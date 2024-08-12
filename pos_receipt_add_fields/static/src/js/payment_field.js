@@ -24,6 +24,7 @@ odoo.define('pos_receipt_add_fields.PaymentScreen', function (require) {
                   if (result.invoice_name) {
                      self.env.pos.invoice  = result.invoice_name
                      self.env.pos.invoice_xml_key  = result.xml_key
+                     console.log(result.cashier)
                      self.env.pos.user_id = result.cashier
                      /* console.log('data');
                      console.log(result.invoice_name)
