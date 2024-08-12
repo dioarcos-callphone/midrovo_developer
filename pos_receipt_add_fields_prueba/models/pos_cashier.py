@@ -10,7 +10,7 @@ class PosCashier(models.Model):
     def get_invoice_field(self, id):
         res = super(PosCashier, self).get_invoice_field(id)
         
-        cashier_name =  res.cashier
+        cashier_name =  res
         
         _logger.info(f'NAME CASHIER >>> { cashier_name }')
         
