@@ -11,8 +11,8 @@ class PosCashier(models.Model):
         pos_id = self.search([('pos_reference', '=', id)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
-        _logger.info('INVOICES >>> %s' % invoice_id)
         
+        _logger.info('INVOICES >>> %s' % invoice_id)
         
         res = super(PosCashier, self).get_invoice_field(id)
         

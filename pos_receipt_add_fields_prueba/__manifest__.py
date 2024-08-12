@@ -12,13 +12,13 @@
     'data': [
         #'views/res_config_settings.xml',
     ],
-    # 'assets': {
-    #     'point_of_sale.assets': [
-    #         'pos_receipt_add_fields/static/src/xml/OrderReceiptFields.xml',
-    #         #'pos_receipt_add_fields/static/src/js/pos_order_receipt_fields.js',
-    #         'pos_receipt_add_fields/static/src/js/payment_field.js',
-    #     ]
-    # },
+    'assets': {
+        'point_of_sale.assets': [
+            # 'pos_receipt_add_fields/static/src/xml/OrderReceiptFields.xml',
+            #'pos_receipt_add_fields/static/src/js/pos_order_receipt_fields.js',
+            'pos_receipt_add_fields/static/src/js/payment_field.js',
+        ]
+    },
     'license': 'LGPL-3',
     'installable': True,
     'application': False,
