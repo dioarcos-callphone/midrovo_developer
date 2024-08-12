@@ -15,7 +15,7 @@ class PosCashier(models.Model):
         _logger.info(f'NAME CASHIER >>> { cashier_name }')
         
         res.update({
-            'cashier_name': res.cashier
+            'cashier_name': res
         })
 
         return res
