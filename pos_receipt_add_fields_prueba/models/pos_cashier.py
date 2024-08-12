@@ -16,7 +16,7 @@ class PosCashier(models.Model):
         
         res = super(PosCashier, self).get_invoice_field(id)
 
-        cashier_name = pos_id.user_id.name if pos_id.user_id else 'Desconocido'
+        cashier_name = pos_id.cashier
         
         _logger.info(f'NAME CASHIER >>> {cashier_name}')
         
