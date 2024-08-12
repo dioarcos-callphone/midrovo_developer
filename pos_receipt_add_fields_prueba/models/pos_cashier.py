@@ -12,16 +12,16 @@ class PosCashier(models.Model):
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
-        _logger.info('INVOICES >>> %s' % invoice_id)
+        _logger.info('INVOICES >>> %s' % invoice_id.partner_id)
         
         res = super(PosCashier, self).get_invoice_field(id)
+
+        cashier_name = pos_id.user_id.name if pos_id.user_id else 'Desconocido'
         
-        cashier_name =  pos_id.cashier
+        _logger.info(f'NAME CASHIER >>> {cashier_name}')
         
-        _logger.info(f'NAME CASHIER >>> { cashier_name }')
-        
-        # res.update({
-            
-        # })
+        res.update({
+            'cashier_name': cashier_name,
+        })
 
         return res
