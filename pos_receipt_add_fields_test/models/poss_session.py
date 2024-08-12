@@ -46,5 +46,5 @@ class PosOrder(models.Model):
             'xml_key': invoice_id.l10n_ec_authorization_number
 
 
-        }
+    }
 
