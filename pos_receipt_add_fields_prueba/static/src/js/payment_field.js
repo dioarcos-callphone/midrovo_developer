@@ -24,7 +24,7 @@ odoo.define('pos_receipt_add_fields_prueba.PaymentScreen', function (require) {
                    if (result.invoice_name) {
                       self.env.pos.invoice  = result.invoice_name
                       self.env.pos.invoice_xml_key  = result.xml_key
-                      console.log(self.env.pos.invoice)
+                      console.log(`Mostrando valor >>>> ${self.env.pos.invoice}`)
                       /* console.log('data');
                       console.log(result.invoice_name)
                       console.log(result.xml_key) */
