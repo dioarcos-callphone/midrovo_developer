@@ -43,7 +43,8 @@ class PosOrder(models.Model):
             'invoice_id': invoice_id.id,
             'invoice_name': invoice_id.name,
             'invoice_number': invoice_id.l10n_latam_document_number,
-            'xml_key': invoice_id.l10n_ec_authorization_number
+            'xml_key': invoice_id.l10n_ec_authorization_number,
+            'cashier_name': invoice_id.cashier_id.name
 
 
         }
