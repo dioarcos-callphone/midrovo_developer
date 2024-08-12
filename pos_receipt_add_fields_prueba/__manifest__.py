@@ -21,7 +21,6 @@
             'pos_receipt_add_fields/static/src/js/payment_field.js',
         ]
     },
-    # 'images': ['static/description/icon.png', ],
     'license': 'LGPL-3',
     'installable': True,
     'application': False,
