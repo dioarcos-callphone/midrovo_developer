@@ -37,4 +37,3 @@ odoo.define('pos_receipt_add_fields.PaymentScreen', function (require) {
 
       return PaymentScreen;
    });
-
