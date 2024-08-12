@@ -38,7 +38,7 @@ class PosOrder(models.Model):
         _logger.info(f'CASHIER NAME >>> { pos_id }')
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
-        _logger.info('________ | INVOICES: %s' % invoice_id)
+        _logger.info('________ | INVOICES >>> %s' % invoice_id)
         _logger.info(f'CASHIER NAME >>> { invoice_id }')
 
         return {
