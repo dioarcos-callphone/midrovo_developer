@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@class='page']" position="inside">
-            <div class="col-auto col-3 mw-100 mb-2" name="salesperson">
-                <span>Cajero:</span>
-                <p class="m-0">
-                    <t t-if="o.invoice_origin">
-                        <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
-                        <t t-if="order">
-                            <t t-set="session" t-value="order.session_id"/>
-                            <t t-if="session">
-                                <t t-esc="session.user_id.name"/>
-                            </t>
-                        </t>
+        <xpath expr="//field[@name='vendedor']" position="replace">
+            <t t-if="o.invoice_origin">
+                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                <t t-if="order">
+                    <t t-set="session" t-value="order.session_id"/>
+                    <t t-if="session">
+                        <t t-esc="session.user_id.name"/>
                     </t>
-                </p>
-            </div>
+                </t>
+            </t>
         </xpath>
     </template>
 </odoo>
