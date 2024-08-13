@@ -16,7 +16,7 @@
         'point_of_sale.assets': [
             # 'pos_receipt_add_fields/static/src/xml/OrderReceiptFields.xml',
             #'pos_receipt_add_fields/static/src/js/pos_order_receipt_fields.js',
-            'pos_receipt_add_fields/static/src/js/payment_field.js',
+            'pos_receipt_add_fields_prueba/static/src/js/payment_field.js',
         ]
     },
     'license': 'LGPL-3',
