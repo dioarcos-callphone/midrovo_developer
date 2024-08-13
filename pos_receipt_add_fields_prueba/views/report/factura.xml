@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr='//div[text()="Vendedor")]' position="replace">
+        <xpath expr='//*[text()="Vendedor")]' position="replace">
             <t t-if="o.invoice_origin">
                 <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
                 <t t-if="order">
