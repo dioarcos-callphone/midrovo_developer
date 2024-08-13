@@ -15,7 +15,7 @@ const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
              console.log('data field 1');
              /* console.log(result) */
              if (result.invoice_name) {
-                console.log(result.cashier_name)
+                console.log(`Mostrando el Cashier Name >>> ${result.cashier_name}`)
                 self.env.pos.user_id = result.cashier_name;
                 /* console.log('data');
                 console.log(result.invoice_name)
