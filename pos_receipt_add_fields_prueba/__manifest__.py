@@ -10,7 +10,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': ['pos_receipt_add_fields'],
     'data': [
-        # 'views/factura.xml',
+        'views/factura.xml',
     ],
     'assets': {
         'point_of_sale.assets': [

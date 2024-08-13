@@ -2,17 +2,10 @@
 <odoo>
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document" primary="True">
-            <!-- Replace the h2 header to include legally required data & barcode-->
-            <!-- <xpath expr="//h2" position="replace">
-                <t t-call="l10n_ec_edi.report_invoice_header"/>
-            </xpath> -->
-
-            <xpath expr="//div[@name='salesperson']" position="replace">
+            <xpath expr="//div[@id='informations']" position="inside">
                 <div class="col-auto col-3 mw-100 mb-2" name="salesperson">
-                    <strong>Vendedor:</strong>
-                    <p class="m-0">
-                        <t t-esc="o.cashier"/>
-                    </p>
+                    <strong>Vendedorsh:</strong>
+                    <p class="m-0" t-field="o.invoice_user_id.name"/>
                 </div>
             </xpath>
         </template>
