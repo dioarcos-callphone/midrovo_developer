@@ -23,19 +23,6 @@
                     </tr>
                 </t>
             </tbody>
-            <t t-if="o.invoice_origin">
-                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
-                <t t-if="order">
-                    <t t-set="session" t-value="order.session_id"/>
-                    
-                    <t t-if="session">
-                        <div class="col-auto col-3 mw-100 mb-2" name="vendedor">
-                            <strong>Vendedor:</strong>
-                            <p class="m-0" t-esc="session.user_id.name"/>
-                        </div>
-                    </t>
-                </t>
-            </t>
         </xpath>
     </template>
 </odoo>
