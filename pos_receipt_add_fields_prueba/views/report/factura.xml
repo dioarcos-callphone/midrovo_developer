@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr="//*[text()='Salesperson']" position="after">
+        <xpath expr="t[@t-set='additional_info']" position="after">
             <tbody>
                 <tr>
                     <td>
