@@ -6,7 +6,7 @@
                 <t t-foreach="additional_info.items()" t-as="item">
                     <tr t-if="item[1]">
                         <td>
-                            <span t-esc="str(item[0])"/>
+                            <span t-esc="str(item[1])"/>
                         </td>
                         <td>
                             <t t-if="o.invoice_origin">
