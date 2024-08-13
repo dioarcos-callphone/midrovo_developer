@@ -8,7 +8,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['pos_receipt_add_fields'],
+    'depends': ['pos_receipt_add_fields', 'point_of_sale', 'sale', 'account'],
     'data': [
         # 'views/factura.xml',
     ],
