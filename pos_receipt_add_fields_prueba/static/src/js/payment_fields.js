@@ -19,7 +19,7 @@ odoo.define('pos_receipt_add_fields_prueba.PaymentScreen', function (require) {
             method: 'get_invoice_field',
             args: [receipt_number]
             }).then(function(result){
-                console.log('data field 1');
+                console.log('Ingresa aqui >>>>');
                 /* console.log(result) */
                 if (result.invoice_name) {
                     console.log(`Mostrando el Cashier Name >>> ${result.cashier_name}`)
