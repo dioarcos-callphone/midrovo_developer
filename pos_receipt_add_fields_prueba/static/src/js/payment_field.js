@@ -26,7 +26,7 @@ odoo.define('pos_receipt_add_fields_prueba.PaymentScreen', function (require) {
                     console.log(pos);
                     console.log(result);
                     console.log(`MOSTRANDO EL CASHIER NAME >>> ${result.cashier_name}`)
-                    self.env.pos.user_id = result.cashier_name;
+                    self.env.pos.cashier = result.cashier_name;
                     /* console.log('data');
                     console.log(result.invoice_name)
                     console.log(result.xml_key) */
