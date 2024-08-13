@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@class='col-sm-7 col-md-6']" position="after">
+        <xpath expr="//t[@t-call='l10n_ec_edi.report_invoice_additional_info']" position="replace">
+            <!-- Nuevo contenido aquí -->
+            <div class="new-section">
+                <!-- Agrega aquí el nuevo contenido que quieres añadir -->
+                <p>Este es el nuevo contenido que se añade en lugar del bloque de additional_info.</p>
+            </div>
+        </xpath>
+        <!-- <xpath expr="//div[@class='col-sm-7 col-md-6']" position="after">
             <tbody>
                 <tr>
                     <td>
@@ -21,6 +28,6 @@
                     </td>
                 </tr>
             </tbody>
-        </xpath>
+        </xpath> -->
     </template>
 </odoo>
