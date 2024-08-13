@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='vendedor']" position="replace">
@@ -11,6 +11,27 @@
                         </t>
                     </t>
                 </t>
+        </xpath>
+    </template>
+</odoo> -->
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <t t-if="o.invoice_origin">
+                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                <t t-if="order">
+                    <t t-set="session" t-value="order.session_id"/>
+                    
+                    <t t-if="session">
+                        <div class="col-auto col-3 mw-100 mb-2" name="vendedor">
+                            <strong>Vendedor:</strong>
+                            <p class="m-0" t-esc="session.user_id.name"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
         </xpath>
     </template>
 </odoo>
