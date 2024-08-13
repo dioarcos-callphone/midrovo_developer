@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@id='additional_info']" position="after">
+        <xpath expr="//div[@name='payment_term']" position="after">
             <p>HOLAAAAA</p>
             <!-- <tbody>
                 <t t-foreach="additional_info.items()" t-as="item">
