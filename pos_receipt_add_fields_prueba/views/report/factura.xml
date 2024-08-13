@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@id='total']" position="after"> 
+        <xpath expr="//div[@id='total']" position="after">
+            <tbody>
+                <t t-foreach="additional_info.items()" t-as="item">
+                    <tr t-if="item[1]">
+                        <td>
+                            <span t-esc="str(item[0])"/>
+                        </td>
+                        <td>
+                            <t t-if="o.invoice_origin">
+                                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                <t t-if="order">
+                                    <t t-set="session" t-value="order.session_id"/>
+                    
+                                    <t t-if="session">
+                                        <span t-esc="session.user_id.name"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
             <t t-if="o.invoice_origin">
                 <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
                 <t t-if="order">
