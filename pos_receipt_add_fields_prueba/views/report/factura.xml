@@ -10,7 +10,7 @@
                         <t t-if="order">
                             <t t-set="session" t-value="order.session_id"/>
                             <t t-if="session">
-                                <t t-esc="session.cashier"/>
+                                <t t-esc="session.user_id.name"/>
                             </t>
                         </t>
                     </t>
