@@ -22,7 +22,10 @@ odoo.define('pos_receipt_add_fields_prueba.PaymentScreen', function (require) {
                 console.log('Ingresa aqui >>>>');
                 /* console.log(result) */
                 if (result.invoice_name) {
-                    console.log(`Mostrando el Cashier Name >>> ${result.cashier_name}`)
+                    const pos = self.env.pos
+                    console.log(`MOSTRANDO EL POST >>> ${pos}`)
+                    console.log(`MOSTRANDO EL RESULT >>> ${result}`)
+                    console.log(`MOSTRANDO EL CASHIER NAME >>> ${result.cashier_name}`)
                     self.env.pos.user_id.name = result.cashier_name;
                     /* console.log('data');
                     console.log(result.invoice_name)
