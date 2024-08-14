@@ -9,10 +9,11 @@ class PosCashier(models.Model):
     @api.model
     def get_invoice_field(self, id):
         pos_id = self.search([('pos_reference', '=', id)])
+        invoice_id = self.env['account.move'].search(
+            [('ref', '=', pos_id.name)])
         
         cashier_name = pos_id.cashier
-        
-        res.invoice_user_id.name = cashier_name
+        invoice_id.invoice_user_id.name = cashier_name
         
         res = super(PosCashier, self).get_invoice_field(id)
         
