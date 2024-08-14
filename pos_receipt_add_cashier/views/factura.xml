@@ -12,8 +12,20 @@
                         </td>
                         <td>
                             <t t-if="item[0] == 'Vendedor'">
-                                <!-- <span t-esc="str(item[1])"/> -->
-                                <span>Hello World</span>
+                                <span>
+                                    <t t-if="o.invoice_origin">
+                                        <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                        <t t-if="order">
+                                            <t t-set="session" t-value="order.session_id"/>
+                                            <t t-if="session">
+                                                <t t-esc="session.user_id.name"/>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </span>
+                            </t>
+                            <t t-else="">
+                                <span t-esc="str(item[1])"/>
                             </t>
                         </td>
                     </tr>
