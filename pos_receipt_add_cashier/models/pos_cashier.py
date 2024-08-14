@@ -15,9 +15,9 @@ class PosCashier(models.Model):
         res = super(PosCashier, self).get_invoice_field(id)
         
         pos_id.account_move._l10n_ec_get_invoice_additional_info()['Vendedor'] = cashier_name
-        additional_info = pos_id.account_move._l10n_ec_get_invoice_additional_info()
+        # additional_info = pos_id.account_move._l10n_ec_get_invoice_additional_info()
         
-        _logger.info(f'INFORMACION ADICIONAL >>> { additional_info }')
+        # _logger.info(f'INFORMACION ADICIONAL >>> { additional_info }')
         
         res.update({
             'cashier_name': cashier_name,
