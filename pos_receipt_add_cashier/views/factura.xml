@@ -1,4 +1,4 @@
-<!-- <odoo>
+<odoo>
     <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
         <xpath expr="//th[@colspan='2']" position="replace">
             <th class="text-center" colspan="2">Información Adicional</th>
@@ -30,4 +30,4 @@
             </tbody>
         </xpath>
     </template>
-</odoo> -->
+</odoo>
