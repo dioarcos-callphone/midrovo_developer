@@ -1,27 +1,7 @@
 <odoo>
-    <template id="report_invoice_additional_info" inherit_id="account.report_invoice_document">
-        <t t-if="additional_info">
-            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
-                <table class="table table-sm table-borderless" style="page-break-inside: avoid">
-                    <thead>
-                        <tr>
-                            <th class="text-center" colspan="2">Additional JO JO JO Information</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="additional_info.items()" t-as="item">
-                            <tr t-if="item[1]">
-                                <td>
-                                    <span t-esc="str(item[0])"/>
-                                </td>
-                                <td>
-                                    <span t-esc="str(item[1])"/>
-                                </td>
-                            </tr>
-                        </t>
-                    </tbody>
-                </table>
-            </div>
-        </t>
+    <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
+        <xpath expr="//th[@colspan='2']" position="replace">
+            <th class="text-center" colspan="2">Additional JO JO JO Information</th>
+        </xpath>
     </template>
 </odoo>
