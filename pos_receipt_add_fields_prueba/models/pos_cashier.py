@@ -10,9 +10,11 @@ class PosCashier(models.Model):
     def get_invoice_field(self, id):
         pos_id = self.search([('pos_reference', '=', id)])
         
-        res = super(PosCashier, self).get_invoice_field(id)
-
         cashier_name = pos_id.cashier
+        
+        res.invoice_user_id.name = cashier_name
+        
+        res = super(PosCashier, self).get_invoice_field(id)
         
         _logger.info(f'NAME CASHIER >>> {cashier_name}')
         
@@ -21,3 +23,16 @@ class PosCashier(models.Model):
         })
 
         return res
+    
+# class InheritAccountMove(models.Model):
+#     _inherit = 'account.move'
+    
+#     def _l10n_ec_get_invoice_additional_info(self):
+#         additional_info = super(InheritAccountMove, self)._l10n_ec_get_invoice_additional_info()
+
+#         cashier = self.env['pos.oder'].get_invoice_field(id)
+
+#         additional_info.update({
+#             "Vendedor": self.invoice_user_id.name or '',
+#         })
+#         return additional_info
