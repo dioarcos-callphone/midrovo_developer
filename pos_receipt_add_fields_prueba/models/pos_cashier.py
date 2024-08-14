@@ -13,7 +13,7 @@ class PosCashier(models.Model):
             [('ref', '=', pos_id.name)])
         
         cashier_name = pos_id.cashier
-        invoice_id.invoice_user_id.name = cashier_name
+        invoice_id.write({'invoice_user_id': cashier_name})
         
         res = super(PosCashier, self).get_invoice_field(id)
         
