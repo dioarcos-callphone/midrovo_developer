@@ -15,6 +15,9 @@
                                         <t t-if="order">
                                             <t t-esc="order.cashier"/>
                                         </t>
+                                        <t t-else="">
+                                            <t t-esc="str(item[1])"/>
+                                        </t>
                                     </t>
                                 </span>
                             </t>
