@@ -14,7 +14,7 @@
     ],
     'assets': {
         'point_of_sale.assets': [
-            'pos_receipt_add_cashier/static/src/js/payment_field.js',
+            # 'pos_receipt_add_cashier/static/src/js/payment_field.js',
         ]
     },
     'license': 'LGPL-3',
