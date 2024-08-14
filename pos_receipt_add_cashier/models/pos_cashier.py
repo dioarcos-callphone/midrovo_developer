@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 import logging 
 
-# _logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 class PosCashier(models.Model):
     _inherit = 'pos.order'
@@ -17,7 +17,7 @@ class PosCashier(models.Model):
         
         res = super(PosCashier, self).get_invoice_field(id)
         
-        # _logger.info(f'NAME CASHIER >>> {cashier_name}')
+        _logger.info(f'NAME CASHIER >>> {cashier_name}')
         
         res.update({
             'cashier_name': cashier_name,
