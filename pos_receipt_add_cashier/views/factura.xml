@@ -1,7 +1,24 @@
 <odoo>
     <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
         <xpath expr="//th[@colspan='2']" position="replace">
-            <th class="text-center" colspan="2">Additional JO JO JO Information</th>
+            <th class="text-center" colspan="2">Información Adicional</th>
+        </xpath>
+        <xpath expr="//tbody" position="replace">
+            <tbody>
+                <t t-foreach="additional_info.items()" t-as="item">
+                    <tr t-if="item[1]">
+                        <td>
+                            <span t-esc="str(item[0])"/>
+                        </td>
+                        <td>
+                            <t t-if="item[0] == 'Vendedor'">
+                                <!-- <span t-esc="str(item[1])"/> -->
+                                <span>Hello World</span>
+                            </t>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
         </xpath>
     </template>
 </odoo>
