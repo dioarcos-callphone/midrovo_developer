@@ -9,19 +9,14 @@ class PosCashier(models.Model):
     @api.model
     def get_invoice_field(self, id):
         pos_id = self.search([('pos_reference', '=', id)])
-        invoice_id = self.env['account.move'].search(
-            [('ref', '=', pos_id.name)])
         
         cashier_name = pos_id.cashier
-        invoice_id.invoice_user_id.name = cashier_name
-        #invoice_id.write({'invoice_user_id': cashier_name})
         
         res = super(PosCashier, self).get_invoice_field(id)
         
-        cashier_account = invoice_id.invoice_user_id
+        additional_info = pos_id.account_move._l10n_ec_get_invoice_additional_info()
         
-        _logger.info(f'NAME CASHIER >>> {cashier_name}')
-        _logger.info(f'NAME CASHIER DEL ACCOUNT MOVE >>> {cashier_account}')
+        _logger.info(f'INFORMACION ADICIONAL >>> { additional_info }')
         
         res.update({
             'cashier_name': cashier_name,
