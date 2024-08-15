@@ -3,8 +3,8 @@
         <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
             <!-- Puedes agregar attrs para ocultar la sección -->
             <!-- <attribute name="t-if">False</attribute> -->
-            <t t-if="o.narration not in 'http'">
-                <p>Nota: <span>Hola mundo</span></p>
+            <t t-if="'http' not in o.narration">
+                <p>Nota: <span>Hola</span></p>
             </t>
         </xpath>
     </template>
