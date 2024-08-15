@@ -1,7 +1,5 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@name='comment']">
-            <h1>HOLAAA</h1>
-        </xpath>
+        <xpath expr="//div[@name='comment']" invisible="1"/>
     </template>
 </odoo>
