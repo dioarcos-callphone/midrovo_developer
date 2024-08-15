@@ -2,9 +2,7 @@
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='note']" position="replace">
             <p name="note">
-                <t t-if="o.l10n_latam_document_type_id">
-                    <p>Informacion</p>
-                </t>
+                <span>Nota</span>
             </p>
         </xpath>
     </template>
