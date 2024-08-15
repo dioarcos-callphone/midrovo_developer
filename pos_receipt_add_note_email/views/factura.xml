@@ -1,8 +1,10 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='note']" position="replace">
-            <p t-if="o.l10n_latam_document_type_id">
-                Este es un párrafo adicional que se muestra solo si el tipo de documento está definido.
+            <p name="note">
+                <t t-if="o.l10n_latam_document_type_id">
+                    <p>Informacion</p>
+                </t>
             </p>
         </xpath>
     </template>
