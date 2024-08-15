@@ -2,7 +2,7 @@
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='note']" position="replace">
             <p name="note">
-                <span>Nota</span>
+                Obteniendo informacion de la nota actual
             </p>
         </xpath>
     </template>
