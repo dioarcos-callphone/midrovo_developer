@@ -1,5 +1,5 @@
 {
-    'name': "Validate Partner",
+    'name': "Validate Customer",
     "description": """Permite validar clientes restringiendo duplicados""",
     "summary": "Valida clientes que no se permita ingresar el mismo cliente si ya contiene su numero de cedula o ruc",
     "category": "Res Parner",
