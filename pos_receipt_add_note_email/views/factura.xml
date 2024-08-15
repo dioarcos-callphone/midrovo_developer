@@ -4,7 +4,7 @@
             <!-- Puedes agregar attrs para ocultar la sección -->
             <!-- <attribute name="t-if">False</attribute> -->
             <t t-if="o.narration not in 'http'">
-                <p>Nota: <span t-esc="o.narration"/></p>
+                <p>Nota: <span>Hola mundo</span></p>
             </t>
         </xpath>
     </template>
