@@ -1,8 +1,8 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//div[@id='informations']" position="before">
-            <div style="background-color:red;">
-                <p>Email: <span style="padding-left:10px;">midrovo@outlook.com</span></p>
+            <div>
+                <p><span style="font-weight:bold;">Email:</span> <span style="padding-left:10px;">midrovo@outlook.com</span></p>
             </div>
         </xpath>
         <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
