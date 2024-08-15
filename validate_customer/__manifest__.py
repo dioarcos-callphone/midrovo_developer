@@ -1,0 +1,15 @@
+{
+    'name': "Validate Partner",
+    "description": """Permite validar clientes restringiendo duplicados""",
+    "summary": "Valida clientes que no se permita ingresar el mismo cliente si ya contiene su numero de cedula o ruc",
+    "category": "Res Parner",
+    "version": "16.0.1.0.0",
+    'author': 'Mauricio Idrovo',
+    'company': 'Callphone sa',
+    'website': "https://www.callphoneecuador.com",
+    'depends': ['res_partner'],
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': True,
+    'auto_install': True,
+}
