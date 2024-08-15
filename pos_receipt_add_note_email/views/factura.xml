@@ -1,7 +1,7 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//div[@id='informations']" position="before">
-            <div style="margin: 0;">
+            <div style="padding-top:10px;">
                 <p><span style="font-weight:bold;">Email del cliente:</span> <span style="padding-left:10px;">midrovo@outlook.com</span></p>
             </div>
         </xpath>
