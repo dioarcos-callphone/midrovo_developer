@@ -1,7 +1,7 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//p[@name='note']" position="replace">
-            <p>Nota: <p name="note"/></p>
+        <xpath expr="//p[@name='payment_communication']" position="replace">
+            <p>Nota: <p name="payment_communication"/></p>
         </xpath>
     </template>
 </odoo>
