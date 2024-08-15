@@ -1,6 +1,6 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//field[@name='narration']">
+        <xpath expr="//div[@name='comment']">
             <h1>HOLAAA</h1>
         </xpath>
     </template>
