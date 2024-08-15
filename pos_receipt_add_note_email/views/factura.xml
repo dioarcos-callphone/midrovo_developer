@@ -1,18 +1,9 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
         <xpath expr="//div[@id='informations']" position="before">
-            <table class="table table-sm table-borderless col-sm-7 col-md-6" style="page-break-inside: avoid">
-                <tbody>
-                    <tr>
-                        <td>
-                            <span style="font-weight: bold;">Email:</span>
-                        </td>
-                        <td>
-                            <span>midrovo@outlook.com</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="background-color:red;">
+                <p>Email: <span style="padding-left:10px;">midrovo@outlook.com</span></p>
+            </div>
         </xpath>
         <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
             <!-- Puedes agregar attrs para ocultar la sección -->
