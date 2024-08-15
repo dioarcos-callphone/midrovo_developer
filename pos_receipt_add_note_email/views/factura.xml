@@ -1,8 +1,11 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="attributes">
+        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
             <!-- Puedes agregar attrs para ocultar la sección -->
-            <attribute name="t-if">False</attribute>
+            <!-- <attribute name="t-if">False</attribute> -->
+            <t t-if="o.narration not in 'http'">
+                <p>Nota: <span t-field="o.narration"/></p>
+            </t>
         </xpath>
     </template>
 </odoo>
