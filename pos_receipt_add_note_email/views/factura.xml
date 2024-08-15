@@ -5,7 +5,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span>Email:</span>
+                            <span style="font-weight: bold;">Email:</span>
                         </td>
                         <td>
                             <span>midrovo@outlook.com</span>
