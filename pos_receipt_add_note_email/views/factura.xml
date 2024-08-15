@@ -1,5 +1,8 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//p[@name='incoterm']" invisible="1"/>
+        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="attributes">
+            <!-- Puedes agregar attrs para ocultar la sección -->
+            <attribute name="t-if">False</attribute>
+        </xpath>
     </template>
 </odoo>
