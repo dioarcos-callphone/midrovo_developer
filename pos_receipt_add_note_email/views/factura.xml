@@ -1,6 +1,6 @@
 <odoo>
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//p[@name='note']" position="attributes">
+        <xpath expr="//p[@name='payment_communication']" position="attributes">
              <attribute name="t-attf-class">d-none</attribute>
         </xpath>
     </template>
