@@ -27,7 +27,9 @@
                                     <t t-if="o.commercial_partner_id">
                                         <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
                                         <t t-if="partner">
-                                            <t t-esc="partner.email_normalized"/>
+                                            <t t-if="partner.email_normalized">
+                                                <t t-esc="partner.email_normalized"/>
+                                            </t>
                                         </t>
                                     </t>
                                 </span>
