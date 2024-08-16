@@ -19,7 +19,13 @@
                             </t>
                         </td>
                         <td>
-                            <t t-if="item[0] == 'Vendedor'">
+                            <t t-if="o.invoice_origin">
+                                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                <t t-if="order and item[0] == 'Vendedor'">
+                                    <t t-esc="order.cashier"/>
+                                </t>
+                            </t>
+                            <!-- <t t-if="item[0] == 'Vendedor' and o.invoice_">
                                 <span>
                                     <t t-if="o.invoice_origin">
                                         <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
@@ -28,7 +34,7 @@
                                         </t>
                                     </t>
                                 </span>
-                            </t>
+                            </t> -->
                             <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
                                 <span>
                                     <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
