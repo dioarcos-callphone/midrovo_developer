@@ -1,6 +1,6 @@
 
 {
-    'name': "POS Receipt Add Cashier",
+    'name': "Invoice Update Fields",
     "summary": "Visualizacion del Cashier o Usuario Odoo, email del cliente y nota de vendedor",
     "description": """
         Este modulo añade funcionalidad para las facturas generadas en los modulos POS y Contabilidad,
