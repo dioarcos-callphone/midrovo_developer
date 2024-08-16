@@ -4,7 +4,7 @@
         <xpath expr="//tbody" position="replace">
             <tbody>
                 <t t-foreach="additional_info.items()" t-as="item">
-                    <tr t-if="item[1]">
+                    <tr>
                         <td>
                             <t t-if="item[0] != 'E-mail'">
                                 <span t-esc="str(item[0])"/>
