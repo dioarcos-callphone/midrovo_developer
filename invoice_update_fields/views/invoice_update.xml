@@ -41,4 +41,13 @@
             </tbody>
         </xpath>
     </template>
+
+    <template id="report_invoice_note" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
+            <t t-if="'http' not in o.narration">
+                <span style="font-weight: bold;">Nota:</span>
+                <t t-esc="o.narration"/>
+            </t>
+        </xpath>
+    </template>
 </odoo>
