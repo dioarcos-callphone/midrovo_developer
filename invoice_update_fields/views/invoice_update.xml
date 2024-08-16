@@ -22,7 +22,7 @@
                                     </t>
                                 </span>
                             </t>
-                            <t t-elif="item[0] == 'E-mail">
+                            <t t-elif="item[0] == 'E-mail'">
                                 <span>
                                     <t t-if="o.commercial_partner_id">
                                         <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id)], limit=1)"/>
