@@ -42,7 +42,7 @@
                                     </t>
                                 </span>
                             </t>                            
-                            <t t-if="item[0] != 'Vendedor'">
+                            <t t-if="item[0] != 'Vendedor' and item[0] != 'E-mail'">
                                 <span t-esc="str(item[1])"/>
                             </t>
                         </td>
