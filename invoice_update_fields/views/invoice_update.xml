@@ -19,22 +19,19 @@
                             </t>
                         </td>
                         <td>
-                            <t t-if="o.invoice_origin">
-                                <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
-                                <t t-if="order and item[0] == 'Vendedor'">
-                                    <t t-esc="order.cashier"/>
-                                </t>
-                            </t>
-                            <!-- <t t-if="item[0] == 'Vendedor' and o.invoice_">
+                            <t t-if="item[0] == 'Vendedor'">
                                 <span>
                                     <t t-if="o.invoice_origin">
                                         <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
                                         <t t-if="order">
                                             <t t-esc="order.cashier"/>
                                         </t>
+                                        <t t-else="">
+                                            <t t-esc="str(item[1])"></t>
+                                        </t>
                                     </t>
                                 </span>
-                            </t> -->
+                            </t>
                             <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
                                 <span>
                                     <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
@@ -45,7 +42,7 @@
                                     </t>
                                 </span>
                             </t>                            
-                            <t t-else="">
+                            <t t-if="item[0] != 'Vendedor'">
                                 <span t-esc="str(item[1])"/>
                             </t>
                         </td>
