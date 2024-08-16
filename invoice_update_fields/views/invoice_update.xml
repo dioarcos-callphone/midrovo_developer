@@ -6,7 +6,12 @@
                 <t t-foreach="additional_info.items()" t-as="item">
                     <tr t-if="item[1]">
                         <td>
-                            <span t-esc="str(item[0])"/>
+                            <t t-if="item[0] != 'E-mail'">
+                                <span t-esc="str(item[0])"/>
+                            </t>
+                            <t t-else="">
+                                <span>E-mail del cliente</span>
+                            </t>
                         </td>
                         <td>
                             <t t-if="item[0] == 'Vendedor'">
@@ -17,13 +22,9 @@
                                             <t t-esc="order.cashier"/>
                                         </t>
                                     </t>
-                                    <t t-else="">
-                                        <t t-esc="str(item[1])"/>
-                                    </t>
                                 </span>
                             </t>
                             <t t-if="item[0] == 'E-mail'">
-                                <p>Holaaa</p>
                                 <span>
                                     <t t-if="o.commercial_partner_id">
                                         <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
