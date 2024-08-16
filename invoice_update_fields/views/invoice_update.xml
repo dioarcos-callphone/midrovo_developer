@@ -24,13 +24,11 @@
                                     <t t-if="o.invoice_origin">
                                         <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
                                         <t t-if="order">
-                                            <t t-if="order.cashier">
-                                                <t t-esc="order.cashier"/>
-                                            </t>
-                                            <t t-else="">
-                                                <t t-esc="str(item[1])"></t>
-                                            </t>
+                                            <t t-esc="order.cashier"/>
                                         </t>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="str(item[1])"></t>
                                     </t>
                                 </span>
                             </t>
