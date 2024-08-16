@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-            <xpath expr="//div[@id='informations']" position="before">
-                <div style="padding-top:10px;">
-                    <p><span style="font-weight:bold;">Email del cliente:</span> <span style="padding-left:10px;">midrovo@outlook.com</span></p>
-                </div>
-            </xpath>
-            <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
-                <t t-if="'http' not in o.narration">
-                    <span style="font-weight: bold;">Nota:</span>
-                    <t t-esc="o.narration"/>
-                </t>
-            </xpath>
-        </template>
     <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
         <xpath expr="//tbody" position="replace">
             <tbody>
@@ -35,6 +22,16 @@
                                     </t>
                                 </span>
                             </t>
+                            <t t-elif="item[0] == 'E-mail">
+                                <span>
+                                    <t t-if="o.commercial_partner_id">
+                                        <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id)], limit=1)"/>
+                                        <t t-if="partner">
+                                            <t t-esc="partner.email_normalized"/>
+                                        </t>
+                                    </t>
+                                </span>
+                            </t>                            
                             <t t-else="">
                                 <span t-esc="str(item[1])"/>
                             </t>
