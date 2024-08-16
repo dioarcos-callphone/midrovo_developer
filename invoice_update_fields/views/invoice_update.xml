@@ -9,8 +9,13 @@
                             <t t-if="item[0] != 'E-mail'">
                                 <span t-esc="str(item[0])"/>
                             </t>
-                            <t t-else="">
-                                <span>E-mail del cliente</span>
+                            <t t-if="o.commercial_partner_id">
+                                <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                <t t-if="partner">
+                                    <t t-if="partner.email_normalized">
+                                        <span>E-mail del cliente</span>
+                                    </t>
+                                </t>
                             </t>
                         </td>
                         <td>
@@ -24,14 +29,12 @@
                                     </t>
                                 </span>
                             </t>
-                            <t t-if="item[0] == 'E-mail'">
+                            <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
                                 <span>
-                                    <t t-if="o.commercial_partner_id">
-                                        <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
-                                        <t t-if="partner">
-                                            <t t-if="partner.email_normalized">
-                                                <t t-esc="partner.email_normalized"/>
-                                            </t>
+                                    <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                    <t t-if="partner">
+                                        <t t-if="partner.email_normalized">
+                                            <t t-esc="partner.email_normalized"/>
                                         </t>
                                     </t>
                                 </span>
