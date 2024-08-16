@@ -14,8 +14,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': ['pos_receipt_add_fields', 'point_of_sale', 'sale', 'account'],
     'data': [
-        'views/invoice_additional_info.xml',
-        'views/invoice_email_and_note.xml'
+        'views/invoice_update.xml',
     ],
     'license': 'LGPL-3',
     'installable': True,

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>    
+<odoo>
+    <template id="report_invoice_note" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='informations']" position="before">
+                <div style="padding-top:10px;">
+                    <p><span style="font-weight:bold;">Email del cliente:</span> <span style="padding-left:10px;">midrovo@outlook.com</span></p>
+                </div>
+            </xpath>
+            <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
+                <t t-if="'http' not in o.narration">
+                    <span style="font-weight: bold;">Nota:</span>
+                    <t t-esc="o.narration"/>
+                </t>
+            </xpath>
+        </template>
     <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
         <xpath expr="//tbody" position="replace">
             <tbody>
