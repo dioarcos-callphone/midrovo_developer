@@ -69,7 +69,7 @@
                                 </td>
                                 <td>
                                     <t t-if="o.invoice_origin">
-                                        <t t-set="order" t-value="env['account_move.sri.lines'].search([('move_id', '=', o.id)], limit=1)"/>
+                                        <t t-set="order" t-value="env['account.move.sri.lines'].search([('move_id', '=', o.id)], limit=1)"/>
                                         <t t-if="order">
                                             <span t-esc="order.payment_valor" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                         </t>
