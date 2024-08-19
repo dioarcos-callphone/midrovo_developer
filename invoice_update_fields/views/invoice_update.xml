@@ -59,5 +59,15 @@
                 <t t-esc="o.narration"/>
             </t>
         </xpath>
+        <xpath expr="//td[span[@t-esc=\"deta['payment_total']\"]]" position="replace">
+            <td>
+                <t t-if="o.invoice_origin">
+                    <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                    <t t-if="order">
+                        <span t-esc="order.amount_total"/>
+                    </t>
+                </t>
+            </td>
+        </xpath>
     </template>
 </odoo>
