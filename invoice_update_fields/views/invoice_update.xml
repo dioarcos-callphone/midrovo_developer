@@ -53,7 +53,7 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//table[thead/tr/th[contains(text(), 'Payment Methods')]]" position="replace">
+        <xpath expr="//table[thead/tr/th[contains(text(), 'MÉTODOS DE PAGO')]]" position="replace">
             <h1>HOLAAA</h1>
         </xpath>
 
