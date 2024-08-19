@@ -53,33 +53,22 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[contains(@class, 'col-6') or contains(@class, 'col-sm-7')]" position="replace">
-            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
-                <table class="table table-sm table-borderless" style="page-break-inside: avoid">
-                    <thead>
-                        <tr>
-                            <th class="text-center" colspan="2">Payment Methods Modificado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="o._l10n_ec_get_payment_data()" t-as="deta">
-                            <tr>
-                                <td>
-                                    <span t-esc="deta['payment_name']"/>
-                                </td>
-                                <td>
-                                    <t t-if="o.invoice_origin">
-                                        <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
-                                        <t t-if="order">
-                                            <span t-esc="order.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                        </t>
-                                    </t>
-                                </td>
-                            </tr>
+        <xpath expr="//t[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
+            <t t-foreach="o._l10n_ec_get_payment_data()" t-as="deta">
+                <tr>
+                    <td>
+                        <span t-esc="deta['payment_name']"/>
+                    </td>
+                    <td>
+                        <t t-if="o.invoice_origin">
+                            <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                            <t t-if="order">
+                                <span t-esc="order.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </t>
                         </t>
-                    </tbody>
-                </table>
-            </div>
+                    </td>
+                </tr>
+            </t>
         </xpath>
         <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
             <t t-if="'http' not in o.narration">
