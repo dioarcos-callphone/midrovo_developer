@@ -53,8 +53,8 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//table[contains(@style, 'page-break-inside: avoid')]" position="replace">
-            <span>HOLAAAA</span>
+        <xpath expr="//div[@id='total']/div[table[@class='table table-sm table-borderless']]" position="replace">
+            <!-- Este div estará vacío o puedes agregar algo nuevo aquí si lo deseas -->
         </xpath>
 
 
