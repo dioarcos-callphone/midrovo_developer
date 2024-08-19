@@ -53,12 +53,6 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
-            <t t-if="'http' not in o.narration">
-                <span style="font-weight: bold;">Nota:</span>
-                <t t-esc="o.narration"/>
-            </t>
-        </xpath>
         <xpath expr="//div[contains(@class, 'col-6') or contains(@class, 'col-sm-7')]" position="replace">
             <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
                 <table class="table table-sm table-borderless" style="page-break-inside: avoid">
@@ -87,6 +81,11 @@
                 </table>
             </div>
         </xpath>
-
+        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
+            <t t-if="'http' not in o.narration">
+                <span style="font-weight: bold;">Nota:</span>
+                <t t-esc="o.narration"/>
+            </t>
+        </xpath>
     </template>
 </odoo>
