@@ -53,7 +53,7 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@id='total']" position="after">
+        <xpath expr="//table[@class='table table-sm table-borderless' and @style='page-break-inside: avoid']" position="replace">
             <h1>Holaa</h1>
         </xpath>
 
