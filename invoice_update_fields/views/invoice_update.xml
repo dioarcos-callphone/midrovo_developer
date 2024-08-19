@@ -53,7 +53,7 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//span[@t-esc=deta['payment_total']]" position="replace">
+        <xpath expr="//*[@t-as=deta]" position="replace">
             <span>HOLAAAA</span>
         </xpath>
 
