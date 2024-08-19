@@ -53,9 +53,9 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//*[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
+        <!-- <xpath expr="//*[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
             <h1>HOLAAA</h1>
-        </xpath>
+        </xpath> -->
 
 
         <!-- <xpath expr="//div[@id='total']" position="after">
