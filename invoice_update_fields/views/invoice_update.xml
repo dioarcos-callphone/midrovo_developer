@@ -69,9 +69,9 @@
                                 </td>
                                 <td>
                                     <t t-if="o.invoice_origin">
-                                        <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                        <t t-set="order" t-value="env['account_move.sri.lines'].search([('move_id', '=', o.id)], limit=1)"/>
                                         <t t-if="order">
-                                            <span t-esc="order.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            <span t-esc="order.payment_valor" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                         </t>
                                     </t>
                                 </td>
