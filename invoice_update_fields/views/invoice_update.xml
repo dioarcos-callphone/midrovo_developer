@@ -53,7 +53,7 @@
     </template>
 
     <template id="report_invoice_note" inherit_id="account.report_invoice_document">
-        <xpath expr="//span[@t-options='{\"widget\": \"monetary\", \"display_currency\": o.currency_id}']" position="replace">
+        <xpath expr="//span[@t-options]" position="replace">
             <span>HOLAAAA</span>
         </xpath>
 
