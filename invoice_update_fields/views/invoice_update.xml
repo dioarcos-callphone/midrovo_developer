@@ -83,11 +83,10 @@
                                             <span t-field="o.amount_residual"/>
                                         </td>
                                     </tr>
-                                    </t>
                                 </t>
                             </t>
-                        </table>
-                    </div>
+                        </t>
+                    </table>
                 </div>
             </div>
         </xpath>
