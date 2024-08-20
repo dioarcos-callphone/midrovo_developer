@@ -9,8 +9,8 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
-        payment_total = payment_data['payment_total']
-        _logger.info(f'MOSTRANDO EL PAYMENTO TOTAL >>> { payment_total }')
+        # payment_total = payment_data['payment_total']
+        _logger.info(f'MOSTRANDO EL PAYMENTO TOTAL >>> { payment_data }')
         
         # for payment in payment_data:
         #     payment_total = payment['payment_total']
