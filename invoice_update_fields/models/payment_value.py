@@ -20,10 +20,10 @@ class PaymentValue(models.Model):
      
     @api.model
     def _l10n_ec_get_payment_data(self):
-        payment_data_2 = []
-        payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
+        payment_data = []
+        # payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
-        payment_data.clear()
+        # payment_data.clear()
         
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
@@ -49,11 +49,7 @@ class PaymentValue(models.Model):
                 'payment_total': line.payment_valor,
                 'payment_name':line.l10n_ec_sri_payment_id.name,
             }
-            
-            payment_data_2.append(payment_vals)
         
         _logger.info(f'MOSTRANDO EL PAYMENT DATA 1 >>> { payment_data }')
-        
-        _logger.info(f'MOSTRANDO EL PAYMENT DATA 2 >>> { payment_data_2 }')
 
         return payment_data
