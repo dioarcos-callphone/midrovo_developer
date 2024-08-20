@@ -9,7 +9,11 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
-        pay_term_line_ids = self.l10n_ec_sri_payment_ids
+        payment_data.clear()
+        
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
+            lambda line : line.payment_valor > 0
+        )
         
         for line in pay_term_line_ids:
             payment_vals = {
