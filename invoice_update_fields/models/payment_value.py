@@ -18,7 +18,7 @@ class PaymentValue(models.Model):
                     'payment_name': line.l10n_ec_sri_payment_id.name,
             }
         
-        payment_data.append(payment_vals)
+            payment_data.append(payment_vals)
         
         # for payment in payment_data:
         #     payment_total = payment['payment_total']
