@@ -25,6 +25,7 @@ class PaymentValue(models.Model):
             payment_vals = {
                     'payment_code': 16,
                     'payment_total': abs(line.balance),
+                    'payment_name': self.l10n_ec_sri_payment_id.name,
             }
         
             payment_data.append(payment_vals)
