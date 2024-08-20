@@ -23,6 +23,6 @@ class PaymentValue(models.Model):
         
             payment_data.append(payment_vals)
         
-        # _logger.info(f'MOSTRANDO EL PAYMENT TOTAL >>> { payment_data }')
+        _logger.info(f'MOSTRANDO EL PAYMENT TOTAL >>> { payment_data }')
 
         return payment_data
