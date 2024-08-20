@@ -11,7 +11,9 @@ class PaymentValue(models.Model):
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
-        invoice_id._l10n_ec_get_payment_data()        
+        result = invoice_id._l10n_ec_get_payment_data()    
+        
+        _logger.info(f'MOSTRANDO PAYMENT DATA >>> { result }')
         
         return super(PaymentValue, self).get_invoice_field(id)
     
