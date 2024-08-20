@@ -18,6 +18,7 @@ class PaymentValue(models.Model):
         
         pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids
         
+        _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
         _logger.info(f'PAYMENT TERM 2 >>> { pay_term_line_ids_2 }')
                 
         for line in pay_term_line_ids:
