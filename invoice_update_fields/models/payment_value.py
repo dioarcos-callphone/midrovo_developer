@@ -29,7 +29,7 @@ class PaymentValue(models.Model):
             payment_data.append(payment_vals)
             
         for line in pay_term_line_ids_2:
-            payments_vals = {
+            payment_vals = {
                 'payment_code': line.l10n_ec_sri_payment_id.code,
                 'payment_total': line.payment_valor,
                 'payment_name':line.l10n_ec_sri_payment_id.name,
