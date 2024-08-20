@@ -10,10 +10,10 @@ class PaymentValue(models.Model):
         string="Payment Method (SRI)",
     )
     
-    line_ids = fields.One2many(
-        'account.move.sri',
-        'move_id',
-    )
+    # line_ids = fields.One2many(
+    #     'account.move.sri.line',
+    #     'move_id',
+    # )
      
     @api.model
     def _l10n_ec_get_payment_data(self):
