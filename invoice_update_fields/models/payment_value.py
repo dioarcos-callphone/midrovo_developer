@@ -9,6 +9,11 @@ class PaymentValue(models.Model):
         comodel_name="l10n_ec.sri.payment",
         string="Payment Method (SRI)",
     )
+    
+    line_ids = fields.One2many(
+        'account.move.sri.lines',
+        'move_id',
+    )
      
     @api.model
     def _l10n_ec_get_payment_data(self):
