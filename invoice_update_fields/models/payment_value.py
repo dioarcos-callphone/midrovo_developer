@@ -19,8 +19,6 @@ class PaymentValue(models.Model):
         pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids.filtered(
             lambda line: line.payment_valor > 0
         )
-        
-        _logger.info(f'CODIGO DEL METODO DE PAGO >>> { code }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
