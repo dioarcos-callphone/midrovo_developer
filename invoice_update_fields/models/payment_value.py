@@ -23,7 +23,7 @@ class PaymentValue(models.Model):
                 
         for line in pay_term_line_ids:
             payment_vals = {
-                    'payment_code': self.l10n_ec_sri_payment_id.code,
+                    'payment_code': 16,
                     'payment_total': abs(line.balance),
             }
         
