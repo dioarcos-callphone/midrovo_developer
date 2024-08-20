@@ -29,10 +29,10 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids
+        # pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids
         
         _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
-        _logger.info(f'PAYMENT TERM 2 >>> { pay_term_line_ids_2 }')
+        # _logger.info(f'PAYMENT TERM 2 >>> { pay_term_line_ids_2 }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
@@ -42,13 +42,6 @@ class PaymentValue(models.Model):
             }
         
             payment_data.append(payment_vals)
-            
-        for line in pay_term_line_ids_2:
-            payment_vals = {
-                'payment_code': line.l10n_ec_sri_payment_id.code,
-                'payment_total': line.payment_valor,
-                'payment_name':line.l10n_ec_sri_payment_id.name,
-            }
         
         _logger.info(f'MOSTRANDO EL PAYMENT DATA 1 >>> { payment_data }')
 
