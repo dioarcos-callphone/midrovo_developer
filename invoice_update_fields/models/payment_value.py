@@ -11,9 +11,7 @@ class PaymentValue(models.Model):
         
         payment_data.clear()
         
-        pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
-            lambda line : line.payment_valor > 0
-        )
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids
         
         for line in pay_term_line_ids:
             payment_vals = {
