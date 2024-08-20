@@ -13,6 +13,8 @@ class PaymentValue(models.Model):
         
         pay_term_line_ids = self.l10n_ec_sri_payment_ids
         
+        _logger.info(f'MOSTRANDO EL PAYMENT TERM LINE >>> { pay_term_line_ids }')
+        
         for line in pay_term_line_ids:
             payment_vals = {
                     'payment_code': line.l10n_ec_sri_payment_id.code,
@@ -26,6 +28,6 @@ class PaymentValue(models.Model):
         #     payment_total = payment['payment_total']
         #     _logger.info(f'MOSTRANDO EL PAYMENTO TOTAL >>> { payment_total }')
         
-        _logger.info(f'MOSTRANDO EL PAYMENTO TOTAL >>> { payment_data }')
+        _logger.info(f'MOSTRANDO EL PAYMENT TOTAL >>> { payment_data }')
 
         return payment_data
