@@ -9,11 +9,14 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
-        payment_vals = {
-                'payment_code': self.line.l10n_ec_sri_payment_id.code,
-                'payment_total': self.line.payment_valor,
-                'payment_name':self.l10n_ec_sri_payment_id.name,
-        }
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids
+        
+        for line in pay_term_line_ids:
+            payment_vals = {
+                    'payment_code': line.l10n_ec_sri_payment_id.code,
+                    'payment_total': line.payment_valor,
+                    'payment_name': line.l10n_ec_sri_payment_id.name,
+            }
         
         payment_data.append(payment_vals)
         
