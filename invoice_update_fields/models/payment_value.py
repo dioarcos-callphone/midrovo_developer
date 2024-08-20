@@ -16,9 +16,7 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids.filtered(
-            lambda line: line.payment_valor > 0
-        )
+        pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids
                 
         for line in pay_term_line_ids:
             payment_vals = {
