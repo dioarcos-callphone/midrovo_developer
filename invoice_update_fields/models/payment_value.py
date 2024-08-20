@@ -5,6 +5,7 @@ _logger = logging.getLogger(__name__)
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
+    @api.model
     def _get_default_forma_pago_sri(self):
         pass
     
