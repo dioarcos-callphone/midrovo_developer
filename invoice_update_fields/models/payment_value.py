@@ -11,7 +11,7 @@ class PaymentValue(models.Model):
     )
     
     line_ids = fields.One2many(
-        'account.move.sri.lines',
+        'account.move.sri',
         'move_id',
     )
      
