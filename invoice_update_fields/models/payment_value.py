@@ -31,9 +31,9 @@ class PaymentValue(models.Model):
         
         for line in pay_term_line_ids:
             payment_vals = {
-                    'payment_code': line.l10n_ec_sri_payment_id.code,
-                    'payment_total': line.payment_valor,
-                    'payment_name': line.l10n_ec_sri_payment_id.name,
+                    'payment_code': self.l10n_ec_sri_payment_id.code,
+                    'payment_total': 500,
+                    #'payment_name': line.l10n_ec_sri_payment_id.name,
             }
         
             payment_data.append(payment_vals)
