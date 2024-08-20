@@ -4,6 +4,11 @@ _logger = logging.getLogger(__name__)
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
+    
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        string="Payment Method (SRI)",
+    )
      
     @api.model
     def _l10n_ec_get_payment_data(self):
