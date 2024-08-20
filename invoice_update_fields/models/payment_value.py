@@ -15,9 +15,10 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        payment_code = self.l10n_ec_sri_payment_id.l10n_ec_sri_payment_id.code
+        payment_code = self.l10n_ec_sri_payment_id
+        code = payment_code.l10n_ec_sri_payment_id.code
         
-        _logger.info(f'CODIGO DEL METODO DE PAGO >>> { payment_code }')
+        _logger.info(f'CODIGO DEL METODO DE PAGO >>> { code }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
