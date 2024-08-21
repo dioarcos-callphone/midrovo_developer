@@ -85,7 +85,7 @@ class PaymentValue(models.Model):
         return payment_data
     
 class InheritAccountMoveSri(models.Model):
-    _inherit = 'account.move.sri'
+    _inherit = 'account.move'
     
     @api.model
     def _get_default_forma_pago_sri(self):
