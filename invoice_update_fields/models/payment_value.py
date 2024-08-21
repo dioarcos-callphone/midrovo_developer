@@ -26,7 +26,7 @@ class PaymentValue(models.Model):
         name = pay_term_line_ids.name
         ref = pay_term_line_ids.ref
         
-        _logger.info(f'PAYMENT TERM 1 >>> { move_id } || { name } || { ref }')
+        _logger.info(f'PAYMENT TERM 1 >>> { move_id.id } || { name } || { ref }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
