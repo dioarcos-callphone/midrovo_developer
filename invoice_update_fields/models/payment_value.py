@@ -37,7 +37,7 @@ class PaymentValue(models.Model):
         for line in pay_term_line_ids:
             payment_vals = {
                     'payment_code': 16,
-                    'payment_total': abs(line.balance),
+                    'payment_total': line.payment_valor,
             }
         
             payment_data.append(payment_vals)
