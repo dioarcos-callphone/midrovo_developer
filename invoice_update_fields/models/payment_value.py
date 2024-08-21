@@ -6,28 +6,14 @@ class PaymentValue(models.Model):
     _inherit = 'account.move'
     
     def _get_default_forma_pago_sri(self):
-        pass
-        # return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
     
     l10n_ec_sri_payment_id = fields.Many2one(
         comodel_name="l10n_ec.sri.payment",
         string="Payment Method (SRI)",
-        # default=_get_default_forma_pago_sri,
+        # default=_get_default_forma_pago_sri,        
     )
     
-    # l10n_ec_sri_payment_id = fields.Many2one(
-    #     comodel_name="l10n_ec.sri.payment",
-    #     string="Payment Method (SRI)",
-    #     required=True, 
-    #     ondelete='cascade', 
-    #     index=True
-    # )
-    
-    # line_ids = fields.One2many(
-    #     'account.move.sri.line',
-    #     'move_id',
-    # )
-     
     @api.model
     def _l10n_ec_get_payment_data(self):
         payment_data = []
@@ -36,7 +22,11 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
+        move_id = pay_term_line_ids.move_id
+        name = pay_term_line_ids.name
+        ref = pay_term_line_ids.ref
+        
+        _logger.info(f'PAYMENT TERM 1 >>> { move_id } || { name } || { ref }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
