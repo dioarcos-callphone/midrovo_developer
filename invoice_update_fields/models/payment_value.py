@@ -18,8 +18,12 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = []
         
-        pay_term_line_ids = self.line_ids.filtered(
-            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        # pay_term_line_ids = self.line_ids.filtered(
+        #     lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        # )
+        
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
+            lambda line: line.payment_valor > 0
         )
         
         move_id = pay_term_line_ids.move_id
