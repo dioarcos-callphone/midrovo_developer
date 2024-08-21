@@ -84,30 +84,16 @@ class PaymentValue(models.Model):
             payment_data.append(payment_vals)
         return payment_data
     
-# class InheritAccountMoveSri(models.Model):
-#     _inherit = 'account.move'
+class InheritPosPaymentMethod(models.Model):
+    _inherit = 'pos.payment.method'
     
-#     @api.model
-#     def _get_default_forma_pago_sri(self):
-#         pass
+    @api.model
+    def _get_default_forma_pago_sri(self):
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
 
-    # l10n_ec_sri_payment_id = fields.Many2one(
-    #     comodel_name="l10n_ec.sri.payment",
-    #     string="Payment Method (SRI)",
-    # )
-    
-# class InheritAccountMoveSriLines(models.Model):
-#     _name = 'account.move.sri.lines'
-
-#     @api.model
-#     def _get_default_forma_pago(self):
-#         pass
-    
-
-    # l10n_ec_sri_payment_id = fields.Many2one(
-    #     comodel_name="l10n_ec.sri.payment",
-    #     string="Payment Method (SRI)",
-    #     required=True, 
-    #     ondelete='cascade', 
-    #     index=True
-    # )
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        string="Payment Method (SRI)",
+        default=_get_default_forma_pago_sri,
+        options="{'no_open': True, 'no_create': True}"
+    )
