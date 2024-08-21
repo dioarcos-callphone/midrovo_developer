@@ -26,11 +26,13 @@ class PaymentValue(models.Model):
             lambda line: line.payment_valor > 0
         )
         
-        move_id = pay_term_line_ids.move_id
-        name = pay_term_line_ids.name
-        ref = pay_term_line_ids.ref
+        # move_id = pay_term_line_ids.move_id
+        # name = pay_term_line_ids.name
+        # ref = pay_term_line_ids.ref
         
-        _logger.info(f'PAYMENT TERM 1 >>> { move_id.id } || { name } || { ref }')
+        # _logger.info(f'PAYMENT TERM 1 >>> { move_id.id } || { name } || { ref }')
+        
+        _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
