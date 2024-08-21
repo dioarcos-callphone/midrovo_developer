@@ -3,7 +3,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class PaymentValue(models.Model):
-    _inherit = 'account_move'
+    _inherit = 'account.move'
     
     @api.model
     def _get_default_forma_pago_sri(self):
