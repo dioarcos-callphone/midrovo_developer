@@ -26,9 +26,12 @@ class PaymentValue(models.Model):
         
         # payment_data.clear()
         
-        pay_term_line_ids = self.line_ids.filtered(
-            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
-        )
+        # pay_term_line_ids = self.line_ids.filtered(
+        #     lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        # )
+        
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids
+        
         
         # pay_term_line_ids_2 = self.l10n_ec_sri_payment_ids
         
