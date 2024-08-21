@@ -51,7 +51,7 @@ class InheritAccountMoveSriLines(models.Model):
     _inherit = 'account.move.sri.lines'
 
     def _get_default_forma_pago(self):
-        return self.env['l10n_ec.sri.payment'].search([('code', '=', '01')])
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
     
 
     l10n_ec_sri_payment_id = fields.Many2one(
@@ -77,6 +77,7 @@ class InheritAccountMoveSriLines(models.Model):
                                     compute='_compute_payment_valor', store=True, readonly=False, precompute=True,
                                     digits='Payment value',)
     
+    @api.model
     @api.depends("payment_valor","move_id")
     def _compute_payment_valor(self):
         value = 0.00
