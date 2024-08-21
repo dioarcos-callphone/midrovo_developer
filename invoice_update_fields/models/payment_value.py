@@ -93,16 +93,16 @@ class PaymentValue(models.Model):
             payment_data.append(payment_vals)
         return payment_data
     
-class InheritPosPaymentMethod(models.Model):
-    _inherit = 'pos.payment.method'
+# class InheritPosPaymentMethod(models.Model):
+#     _inherit = 'pos.payment.method'
     
-    @api.model
-    def _get_default_forma_pago_sri(self):
-        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
+#     @api.model
+#     def _get_default_forma_pago_sri(self):
+#         return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
 
-    l10n_ec_sri_payment_id = fields.Many2one(
-        comodel_name="l10n_ec.sri.payment",
-        string="Payment Method (SRI)",
-        default=_get_default_forma_pago_sri,
-        options="{'no_open': True, 'no_create': True}"
-    )
+#     l10n_ec_sri_payment_id = fields.Many2one(
+#         comodel_name="l10n_ec.sri.payment",
+#         string="Payment Method (SRI)",
+#         default=_get_default_forma_pago_sri,
+#         options="{'no_open': True, 'no_create': True}"
+#     )
