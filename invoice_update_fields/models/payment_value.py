@@ -48,7 +48,7 @@ class PaymentValue(models.Model):
         return payment_data
     
 class InheritAccountMoveSriLines(models.Model):
-    _name = 'account.move.sri.lines'
+    _inherit = 'account.move.sri.lines'
 
     def _get_default_forma_pago(self):
         return self.env['l10n_ec.sri.payment'].search([('code', '=', '01')])
