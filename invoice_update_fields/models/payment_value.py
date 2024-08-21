@@ -28,7 +28,10 @@ class PaymentValue(models.Model):
         
         account_move_sri_lines = self.env['account.move.sri.lines'].browse(move_id)
         
+        id = account_move_sri_lines.id
+        payment_valor = account_move_sri_lines.payment_valor
         
+        _logger.info(f'VALORES DEL SRI LINES >>> { id } || { payment_valor }')
         
         # pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
         #     lambda line: line.payment_valor > 0
