@@ -6,12 +6,11 @@ class PaymentValue(models.Model):
     _inherit = 'account.move'
     
     def _get_default_forma_pago_sri(self):
-        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
+        pass
     
     l10n_ec_sri_payment_id = fields.Many2one(
         comodel_name="l10n_ec.sri.payment",
         string="Payment Method (SRI)",
-        # default=_get_default_forma_pago_sri,        
     )
     
     @api.model
@@ -35,9 +34,11 @@ class PaymentValue(models.Model):
         _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
                 
         for line in pay_term_line_ids:
+            self.l10n_ec_sri_payment_id = line.l10n_ec_sri_payment_id
             payment_vals = {
-                    'payment_code': 16,
+                    'payment_code': self.l10n_ec_sri_payment_id.code,
                     'payment_total': line.payment_valor,
+                    'payment_name': self.l10n_ec_sri_payment_id.name
             }
         
             payment_data.append(payment_vals)
