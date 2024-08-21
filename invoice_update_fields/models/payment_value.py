@@ -51,6 +51,8 @@ class PaymentValue(models.Model):
 
     #     return payment_data
     
+    compensa = fields.Float(u'Compensacion', )
+    
     @api.model
     def _l10n_ec_get_payment_data(self):
         """ Get payment data for the XML.  """
