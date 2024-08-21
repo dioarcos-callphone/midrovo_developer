@@ -5,6 +5,15 @@ _logger = logging.getLogger(__name__)
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
+    def _get_default_forma_pago_sri(self):
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
+    
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        string="Payment Method (SRI)",
+        default=_get_default_forma_pago_sri,
+    )
+    
     # l10n_ec_sri_payment_id = fields.Many2one(
     #     comodel_name="l10n_ec.sri.payment",
     #     string="Payment Method (SRI)",
