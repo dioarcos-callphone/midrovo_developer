@@ -18,9 +18,13 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = []
         
-        pay_term_line = self.line_ids.filtered(
+        account_move_line = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
+        
+        account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',account_move_line.move_id.id)])
+        
+        
         
         pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
             lambda line: line.payment_valor > 0
@@ -31,8 +35,8 @@ class PaymentValue(models.Model):
         # ref = pay_term_line_ids.ref
         
         # _logger.info(f'PAYMENT TERM 1 >>> { move_id.id } || { name } || { ref }')
-        _logger.info(f'PAYMENT TERM 0 >>> { pay_term_line }')
-        _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
+        _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
+        _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
                 
         for line in pay_term_line_ids:
             payment_vals = {
