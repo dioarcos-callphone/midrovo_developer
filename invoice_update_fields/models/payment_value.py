@@ -24,6 +24,8 @@ class PaymentValue(models.Model):
         
         code = account_move_line.move_id.id
         
+        _logger.info(f'CODIGO DE MOVE LNE >>> { code }')
+        
         account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',code)])
         
         
