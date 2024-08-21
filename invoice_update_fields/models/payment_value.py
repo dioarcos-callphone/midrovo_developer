@@ -5,8 +5,8 @@ _logger = logging.getLogger(__name__)
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
-    def _get_default_forma_pago_sri(self, id):
-        return self.env['l10n_ec.sri.payment'].search([('code', '=', id)])
+    def _get_default_forma_pago_sri(self):
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '16')])
     
     l10n_ec_sri_payment_id = fields.Many2one(
         comodel_name="l10n_ec.sri.payment",
@@ -35,12 +35,10 @@ class PaymentValue(models.Model):
         _logger.info(f'PAYMENT TERM 1 >>> { pay_term_line_ids }')
                 
         for line in pay_term_line_ids:
-            self.l10n_ec_sri_payment_id = line.l10n_ec_sri_payment_id
-            self._get_default_forma_pago_sri(line.l10_ec_sri_payment.code)
             payment_vals = {
-                    'payment_code': self.l10n_ec_sri_payment_id.code,
+                    'payment_code': line.l10_ec_sri_payment_id.code,
                     'payment_total': line.payment_valor,
-                    'payment_name': self.l10n_ec_sri_payment_id.name
+                    'payment_name': line.l10n_ec_sri_payment_id.name
             }
         
             payment_data.append(payment_vals)
