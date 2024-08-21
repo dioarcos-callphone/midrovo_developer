@@ -26,9 +26,9 @@ class PaymentValue(models.Model):
         
         
         
-        pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
-            lambda line: line.payment_valor > 0
-        )
+        # pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
+        #     lambda line: line.payment_valor > 0
+        # )
         
         # move_id = pay_term_line_ids.move_id
         # name = pay_term_line_ids.name
@@ -38,11 +38,11 @@ class PaymentValue(models.Model):
         _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
         _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
                 
-        for line in pay_term_line_ids:
+        for line in account_move_line:
             payment_vals = {
-                'payment_code': line.l10n_ec_sri_payment_id.code,
-                'payment_total': line.payment_valor,
-                'payment_name':line.l10n_ec_sri_payment_id.name,
+                'payment_code': 16,
+                'payment_total': 200,
+                'payment_name': 'Debito',
             }
         
             payment_data.append(payment_vals)
