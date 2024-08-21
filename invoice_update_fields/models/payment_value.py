@@ -11,7 +11,7 @@ class PaymentValue(models.Model):
     l10n_ec_sri_payment_id = fields.Many2one(
         comodel_name="l10n_ec.sri.payment",
         string="Payment Method (SRI)",
-        default='_get_default_forma_pago_sri'
+        default=_get_default_forma_pago_sri,
     )
     
     @api.model
