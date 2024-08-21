@@ -22,7 +22,9 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',account_move_line.move_id.id)])
+        code = account_move_line.move_id.id
+        
+        account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',code)])
         
         
         
