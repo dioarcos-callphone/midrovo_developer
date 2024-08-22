@@ -106,6 +106,14 @@ class AccountMoveCompensa(models.Model):
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
+        
+        move_id = pay_term_line_ids.move_id.id
+        
+        _logger.info(f'CODIGO DE MOVE LINE >>> { move_id }')
+        
+        account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',move_id)])
+        
+        _logger.info(f'OBTENIENDO SRI LINES >>> { account_move_sri_lines }')
 
         for line in pay_term_line_ids:
             payment_vals = {
