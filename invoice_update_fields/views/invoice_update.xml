@@ -65,11 +65,11 @@
                         <t t-foreach="env['account.move.sri.lines'].search([('move_id','=',o.id)])" t-as="data">
                             <tr>
                                 <td>
-                                    <span t-esc="data.l10n_ec_sri_payment_id.code"/>
+                                    <span t-esc="data.l10n_ec_sri_payment_id.name"/>
                                    
                                 </td>
                                 <td>
-                                     <span t-esc="data.l10n_ec_sri_payment_id.name" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                     <span t-esc="data.l10n_ec_sri_payment_id.payment_valor" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </td>
                             </tr>
                         </t>
