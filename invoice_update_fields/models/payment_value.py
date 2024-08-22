@@ -39,6 +39,8 @@ class PosOrder(models.Model):
         
         result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
         
+        invoice_id._l10n_ec_get_payment_data()
+        
         _logger.info(f'OBTENIENDO EL SRI LINES >>> { result }')
 
         return {
