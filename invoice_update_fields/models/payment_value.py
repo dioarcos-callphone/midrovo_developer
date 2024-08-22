@@ -58,7 +58,7 @@ class AccountMoveSriLines(models.Model):
     
     @api.depends("payment_valor","move_id")
     def _compute_payment_valor(self):
-        value = 0.00
+        value = 20.00
         for line in self:
             if ( line.move_id[0]):
                 invoices = self.env["account.move"].browse([line.move_id[0].id])
