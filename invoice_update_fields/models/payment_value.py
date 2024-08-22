@@ -61,3 +61,7 @@ class AccountMoveSriLines(models.Model):
                 invoices = self.env["account.move"].browse([line.move_id[0].id])
                 value = invoices._get_default_payment_valor()
                 line.payment_valor = value
+                
+    @api.model
+    def create(self, vals):
+        return super(AccountMoveSriLines, self).create(vals)
