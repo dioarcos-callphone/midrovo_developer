@@ -32,7 +32,7 @@ class PosOrder(models.Model):
     @api.model
     def get_invoice_field(self, id):
         _logger.info(f'OBTENIENDO EL ID >>> { id }')
-        pos_id = self.search([('pos_reference', '=', id)])
+        pos_id = self.search([('pos_reference', '=', id.pos_reference)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
