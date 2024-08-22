@@ -10,5 +10,14 @@ class PaymentValue(models.Model):
         payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
         payment_data.clear()
+        
+        result = self.env['account.move.sri.lines'].search([], order='id desc', limit=5)
+        
+        _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
+        
+        for element in result:
+            _logger.info(f'ACCOUNT MOVE ID >>> { element.move_id }')
+        
+        
 
         return payment_data
