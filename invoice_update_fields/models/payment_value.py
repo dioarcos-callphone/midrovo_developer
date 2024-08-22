@@ -108,7 +108,7 @@ class AccountMoveCompensa(models.Model):
         for line in pay_term_line_ids:
             payment_vals = {
                 'payment_code': self.l10n_ec_sri_payment_id.code,
-                'payment_total': abs(line.balance),
+                'payment_total': 200,
                 'payment_name': 'deposito',
             }
             if self.invoice_payment_term_id and line.date_maturity:
