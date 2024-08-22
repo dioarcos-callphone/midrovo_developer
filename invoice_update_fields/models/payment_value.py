@@ -14,45 +14,39 @@ class PaymentValue(models.Model):
         string="Payment Method (SRI)",
     )
     
-    @api.model
-    def _l10n_ec_get_payment_data(self):
-        payment_data = []
+    # @api.model
+    # def _l10n_ec_get_payment_data(self):
+    #     payment_data = []
         
-        account_move_line = self.line_ids.filtered(
-            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
-        )
+    #     account_move_line = self.line_ids.filtered(
+    #         lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+    #     )
         
-        move_id = account_move_line.move_id.id
+    #     move_id = account_move_line.move_id.id
         
-        _logger.info(f'CODIGO DE MOVE LINE >>> { move_id }')
+    #     _logger.info(f'CODIGO DE MOVE LINE >>> { move_id }')
         
-        self.env.cr.execute("""
-                            SELECT * FROM account_move_sri_lines WHERE move_id = %s
-                            """, (move_id,))
+    #     # account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',move_id)])
         
-        account_move_sri_lines = self.env.cr.fetchall()
-        
-        # account_move_sri_lines = self.env['account.move.sri.lines'].sudo().search([('move_id','=',move_id)])
-        
-        #id = account_move_sri_lines.id
+    #     #id = account_move_sri_lines.id
                 
-        #_logger.info(f'VALORES DEL SRI LINES >>> { id }')
+    #     #_logger.info(f'VALORES DEL SRI LINES >>> { id }')
         
-        _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
-        _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
+    #     _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
+    #     # _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
                 
-        for line in account_move_line:
-            payment_vals = {
-                'payment_code': 16,
-                'payment_total': 200,
-                'payment_name': 'Debito',
-            }
+    #     for line in account_move_line:
+    #         payment_vals = {
+    #             'payment_code': 16,
+    #             'payment_total': 200,
+    #             'payment_name': 'Debito',
+    #         }
         
-            payment_data.append(payment_vals)
+    #         payment_data.append(payment_vals)
         
-        _logger.info(f'MOSTRANDO EL PAYMENT DATA 1 >>> { payment_data }')
+    #     _logger.info(f'MOSTRANDO EL PAYMENT DATA 1 >>> { payment_data }')
 
-        return payment_data
+    #     return payment_data
     
 # class InheritAccountMoveSriLines(models.Model):
 #     _inherit = 'account.move.sri.lines'
