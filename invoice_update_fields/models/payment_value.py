@@ -35,6 +35,9 @@ class PosOrder(models.Model):
         pos_id = self.search([('pos_reference', '=', id)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
+        
+        result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
+        _logger.info(f'OBTENIENDO RESULT >>> { result }')
 
         return {
             'invoice_id': invoice_id.id,
