@@ -28,9 +28,9 @@ class PaymentValue(models.Model):
         
         account_move_sri_lines = self.env['account.move.sri.lines'].search([('move_id','=',move_id)])
         
-        id = account_move_sri_lines.id
+        #id = account_move_sri_lines.id
                 
-        _logger.info(f'VALORES DEL SRI LINES >>> { id }')
+        #_logger.info(f'VALORES DEL SRI LINES >>> { id }')
         
         _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
         _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
