@@ -28,7 +28,7 @@ class PaymentValue(models.Model):
         
         self.env.cr.execute("""
                             SELECT * FROM account_move_sri_lines WHERE move_id = %s
-                            """, ( move_id ))
+                            """, (move_id,))
         
         account_move_sri_lines = self.env.cr.fetchall()
         
