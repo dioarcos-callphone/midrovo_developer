@@ -37,7 +37,7 @@ class PosOrder(models.Model):
             [('ref', '=', pos_id.name)])
         
         
-        result = self.env['account.move.sri.lines'].seach([('mode_id','=',invoice_id.id)])
+        result = self.env['account.move.sri.lines'].search([('mode_id','=',invoice_id.id)])
         
         _logger.info(f'OBTENIENDO EL SRI LINES >>> { result }')
 
