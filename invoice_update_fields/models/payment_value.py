@@ -46,6 +46,11 @@ class PosOrder(models.Model):
                 'payment_name':line.l10n_ec_sri_payment_id.name,
             }
             
+            self.env['account.move.sri.lines'].create({
+                'l10n_ec_sri_payment_id': line.l10n_ec_sri_payment_id.code,
+                'payment_valor': line.payment_valor,
+            })
+            
             payment_data.append(payment_vals)
 
         return {
