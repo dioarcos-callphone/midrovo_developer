@@ -63,4 +63,5 @@ class AccountMoveSriLines(models.Model):
             if ( line.move_id[0]):
                 invoices = self.env["account.move"].browse([line.move_id[0].id])
                 value = invoices._get_default_payment_valor()
+                value = 20.00
                 line.payment_valor = value
