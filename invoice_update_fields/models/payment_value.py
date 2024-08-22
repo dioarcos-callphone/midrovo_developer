@@ -13,6 +13,8 @@ class PaymentValue(models.Model):
         
         result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
+        self.env['account.move.sri.lines'].create(result)
+        
         sri_lines = result[0]
         
         result.write(sri_lines)
@@ -25,3 +27,43 @@ class PaymentValue(models.Model):
         
 
         return payment_data
+
+
+class AccountMoveSriLines(models.Model):
+    _inherit = 'account.move.sri.lines'
+
+    def _get_default_forma_pago(self):
+        pass
+    
+
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        string="Payment Method (SRI)",
+        required=True, 
+        ondelete='cascade', 
+        index=True
+    )
+    
+    #parameter to One2many, 
+    move_id = fields.Many2one(  "account.move", 
+                                string="Account_key",
+                                required=True,
+                                readonly=True,
+                                index=True,
+                                auto_join=True,
+                                ondelete="cascade",
+                                check_company=True,
+                            )
+    
+    payment_valor = fields.Float( string="Price value",
+                                    compute='_compute_payment_valor', store=True, readonly=False, precompute=True,
+                                    digits='Payment value',)
+    
+    @api.depends("payment_valor","move_id")
+    def _compute_payment_valor(self):
+        value = 0.00
+        for line in self:
+            if ( line.move_id[0]):
+                invoices = self.env["account.move"].browse([line.move_id[0].id])
+                value = invoices._get_default_payment_valor()
+                line.payment_valor = value
