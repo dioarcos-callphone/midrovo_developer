@@ -100,6 +100,8 @@ class AccountMoveCompensa(models.Model):
     def _l10n_ec_get_payment_data(self):
         """ Get payment data for the XML.  """
         payment_data = super(AccountMoveCompensa, self)._l10n_ec_get_payment_data()
+        
+        payment_data.clear()
 
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
@@ -107,7 +109,7 @@ class AccountMoveCompensa(models.Model):
 
         for line in pay_term_line_ids:
             payment_vals = {
-                'payment_code': self.l10n_ec_sri_payment_id.code,
+                'payment_code': 16,
                 'payment_total': 200,
                 'payment_name': 'deposito',
             }
