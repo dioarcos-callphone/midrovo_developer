@@ -17,7 +17,7 @@ class PaymentValue(models.Model):
         )
         
         for line in pay_term_line_ids:
-            pos_id = self.search([('pos_reference', '=', line.move_id.ref)])
+            pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
             pos_id.get_invoice_field(pos_id.id)
             
         
