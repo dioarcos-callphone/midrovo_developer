@@ -16,9 +16,7 @@ class PaymentValue(models.Model):
             lambda line: line.payment_valor > 0
         )
         
-        _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
-        
-        self.env['account.move.sri.lines'].create(result)      
+        _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')      
         
         # for element in result:
         #     _logger.info(f'ACCOUNT MOVE ID >>> { element.move_id }')
