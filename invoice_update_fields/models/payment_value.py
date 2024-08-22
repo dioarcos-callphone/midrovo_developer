@@ -13,12 +13,6 @@ class PaymentValue(models.Model):
         
         result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
-        self.env['account.move.sri.lines'].create(result)
-        
-        sri_lines = result[0]
-        
-        result.write(sri_lines)
-        
         _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
         
         for element in result:
