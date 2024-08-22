@@ -9,11 +9,7 @@ class PaymentValue(models.Model):
         pass
     
     @api.model
-    def _l10n_ec_get_payment_data(self):
-        payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
-        
-        payment_data.clear()
-        
+    def _l10n_ec_get_payment_data(self):        
         result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
         _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
@@ -23,7 +19,7 @@ class PaymentValue(models.Model):
         
         
 
-        return payment_data
+        return super(PaymentValue, self)._l10n_ec_get_payment_data()
 
 
 class AccountMoveSriLines(models.Model):
@@ -58,7 +54,7 @@ class AccountMoveSriLines(models.Model):
     
     @api.depends("payment_valor","move_id")
     def _compute_payment_valor(self):
-        value = 0.00
+        value = 20.00
         for line in self:
             if ( line.move_id[0]):
                 invoices = self.env["account.move"].browse([line.move_id[0].id])
