@@ -46,7 +46,7 @@ class PosOrder(models.Model):
                 'payment_name':line.l10n_ec_sri_payment_id.name,
             }
             
-            self.env['account.move.sri.lines'].create({
+            self.env['account.move.sri.lines'].write({
                 'l10n_ec_sri_payment_id': line.l10n_ec_sri_payment_id.code,
                 'payment_valor': line.payment_valor,
             })
