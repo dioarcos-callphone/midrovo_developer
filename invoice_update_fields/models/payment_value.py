@@ -44,16 +44,18 @@ class PosOrder(models.Model):
             'invoice_name': invoice_id.name,
             'invoice_number': invoice_id.l10n_latam_document_number,
             'xml_key': invoice_id.l10n_ec_authorization_number,
+            'payment_data': result
         }
         
     def _l10n_ec_get_payment_data(self, pos_reference):
-        self.get_invoice_field(pos_reference.pos_reference)
+        payment =  self.get_invoice_field(pos_reference.pos_reference)
         payment_data = []
         pos_id = self.search([('pos_reference', '=', pos_reference.pos_reference)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
-        _logger.info(f'OBTENIENDO DEL INVOICE >>> { invoice_id }')        
+        payment = payment['payment_data']
+        _logger.info(f'OBTENIENDO DEL INVOICE >>> { payment }')        
         
         result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
         
