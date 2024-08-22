@@ -27,47 +27,26 @@ class PaymentValue(models.Model):
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
 
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
 
-class AccountMoveSriLines(models.Model):
-    _inherit = 'account.move.sri.lines'
+    sale_barcode = fields.Char()
 
-    def _get_default_forma_pago(self):
-        pass
-    
-
-    l10n_ec_sri_payment_id = fields.Many2one(
-        comodel_name="l10n_ec.sri.payment",
-        string="Payment Method (SRI)",
-        required=True, 
-        ondelete='cascade', 
-        index=True
-    )
-    
-    #parameter to One2many, 
-    move_id = fields.Many2one(  "account.move", 
-                                string="Account_key",
-                                required=True,
-                                readonly=True,
-                                index=True,
-                                auto_join=True,
-                                ondelete="cascade",
-                                check_company=True,
-                            )
-    
-    payment_valor = fields.Float( string="Price value",
-                                    compute='_compute_payment_valor', store=True, readonly=False, precompute=True,
-                                    digits='Payment value',)
-    
-    @api.depends("payment_valor","move_id")
-    def _compute_payment_valor(self):
-        value = 0.00
-        for line in self:
-            if ( line.move_id[0]):
-                _logger.info('ENTRA A _COMPUTE_PAYMENT_VALOR')
-                invoices = self.env["account.move"].browse([line.move_id[0].id])
-                value = invoices._get_default_payment_valor()
-                line.payment_valor = value
-                
     @api.model
-    def create(self, vals):
-        return super(AccountMoveSriLines, self).create(vals)
+    def get_invoice_field(self, id):
+        pos_id = self.search([('pos_reference', '=', id)])
+        invoice_id = self.env['account.move'].search(
+            [('ref', '=', pos_id.name)])
+        
+        
+        result = self.env['account.move.sri.lines'].seach([('mode_id','=',invoice_id.id)])
+        
+        _logger.info(f'OBTENIENDO EL SRI LINES >>> { result }')
+
+        return {
+            'invoice_id': invoice_id.id,
+            'invoice_name': invoice_id.name,
+            'invoice_number': invoice_id.l10n_latam_document_number,
+            'xml_key': invoice_id.l10n_ec_authorization_number,
+        }
+
