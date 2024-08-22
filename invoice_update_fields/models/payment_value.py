@@ -49,6 +49,7 @@ class PosOrder(models.Model):
         }
         
     def _l10n_ec_get_payment_data(self, pos_reference):
+        _logger.info(f'OBTENIENDO DE LA VISTA >>> { pos_reference }')
         payment_data = []
         pos_id = self.search([('pos_reference', '=', pos_reference)])
         invoice_id = self.env['account.move'].search(
