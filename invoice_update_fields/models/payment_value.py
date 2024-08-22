@@ -18,6 +18,10 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = []
         
+        result = self.env['account.move.sri']._l10n_ec_get_payment_data()
+        
+        _logger.info(f'OBTENIENDO PAYMENT DATA DE MOVE SRI >>> { result }')
+        
         account_move_line = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
