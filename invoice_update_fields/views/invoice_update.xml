@@ -62,7 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="env['pos.order']._l10n_ec_get_payment_data('o.ref')" t-as="data">
+                        <t t-foreach="env['pos.order']._l10n_ec_get_payment_data(o.ref)" t-as="data">
                             <tr>
                                 <td>
                                     <span t-esc="data['payment_name']"/>
