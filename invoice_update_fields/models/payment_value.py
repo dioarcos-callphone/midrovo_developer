@@ -2,27 +2,27 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
-class PaymentValue(models.Model):
-    _inherit = 'account.move'
+# class PaymentValue(models.Model):
+#     _inherit = 'account.move'
     
-    def _get_default_forma_pago(self):
-        pass
+#     def _get_default_forma_pago(self):
+#         pass
     
-    @api.model
-    def _l10n_ec_get_payment_data(self):        
-        # result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
+#     @api.model
+#     def _l10n_ec_get_payment_data(self):        
+#         # result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
-        # pay_term_line_ids = self.line_ids.filtered(
-        #     lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
-        # )
+#         # pay_term_line_ids = self.line_ids.filtered(
+#         #     lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+#         # )
         
-        # for line in pay_term_line_ids:
-        #     _logger.info(f'OBTENIENDO POS REFERENCE >>> { line.move_id.ref }')
-        #     pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
-        #     _logger.info(f'OBTENIENDO ID DE POS ORDER >>> { pos_id }')
-        #     # pos_id.get_invoice_field(pos_id.id)    
+#         # for line in pay_term_line_ids:
+#         #     _logger.info(f'OBTENIENDO POS REFERENCE >>> { line.move_id.ref }')
+#         #     pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
+#         #     _logger.info(f'OBTENIENDO ID DE POS ORDER >>> { pos_id }')
+#         #     # pos_id.get_invoice_field(pos_id.id)    
 
-        return super(PaymentValue, self)._l10n_ec_get_payment_data()
+#         return super(PaymentValue, self)._l10n_ec_get_payment_data()
 
 class PosOrder(models.Model):
     _inherit = 'pos.order'
