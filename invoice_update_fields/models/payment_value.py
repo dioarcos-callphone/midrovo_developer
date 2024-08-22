@@ -5,6 +5,9 @@ _logger = logging.getLogger(__name__)
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
+    def _get_default_forma_pago(self):
+        pass
+    
     @api.model
     def _l10n_ec_get_payment_data(self):
         payment_data = super(PaymentValue, self)._l10n_ec_get_payment_data()
