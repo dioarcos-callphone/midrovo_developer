@@ -18,7 +18,8 @@ class PaymentValue(models.Model):
         
         for line in pay_term_line_ids:
             pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
-            pos_id.get_invoice_field(pos_id.id)
+            _logger.info(f'OBTENIENDO ID DE POS ORDER >>> { pos_id }')
+            # pos_id.get_invoice_field(pos_id.id)
             
         
         result = self.l10n_ec_sri_payment_ids.filtered(
