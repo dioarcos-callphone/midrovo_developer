@@ -22,16 +22,20 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        move_id = account_move_line.move_id.id
+        pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
+            lambda line: line.payment_valor >= 0
+        )
         
-        _logger.info(f'CODIGO DE MOVE LNE >>> { move_id }')
+        # move_id = account_move_line.move_id.id
         
-        account_move_sri_lines = self.env['account.move.sri.lines'].browse(move_id)
+        # _logger.info(f'CODIGO DE MOVE LNE >>> { move_id }')
         
-        id = account_move_sri_lines.id
-        #payment_valor = account_move_sri_lines.payment_valor
+        # account_move_sri_lines = self.env['account.move.sri.lines'].browse(move_id)
         
-        _logger.info(f'VALORES DEL SRI LINES >>> { id }')
+        # id = account_move_sri_lines.id
+        # payment_valor = account_move_sri_lines.payment_valor
+        
+        # _logger.info(f'VALORES DEL SRI LINES >>> { id }')
         
         # pay_term_line_ids = self.l10n_ec_sri_payment_ids.filtered(
         #     lambda line: line.payment_valor > 0
@@ -43,7 +47,7 @@ class PaymentValue(models.Model):
         
         # _logger.info(f'PAYMENT TERM 1 >>> { move_id.id } || { name } || { ref }')
         _logger.info(f'ACCOUNT MOVE LINE 0 >>> { account_move_line }')
-        _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { account_move_sri_lines }')
+        _logger.info(f'ACCOUNT MOVE SRI LINES 1 >>> { pay_term_line_ids }')
                 
         for line in account_move_line:
             payment_vals = {
