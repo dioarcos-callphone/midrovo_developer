@@ -20,13 +20,7 @@ class PaymentValue(models.Model):
         #     _logger.info(f'OBTENIENDO POS REFERENCE >>> { line.move_id.ref }')
         #     pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
         #     _logger.info(f'OBTENIENDO ID DE POS ORDER >>> { pos_id }')
-        #     # pos_id.get_invoice_field(pos_id.id)
-            
-        result = self.l10n_ec_sri_payment_ids.filtered(
-            lambda line: line.payment_valor > 0
-        )
-        
-        _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')      
+        #     # pos_id.get_invoice_field(pos_id.id)    
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
 
@@ -37,6 +31,7 @@ class PosOrder(models.Model):
 
     @api.model
     def get_invoice_field(self, id):
+        _logger.info(f'OBTENIENDO EL ID >>> { id }')
         pos_id = self.search([('pos_reference', '=', id)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
@@ -49,7 +44,6 @@ class PosOrder(models.Model):
         }
         
     def _l10n_ec_get_payment_data(self, pos_reference):
-        _logger.info(f'OBTENIENDO DE LA VISTA >>> { pos_reference }')
         payment_data = []
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_reference)])
@@ -57,6 +51,8 @@ class PosOrder(models.Model):
         _logger.info(f'OBTENIENDO DEL INVOICE >>> { invoice_id }')        
         
         result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
+        
+        _logger.info(f'OBTENIENDO RESULT >>> { result }')
         
         for line in result:
             payment_vals = {
