@@ -11,7 +11,11 @@ class PaymentValue(models.Model):
         
         payment_data.clear()
         
-        result = self.env['account.move.sri.lines'].search([], order='id desc', limit=5)
+        result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
+        
+        sri_lines = result
+        
+        result.write(sri_lines)
         
         _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
         
