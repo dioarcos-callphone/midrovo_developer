@@ -13,7 +13,7 @@ class PaymentValue(models.Model):
         
         result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
-        sri_lines = result
+        sri_lines = result[0]
         
         result.write(sri_lines)
         
