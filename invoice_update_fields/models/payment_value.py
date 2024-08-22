@@ -12,6 +12,15 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):        
         # result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
         
+        pay_term_line_ids = self.line_ids.filtered(
+            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        )
+        
+        for line in pay_term_line_ids:
+            pos_id = self.search([('pos_reference', '=', line.move_id.ref)])
+            pos_id.get_invoice_field(pos_id.id)
+            
+        
         result = self.l10n_ec_sri_payment_ids.filtered(
             lambda line: line.payment_valor > 0
         )
