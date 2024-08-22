@@ -18,7 +18,7 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_data = []
         
-        result = self.env['l10n.ec.edi']._l10n_ec_get_payment_data()
+        result = self.env['account.move']._l10n_ec_get_payment_data()
         
         _logger.info(f'OBTENIENDO PAYMENT DATA DE MOVE SRI >>> { result }')
         
