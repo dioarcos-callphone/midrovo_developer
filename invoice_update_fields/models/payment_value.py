@@ -17,6 +17,7 @@ class PaymentValue(models.Model):
         )
         
         for line in pay_term_line_ids:
+            _logger.info(f'OBTENIENDO POS REFERENCE >>> { line.move_id.ref }')
             pos_id = self.env['pos.order'].search([('pos_reference', '=', line.move_id.ref)])
             _logger.info(f'OBTENIENDO ID DE POS ORDER >>> { pos_id }')
             # pos_id.get_invoice_field(pos_id.id)
