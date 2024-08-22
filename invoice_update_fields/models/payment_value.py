@@ -10,7 +10,13 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):        
-        result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
+        # result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
+        
+        result = self.l10n_ec_sri_payment_ids.filtered(
+            lambda line: line.payment_valor > 0
+        )
+        
+        self.env['account.move.sri.lines'].create(result)      
         
         _logger.info(f'MOSTRANDO RESULTADO SRI LINES >>> { result }')
         
