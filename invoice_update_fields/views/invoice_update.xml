@@ -61,15 +61,15 @@
                             <th class="text-center" colspan="2">Métodos de Pago</th>
                         </tr>
                     </thead>
+                    <t t-set="invoice_field" t-value="env['pos.order'].get_invoice_field(env['pos.order'].search([('account_move','=',o.id)]))"/>
                     <tbody>
-                        <t t-foreach="env['pos.order'].get_invoice_field(env['pos.order'].search([('account_move','=',o.id)]))['payment_data']" t-as="data">
+                        <t t-foreach="invoice_field['payment_data']" t-as="data">
                             <tr>
                                 <td>
                                     <span t-esc="data['payment_name']"/>
-                                   
                                 </td>
                                 <td>
-                                     <span t-esc="data['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    <span t-esc="data['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </td>
                             </tr>
                         </t>
