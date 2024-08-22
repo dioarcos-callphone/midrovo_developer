@@ -31,34 +31,12 @@ class PosOrder(models.Model):
 
     @api.model
     def get_invoice_field(self, id):
-        _logger.info(f'OBTENIENDO EL ID >>> { id }')
+        payment_data = []
         pos_id = self.search([('pos_reference', '=', id.pos_reference)])
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
         result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
-        _logger.info(f'OBTENIENDO RESULT >>> { result }')
-
-        return {
-            'invoice_id': invoice_id.id,
-            'invoice_name': invoice_id.name,
-            'invoice_number': invoice_id.l10n_latam_document_number,
-            'xml_key': invoice_id.l10n_ec_authorization_number,
-            'payment_data': result
-        }
-        
-    def _l10n_ec_get_payment_data(self, pos_reference):
-        payment =  self.get_invoice_field(pos_reference.pos_reference)
-        payment_data = []
-        pos_id = self.search([('pos_reference', '=', pos_reference.pos_reference)])
-        invoice_id = self.env['account.move'].search(
-            [('ref', '=', pos_id.name)])
-        
-        payment = payment['payment_data']
-        _logger.info(f'OBTENIENDO DEL INVOICE >>> { payment }')        
-        
-        result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
-        
         _logger.info(f'OBTENIENDO RESULT >>> { result }')
         
         for line in result:
@@ -69,8 +47,39 @@ class PosOrder(models.Model):
             }
             
             payment_data.append(payment_vals)
+
+        return {
+            'invoice_id': invoice_id.id,
+            'invoice_name': invoice_id.name,
+            'invoice_number': invoice_id.l10n_latam_document_number,
+            'xml_key': invoice_id.l10n_ec_authorization_number,
+            'payment_data': payment_data
+        }
+        
+    # def _l10n_ec_get_payment_data(self, pos_reference):
+    #     payment =  self.get_invoice_field(pos_reference.pos_reference)
+    #     payment_data = []
+    #     pos_id = self.search([('pos_reference', '=', pos_reference.pos_reference)])
+    #     invoice_id = self.env['account.move'].search(
+    #         [('ref', '=', pos_id.name)])
+        
+    #     payment = payment['payment_data']
+    #     _logger.info(f'OBTENIENDO DEL INVOICE >>> { payment }')        
+        
+    #     result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
+        
+    #     _logger.info(f'OBTENIENDO RESULT >>> { result }')
+        
+    #     for line in result:
+    #         payment_vals = {
+    #             'payment_code': line.l10n_ec_sri_payment_id.code,
+    #             'payment_total': line.payment_valor,
+    #             'payment_name':line.l10n_ec_sri_payment_id.name,
+    #         }
             
-        return payment_data
+    #         payment_data.append(payment_vals)
+            
+    #     return payment_data
             
         
         
