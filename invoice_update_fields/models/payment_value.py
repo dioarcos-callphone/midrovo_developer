@@ -25,6 +25,7 @@ class PaymentValue(models.Model):
 
         # Ejecutar la operación asincrónica y almacenar el resultado en un campo
         async_result = asyncio.run(self._fetch_async_data(move_id))
+        _logger.info(f'OBTENIENDO RESULTADO >>> { async_result }')
         self.write({'async_result': str(async_result)})
         
     @api.model
