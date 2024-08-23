@@ -10,25 +10,20 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
-    async_result = fields.Text("Async Result")
-
-    @api.model
-    async def _fetch_async_data(self, move_id):
-        loop = asyncio.get_event_loop()
-        with ThreadPoolExecutor() as pool:
-            result = await loop.run_in_executor(pool, self.search_account_move_sri_lines, move_id)
-        return result
+    account_sri_lines = fields.Many2one('account.move.sri.lines', 'sri_lines')
 
     def calculate_async_data(self):
         # Asume que move_id es el ID de la factura actual
         move_id = self.id
         
-        _logger.info(f'OBTENIENDO ID >>> { move_id }')
+        result = self.account_sri_lines.search([('move_id','=',move_id)])
+        
+        _logger.info(f'OBTENIENDO RESULTADO >>> { result }')
 
         # Ejecutar la operación asincrónica y almacenar el resultado en un campo
-        async_result = asyncio.run(self._fetch_async_data(move_id))
-        _logger.info(f'OBTENIENDO RESULTADO >>> { async_result }')
-        self.write({'async_result': str(async_result)})
+        # async_result = asyncio.run(self._fetch_async_data(move_id))
+        # _logger.info(f'OBTENIENDO RESULTADO >>> { async_result }')
+        # self.write({'async_result': str(async_result)})
         
     @api.model
     def create(self, vals):
