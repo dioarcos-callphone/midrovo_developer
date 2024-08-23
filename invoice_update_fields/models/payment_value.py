@@ -60,7 +60,7 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        pd = self.env['l10n.ec.edi']
+        pd = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
         _logger.info(f'OBTENIENDO DEL SUPER >>> { pd }')
         
