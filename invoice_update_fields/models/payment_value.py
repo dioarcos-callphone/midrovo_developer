@@ -60,10 +60,6 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        pd = super(PaymentValue, self)._l10n_ec_get_payment_data()
-        
-        _logger.info(f'OBTENIENDO DEL SUPER >>> { pd }')
-        
         # return payment_data
         return payment_data
     
