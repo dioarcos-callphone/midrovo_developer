@@ -1,7 +1,8 @@
 from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
-import time
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
@@ -10,19 +11,32 @@ class PaymentValue(models.Model):
         pass
     
     @api.model
-    def _l10n_ec_get_payment_data(self):        
+    async def _l10n_ec_get_payment_data(self):    
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
         move_id = pay_term_line_ids.move_id.id
         
-        result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
+        # result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
+        
+        result = await self.async_search(move_id)
         
         _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
         _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
+    
+    def search_account_move_sri_lines(self, move_id):
+        return self.env['account.move.sri.lines'].search([('move_id', '=', move_id)], limit=1)
+
+    # Función asincrónica que utiliza un ThreadPoolExecutor para la búsqueda
+    async def async_search(self, move_id):
+        loop = asyncio.get_event_loop()
+        with ThreadPoolExecutor() as pool:
+            result = await loop.run_in_executor(pool, self.search_account_move_sri_lines, move_id)
+        return result
+
 
 # class PosOrder(models.Model):
 #     _inherit = 'pos.order'
