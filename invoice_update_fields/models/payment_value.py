@@ -61,8 +61,8 @@ class PaymentValue(models.Model):
         
         data.clear() 
 
-        return payment_data
-        #return super(PaymentValue, self)._l10n_ec_get_payment_data()
+        # return payment_data
+        return super(PaymentValue, self)._l10n_ec_get_payment_data().clear()
 
 class PosPaymentMethod(models.Model):
     _inherit = 'pos.payment.method'
