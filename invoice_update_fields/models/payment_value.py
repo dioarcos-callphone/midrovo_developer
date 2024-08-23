@@ -11,11 +11,7 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
-    l10n_ec_sri_payment_id = fields.Many2one(
-        comodel_name="l10n_ec.sri.payment",
-        string="Payment Method (SRI)",
-        options="{'no_open': True, 'no_create': True}"
-    )
+    l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id', required = True)
     
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
@@ -48,10 +44,6 @@ class PaymentValue(models.Model):
             _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
-            
-            self.l10n_ec_sri_payment_id = result
-            
-            _logger.info(f'OBTENIENDO EL SRI PAYMENT >>> { self.l10n_ec_sri_payment_id }')
             
             _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
