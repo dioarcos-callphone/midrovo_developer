@@ -2,6 +2,8 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
+data = []
+
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
@@ -11,9 +13,11 @@ class PaymentValue(models.Model):
     l10n_ec_sri_payment_ids = fields.One2many('account.move.sri.lines', 'move_id', required = True)
     
     @api.model
-    def update_account_move_sri_lines(self, invoice_name, sri_lines):
+    def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            _logger.info(f'SE OBTIENE LOS SRI LINES >>> { sri_lines }')
+            for line in sri_lines:
+                data.append(line)
+            
             # Agrega las sri_lines al acount_move
             lines_value = []
             invoice_id = self.env['account.move'].search(
@@ -30,6 +34,8 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
+        _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
+        
           
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
