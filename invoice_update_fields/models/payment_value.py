@@ -22,6 +22,8 @@ class PaymentValue(models.Model):
     def calculate_async_data(self):
         # Asume que move_id es el ID de la factura actual
         move_id = self.id
+        
+        _logger.info(f'OBTENIENDO ID >>> { move_id }')
 
         # Ejecutar la operación asincrónica y almacenar el resultado en un campo
         async_result = asyncio.run(self._fetch_async_data(move_id))
