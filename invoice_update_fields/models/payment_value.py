@@ -49,7 +49,6 @@ class PaymentValue(models.Model):
             payment_values = {
                 'payment_code': result[0],
                 'payment_total': line['payment_valor'],
-                'payment_name': result[1],
             }
             
             payment_data.append(payment_values)
