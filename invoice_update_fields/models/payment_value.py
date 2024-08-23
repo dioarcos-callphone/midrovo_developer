@@ -11,7 +11,11 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
-    l10n_ec_sri_payment_ids = fields.One2many('account.move.sri.lines', 'move_id', required = True)
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        string="Payment Method (SRI)",
+        options="{'no_open': True, 'no_create': True}"
+    )
     
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
@@ -45,6 +49,10 @@ class PaymentValue(models.Model):
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
             
+            self.l10n_ec_sri_payment_id = result
+            
+            _logger.info(f'OBTENIENDO EL SRI PAYMENT >>> { self.l10n_ec_sri_payment_id }')
+            
             _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
                 'payment_code': result[0],
@@ -55,15 +63,6 @@ class PaymentValue(models.Model):
             payment_data.append(payment_values)
         
         _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')  
-        
-        # move_id = pay_term_line_ids.move_id.id
-        
-        # result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
-        
-        # result = await self.async_search(move_id)
-        
-        # _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
-        # _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }')
         
         data.clear() 
 
