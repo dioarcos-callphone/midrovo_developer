@@ -11,6 +11,24 @@ class PaymentValue(models.Model):
     l10n_ec_sri_payment_ids = fields.One2many('account.move.sri.lines', 'move_id', required = True)
     
     @api.model
+    def update_account_move_sri_lines(self, invoice_name, sri_lines):
+        try:
+            _logger.info(f'SE OBTIENE LOS SRI LINES >>> { sri_lines }')
+            # Agrega las sri_lines al acount_move
+            lines_value = []
+            invoice_id = self.env['account.move'].search(
+            [('ref', '=', invoice_name)])
+            invoice = self.env['account.move'].browse(invoice_id.id)
+            if invoice :
+                for sri_line in sri_lines:
+                    invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
+                    lines_value.append( (0, 0, sri_line))
+                invoice.env.cr.commit()
+        except Exception as e:
+            # Captura la excepción y registra el error
+            _logger.error("Ocurrió un error: %s", str(e))
+    
+    @api.model
     def _l10n_ec_get_payment_data(self):
           
         pay_term_line_ids = self.line_ids.filtered(
@@ -25,8 +43,8 @@ class PaymentValue(models.Model):
         
         # result = await self.async_search(move_id)
         
-        _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
-        _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
+        # _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
+        # _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
     
