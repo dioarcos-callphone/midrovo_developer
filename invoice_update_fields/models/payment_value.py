@@ -34,7 +34,7 @@ class PaymentValue(models.Model):
             _logger.error("Ocurrió un error: %s", str(e))
     
     @api.model
-    def _l10n_ec_get_payment_data(self):
+    def _l10n_ec_get_payment_data_inherit(self):
         cr = self.env.cr
         payment_data = []
         _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
