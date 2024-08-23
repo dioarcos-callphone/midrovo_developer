@@ -59,72 +59,17 @@ class PaymentValue(models.Model):
 
         return payment_data
         #return super(PaymentValue, self)._l10n_ec_get_payment_data()
-    
 
+class PosPaymentMethod(models.Model):
+    _inherit = 'pos.payment.method'
 
-# class PosOrder(models.Model):
-#     _inherit = 'pos.order'
+    def _get_default_forma_pago_sri(self):
+        _logger.info(f'ENTRA EN EL METODO DE LA CLASE POS PAYMENT METHOD')
+        return self.env['l10n_ec.sri.payment'].search([('code', '=', '01')])
 
-#     sale_barcode = fields.Char()
-
-#     @api.model
-#     def get_invoice_field(self, id):
-#         payment_data = []
-#         pos_id = self.search([('pos_reference', '=', id)])
-#         invoice_id = self.env['account.move'].search(
-#             [('ref', '=', pos_id.name)])
-        
-#         result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
-#         _logger.info(f'OBTENIENDO RESULT >>> { result }')
-        
-#         for line in result:
-#             payment_vals = {
-#                 'payment_code': line.l10n_ec_sri_payment_id.code,
-#                 'payment_total': line.payment_valor,
-#                 'payment_name':line.l10n_ec_sri_payment_id.name,
-#             }
-            
-#             self.env['account.move.sri.lines'].write({
-#                 'l10n_ec_sri_payment_id': line.l10n_ec_sri_payment_id.code,
-#                 'payment_valor': line.payment_valor,
-#             })
-            
-#             payment_data.append(payment_vals)
-
-#         return {
-#             'invoice_id': invoice_id.id,
-#             'invoice_name': invoice_id.name,
-#             'invoice_number': invoice_id.l10n_latam_document_number,
-#             'xml_key': invoice_id.l10n_ec_authorization_number,
-#             'payment_data': payment_data
-#         }
-        
-    # def _l10n_ec_get_payment_data(self, pos_reference):
-    #     payment =  self.get_invoice_field(pos_reference.pos_reference)
-    #     payment_data = []
-    #     pos_id = self.search([('pos_reference', '=', pos_reference.pos_reference)])
-    #     invoice_id = self.env['account.move'].search(
-    #         [('ref', '=', pos_id.name)])
-        
-    #     payment = payment['payment_data']
-    #     _logger.info(f'OBTENIENDO DEL INVOICE >>> { payment }')        
-        
-    #     result = self.env['account.move.sri.lines'].search([('move_id','=',invoice_id.id)])
-        
-    #     _logger.info(f'OBTENIENDO RESULT >>> { result }')
-        
-    #     for line in result:
-    #         payment_vals = {
-    #             'payment_code': line.l10n_ec_sri_payment_id.code,
-    #             'payment_total': line.payment_valor,
-    #             'payment_name':line.l10n_ec_sri_payment_id.name,
-    #         }
-            
-    #         payment_data.append(payment_vals)
-            
-    #     return payment_data
-            
-        
-        
-        
-        
+    l10n_ec_sri_payment_id = fields.Many2one(
+        comodel_name="l10n_ec.sri.payment",
+        default=_get_default_forma_pago_sri,
+         string="Payment Method (SRI)",
+       options="{'no_open': True, 'no_create': True}"
+    )
