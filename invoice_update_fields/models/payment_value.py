@@ -11,6 +11,9 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
+    def _get_default_forma_pago_sri(self):
+        pass
+    
     l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id', required = True)
     
     @api.model
@@ -71,6 +74,6 @@ class PosPaymentMethod(models.Model):
     l10n_ec_sri_payment_id = fields.Many2one(
         comodel_name="l10n_ec.sri.payment",
         default=_get_default_forma_pago_sri,
-         string="Payment Method (SRI)",
-       options="{'no_open': True, 'no_create': True}"
+        string="Payment Method (SRI)",
+        options="{'no_open': True, 'no_create': True}"
     )
