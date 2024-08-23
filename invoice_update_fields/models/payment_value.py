@@ -38,6 +38,7 @@ class PaymentValue(models.Model):
         _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
         
         for line in data:
+            _logger.info(f'ID DEL PAYMENT SRI >>> { line.l10n_ec_sri_payment_id }')
             l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search([('id', '=', line.l10n_ec_sri_payment_id)])
             
             
