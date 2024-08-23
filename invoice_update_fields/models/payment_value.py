@@ -38,7 +38,9 @@ class PaymentValue(models.Model):
         _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
         
         for line in data:
-            l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search('id', '=', line.l10n_ec_sri_payment_id)
+            l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search([('id', '=', line.l10n_ec_sri_payment_id)])
+            
+            
             payment_values = {
                 'payment_code': l10n_ec_sri_payment.code,
                 'payment_total': line.payment_valor,
