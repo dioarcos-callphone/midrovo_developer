@@ -1,8 +1,6 @@
 from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
-import asyncio
-from concurrent.futures import ThreadPoolExecutor
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
