@@ -17,7 +17,7 @@ class PaymentValue(models.Model):
         
         move_id = pay_term_line_ids.move_id.id
         
-        time.sleep(5) 
+        # time.sleep(5) 
         result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
         
         _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
