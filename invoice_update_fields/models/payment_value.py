@@ -3,6 +3,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 data = []
+query = 'SELECT code, name FROM l10n_ec_sri_payment WHERE id = %s'
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
@@ -34,19 +35,22 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
+        cr = self.env.cr
         payment_data = []
         _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
             _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
-            l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search([('id', '=', payment_id)])
+            cr.execute(query,(payment_id,))
+            result = cr.fetchall()
+            #l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search([('id', '=', payment_id)])
             
-            
+            _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
-                'payment_code': l10n_ec_sri_payment.code,
+                'payment_code': 'l10n_ec_sri_payment.code',
                 'payment_total': line.payment_valor,
-                'payment_name': l10n_ec_sri_payment.name,
+                'payment_name': 'l10n_ec_sri_payment.name',
             }
             
             payment_data.append(payment_values)
