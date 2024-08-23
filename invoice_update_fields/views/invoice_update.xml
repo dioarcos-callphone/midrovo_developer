@@ -60,23 +60,14 @@
             </t>
         </xpath>
 
-        <xpath expr="//div[@class='page']" position="inside">
-            <!-- Aquí puedes agregar el contenido actual de tu informe -->
-
-            <!-- Payment Lines from Receipt -->
-            <t t-if="o.receipt_paymentlines">
-                <div class="payment-lines">
-                    <h3>Payment Lines</h3>
-                    <t t-foreach="o.receipt_paymentlines" t-as="line">
-                        <div>
-                            <t t-esc="line.name" />
-                            <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
-                        </div>
-                    </t>
-                </div>
-            </t>
-            <t t-else="">
-                <div>No payment lines available.</div>
+        <xpath expr="//div[@id='total']" position="after">
+            <t t-name="OrderReceiptFields" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+                <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+                    <div>
+                        <t t-esc="line.name" />
+                        <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
+                    </div>
+                </t>
             </t>
         </xpath>
 
