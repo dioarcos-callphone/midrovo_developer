@@ -1,4 +1,4 @@
-odoo.define('pos_payment_sri.pos_payments_sri_order', function(require) {
+odoo.define('invoice_update_fields.pos_payment_sri_extension', function(require) {
     "use strict";
 
     var { Order } = require("point_of_sale.models");
