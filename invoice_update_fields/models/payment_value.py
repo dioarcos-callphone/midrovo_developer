@@ -34,14 +34,20 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
+        payment_data = []
         _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
         
-          
-        pay_term_line_ids = self.line_ids.filtered(
-            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
-        )
+        for line in data:
+            l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search('id', '=', line.l10n_ec_sri_payment_id)
+            payment_values = {
+                'payment_code': l10n_ec_sri_payment.code,
+                'payment_total': line.payment_valor,
+                'payment_name': l10n_ec_sri_payment.name,
+            }
+            
+            payment_data.append(payment_values)
         
-        result = self.l10n_ec_sri_payment_ids
+        _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')  
         
         # move_id = pay_term_line_ids.move_id.id
         
@@ -50,9 +56,12 @@ class PaymentValue(models.Model):
         # result = await self.async_search(move_id)
         
         # _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
-        # _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
+        # _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }')
+        
+        data.clear() 
 
-        return super(PaymentValue, self)._l10n_ec_get_payment_data()
+        return payment_data
+        #return super(PaymentValue, self)._l10n_ec_get_payment_data()
     
 
 
