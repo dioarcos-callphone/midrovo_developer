@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
+import time
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
@@ -10,11 +11,14 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):        
-        result = self.env['account.move.sri.lines'].search([], order='id desc', limit=1)
-        
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
+        
+        move_id = pay_term_line_ids.move_id.id
+        
+        time.sleep(5) 
+        result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
         
         _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
         _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
