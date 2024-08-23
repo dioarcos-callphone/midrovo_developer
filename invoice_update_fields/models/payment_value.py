@@ -40,15 +40,14 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         cr = self.env.cr
         payment_data = []
-        _logger.info(f'SE OBTIENE LOS SRI LINES >>> { data }')
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
-            _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
+            # _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
             
-            _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
+            # _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
                 'payment_code': result[0],
                 'payment_total': line['payment_valor'],
@@ -61,11 +60,12 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        pd = super(PaymentValue, self)._l10n_ec_get_payment_data().clear()
+        pd = super(PaymentValue, self)._l10n_ec_get_payment_data()
         
-        pd = payment_data
+        _logger.info(f'OBTENIENDO DEL SUPER >>> { pd }')
+        
         # return payment_data
-        return pd
+        return payment_data
     
     
 class PosPaymentMethod(models.Model):
