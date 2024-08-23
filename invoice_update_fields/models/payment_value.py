@@ -10,32 +10,7 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
-    account_sri_lines = fields.Many2one('account.move.sri.lines', 'sri_lines')
-
-    def calculate_async_data(self):
-        # Asume que move_id es el ID de la factura actual
-        move_id = self.id
-        
-        result = self.account_sri_lines.search([('move_id','=',move_id)])
-        
-        _logger.info(f'OBTENIENDO RESULTADO >>> { result }')
-
-        # Ejecutar la operación asincrónica y almacenar el resultado en un campo
-        # async_result = asyncio.run(self._fetch_async_data(move_id))
-        # _logger.info(f'OBTENIENDO RESULTADO >>> { async_result }')
-        # self.write({'async_result': str(async_result)})
-        
-    @api.model
-    def create(self, vals):
-        record = super(PaymentValue, self).create(vals)
-        record.calculate_async_data()
-        return record
-
-    def write(self, vals):
-        res = super(PaymentValue, self).write(vals)
-        if 'line_ids' in vals:
-            self.calculate_async_data()
-        return res
+    l10n_ec_sri_payment_ids = fields.One2many('account.move.sri.lines', 'move_id', required = True)
     
     @api.model
     def _l10n_ec_get_payment_data(self):
@@ -44,26 +19,19 @@ class PaymentValue(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
+        result = self.l10n_ec_sri_payment_ids
+        
         # move_id = pay_term_line_ids.move_id.id
         
         # result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
         
         # result = await self.async_search(move_id)
         
-        # _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
+        _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
         _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
     
-    def search_account_move_sri_lines(self, move_id):
-        return self.env['account.move.sri.lines'].search([('move_id', '=', move_id)], limit=1)
-
-    # Función asincrónica que utiliza un ThreadPoolExecutor para la búsqueda
-    async def async_search(self, move_id):
-        loop = asyncio.get_event_loop()
-        with ThreadPoolExecutor() as pool:
-            result = await loop.run_in_executor(pool, self.search_account_move_sri_lines, move_id)
-        return result
 
 
 # class PosOrder(models.Model):
