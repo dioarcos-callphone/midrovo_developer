@@ -11,18 +11,42 @@ class PaymentValue(models.Model):
         pass
     
     @api.model
-    async def _l10n_ec_get_payment_data(self):    
+    async def _fetch_async_data(self, move_id):
+        # Aquí realizas la operación asincrónica
+        result = await self.async_search(move_id)
+        return result
+
+    def fetch_data_and_render(self, move_id):
+        # Llamas al método asincrónico para obtener los datos
+        async_result = self._fetch_async_data(move_id)
+
+        # Espera que la operación asincrónica termine
+        result = asyncio.run(async_result)
+        
+        # Ahora puedes almacenar el resultado en el contexto o en un campo temporal
+        self.env.context = dict(self.env.context or {}, async_result=result)
+
+        # Luego llamas al método que renderiza el template
+        return self._l10n_ec_get_payment_data()
+    
+    @api.model
+    def _l10n_ec_get_payment_data(self):  
+        async_result = self.env.context.get('async_result')
+
+        if async_result:
+            _logger.info(f'OBTENIENDO RESULTADO ASINCRÓNICO >>> {async_result}')
+          
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
-        move_id = pay_term_line_ids.move_id.id
+        # move_id = pay_term_line_ids.move_id.id
         
         # result = self.env['account.move.sri.lines'].search([('move_id','=', move_id)], limit=1)
         
-        result = await self.async_search(move_id)
+        # result = await self.async_search(move_id)
         
-        _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
+        # _logger.info(f'OBTENIENDO SRI LINES >>> { result }')
         _logger.info(f'OBTENIENDO MOVE LINE >>> { pay_term_line_ids }') 
 
         return super(PaymentValue, self)._l10n_ec_get_payment_data()
