@@ -10,31 +10,37 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago(self):
         pass
     
+    async_result = fields.Text("Async Result")
+
     @api.model
     async def _fetch_async_data(self, move_id):
-        # Aquí realizas la operación asincrónica
-        result = await self.async_search(move_id)
+        loop = asyncio.get_event_loop()
+        with ThreadPoolExecutor() as pool:
+            result = await loop.run_in_executor(pool, self.search_account_move_sri_lines, move_id)
         return result
 
-    def fetch_data_and_render(self, move_id):
-        # Llamas al método asincrónico para obtener los datos
-        async_result = self._fetch_async_data(move_id)
+    def calculate_async_data(self):
+        # Asume que move_id es el ID de la factura actual
+        move_id = self.id
 
-        # Espera que la operación asincrónica termine
-        result = asyncio.run(async_result)
+        # Ejecutar la operación asincrónica y almacenar el resultado en un campo
+        async_result = asyncio.run(self._fetch_async_data(move_id))
+        self.write({'async_result': str(async_result)})
         
-        # Ahora puedes almacenar el resultado en el contexto o en un campo temporal
-        self.env.context = dict(self.env.context or {}, async_result=result)
+    @api.model
+    def create(self, vals):
+        record = super(PaymentValue, self).create(vals)
+        record.calculate_async_data()
+        return record
 
-        # Luego llamas al método que renderiza el template
-        return self._l10n_ec_get_payment_data()
+    def write(self, vals):
+        res = super(PaymentValue, self).write(vals)
+        if 'line_ids' in vals:
+            self.calculate_async_data()
+        return res
     
     @api.model
-    def _l10n_ec_get_payment_data(self):  
-        async_result = self.env.context.get('async_result')
-
-        if async_result:
-            _logger.info(f'OBTENIENDO RESULTADO ASINCRÓNICO >>> {async_result}')
+    def _l10n_ec_get_payment_data(self):
           
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
