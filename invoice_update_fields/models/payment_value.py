@@ -60,7 +60,7 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        pd =  self.env['account.move']._l10n_ec_get_payment_data()
+        pd = self.env['l10n.ec.edi']._l10n_ec_get_payment_data()
         
         _logger.info(f'OBTENIENDO DEL SUPER >>> { pd }')
         
