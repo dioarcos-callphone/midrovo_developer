@@ -44,13 +44,12 @@ class PaymentValue(models.Model):
             _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
-            #l10n_ec_sri_payment = self.env['l10n_ec_sri_payment'].search([('id', '=', payment_id)])
             
             _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
-                'payment_code': 'l10n_ec_sri_payment.code',
-                'payment_total': line.payment_valor,
-                'payment_name': 'l10n_ec_sri_payment.name',
+                'payment_code': result[0],
+                'payment_total': line['payment_valor'],
+                'payment_name': result[1],
             }
             
             payment_data.append(payment_values)
