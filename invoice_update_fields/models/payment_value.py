@@ -14,7 +14,7 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago_sri(self):
         pass
     
-    l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id',)
+    # l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id',)
     
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
@@ -63,18 +63,3 @@ class PaymentValue(models.Model):
         
         # return payment_data
         return payment_data
-    
-    
-class PosPaymentMethod(models.Model):
-    _inherit = 'pos.payment.method'
-
-    def _get_default_forma_pago_sri(self):
-        _logger.info(f'ENTRA EN EL METODO DE LA CLASE POS PAYMENT METHOD')
-        return self.env['l10n_ec.sri.payment'].search([('code', '=', '01')])
-
-    l10n_ec_sri_payment_id = fields.Many2one(
-        comodel_name="l10n_ec.sri.payment",
-        default=_get_default_forma_pago_sri,
-        string="Payment Method (SRI)",
-        options="{'no_open': True, 'no_create': True}"
-    )
