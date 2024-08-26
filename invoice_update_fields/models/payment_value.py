@@ -40,6 +40,7 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
+        payment_contable = super(PaymentValue, self)._l10_ec_get_payment_data()
         cr = self.env.cr
         payment_data = []
         
@@ -62,9 +63,7 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        #payment_contable = self._l10_ec_get_payment_data()
-        
-        #_logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
         
         # return payment_data
         return payment_data
