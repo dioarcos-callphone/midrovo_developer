@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
+    <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
         <xpath expr="//tbody" position="replace">
             <tbody>
                 <t t-foreach="additional_info.items()" t-as="item">
@@ -50,7 +50,7 @@
                 </t>
             </tbody>
         </xpath>
-    </template> -->
+    </template>
 
     <template id="report_invoice_note" inherit_id="l10n_ec_edi.report_invoice_document">
 
@@ -61,8 +61,8 @@
             </t>
         </xpath>
         
-        <xpath expr="//div[@id='total']" position="after">
-            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
+        <xpath expr="//div[@id='total']//div" position="after">
+            <div class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
                 <table class="table table-sm table-borderless" style="page-break-inside: avoid">
                     <thead>
                         <tr>
