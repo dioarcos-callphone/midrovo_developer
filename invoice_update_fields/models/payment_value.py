@@ -14,7 +14,7 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago_sri(self):
         pass
     
-    l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id', required = True)
+    l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id',)
     
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
