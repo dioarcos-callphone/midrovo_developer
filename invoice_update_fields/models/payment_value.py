@@ -14,8 +14,6 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago_sri(self):
         pass
     
-    # l10n_ec_sri_payment_ids = fields.Many2one('account.move.sri.lines', 'move_id',)
-    
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
@@ -27,7 +25,6 @@ class PaymentValue(models.Model):
             lines_value = []
             invoice_id = self.env['account.move'].search(
             [('ref', '=', invoice_name)])
-            _logger.info(f'MOSTRANDO EL INVOICE >>> { invoice_id }')
             invoice = self.env['account.move'].browse(invoice_id.id)
             if invoice :
                 for sri_line in sri_lines:
@@ -47,24 +44,21 @@ class PaymentValue(models.Model):
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
-            _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
+            
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
-            
-            _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
+
             payment_values = {
                 'payment_code': result[0],
                 'payment_total': line['payment_valor'],
                 'payment_name': result[1]
             }
             
-            payment_data.append(payment_values)
-        
-        _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')  
+            payment_data.append(payment_values)  
         
         data.clear()
         
-        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        # _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
+        # _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
         
-        # return payment_data
         return payment_data if payment_data else payment_contable
