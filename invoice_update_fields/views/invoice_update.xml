@@ -61,7 +61,7 @@
             </t>
         </xpath>
         
-        <xpath expr="//t[@t-foreach]" position="replace">
+        <xpath expr="//t[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
             <t t-foreach="o._l10n_ec_get_payment_data_inherit()" t-as="deta">
                 <tr>
                     <td>
@@ -69,7 +69,7 @@
                         
                     </td>
                     <td>
-                            <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                     </td>
                 </tr>
             </t>
