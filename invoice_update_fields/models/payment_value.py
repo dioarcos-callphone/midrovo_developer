@@ -43,11 +43,11 @@ class PaymentValue(models.Model):
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
-            # _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
+            _logger.info(f'ID DEL PAYMENT SRI >>> { payment_id }')
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
             
-            # _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
+            _logger.info(f'OBTENIENDO EL RESULT >>> { result }')
             payment_values = {
                 'payment_code': result[0],
                 'payment_total': line['payment_valor'],
