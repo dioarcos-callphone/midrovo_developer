@@ -61,29 +61,20 @@
             </t>
         </xpath>
         
-        <xpath expr="////div[@id='total']//table[@class='table table-sm table-borderless']" position="replace">
-            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
-                <table class="table table-sm table-borderless" style="page-break-inside: avoid">
-                    <thead>
-                        <tr>
-                            <th class="text-center" colspan="2">Métodos de Pago</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="o._l10n_ec_get_payment_data_inherit()" t-as="deta">
-                            <tr>
-                                <td>
-                                    <span t-esc="deta['payment_name']"/>
-                                   
-                                </td>
-                                <td>
-                                     <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                </td>
-                            </tr>
-                        </t>
-                    </tbody>
-                </table>
-            </div>
+        <xpath expr="//t[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
+            <tbody>
+                <t t-foreach="o._l10n_ec_get_payment_data_inherit()" t-as="deta">
+                    <tr>
+                        <td>
+                            <span t-esc="deta['payment_name']"/>
+                            
+                        </td>
+                        <td>
+                            <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
         </xpath>
     </template>
 </odoo>
