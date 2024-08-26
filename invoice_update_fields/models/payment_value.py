@@ -62,9 +62,9 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        payment_contable = self._l10_ec_get_payment_data()
+        #payment_contable = self._l10_ec_get_payment_data()
         
-        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        #_logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
         
         # return payment_data
         return payment_data
