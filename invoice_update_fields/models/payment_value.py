@@ -63,4 +63,4 @@ class PaymentValue(models.Model):
         data.clear()
         
         # return payment_data
-        return payment_data if payment_data else super(PaymentValue, self)._l10_ec_get_payment_data()
+        return payment_data if payment_data else self.env['account.move']._l10_ec_get_payment_data()
