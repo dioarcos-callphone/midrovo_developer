@@ -191,30 +191,56 @@
     </template>
 
     <!-- Additional info (re-used by withhold report) -->
-    <template id="report_invoice_additional_info">
-        <t t-if="additional_info">
-            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
-                <table class="table table-sm table-borderless" style="page-break-inside: avoid">
-                    <thead>
-                        <tr>
-                            <th class="text-center" colspan="2">Additional Information</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="additional_info.items()" t-as="item">
-                            <tr t-if="item[1]">
-                                <td>
-                                    <span t-esc="str(item[0])"/>
-                                </td>
-                                <td>
-                                    <span t-esc="str(item[1])"/>
-                                </td>
-                            </tr>
-                        </t>
-                    </tbody>
-                </table>
-            </div>
-        </t>
+    <template id="report_invoice_additional_info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
+        <xpath expr="//tbody" position="replace">
+            <tbody>
+                <t t-foreach="additional_info.items()" t-as="item">
+                    <tr>
+                        <td>
+                            <t t-if="item[0] != 'E-mail'">
+                                <span t-esc="str(item[0])"/>
+                            </t>
+                            <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
+                                <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                <t t-if="partner">
+                                    <t t-if="partner.email_normalized">
+                                        <span>E-mail del cliente</span>
+                                    </t>
+                                </t>
+                            </t>
+                        </td>
+                        <td>
+                            <t t-if="item[0] == 'Vendedor'">
+                                <span>
+                                    <t t-if="o.invoice_origin">
+                                        <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                        <t t-if="order">
+                                            <t t-esc="order.cashier"/>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="str(item[1])"></t>
+                                    </t>
+                                </span>
+                            </t>
+                            <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
+                                <span>
+                                    <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                    <t t-if="partner">
+                                        <t t-if="partner.email_normalized">
+                                            <t t-esc="partner.email_normalized"/>
+                                        </t>
+                                    </t>
+                                </span>
+                            </t>                            
+                            <t t-if="item[0] != 'Vendedor' and item[0] != 'E-mail'">
+                                <span t-esc="str(item[1])"/>
+                            </t>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </xpath>
     </template>
 
     <!-- Workaround for Studio reports, see odoo/odoo#60660 -->
