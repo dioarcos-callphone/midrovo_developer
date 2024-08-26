@@ -27,6 +27,7 @@ class PaymentValue(models.Model):
             lines_value = []
             invoice_id = self.env['account.move'].search(
             [('ref', '=', invoice_name)])
+            _logger.info(f'MOSTRANDO EL INVOICE >>> { invoice_id }')
             invoice = self.env['account.move'].browse(invoice_id.id)
             if invoice :
                 for sri_line in sri_lines:
