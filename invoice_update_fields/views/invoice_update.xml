@@ -62,19 +62,17 @@
         </xpath>
         
         <xpath expr="//t[@t-foreach='o._l10n_ec_get_payment_data()']" position="replace">
-            <tbody>
-                <t t-foreach="o._l10n_ec_get_payment_data_inherit()" t-as="deta">
-                    <tr>
-                        <td>
-                            <span t-esc="deta['payment_name']"/>
-                            
-                        </td>
-                        <td>
-                            <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                        </td>
-                    </tr>
-                </t>
-            </tbody>
+            <t t-foreach="o._l10n_ec_get_payment_data_inherit()" t-as="deta">
+                <tr>
+                    <td>
+                        <span t-esc="deta['payment_name']"/>
+                        
+                    </td>
+                    <td>
+                        <span t-esc="deta['payment_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
+            </t>
         </xpath>
     </template>
 </odoo>
