@@ -53,7 +53,7 @@
     </template>
 
     <template id="report_invoice_document" inherit_id="l10n_ec_edi.report_invoice_document">
-        <xpath expr="//div[@id='total']" position="after">
+        <xpath expr="//div[@id='total']" position="replace">
             <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}">
                 <table class="table table-sm table-borderless" style="page-break-inside: avoid">
                     <thead>
