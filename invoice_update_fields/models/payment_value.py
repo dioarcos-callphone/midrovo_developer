@@ -62,5 +62,9 @@ class PaymentValue(models.Model):
         
         data.clear()
         
+        payment_contable = super(PaymentValue, self)._l10_ec_gt_payment_data()
+        
+        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        
         # return payment_data
-        return payment_data if payment_data else self.env['account.move']._l10_ec_get_payment_data()
+        return payment_data
