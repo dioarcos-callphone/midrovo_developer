@@ -16,12 +16,6 @@
     'data': [
         'views/invoice_update.xml'
     ],
-    
-    'assets': {
-        'point_of_sale.assets': [
-            'invoice_update_fields/static/src/js/pos_payment_sri_extension.js',
-        ],
-    },
 
     'license': 'LGPL-3',
     'installable': True,
