@@ -40,7 +40,7 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
-        payment_contable = super(PaymentValue, self)._l10_ec_get_payment_data()
+        payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         cr = self.env.cr
         payment_data = []
         
