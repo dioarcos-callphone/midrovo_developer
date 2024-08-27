@@ -1,6 +1,6 @@
 <odoo>
     <template id="template_id" inherit="point_of_sale.PartnerDetailsEdit">
-        <xpath expr="//span[trxt()='NIF']" position="replace">
+        <xpath expr="//span[text()='NIF']" position="replace">
             <span class="label">Número de Identificación</span>            
         </xpath>
     </template>
