@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template id="template" xml:space="preserve">
     <t t-name="PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
-        <xpath expr="//div[@class='partner-detail']//span[contains(text(), 'NIF')]" position="replace">
+        <xpath expr="//input[@name='vat')]" position="replace">
             <span class="label">Número de Identificación</span>
         </xpath>
     </t>
