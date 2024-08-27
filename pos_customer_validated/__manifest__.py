@@ -18,7 +18,7 @@
     ],
     
     'assets': {
-    'point_of_sale.assets': [
+    'point_of_sale.assets_common': [
         'pos_customer_validated/static/src/xml/partner_details_edit_inherit.xml',
         ],
     },
