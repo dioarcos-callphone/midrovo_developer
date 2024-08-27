@@ -17,9 +17,12 @@
         # 'views/partner_details_edit.xml'
     ],
     
-    # 'assets': {
-    #     'views/partner_details_edit.xml'
-    # },
+    'assets': {
+    'point_of_sale.assets': [
+        'pos_customer_validated/static/src/xml/partner_details_edit.xml',
+        ],
+    },
+
 
     'license': 'LGPL-3',
     'installable': True,
