@@ -17,9 +17,9 @@
         # 'views/partner_details_edit.xml'
     ],
     
-    'assets': {
-        'views/partner_details_edit.xml'
-    },
+    # 'assets': {
+    #     'views/partner_details_edit.xml'
+    # },
 
     'license': 'LGPL-3',
     'installable': True,
