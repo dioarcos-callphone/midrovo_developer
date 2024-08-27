@@ -1,6 +1,6 @@
 <!-- pos_customer_validated/views/partner_details_edit.xml -->
 <odoo>
-    <template id="assets_backend" name="pos_customer_validated assets" inherit_id="point_of_sale.assets">
+    <template id="partner_details_edit" name="pos_customer_validated assets" inherit_id="point_of_sale.PartnerDetailsEdit">
         <xpath expr="//template[@id='PartnerDetailsEdit']" position="replace">
             <template id="PartnerDetailsEdit" name="Partner Details Edit">
                 <div>
