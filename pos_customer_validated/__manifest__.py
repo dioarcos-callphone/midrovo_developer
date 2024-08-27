@@ -14,8 +14,12 @@
     'website': "https://www.callphoneecuador.com",
     'depends': ['point_of_sale','contacts'],
     'data': [
-        'views/partner_details_edit.xml'
+        # 'views/partner_details_edit.xml'
     ],
+    
+    'assets': {
+        'views/partner_details_edit.xml'
+    },
 
     'license': 'LGPL-3',
     'installable': True,
