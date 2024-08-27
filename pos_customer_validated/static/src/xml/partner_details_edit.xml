@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <template id="partner_detail_edit" inherit_id="point_of_sale.PartnerDetailsEdit">
+    <template id="partner_detail_edit" inherit_id="PartnerDetailsEdit">
         <xpath expr="//div[@class='partner-detail']//span[contains(text(), 'Tax ID')]" position="replace">
             <span class="label">Número de Identificación</span>
         </xpath>
     </template>
+
 </odoo>
