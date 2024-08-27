@@ -18,7 +18,7 @@
     ],
     
     'assets': {
-        'point_of_sale.assets_common': [
+        'web.assets_qweb': [
             'pos_customer_validated/static/src/xml/partner_details_edit.xml',
         ],
     },
