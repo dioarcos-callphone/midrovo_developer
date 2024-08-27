@@ -1,15 +1,8 @@
-<!-- pos_customer_validated/views/partner_details_edit.xml -->
-<odoo>
-    <template id="partner_details_edit" name="pos_customer_validated assets" inherit_id="point_of_sale.PartnerDetailsEdit">
-        <xpath expr="//template[@id='PartnerDetailsEdit']" position="replace">
-            <template id="PartnerDetailsEdit" name="Partner Details Edit">
-                <div>
-                    <!-- Ejemplo de cómo cambiar los nombres de los campos -->
-                    <label for="name">Nuevo Nombre</label>
-                    <input type="text" id="name" name="name"/>
-                    <!-- Repite esto para los otros campos -->
-                </div>
-            </template>
-        </xpath>
-    </template>
-</odoo>
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="partner_details_edit.template" inherit_id="point_of_sale.template">
+    <t t-extend="PartnerDetailsEdit">
+        <t t-jquery="div.partner-detail" t-operation="append">
+            <h1>HOLA</h1>
+        </t>
+    </t>
+</templates>
