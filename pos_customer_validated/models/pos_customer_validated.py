@@ -9,7 +9,7 @@ def verify_final_consumer(vat):
 class PosCustomerValidated(models.Model):
     _inherit = 'res.partner'
     
-    vat_validation = fields.char()
+    vat_validation = fields.Char()
     
     @api.model
     def create_from_ui(self, partner):
