@@ -1,4 +1,4 @@
-from odoo import models, api
+from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import logging, stdnum
 _logger = logging.getLogger(__name__)
@@ -9,6 +9,8 @@ def verify_final_consumer(vat):
 class PosCustomerValidated(models.Model):
     _inherit = 'res.partner'
     
+    vat_validation = fields.char()
+    
     @api.model
     def create_from_ui(self, partner):
         _logger.info(f'SE OBTIENE CUSTOMER DEL FRONT >>> { partner }')
@@ -18,7 +20,7 @@ class PosCustomerValidated(models.Model):
             
             self._l10n_ec_vat_validation(vat)
             
-            result = self.l10n_ec_vat_validation
+            result = self.vat_validation
             
             _logger.info(f'VALIDACION DE VAT >>> { result }')
             
@@ -41,6 +43,6 @@ class PosCustomerValidated(models.Model):
         _logger.info(f'OBTENIENDO FINAL CONSUMER >>> { final_consumer }')
         if not final_consumer:
             if not ci.is_valid(vat):
-                self.l10n_ec_vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
+                self.vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
             if not ruc.is_valid(vat):
-                self.l10n_ec_vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
+                self.vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
