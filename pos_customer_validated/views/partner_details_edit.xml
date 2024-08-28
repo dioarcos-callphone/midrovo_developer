@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates id="partner_details_edit.template" inherit_id="point_of_sale.template">
-    <t t-extend="PartnerDetailsEdit">
-        <t t-jquery="div.partner-detail" t-operation="append">
-            <h1>HOLA</h1>
-        </t>
-    </t>
-</templates>
