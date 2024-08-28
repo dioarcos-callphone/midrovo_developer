@@ -12,7 +12,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['point_of_sale','contacts'],
+    'depends': ['point_of_sale','contacts', "l10n_ec", "l10n_latam_invoice_document", "l10n_latam_base",],
     'data': [],
     
     'assets': {
