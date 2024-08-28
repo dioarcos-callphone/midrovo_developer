@@ -32,19 +32,16 @@ class PosCustomerValidated(models.Model):
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
     def _l10n_ec_vat_validation(self, vat):
-        vat_validation = None
-        it_ruc = self.env.ref("l10n_ec.ec_ruc", False)
-        it_dni = self.env.ref("l10n_ec.ec_dni", False)
+        vat_validation = False
         ruc = stdnum.util.get_cc_module("ec", "ruc")
         ci = stdnum.util.get_cc_module("ec", "ci")
         self.l10n_ec_vat_validation = False
         final_consumer = verify_final_consumer(vat)
-        _logger.info(f'OBTENIENDO IT RUC >>> { it_ruc }')
-        _logger.info(f'OBTENIENDO IT DNI >>> { it_dni }')
         if not final_consumer:
-            if not ci.is_valid(vat):
-                vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
-            # if not ruc.is_valid(vat):
-            #     vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
+            if ci.is_valid(vat) and len(vat) == 10:
+                vat_validation = True
+                
+            elif ruc.is_valid(vat) and len(vat) == 13:
+                vat_validation = True
                 
         return vat_validation
