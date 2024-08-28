@@ -3,7 +3,7 @@ from odoo.exceptions import ValidationError
 import logging, re
 _logger = logging.getLogger(__name__)
 
-identifiacion_regex = r"^(1|2|3|4|5|6|7|8|9)[0-9]{9}$"
+identifiacion_regex = r"^[1-9][0-9]{9}$"
 
 class PosCustomerValidated(models.Model):
     _inherit = 'res.partner'
