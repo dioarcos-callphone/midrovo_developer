@@ -44,7 +44,7 @@ class PosCustomerValidated(models.Model):
         if not final_consumer:
             if not ci.is_valid(vat):
                 vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
-            if not ruc.is_valid(vat):
-                vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
+            # if not ruc.is_valid(vat):
+            #     vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
                 
         return vat_validation
