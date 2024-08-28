@@ -25,7 +25,7 @@
         # 'point_of_sale.assets': [
         #     'pos_customer_validated/static/src/models.js'  
         # ],
-        'web.assets_qweb': [
+        'point_of_sale.assets': [
             'pos_customer_validated/static/src/xml/partner_details_edit.xml',
         ],
     },
