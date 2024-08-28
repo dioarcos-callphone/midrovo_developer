@@ -38,6 +38,7 @@ class PosCustomerValidated(models.Model):
         ci = stdnum.util.get_cc_module("ec", "ci")
         self.l10n_ec_vat_validation = False
         final_consumer = verify_final_consumer(vat)
+        _logger.info(f'OBTENIENDO FINAL CONSUMER >>> { final_consumer }')
         if not final_consumer:
             if not ci.is_valid(vat):
                 self.l10n_ec_vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
