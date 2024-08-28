@@ -11,23 +11,26 @@ class PosCustomerValidated(models.Model):
     
     @api.model
     def create_from_ui(self, partner):
-        _logger.info(f'SE OBTIENE CUSTOMER DEL FRONT >>> { partner }')
         if partner.get('vat') and partner['id'] == False:
             vat = partner['vat']
             longitud = len(vat)
             
-            result = self._l10n_ec_vat_validation(vat)
+            if(longitud > 13 or longitud < 10):
+                raise ValidationError('El número de identificación no es válido.')
             
-            _logger.info(f'VALIDACION DE VAT >>> { result }')
+            if(not self._l10n_ec_vat_validation(vat)):
+                raise ValidationError(f'El número de identificación { vat } no existe.')
             
-            customer_vat = self.search([( 'vat', '=', vat )])
+            cedula = vat if len(vat) == 10 else vat[:-3]
+            ruc = vat if len(vat) == 13 else f'{ vat }001'
             
+            _logger.info(f'CEDULA >> { cedula } || RUC >> { ruc }')
             
-            
-            customer_ruc = self.search([('vat', '=', vat)])
+            customer_vat = self.search([( 'vat', '=', cedula )])
+            customer_ruc = self.search([('vat', '=', ruc)])
             
             if customer_vat or customer_ruc:
-                raise ValidationError('El número de identificación ya existe.')
+                raise ValidationError(f'El número de identificación ya se encuentra registrado.')
             
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
