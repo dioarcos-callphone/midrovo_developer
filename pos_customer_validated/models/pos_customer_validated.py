@@ -10,10 +10,9 @@ class PosCustomerValidated(models.Model):
     def create_from_ui(self, partner):
         _logger.info(f'SE OBTIENE CUSTOMER DEL FRONT >>> { partner }')
         if partner.get('vat') and partner['id'] == False:
-            
-            _logger.info(f'LONGITUD DEL VAT >>> { len(partner['vat']) }')
-            
             vat = partner['vat']
+            
+            _logger.info(f'LONGITUD DEL VAT >>> { len(vat) }')
             
             customer_vat = self.search([( 'vat', '=', vat )])
             
