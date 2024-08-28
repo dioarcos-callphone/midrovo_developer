@@ -33,11 +33,14 @@ class PosCustomerValidated(models.Model):
     
     def _l10n_ec_vat_validation(self, vat):
         vat_validation = None
+        it_ruc = self.env.ref("l10n_ec.ec_ruc", False)
+        it_dni = self.env.ref("l10n_ec.ec_dni", False)
         ruc = stdnum.util.get_cc_module("ec", "ruc")
         ci = stdnum.util.get_cc_module("ec", "ci")
         self.l10n_ec_vat_validation = False
         final_consumer = verify_final_consumer(vat)
-        _logger.info(f'OBTENIENDO FINAL CONSUMER >>> { final_consumer }')
+        _logger.info(f'OBTENIENDO IT RUC >>> { it_ruc }')
+        _logger.info(f'OBTENIENDO IT DNI >>> { it_dni }')
         if not final_consumer:
             if not ci.is_valid(vat):
                 vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
