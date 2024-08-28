@@ -3,7 +3,7 @@ from odoo.exceptions import ValidationError
 import logging, re
 _logger = logging.getLogger(__name__)
 
-identifiacion_regex = r"^[1-9][0-9]{9}$"
+# identifiacion_regex = r"^[1-9][0-9]{9}$"
 
 class PosCustomerValidated(models.Model):
     _inherit = 'res.partner'
@@ -15,7 +15,7 @@ class PosCustomerValidated(models.Model):
             vat = partner['vat']
             longitud = len(vat)
             
-            result = self.validar_identificacion(vat)
+            result = self.l10n_ec_vat_validation
             
             _logger.info(f'VALIDACION DE VAT >>> { result }')
             
@@ -30,5 +30,5 @@ class PosCustomerValidated(models.Model):
             
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
-    def validar_identificacion(self, identificacion):
-        return re.match(identifiacion_regex, identificacion) is not None
+    # def validar_identificacion(self, identificacion):
+    #     return re.match(identifiacion_regex, identificacion) is not None
