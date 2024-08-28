@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, api
+from odoo.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -14,6 +15,6 @@ class PosCustomerValidated(models.Model):
             customer = self.search([( 'vat', '=', vat )])
             
             if customer:
-                _logger.info(f'SE OBTIENE CUSTOMER DE LA BASE DE DATOS >>> { customer }')
+                raise ValidationError('Este ruc ya existe')
             
         return super(PosCustomerValidated, self).create_from_ui(partner)
