@@ -7,6 +7,7 @@ class PosCustomerValidated(models.Model):
     
     @api.model
     def create_from_ui(self, partner):
+        _logger.info(f'SE OBTIENE CUSTOMER DEL FRONT >>> { partner }')
         if partner.get('vat'):
             vat = partner['vat']
             
