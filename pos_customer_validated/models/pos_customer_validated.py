@@ -16,9 +16,7 @@ class PosCustomerValidated(models.Model):
             vat = partner['vat']
             longitud = len(vat)
             
-            self._l10n_ec_vat_validation(vat)
-            
-            result = self._vat_validation
+            result = self._l10n_ec_vat_validation(vat)
             
             _logger.info(f'VALIDACION DE VAT >>> { result }')
             
@@ -34,6 +32,7 @@ class PosCustomerValidated(models.Model):
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
     def _l10n_ec_vat_validation(self, vat):
+        vat_validation = None
         ruc = stdnum.util.get_cc_module("ec", "ruc")
         ci = stdnum.util.get_cc_module("ec", "ci")
         self.l10n_ec_vat_validation = False
@@ -41,6 +40,8 @@ class PosCustomerValidated(models.Model):
         _logger.info(f'OBTENIENDO FINAL CONSUMER >>> { final_consumer }')
         if not final_consumer:
             if not ci.is_valid(vat):
-                self._vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
+                vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (could be an old VAT number)"
             if not ruc.is_valid(vat):
-                self._vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
+                vat_validation = f"The VAT { vat } seems to be invalid as the tenth digit doesn't comply with the validation algorithm (SRI has stated that this validation is not required anymore for some VAT numbers)"
+                
+        return vat_validation
