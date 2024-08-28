@@ -13,24 +13,15 @@
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
     'depends': ['point_of_sale','contacts'],
-    'data': [
-        # 'views/partner_details_edit.xml'
-    ],
-    
-    'qweb': [
-        'static/src/xml/partner_details_edit.xml'
-    ],
+    'data': [],
     
     'assets': {
-        # 'point_of_sale.assets': [
-        #     'pos_customer_validated/static/src/models.js'  
-        # ],
         'point_of_sale.assets': [
+            'pos_customer_validated/static/src/js/customer_validation.js',
             'pos_customer_validated/static/src/xml/partner_details_edit.xml',
             'pos_customer_validated/static/src/scss/pos.scss',
         ],
     },
-
 
     'license': 'LGPL-3',
     'installable': True,

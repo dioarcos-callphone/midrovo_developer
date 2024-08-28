@@ -6,11 +6,13 @@ class PosCustomerValidated(models.Model):
     _inherit = 'res.partner'
     
     @api.model
-    def create(self, vals):
-        if 'vat' in vals:
-            vat = vals['vat']
-            customer = self.search([('vat', vat)])
+    def create_from_ui(self, partner):
+        if partner.get('vat'):
+            vat = partner['vat']
             
-            _logger.info(f'OBTENIENDO CUSTOMER DE LA BASE DE DATOS >>> { customer }')
+            customer = self.search([( 'vat', '=', vat )])
             
-        return super(PosCustomerValidated, self).create(vals)
+            if customer:
+                _logger.info(f'SE OBTIENE CUSTOMER DE LA BASE DE DATOS >>> { customer }')
+            
+        return super(PosCustomerValidated, self).create_from_ui(partner)
