@@ -14,7 +14,7 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
             const vat = partner.vat
 
             if(vat) {
-                input_vat = document.querySelector('input[name="vat"]')
+                const input_vat = document.querySelector('input[name="vat"]')
 
                 if(input_vat) input_vat.disabled = true;
             }
