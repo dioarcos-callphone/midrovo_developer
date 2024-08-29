@@ -16,7 +16,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             });
     
             if (confirmed) {
-                selectedOrderline.set_customer_note(inputNote);
+                console.log(`Mostrando InputNote >>> ${ inputNote }`)
             }
         }
 
