@@ -16,7 +16,10 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
             if(vat) {
                 const input_vat = document.querySelector('input[name="vat"]')
 
-                if(input_vat) input_vat.disabled = true;
+                if(input_vat) {
+                    console.log('ENTRA AL INPUT')
+                    input_vat.disabled = true;
+                }
             }
 
         }
