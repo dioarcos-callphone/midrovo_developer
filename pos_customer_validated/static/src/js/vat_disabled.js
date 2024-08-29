@@ -9,7 +9,7 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
         setup() {
             super.setup()
             const partner = this.props.partner;
-            vat = partner.vat;
+            const vat = partner.vat;
 
             if(vat) {
                 console.log(vat)
