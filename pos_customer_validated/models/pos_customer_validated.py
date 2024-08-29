@@ -28,8 +28,6 @@ class PosCustomerValidated(models.Model):
             cedula = vat if len(vat) == 10 else vat[:-3]
             ruc = vat if len(vat) == 13 else f'{ vat }001'
             
-            _logger.info(f'CEDULA >> { cedula } || RUC >> { ruc }')
-            
             customer_vat = self.search([( 'vat', '=', cedula )])
             customer_ruc = self.search([('vat', '=', ruc)])
                         
@@ -40,9 +38,10 @@ class PosCustomerValidated(models.Model):
     
     def _l10n_ec_vat_validation(self, vat):
         vat_validation = False
+        
         ruc = stdnum.util.get_cc_module("ec", "ruc")
         ci = stdnum.util.get_cc_module("ec", "ci")
-        self.l10n_ec_vat_validation = False
+        
         final_consumer = verify_final_consumer(vat)
         if not final_consumer:
             if ci.is_valid(vat) and len(vat) == 10:

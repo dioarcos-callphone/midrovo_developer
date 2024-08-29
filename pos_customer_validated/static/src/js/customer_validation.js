@@ -17,8 +17,6 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
                 args: [event.detail.processedChanges],
             });
 
-            console.log(`OBTENIENDO EL PARTNER >>> ${ partnerId }`)
-
             await this.env.pos._loadPartners([partnerId]);
             this.state.selectedPartner = this.env.pos.db.get_partner_by_id(partnerId);
             this.confirm();
