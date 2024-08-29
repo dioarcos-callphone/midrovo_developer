@@ -6,8 +6,8 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     const Registries = require('point_of_sale.Registries');
 
     const PartnerDetailsEditExtend = PartnerDetailsEdit => class extends PartnerDetailsEdit {
-        setup() {
-            super.setup()
+        mounted() {
+            super.mounted()
 
             const partner = this.props.partner;
 
