@@ -1,4 +1,4 @@
-odoo.define('pos_customer_validated.vat_disabled', (requiere) => {
+odoo.define('pos_customer_validated.vat_disabled', (require) => {
     "use strict";
 
     const rpc = require('web.rpc')
