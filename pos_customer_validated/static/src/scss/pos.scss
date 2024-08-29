@@ -19,6 +19,10 @@
     display: none;
 }
 
+.partner-details-right .partner-detail:nth-child(5) {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .pos .partnerlist-screen .partner-detail{
         display: flex;
