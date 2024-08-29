@@ -12,8 +12,10 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
 
             if(partner.vat) {
                 console.log(`MOSTRANDO EL PARTNER VAT >>> ${ partner.vat }`);
-                // const vatInput = document.querySelector('input.detail.vat[name="vat"]');
-                // vatInput.disabled = true;
+                const vatInput = document.querySelector('input[name="vat"]');
+                if(vatInput) {
+                    console.log('Entra a VATINPUT')
+                }
             }
         }
 
