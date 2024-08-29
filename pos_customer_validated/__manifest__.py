@@ -6,6 +6,7 @@
         - Se cambia el campo NIF a Número de identificación
         - Se valida que no existan clientes duplicados
         - Se valida que solo exista un cliente
+        - Validación de RUC y cédula
     """,
     "category": "Point of Sale",
     "version": "16.0.1.0.0",
