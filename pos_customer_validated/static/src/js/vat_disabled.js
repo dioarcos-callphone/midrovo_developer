@@ -1,0 +1,27 @@
+odoo.define('pos_customer_validated.vat_disabled', (requiere) => {
+    "use strict";
+
+    const rpc = require('web.rpc')
+    const PartnerDetailsEdit = require('point_of_sale.PartnerDetailsEdit')
+    const Registries = require('point_of_sale.Registries');
+
+    const PartnerDetailsEditExtend = PartnerDetailsEdit => class extends PartnerDetailsEdit {
+        setup() {
+            super.setup()
+
+            const partner = this.props.partner;
+
+            vat = partner.vat
+
+            if(vat) {
+                console.log(`OBTENIENDO VAT >>> ${ vat }`)
+            }
+
+        }
+    }
+
+    Registries.Component.extend(PartnerDetailsEdit, PartnerDetailsEditExtend);
+
+    return PartnerDetailsEdit;
+
+});

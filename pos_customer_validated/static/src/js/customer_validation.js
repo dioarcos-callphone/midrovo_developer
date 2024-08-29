@@ -8,15 +8,6 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
     const PartnerListScreenExtend = PartnerListScreen => class extends PartnerListScreen {
         setup() {
             super.setup();
-            const partner = this.props.partner;
-
-            if(partner.vat) {
-                console.log(`MOSTRANDO EL PARTNER VAT >>> ${ partner.vat }`);
-                const vatInput = document.querySelector('input[name="vat"]');
-                if(vatInput) {
-                    console.log('Entra a VATINPUT')
-                }
-            }
         }
 
         async saveChanges(event) {
