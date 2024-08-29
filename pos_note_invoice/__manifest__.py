@@ -14,6 +14,12 @@
     'depends': ['point_of_sale',],
     'data': [],
     
+    "assets": {
+        "point_of_sale.assets": [
+            'pos_note_invoice/static/src/xml/order_line_note_button.xml',
+        ],
+    }
+    
     'license': 'LGPL-3',
     'installable': True,
     'application': False,
