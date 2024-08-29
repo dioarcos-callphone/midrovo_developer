@@ -11,8 +11,9 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
             const partner = this.props.partner;
 
             if(partner.vat) {
-                const vatInput = document.querySelector('input.detail.vat[name="vat"]');
-                vatInput.disabled = true;
+                console.log(`MOSTRANDO EL PARTNER VAT >>> ${ partner.vat }`);
+                // const vatInput = document.querySelector('input.detail.vat[name="vat"]');
+                // vatInput.disabled = true;
             }
         }
 
@@ -22,10 +23,6 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
                 method: "create_from_ui",
                 args: [event.detail.processedChanges],
             });
-
-            id = event.detail.processedChanges.id
-
-            console.log(`OBTENIENDO ID DEL FRONT >>> ${ id }`)
 
             await this.env.pos._loadPartners([partnerId]);
             this.state.selectedPartner = this.env.pos.db.get_partner_by_id(partnerId);
