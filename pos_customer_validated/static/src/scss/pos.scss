@@ -23,6 +23,10 @@
     display: none;
 }
 
+.partnerlist-screen .screen-content .top-content .more-info {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .pos .partnerlist-screen .partner-detail{
         display: flex;
