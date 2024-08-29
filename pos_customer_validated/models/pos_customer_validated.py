@@ -19,7 +19,11 @@ class PosCustomerValidated(models.Model):
                 raise ValidationError('El número de identificación no es válido.')
             
             if(not self._l10n_ec_vat_validation(vat)):
-                raise ValidationError(f'El número de identificación { vat } no existe.')
+                if len(vat) == 10:
+                    raise ValidationError(f'La Cédula { vat } parece no ser válida ya que el décimo dígito no cumple con el algoritmo de validación (podría ser un número de cédula antiguo).')
+                
+                else:
+                    raise ValidationError(f'El RUC { vat } parece no ser válido ya que el décimo dígito no cumple con el algoritmo de validación (SRI ha declarado que esta validación ya no es necesaria para algunos números de RUC)')
             
             cedula = vat if len(vat) == 10 else vat[:-3]
             ruc = vat if len(vat) == 13 else f'{ vat }001'
@@ -28,7 +32,7 @@ class PosCustomerValidated(models.Model):
             
             customer_vat = self.search([( 'vat', '=', cedula )])
             customer_ruc = self.search([('vat', '=', ruc)])
-            
+                        
             if customer_vat or customer_ruc:
                 raise ValidationError(f'El número de identificación ya se encuentra registrado.')
             
