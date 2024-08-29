@@ -6,24 +6,20 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     const Registries = require('point_of_sale.Registries');
 
     const PartnerDetailsEditExtend = PartnerDetailsEdit => class extends PartnerDetailsEdit {
-        mounted() {
-            super.mounted()
-
-            const partner = this.props.partner;
-
-            const vat = partner.vat
-
-            if(vat) {
-                const input_vat = document.querySelector("input[name='vat']")
-                console.log(`MOSTRAR INPUT VAT ${ input_vat.value }`)
-
-                if(input_vat) {
-                    console.log('ENTRA AL INPUT')
-                    input_vat.disabled = true;
-                }
-            }
-
+        setup() {
+            super.setup()
+            this._disableVatInput()
         }
+
+        _disableVatInput() {
+            setTimeout(() => {
+                const inputVat = document.querySelector("input[name='vat']");
+                if (inputVat) {
+                    inputVat.disabled = true;
+                }
+            }, 0);
+        }
+
     }
 
     Registries.Component.extend(PartnerDetailsEdit, PartnerDetailsEditExtend);
