@@ -9,6 +9,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         setup() {
             super.setup();
             this.ui = useService('ui');
+            this.inputNote = ''
 
             useBus(this.ui.bus, 'input-note-event', event => {
                 this.onInputNoteEvent(event);
@@ -17,6 +18,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         }
 
         onInputNoteEvent(event) {
+            this.inputNote = event.note
             console.log('Nota recibida:', event.note);
             // Aquí puedes manejar la nota recibida, por ejemplo, asignarla a un campo o mostrarla en la interfaz.
         }
@@ -26,6 +28,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
+
+            console.log('Nota almacenada:', this.inputNote);
+
             rpc.query({
                 model: 'pos.order',
                 method: 'get_invoice_field',
