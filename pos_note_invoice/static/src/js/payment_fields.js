@@ -1,9 +1,10 @@
+import { useBus } from '@web/core/utils/hooks';
 odoo.define('pos_note_invoice.payment_fields', function (require) {
     'use strict';
     var rpc = require('web.rpc')
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
-    const { useBus } = require("web.core.utils.hooks");
+    // const { useBus } = require("web.core.utils.hooks");
     
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
@@ -20,7 +21,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         }
 
         async validateOrder(isForceValidate) {
-            this._eventNote();
+            // this._eventNote();
             let receipt_number = this.env.pos.selectedOrder.name;
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
