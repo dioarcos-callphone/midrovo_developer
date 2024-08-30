@@ -1,9 +1,9 @@
+import { useBus } from "@web/core/utils/hooks";
 odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     "use strict";
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
-    const { useBus } = require("web.core.utils.hooks");
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
