@@ -1,14 +1,13 @@
+import { useBus } from '@odoo/owl';
 odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     "use strict";
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
-    const { useService } = require('web.core.utils.hooks');
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
-            this.ui = useService('ui');
         }
 
         async onClick() {    
@@ -20,7 +19,8 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             if (confirmed) {
                 
                 console.log(`Mostrando InputNote >>> ${ inputNote }`);
-                this.ui.bus.trigger('order_line_note_updated', { note: inputNote });
+                const bus = useBus(); // Get the bus instance
+                bus.emit('note-submitted', inputNote);
 
             }
         }
