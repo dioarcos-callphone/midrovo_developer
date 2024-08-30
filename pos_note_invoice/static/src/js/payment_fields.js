@@ -9,7 +9,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            this.env.posbus = useBus(this.env.posbus, 'order_line_note_updated', this._onOrderLineNoteUpdated.bind(this));
+            this.bus = useBus(this.env.bus, 'order_line_note_updated', this._onOrderLineNoteUpdated.bind(this));
           }
 
         async validateOrder(isForceValidate) {
