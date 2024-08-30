@@ -8,9 +8,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            this.bus = useBus();
-            this.handleNoteAdded = this.handleNoteAdded.bind(this);
-            this.bus.on('note_added', this, this.handleNoteAdded);
+            useBus('this.env.bus', 'note_added', this.handleNoteAdded);
         }
 
         handleNoteAdded(event) {
