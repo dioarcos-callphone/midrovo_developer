@@ -8,7 +8,9 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
-            this.bus = useBus(this.env.bus, 'order_line_note_updated', this._onOrderLineNoteUpdated.bind(this));
+            useBus(this.env.bus, 'order_line_note_updated', event => {
+                console.log('Evento recibido:', event);
+            });
         }
 
         async onClick() {    
@@ -19,14 +21,10 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     
             if (confirmed) {
                 
-                console.log(`Mostrando InputNote >>> ${ inputNote }`)
-                this.bus.trigger('order_line_note_updated', { note: inputNote });
+                console.log(`Mostrando InputNote >>> ${ inputNote }`);
+                this.env.bus.trigger('order_line_note_updated', { note: inputNote });
 
             }
-        }
-
-        _onOrderLineNoteUpdated(event) {
-            console.log(`Nota actualizada: ${event.detail.note}`);
         }
 
     }
