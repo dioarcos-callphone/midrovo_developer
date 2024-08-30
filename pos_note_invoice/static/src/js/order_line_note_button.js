@@ -8,7 +8,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
-            this.bus = useBus()
+            this.bus = useBus
         }
 
         async onClick() {    
