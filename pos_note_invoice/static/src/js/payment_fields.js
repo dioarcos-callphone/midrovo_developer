@@ -3,7 +3,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     var rpc = require('web.rpc')
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
-    const { useBus } = require("@web/core/utils/hooks");
+    const { useBus } = require("web.core.utils.hooks");
     
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
