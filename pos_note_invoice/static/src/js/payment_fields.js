@@ -8,14 +8,13 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            console.log('OBTENIENDO EL USEBUS')
-            console.log(useBus)
-            //useBus(this.env.bus, 'note_added', this.handleNoteAdded.bind(this));
+            useBus(this.env.bus, 'input-note-event', this.onInputNoteEvent);
+
         }
 
-        handleNoteAdded(event) {
-            const { note } = event;
-            console.log(`Nota recibida: ${note}`);
+        onInputNoteEvent(event) {
+            console.log('Nota recibida:', event.note);
+            // Aquí puedes manejar la nota recibida, por ejemplo, asignarla a un campo o mostrarla en la interfaz.
         }
 
         async validateOrder(isForceValidate) {
