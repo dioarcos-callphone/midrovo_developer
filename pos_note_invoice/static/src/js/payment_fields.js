@@ -12,16 +12,17 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             this.inputNote = ''
 
             useBus(this.ui.bus, 'input-note-event', event => {
-                this.onInputNoteEvent(event);
+                // this.onInputNoteEvent(event);
+                console.log(`OBTENIENDO LA NOTA DEL VENDEDOR >>> ${ event.note }`)
             });
 
         }
 
-        onInputNoteEvent(event) {
-            this.inputNote = event.note
-            console.log('Nota recibida:', event.note);
-            // Aquí puedes manejar la nota recibida, por ejemplo, asignarla a un campo o mostrarla en la interfaz.
-        }
+        // onInputNoteEvent(event) {
+        //     this.inputNote = event.note
+        //     console.log('Nota recibida:', event.note);
+        //     // Aquí puedes manejar la nota recibida, por ejemplo, asignarla a un campo o mostrarla en la interfaz.
+        // }
 
         async validateOrder(isForceValidate) {
             let receipt_number = this.env.pos.selectedOrder.name;
