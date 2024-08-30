@@ -10,13 +10,13 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            // this.bus = useBus();
-            // this.bus.on('orderline_note_added', this, this._onOrderlineNoteAdded);
+            this.bus = useBus();
+            this.bus.on('order-line-note-updated', this, this._onOrderlineNoteAdded);
           }
 
         _onOrderlineNoteAdded(eventData) {
-            const inputNote = eventData.note;
-            console.log(`Nota recibida en PaymentScreen: ${inputNote}`);
+            const { note } = eventData.detail;
+            console.log(`Nota recibida en PaymentScreen: ${note}`);
             // Aquí puedes usar inputNote como desees
         }
 
