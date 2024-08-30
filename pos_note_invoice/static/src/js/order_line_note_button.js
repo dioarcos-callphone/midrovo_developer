@@ -3,12 +3,12 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
-    const EventBus = require('web.core').EventBus;
+    const { eventBus } = require('web.core');
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
-            this.eventBus = new EventBus();           
+            this.eventBus = eventBus;           
         }
 
         async onClick() {    
