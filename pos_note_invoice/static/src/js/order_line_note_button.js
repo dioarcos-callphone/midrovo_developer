@@ -3,7 +3,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
-    const bus = require('bus.bus').bus;
+    // const { useBus } = require("@web/core/utils/hooks");
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
@@ -19,9 +19,6 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             if (confirmed) {
                 
                 console.log(`Mostrando InputNote >>> ${ inputNote }`);
-                bus.trigger('note', {
-                    message: inputNote
-                });
                 // this.bus.trigger('inputNote:updated', { inputNote });
 
             }
