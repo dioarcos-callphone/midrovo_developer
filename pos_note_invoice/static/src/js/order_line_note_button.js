@@ -1,9 +1,9 @@
-import { useBus } from '@odoo/owl';
 odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     "use strict";
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
+    const { useBus } = require('odoo.owl');
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {

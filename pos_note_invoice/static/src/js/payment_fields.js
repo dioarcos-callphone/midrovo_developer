@@ -5,6 +5,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
     const { onMounted } = owl;
+    const { useBus } = require('odoo.owl');
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
