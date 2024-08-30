@@ -1,4 +1,3 @@
-import { useBus } from '@web/core/utils/hooks';
 odoo.define('pos_note_invoice.payment_fields', function (require) {
     'use strict';
     var rpc = require('web.rpc')
