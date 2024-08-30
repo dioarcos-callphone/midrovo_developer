@@ -11,7 +11,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         setup() {
             super.setup();
             this.bus = useBus();
-            this.bus.on('orderline_note_added', this, this._onOrderlineNoteAdded);
+            // this.bus.on('orderline_note_added', this, this._onOrderlineNoteAdded);
           }
 
         _onOrderlineNoteAdded(eventData) {
