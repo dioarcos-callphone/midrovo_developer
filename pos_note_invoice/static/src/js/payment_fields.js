@@ -9,7 +9,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         setup() {
             super.setup();
             this.bus = useBus();  // Configura el bus
-            this.bus.on('inputNote:updated', this._onInputNoteUpdated.bind(this));
+            this.bus.on('inputNote:updated', this._onInputNoteUpdated);
                 
         }
 
