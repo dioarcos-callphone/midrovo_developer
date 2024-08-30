@@ -1,3 +1,5 @@
+import { useBus, userService } from '@web/core/utils/hooks';
+
 odoo.define('pos_note_invoice.payment_fields', function (require) {
     'use strict';
     var rpc = require('web.rpc')
@@ -9,6 +11,10 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
+            this.ui = userService('ui');
+            useBus(this.ui.bus, 'order_line_note_updated', event => {
+                console.log(event)
+            });
             // this.bus = useBus(this.env.bus, 'order_line_note_updated', this._onOrderLineNoteUpdated.bind(this));
           }
 
