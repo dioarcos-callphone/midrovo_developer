@@ -3,23 +3,21 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     var rpc = require('web.rpc')
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
-    const { useBus } = require("point_of_sale.utils");
+    const { useBus } = require('@web/core/utils/hooks');
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
+            this.bus = useBus();
+            this.bus.on('note_added', this, this.handleNoteAdded);
         }
 
-        _eventNote() {
-            setTimeout(() => {
-                useBus(this.env.bus, "note", event => {
-                    console.log(event);
-                });
-            }, 0);
+        handleNoteAdded(event) {
+            const { note } = event.detail;
+            console.log(`Nota recibida: ${note}`);
         }
 
         async validateOrder(isForceValidate) {
-            this._eventNote();
             let receipt_number = this.env.pos.selectedOrder.name;
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
