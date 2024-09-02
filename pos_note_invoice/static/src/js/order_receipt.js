@@ -34,7 +34,7 @@ odoo.define("pos_note_invoice.order_receipt", function (require) {
                             let receipt_number = self.env.pos.selectedOrder.name;
                             let sri_lines = self.env.pos.get_order().export_as_JSON().l10n_ec_sri_payment_ids;
 
-                            const orders = this.env.pos.selectedOrder
+                            const orders = self.env.pos.selectedOrder
                             console.log(orders.orderlines)
 
                             if(sri_lines) {
