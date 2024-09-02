@@ -15,12 +15,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             // const bus = this.env.bus || new EventBus();
             // useBus(this.env.bus, 'input-note-event', (event) => this.noteUpdate(event));
             
+            this.env.bus.on("input-note-event", this, this.noteUpdate);
 
         }
-
-        obteniendoNota() {
-            this.env.bus.on("input-note-event", this, this.noteUpdate);
-        };
 
         noteUpdate(evento) {
             console.log('ENTRANDO A NOTE UPDATE')
@@ -41,8 +38,6 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
-
-            this.obteniendoNota()
 
             // console.log('Nota almacenada:', this.inputNote);
 
