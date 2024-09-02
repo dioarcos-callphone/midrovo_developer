@@ -14,6 +14,7 @@ class InvoiceUpdate(models.Model):
             [('ref', '=', invoice_name)])
             invoice = self.env['account.move'].browse(invoice_id.id)
             if invoice :
+                _logger.info(f'ENTRA EN UPDATE ACCOUNT')
                 invoice.write({ 'narration': 'NOTA ACTUALIZADA' })
                 for sri_line in sri_lines:
                     invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})

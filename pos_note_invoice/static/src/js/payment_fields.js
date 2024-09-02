@@ -19,11 +19,15 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             console.log(orders.orderlines)
 
             rpc.query({
-                model: 'account.move',
-                method: 'note_update',
-                args: ['NOTA ACTUALIZADA']
+                model: 'pos.order',
+                method: 'get_invoice_field',
+                args: [receipt_number]
                 }).then(function(result){
-                   console.log(`*** NOTA ACTUALIZADA ***  ${ result }`);
+                   console.log('*** ENTRA AQUI ***');
+                   if (result.invoice_name) {
+                      self.env.pos.invoice  = result.invoice_name
+                      self.env.pos.invoice_xml_key  = result.xml_key
+                   }
                 });
                 return receipt_order
         }
