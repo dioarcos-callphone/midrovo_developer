@@ -23,7 +23,11 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         };
 
         noteUpdate(evento) {
-            console.log(evento.detail.note);
+            console.log('ENTRANDO A NOTE UPDATE')
+            
+            nota = evento.detail.note
+
+            console.log(`MOSTRANDO LA NOTA >>> ${ nota }`);
         }
 
         // onInputNoteEvent(event) {
