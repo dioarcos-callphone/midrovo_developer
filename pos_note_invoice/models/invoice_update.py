@@ -14,11 +14,12 @@ class InvoiceUpdate(models.Model):
             [('ref', '=', invoice_name)])
             invoice = self.env['account.move'].browse(invoice_id.id)
             if invoice :
-                invoice.write({ 'narration': 'NOTA ACTUALIZADA' })
+                _logger.info('ENTRA AL INVOICE')
                 for sri_line in sri_lines:
                     invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
                     lines_value.append( (0, 0, sri_line))
                 invoice.env.cr.commit()
+                invoice.write({ 'narration': 'NOTA ACTUALIZADA' })
         except Exception as e:
             # Captura la excepción y registra el error
             _logger.error("Ocurrió un error: %s", str(e))
