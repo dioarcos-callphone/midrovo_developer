@@ -13,7 +13,7 @@ class InvoiceUpdate(models.Model):
         invoice_id = self.env['account.move'].search(
             [('ref', '=', pos_id.name)])
         
-        # invoice_id.write({'narration': narration})
+        invoice_id.write({'narration': 'ESCRIBIENDO NOTA DE PRUEBA'})
 
         return {
             'invoice_id': invoice_id.id,
