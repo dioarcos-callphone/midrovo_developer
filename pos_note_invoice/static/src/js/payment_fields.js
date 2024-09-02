@@ -10,6 +10,10 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             super.setup();
             this.ui = useService('ui');
             this.inputNote = ''
+            useBus(this.ui.bus, 'input-note-event', event => {
+                // this.onInputNoteEvent(event);
+                console.log(`OBTENIENDO LA NOTA DEL VENDEDOR >>> ${ event.note }`)
+            });
 
         }
 
@@ -24,11 +28,6 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
-
-            useBus(this.ui.bus, 'input-note-event', event => {
-                // this.onInputNoteEvent(event);
-                console.log(`OBTENIENDO LA NOTA DEL VENDEDOR >>> ${ event.note }`)
-            });
 
             console.log('Nota almacenada:', this.inputNote);
 
