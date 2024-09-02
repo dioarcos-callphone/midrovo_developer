@@ -7,6 +7,9 @@ class InvoiceUpdate(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
+        note_context = self.env.context.get('note_context')
+        
+        _logger.info(f'Nota recibida del contexto: {note_context}')
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
