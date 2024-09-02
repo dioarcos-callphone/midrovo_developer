@@ -11,14 +11,13 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['point_of_sale', 'account', 'sale', 'pos_receipt_add_fields', 'account_move_sri'],
+    'depends': ['point_of_sale', 'account', 'sale', 'invoice_updat_fields', 'account_move_sri'],
     'data': [],
     
     "assets": {
         "point_of_sale.assets": [
             # 'pos_note_invoice/static/src/js/order_line_note_button.js',
             'pos_note_invoice/static/src/js/payment_fields.js',
-            'pos_note_invoice/static/src/js/order_receipt.js',
             'pos_note_invoice/static/src/xml/order_line_note_button.xml',
         ],
     },

@@ -6,20 +6,15 @@ class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
     @api.model
-    def update_account_move_sri_lines(self, invoice_name, sri_lines):        
-        try:            
-            # Agrega las sri_lines al acount_move
-            lines_value = []
-            invoice_id = self.env['account.move'].search(
-            [('ref', '=', invoice_name)])
-            invoice = self.env['account.move'].browse(invoice_id.id)
-            if invoice :
-                _logger.info('ENTRA AL INVOICE')
-                for sri_line in sri_lines:
-                    invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
-                    lines_value.append( (0, 0, sri_line))
-                invoice.env.cr.commit()
-                invoice.write({ 'narration': 'NOTA ACTUALIZADA' })
-        except Exception as e:
-            # Captura la excepción y registra el error
-            _logger.error("Ocurrió un error: %s", str(e))
+    def _l10n_ec_get_payment_data(self):
+        pay_term_line_ids = self.line_ids.filtered(
+            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        )
+        
+        _logger.info(f'OBTENIENDO EL PAY TERM >>> { pay_term_line_ids }')
+
+        
+        # _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
+        # _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        
+        return super(InvoiceUpdate, self)._l10n_ec_get_payment_data()
