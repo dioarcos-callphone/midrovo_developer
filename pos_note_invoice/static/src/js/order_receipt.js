@@ -25,9 +25,7 @@ odoo.define("pos_note_invoice.order_receipt", function (require) {
                 let session_orders = self.session_orders;
                 var length = session_orders.length-1
                 var order_session = session_orders[length]
-                const orders = this.env.pos.selectedOrder
-
-                console.log(orders.orderlines)
+                
                 /* Si el en el config esta activado */
                 result = data = super._flush_orders(...arguments);
                 //if ( order_session.l10n_ec_sri_payment_ids == true ) {
@@ -35,6 +33,10 @@ odoo.define("pos_note_invoice.order_receipt", function (require) {
                         data.then(function(){
                             let receipt_number = self.env.pos.selectedOrder.name;
                             let sri_lines = self.env.pos.get_order().export_as_JSON().l10n_ec_sri_payment_ids;
+
+                            const orders = this.env.pos.selectedOrder
+                            console.log(orders.orderlines)
+
                             if(sri_lines) {
                                 rpc.query({ 
                                     model: 'pos.order',
