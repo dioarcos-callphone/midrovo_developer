@@ -18,7 +18,7 @@ class InvoiceUpdate(models.Model):
         
         account_move = self.search([('id', '=', move_id)])
         
-        account_move.write({ 'narration': 'ACTUALIZANDO NOTA' })
+        # account_move.write({ 'narration': 'ACTUALIZANDO NOTA' })
         
         _logger.info(f'OBTENIENDO EL PAY TERM >>> { pay_term_line_ids }')
 

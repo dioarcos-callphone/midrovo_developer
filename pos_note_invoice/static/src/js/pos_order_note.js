@@ -1,4 +1,4 @@
-odoo.define('pos_note_invoice.models', function (require) {
+odoo.define('pos_note_invoice.pos_order_note', function (require) {
     "use strict";
 
     const models = require('point_of_sale.models');
