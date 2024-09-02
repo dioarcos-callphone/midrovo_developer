@@ -19,24 +19,11 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     
             if (confirmed) {
                 console.log('Disparando evento "input-note-event" con la nota:', inputNote);
-                
-                // if (this.isEventBus(this.env.bus)) {
-                //     console.log('this.env.bus parece ser un EventBus.');
-                // } else {
-                //     console.log('this.env.bus no es un EventBus.');
-                // }
 
                 this.env.bus.trigger("input-note-event", { note: inputNote });
 
             }
         }
-
-        // isEventBus(obj) {
-        //     return obj && typeof obj === 'object' && 
-        //            typeof obj.on === 'function' &&
-        //            typeof obj.off === 'function' &&
-        //            typeof obj.trigger === 'function';
-        // }
 
     }
 
