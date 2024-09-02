@@ -5,23 +5,18 @@ _logger = logging.getLogger(__name__)
 class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
-    def update_note(note):
-        pass
-    
     @api.model
-    def update_account_move_sri_lines(self, invoice_name, sri_lines):        
-        try:            
-            # Agrega las sri_lines al acount_move
-            lines_value = []
-            invoice_id = self.env['account.move'].search(
-            [('ref', '=', invoice_name)])
-            invoice = self.env['account.move'].browse(invoice_id.id)
-            if invoice :
-                invoice.write({ 'narration': 'ESCRIBIENDO PRUEBA NARRATION' })
-                for sri_line in sri_lines:
-                    invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
-                    lines_value.append( (0, 0, sri_line))
-                invoice.env.cr.commit()
-        except Exception as e:
-            # Captura la excepción y registra el error
-            _logger.error("Ocurrió un error: %s", str(e))
+    def get_invoice_field(self, id):
+        pos_id = self.search([('pos_reference', '=', id)])
+        invoice_id = self.env['account.move'].search(
+            [('ref', '=', pos_id.name)])
+        
+        invoice_id.write({ 'narration': 'ACTUALIZANDO NOTA DEL INVOICE' })
+        _logger.info('________ | INVOICES >>> %s' % invoice_id)
+
+        return {
+            'invoice_id': invoice_id.id,
+            'invoice_name': invoice_id.name,
+            'invoice_number': invoice_id.l10n_latam_document_number,
+            'xml_key': invoice_id.l10n_ec_authorization_number,
+        }
