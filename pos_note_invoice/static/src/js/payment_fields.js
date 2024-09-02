@@ -15,7 +15,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             // const bus = this.env.bus || new EventBus();
             // useBus(this.env.bus, 'input-note-event', (event) => this.noteUpdate(event));
             
-            this.env.bus.on("input-note-event", this, this.noteUpdate);
+            onMounted(() => {
+                this.env.bus.on("input-note-event", this, this.noteUpdate);
+            });
 
         }
 
