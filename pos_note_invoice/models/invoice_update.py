@@ -6,7 +6,7 @@ class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
     @api.model
-    def create(self, vals):
-        vals['narration'] = 'ACTUALIZANDO NOTA DE POS'
+    def write(self, vals):
+        vals['narration'] = 'ACTUALIANDO NOTA EN POS'
         
-        return super(InvoiceUpdate, self).create(vals)
+        return super(InvoiceUpdate, self).write(vals)
