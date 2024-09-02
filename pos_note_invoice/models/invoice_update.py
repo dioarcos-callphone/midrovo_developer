@@ -11,6 +11,12 @@ class InvoiceUpdate(models.Model):
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
         
+        move_id = pay_term_line_ids.move_id.id
+        
+        account_move = self.search([('id', '=', move_id)])
+        
+        account_move.write({ 'narration': 'ACTUALIZANDO NOTA' })
+        
         _logger.info(f'OBTENIENDO EL PAY TERM >>> { pay_term_line_ids }')
 
         
