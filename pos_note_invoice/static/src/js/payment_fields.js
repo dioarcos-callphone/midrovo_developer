@@ -14,7 +14,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             this.inputNote = ''
             // const bus = this.env.bus || new EventBus();
             // useBus(this.env.bus, 'input-note-event', (event) => this.noteUpdate(event));
-            this.obteniendoNota()
+            
 
         }
 
@@ -41,6 +41,8 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
+
+            this.obteniendoNota()
 
             // console.log('Nota almacenada:', this.inputNote);
 
