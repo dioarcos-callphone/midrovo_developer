@@ -16,7 +16,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
 
-            console.log(orders.orderlines)
+            // console.log(orders.orderlines)
 
             rpc.query({
                 model: 'pos.order',
