@@ -16,7 +16,7 @@
     
     "assets": {
         "point_of_sale.assets": [
-            'pos_note_invoice/static/src/js/order_line_note_button.js',
+            # 'pos_note_invoice/static/src/js/order_line_note_button.js',
             'pos_note_invoice/static/src/js/payment_fields.js',
             'pos_note_invoice/static/src/xml/order_line_note_button.xml',
         ],
