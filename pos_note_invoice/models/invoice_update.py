@@ -9,4 +9,4 @@ class InvoiceUpdate(models.Model):
     def create(self, vals):
         vals['narration'] = 'ACTUALIZANDO NOTA DE POS'
         
-        return super(InvoiceUpdate, self).vals(vals)
+        return super(InvoiceUpdate, self).create(vals)
