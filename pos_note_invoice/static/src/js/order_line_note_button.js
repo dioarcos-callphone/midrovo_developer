@@ -26,7 +26,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                 //     console.log('this.env.bus no es un EventBus.');
                 // }
 
-                this.env.bus("input-note-event", { note: inputNote });
+                this.env.bus.trigger("input-note-event", { note: inputNote });
 
             }
         }
