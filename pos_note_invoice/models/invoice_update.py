@@ -5,8 +5,9 @@ _logger = logging.getLogger(__name__)
 class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
-    @api.model
-    def write(self, vals):
-        vals['narration'] = 'ACTUALIANDO NOTA EN POS'
+    def note_update(self, note):
         
-        return super(InvoiceUpdate, self).write(vals)
+        _logger.info(f'OBTENIENDO NOTE >>> { note }')
+        
+        return 'ACTUALIZADO'
+        
