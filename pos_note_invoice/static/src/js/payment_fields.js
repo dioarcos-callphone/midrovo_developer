@@ -21,7 +21,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             rpc.query({
                 model: 'account.move',
                 method: 'note_update',
-                args: 'ACTUALIZANDO NOTA',
+                args: ['ACTUALIZANDO NOTA'],
             }).then((result) =>{
                 console.log(result)
             })
