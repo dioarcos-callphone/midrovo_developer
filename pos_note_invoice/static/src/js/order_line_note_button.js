@@ -20,7 +20,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             if (confirmed) {
                 console.log('Disparando evento "note_added" con la nota:', inputNote);
 
-                this.ui.bus.trigger('input-note-event', { note: inputNote });
+                this.env.bus.trigger('input-note-event', { note: inputNote });
 
             }
         }

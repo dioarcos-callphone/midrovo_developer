@@ -8,9 +8,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            this.ui = useService('ui');
+            // this.ui = useService('ui');
             this.inputNote = ''
-            useBus(this.ui.bus, 'input-note-event', event => {
+            useBus(this.env.bus, 'input-note-event', event => {
                 // this.onInputNoteEvent(event);
                 console.log(`OBTENIENDO LA NOTA DEL VENDEDOR >>> ${ event.note }`)
             });
