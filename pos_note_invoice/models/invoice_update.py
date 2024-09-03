@@ -8,4 +8,4 @@ class InvoiceUpdate(models.Model):
     @api.model
     def get_note(self, nota):
         _logger.info(f'OTENIENDO NOTA EN EL BACK >>> { nota }')
-        return note
+        return nota
