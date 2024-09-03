@@ -19,7 +19,9 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             if (confirmed) {
                 console.log('Esta es la nota:', inputNote);
                 // this.env.pos.get_order().set_note_context(inputNote);
-                this.trigger('note-update', { note: inputNote });
+                // this.trigger('note-update', { note: inputNote });
+                const order = this.env.pos.get_order();
+                order.set_note_context(inputNote);
 
             }
         }
