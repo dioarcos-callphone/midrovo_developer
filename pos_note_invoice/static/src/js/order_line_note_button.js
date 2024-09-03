@@ -18,16 +18,9 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             });
     
             if (confirmed) {
-                console.log('Esta es la nota:', inputNote);
                 NoteService.setNote(inputNote);
-                console.log(NoteService.getNote());
             }
         }
-
-        noteInput(event) {
-            console.log(`MOSTRANDO EVENTO >>> ${ event.detail.note }`)
-        }
-
     }
 
     Registries.Component.extend(OrderlineCustomerNoteButton, OrderlineCustomerNoteButtonExtend);

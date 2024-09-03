@@ -13,6 +13,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
 
         mostrandoNote() {
             const nota = NoteService.getNote();
+            console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
@@ -20,10 +21,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             }).then((result) => {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
-            console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
         }
-
-
     }
  
     Registries.Component.extend(PaymentScreen, PosPaymentReceiptExtend);

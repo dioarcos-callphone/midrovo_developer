@@ -17,7 +17,7 @@ odoo.define('pos_note_invoice.pos_global_state', (require) => {
                 model: 'account.move',
                 method: 'get_note',
                 args: [nota]
-            }).then((result) => {
+            }).then(function(result) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
         }
