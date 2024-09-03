@@ -30,29 +30,10 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                     self.env.pos.invoice_xml_key  = result.xml_key
                 }
 
-                rpc.query({
-                    model: 'account.move',
-                    method: 'get_note',
-                    args: [ nota ]
-                }).then(function(result) {
-                    console.log(`MOSTRANDO RESULT >>> ${ result }`)
-                });
-
             });
                return receipt_order
          }
 
-        // mostrandoNote() {
-        //     const nota = NoteService.getNote();
-        //     console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
-        //     rpc.query({
-        //         model: 'account.move',
-        //         method: 'get_note',
-        //         args: [ nota ]
-        //     }).then(function(result) {
-        //         console.log(`MOSTRANDO RESULT >>> ${ result }`)
-        //     });
-        // }
     }
  
     Registries.Component.extend(PaymentScreen, PosPaymentReceiptExtend);
