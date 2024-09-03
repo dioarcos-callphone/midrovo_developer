@@ -5,6 +5,9 @@ _logger = logging.getLogger(__name__)
 class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
+    def get_note(self, note):
+        return note
+    
     @api.model
     def _l10n_ec_get_payment_data(self):
         note_context = self.env.context.get('note_context')

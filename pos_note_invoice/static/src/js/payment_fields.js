@@ -8,15 +8,18 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            this._retrieveNote();
+            this.getNoteOrder();
         }
 
-        _retrieveNote() {
-            const note = this.env.note_context;
-            if (note) {
-                console.log(`Nota recuperada: ${note}`);
-                // Aquí puedes manejar la nota como desees
-            }
+        getNoteOrder() {
+            const orders = this.env.pos.selectedOrder
+            rpc.query({
+                model: 'account.move',
+                method: 'get_note',
+                args: ['NOTA ACTUALIZADA']
+            }).then(function(result) {
+                console.log(`MOSTRANDO RESULTADO ${ result }`)
+            });
         }
 
         async validateOrder(isForceValidate) {
