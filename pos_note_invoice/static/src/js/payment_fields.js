@@ -9,6 +9,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         setup() {
             super.setup();
             useListener('note-update', this.noteInput);
+            this.env.bus.on('note', this, this.noteInput);
             // this.getNoteOrder();
         }
 
@@ -23,6 +24,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         //     });
         // }
         noteInput(event) {
+            console.log(`MOSTRANDO EVENTO EN POS PAYMENT >>> ${ event.note }`)
             console.log(`MOSTRANDO EVENTO EN POS PAYMENT >>> ${ event.detail.note }`)
         }
 
