@@ -12,6 +12,11 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             useListener('note-update', this.noteInput);
             this.env.bus.on('note', this, this.noteInput);
             // this.getNoteOrder();
+            this.mostrandoNote();
+        }
+
+        mostrandoNote() {
+            console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
         }
 
         // getNoteOrder() {
