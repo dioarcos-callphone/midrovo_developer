@@ -8,7 +8,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            this.mostrandoNote();
+            // this.mostrandoNote();
         }
 
         async validateOrder(isForceValidate) {
@@ -26,7 +26,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             var orders = this.env.pos.selectedOrder
             const receipt_order = await super.validateOrder(...arguments);
             var self = this;
-            
+
             rpc.query({
                model: 'pos.order',
                method: 'get_invoice_field',
@@ -40,17 +40,17 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                return receipt_order
          }
 
-        mostrandoNote() {
-            const nota = NoteService.getNote();
-            console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
-            rpc.query({
-                model: 'account.move',
-                method: 'get_note',
-                args: [ nota ]
-            }).then(function(result) {
-                console.log(`MOSTRANDO RESULT >>> ${ result }`)
-            });
-        }
+        // mostrandoNote() {
+        //     const nota = NoteService.getNote();
+        //     console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
+        //     rpc.query({
+        //         model: 'account.move',
+        //         method: 'get_note',
+        //         args: [ nota ]
+        //     }).then(function(result) {
+        //         console.log(`MOSTRANDO RESULT >>> ${ result }`)
+        //     });
+        // }
     }
  
     Registries.Component.extend(PaymentScreen, PosPaymentReceiptExtend);
