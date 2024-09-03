@@ -19,6 +19,7 @@
             'pos_note_invoice/static/src/js/order_line_note_button.js',
             'pos_note_invoice/static/src/js/payment_fields.js',
             'pos_note_invoice/static/src/js/note_service.js',
+            'pos_note_invoice/static/src/js/pos_global_state.js',
             # 'pos_note_invoice/static/src/js/pos_order_note.js',
             'pos_note_invoice/static/src/xml/order_line_note_button.xml',
         ],

@@ -1,37 +1,18 @@
 odoo.define('pos_note_invoice.payment_fields', function (require) {
     'use strict';
-    var rpc = require('web.rpc')
+    const rpc = require('web.rpc')
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
-    const { useListener } = require('@web/core/utils/hooks');
     const NoteService = require('pos_note_invoice.note_service');
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
-            useListener('note-update', this.noteInput);
-            this.env.bus.on('note', this, this.noteInput);
-            // this.getNoteOrder();
             this.mostrandoNote();
         }
 
         mostrandoNote() {
             console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
-        }
-
-        // getNoteOrder() {
-        //     const orders = this.env.pos.selectedOrder
-        //     rpc.query({
-        //         model: 'account.move',
-        //         method: 'get_note',
-        //         args: ['NOTA ACTUALIZADA']
-        //     }).then(function(result) {
-        //         console.log(`MOSTRANDO RESULTADO ${ result }`)
-        //     });
-        // }
-        noteInput(event) {
-            const note = NoteService.getNote();  // Obtiene la nota del servicio global
-            console.log(`Nota recibida en PaymentScreen: ${note}`);
         }
 
         async validateOrder(isForceValidate) {

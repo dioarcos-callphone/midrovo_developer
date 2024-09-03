@@ -3,14 +3,12 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
 
     const OrderlineCustomerNoteButton = require('point_of_sale.OrderlineCustomerNoteButton');
     const Registries = require('point_of_sale.Registries');
-    const { useListener } = require('@web/core/utils/hooks');
     const NoteService = require('pos_note_invoice.note_service');
 
 
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
-            useListener('note-update', this.noteInput)
         }
 
         async onClick() {    
@@ -23,11 +21,6 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                 console.log('Esta es la nota:', inputNote);
                 NoteService.setNote(inputNote);
                 console.log(NoteService.getNote());
-                // this.env.pos.get_order().set_note_context(inputNote);
-                this.trigger('note-update', { note: inputNote });
-                this.env.bus.trigger('note', { note: inputNote });
-                // this.env.note_context = inputNote;
-
             }
         }
 
