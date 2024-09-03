@@ -20,7 +20,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                 console.log('Esta es la nota:', inputNote);
                 // this.env.pos.get_order().set_note_context(inputNote);
                 // this.trigger('note-update', { note: inputNote });
-                this.env.note_context = inputNote;
+                // this.env.note_context = inputNote;
 
             }
         }
