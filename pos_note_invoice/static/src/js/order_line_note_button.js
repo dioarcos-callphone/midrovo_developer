@@ -9,7 +9,9 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
     const OrderlineCustomerNoteButtonExtend = OrderlineCustomerNoteButton => class extends OrderlineCustomerNoteButton {
         setup() {
             super.setup();
+            this.note = ''
             useListener('note-update', this.noteInput)
+            console.log(`MOSTRANDO EVENTO >>> ${ this.note }`)
         }
 
         async onClick() {    
@@ -28,7 +30,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
         }
 
         noteInput(event) {
-            console.log(`MOSTRANDO EVENTO >>> ${ event.detail.note }`)
+            this.note = event.detail.note
         }
 
     }
