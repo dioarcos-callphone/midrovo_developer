@@ -1,4 +1,4 @@
-odoo.define('invoice_update_fields.pos_global_state', (require) => {
+odoo.define('pos_note_invoice.pos_global_state', (require) => {
     const { PosGlobalState } = require("point_of_sale.models");
     const Registries = require("point_of_sale.Registries");
     const rpc = require("web.rpc");
@@ -16,7 +16,7 @@ odoo.define('invoice_update_fields.pos_global_state', (require) => {
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
-                args: [note]
+                args: [nota]
             }).then((result) => {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
