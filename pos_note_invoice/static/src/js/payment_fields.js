@@ -13,6 +13,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
 
         async validateOrder(isForceValidate) {
             const receipt_number = this.env.pos.selectedOrder.name;
+            console.log(`MOSTRANDO RECEIP >>> ${ receipt_number }`)
             const argumentos = {
                 'receipt_number': receipt_number,
                 'note': NoteService.getNote()
