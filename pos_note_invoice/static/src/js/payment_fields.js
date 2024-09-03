@@ -18,10 +18,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             const POS = orders.orderlines[0]
             const { pos } = POS
 
-            const { invoice } = pos
+            const invoice = this.env.pos.invoice
 
-            console.log(pos)
-            console.log(invoice);
+            console.log(invoice)
 
             console.log(`MOSTRANDO RECEIP >>> ${ receipt_number }`)
             const argumentos = {
@@ -41,9 +40,8 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         }
 
     }
- 
+
     Registries.Component.extend(PaymentScreen, PosPaymentReceiptExtend);
- 
+
     return PaymentScreen;
 });
- 
