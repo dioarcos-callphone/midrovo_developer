@@ -22,7 +22,7 @@ class InvoiceUpdate(models.Model):
         
         _logger.info(f'MOSTRANDO NARRATION >>>> { invoice.narration }')
         
-        invoice.write({ 'narration': nota })        
+        # invoice.write({ 'narration': nota })        
         
         _logger.info(f'MOSTRANDO ARGUMENTOS >>> { argumentos }')
         # pay_term_line_ids = self.line_ids.filtered(
