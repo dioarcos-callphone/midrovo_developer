@@ -20,6 +20,8 @@ class InvoiceUpdate(models.Model):
         
         _logger.info(f'MOSTRANDO INVOICE >>>> { invoice }')
         
+        _logger.info(f'MOSTRANDO NARRATION >>>> { invoice.narration }')
+        
         invoice.write({ 'narration': nota })        
         
         _logger.info(f'MOSTRANDO ARGUMENTOS >>> { argumentos }')
