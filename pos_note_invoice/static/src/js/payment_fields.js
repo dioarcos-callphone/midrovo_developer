@@ -28,7 +28,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
 
-            return true;
+            return await super._postPushOrderResolve(order, order_server_ids);
         }
 
     }
