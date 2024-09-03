@@ -11,7 +11,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             // this.mostrandoNote();
         }
 
-        async _finalizeValidation() {
+        async _postPushOrderResolve(order, order_server_ids) {
             const receipt_number = this.env.pos.selectedOrder.name;
             const argumentos = {
                 'receipt_number': receipt_number,
@@ -23,11 +23,12 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
-                args: [ nota ]
+                args: [ argumentos ]
             }).then(function(result) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
 
+            return true;
         }
 
     }
