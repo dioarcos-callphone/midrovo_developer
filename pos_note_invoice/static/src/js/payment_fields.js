@@ -18,8 +18,6 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                 'note': NoteService.getNote()
             }
 
-            const nota = NoteService.getNote()
-
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
