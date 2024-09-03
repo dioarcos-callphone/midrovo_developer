@@ -9,12 +9,6 @@ class InvoiceUpdate(models.Model):
     
     @api.model
     def get_note(self, nota):
-        nota_actual = nota
-
-        return nota_actual
-    
-    @api.model
-    def _l10n_ec_get_payment_data(self):
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
@@ -28,6 +22,25 @@ class InvoiceUpdate(models.Model):
         _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
         
         if invoice:
-            invoice.write({ 'narration': nota_actual })
+            invoice.write({ 'narration': nota })
+
+        return nota
+    
+    # @api.model
+    # def _l10n_ec_get_payment_data(self):
+    #     pay_term_line_ids = self.line_ids.filtered(
+    #         lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+    #     )
         
-        return super(InvoiceUpdate, self)._l10n_ec_get_payment_data()
+    #     move_id = pay_term_line_ids.move_id.id
+        
+    #     _logger.info(f'OBTENIENDO MOVE ID >>> { move_id }')
+        
+    #     invoice = self.search([('id', '=', move_id)])
+        
+    #     _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
+        
+    #     if invoice:
+    #         invoice.write({ 'narration': nota_actual })
+        
+    #     return super(InvoiceUpdate, self)._l10n_ec_get_payment_data()
