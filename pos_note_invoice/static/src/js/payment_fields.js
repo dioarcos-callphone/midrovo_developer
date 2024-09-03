@@ -8,6 +8,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
             super.setup();
+            useListener('note-update', this.noteInput);
             // this.getNoteOrder();
         }
 
@@ -21,6 +22,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         //         console.log(`MOSTRANDO RESULTADO ${ result }`)
         //     });
         // }
+        noteInput(event) {
+            console.log(`MOSTRANDO EVENTO EN POS PAYMENT >>> ${ event.detail.note }`)
+        }
 
         async validateOrder(isForceValidate) {
             let receipt_number = this.env.pos.selectedOrder.name;
