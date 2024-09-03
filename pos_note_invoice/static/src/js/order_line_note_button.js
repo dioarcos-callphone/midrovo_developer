@@ -11,6 +11,10 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
             super.setup();
             this.note = ''
             useListener('note-update', this.noteInput)
+            this.getNote()
+        }
+
+        getNote() {
             console.log(`MOSTRANDO EVENTO >>> ${ this.note }`)
         }
 
@@ -30,7 +34,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
         }
 
         noteInput(event) {
-            this.note = event.detail.note
+            this.note 
         }
 
     }
