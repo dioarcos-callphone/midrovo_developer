@@ -12,9 +12,13 @@ class InvoiceUpdate(models.Model):
         receipt_number = argumentos['receipt_number']
         nota = argumentos['note']
         
+        _logger.info(f'NUMBER RECEIPT >>> { receipt_number } || NOTA >>> { nota }')
+        
         pos_id = self.env['pos.order'].search([('pos_reference', '=', receipt_number)], limit=1)
         
         invoice = self.search([('ref', '=', pos_id.name)], limit=1)
+        
+        _logger.info(f'MOSTRANDO INVOICE >>>> { invoice }')
         
         invoice.write({ 'narration': nota })        
         
