@@ -2,11 +2,19 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
+nota_actual = ''
+
 class InvoiceUpdate(models.Model):
     _inherit = 'account.move'
     
     @api.model
     def get_note(self, nota):
+        nota_actual = nota
+
+        return nota_actual
+    
+    @api.model
+    def _l10n_ec_get_payment_data(self):
         pay_term_line_ids = self.line_ids.filtered(
             lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
@@ -20,6 +28,6 @@ class InvoiceUpdate(models.Model):
         _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
         
         if invoice:
-            invoice.write({ 'narration': nota })
-
-        return nota
+            invoice.write({ 'narration': nota_actual })
+        
+        return super(InvoiceUpdate, self)._l10n_ec_get_payment_data()
