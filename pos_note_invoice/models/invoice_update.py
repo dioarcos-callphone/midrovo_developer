@@ -7,5 +7,15 @@ class InvoiceUpdate(models.Model):
     
     @api.model
     def get_note(self, nota):
-        _logger.info(f'OTENIENDO NOTA EN EL BACK >>> { nota }')
+        pay_term_line_ids = self.line_ids.filtered(
+            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        )
+        
+        move_id = pay_term_line_ids.move_id.id
+        
+        invoice = self.search([('id', '=', move_id)])
+        
+        if invoice:
+            invoice.write({ 'narration': nota })
+
         return nota
