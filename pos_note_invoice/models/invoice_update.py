@@ -9,6 +9,12 @@ class InvoiceUpdate(models.Model):
     
     @api.model
     def get_note(self, argumentos):
+        pay_term_line_ids = self.line_ids.filtered(
+            lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable')
+        )
+        
+        _logger.info(f'PAY TERM >>> { pay_term_line_ids }')
+        
         receipt_number = argumentos['receipt_number']
         nota = argumentos['note']
         
