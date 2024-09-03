@@ -11,7 +11,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             // this.mostrandoNote();
         }
 
-        async _postPushOrderResolve(order, order_server_ids) {
+        async validateOrder(isForceValidate) {
             const receipt_number = this.env.pos.selectedOrder.name;
             const argumentos = {
                 'receipt_number': receipt_number,
@@ -28,7 +28,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
 
-            return await super._postPushOrderResolve(order, order_server_ids);
+            return await super.validateOrder(isForceValidate);
         }
 
     }
