@@ -12,10 +12,13 @@ odoo.define('invoice_update_fields.pos_global_state', (require) => {
 
         obteniendoNotaCashier() {
             const nota = NoteService.getNote();
+            console.log(`OBTENIENDO NOTA DEL ORDER LINE NOTE >>> ${ nota }`)
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
                 args: [note]
+            }).then((result) => {
+                console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
         }
 
