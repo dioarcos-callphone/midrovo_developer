@@ -12,11 +12,10 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         }
 
         _retrieveNote() {
-            const order = this.env.pos.get_order();
-            const note = order.get_note_context();  // Método para obtener la nota
+            const note = this.env.note_context;
             if (note) {
                 console.log(`Nota recuperada: ${note}`);
-                // Aquí puedes manejar la nota como desees, quizás mostrarla en pantalla
+                // Aquí puedes manejar la nota como desees
             }
         }
 
