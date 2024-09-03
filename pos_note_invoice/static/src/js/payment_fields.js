@@ -4,6 +4,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
     const PaymentScreen = require('point_of_sale.PaymentScreen');
     const Registries = require('point_of_sale.Registries');
     const { useListener } = require('@web/core/utils/hooks');
+    const NoteService = require('pos_note_invoice.note_service');
 
     const PosPaymentReceiptExtend = PaymentScreen => class extends PaymentScreen {
         setup() {
@@ -24,8 +25,8 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         //     });
         // }
         noteInput(event) {
-            console.log(`MOSTRANDO EVENTO EN POS PAYMENT >>> ${ event.note }`)
-            console.log(`MOSTRANDO EVENTO EN POS PAYMENT >>> ${ event.detail.note }`)
+            const note = NoteService.getNote();  // Obtiene la nota del servicio global
+            console.log(`Nota recibida en PaymentScreen: ${note}`);
         }
 
         async validateOrder(isForceValidate) {
