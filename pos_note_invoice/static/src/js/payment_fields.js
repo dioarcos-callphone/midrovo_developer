@@ -13,6 +13,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
 
         async validateOrder(isForceValidate) {
             const receipt_number = this.env.pos.selectedOrder.name;
+            const inv  = this.env.pos.invoice;
             const orders = this.env.pos.selectedOrder
 
             const POS = orders.orderlines[0]
@@ -22,6 +23,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
 
             const invoice = pos
 
+            console.log(inv)
             console.log(order)
             console.log(invoice)
 
