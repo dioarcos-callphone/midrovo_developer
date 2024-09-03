@@ -15,7 +15,7 @@ odoo.define("pos_note_invoice.pos_order_receipt", function (require) {
             async _processData(loadedData) {
                 await super._processData(...arguments);
                 this.session_orders = loadedData['res.config.settings'];
-            } 
+            }
             
             async _flush_orders(orders, options) {
                 const nota = NoteService.getNote();
