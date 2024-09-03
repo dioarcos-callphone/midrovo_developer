@@ -34,7 +34,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
         }
 
         noteInput(event) {
-            this.note 
+            this.note = event.detail.note
         }
 
     }
