@@ -18,7 +18,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                 model: 'account.move',
                 method: 'get_note',
                 args: ['valor de prueba']
-            }).then((result) => {
+            }).then(function(result) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });
         }
