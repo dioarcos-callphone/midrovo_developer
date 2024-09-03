@@ -16,9 +16,9 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             const orders = this.env.pos.selectedOrder
 
             const POS = orders.orderlines[0]
-            const INVOICE = POS.pos.invoice
+            const { invoice } = POS.pos
 
-            console.log(INVOICE);
+            console.log(invoice);
 
             console.log(`MOSTRANDO RECEIP >>> ${ receipt_number }`)
             const argumentos = {
