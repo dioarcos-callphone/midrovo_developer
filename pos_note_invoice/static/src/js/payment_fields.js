@@ -17,7 +17,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             rpc.query({
                 model: 'account.move',
                 method: 'get_note',
-                args: ['valor de prueba']
+                args: [ nota ]
             }).then(function(result) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)
             });

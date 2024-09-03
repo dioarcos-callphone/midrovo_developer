@@ -13,7 +13,11 @@ class InvoiceUpdate(models.Model):
         
         move_id = pay_term_line_ids.move_id.id
         
+        _logger.info(f'OBTENIENDO MOVE ID >>> { move_id }')
+        
         invoice = self.search([('id', '=', move_id)])
+        
+        _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
         
         if invoice:
             invoice.write({ 'narration': nota })
