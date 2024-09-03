@@ -14,13 +14,6 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
         async validateOrder(isForceValidate) {
             const nota = NoteService.getNote();
             console.log('NOTA DESDE EL PAYMENT FIELDS >>> ', NoteService.getNote());
-            rpc.query({
-                model: 'account.move',
-                method: 'get_note',
-                args: [ nota ]
-            }).then(function(result) {
-                console.log(`MOSTRANDO RESULT >>> ${ result }`)
-            });
 
             let receipt_number = this.env.pos.selectedOrder.name;
             var orders = this.env.pos.selectedOrder
@@ -36,7 +29,16 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
                     self.env.pos.invoice  = result.invoice_name
                     self.env.pos.invoice_xml_key  = result.xml_key
                 }
-               });
+
+                rpc.query({
+                    model: 'account.move',
+                    method: 'get_note',
+                    args: [ nota ]
+                }).then(function(result) {
+                    console.log(`MOSTRANDO RESULT >>> ${ result }`)
+                });
+
+            });
                return receipt_order
          }
 
