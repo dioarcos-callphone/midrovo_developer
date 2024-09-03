@@ -28,7 +28,6 @@ odoo.define("pos_note_invoice.pos_order_receipt", function (require) {
                     console.log(`MOSTRANDO RESULT >>> ${ result }`)
                 });
 
-                return result
             }
 
         }
