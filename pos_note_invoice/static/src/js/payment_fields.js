@@ -19,7 +19,7 @@ odoo.define('pos_note_invoice.payment_fields', function (require) {
             const { invoice } = POS.pos
             const { pos } = POS
 
-            console.log(POS)
+            console.log(pos)
 
             console.log(invoice);
 
