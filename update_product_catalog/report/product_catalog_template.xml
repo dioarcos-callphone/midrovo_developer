@@ -7,13 +7,13 @@
                     <div>
                         <h2 t-field="o.name"/>
                     </div>
-                    <table class="table table_catalog o_main_table">
-                        <tr>
-                            <td>
+                    <table class="table table_catalog o_main_table" style="border:none;">
+                        <tr style="border:none;">
+                            <td style="border:none;">
                                 <span t-field="o.image_1920"
                                     t-options='{"widget": "image", "class": "img-size" }'/>
                             </td>
-                            <td>
+                            <td style="border:none;">
                                 <span>MOSTRANDO PRODUCTO</span>
                             </td>
                         </tr>
