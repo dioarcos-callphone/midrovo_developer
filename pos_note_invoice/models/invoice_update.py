@@ -13,8 +13,4 @@ class InvoiceUpdate(models.Model):
             
             if invoice:
                 invoice.write({ 'narration': nota })
-                
-                return invoice
-            
-        return None
     
