@@ -29,7 +29,9 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
             //     console.log(`MOSTRANDO RESULT DE NOTE UPDATE ${ result }`)
             // });
 
-            // console.log(result)            
+            // console.log(result)
+            
+            NoteService.setNote('');
 
             return result
         }
