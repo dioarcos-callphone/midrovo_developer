@@ -1,4 +1,4 @@
-odoo.define("pos_note_invoice.pos_order", (require) => {
+odoo.define("pos_note_invoice.pos_global_state", (require) => {
     "use strict";
 
     const PosGlobalState = require("point_of_sale.models");
@@ -6,7 +6,7 @@ odoo.define("pos_note_invoice.pos_order", (require) => {
     const rpc = require('web.rpc');
     const NoteService = require('pos_note_invoice.note_service');
 
-    const PosGlobalStateExtend = PosGlobalState => class extends PosGlobalState {
+    const PosGlobalStateExtend = PosGlobalState => class PosGlobalStateExtend extends PosGlobalState {
         // constructor(obj) {
         //     super(obj);
         //     // Puedes agregar o modificar atributos aquí
