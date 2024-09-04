@@ -41,7 +41,7 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
 
             rpc.query({
                 model: 'pos.order',
-                method: 'get_note',
+                method: 'create_from_ui',
                 args: args
             }).then(function(result) {
                 console.log(`MOSTRANDO RESULT >>> ${ result }`)

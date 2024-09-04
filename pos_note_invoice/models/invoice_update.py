@@ -2,23 +2,31 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
-nota_actual = ''
-
 class InvoiceUpdate(models.Model):
     _inherit = 'pos.order'
     
-    @api.model
-    def get_note(self, orders, draft, nota):
-        # invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
-        for order in orders:
-            # name = order['name']
+    # @api.model
+    # def get_note(self, orders, draft, nota):
+    #     # invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
+    #     for order in orders:
+    #         # name = order['name']
             
-            _logger.info(f'OBTENIENDO SHOP NAME >>> { order }')
+    #         _logger.info(f'OBTENIENDO SHOP NAME >>> { order }')
             
-        _logger.info(f'OBTENIENDO ORDERS >>> { orders }')
-        _logger.info(f'OBTENIENDO NOTA >>> { nota }')
+    #     _logger.info(f'OBTENIENDO ORDERS >>> { orders }')
+    #     _logger.info(f'OBTENIENDO NOTA >>> { nota }')
 
-        return nota
+    #     return nota
+    
+    @api.model
+    def create_from_ui(self, orders, draft, nota):
+        invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
+        
+        _logger.info(f'OBTENIENDO NOTA >>> { nota }')
+        _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
+        
+        return invoice
+        
     
     # @api.model
     # def get_note(self, argumentos):
