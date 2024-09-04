@@ -32,6 +32,8 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
 
             const nota = NoteService.getNote();
 
+            console.log(`OBTENIENDO NOTA EN POS GLOBAL >>> ${ nota }`)
+
             args.push(options.draft || false);
             args.push(nota);
 
