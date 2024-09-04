@@ -6,7 +6,7 @@
                 <article class="product-article">
                     <div>
                         <span t-field="o.image_1920"
-                          t-options='{"widget": "image", "class": "img_size" }'/>
+                          t-options='{"widget": "image", "class": "img-size" }'/>
                     </div>
                     <div>
                         <span>MOSTRANDO PRODUCTO</span>
