@@ -4,9 +4,26 @@
         <xpath expr="//div[@class='page']" position="replace">
             <div class="page">
                 <article class="product-article">
-                    <p t-field="o.image_1920"
-                        t-options='{"widget": "image", "class": "img-size" }'/>
-                    <p>MOSTRANDO PRODUCTO</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h2 t-field="o.name"/>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span t-field="o.image_1920"
+                                       t-options='{"widget": "image", "class": "img-size" }'/>
+                                </td>
+                                <td>
+                                    <span>MOSTRANDO PRODUCTO</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </article>
             </div>            
         </xpath>
