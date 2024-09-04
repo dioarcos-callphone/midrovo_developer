@@ -1,5 +1,6 @@
 odoo.define("pos_note_invoice.pos_global_state", (require) => {
     const PosGlobalState = require("point_of_sale.models");
+    const Registries = require('point_of_sale.Registries');
     const rpc = require('web.rpc');
     const NoteService = require('pos_note_invoice.note_service');
 
