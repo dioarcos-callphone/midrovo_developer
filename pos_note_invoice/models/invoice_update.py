@@ -23,9 +23,14 @@ class InvoiceUpdate(models.Model):
     #     return super(InvoiceUpdate, self).create_from_ui(orders, draft)
     
     @api.model
-    def note_update_invoice(self, nota, result):
-        _logger.info(f'OBTENIENDO RESULT DEL CREATE FROM EN EL BACKEND >>> { result }')
-        _logger.info(f'OBTENIENDO NOTA >>> { nota }')
+    def note_update_invoice(self, nota, results):
+        for result in results:
+            account_move = result['account_move']
+            invoice = self.env['account.move'].search([('id', '=', account_move)])
+            
+            if invoice:
+                invoice.write({ 'narration': nota })
+                
         return nota
         
     
