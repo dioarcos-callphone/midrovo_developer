@@ -10,9 +10,9 @@ class InvoiceUpdate(models.Model):
     @api.model
     def get_note(self, orders, draft, nota):
         for order in orders:
-            name = order['name']
+            # name = order['name']
             
-            _logger.info(f'OBTENIENDO SHOP NAME >>> { name }')
+            _logger.info(f'OBTENIENDO SHOP NAME >>> { order }')
             
         _logger.info(f'OBTENIENDO ORDERS >>> { orders }')
         _logger.info(f'OBTENIENDO NOTA >>> { nota }')
