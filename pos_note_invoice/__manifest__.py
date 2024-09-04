@@ -3,7 +3,8 @@
     
     "summary": "Visualización general del comentario o nota de la factura",
     "description": """
-        Se añade nota general para que pueda ser visualizada en la factura
+        - Se añade nota general para que pueda ser visualizada en la factura
+        - Actualización del narration en el POS
     """,
     
     "category": "Point of Sale",
@@ -11,15 +12,13 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['point_of_sale', 'account', 'sale', 'account_move_sri',],
+    'depends': [ 'point_of_sale', 'account' ],
     'data': [],
     
     "assets": {
         "point_of_sale.assets": [
             'pos_note_invoice/static/src/js/order_line_note_button.js',
-            # 'pos_note_invoice/static/src/js/payment_fields.js',
             'pos_note_invoice/static/src/js/pos_global_state.js',
-            # 'pos_note_invoice/static/src/js/pos_order_receipt.js',
             'pos_note_invoice/static/src/js/note_service.js',
             'pos_note_invoice/static/src/xml/order_line_note_button.xml',
         ],
