@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_note" inherit_id="invoice_update_fields.report_invoice_note">
+
+        <xpath expr="//div[@t-if='not is_html_empty(o.narration)']" position="replace">
+            <t t-if="'http' not in o.narration">
+                <span style="font-weight: bold;">Nota ADICIONAL:</span>
+                <t t-esc="o.narration"/>
+            </t>
+        </xpath>
+        
+    </template>
+</odoo>
