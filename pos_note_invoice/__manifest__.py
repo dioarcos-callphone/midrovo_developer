@@ -5,6 +5,7 @@
     "description": """
         - Se añade nota general para que pueda ser visualizada en la factura
         - Actualización del narration en el POS
+        - La nota que se ingresa debe tener un mínimo de 500 caracteres.
     """,
     
     "category": "Point of Sale",
