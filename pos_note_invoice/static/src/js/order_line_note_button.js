@@ -23,7 +23,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                 if(longitud > 500) {
                     const { confirmed: continueConfirmation } = await this.showPopup('ConfirmPopup', {
                         title: this.env._t('Advertencia'),
-                        body: this.env._t('El comentario no puede exceder los 200 caracteres.'),
+                        body: this.env._t('El comentario no puede exceder los 500 caracteres.'),
                     });
 
                     return
