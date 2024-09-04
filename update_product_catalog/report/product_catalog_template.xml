@@ -4,9 +4,9 @@
         <xpath expr="//div[@class='page']" position="replace">
             <div class="page">
                 <article>
-                    <div>
+                    <div class="product-article">
                         <span t-field="o.image_1920"
-                          t-options='{"widget": "image", "class": "o_img_padding o_img_size" }'/>
+                          t-options='{"widget": "image", "class": "img_size" }'/>
                     </div>
                     <div>
                         <span>MOSTRANDO PRODUCTO</span>
