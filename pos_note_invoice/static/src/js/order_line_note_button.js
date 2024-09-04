@@ -26,13 +26,11 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                         body: this.env._t('El comentario excede los 200 caracteres. ¿Deseas continuar?'),
                     });
 
-                    if (!continueConfirmation) {
-                        return;
-                    }
+                    return
                     
-                } else {
-                    NoteService.setNote(inputNote);
                 }
+
+                NoteService.setNote(inputNote);
             }
         }
     }
