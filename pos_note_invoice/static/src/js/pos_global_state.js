@@ -21,16 +21,6 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
                 args: [ nota, result ]
             })
 
-            // rpc.query({
-            //     model: 'pos.order',
-            //     method: 'note_update_invoice',
-            //     args: [ nota, result ]
-            // }).then(function(result) {
-            //     console.log(`MOSTRANDO RESULT DE NOTE UPDATE ${ result }`)
-            // });
-
-            // console.log(result)
-            
             NoteService.setNote('');
 
             return result
