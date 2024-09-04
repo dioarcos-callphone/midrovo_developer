@@ -15,7 +15,7 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
 
             const nota = NoteService.getNote();
 
-            result_note_update = await rpc.query({
+            const result_note_update = await rpc.query({
                 model: 'pos.order',
                 method: 'note_update_invoice',
                 args: [ nota, result ]
