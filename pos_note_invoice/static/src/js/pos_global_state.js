@@ -17,45 +17,48 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
         // }
 
         _save_to_server(orders, options) {
-            if (!orders || !orders.length) {
-                return Promise.resolve([]);
-            }
-            this.set_synch("connecting", orders.length);
-            options = options || {};
+            // if (!orders || !orders.length) {
+            //     return Promise.resolve([]);
+            // }
+            // this.set_synch("connecting", orders.length);
+            // options = options || {};
     
-            var args = [
-                _.map(orders, function (order) {
-                    order.to_invoice = options.to_invoice || false;
-                    return order;
-                }),
-            ];
+            // var args = [
+            //     _.map(orders, function (order) {
+            //         order.to_invoice = options.to_invoice || false;
+            //         return order;
+            //     }),
+            // ];
 
-            const nota = NoteService.getNote();
+            // const nota = NoteService.getNote();
 
-            console.log(`OBTENIENDO NOTA EN POS GLOBAL >>> ${ nota }`)
+            // console.log(`OBTENIENDO NOTA EN POS GLOBAL >>> ${ nota }`)
 
-            args.push(options.draft || false);
+            // args.push(options.draft || false);
 
-            console.log(args);
+            // console.log(args);
 
-            rpc.query({
-                model: 'pos.order',
-                method: 'create_from_ui',
-                args: args
-            }).then(function(result) {
-                console.log(`MOSTRANDO RESULT DE CREATE FROM >>> ${ result }`)
-                rpc.query({
-                    model: 'pos.order',
-                    method: 'note_update_invoice',
-                    args: [ nota, result ]
-                }).then(function(result) {
-                    console.log(`MOSTRANDO RESULT DE NOTE UPDATE`)
-                });
+            // rpc.query({
+            //     model: 'pos.order',
+            //     method: 'create_from_ui',
+            //     args: args
+            // }).then(function(result) {
+            //     console.log(`MOSTRANDO RESULT DE CREATE FROM >>> ${ result }`)
+            //     rpc.query({
+            //         model: 'pos.order',
+            //         method: 'note_update_invoice',
+            //         args: [ nota, result ]
+            //     }).then(function(result) {
+            //         console.log(`MOSTRANDO RESULT DE NOTE UPDATE`)
+            //     });
 
-            });
-            
+            // });
 
-            return super._save_to_server(orders, options);
+            const result = super._save_to_server(orders, options);
+
+            console.log(`MOSTRANDO RESULT >>>> ${ result }`)            
+
+            return result
         }
     }
 
