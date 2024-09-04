@@ -2,7 +2,18 @@
 <odoo>
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//div[@class='page']" position="replace">
-            <div class="page"/>            
+            <div class="page">
+                <article>
+                    <div>
+                        <span t-field="o.image_1920"
+                          t-options='{"widget": "image", "class": "o_img_padding o_img_size" }'/>
+                    </div>
+                    <div>
+                        <span>MOSTRANDO PRODUCTO</span>
+                    </div>
+
+                </article>
+            </div>            
         </xpath>
     </template>
 </odoo>
