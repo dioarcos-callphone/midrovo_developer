@@ -7,66 +7,33 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
     const NoteService = require('pos_note_invoice.note_service');
 
     const PosGlobalStateExtend = (PosGlobalState) => class PosGlobalStateExtend extends PosGlobalState {
-        // constructor(obj) {
-        //     super(obj);
-        //     // Puedes agregar o modificar atributos aquí
-        // }
-
-        // setup() {
-        //     super.setup()
-        // }
 
         async _save_to_server(orders, options) {
-            // if (!orders || !orders.length) {
-            //     return Promise.resolve([]);
-            // }
-            // this.set_synch("connecting", orders.length);
-            // options = options || {};
-    
-            // var args = [
-            //     _.map(orders, function (order) {
-            //         order.to_invoice = options.to_invoice || false;
-            //         return order;
-            //     }),
-            // ];
 
-            // const nota = NoteService.getNote();
-
-            // console.log(`OBTENIENDO NOTA EN POS GLOBAL >>> ${ nota }`)
-
-            // args.push(options.draft || false);
-
-            // console.log(args);
-
-            // rpc.query({
-            //     model: 'pos.order',
-            //     method: 'create_from_ui',
-            //     args: args
-            // }).then(function(result) {
-            //     console.log(`MOSTRANDO RESULT DE CREATE FROM >>> ${ result }`)
-            //     rpc.query({
-            //         model: 'pos.order',
-            //         method: 'note_update_invoice',
-            //         args: [ nota, result ]
-            //     }).then(function(result) {
-            //         console.log(`MOSTRANDO RESULT DE NOTE UPDATE`)
-            //     });
-
-            // });
-
+            // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
 
             const nota = NoteService.getNote();
 
-            rpc.query({
+            result_note_update = await rpc.query({
                 model: 'pos.order',
                 method: 'note_update_invoice',
                 args: [ nota, result ]
-            }).then(function(result) {
-                console.log(`MOSTRANDO RESULT DE NOTE UPDATE ${ result }`)
-            });
+            })
 
-            console.log(result)            
+            if(result_note_update) {
+                console.log(`MOSTRANDO RESULT DE NOTE UPDATE ${ result }`)
+            }
+
+            // rpc.query({
+            //     model: 'pos.order',
+            //     method: 'note_update_invoice',
+            //     args: [ nota, result ]
+            // }).then(function(result) {
+            //     console.log(`MOSTRANDO RESULT DE NOTE UPDATE ${ result }`)
+            // });
+
+            // console.log(result)            
 
             return result
         }
