@@ -7,7 +7,7 @@
                     <div>
                         <h2 t-field="o.name"/>
                     </div>
-                    <table>
+                    <table class="no-border" style="width: 100%;">
                         <tr>
                             <td>
                                 <span t-field="o.image_1920"

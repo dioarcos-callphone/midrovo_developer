@@ -2,6 +2,16 @@
     padding: 10px 20px;
 }
 
+.no-border {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.no-border td, .no-border th {
+    border: none;
+}
+
 .img-size {
     width: 350px;
     height: 350px;
