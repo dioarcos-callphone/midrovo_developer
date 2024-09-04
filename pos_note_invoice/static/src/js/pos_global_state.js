@@ -41,6 +41,6 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
         }
     }
 
-    Registries.Model.extend(PosGlobalState, PosGlobalStateExtend);
+    Registries.Model.extend(PosGlobalState, PosGlobalStateExtend(PosGlobalState));
 
 });
