@@ -13,7 +13,9 @@
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'point_of_sale', 'account', 'invoice_update_fields' ],
-    'data': [],
+    'data': [
+        "views/note_update.xml"    
+    ],
     
     "assets": {
         "point_of_sale.assets": [
