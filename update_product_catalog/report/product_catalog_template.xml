@@ -3,7 +3,7 @@
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//div[@class='page']" position="replace">
             <div class="page">
-                <article class="product-article">
+                <article t-options='{ "class": "product-article" }'>
                     <div>
                         <span t-field="o.image_1920"
                           t-options='{"widget": "image", "class": "img-size" }'/>
