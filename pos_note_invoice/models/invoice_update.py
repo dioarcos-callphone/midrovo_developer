@@ -8,13 +8,14 @@ class InvoiceUpdate(models.Model):
     _inherit = 'pos.order'
     
     @api.model
-    def get_note(self, *args):
-        # invoice = super(InvoiceUpdate, self).create_from_ui(orders)
+    def get_note(self, orders, draft, nota):
+        invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
 
-        _logger.info(f'OBTENIENDO INVOICE >>> { args }')
-        # _logger.info(f'OBTENIENDO NOTA >>> { nota }')
+        _logger.info(f'OBTENIENDO ORDERS >>> { orders }')
+        _logger.info(f'OBTENIENDO NOTA >>> { nota }')
+        _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
 
-        return args
+        return nota
     
     # @api.model
     # def get_note(self, argumentos):
