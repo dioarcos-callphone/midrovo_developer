@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
-        <xpath expr="//div[class='div-h-50']" position="replace">
+        <xpath expr="//div[@class='div-h-50']" position="replace">
             <div class="div-h-50">
                 <h1>HOLA</h1>
             </div>            
