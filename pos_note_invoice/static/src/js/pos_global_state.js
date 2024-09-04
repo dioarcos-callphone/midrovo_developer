@@ -37,6 +37,8 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
             args.push(options.draft || false);
             args.push(nota);
 
+            console.log(args);
+
             rpc.query({
                 model: 'pos.order',
                 method: 'get_note',
