@@ -1,18 +1,20 @@
 odoo.define("pos_note_invoice.pos_global_state", (require) => {
-    const PosGlobalState = require("point_of_sale.models").PosGlobalState;
+    "use strict";
+
+    const PosGlobalState = require("point_of_sale.models");
     const Registries = require('point_of_sale.Registries');
     const rpc = require('web.rpc');
     const NoteService = require('pos_note_invoice.note_service');
 
     const PosGlobalStateExtend = PosGlobalState => class extends PosGlobalState {
-        constructor(obj) {
-            super(obj);
-            // Puedes agregar o modificar atributos aquí
-        }
+        // constructor(obj) {
+        //     super(obj);
+        //     // Puedes agregar o modificar atributos aquí
+        // }
 
-        setup() {
-            super.setup()
-        }
+        // setup() {
+        //     super.setup()
+        // }
 
         _save_to_server(orders, options) {
             if (!orders || !orders.length) {
@@ -46,6 +48,6 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
         }
     }
 
-    Registries.Model.extend(PosGlobalState, PosGlobalStateExtend(PosGlobalState));
+    Registries.Model.extend(PosGlobalState, PosGlobalStateExtend);
 
 });
