@@ -30,10 +30,9 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
                         return;
                     }
                     
+                } else {
+                    NoteService.setNote(inputNote);
                 }
-
-                console.log(longitud)
-                NoteService.setNote(inputNote);
             }
         }
     }
