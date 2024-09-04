@@ -1,0 +1,34 @@
+/*Modifications for the Standard and Boxed document layouts */
+table.table_catalog {
+    width: 800px !important;
+    margin: auto;
+    /* border: 0 !important; */
+
+}
+
+.table_catalog.o_main_table.custom-no-border {
+    border: 0 !important;
+}
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+    border: 0 }
+  
+table.borderless td, table.borderless th {
+    /* Override padding for "table.docutils td" with "! important".
+       The right padding separates the table cells. */
+    padding: 0 0.5em 0 0 ! important }
+
+
+div.div-h-50 {
+    height: 50px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.wh-description {
+    max-height: 100px !important;
+    width: 300px !important;
+    margin: auto;
+}
+
