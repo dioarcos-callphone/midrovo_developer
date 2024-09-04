@@ -9,7 +9,7 @@ class InvoiceUpdate(models.Model):
     
     @api.model
     def get_note(self, orders, draft, nota):
-        invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
+        # invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
         for order in orders:
             # name = order['name']
             
