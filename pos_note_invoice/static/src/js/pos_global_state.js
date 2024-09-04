@@ -1,4 +1,4 @@
-odoo.define("pos_note_invoice.pos_global_state", (require) => {
+odoo.define("pos_note_invoice.pos_order", (require) => {
     "use strict";
 
     const PosGlobalState = require("point_of_sale.models");
