@@ -23,7 +23,8 @@ class InvoiceUpdate(models.Model):
         return super(InvoiceUpdate, self).create_from_ui(orders, draft)
     
     @api.model
-    def note_update_invoice(self, nota):
+    def note_update_invoice(self, result, nota):
+        _logger.info(f'OBTENIENDO RESULT DEL CREATE FROM EN EL BACKEND >>> { result }')
         _logger.info(f'OBTENIENDO NOTA >>> { nota }')
         return nota
         
