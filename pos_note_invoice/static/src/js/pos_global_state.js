@@ -16,7 +16,7 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
         //     super.setup()
         // }
 
-        _save_to_server(orders, options) {
+        async _save_to_server(orders, options) {
             // if (!orders || !orders.length) {
             //     return Promise.resolve([]);
             // }
@@ -54,9 +54,9 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
 
             // });
 
-            const result = super._save_to_server(orders, options);
+            const result = await super._save_to_server(orders, options);
 
-            console.log(`MOSTRANDO RESULT >>>> ${ result }`)            
+            console.log(result)            
 
             return result
         }
