@@ -13,6 +13,7 @@ odoo.define('pos_note_invoice.order_line_note_button', (require) => {
 
         async onClick() {    
             const { confirmed, payload: inputNote } = await this.showPopup("TextAreaPopup", {
+                startingValue: NoteService.getNote(),
                 title: this.env._t("Añadir Nota o Comentario"),
             });
     
