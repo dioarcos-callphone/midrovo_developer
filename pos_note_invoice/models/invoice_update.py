@@ -19,13 +19,13 @@ class InvoiceUpdate(models.Model):
     #     return nota
     
     @api.model
-    def create_from_ui(self, orders, draft, nota):
-        invoice = super(InvoiceUpdate, self).create_from_ui(orders, draft)
-        
+    def create_from_ui(self, orders, draft):
+        return super(InvoiceUpdate, self).create_from_ui(orders, draft)
+    
+    @api.model
+    def note_update_invoice(self, nota):
         _logger.info(f'OBTENIENDO NOTA >>> { nota }')
-        _logger.info(f'OBTENIENDO INVOICE >>> { invoice }')
-        
-        return invoice
+        return nota
         
     
     # @api.model

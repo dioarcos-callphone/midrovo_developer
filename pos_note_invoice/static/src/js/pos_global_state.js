@@ -35,7 +35,6 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
             console.log(`OBTENIENDO NOTA EN POS GLOBAL >>> ${ nota }`)
 
             args.push(options.draft || false);
-            args.push(nota);
 
             console.log(args);
 
@@ -44,7 +43,15 @@ odoo.define("pos_note_invoice.pos_global_state", (require) => {
                 method: 'create_from_ui',
                 args: args
             }).then(function(result) {
-                console.log(`MOSTRANDO RESULT >>> ${ result }`)
+                console.log(`MOSTRANDO RESULT DE CREATE FROM >>> ${ result }`)
+                rpc.query({
+                    model: 'pos.order',
+                    method: 'note_update_invoice',
+                    args: [ nota, result ]
+                }).then(function(result) {
+                    console.log(`MOSTRANDO RESULT DE NOTE UPDATE`)
+                });
+
             });
             
 
