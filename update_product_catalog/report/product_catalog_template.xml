@@ -7,7 +7,7 @@
                     <div style="border:none;">
                         <h2 t-field="o.name"/>
                     </div>
-                    <table class="table table_catalog o_main_table" style="border:none;">
+                    <table class=".no-border" style="border:none;">
                         <tr style="border:none;">
                             <td style="border:none;">
                                 <span t-field="o.image_1920"
