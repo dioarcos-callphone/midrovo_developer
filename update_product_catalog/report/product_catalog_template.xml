@@ -10,7 +10,7 @@
                             padding: 0 !important;
                         }
                     </style>
-                    <h1>REPORTE PDF</h1>
+                    <span>Reporte PDF</span>
                 </t>
             </t>          
         </xpath>
