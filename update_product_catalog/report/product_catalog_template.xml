@@ -4,7 +4,26 @@
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
-                    <h3>Reporte PDF</h3>
+                    <div class="page">
+                        <header>
+                            <div>
+                                <h3 t-field="o.name"/>
+                            </div>
+                        </header>
+                        <article>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <span t-field="o.image_1920"
+                                              t-options='{"widget": "image", }'/>
+                                    </td>
+                                    <td>
+                                        <span>AQUI VAN LAS VARIANTES</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </article>
+                    </div>
                 </t>
             </t>          
         </xpath>
