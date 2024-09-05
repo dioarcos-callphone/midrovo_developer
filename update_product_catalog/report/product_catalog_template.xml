@@ -18,7 +18,9 @@
                                               t-options='{"widget": "image", "class": "img-size" }'/>
                                     </td>
                                     <td>
-                                        <span>AQUI VAN LAS VARIANTES</span>
+                                        <div class="variantes">
+                                            <span>AQUI VAN LAS VARIANTES</span>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
