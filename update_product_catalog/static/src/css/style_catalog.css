@@ -30,6 +30,10 @@
     height: 220px;
 }
 
+.column-variants {
+    background-color: burlywood;
+}
+
 .variantes {
     background-color: aqua;
 }
