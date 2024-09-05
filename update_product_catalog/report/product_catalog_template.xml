@@ -4,7 +4,7 @@
         <xpath expr="//div[@class='page']" position="replace">
             <div class="page">
                 <article class="product-article">
-                    <div>
+                    <div style="border:none;">
                         <h2 t-field="o.name"/>
                     </div>
                     <table class="table table_catalog o_main_table" style="border:none;">
