@@ -19,7 +19,7 @@
                                     </td>
                                     <td class="column-variants">
                                         <div class="variants">
-                                            <span t-field="product.product.name"/>
+                                            <span t-field="o.id"/>
                                         </div>
                                     </td>
                                 </tr>
