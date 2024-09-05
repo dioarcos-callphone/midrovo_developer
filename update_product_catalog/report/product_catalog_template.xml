@@ -19,13 +19,7 @@
                                     </td>
                                     <td class="column-variants">
                                         <div class="variants">
-                                            <t t-if="doc_model == 'product.product'">
-                                                <t t-set="variant_names" t-value="', '.join(o.product_template_variant_value_ids.mapped('name'))"/>
-                                                <t t-if="variant_names">
-                                                    <br/>
-                                                    (<span t-out="variant_names"/>)
-                                                </t>
-                                            </t>
+                                            <span t-field="product.product.name"/>
                                         </div>
                                     </td>
                                 </tr>
