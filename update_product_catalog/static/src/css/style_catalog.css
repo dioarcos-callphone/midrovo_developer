@@ -3,6 +3,11 @@
     border: none;
 }
 
+table {
+    border: none !important;
+    border: transparent !important;
+}
+
 .no-border {
     border: none;
     width: 100%;
