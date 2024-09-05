@@ -18,6 +18,7 @@
 .no-border {
     border: none !important;
     border: transparent !important;
+    border-collapse: collapse;
     width: 100%;
 }
 
