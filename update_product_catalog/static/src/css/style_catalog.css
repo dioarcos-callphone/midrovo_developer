@@ -1,17 +1,16 @@
-/* .page {
+.page {
     margin: 0 !important;
     padding: 0 !important;
 }
 
 .title {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 5px 0 !important;
     text-align: center;
 }
 
 .product-article {
     padding: 10px 20px;
-    border: none;
     background-color: grey;
 }
 
@@ -26,6 +25,6 @@
 }
 
 .img-size {
-    width: 150px;
-    height: 150px;
-} */
+    width: 200px;
+    height: 200px;
+}
