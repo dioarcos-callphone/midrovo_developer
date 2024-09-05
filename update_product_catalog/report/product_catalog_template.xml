@@ -1,27 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
-        <xpath expr="//div[@class='page']" position="replace">
-            <div class="page">
-                <article class="product-article">
-                    <div class="title">
-                        <h2 t-field="o.name"/>
-                    </div>
-                    <table class="no-border">
-                        <tr>
-                            <td>
-                                <span t-field="o.image_1920"
-                                    t-options='{"widget": "image", "class": "img-size" }'/>
-                            </td>
-                            <td>
-                                <div>
-                                    <span>MOSTRANDO PRODUCTO</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </article>
-            </div>            
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-call="web.html-container">
+                <t t-call="web.external-layout">
+                    <h1>REPORTE PDF</h1>
+                </t>
+            </t>          
         </xpath>
     </template>
 </odoo>
