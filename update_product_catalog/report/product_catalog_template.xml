@@ -2,7 +2,7 @@
 <odoo>
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//div[@class='page']" position="replace">
-            <div class="page">
+            <div class="page-catalog">
                 <article class="product-article">
                     <div class="title">
                         <h2 t-field="o.name"/>
