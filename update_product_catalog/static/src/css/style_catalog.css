@@ -3,18 +3,14 @@
     border: none;
 }
 
-table {
+.no-border {
     border: none !important;
     border: transparent !important;
-}
-
-.no-border {
-    border: none;
     width: 100%;
 }
 
 .no-border td, .no-border th {
-    border: none;
+    border: none !important;
 }
 
 .img-size {
