@@ -22,7 +22,9 @@
     width: 100%;
 }
 
-.no-border td, .no-border th {
+.no-border td {
+    padding: 0 !important;
+    margin: 0 !important;
     border: none !important;
 }
 
