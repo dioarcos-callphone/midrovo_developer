@@ -5,7 +5,7 @@ class ProductCategory(models.Model):
     
     @api.model
     def _get_data_product_variants(self, product_template_id):
-        product_variants = self.env['product.product'].search(['id', '=', product_template_id])
+        product_variants = self.env['product.product'].search([('id', '=', product_template_id)])
         
         data = []
         
