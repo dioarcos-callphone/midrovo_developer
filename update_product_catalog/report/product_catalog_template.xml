@@ -11,7 +11,7 @@
                             </div>
                         </header>
                         <article class="product-article">
-                            <table>
+                            <table class="no-border">
                                 <tr>
                                     <td>
                                         <span t-field="o.image_1920"
