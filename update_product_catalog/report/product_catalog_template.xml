@@ -13,7 +13,7 @@
                         <article class="product-article">
                             <table class="no-border">
                                 <tr>
-                                    <td>
+                                    <td class="column-img">
                                         <span t-field="o.image_1920"
                                               t-options='{"widget": "image", "class": "img-size" }'/>
                                     </td>

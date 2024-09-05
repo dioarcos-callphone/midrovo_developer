@@ -30,6 +30,10 @@
     height: 220px;
 }
 
+.column-img {
+    background-color: cadetblue;
+}
+
 .column-variants {
     background-color: burlywood;
 }
