@@ -10,21 +10,23 @@
                                 <h3 t-field="o.name"/>
                             </div>
                         </header>
-                        <article class="product-article">
-                            <table class="no-border">
-                                <tr>
-                                    <td class="column-img">
-                                        <span t-field="o.image_1920"
-                                              t-options='{"widget": "image", "class": "img-size" }'/>
-                                    </td>
-                                    <td class="column-variants">
-                                        <div class="variants">
-                                            <span t-field="o.id"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </article>
+                        <t t-foreach="o._get_data_product_variants(o.id)" t-as="data">
+                            <article class="product-article">
+                                <table class="no-border">
+                                    <tr>
+                                        <td class="column-img">
+                                            <span t-field="o.image_1920"
+                                                t-options='{"widget": "image", "class": "img-size" }'/>
+                                        </td>
+                                        <td class="column-variants">
+                                            <div class="variants">
+                                                <span t-field="o.id"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </article>
+                        </t>
                     </div>
                 </t>
             </t>          
