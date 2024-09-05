@@ -14,7 +14,8 @@ class ProductCategory(models.Model):
         data = []
         
         for product_variant in product_variants:
-            _logger.info(f'MOSTRANDO LA DATA >>> { product_variant.product_template_variant_value_ids }')
+            name = product_variant.product_template_variant_value_ids.mapped('name')
+            _logger.info(f'MOSTRANDO LA DATA >>> { name }')
             
             data.append(product_variant)
                         
