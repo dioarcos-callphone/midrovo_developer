@@ -21,8 +21,7 @@
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
-                                                    <t t-set="variant_names" t-value="', '.join(env['product.product'].product_template_variant_value_ids.mapped('name'))"/>
-                                                    <span t-out="variant_names"/>
+                                                                                          
                                                 </div>
                                                 
                                             </td>
