@@ -23,8 +23,7 @@
 }
 
 .no-border td {
-    padding: 0 !important;
-    margin: 0 !important;
+    vertical-align: top;
     border: none !important;
 }
 
