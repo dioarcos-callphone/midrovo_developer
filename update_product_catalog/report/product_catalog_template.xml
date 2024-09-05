@@ -15,7 +15,7 @@
                                 <tr>
                                     <td>
                                         <span t-field="o.image_1920"
-                                              t-options='{"widget": "image", }'/>
+                                              t-options='{"widget": "image", "class": "img-size" }'/>
                                     </td>
                                     <td>
                                         <span>AQUI VAN LAS VARIANTES</span>
