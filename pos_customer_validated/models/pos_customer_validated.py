@@ -13,6 +13,7 @@ class PosCustomerValidated(models.Model):
     def create_from_ui(self, partner):
         if partner.get('vat') and partner['id'] == False:
             vat = partner['vat']
+            _logger.info(f'VAT >>>> { vat }')
             longitud = len(vat)
             
             if(longitud > 13 or longitud < 10):
