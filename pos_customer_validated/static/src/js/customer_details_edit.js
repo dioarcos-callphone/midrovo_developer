@@ -34,4 +34,8 @@ odoo.define("pos_customer_validated.customer_details_edit", (require) => {
         }
     }
 
+    Registries.Component.extend(PartnerDetailsEdit, PartnerDetailsEditExtend);
+
+    return PartnerDetailsEdit;
+
 });
