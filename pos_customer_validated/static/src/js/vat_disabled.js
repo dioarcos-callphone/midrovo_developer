@@ -25,6 +25,32 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
             }, 0);
         }
 
+        saveChanges() {
+            const processedChanges = {};
+            for (const [key, value] of Object.entries(this.changes)) {
+                if (this.intFields.includes(key)) {
+                    processedChanges[key] = parseInt(value) || false;
+                } else {
+                    processedChanges[key] = value;
+                }
+            }
+            if (
+                processedChanges.state_id &&
+                this.env.pos.states.find((state) => state.id === processedChanges.state_id)
+                    .country_id[0] !== processedChanges.country_id
+            ) {
+                processedChanges.state_id = false;
+            }
+    
+            if ((!this.props.partner.vat && !processedChanges.vat) || processedChanges.vat === "") {
+                return this.showPopup("ErrorPopup", {
+                    title: _t("Se requiere número de identificación"),
+                });
+            }
+            
+            return super.saveChanges()
+        }
+
     }
 
     Registries.Component.extend(PartnerDetailsEdit, PartnerDetailsEditExtend);
