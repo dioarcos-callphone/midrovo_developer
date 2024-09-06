@@ -8,13 +8,10 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     const PartnerDetailsEditExtend = PartnerDetailsEdit => class extends PartnerDetailsEdit {
         setup() {
             super.setup()
-            
-            this._disableVatInput();
         }
 
         _disableVatInput() {
-            const partner = this.props.partner;
-            const vat = partner.vat;
+            const vat = this.props.partner.vat;
 
             if(vat) {
                 if (inputVat) {
@@ -25,6 +22,9 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
         }
 
         saveChanges() {
+
+            this._disableVatInput()
+
             const processedChanges = {};
             for (const [key, value] of Object.entries(this.changes)) {
                 if (this.intFields.includes(key)) {
