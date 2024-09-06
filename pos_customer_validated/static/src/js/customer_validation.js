@@ -11,10 +11,8 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
         }
 
         async saveChanges(event) {
-            const { processedChanges } = event.detail
-
             console.log('ENTRA AQUI')
-            console.log(processedChanges)
+            console.log(event.detail.processedChanges)
 
             const partnerId = await this.rpc({
                 model: "res.partner",
