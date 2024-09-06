@@ -9,6 +9,7 @@
         - Validación de RUC y cédula
         - Se oculta campos (bar code y postal code)
         - Se desactiva el campo vat en el momento que se realizan actualizaciones del cliente
+        - Numero de identificacion (CEDULA O RUC) es obligatorio
     """,
     "category": "Point of Sale",
     "version": "16.0.1.0.0",
