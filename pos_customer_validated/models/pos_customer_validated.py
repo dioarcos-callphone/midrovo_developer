@@ -17,7 +17,7 @@ class PosCustomerValidated(models.Model):
             longitud = len(vat)
             
             if(longitud > 13 or longitud < 10):
-                raise ValidationError('El número de identificación no es válidooo.')
+                raise ValidationError('El número de identificación no es válidoo.')
             
             if(not self._l10n_ec_vat_validation(vat)):
                 if len(vat) == 10:
@@ -38,7 +38,6 @@ class PosCustomerValidated(models.Model):
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
     def _l10n_ec_vat_validation(self, vat):
-        _logger.info(f'__VAT >>>>')
         vat_validation = False
         
         ruc = stdnum.util.get_cc_module("ec", "ruc")
