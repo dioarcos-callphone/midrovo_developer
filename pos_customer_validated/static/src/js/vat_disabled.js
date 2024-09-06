@@ -9,10 +9,7 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
         setup() {
             super.setup()
             
-
-            if(vat) {
-                this._disableVatInput();
-            }
+            this._disableVatInput();
         }
 
         _disableVatInput() {
