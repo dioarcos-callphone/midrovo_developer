@@ -44,7 +44,7 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     
             if ((!this.props.partner.vat && !processedChanges.vat) || processedChanges.vat === "") {
                 return this.showPopup("ErrorPopup", {
-                    title: _t("Se requiere número de identificación"),
+                    title: this.env._t("Se requiere número de identificación"),
                 });
             }
             
