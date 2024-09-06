@@ -19,7 +19,7 @@ class ProductCategory(models.Model):
             # for variant_value in variant_values:
             #     _logger.info(f'MOSTRANDO VARIANT VALUE >>> { variant_value.product_attribute_value_id.name }')
             
-            _logger.info(f'MOSTRANDO LA DATA >>> { product_variant.product_template_variant_value_ids }')
+            _logger.info(f'MOSTRANDO LA DATA >>> { product_variant.product_template_variant_value_ids.attribute_id }')
             
             data.append(product_variant)
                         
