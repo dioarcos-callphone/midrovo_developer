@@ -28,3 +28,4 @@ odoo.define('pos_customer_validated.customer_validation', (require) => {
     return PartnerListScreen;
 
 });
+

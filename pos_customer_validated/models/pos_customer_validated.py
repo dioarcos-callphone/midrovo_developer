@@ -51,3 +51,4 @@ class PosCustomerValidated(models.Model):
                 vat_validation = True
                 
         return vat_validation
+    

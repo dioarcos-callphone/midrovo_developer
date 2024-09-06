@@ -58,3 +58,4 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     return PartnerDetailsEdit;
 
 });
+
