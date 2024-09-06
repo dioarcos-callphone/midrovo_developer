@@ -4,23 +4,26 @@ odoo.define('pos_customer_validated.vat_disabled', (require) => {
     const rpc = require('web.rpc')
     const PartnerDetailsEdit = require('point_of_sale.PartnerDetailsEdit')
     const Registries = require('point_of_sale.Registries');
+    const { onMounted, } = require("@odoo/owl");
 
     const PartnerDetailsEditExtend = PartnerDetailsEdit => class extends PartnerDetailsEdit {
         setup() {
             super.setup();
 
+            onMounted(() => {
+                const vat = this.props.partner.vat;
+                if(vat) {
+                    const inputVat = document.querySelector("input[name='vat']");
+                    if (inputVat) {
+                        console.log('ENTRA AL VAT DEL PARTNER')
+                        inputVat.disabled = true;
+                    }
+                }
+            });
+
         }
 
         saveChanges() {
-            const vat = this.props.partner.vat;
-            if(vat) {
-                const inputVat = document.querySelector("input[name='vat']");
-                if (inputVat) {
-                    console.log('ENTRA AL VAT DEL PARTNER')
-                    inputVat.disabled = true;
-                }
-            }
-            
             const processedChanges = {};
             for (const [key, value] of Object.entries(this.changes)) {
                 if (this.intFields.includes(key)) {
