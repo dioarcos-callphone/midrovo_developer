@@ -38,6 +38,7 @@ class PosCustomerValidated(models.Model):
         return super(PosCustomerValidated, self).create_from_ui(partner)
     
     def _l10n_ec_vat_validation(self, vat):
+        _logger.info(f'__VAT >>>>')
         vat_validation = False
         
         ruc = stdnum.util.get_cc_module("ec", "ruc")
