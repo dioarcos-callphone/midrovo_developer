@@ -20,7 +20,6 @@
     
     'assets': {
         'point_of_sale.assets': [
-            'pos_customer_validated/static/src/js/customer_details_edit.js',
             'pos_customer_validated/static/src/js/customer_validation.js',
             'pos_customer_validated/static/src/js/vat_disabled.js',
             'pos_customer_validated/static/src/xml/partner_details_edit.xml',
