@@ -16,7 +16,7 @@ class PosCustomerValidated(models.Model):
             longitud = len(vat)
             
             if(longitud > 13 or longitud < 10):
-                raise ValidationError('El número de identificación no es válidooo.')
+                raise ValidationError('El número de identificación no es válido.')
             
             if(not self._l10n_ec_vat_validation(vat)):
                 if len(vat) == 10:
