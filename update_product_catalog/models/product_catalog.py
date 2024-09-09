@@ -16,7 +16,10 @@ class ProductCategory(models.Model):
         for product in product_product:
             values = product.product_template_variant_value_ids
             for value in values:
-                _logger.info(f'VALORES >>> { value.attribute_id }')
+                color = value.attribute_id.name
+                
+                if(color.lower()  == 'color'):
+                    _logger.info(f'VALORES >>> { color }')
         
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
