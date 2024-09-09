@@ -24,8 +24,18 @@
                                                 <table class="table-variants">
                                                     <thead>
                                                         <tr>
-                                                            <th>Tallas</th>
-                                                            <th>DIsponible</th>
+                                                            <t t-foreach="result['tallas']" t-as="talla">
+                                                                <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
+                                                                    <t t-if="variant_value.attribute_id.name.lower() == 'talla'">
+                                                                        <tr>
+                                                                            <span t-esc="variant_value.name"/>
+                                                                        </tr>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                            <th>
+                                                                <span>Disponible</span>
+                                                            </th>
                                                         </tr>
                                                     </thead>
 

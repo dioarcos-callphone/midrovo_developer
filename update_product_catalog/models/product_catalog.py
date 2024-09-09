@@ -9,7 +9,6 @@ class ProductCategory(models.Model):
     
     @api.model
     def _get_data_product_variants(self):
-        _logger.info(f'MOSTRANDO PRODUCT TEMPLATE >>> { self.id }')
         data = []
         product_variants = []
         colores = []
