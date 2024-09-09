@@ -36,6 +36,7 @@ class ProductCategory(models.Model):
                         product_variants.append(product)
                         
             variantes = product_variants
+            product_variants.clear()
 
             product_data = {
                 "color": color,
@@ -44,8 +45,6 @@ class ProductCategory(models.Model):
             }
 
             data.append(product_data)
-            
-            product_variants.clear()
             
         for r in data:
             for talla in r['tallas']:
