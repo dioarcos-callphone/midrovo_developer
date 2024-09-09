@@ -37,3 +37,18 @@
 .column-variants {
     width: 70%;
 }
+
+.table-variants {
+    width: 50%;
+    border-collapse: collapse;
+}
+
+.table-variants th, .table-variants td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.table-variants th {
+    background-color: #f2f2f2;
+}
