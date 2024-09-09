@@ -16,7 +16,8 @@
                                     <table class="no-border">
                                         <tr>
                                             <td class="column-img">
-                                                <img t-att-src="'data:image/png;base64,%s' % env['product.product'].search([('id','=',result['img'])]).image_1920" class="img-size"/>
+                                                <span t-field="env['product.product'].search([('id','=',result['img'])]).image_1920"
+                                                      t-options='{"widget": "image", "class": "img-size" }'></span>
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
