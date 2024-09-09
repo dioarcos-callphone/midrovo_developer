@@ -34,7 +34,6 @@ class ProductCategory(models.Model):
                     val = value.name
                     if(color == val):
                         product_variants.append(product)
-                        _logger.info(f'VALORES >>> { color }')
 
                 image = product.image_1920
                         
