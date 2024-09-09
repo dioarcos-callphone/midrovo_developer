@@ -21,7 +21,21 @@
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
-                                                    <span>HOLA</span>                         
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tallas</th>
+                                                                <th>DIsponible</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>20</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                        
                                                 </div>
                                                 
                                             </td>
