@@ -9,6 +9,7 @@ class ProductCategory(models.Model):
     
     @api.model
     def _get_data_product_variants(self, product_template):
+        data = []
         product_variants = []
         colores = []
         # product_variants = self.search([('atrribute_id', '=', product_template.attribute_id)],)
@@ -23,21 +24,29 @@ class ProductCategory(models.Model):
             if(color.lower() == 'color'):
                 for value in product_line.value_ids:
                     colores.append(value.name)
-                    _logger.info(f'MOSTRANDO COLORES >>> { value.name }')
-        
-        
-        for product in product_product:
-            values = product.product_template_variant_value_ids
-            for value in values:
-                color = value.attribute_id.name
-                
-                if(color.lower()  == 'color'):
-                    product_variants.append(product)
-                    _logger.info(f'VALORES >>> { color }')
+                    
+        for color in colores:
+            for product in product_product:
+                values = product.product_template_variant_value_ids
+                for value in values:
+                    color = value.name
+                    if(color == color):
+                        product_variants.append(product)
+                        _logger.info(f'VALORES >>> { color }')
+                        
+            product_data = {
+                "color": color,
+                "data": product_variants
+            }
+            
+            data.append(product_data)
+            
+            product_variants.clear()
+            
         
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
-        _logger.info(f'MOSTRANDO PRODUCT VARIANTS >>> { product_variants }')
+        _logger.info(f'MOSTRANDO PRODUCT DATA >>> { product_data }')
         
         # product_attributte_lines = self.env['product.template.attribute.line'].search([(
         #     'product_tmpl_id', '=', product_template.id
