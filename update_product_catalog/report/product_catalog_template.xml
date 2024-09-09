@@ -21,7 +21,7 @@
                                         </td>
                                         <td class="column-variants">
                                             <div class="variants">
-                                                <table>
+                                                <table class="table-variants">
                                                     <thead>
                                                         <tr>
                                                             <th>Tallas</th>
