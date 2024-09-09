@@ -16,7 +16,7 @@
                                     <table class="no-border">
                                         <tr>
                                             <td class="column-img">
-                                                <span t-esc="data['img']"
+                                                <span t-field="o.image_1920"
                                                     class="img-size"
                                                     t-options='{"widget": "image" }'/>
                                             </td>
