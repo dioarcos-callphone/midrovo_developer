@@ -33,6 +33,7 @@ class ProductCategory(models.Model):
                     val = value.name
                     if(color == val):
                         _logger.info(f'MOSTRANDO COLOR >>> { val }')
+                        _logger.info(f'MOSTRANDO CANTIDAD DISPONIBLE >>> { product.immediately_usable_qty }')
                         product_variants.append(product)
 
             product_data = {
