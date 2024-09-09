@@ -8,16 +8,16 @@ class ProductCategory(models.Model):
     _inherit = "product.template"
     
     @api.model
-    def _get_data_product_variants(self, product_template):
+    def _get_data_product_variants(self):
         _logger.info(f'MOSTRANDO PRODUCT TEMPLATE >>> { self.id }')
         data = []
         product_variants = []
         colores = []
 
-        product_product = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)])
+        product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
                 
         product_attributte_lines = self.env['product.template.attribute.line'].search([(
-            'product_tmpl_id', '=', product_template.id
+            'product_tmpl_id', '=', self.id
         )])
         
         for product_line in product_attributte_lines:
