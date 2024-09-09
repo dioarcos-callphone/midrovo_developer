@@ -19,7 +19,7 @@ class ProductCategory(models.Model):
                 color = value.attribute_id.name
                 
                 if(color.lower()  == 'color'):
-                    product_variants.append(value)
+                    product_variants.append(product)
                     _logger.info(f'VALORES >>> { color }')
         
         
