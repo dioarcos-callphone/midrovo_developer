@@ -16,9 +16,7 @@
                                     <table class="no-border">
                                         <tr>
                                             <td class="column-img">
-                                                <span t-field="o.image_1920"
-                                                    class="img-size"
-                                                    t-options='{"widget": "image" }'/>
+                                                <img t-att-src="'data:image/png;base64,%s' % data['img']" class="img-size"/>
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
