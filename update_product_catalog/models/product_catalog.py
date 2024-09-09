@@ -11,7 +11,7 @@ class ProductCategory(models.Model):
     def _get_data_product_variants(self, product_template):
         # product_variants = self.search([('atrribute_id', '=', product_template.attribute_id)],)
         
-        _logger.info(f'PRODUCTO TEMPLATE >>> { product_template.attribute_id }')
+        _logger.info(f'PRODUCTO TEMPLATE >>> { product_template }')
         
         # variantes = []
         
