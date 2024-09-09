@@ -36,7 +36,7 @@ class ProductCategory(models.Model):
 
             product_data = {
                 "color": color,
-                "img": product_variants[0].image_1920,
+                "img": product_variants[0].id,
                 "data": product_variants
             }
             
