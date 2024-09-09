@@ -19,10 +19,12 @@ class ProductCategory(models.Model):
                 color = value.attribute_id.name
                 
                 if(color.lower()  == 'color'):
+                    product_variants.append(value)
                     _logger.info(f'VALORES >>> { color }')
         
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
+        _logger.info(f'MOSTRANDO PRODUCT VARIANTS >>> { product_variants }')
         
         # product_attributte_lines = self.env['product.template.attribute.line'].search([(
         #     'product_tmpl_id', '=', product_template.id
