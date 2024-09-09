@@ -30,7 +30,7 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        <t t-foreach="data['tallas']" t-as="talla">
+                                                        <t t-foreach="result['tallas']" t-as="talla">
                                                             <tr>
                                                                 <td>
                                                                     <span>10</span>
