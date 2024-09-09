@@ -16,7 +16,7 @@
                                     <table class="no-border">
                                         <tr>
                                             <td class="column-img">
-                                                <img t-att-src="'data:image/png;base64,%s' % env['product.product'].search([('id','=',data['img])]).image_1920" class="img-size"/>
+                                                <img t-att-src="'data:image/png;base64,%s' % env['product.product'].search([('id','=',data['img'])]).image_1920" class="img-size"/>
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
