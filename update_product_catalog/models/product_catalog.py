@@ -10,8 +10,21 @@ class ProductCategory(models.Model):
     @api.model
     def _get_data_product_variants(self, product_template):
         product_variants = []
+        colores = []
         # product_variants = self.search([('atrribute_id', '=', product_template.attribute_id)],)
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)])
+        
+        product_attributte_lines = self.env['product.template.attribute.line'].search([(
+            'product_tmpl_id', '=', product_template.id
+        )])
+        
+        for product_line in product_attributte_lines:
+            color = product_line.attribute_id.name
+            if(color.lower() == 'color'):
+                for value in product_line.value_ids:
+                    colores.append(value.name)
+                    _logger.info(f'MOSTRANDO COLORES >>> { value.name }')
+        
         
         for product in product_product:
             values = product.product_template_variant_value_ids
