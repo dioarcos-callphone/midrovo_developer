@@ -45,7 +45,7 @@ class ProductCategory(models.Model):
         
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
-        _logger.info(f'MOSTRANDO PRODUCT DATA >>> { product_data }')
+        _logger.info(f'MOSTRANDO PRODUCT DATA >>> { data }')
         
         # product_attributte_lines = self.env['product.template.attribute.line'].search([(
         #     'product_tmpl_id', '=', product_template.id
