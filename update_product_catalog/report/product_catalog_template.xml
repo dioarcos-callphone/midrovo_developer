@@ -17,7 +17,8 @@
                                         <tr>
                                             <td class="column-img">
                                                 <span t-esc="data['img']"
-                                                    t-options='{"widget": "image", "class": "img-size" }'/>
+                                                    class="img-size"
+                                                    t-options='{"widget": "image" }'/>
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
