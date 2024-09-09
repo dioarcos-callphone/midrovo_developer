@@ -40,16 +40,13 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        <t t-foreach="result['tallas']" t-as="talla">
-                                                            <tr>
-                                                                <td>
-                                                                    <span>10</span>
-                                                                </td>
+                                                        <tr>
+                                                            <t t-foreach="result['tallas']" t-as="talla">
                                                                 <td>
                                                                     <span t-esc="talla.immediately_usable_qty"/>
                                                                 </td>
-                                                            </tr>
-                                                        </t>
+                                                            </t>
+                                                        </tr>
                                                     </tbody>
                                                 </table>                        
                                             </div>
