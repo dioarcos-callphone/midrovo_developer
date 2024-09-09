@@ -26,6 +26,7 @@ class ProductCategory(models.Model):
                     colores.append(value.name)
                     
         for color in colores:
+            product_variants.clear()
             for product in product_product:
                 values = product.product_template_variant_value_ids
                 for value in values:
@@ -36,7 +37,6 @@ class ProductCategory(models.Model):
                         product_variants.append(product)
                         
             variantes = product_variants
-            product_variants.clear()
 
             product_data = {
                 "color": color,
