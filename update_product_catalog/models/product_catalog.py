@@ -17,9 +17,9 @@ class ProductCategory(models.Model):
         _logger.info(f'PRODUCTO TEMPLATE >>> { product_attributte_lines.value_ids }')
         
         for product_line in product_attributte_lines:
-            if(product_line.attribute_id.name == 'color'):
-                color = product_line.attribute_id.name
-                _logger.info(f'color')
+            color = product_line.attribute_id.name
+            if(color.lower() == 'color'):
+                _logger.info(f'MOSTRANDO COLOR >>> { color.lower() }')
         
         # variantes = []
         
