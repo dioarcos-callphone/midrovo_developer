@@ -11,12 +11,12 @@
                                     <h3 t-field="o.name"/>
                                 </div>
                             </header>
-                            <t t-foreach="o._get_data_product_variants(o)" t-as="data">
+                            <t t-foreach="o._get_data_product_variants(o)" t-as="result">
                                 <article class="product-article">
                                     <table class="no-border">
                                         <tr>
                                             <td class="column-img">
-                                                <img t-att-src="'data:image/png;base64,%s' % env['product.product'].search([('id','=',data['img'])]).image_1920" class="img-size"/>
+                                                <img t-att-src="'data:image/png;base64,%s' % env['product.product'].search([('id','=',result['img'])]).image_1920" class="img-size"/>
                                             </td>
                                             <td class="column-variants">
                                                 <div class="variants">
