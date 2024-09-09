@@ -32,7 +32,6 @@ class ProductCategory(models.Model):
                 for value in values:
                     val = value.name
                     if(color == val):
-                        _logger.info(f'PRODUCTO INMEDIATO >>> { product.immediately_usable_qty }')
                         product_variants.append(product)
 
             product_data = {
@@ -40,6 +39,9 @@ class ProductCategory(models.Model):
                 "img": product_variants[0].id,
                 "tallas": product_variants
             }
+            
+            for talla in product_data['tallas']:
+                _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
             
             data.append(product_data)
                         
