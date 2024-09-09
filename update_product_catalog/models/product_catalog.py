@@ -29,8 +29,8 @@ class ProductCategory(models.Model):
             for product in product_product:
                 values = product.product_template_variant_value_ids
                 for value in values:
-                    color = value.name
-                    if(color == color):
+                    val = value.name
+                    if(color == val):
                         product_variants.append(product)
                         _logger.info(f'VALORES >>> { color }')
                         
