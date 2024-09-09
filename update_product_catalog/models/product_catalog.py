@@ -16,7 +16,7 @@ class ProductCategory(models.Model):
         for product in product_product:
             values = product.product_template_variant_value_ids
             for value in values:
-                _logger.info(f'VALORES >>> { value.name }')
+                _logger.info(f'VALORES >>> { value.id }')
         
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
