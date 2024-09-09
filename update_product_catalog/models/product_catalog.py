@@ -26,6 +26,7 @@ class ProductCategory(models.Model):
                     colores.append(value.name)
                     
         for color in colores:
+            image = ''
             product_variants.clear()
             for product in product_product:
                 values = product.product_template_variant_value_ids
@@ -34,9 +35,12 @@ class ProductCategory(models.Model):
                     if(color == val):
                         product_variants.append(product)
                         _logger.info(f'VALORES >>> { color }')
+
+                image = product.image_1920
                         
             product_data = {
                 "color": color,
+                "img": image,
                 "data": product_variants
             }
             
