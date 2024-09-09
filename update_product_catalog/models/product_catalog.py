@@ -13,7 +13,7 @@ class ProductCategory(models.Model):
         product_attributte_line = self.env['product.template.attribute.line'].search([(
             'product_tmpl_id', '=', product_template.id
         )])
-        _logger.info(f'PRODUCTO TEMPLATE >>> { product_attributte_line }')
+        _logger.info(f'PRODUCTO TEMPLATE >>> { product_attributte_line.value_ids }')
         
         # variantes = []
         
