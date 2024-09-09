@@ -9,8 +9,15 @@ class ProductCategory(models.Model):
     
     @api.model
     def _get_data_product_variants(self, product_template):
+        product_variants = []
         # product_variants = self.search([('atrribute_id', '=', product_template.attribute_id)],)
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)])
+        
+        for product in product_product:
+            values = product.product_template_variant_value_ids
+            for value in values:
+                _logger.info(f'VALORES >>> { value }')
+        
         
         _logger.info(f'MOSTRANDO PRODUCT PRODUCT >>> { product_product }')
         
