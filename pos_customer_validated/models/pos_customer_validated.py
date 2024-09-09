@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import logging, stdnum
-_logger = logging.getLogger(__name__)
+# _logger = logging.getLogger(__name__)
 
 def verify_final_consumer(vat):
     return vat == '9' * 13
