@@ -10,10 +10,16 @@ class ProductCategory(models.Model):
     @api.model
     def _get_data_product_variants(self, product_template):
         # product_variants = self.search([('atrribute_id', '=', product_template.attribute_id)],)
-        product_attributte_line = self.env['product.template.attribute.line'].search([(
+        product_attributte_lines = self.env['product.template.attribute.line'].search([(
             'product_tmpl_id', '=', product_template.id
         )])
-        _logger.info(f'PRODUCTO TEMPLATE >>> { product_attributte_line.value_ids }')
+        
+        _logger.info(f'PRODUCTO TEMPLATE >>> { product_attributte_lines.value_ids }')
+        
+        for product_line in product_attributte_lines:
+            if(product_line.attribute_id.name == 'color'):
+                color = product_line.attribute_id.name
+                _logger.info(f'color')
         
         # variantes = []
         
