@@ -26,7 +26,6 @@ class ProductCategory(models.Model):
                     colores.append(value.name)
                     
         for color in colores:
-            # product_variants.clear()
             for product in product_product:
                 values = product.product_template_variant_value_ids
                 for value in values:
@@ -35,14 +34,18 @@ class ProductCategory(models.Model):
                         _logger.info(f'MOSTRANDO COLOR >>> { val }')
                         _logger.info(f'MOSTRANDO CANTIDAD DISPONIBLE >>> { product.immediately_usable_qty }')
                         product_variants.append(product)
+                        
+            variantes = product_variants
 
             product_data = {
                 "color": color,
                 "img": product_variants[0].id,
-                "tallas": product_variants
+                "tallas": variantes
             }
 
             data.append(product_data)
+            
+            product_variants.clear()
             
         for r in data:
             for talla in r['tallas']:
