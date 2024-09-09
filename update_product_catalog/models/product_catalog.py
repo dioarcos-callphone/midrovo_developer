@@ -40,9 +40,9 @@ class ProductCategory(models.Model):
                 "tallas": product_variants
             }
             
-            for talla in product_data['tallas']:
-                _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
-            
             data.append(product_data)
+            
+        for talla in product_data['tallas']:
+            _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
                         
         return data
