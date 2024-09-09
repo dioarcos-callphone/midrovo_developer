@@ -31,6 +31,7 @@ class ProductCategory(models.Model):
                 values = product.product_template_variant_value_ids
                 for value in values:
                     val = value.name
+                    _logger.info(f'MOSTRANDO COLOR >>> { val }')
                     if(color == val):
                         product_variants.append(product)
 
@@ -42,8 +43,8 @@ class ProductCategory(models.Model):
             
             data.append(product_data)
             
-        for r in data[0]:
-            for talla in r['tallas']:
-                _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
+        # for r in data[0]:
+        #     for talla in r['tallas']:
+        #         _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
                         
         return data
