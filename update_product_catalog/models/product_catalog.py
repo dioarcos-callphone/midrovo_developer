@@ -42,7 +42,8 @@ class ProductCategory(models.Model):
             
             data.append(product_data)
             
-        for talla in product_data['tallas']:
-            _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
+        for r in data:
+            for talla in r['tallas']:
+                _logger.info(f'CANTIDAD DISPONIBLE >>> { talla.immediately_usable_qty }')
                         
         return data
