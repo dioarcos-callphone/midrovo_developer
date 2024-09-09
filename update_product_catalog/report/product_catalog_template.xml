@@ -3,49 +3,49 @@
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                            <header class="title">
-                                <div>
-                                    <h3 t-field="o.name"/>
-                                </div>
-                            </header>
-                            <t t-foreach="o._get_data_product_variants()" t-as="result">
-                                <article class="product-article">
-                                    <table class="no-border">
-                                        <tr>
-                                            <td class="column-img">
-                                                <span t-field="env['product.product'].search([('id','=',result['img'])]).image_1920"
-                                                      t-options='{"widget": "image", "class": "img-size" }'></span>
-                                            </td>
-                                            <td class="column-variants">
-                                                <div class="variants">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Tallas</th>
-                                                                <th>DIsponible</th>
-                                                            </tr>
-                                                        </thead>
+                <!-- <t t-foreach="docs" t-as="o"> -->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <header class="title">
+                            <div>
+                                <h3 t-field="o.name"/>
+                            </div>
+                        </header>
+                        <t t-foreach="o._get_data_product_variants()" t-as="result">
+                            <article class="product-article">
+                                <table class="no-border">
+                                    <tr>
+                                        <td class="column-img">
+                                            <span t-field="env['product.product'].search([('id','=',result['img'])]).image_1920"
+                                                    t-options='{"widget": "image", "class": "img-size" }'></span>
+                                        </td>
+                                        <td class="column-variants">
+                                            <div class="variants">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Tallas</th>
+                                                            <th>DIsponible</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>10</td>
-                                                                <td>20</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>                        
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </article>
-                            </t>
-                        </div>
-                    </t>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>10</td>
+                                                            <td>20</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>                        
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </article>
+                        </t>
+                    </div>
                 </t>
+                <!-- </t> -->
             </t>          
         </xpath>
     </template>
