@@ -38,6 +38,10 @@
     width: 70%;
 }
 
+.variants {
+    text-align: end;
+}
+
 .table-variants {
     width: 50%;
     border-collapse: collapse;
