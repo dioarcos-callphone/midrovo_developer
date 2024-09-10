@@ -13,12 +13,16 @@ class StockPickingUpdate(models.Model):
     def _onchange_(self):
         product_id = self.product_id
         
-        if(product_id):    
-            for select in self.select_validate:
-                if select.id == product_id.id:
-                    raise ValidationError(f'El producto { product_id.name } ya fue seleccionado.')
+        if(product_id):
+            products = self.move_ids_without_package
             
-            self.select_validate.append(product_id)
+            _logger.info(f'MOSTRANDO PRODUCTOS SELECCIONADOS >>> { products }')
+                
+            # for select in self.select_validate:
+            #     if select.id == product_id.id:
+            #         raise ValidationError(f'El producto { product_id.name } ya ha sido seleccionado.')
+            
+            # self.select_validate.append(product_id)
         
         
                 
