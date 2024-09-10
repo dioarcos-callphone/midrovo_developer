@@ -11,11 +11,12 @@ class StockPickingUpdate(models.Model):
     def _onchange_(self):
         product_id = self.product_id
         
-        for select in self.select_validate:
-            if select.id == product_id.id:
-                _logger.info(f'YA FUE SELECCIONADO EL PRODUCTO >>> { product_id }')
-        
-        self.select_validate.append(product_id)
+        if(product_id):    
+            for select in self.select_validate:
+                if select.id == product_id.id:
+                    _logger.info(f'YA FUE SELECCIONADO EL PRODUCTO >>> { product_id }')
+            
+            self.select_validate.append(product_id)
         
         
                 
