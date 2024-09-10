@@ -40,6 +40,7 @@
 }
 
 .variants {
+    width: 70%;
     background-color: chocolate;
     text-align: center;
     float: right;
