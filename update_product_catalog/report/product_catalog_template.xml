@@ -29,18 +29,6 @@
                                                         <td>
                                                             <span t-esc="result['color']"/>
                                                         </td>
-                                                        <td class="title-head">
-                                                            <strong>Precio venta:</strong>
-                                                        </td>
-                                                        <td>
-                                                            <span t-esc="result['precio_venta']"/>
-                                                        </td>
-                                                        <td class="title-head">
-                                                            <strong>Precio + IVA:</strong>
-                                                        </td>
-                                                        <td>
-                                                            <span t-esc="result['precio_iva']"/>
-                                                        </td>
                                                     </tr>
                                                 </table>
                                                 <table class="table-variants">
