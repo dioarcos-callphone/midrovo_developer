@@ -48,6 +48,15 @@
     border-collapse: collapse;
 }
 
+.head-variants {
+    border: none !important;
+    border: transparent !important;
+    float: right;
+    width: 50%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
 .table-variants thead {
     border: 1px solid #2196f3 !important;
 }
