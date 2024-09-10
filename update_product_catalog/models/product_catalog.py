@@ -14,40 +14,37 @@ class ProductCategory(models.Model):
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
         
-        
-        valor_venta = self.list_price
-        valor_iva = self.tax_string
-                
-        product_attributte_lines = self.env['product.template.attribute.line'].search([(
-            'product_tmpl_id', '=', self.id
-        )])
-        
-        for product_line in product_attributte_lines:
-            color = product_line.attribute_id.name
-            if(color.lower() == 'color'):
-                for value in product_line.value_ids:
-                    colores.append(value.name)
-                    
-        for color in colores:
-            suma_disponible = 0
-            product_variants = []
-            for product in product_product:
-                values = product.product_template_variant_value_ids
-                for value in values:
-                    val = value.name
-                    if(color == val):
-                        suma_disponible += int(product.immediately_usable_qty)
-                        product_variants.append(product)
-
-            product_data = {
-                "color": color,
-                "img": product_variants[0].id,
-                "tallas": product_variants,
-                "disponible": suma_disponible,
-                "precio_venta": f'$ { valor_venta }',
-                "precio_iva": f'$ { valor_iva }' if valor_iva else None 
-            }
-
-            data.append(product_data)
+        if product_product:        
+            product_attributte_lines = self.env['product.template.attribute.line'].search([(
+                'product_tmpl_id', '=', self.id
+            )])
+            
+            for product_line in product_attributte_lines:
+                color = product_line.attribute_id.name
+                if(color.lower() == 'color'):
+                    for value in product_line.value_ids:
+                        colores.append(value.name)
                         
-        return data
+            for color in colores:
+                suma_disponible = 0
+                product_variants = []
+                for product in product_product:
+                    values = product.product_template_variant_value_ids
+                    for value in values:
+                        val = value.name
+                        if(color == val):
+                            suma_disponible += int(product.immediately_usable_qty)
+                            product_variants.append(product)
+
+                product_data = {
+                    "color": color,
+                    "img": product_variants[0].id,
+                    "tallas": product_variants,
+                    "disponible": suma_disponible,
+                }
+
+                data.append(product_data)
+                        
+            return data
+        
+        return None

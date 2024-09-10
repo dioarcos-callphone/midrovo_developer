@@ -3,7 +3,6 @@
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
-                <!-- <t t-foreach="docs" t-as="o"> -->
                 <t t-call="web.external_layout">
                     <div class="page">
                         <header class="title">
@@ -11,12 +10,70 @@
                                 <h3 t-field="o.name"/>
                             </div>
                         </header>
-                        <t t-foreach="o._get_data_product_variants()" t-as="result">
+                        <t t-if="o._get_data_product_variants()">
+                            <t t-foreach="o._get_data_product_variants()" t-as="result">
+                                <article class="product-article">
+                                    <table class="no-border">
+                                        <tr>
+                                            <td class="column-img">
+                                                <span t-field="env['product.product'].search([('id','=',result['img'])]).image_1920"
+                                                        t-options='{"widget": "image", "class": "img-size" }'></span>
+                                            </td>
+                                            <td class="column-variants">
+                                                <div class="variants">
+                                                    <table class="head-variants">
+                                                        <tr>
+                                                            <td class="title-head">
+                                                                <strong>Color:</strong>
+                                                            </td>
+                                                            <td>
+                                                                <span t-esc="result['color'].upper()"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="table-variants">
+                                                        <thead>
+                                                            <tr>
+                                                                <t t-foreach="result['tallas']" t-as="talla">
+                                                                    <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
+                                                                        <t t-if="variant_value.attribute_id.name.lower() == 'tallas'">
+                                                                            <th>
+                                                                                <span t-esc="variant_value.name"/>
+                                                                            </th>
+                                                                        </t>
+                                                                    </t>
+                                                                </t>
+                                                                <th>
+                                                                    <span>Pares</span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <t t-foreach="result['tallas']" t-as="talla">
+                                                                    <td>
+                                                                        <span t-esc="int(talla.immediately_usable_qty)"/>
+                                                                    </td>
+                                                                </t>
+                                                                <td>
+                                                                    <span t-esc="result['disponible']"/>
+                                                                </td>                                                        </tr>
+                                                        </tbody>
+                                                    </table>                        
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </article>
+                            </t>
+                        </t>
+                        <t t-else="">
                             <article class="product-article">
                                 <table class="no-border">
                                     <tr>
                                         <td class="column-img">
-                                            <span t-field="env['product.product'].search([('id','=',result['img'])]).image_1920"
+                                            <span t-field="o.image_1920"
                                                     t-options='{"widget": "image", "class": "img-size" }'></span>
                                         </td>
                                         <td class="column-variants">
@@ -24,53 +81,21 @@
                                                 <table class="head-variants">
                                                     <tr>
                                                         <td class="title-head">
-                                                            <strong>Color:</strong>
+                                                            <h2>Disponible:</h2>
                                                         </td>
                                                         <td>
-                                                            <span t-esc="result['color'].upper()"/>
+                                                            <span t-field="o.immediately_usable_qty"/>
                                                         </td>
                                                     </tr>
-                                                </table>
-                                                <table class="table-variants">
-                                                    <thead>
-                                                        <tr>
-                                                            <t t-foreach="result['tallas']" t-as="talla">
-                                                                <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
-                                                                    <t t-if="variant_value.attribute_id.name.lower() == 'tallas'">
-                                                                        <th>
-                                                                            <span t-esc="variant_value.name"/>
-                                                                        </th>
-                                                                    </t>
-                                                                </t>
-                                                            </t>
-                                                            <th>
-                                                                <span>Pares</span>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <t t-foreach="result['tallas']" t-as="talla">
-                                                                <td>
-                                                                    <span t-esc="int(talla.immediately_usable_qty)"/>
-                                                                </td>
-                                                            </t>
-                                                            <td>
-                                                                <span t-esc="result['disponible']"/>
-                                                            </td>                                                        </tr>
-                                                    </tbody>
-                                                </table>                        
+                                                </table>                       
                                             </div>
-                                            
                                         </td>
                                     </tr>
                                 </table>
                             </article>
-                        </t>
+                        </t> 
                     </div>
                 </t>
-                <!-- </t> -->
             </t>          
         </xpath>
     </template>
