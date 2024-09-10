@@ -43,10 +43,12 @@
                                                         <tr>
                                                             <t t-foreach="result['tallas']" t-as="talla">
                                                                 <td>
-                                                                    <span t-esc="talla.immediately_usable_qty"/>
+                                                                    <span t-esc="int(talla.immediately_usable_qty)"/>
                                                                 </td>
                                                             </t>
-                                                        </tr>
+                                                            <td>
+                                                                <span t-esc="result['disponible']"/>
+                                                            </td>                                                        </tr>
                                                     </tbody>
                                                 </table>                        
                                             </div>
