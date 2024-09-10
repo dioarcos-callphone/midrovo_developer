@@ -25,20 +25,21 @@ class ProductCategory(models.Model):
                     colores.append(value.name)
                     
         for color in colores:
+            suma_disponible = 0
             product_variants = []
             for product in product_product:
                 values = product.product_template_variant_value_ids
                 for value in values:
                     val = value.name
                     if(color == val):
+                        suma_disponible += int(product.immediately_usable_qty)
                         product_variants.append(product)
-                        
-            variantes = product_variants
 
             product_data = {
                 "color": color,
                 "img": product_variants[0].id,
-                "tallas": variantes
+                "tallas": product_variants,
+                "disponible": suma_disponible
             }
 
             data.append(product_data)

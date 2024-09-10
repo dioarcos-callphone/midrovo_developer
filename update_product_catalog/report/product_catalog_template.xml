@@ -28,7 +28,7 @@
                                                                 <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
                                                                     <t t-if="variant_value.attribute_id.name.lower() == 'tallas'">
                                                                         <th>
-                                                                            <span t-esc="variant_value.name"/>
+                                                                            <span t-esc="int(variant_value.name)"/>
                                                                         </th>
                                                                     </t>
                                                                 </t>
