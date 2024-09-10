@@ -5,7 +5,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class StockPickingUpdate(models.Model):
-    _inherit = "stock.picking"
+    _inherit = "stock.move"
     
     select_validate = []
     
@@ -14,7 +14,7 @@ class StockPickingUpdate(models.Model):
         product_id = self.product_id
         
         if(product_id):
-            products = self.move_ids_without_package
+            products = self.env['stock.picking'].move_ids_without_package
             
             _logger.info(f'MOSTRANDO PRODUCTOS SELECCIONADOS >>> { products }')
                 
