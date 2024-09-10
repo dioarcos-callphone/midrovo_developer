@@ -3,7 +3,10 @@
     
     "summary": "Actualiación en el diseño del catalogo de productos.",
     "description": """
-        Este modulo permite actualizar el diseño del catalogo de productos.
+        - Actualización del diseño del catalogo de productos.
+        - Muestra productos por variantes y no variantes.
+        - Este modulo se centra más a los productos cuyas variantes son de tipo color y talla
+        - Solo acepta atributos "color" y "tallas"
     """,
     
     "category": "Sales",
