@@ -21,6 +21,9 @@
                                         </td>
                                         <td class="column-variants">
                                             <div class="variants">
+                                                <p>Codigo</p>
+                                                <p>Material</p>
+                                                <p>Precio con IVA</p>
                                                 <table class="table-variants">
                                                     <thead>
                                                         <tr>
