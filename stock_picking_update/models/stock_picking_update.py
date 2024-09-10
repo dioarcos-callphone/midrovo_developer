@@ -16,7 +16,7 @@ class StockPickingUpdate(models.Model):
         if(product_id):    
             for select in self.select_validate:
                 if select.id == product_id.id:
-                    raise(f'YA FUE SELECCIONADO EL PRODUCTO')
+                    raise ValidationError(f'YA FUE SELECCIONADO EL PRODUCTO')
             
             self.select_validate.append(product_id)
         
