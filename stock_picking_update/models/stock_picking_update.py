@@ -9,14 +9,14 @@ class StockPickingUpdate(models.Model):
     
     select_validate = []
     
-    @api.onchange('product_id', 'move_ids_without_package')
+    @api.onchange('product_id')
     def _onchange_(self):
         product_id = self.product_id
         
         if(product_id):
-            products = self.move_ids_without_package
             
-            _logger.info(f'MOSTRANDO PRODUCTOS SELECCIONADOS >>> { products }')
+            
+            _logger.info(f'MOSTRANDO PRODUCTOS SELECCIONADOS >>> { product_id }')
                 
             # for select in self.select_validate:
             #     if select.id == product_id.id:
