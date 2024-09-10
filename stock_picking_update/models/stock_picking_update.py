@@ -3,7 +3,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class SockPickingUpdate(models.Model):
-    _inherit = "stock.move"
+    _inherit = "stock.picking"
     
     @api.onchange('product_id')
     def _onchange_(self):
