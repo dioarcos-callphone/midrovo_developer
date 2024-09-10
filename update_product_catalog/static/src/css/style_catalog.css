@@ -39,7 +39,7 @@
 }
 
 .variants {
-    text-align: end;
+    text-align: center;
 }
 
 .table-variants {
@@ -47,11 +47,11 @@
     border-collapse: collapse;
 }
 
-/* .table-variants th, .table-variants td {
+.table-variants th, .table-variants td {
     border: 1px solid black;
     padding: 8px;
-    text-align: right;
-} */
+    /* text-align: right; */
+}
 
 .table-variants th {
     background-color: #f2f2f2;
