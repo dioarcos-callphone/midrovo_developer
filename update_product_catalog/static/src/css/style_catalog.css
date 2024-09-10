@@ -40,6 +40,9 @@
 }
 
 .variants {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: end !important;
     background-color: chocolate;
     text-align: center;
 }
@@ -53,7 +56,7 @@
     margin-bottom: 5px;
     border: none !important;
     border: transparent !important;
-    width: 50%;
+    width: 70%;
     border-collapse: collapse;
     text-align: left;
 }
