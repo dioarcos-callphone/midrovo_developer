@@ -16,7 +16,7 @@
     background-color: white;
 }
 
-.no-border {
+.no-border, .no-border-variants {
     border: none !important;
     border: transparent !important;
     border-collapse: collapse;
