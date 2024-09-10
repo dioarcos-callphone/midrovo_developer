@@ -77,8 +77,8 @@
                                                     t-options='{"widget": "image", "class": "img-size" }'></span>
                                         </td>
                                         <td class="column-variants">
-                                            <div class="variants">
-                                                <table class="head-variants">
+                                            <div class="no-variants">
+                                                <table class="head-no-variants">
                                                     <tr>
                                                         <td class="title-head">
                                                             <h2>Disponible:</h2>

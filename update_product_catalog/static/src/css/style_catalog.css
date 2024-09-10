@@ -38,7 +38,7 @@
     width: 70%;
 }
 
-.variants {
+.variants, .no-variants {
     text-align: center;
 }
 
@@ -56,6 +56,14 @@
     width: 40%;
     border-collapse: collapse;
     text-align: right;
+    padding: 10px 5px !important;
+}
+
+.head-no-variants {
+    border: none !important;
+    border: transparent !important;
+    width: 100%;
+    border-collapse: collapse;
     padding: 10px 5px !important;
 }
 
