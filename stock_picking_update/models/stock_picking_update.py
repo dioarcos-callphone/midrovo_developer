@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -14,7 +16,7 @@ class StockPickingUpdate(models.Model):
         if(product_id):    
             for select in self.select_validate:
                 if select.id == product_id.id:
-                    _logger.info(f'YA FUE SELECCIONADO EL PRODUCTO >>> { product_id }')
+                    raise(f'YA FUE SELECCIONADO EL PRODUCTO')
             
             self.select_validate.append(product_id)
         
