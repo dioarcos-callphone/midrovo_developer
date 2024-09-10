@@ -44,8 +44,8 @@ class ProductCategory(models.Model):
                 "img": product_variants[0].id,
                 "tallas": product_variants,
                 "disponible": suma_disponible,
-                "precio_venta": valor_venta,
-                "precio_iva": valor_iva 
+                "precio_venta": f'$ { valor_venta }',
+                "precio_iva": f'$ { valor_iva }' if valor_iva else None 
             }
 
             data.append(product_data)
