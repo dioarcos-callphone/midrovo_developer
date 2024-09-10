@@ -59,6 +59,10 @@
     text-align: right;
 }
 
+.head-variants .title-head {
+    text-align: left;
+}
+
 .table-variants thead {
     border: 1px solid #2196f3 !important;
 }
