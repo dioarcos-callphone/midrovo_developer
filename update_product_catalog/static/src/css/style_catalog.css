@@ -48,7 +48,7 @@
 }
 
 .table-variants th, .table-variants td {
-    border: 1px solid #2196f3;
+    border: 1px solid #2196f3 !important;
     padding: 8px;
     /* text-align: right; */
 }
