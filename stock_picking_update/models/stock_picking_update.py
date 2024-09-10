@@ -5,7 +5,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class StockPickingUpdate(models.Model):
-    _inherit = "stock.move"
+    _inherit = "stock.picking"
     
     select_validate = []
     
