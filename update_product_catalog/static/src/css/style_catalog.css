@@ -45,7 +45,7 @@
 
 .table-variants {
     float: right;
-    width: 70%;
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -54,7 +54,7 @@
     margin-bottom: 5px;
     border: none !important;
     border: transparent !important;
-    width: 30%;
+    width: 20%;
     border-collapse: collapse;
     text-align: right;
 }
