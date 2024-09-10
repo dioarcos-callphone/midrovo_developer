@@ -39,12 +39,11 @@
 }
 
 .variants {
-    float: right;
-    background-color: burlywood;
     text-align: center;
 }
 
 .table-variants {
+    float: right;
     width: 50%;
     border-collapse: collapse;
 }
