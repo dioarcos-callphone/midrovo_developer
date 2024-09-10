@@ -71,5 +71,6 @@
 }
 
 .table-variants th {
+    font-weight: 500;
     background-color: #f2f2f2;
 }
