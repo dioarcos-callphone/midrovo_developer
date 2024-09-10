@@ -84,7 +84,7 @@
                                                             <h2>Disponible:</h2>
                                                         </td>
                                                         <td>
-                                                            <h2 t-field="o.immediately_usable_qty"/>
+                                                            <h2 t-field="int(o.immediately_usable_qty)"/>
                                                         </td>
                                                     </tr>
                                                 </table>                       
