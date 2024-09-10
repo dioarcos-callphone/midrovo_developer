@@ -29,6 +29,11 @@
     border: none !important;
 }
 
+.no-border-variants td {
+    vertical-align: middle;
+    border: none !important;
+}
+
 .img-size {
     width: 220px;
     height: 220px;
@@ -62,7 +67,7 @@
 .head-no-variants {
     border: none !important;
     border: transparent !important;
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
     padding: 10px 5px !important;
 }

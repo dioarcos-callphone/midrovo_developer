@@ -70,7 +70,7 @@
                         </t>
                         <t t-else="">
                             <article class="product-article">
-                                <table class="no-border">
+                                <table class="no-border-variants">
                                     <tr>
                                         <td class="column-img">
                                             <span t-field="o.image_1920"
@@ -84,7 +84,7 @@
                                                             <h2>Disponible:</h2>
                                                         </td>
                                                         <td>
-                                                            <span t-field="o.immediately_usable_qty"/>
+                                                            <h2 t-field="o.immediately_usable_qty"/>
                                                         </td>
                                                     </tr>
                                                 </table>                       
