@@ -10,7 +10,6 @@ class ProductCategory(models.Model):
     @api.model
     def _get_data_product_variants(self):
         data = []
-        product_variants = []
         colores = []
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
@@ -26,7 +25,7 @@ class ProductCategory(models.Model):
                     colores.append(value.name)
                     
         for color in colores:
-            
+            product_variants = []
             for product in product_product:
                 values = product.product_template_variant_value_ids
                 for value in values:
