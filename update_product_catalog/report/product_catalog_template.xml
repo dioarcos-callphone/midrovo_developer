@@ -24,7 +24,7 @@
                                                 <table class="head-variants">
                                                     <tr>
                                                         <td>
-                                                            <span>Codigo:</span>
+                                                            <strong>Codigo:</strong>
                                                         </td>
                                                         <td>
                                                             <span>SKU-125478632</span>
@@ -33,7 +33,7 @@
 
                                                     <tr>
                                                         <td>
-                                                            <span>Material:</span>
+                                                            <strong>Material:</strong>
                                                         </td>
                                                         <td>
                                                             <span>Nombre prueba</span>
@@ -42,7 +42,7 @@
 
                                                     <tr>
                                                         <td>
-                                                            <span>Precio + IVA:</span>
+                                                            <strong>Precio + IVA:</strong>
                                                         </td>
                                                         <td>
                                                             <span>$25,25</span>
