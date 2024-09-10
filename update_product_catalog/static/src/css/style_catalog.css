@@ -25,7 +25,7 @@
 }
 
 .no-border td {
-    vertical-align: top;
+    vertical-align: middle;
     border: none !important;
 }
 
