@@ -10,7 +10,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['base'],
+    'depends': ['base','stock'],
     'data': [],
 
     'license': 'LGPL-3',
