@@ -21,9 +21,34 @@
                                         </td>
                                         <td class="column-variants">
                                             <div class="variants">
-                                                <p>Codigo</p>
-                                                <p>Material</p>
-                                                <p>Precio con IVA</p>
+                                                <table class="head-variants">
+                                                    <tr>
+                                                        <td>
+                                                            <span>Codigo:</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>SKU-125478632</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <span>Material:</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>Nombre prueba</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <span>Precio + IVA:</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>$25,25</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                                 <table class="table-variants">
                                                     <thead>
                                                         <tr>
