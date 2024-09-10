@@ -39,6 +39,7 @@
 }
 
 .variants {
+    float: right;
     background-color: burlywood;
     text-align: center;
 }
