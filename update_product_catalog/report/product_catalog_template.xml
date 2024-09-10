@@ -27,7 +27,7 @@
                                                             <strong>Color:</strong>
                                                         </td>
                                                         <td>
-                                                            <span t-esc="result['color']"/>
+                                                            <span t-esc="result['color'].upper()"/>
                                                         </td>
                                                     </tr>
                                                 </table>
