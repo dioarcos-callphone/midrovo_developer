@@ -65,6 +65,7 @@
 }
 
 .head-no-variants {
+    margin: auto;
     border: none !important;
     border: transparent !important;
     width: 50%;
