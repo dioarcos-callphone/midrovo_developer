@@ -13,6 +13,10 @@ class ProductCategory(models.Model):
         colores = []
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
+        
+        
+        valor_venta = self.list_price
+        valor_iva = self.tax_string
                 
         product_attributte_lines = self.env['product.template.attribute.line'].search([(
             'product_tmpl_id', '=', self.id
@@ -39,7 +43,9 @@ class ProductCategory(models.Model):
                 "color": color,
                 "img": product_variants[0].id,
                 "tallas": product_variants,
-                "disponible": suma_disponible
+                "disponible": suma_disponible,
+                "precio_venta": valor_venta,
+                "precio_iva": valor_iva 
             }
 
             data.append(product_data)
