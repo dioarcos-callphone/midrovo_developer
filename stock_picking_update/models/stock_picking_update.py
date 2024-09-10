@@ -2,7 +2,7 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
-class SockPickingUpdate(models.Model):
+class StockPickingUpdate(models.Model):
     _inherit = "stock.picking"
     
     @api.onchange('product_id')
