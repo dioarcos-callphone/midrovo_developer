@@ -24,28 +24,10 @@
                                                 <table class="head-variants">
                                                     <tr>
                                                         <td class="title-head">
-                                                            <strong>Codigo:</strong>
+                                                            <strong>Color:</strong>
                                                         </td>
                                                         <td>
-                                                            <span>SKU-125478632</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="title-head">
-                                                            <strong>Material:</strong>
-                                                        </td>
-                                                        <td>
-                                                            <span>Nombre prueba</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="title-head">
-                                                            <strong>Precio + IVA:</strong>
-                                                        </td>
-                                                        <td>
-                                                            <span>$25,25</span>
+                                                            <span t-esc="result['color']"/>
                                                         </td>
                                                     </tr>
                                                 </table>
