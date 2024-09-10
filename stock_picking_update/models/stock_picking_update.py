@@ -9,7 +9,7 @@ class StockPickingUpdate(models.Model):
     
     select_validate = []
     
-    @api.depends('product_id', 'move_ids_without_package')
+    @api.onchange('product_id', 'move_ids_without_package')
     def _onchange_(self):
         product_id = self.product_id
         
