@@ -35,12 +35,12 @@
 }
 
 .column-variants {
-    float: inline-end;
     width: 70%;
 
 }
 
 .variants {
+    background-color: chocolate;
     text-align: center;
 }
 
