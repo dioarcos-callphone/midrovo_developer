@@ -25,7 +25,7 @@
 }
 
 .no-border td {
-    vertical-align: middle;
+    vertical-align: top;
     border: none !important;
 }
 
@@ -36,7 +36,6 @@
 
 .column-variants {
     width: 70%;
-
 }
 
 .variants {
