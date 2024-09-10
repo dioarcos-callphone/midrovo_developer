@@ -32,7 +32,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td>
+                                                        <td class="title-head">
                                                             <strong>Material:</strong>
                                                         </td>
                                                         <td>
@@ -41,7 +41,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td>
+                                                        <td class="title-head">
                                                             <strong>Precio + IVA:</strong>
                                                         </td>
                                                         <td>
