@@ -46,7 +46,7 @@ class ProductCategory(models.Model):
                                 
                                 product_variants.append(product)
                                 
-                            elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
+                            elif(value.attribute_id.name.lower() == 'tallas' or value.attribute_id.name.lower() == 'talla'):
                                 suma_disponible += int(product.immediately_usable_qty)
                                 
                                 _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
