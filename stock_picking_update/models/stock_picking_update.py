@@ -5,7 +5,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class StockPickingUpdate(models.Model):
-    _inherit = "stock.picking"
+    _inherit = "stock.move"
     
     # select_validate = []
     
@@ -28,10 +28,10 @@ class StockPickingUpdate(models.Model):
     #     for line in self.move_line_ids:
     #         _logger.info(f"Línea añadida: { line.product_id.name }")
     
-    @api.onchange('move_line_ids')
+    @api.onchange('move_ids')
     def onchange_field(self):
-        move_line_ids = self.move_line_ids
-        _logger.info(f'OBTENIENDO MOVE LINES >>> { move_line_ids }')
+        move_ids = self.move_ids
+        _logger.info(f'OBTENIENDO MOVE LINES >>> { move_ids }')
     
         
         
