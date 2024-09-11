@@ -31,6 +31,8 @@ class ProductCategory(models.Model):
                 for product in product_product:
                     values = product.product_template_variant_value_ids
                     
+                    _logger.info(f'MOSTRANDO VALUES >>> { values }')
+                    
                     if(len(values) > 0):
                         for value in values:
                             val = value.name
