@@ -34,10 +34,7 @@ class ProductCategory(models.Model):
                     values = product.product_template_variant_value_ids
                     
                     if(not values):
-                        product_attributte_values = self.env['product.template.attribute.value'].search([(
-                            'product_tmpl_id', '=', self.id
-                        )])
-                        _logger.info(f'MOSTRANDO PRODUCT ATTRIBUTE LINES { product_attributte_values }')
+                        _logger.info(f'MOSTRANDO PRODUCT ATTRIBUTE LINES { product_attributte_lines.name }')
                     
                     if(len(values) > 1):
                         for value in values:
