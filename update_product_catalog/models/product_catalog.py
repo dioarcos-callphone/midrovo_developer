@@ -36,7 +36,7 @@ class ProductCategory(models.Model):
                 for product in product_product:
                     values = product.product_template_variant_value_ids
                     
-                    if(values and len(values) > 1):
+                    if(values):
                         for value in values:
                             val = value.name
                             if(color == val):
@@ -46,12 +46,12 @@ class ProductCategory(models.Model):
                                 
                                 product_variants.append(product)
                                 
-                            elif(value.attribute_id.name.lower() == 'tallas' or value.attribute_id.name.lower() == 'talla'):
-                                suma_disponible += int(product.immediately_usable_qty)
+                            # elif(value.attribute_id.name.lower() == 'tallas' or value.attribute_id.name.lower() == 'talla'):
+                            #     suma_disponible += int(product.immediately_usable_qty)
                                 
-                                _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
+                            #     _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
                                 
-                                product_variants.append(product)
+                            #     product_variants.append(product)
                                 
                     else:
                         suma_disponible += int(product.immediately_usable_qty)
