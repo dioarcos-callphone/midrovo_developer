@@ -11,7 +11,7 @@ class ProductCategory(models.Model):
     def _get_data_product_variants(self):
         data = []
         colores = []
-        talla = ''
+        talla = []
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
         
@@ -28,7 +28,7 @@ class ProductCategory(models.Model):
                         
                 if(color.lower() == 'talla' or color.lower() == 'tallas'):
                     for value in product_line.value_ids:
-                        talla = value.name
+                        talla.append(value.name)
             
             for color in colores:
                 suma_disponible = 0

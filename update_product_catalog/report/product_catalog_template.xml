@@ -46,15 +46,20 @@
                                                                             </t>
                                                                         </t>
                                                                         <t t-else="">
-                                                                            <th>
-                                                                                <span t-esc="result['talla_unica']"/>
-                                                                            </th>
+                                                                            <t t-foreach="result['talla_unica']" t-as="t">
+                                                                                <th>
+                                                                                    <span t-esc="t"/>
+                                                                                </th>
+                                                                            </t>
+                                                                            
                                                                         </t>
                                                                     </t>
                                                                     <t t-else="">
-                                                                        <th>
-                                                                            <span t-esc="result['talla_unica']"/>
-                                                                        </th>
+                                                                        <t t-foreach="result['talla_unica']" t-as="t">
+                                                                            <th>
+                                                                                <span t-esc="t"/>
+                                                                            </th>
+                                                                        </t>
                                                                     </t>
                                                                     
                                                                 </t>
