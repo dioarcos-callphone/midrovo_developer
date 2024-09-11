@@ -28,10 +28,11 @@ class StockPickingUpdate(models.Model):
     #     for line in self.move_line_ids:
     #         _logger.info(f"Línea añadida: { line.product_id.name }")
     
-    @api.onchange('move_ids')
+    @api.onchange('move_ids_without_package')
     def onchange_field(self):
-        move_ids = self.move_ids
+        move_ids = self.move_ids_without_package
         _logger.info(f'OBTENIENDO MOVE LINES >>> { move_ids }')
+        
     
         
         
