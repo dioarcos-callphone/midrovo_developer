@@ -1,6 +1,6 @@
 from odoo import models, fields, api
-import logging
-_logger = logging.getLogger(__name__)
+# import logging
+# _logger = logging.getLogger(__name__)
 
 
 
@@ -43,8 +43,6 @@ class ProductCategory(models.Model):
                                 if(color == val):
                                     suma_disponible += int(product.immediately_usable_qty)
                                     
-                                    _logger.info(f'ENTRA AQUI CUANDO ES COLOR >>> { product }')
-                                    
                                     product_variants.append(product)
                                     
                         else:
@@ -52,14 +50,10 @@ class ProductCategory(models.Model):
                             if(color == val):
                                 suma_disponible += int(product.immediately_usable_qty)
                                 
-                                _logger.info(f'ENTRA AQUI CUANDO ES COLOR >>> { product }')
-                                
                                 product_variants.append(product)
                                 
                             elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
                                 suma_disponible += int(product.immediately_usable_qty)
-                                
-                                _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
                                 
                                 product_variants.append(product)
                                 
