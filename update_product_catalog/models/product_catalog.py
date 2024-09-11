@@ -29,6 +29,12 @@ class ProductCategory(models.Model):
                 if(color.lower() == 'talla' or color.lower() == 'tallas'):
                     for value in product_line.value_ids:
                         talla.append(value.name)
+                        
+            if not colores:
+                return None 
+            
+            if not talla:
+                return None           
             
             for color in colores:
                 suma_disponible = 0
