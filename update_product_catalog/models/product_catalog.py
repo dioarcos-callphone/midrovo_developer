@@ -14,8 +14,6 @@ class ProductCategory(models.Model):
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
         
-        _logger.info(f'MOSTRANDO PRODUCTOS >>> { product_product }')
-        
         if product_product and len(product_product) > 1:        
             product_attributte_lines = self.env['product.template.attribute.line'].search([(
                 'product_tmpl_id', '=', self.id
@@ -28,6 +26,7 @@ class ProductCategory(models.Model):
                         colores.append(value.name)
                         
             for color in colores:
+                _logger.info(f'MOSTRANDO COLOR >>> { color }')
                 suma_disponible = 0
                 product_variants = []
                 for product in product_product:
@@ -38,7 +37,6 @@ class ProductCategory(models.Model):
                             val = value.name
                             if(color == val):
                                 suma_disponible += int(product.immediately_usable_qty)
-                                _logger.info('ENTRA AQUI')
                                 product_variants.append(product)
                                 
                     else:
