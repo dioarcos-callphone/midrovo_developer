@@ -12,8 +12,6 @@ class ProductCategory(models.Model):
         data = []
         colores = []
         talla = []
-        
-        _logger.info('ENTRA EN ESTA FUNCION')
 
         product_product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
         
