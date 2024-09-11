@@ -42,6 +42,13 @@
                                                                                     <span t-esc="variant_value.name"/>
                                                                                 </th>
                                                                             </t>
+                                                                            <t t-if="len(result['talla_unica']) == 1">
+                                                                                <t t-foreach="result['talla_unica']" t-as="t">
+                                                                                    <th>
+                                                                                        <span t-esc="t"/>
+                                                                                    </th>
+                                                                                </t>
+                                                                            </t>
                                                                         </t>
                                                                     </t>
                                                                     <t t-else="">
