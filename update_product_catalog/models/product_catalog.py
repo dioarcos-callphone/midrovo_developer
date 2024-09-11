@@ -49,6 +49,7 @@ class ProductCategory(models.Model):
                                 product_variants.append(product)
                                 
                     else:
+                        suma_disponible += int(product.immediately_usable_qty)
                         product_variants.append(product)
 
                 product_data = {
