@@ -42,6 +42,12 @@
                                                                                     <span t-esc="variant_value.name"/>
                                                                                 </th>
                                                                             </t>
+
+                                                                            <t t-elif="variant_value.attribute_id.name.lower() != 'tallas' or variant_value.attribute_id.name.lower() != 'talla' and variant_value.attribute_id.name.lower() != 'colores' or variant_value.attribute_id.name.lower() != 'color'">
+                                                                                <th>
+                                                                                    <span t-esc="variant_value.name"/>
+                                                                                </th>
+                                                                            </t>
                                                                         </t>
                                                                     </t>
                                                                     <t t-else="">
