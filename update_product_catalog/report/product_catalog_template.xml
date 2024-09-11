@@ -42,6 +42,11 @@
                                                                                     <span t-esc="variant_value.name or result['talla_unica']"/>
                                                                                 </th>
                                                                             </t>
+                                                                            <t t-else="">
+                                                                                <th>
+                                                                                    <span t-esc="result['talla_unica']"/>
+                                                                                </th>
+                                                                            </t>
                                                                         </t>
                                                                     </t>
                                                                     <t t-else="">
