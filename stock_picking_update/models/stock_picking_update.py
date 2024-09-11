@@ -21,12 +21,18 @@ class StockPickingUpdate(models.Model):
             
     #         self.select_validate.append(product_id)
             
-    def action_confirm(self):
-        super(StockPickingUpdate, self).action_confirm()
+    # def action_confirm(self):
+    #     super(StockPickingUpdate, self).action_confirm()
 
-        # Acceder a las líneas que se han añadido en el campo move_line_ids
-        for line in self.move_line_ids:
-            _logger.info(f"Línea añadida: { line.product_id.name }")
+    #     # Acceder a las líneas que se han añadido en el campo move_line_ids
+    #     for line in self.move_line_ids:
+    #         _logger.info(f"Línea añadida: { line.product_id.name }")
+    
+    @api.onchange('move_line_ids')
+    def onchange_field(self):
+        move_line_ids = self.move_line_ids
+        _logger.info(f'OBTENIENDO MOVE LINES >>> { move_line_ids }')
+    
         
         
                 
