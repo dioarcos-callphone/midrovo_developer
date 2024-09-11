@@ -42,11 +42,6 @@
                                                                                     <span t-esc="variant_value.name"/>
                                                                                 </th>
                                                                             </t>
-                                                                            <t t-else="variant_value.attribute_id.name.lower() != 'color' or variant_value.attribute_id.name.lower() != 'colores'">
-                                                                                <th>
-                                                                                    <span t-esc="result['talla_unica']"/>
-                                                                                </th>
-                                                                            </t>
                                                                         </t>
                                                                     </t>
                                                                     <t t-else="">
