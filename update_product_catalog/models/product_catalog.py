@@ -30,9 +30,16 @@ class ProductCategory(models.Model):
                 product_variants = []
                 for product in product_product:
                     values = product.product_template_variant_value_ids
-                    for value in values:
-                        val = value.name
-                        if(color == val):
+                    
+                    if(values > 1):
+                        for value in values:
+                            val = value.name
+                            if(color == val):
+                                suma_disponible += int(product.immediately_usable_qty)
+                                product_variants.append(product)
+                                
+                    else:
+                        if(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
                             suma_disponible += int(product.immediately_usable_qty)
                             product_variants.append(product)
 
