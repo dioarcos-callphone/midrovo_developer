@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 class StockPickingUpdate(models.Model):
     _inherit = "stock.move"
     
-    @api.onchange('product_id','move_ids_without_package')
+    @api.onchange('product_id')
     def onchange_field(self):
         product_id = self.product_id
         move_ids = self.move_ids_without_package
