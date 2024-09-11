@@ -34,6 +34,9 @@ class ProductCategory(models.Model):
                     values = product.product_template_variant_value_ids
                     _logger.info(f'MOSTRANDO VALUES >>> { values }')
                     
+                    if(not values):
+                        _logger.info(f'MOSTRANDO PRODUCT ATTRIBUTE LINES { product_attributte_lines }')
+                    
                     if(len(values) > 1):
                         for value in values:
                             val = value.name
