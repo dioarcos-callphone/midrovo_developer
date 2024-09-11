@@ -31,7 +31,7 @@ class ProductCategory(models.Model):
                 for product in product_product:
                     values = product.product_template_variant_value_ids
                     
-                    if(values > 1):
+                    if(len(values) > 1):
                         for value in values:
                             val = value.name
                             if(color == val):
