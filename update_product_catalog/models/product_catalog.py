@@ -37,9 +37,18 @@ class ProductCategory(models.Model):
                     values = product.product_template_variant_value_ids
                     
                     if(values):
-                        _logger.info(f'MOSTRAR VALUES LONG { len(values) }')
-                        for value in values:
-                            val = value.name
+                        if(len(values) > 1):
+                            for value in values:
+                                val = value.name
+                                if(color == val):
+                                    suma_disponible += int(product.immediately_usable_qty)
+                                    
+                                    _logger.info(f'ENTRA AQUI CUANDO ES COLOR >>> { product }')
+                                    
+                                    product_variants.append(product)
+                                    
+                        else:
+                            val = values.name
                             if(color == val):
                                 suma_disponible += int(product.immediately_usable_qty)
                                 
@@ -47,12 +56,12 @@ class ProductCategory(models.Model):
                                 
                                 product_variants.append(product)
                                 
-                            # elif(value.attribute_id.name.lower() == 'tallas' or value.attribute_id.name.lower() == 'talla'):
-                            #     suma_disponible += int(product.immediately_usable_qty)
+                            elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
+                                suma_disponible += int(product.immediately_usable_qty)
                                 
-                            #     _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
+                                _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
                                 
-                            #     product_variants.append(product)
+                                product_variants.append(product)
                                 
                     else:
                         suma_disponible += int(product.immediately_usable_qty)
