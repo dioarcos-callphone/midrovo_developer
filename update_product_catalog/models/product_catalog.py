@@ -38,6 +38,7 @@ class ProductCategory(models.Model):
                             val = value.name
                             if(color == val):
                                 suma_disponible += int(product.immediately_usable_qty)
+                                _logger.info('ENTRA AQUI')
                                 product_variants.append(product)
                                 
                     else:
