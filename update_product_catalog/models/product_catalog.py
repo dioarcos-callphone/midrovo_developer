@@ -32,7 +32,7 @@ class ProductCategory(models.Model):
                 product_variants = []
                 for product in product_product:
                     values = product.product_template_variant_value_ids
-                    _logger.info(f'MOSTRANDO VALUES { product_attributte_lines.values_id }')
+                    _logger.info(f'MOSTRANDO VALUES { product_attributte_lines.value_id }')
                     if(len(values) > 0):
                         for value in values:
                             val = value.name
