@@ -31,8 +31,6 @@ class ProductCategory(models.Model):
                 for product in product_product:
                     values = product.product_template_variant_value_ids
                     
-                    _logger.info(f'MOSTRANDO VALUES >>> { values }')
-                    
                     if(values):
                         for value in values:
                             val = value.name
@@ -50,8 +48,8 @@ class ProductCategory(models.Model):
                                 
                                 product_variants.append(product)
                                 
-                        else:
-                            product_variants.append(product)
+                    else:
+                        product_variants.append(product)
 
                 product_data = {
                     "color": color,
