@@ -7,6 +7,14 @@ _logger = logging.getLogger(__name__)
 class StockPickingUpdate(models.Model):
     _inherit = "stock.move"
     
+    @api.onchange('product_id','move_ids_without_package')
+    def onchange_field(self):
+        product_id = self.product_id
+        move_ids = self.move_ids_without_package
+        _logger.info(f'OBTENIENDO MOVE LINES >>> { move_ids }')
+        _logger.info(f'OBTENIENDO PRODUCT ID >>> { product_id }')
+        
+        
     # select_validate = []
     
     # @api.onchange('product_id')
@@ -27,13 +35,6 @@ class StockPickingUpdate(models.Model):
     #     # Acceder a las líneas que se han añadido en el campo move_line_ids
     #     for line in self.move_line_ids:
     #         _logger.info(f"Línea añadida: { line.product_id.name }")
-    
-    @api.onchange('product_id','move_ids_without_package')
-    def onchange_field(self):
-        product_id = self.product_id
-        move_ids = self.move_ids_without_package
-        _logger.info(f'OBTENIENDO MOVE LINES >>> { move_ids }')
-        _logger.info(f'OBTENIENDO PRODUCT ID >>> { product_id }')
         
     
         
