@@ -16,7 +16,7 @@ class ProductCategory(models.Model):
         
         _logger.info(f'MOSTRANDO PRODUCTOS >>> { product_product }')
         
-        if product_product:        
+        if product_product and len(product_product) > 1:        
             product_attributte_lines = self.env['product.template.attribute.line'].search([(
                 'product_tmpl_id', '=', self.id
             )])
