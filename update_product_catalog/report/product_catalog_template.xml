@@ -36,14 +36,16 @@
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
                                                                     <t t-if="talla.product_template_variant_value_ids">
-                                                                        <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
-                                                                            <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
-                                                                                <th>
-                                                                                    <span t-esc="variant_value.name"/>
-                                                                                </th>
+                                                                        <t t-if="len(talla.product_template_variant_value_ids) > 1">
+                                                                            <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
+                                                                                <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
+                                                                                    <th>
+                                                                                        <span t-esc="variant_value.name"/>
+                                                                                    </th>
+                                                                                </t>
                                                                             </t>
                                                                         </t>
-                                                                        <t t-else="len(talla.product_template_variant_value_ids) == 1">
+                                                                        <t t-else="">
                                                                             <th>
                                                                                 <span t-esc="result['talla_unica']"/>
                                                                             </th>
