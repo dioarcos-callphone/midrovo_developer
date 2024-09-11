@@ -47,6 +47,10 @@ class ProductCategory(models.Model):
                                     
                                     product_variants.append(product)
                                     
+                                if(color.lower() == 'talla' or color.lower() == 'tallas'):
+                                    for value in product_line.value_ids:
+                                        talla = value.name
+                                    
                         else:
                             val = values.name
                             if(color == val):

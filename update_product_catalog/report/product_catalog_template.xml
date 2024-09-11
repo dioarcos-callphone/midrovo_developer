@@ -39,7 +39,7 @@
                                                                         <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
                                                                             <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
                                                                                 <th>
-                                                                                    <span t-esc="variant_value.name"/>
+                                                                                    <span t-esc="variant_value.name or result['talla_unica']"/>
                                                                                 </th>
                                                                             </t>
                                                                         </t>
