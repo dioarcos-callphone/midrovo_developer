@@ -25,8 +25,9 @@ class ProductCategory(models.Model):
                     for value in product_line.value_ids:
                         colores.append(value.name)
                         
+            _logger.info(colores)
+            
             for color in colores:
-                _logger.info(f'MOSTRANDO COLOR >>> { color }')
                 suma_disponible = 0
                 product_variants = []
                 for product in product_product:
