@@ -49,6 +49,9 @@ class ProductCategory(models.Model):
                                 _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
                                 
                                 product_variants.append(product)
+                                
+                        else:
+                            product_variants.append(product)
 
                 product_data = {
                     "color": color,
