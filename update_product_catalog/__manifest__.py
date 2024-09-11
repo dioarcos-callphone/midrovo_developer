@@ -16,8 +16,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'amf_product_catalog', 'sale', ],
     'data': [
-        'report/product_catalog_template.xml',
-        'report/product_catalog_report.xml'   
+        'report/product_catalog_template.xml', 
     ],
     
     'assets': {
