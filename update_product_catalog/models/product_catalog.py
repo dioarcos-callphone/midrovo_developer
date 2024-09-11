@@ -37,6 +37,7 @@ class ProductCategory(models.Model):
                     values = product.product_template_variant_value_ids
                     
                     if(values):
+                        _logger.info(f'MOSTRAR VALUES LONG { len(values) }')
                         for value in values:
                             val = value.name
                             if(color == val):
