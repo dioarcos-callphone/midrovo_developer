@@ -45,7 +45,7 @@ class ProductCategory(models.Model):
 
                 product_data = {
                     "color": color,
-                    "img": product_variants[0].id if product_variants else None,
+                    "img": product_variants[0].id,
                     "tallas": product_variants,
                     "disponible": suma_disponible,
                 }
