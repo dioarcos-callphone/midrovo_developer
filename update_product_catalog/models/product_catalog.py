@@ -33,7 +33,7 @@ class ProductCategory(models.Model):
                     
                     _logger.info(f'MOSTRANDO VALUES >>> { values }')
                     
-                    if(len(values) > 0):
+                    if(values):
                         for value in values:
                             val = value.name
                             if(color == val):
@@ -43,13 +43,12 @@ class ProductCategory(models.Model):
                                 
                                 product_variants.append(product)
                                 
-                    else:
-                        if(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
-                            suma_disponible += int(product.immediately_usable_qty)
-                            
-                            _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
-                            
-                            product_variants.append(product)
+                            elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
+                                suma_disponible += int(product.immediately_usable_qty)
+                                
+                                _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
+                                
+                                product_variants.append(product)
 
                 product_data = {
                     "color": color,
