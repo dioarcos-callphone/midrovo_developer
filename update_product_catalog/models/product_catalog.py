@@ -38,11 +38,17 @@ class ProductCategory(models.Model):
                             val = value.name
                             if(color == val):
                                 suma_disponible += int(product.immediately_usable_qty)
+                                
+                                _logger.info(f'ENTRA AQUI CUANDO ES COLOR >>> { product }')
+                                
                                 product_variants.append(product)
                                 
                     else:
                         if(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
                             suma_disponible += int(product.immediately_usable_qty)
+                            
+                            _logger.info(f'ENTRA AQUI CUANDO ES TALLA >>> { product }')
+                            
                             product_variants.append(product)
 
                 product_data = {
