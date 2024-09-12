@@ -14,7 +14,7 @@
     'depends': [ 'base', 'sale_management' ],
     'data': [
         'reports/product_catalog_report.xml',
-        'product_catalog_template.xml'
+        'report/product_catalog_template.xml'
     ],
     
     'license': 'LGPL-3',
