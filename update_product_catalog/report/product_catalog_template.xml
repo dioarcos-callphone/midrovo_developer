@@ -90,10 +90,10 @@
                             <article class="product-article">
                                 <table class="no-border-variants" style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
                                     <tr>
-                                        <td class="column-img" style="vertical-align: middle; border: none !important;">
+                                        <!-- <td class="column-img" style="vertical-align: middle; border: none !important;">
                                             <span t-field="o.image_1920"
                                                     t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
-                                        </td>
+                                        </td> -->
                                         <td class="column-variants" style="vertical-align: middle; border: none !important;">
                                             <div class="no-variants" style="text-align: center;">
                                                 <table class="head-no-variants" style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
