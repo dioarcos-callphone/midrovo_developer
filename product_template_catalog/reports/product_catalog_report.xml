@@ -7,7 +7,6 @@
         <field name="report_name">product_template_catalog.product_catalog_report_template_badge</field>
         <field name="report_file">product_template_catalog.product_catalog_report_template_badge</field>
         <field name="print_report_name">'Product_Catalog_Report'</field>
-        <field name="paperformat_id" ref="product_template_catalog.paperformat_euro_lowmargin"/>
         <field name="binding_model_id" ref="sale.model_product_template"/>
         <field name="binding_type">report</field>
     </record>
