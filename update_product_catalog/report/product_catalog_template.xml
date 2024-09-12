@@ -5,25 +5,25 @@
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
                     <div class="page" style="margin: 0 !important; padding: 0 !important;">
-                        <header class="title" style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
+                        <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                             <div>
                                 <h3 t-field="o.name"/>
                             </div>
                         </header>
                         <t t-if="o._get_data_product_variants()">
                             <t t-foreach="o._get_data_product_variants()" t-as="result">
-                                <article class="product-article" style="margin: 10px 0 !important; padding: 10px 7px !important;">
-                                    <table class="no-border" style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
+                                <article style="margin: 10px 0 !important; padding: 10px 7px !important;">
+                                    <table style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
                                         <tr>
-                                            <td class="column-img" style="vertical-align: top; border: none !important;">
+                                            <td style="vertical-align: top; border: none !important;">
                                                 <span t-field="env['product.product'].search([('id','=',result['img'])]).image_128"
                                                         t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                             </td>
-                                            <td class="column-variants" style="vertical-align: top; border: none !important; width: 70%;">
-                                                <div class="variants" style="text-align: center;">
-                                                    <table class="head-variants" style="float: right; margin-bottom: 5px; border: none !important; border: transparent !important; width: 40%; border-collapse: collapse; text-align: right; padding: 10px 5px !important;">
+                                            <td style="vertical-align: top; border: none !important; width: 70%;">
+                                                <div style="text-align: center;">
+                                                    <table style="float: right; margin-bottom: 5px; border: none !important; border: transparent !important; width: 40%; border-collapse: collapse; text-align: right; padding: 10px 5px !important;">
                                                         <tr>
-                                                            <td class="title-head" style="vertical-align: top; border: none !important;">
+                                                            <td style="vertical-align: top; border: none !important;">
                                                                 <strong>Color:</strong>
                                                             </td>
                                                             <td style="vertical-align: top; border: none !important;">
@@ -31,7 +31,7 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="table-variants" style="float: right; width: 80%; border-collapse: collapse;">
+                                                    <table style="float: right; width: 80%; border-collapse: collapse;">
                                                         <thead style="border: 1px solid #2196f3 !important;">
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
@@ -87,18 +87,18 @@
                             </t>
                         </t>
                         <t t-else="">
-                            <article class="product-article">
-                                <table class="no-border-variants" style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
+                            <article>
+                                <table style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
                                     <tr>
                                         <!-- <td class="column-img" style="vertical-align: middle; border: none !important;">
                                             <span t-field="o.image_1920"
                                                     t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                         </td> -->
-                                        <td class="column-variants" style="vertical-align: middle; border: none !important;">
-                                            <div class="no-variants" style="text-align: center;">
-                                                <table class="head-no-variants" style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
+                                        <td style="vertical-align: middle; border: none !important;">
+                                            <div style="text-align: center;">
+                                                <table style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
                                                     <tr>
-                                                        <td class="title-head" style="vertical-align: middle; border: none !important;">
+                                                        <td style="vertical-align: middle; border: none !important;">
                                                             <h2>Disponible:</h2>
                                                         </td>
                                                         <td style="vertical-align: middle; border: none !important;">
