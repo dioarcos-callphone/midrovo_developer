@@ -2,6 +2,95 @@
 <odoo>
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <style>
+                .page {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                .title {
+                    margin: 0 !important;
+                    padding-bottom: 5px !important;
+                    text-align: center;
+                }
+
+                .product-article {
+                    margin: 10px 0 !important;
+                    padding: 10px 7px !important;
+                }
+
+                .no-border, .no-border-variants {
+                    border: none !important;
+                    border: transparent !important;
+                    border-collapse: collapse;
+                    width: 100%;
+                    height: 50%;
+                }
+
+                .no-border td {
+                    vertical-align: top;
+                    border: none !important;
+                }
+
+                .no-border-variants td {
+                    vertical-align: middle;
+                    border: none !important;
+                }
+
+                .img-size {
+                    width: 220px;
+                    height: 220px;
+                }
+
+                .column-variants {
+                    width: 70%;
+                }
+
+                .variants, .no-variants {
+                    text-align: center;
+                }
+
+                .table-variants {
+                    float: right;
+                    width: 80%;
+                    border-collapse: collapse;
+                }
+
+                .head-variants {
+                    float: right;
+                    margin-bottom: 5px;
+                    border: none !important;
+                    border: transparent !important;
+                    width: 40%;
+                    border-collapse: collapse;
+                    text-align: right;
+                    padding: 10px 5px !important;
+                }
+
+                .head-no-variants {
+                    margin: auto;
+                    border: none !important;
+                    border: transparent !important;
+                    width: 50%;
+                    border-collapse: collapse;
+                    padding: 10px 5px !important;
+                }
+
+                .table-variants thead {
+                    border: 1px solid #2196f3 !important;
+                }
+
+                .table-variants th, .table-variants td {
+                    border: 1px solid #2196f3 !important;
+                    padding: 8px !important;
+                    /* text-align: right; */
+                }
+
+                .table-variants th {
+                    font-weight: 500;
+                    background-color: #f2f2f2;
+                }
+            </style>
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
                     <div class="page">
