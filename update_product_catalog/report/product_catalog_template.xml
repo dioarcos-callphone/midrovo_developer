@@ -19,14 +19,14 @@
                                                 <span t-field="env['product.product'].search([('id','=',result['img'])]).image_128"
                                                         t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                             </td>
-                                            <td class="column-variants" style="width: 70%;">
+                                            <td class="column-variants" style="vertical-align: top; border: none !important; width: 70%;">
                                                 <div class="variants" style="text-align: center;">
                                                     <table class="head-variants" style="float: right; margin-bottom: 5px; border: none !important; border: transparent !important; width: 40%; border-collapse: collapse; text-align: right; padding: 10px 5px !important;">
                                                         <tr>
-                                                            <td class="title-head">
+                                                            <td class="title-head" style="vertical-align: top; border: none !important;">
                                                                 <strong>Color:</strong>
                                                             </td>
-                                                            <td>
+                                                            <td style="vertical-align: top; border: none !important;">
                                                                 <span t-esc="result['color'].upper()"/>
                                                             </td>
                                                         </tr>
@@ -94,14 +94,14 @@
                                             <span t-field="o.image_1920"
                                                     t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                         </td>
-                                        <td class="column-variants">
+                                        <td class="column-variants" style="vertical-align: middle; border: none !important;">
                                             <div class="no-variants" style="text-align: center;">
                                                 <table class="head-no-variants" style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
                                                     <tr>
-                                                        <td class="title-head">
+                                                        <td class="title-head" style="vertical-align: middle; border: none !important;">
                                                             <h2>Disponible:</h2>
                                                         </td>
-                                                        <td>
+                                                        <td style="vertical-align: middle; border: none !important;">
                                                             <h2 t-esc="int(o.immediately_usable_qty)"/>
                                                         </td>
                                                     </tr>
