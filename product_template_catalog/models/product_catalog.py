@@ -16,10 +16,16 @@ class ProductTemplateCatalog(models.Model):
         
         for variant in product_variants:
             _logger.info('YYYY MOSTRANDO VALOR YYYY')
-            _logger.info(variant.get('name'))
-            _logger.info(variant.get('product_template_variant_value_ids'))
-            _logger.info(variant.get('qty_available'))
-            _logger.info(variant.get('immediately_usable_qty'))
+            
+            name = variant.get('name')
+            variant_values = variant.get('product_template_variant_value_ids')
+            qty_available = variant.get('qty_available')
+            immediately_usable = variant.get('immediately_usable_qty')
+            
+            _logger.info(f'Nombre del producto: { name }')
+            _logger.info(f'Variantes: { variant_values }')
+            _logger.info(f'Cantidad en mano: { qty_available }')
+            _logger.info(f'Cantidad inmediata: { immediately_usable }')
         
         # _logger.info('YYYY MOSTRANDO VALOR YYYY')
         # _logger.info(product_variants)
