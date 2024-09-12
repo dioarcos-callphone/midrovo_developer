@@ -13,4 +13,6 @@ class ProductTemplateCatalog(models.Model):
         _logger.info('YYYY MOSTRANDO VALOR YYYY')
         _logger.info(product_tmpl_attribute_lines)
         
-        return self.name
+        name = self.name
+        
+        return name
