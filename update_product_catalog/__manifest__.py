@@ -26,7 +26,7 @@
     #     'web.report_assets_pdf': [
     #         'update_product_catalog/static/src/css/style_catalog_pdf.css',
     #     ],
-    },
+    # },
     
     'license': 'LGPL-3',
     'installable': True,
