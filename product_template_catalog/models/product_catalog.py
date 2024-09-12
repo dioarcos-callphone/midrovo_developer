@@ -10,7 +10,7 @@ class ProductTemplateCatalog(models.Model):
     def product_catalog_group_by_dinamic(self):
         product_variants = self.env['product.product'].read_group(
             [( 'product_tmpl_id', '=', self.id )],
-            [ 'name', 'product_template_variant_value_ids', 'qty_available', 'immediately_usable_qty' ],
+            [ 'product_tmpl_id', 'name', 'product_template_variant_value_ids', 'qty_available', 'immediately_usable_qty' ],
             [ 'product_tmpl_id' ]
         )
         
