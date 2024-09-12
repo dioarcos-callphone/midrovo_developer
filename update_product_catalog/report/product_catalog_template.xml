@@ -10,6 +10,7 @@
                                 <h3 t-field="o.name"/>
                             </div>
                         </header>
+                        
                         <t t-if="o._get_data_product_variants()">
                             <t t-foreach="o._get_data_product_variants()" t-as="result">
                                 <article class="product-article" style="margin: 10px 0 !important; padding: 10px 7px !important;">
