@@ -16,7 +16,7 @@ class ProductTemplateCatalog(models.Model):
         
         for variant in product_variants:
             _logger.info('YYYY MOSTRANDO VALOR YYYY')
-            _logger.info(variant)
+            _logger.info(variant.name)
         
         # _logger.info('YYYY MOSTRANDO VALOR YYYY')
         # _logger.info(product_variants)
