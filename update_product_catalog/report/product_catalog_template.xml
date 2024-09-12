@@ -4,24 +4,24 @@
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
-                    <div class="page">
-                        <header class="title">
+                    <div class="page" style="margin: 0 !important; padding: 0 !important;">
+                        <header class="title" style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                             <div>
                                 <h3 t-field="o.name"/>
                             </div>
                         </header>
                         <t t-if="o._get_data_product_variants()">
                             <t t-foreach="o._get_data_product_variants()" t-as="result">
-                                <article class="product-article">
-                                    <table class="no-border">
+                                <article class="product-article" style="margin: 10px 0 !important; padding: 10px 7px !important;">
+                                    <table class="no-border" style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
                                         <tr>
-                                            <td class="column-img">
+                                            <td class="column-img" style="vertical-align: top; border: none !important;">
                                                 <span t-field="env['product.product'].search([('id','=',result['img'])]).image_128"
-                                                        t-options='{"widget": "image", "class": "img-size" }'></span>
+                                                        t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                             </td>
-                                            <td class="column-variants">
-                                                <div class="variants">
-                                                    <table class="head-variants">
+                                            <td class="column-variants" style="width: 70%;">
+                                                <div class="variants" style="text-align: center;">
+                                                    <table class="head-variants" style="float: right; margin-bottom: 5px; border: none !important; border: transparent !important; width: 40%; border-collapse: collapse; text-align: right; padding: 10px 5px !important;">
                                                         <tr>
                                                             <td class="title-head">
                                                                 <strong>Color:</strong>
@@ -31,20 +31,20 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="table-variants">
-                                                        <thead>
+                                                    <table class="table-variants" class="float: right; width: 80%; border-collapse: collapse;">
+                                                        <thead style="border: 1px solid #2196f3 !important;">
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
                                                                     <t t-if="talla.product_template_variant_value_ids">
                                                                         <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
                                                                             <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
-                                                                                <th>
+                                                                                <th style="border: 1px solid #2196f3 !important; padding: 8px !important;">
                                                                                     <span t-esc="variant_value.name"/>
                                                                                 </th>
                                                                             </t>
                                                                             <t t-if="len(result['talla_unica']) == 1">
                                                                                 <t t-foreach="result['talla_unica']" t-as="t">
-                                                                                    <th>
+                                                                                    <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
                                                                                         <span t-esc="t"/>
                                                                                     </th>
                                                                                 </t>
@@ -53,14 +53,14 @@
                                                                     </t>
                                                                     <t t-else="">
                                                                         <t t-foreach="result['talla_unica']" t-as="t">
-                                                                            <th>
+                                                                            <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
                                                                                 <span t-esc="t"/>
                                                                             </th>
                                                                         </t>
                                                                     </t>
                                                                     
                                                                 </t>
-                                                                <th>
+                                                                <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
                                                                     <span>Pares</span>
                                                                 </th>
                                                             </tr>
@@ -69,13 +69,14 @@
                                                         <tbody>
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
-                                                                    <td>
+                                                                    <td style="border: 1px solid #2196f3 !important; padding: 8px !important;">
                                                                         <span t-esc="int(talla.immediately_usable_qty)"/>
                                                                     </td>
                                                                 </t>
-                                                                <td>
+                                                                <td style="border: 1px solid #2196f3 !important; padding: 8px !important;">
                                                                     <span t-esc="result['disponible']"/>
-                                                                </td>                                                        </tr>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>                        
                                                 </div> 
@@ -87,15 +88,15 @@
                         </t>
                         <t t-else="">
                             <article class="product-article">
-                                <table class="no-border-variants">
+                                <table class="no-border-variants" style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
                                     <tr>
-                                        <td class="column-img">
+                                        <td class="column-img" style="vertical-align: middle; border: none !important;">
                                             <span t-field="o.image_1920"
                                                     t-options='{"widget": "image", "class": "img-size" }'></span>
                                         </td>
                                         <td class="column-variants">
-                                            <div class="no-variants">
-                                                <table class="head-no-variants">
+                                            <div class="no-variants" style="text-align: center;">
+                                                <table class="head-no-variants" style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
                                                     <tr>
                                                         <td class="title-head">
                                                             <h2>Disponible:</h2>

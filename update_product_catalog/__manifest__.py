@@ -19,12 +19,6 @@
         'report/product_catalog_template.xml', 
     ],
     
-    'assets': {
-        'web.report_assets_common': [
-            'update_product_catalog/static/src/css/style_catalog.css',
-        ]
-    },
-    
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
