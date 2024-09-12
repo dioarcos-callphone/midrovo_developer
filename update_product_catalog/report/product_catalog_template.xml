@@ -31,7 +31,7 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="table-variants" class="float: right; width: 80%; border-collapse: collapse;">
+                                                    <table class="table-variants" style="float: right; width: 80%; border-collapse: collapse;">
                                                         <thead style="border: 1px solid #2196f3 !important;">
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
@@ -92,7 +92,7 @@
                                     <tr>
                                         <td class="column-img" style="vertical-align: middle; border: none !important;">
                                             <span t-field="o.image_1920"
-                                                    t-options='{"widget": "image", "class": "img-size" }'></span>
+                                                    t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
                                         </td>
                                         <td class="column-variants">
                                             <div class="no-variants" style="text-align: center;">
