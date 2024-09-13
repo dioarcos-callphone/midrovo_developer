@@ -59,11 +59,11 @@ class ProductTemplateCatalog(models.Model):
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids', 'in', variant_values)
+                    # ('product_template_variant_value_ids', 'in', variant_values)
             ])
             
             for p in products:
-                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p }')
+                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
         return 'prueba'
 
