@@ -61,18 +61,12 @@ class ProductTemplateCatalog(models.Model):
                 
                 _logger.info(f'VALUES >>> { values.product_attribute_value_id }')
                 
-                # attribute = variant_values.attribute_id.name
                 
-                # if attribute in [ 'tallas', 'color' ]:
-                #     formatted_variants.append({
-                #         'variante': variant_values.attribute_id.name,
-                #         'count': variant['__count'],
-                #     })
-                
-                formatted_variants.append({
-                    'variante': values.id,
-                    'count': variant['__count'],
-                })
+                if values.product_attribute_value_id.id in variant_values:
+                    formatted_variants.append({
+                        'variante': values.id,
+                        'count': variant['__count'],
+                    })
             
             _logger.info(formatted_variants)
         
