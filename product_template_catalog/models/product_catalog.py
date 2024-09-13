@@ -71,7 +71,7 @@ class ProductTemplateCatalog(models.Model):
                 
                 data = {
                     'name': p.name,
-                    'variants': vals_variant or vals_variant['null']
+                    'variants': vals_variant or vals_variant.append('no hay variante de valores')
                 }
                 
                 products_data.append(data)
