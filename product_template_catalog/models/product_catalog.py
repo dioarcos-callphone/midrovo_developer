@@ -33,4 +33,6 @@ class ProductTemplateCatalog(models.Model):
         )
         
         _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
+        
+        return 'prueba'
 
