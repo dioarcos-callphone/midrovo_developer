@@ -59,7 +59,7 @@ class ProductTemplateCatalog(models.Model):
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
-                    # ('product_template_variant_value_ids', 'in', variant_values)
+                    ('product_template_variant_value_ids.value_ids.id', 'in', variant_values)
             ])
             
             for p in products:
