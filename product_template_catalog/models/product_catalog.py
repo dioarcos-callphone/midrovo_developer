@@ -32,6 +32,9 @@ class ProductTemplateCatalog(models.Model):
         
         _logger.info(f'Mostrando atributos >>> { attributes } ')
         
+        for attribute in attributes:
+            _logger.info(attribute.name)
+        
         product_variants = self.env['product.product'].read_group(
             domain=[
                 ('product_tmpl_id', '=', product_id),
