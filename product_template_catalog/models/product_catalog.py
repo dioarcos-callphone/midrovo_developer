@@ -30,51 +30,43 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
         
+        if attributes:
+            variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
         
-        
-        a = [v_val.name for v_id in attributes for v_val in v_id.value_ids]
-        
-        _logger.info(f'MOSTRANDO VALORES >>> { a }')
-        
-        _logger.info(f'MOSTRANDO ATRIBUTES >>> { attributes }')
-        
-        # if attributes:
-        #     attribute_ids = [ a.name for a in attributes ]
-        
-        #     _logger.info(f'Mostrando atributos >>> { attribute_ids } ')
+            _logger.info(f'Mostrando atributos >>> { variant_values } ')
             
-        #     product_variants = self.env['product.product'].read_group(
-        #         domain=[
-        #             ('product_tmpl_id', '=', product_id),
-        #             ('product_template_variant_value_ids', 'in', attribute_ids )
-        #         ],
-        #         fields=['product_template_variant_value_ids'],
-        #         groupby=[
-        #             'product_template_variant_value_ids',
-        #         ],
-        #         lazy=False
-        #     )
+            product_variants = self.env['product.product'].read_group(
+                domain=[
+                    ('product_tmpl_id', '=', product_id),
+                    ('product_template_variant_value_ids', 'in', variant_values )
+                ],
+                fields=['product_template_variant_value_ids'],
+                groupby=[
+                    'product_template_variant_value_ids',
+                ],
+                lazy=False
+            )
             
-        #     _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
+            _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
             
-        #     formatted_variants = []
-        #     for variant in product_variants:
-        #         variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
+            formatted_variants = []
+            for variant in product_variants:
+                variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
-        #         # attribute = variant_values.attribute_id.name
+                # attribute = variant_values.attribute_id.name
                 
-        #         # if attribute in [ 'tallas', 'color' ]:
-        #         #     formatted_variants.append({
-        #         #         'variante': variant_values.attribute_id.name,
-        #         #         'count': variant['__count'],
-        #         #     })
+                # if attribute in [ 'tallas', 'color' ]:
+                #     formatted_variants.append({
+                #         'variante': variant_values.attribute_id.name,
+                #         'count': variant['__count'],
+                #     })
                 
-        #         formatted_variants.append({
-        #             'variante': variant_values.name,
-        #             'count': variant['__count'],
-        #         })
+                formatted_variants.append({
+                    'variante': variant_values.name,
+                    'count': variant['__count'],
+                })
             
-        #     _logger.info(formatted_variants)
+            _logger.info(formatted_variants)
         
         return 'prueba'
 
