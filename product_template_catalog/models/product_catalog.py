@@ -29,7 +29,7 @@ class ProductTemplateCatalog(models.Model):
             domain=[ ('product_tmpl_id', '=', product_id) ],
             fields=['product_template_variant_value_ids'],
             groupby=[
-                'product_template_variant_value_ids.name',
+                'product_template_variant_value_ids',
             ],
             lazy=False
         )
