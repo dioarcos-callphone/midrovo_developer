@@ -66,12 +66,16 @@ class ProductTemplateCatalog(models.Model):
                 vals_variant = []
                 variantes = p.product_template_variant_value_ids
                 
-                for v in variantes:
-                    vals_variant.append(v.name)
+                if variantes:
+                    for v in variantes:
+                        vals_variant.append(v.name)
+                        
+                else:
+                    vals_variant.append('no hay variante de valores')
                 
                 data = {
                     'name': p.name,
-                    'variants': vals_variant or vals_variant.append('no hay variante de valores')
+                    'variants': vals_variant
                 }
                 
                 products_data.append(data)
