@@ -71,7 +71,7 @@ class ProductTemplateCatalog(models.Model):
                         vals_variant.append(v.name)
                         
                 else:
-                    vals_variant.append('no hay variante de valores')
+                    vals_variant.append('no hay valores de variante')
                 
                 data = {
                     'name': p.name,
@@ -81,5 +81,5 @@ class ProductTemplateCatalog(models.Model):
                 products_data.append(data)
                 _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
-        return products_data or [{ 'name': 'no variant' }]
+        return products_data or [{ 'name': 'no variant', 'variants': ['no hay valores de variante'] }]
 
