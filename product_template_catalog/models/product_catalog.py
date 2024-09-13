@@ -70,5 +70,5 @@ class ProductTemplateCatalog(models.Model):
                 products_data.append(data)
                 _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
-        return products_data
+        return products_data or [{ 'name': 'no variant' }]
 
