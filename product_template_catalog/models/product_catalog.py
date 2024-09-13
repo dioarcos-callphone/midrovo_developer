@@ -27,24 +27,24 @@ class ProductTemplateCatalog(models.Model):
         
         product_variants = self.env['product.product'].read_group(
             domain=[ ('product_tmpl_id', '=', product_id) ],
-            fields=['product_template_variant_value_ids[0].id'],
+            fields=['product_template_variant_value_ids'],
             groupby=[
-                'product_template_variant_value_ids[0].id',
+                'product_template_variant_value_ids',
             ],
             lazy=False
         )
         
         _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
         
-        # formatted_variants = []
-        # for variant in product_variants:
-        #     variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
-        #     formatted_variants.append({
-        #         'variante': variant_values.name,
-        #         'count': variant['__count'],
-        #     })
+        formatted_variants = []
+        for variant in product_variants:
+            variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
+            formatted_variants.append({
+                'variante': variant_values.attribute_id.name,
+                'count': variant['__count'],
+            })
         
-        # _logger.info(formatted_variants)
+        _logger.info(formatted_variants)
         
         return 'prueba'
 
