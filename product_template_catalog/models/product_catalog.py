@@ -44,5 +44,7 @@ class ProductTemplateCatalog(models.Model):
                 'count': variant['__count'],
             })
         
+        _logger.info(formatted_variants)
+        
         return 'prueba'
 
