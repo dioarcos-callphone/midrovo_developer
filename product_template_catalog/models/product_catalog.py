@@ -9,14 +9,14 @@ class ProductTemplateCatalog(models.Model):
     @api.model
     def _get_report_values(self):
         query = """
-        SELECT * FROM product_product WHERE product_tmpl_id = %s 
+        SELECT product_template_variant_value_ids FROM product_product WHERE product_tmpl_id = %s 
         """
         
         self.env.cr.execute(query, [self.id])
         result_data = self.env.cr.dictfetchall()
         
         for r in result_data:
-            _logger.info(f'MOSTRANDO ---> { r.product_template_variant_value_ids }')
+            _logger.info(f'MOSTRANDO ---> { r }')
         
         return 'prueba'
         
