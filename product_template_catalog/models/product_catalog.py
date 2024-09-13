@@ -27,8 +27,12 @@ class ProductTemplateCatalog(models.Model):
         
         attributes = self.env['product.template.attribute.line'].search([
             ('product_tmpl_id', '=', product_id),
-            # ('attribute_id.name', 'in', ['color', 'tallas'])
+            ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
+        
+        a = [ v.attribute_id.name for v in attributes ]
+        
+        _logger.info(f'MOSTRANDO VALORES >>> { a }')
         
         _logger.info(f'MOSTRANDO ATRIBUTES >>> { attributes }')
         
