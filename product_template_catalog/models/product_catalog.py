@@ -33,7 +33,7 @@ class ProductTemplateCatalog(models.Model):
         if attributes:
             attribute_ids = [ a.id for a in attributes ]
         
-            _logger.info(f'Mostrando atributos >>> { attribute_ids } ')
+            _logger.info(f'Mostrando atributos >>> { attribute_ids.name } ')
             
             product_variants = self.env['product.product'].read_group(
                 domain=[
