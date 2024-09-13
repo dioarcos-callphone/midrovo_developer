@@ -15,7 +15,8 @@ class ProductTemplateCatalog(models.Model):
         self.env.cr.execute(query, [self.id])
         result_data = self.env.cr.dictfetchall()
         
-        _logger.info(f'MOSTRANDO RESULT DATA ---> { result_data }')
+        for r in result_data:
+            _logger.info(f'MOSTRANDO ---> { r.product_template_variant_value_ids }')
         
         return 'prueba'
         
