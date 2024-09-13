@@ -31,6 +31,10 @@ class ProductTemplateCatalog(models.Model):
         ])
         
         if attributes:
+            
+            for a in attributes:
+                _logger.info(f'ATTT >>> { a.value_ids }')
+            
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
         
             _logger.info(f'Mostrando atributos >>> { variant_values } ')
