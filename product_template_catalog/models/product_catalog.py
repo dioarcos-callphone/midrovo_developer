@@ -39,10 +39,14 @@ class ProductTemplateCatalog(models.Model):
         formatted_variants = []
         for variant in product_variants:
             variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
-            formatted_variants.append({
-                'variante': variant_values.attribute_id.name,
-                'count': variant['__count'],
-            })
+            
+            attribute = variant_values.attribute_id.name
+            
+            if attribute in [ 'tallas', 'color' ]:
+                formatted_variants.append({
+                    'variante': variant_values.attribute_id.name,
+                    'count': variant['__count'],
+                })
         
         _logger.info(formatted_variants)
         
