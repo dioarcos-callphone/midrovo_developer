@@ -32,7 +32,7 @@ class ProductTemplateCatalog(models.Model):
         product_variants = self.env['product.product'].read_group(
             domain=[
                 ('product_tmpl_id', '=', product_id),
-                ('product_template_variant_value_ids', 'in', [ 11, 12, ] )
+                ('product_template_variant_value_ids', 'in', [ 8, 9, ] )
             ],
             fields=['product_template_variant_value_ids'],
             groupby=[
