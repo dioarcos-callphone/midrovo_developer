@@ -23,6 +23,7 @@ class ProductTemplateCatalog(models.Model):
     
     @api.model
     def product_variant_group(self):
+        products_data = []
         product_id = self.id
         
         attributes = self.env['product.template.attribute.line'].search([
@@ -59,11 +60,15 @@ class ProductTemplateCatalog(models.Model):
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids.value_ids.id', 'in', variant_values)
             ])
             
             for p in products:
+                data = {
+                    'name': p.name
+                }
+                
+                products_data.append(data)
                 _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
-        return 'prueba'
+        return products_data
 
