@@ -49,13 +49,6 @@ class ProductTemplateCatalog(models.Model):
             for variant in product_variants:                
                 value = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
-                products = self.env['product.product'].search([
-                    ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids', 'in', variant_values)
-                ])
-                
-                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { products }')
-                
                 if value.product_attribute_value_id.id in variant_values:
                     formatted_variants.append({
                         'variante': value.name,
@@ -63,6 +56,14 @@ class ProductTemplateCatalog(models.Model):
                     })
             
             _logger.info(formatted_variants)
+            
+            products = self.env['product.product'].search([
+                    ('product_tmpl_id', '=', product_id),
+                    ('product_template_variant_value_ids', 'in', variant_values)
+            ])
+            
+            for p in products:
+                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p }')
         
         return 'prueba'
 
