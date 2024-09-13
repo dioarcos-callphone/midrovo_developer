@@ -59,7 +59,7 @@ class ProductTemplateCatalog(models.Model):
                 
                 values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
-                _logger.info(f'VALUES >>> { values }')
+                _logger.info(f'VALUES >>> { values.product_attribute_value_id }')
                 
                 # attribute = variant_values.attribute_id.name
                 
