@@ -30,14 +30,8 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
         
-        if attributes:
-            
-            for a in attributes:
-                _logger.info(f'ATTT >>> { a.value_ids }')
-            
+        if attributes:            
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
-        
-            _logger.info(f'Mostrando atributos >>> { variant_values } ')
             
             product_variants = self.env['product.product'].read_group(
                 domain=[
@@ -52,15 +46,15 @@ class ProductTemplateCatalog(models.Model):
             )
             
             formatted_variants = []
-            for variant in product_variants:
-                d = variant['product_template_variant_value_ids']
-                
-                _logger.info(f'PRODUCT TEMPLATE VARIANT VALUE IDS >>> { d }')
-                
+            for variant in product_variants:                
                 value = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
-                _logger.info(f'VALUES >>> { value.product_attribute_value_id }')
+                products = self.env['product.product'].search([
+                    ('product_tmpl_id', '=', product_id),
+                    ('product_template_variant_value_ids', 'in', variant_values)
+                ])
                 
+                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { products }')
                 
                 if value.product_attribute_value_id.id in variant_values:
                     formatted_variants.append({
