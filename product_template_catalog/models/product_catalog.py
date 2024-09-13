@@ -25,9 +25,12 @@ class ProductTemplateCatalog(models.Model):
     def product_variant_group(self):
         product_id = self.id
         
-        # attributes = self.env['product.template.attribute.line'].search([
-        #     ('product_tmpl_id', '=', product_id)
-        # ])
+        attributes = self.env['product.template.attribute.value'].search([
+            ('product_tmpl_id', '=', product_id),
+            ('attribute_id.name', 'in', ['color', 'tallas'])
+        ])
+        
+        _logger.info(f'Mostrando atributos >>> { attributes } ')
         
         product_variants = self.env['product.product'].read_group(
             domain=[
