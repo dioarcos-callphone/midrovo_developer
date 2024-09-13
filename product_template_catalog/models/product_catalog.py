@@ -32,7 +32,7 @@ class ProductTemplateCatalog(models.Model):
         
         
         
-        a = [ v.value_ids for v in attributes ]
+        a = [v_val.name for v_id in attributes for v_val in v_id.value_ids]
         
         _logger.info(f'MOSTRANDO VALORES >>> { a }')
         
