@@ -53,7 +53,7 @@ class ProductTemplateCatalog(models.Model):
                 
                 _logger.info(f'PRODUCT TEMPLATE VARIANT VALUE IDS >>> { d }')
                 
-                values = self.env['product.template.attribute.line'].browse(variant['product_template_variant_value_ids'][0])
+                values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
                 _logger.info(f'VALUES >>> { values }')
                 
@@ -66,7 +66,7 @@ class ProductTemplateCatalog(models.Model):
                 #     })
                 
                 formatted_variants.append({
-                    'variante': values.value_ids,
+                    'variante': values.id,
                     'count': variant['__count'],
                 })
             
