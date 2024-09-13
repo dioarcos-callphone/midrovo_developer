@@ -43,24 +43,24 @@ class ProductTemplateCatalog(models.Model):
         
         _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
         
-        # formatted_variants = []
-        # for variant in product_variants:
-        #     variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
+        formatted_variants = []
+        for variant in product_variants:
+            variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
             
-        #     # attribute = variant_values.attribute_id.name
+            # attribute = variant_values.attribute_id.name
             
-        #     # if attribute in [ 'tallas', 'color' ]:
-        #     #     formatted_variants.append({
-        #     #         'variante': variant_values.attribute_id.name,
-        #     #         'count': variant['__count'],
-        #     #     })
+            # if attribute in [ 'tallas', 'color' ]:
+            #     formatted_variants.append({
+            #         'variante': variant_values.attribute_id.name,
+            #         'count': variant['__count'],
+            #     })
             
-        #     formatted_variants.append({
-        #         'variante': variant_values.attribute_id.name,
-        #         'count': variant['__count'],
-        #     })
+            formatted_variants.append({
+                'variante': variant_values.attribute_id.name,
+                'count': variant['__count'],
+            })
         
-        # _logger.info(formatted_variants)
+        _logger.info(formatted_variants)
         
         return 'prueba'
 
