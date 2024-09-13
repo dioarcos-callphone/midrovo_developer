@@ -63,8 +63,15 @@ class ProductTemplateCatalog(models.Model):
             ])
             
             for p in products:
+                vals_variant = []
+                variantes = p.product_template_variant_value_ids
+                
+                for v in variantes:
+                    vals_variant.append(v.name)
+                
                 data = {
-                    'name': p.name
+                    'name': p.name,
+                    'variants': vals_variant
                 }
                 
                 products_data.append(data)
