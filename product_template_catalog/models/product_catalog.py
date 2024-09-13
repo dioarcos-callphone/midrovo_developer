@@ -30,7 +30,9 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
         
-        a = [ v.attribute_id.value_ids for v in attributes ]
+        
+        
+        a = [ v.value_ids for v in attributes ]
         
         _logger.info(f'MOSTRANDO VALORES >>> { a }')
         
