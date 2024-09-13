@@ -66,7 +66,7 @@ class ProductTemplateCatalog(models.Model):
                 #     })
                 
                 formatted_variants.append({
-                    'variante': values.values_id,
+                    'variante': values.value_ids,
                     'count': variant['__count'],
                 })
             
