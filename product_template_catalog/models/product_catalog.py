@@ -38,6 +38,8 @@ class ProductTemplateCatalog(models.Model):
         
         formatted_variants = []
         for variant in product_variants:
+            _logger.info(f'VARIANTE >> { variant }')
+            _logger.info(f'NOMBRE VARIANTE >> { variant.name }')
             variant_values = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
             formatted_variants.append({
                 'variant_values': variant_values.name,
