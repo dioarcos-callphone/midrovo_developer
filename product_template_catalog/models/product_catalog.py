@@ -10,25 +10,27 @@ class ProductTemplateCatalog(models.Model):
     def product_attribute_lines(self):      
         product_template_id = self.id
         
-        attribute_lines = self.env['product.template.attribute.line'].search([
+        attribute_lines = self.env['product.template.attribute.line'].search_read([
             ('product_tmpl_id', '=', product_template_id)
         ])
         
         if attribute_lines:
             _logger.info(len(attribute_lines))
         
-        # product_variants = self.env['product.product'].search([
-        #     ('product_tmpl_id', '=', product_template_id)
-        # ])
-        
-        
-        
-        # if product_variants:
-        #     variantes = product_variants.product_template
-            
-        #     _logger.info('')
-        
         name = self.name
         
         return name
+    
+    @api.model
+    def product_variant_group(self):
+        product_id = self.id
+        
+        product_variants = self.env['product.product'].read_group(
+            domain=[ ('product_tmpl_id', '=', product_id) ],
+            fields=['product_template_attribute_value_ids:attribute_value_ids', 'color_id', 'size_id'],  # Los campos que necesitas
+            groupby=['color_id', 'size_id'],
+            lazy=False
+        )
+        
+        _logger.info(f'Mostrando variantes de producto >>> { product_variants }')
 
