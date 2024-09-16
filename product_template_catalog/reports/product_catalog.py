@@ -66,8 +66,15 @@ class ProductTemplateCatalog(models.Model):
                                             
                             if product_data:
                                 products_data.append(product_data)
-                                    
-            product_color = set(product_color)
+                                
+                product_color = set(product_color)
+                                
+                for color in product_color:
+                    if products_data:
+                        for product in products_data:
+                            _logger.info(f'{ product }')
+                    
+                    
             _logger.info(products_data)
                               
         return 'prueba'       
