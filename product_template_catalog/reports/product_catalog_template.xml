@@ -6,9 +6,9 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <h1 t-esc='product_template.name'></h1>
-                        <t t-foreach="product_template._get_report_values()" t-as="result">
+                        <t t-foreach="env['product.template.catalog']._get_report_values(product_template.id)" t-as="result">
                             <span t-esc="result['name']"></span>
-                            <span t-esc="result['imagen']"></span>
+                            <!-- <span t-esc="result['imagen']"></span> -->
                         </t>
                         <!-- <t t-foreach="product_template.product_variant_group()" t-as="data">
                             <h3 t-esc="data['name']"></h3>

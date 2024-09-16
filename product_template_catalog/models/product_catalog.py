@@ -3,11 +3,11 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
-class ProductTemplateCatalog(models.Model):
-    _inherit = "product.template"
+class ProductTemplateCatalog(models.AbstractModel):
+    _name = "product.template.catalog"
     
     @api.model
-    def _get_report_values(self):
+    def _get_report_values(self, id):
         products = []
         query = """
         SELECT * FROM product_template pt
@@ -15,7 +15,7 @@ class ProductTemplateCatalog(models.Model):
         WHERE pt.id = %s
         """
         
-        self.env.cr.execute(query, [self.id])
+        self.env.cr.execute(query, [id])
         result_data = self.env.cr.dictfetchall()
         
         for r in result_data:
