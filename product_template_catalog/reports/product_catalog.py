@@ -48,11 +48,12 @@ class ProductTemplateCatalog(models.Model):
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
                                     if len(product_color) < len(values_attributes_ids_color):
+                                        _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }') 
                                         product_color.append(variant.name)
                                         product_data['color'] = variant.name
                                 
                                 if variant.id in values_attributes_ids_talla:
-                                    _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }')  
+                                    # _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }')  
                                     if len(product_talla) < len(values_attributes_ids_talla):                                        
                                         if sum(disponibles) < self.immediately_usable_qty:
                                             product_data['talla'] = variant.name
