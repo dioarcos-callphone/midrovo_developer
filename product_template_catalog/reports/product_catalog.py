@@ -16,9 +16,13 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
         
-        if attributes:      
-            for a in attributes:
-                _logger.info(f'ATRIBUTOS >>> { a.value_ids }')      
+        if attributes:
+            attribute_lines = [ a.id for a in attributes ]
+            
+            values_attributes = self.env['product.template_attribute_value'].search([('attribute_line_id', 'in', attribute_lines)])
+            
+            _logger.info(f'VALUES ATTRIBUTES >>> { values_attributes }')
+                
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
             
             _logger.info(f'VARIANT VALUES >>> { variant_values }')
