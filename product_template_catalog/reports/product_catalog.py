@@ -134,7 +134,8 @@ class ProductTemplateCatalog(models.Model):
                                             
                                 if product_data:
                                     products_data.append(product_data)
-                                
+                                    
+            product_data = set(product_data)
             _logger.info(products_data)
                                 
             product_color = set(product_color)
