@@ -100,7 +100,7 @@ class ProductTemplateCatalog(models.Model):
                     if variants:
                         for variant in variants:
                             if variant.id in values_attributes_ids:
-                                _logger.info(f'ENTRA CUANDO ES TALLA Y COLOR')
+                                _logger.info(f'ENTRA CUANDO ES TALLA Y COLOR { variant.id } || { values_attributes_ids }')
                                 
         return 'prueba'
             
