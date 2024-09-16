@@ -54,15 +54,15 @@ class ProductTemplateCatalog(models.Model):
                                 
                                 if variant.id in values_attributes_ids_talla:
                                     # _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }')  
-                                    if len(product_talla) < len(values_attributes_ids_talla):                                        
-                                        if sum(disponibles) < self.immediately_usable_qty:
-                                            product_data['talla'] = variant.name
-                                            product_data['disponible'] = product.immediately_usable_qty
-                                            product_talla.append({
-                                                "talla": variant.name,
-                                                "disponible": product.immediately_usable_qty
-                                            })
-                                            disponibles.append(product.immediately_usable_qty)
+                                    # if len(product_talla) < len(values_attributes_ids_talla):                                        
+                                    if sum(disponibles) < self.immediately_usable_qty:
+                                        product_data['talla'] = variant.name
+                                        product_data['disponible'] = product.immediately_usable_qty
+                                        product_talla.append({
+                                            "talla": variant.name,
+                                            "disponible": product.immediately_usable_qty
+                                        })
+                                        disponibles.append(product.immediately_usable_qty)
                                             
                             if product_data:
                                 products_data.append(product_data)
