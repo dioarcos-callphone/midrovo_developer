@@ -21,6 +21,8 @@ class ProductTemplateCatalog(models.Model):
             
             values_attributes = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines)])
             
+            values_attributes_ids = [ v.id for v in values_attributes ]
+            
             _logger.info(f'VALUES ATTRIBUTES >>> { values_attributes }')
                 
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
@@ -33,7 +35,7 @@ class ProductTemplateCatalog(models.Model):
             product_variants = self.env['product.product'].read_group(
                 domain=[
                     ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids', 'in', values_attributes)
+                    ('product_template_variant_value_ids', 'in', values_attributes_ids)
                 ],
                 fields=['product_template_variant_value_ids'],
                 groupby=[
