@@ -47,13 +47,7 @@ class ProductTemplateCatalog(models.Model):
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids', 'not in', values_attributes_ids)
-            ])
-            
-            mi_set = set(products)
-            
-            for p in mi_set:
-                _logger.info(p.product_template_variant_value_ids)
+            ]) 
             
             _logger.info(formatted_variants)
             
@@ -79,4 +73,36 @@ class ProductTemplateCatalog(models.Model):
         # return products_data or [{ 'name': 'no variant', 'variants': ['no hay valores de variante'] }]
         
         return 'prueba'
+    
+    @api.model
+    def get_product_variant(self):
+        products_data = []
+        product_id = self.id
+        
+        attributes = self.env['product.template.attribute.line'].search([
+            ('product_tmpl_id', '=', product_id),
+            ('attribute_id.name', 'in', ['color', 'tallas'])
+        ])
+        
+        if attributes:
+            attribute_lines = [ a.id for a in attributes ]
+            values_attributes = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines)])
+            values_attributes_ids = [ v.id for v in values_attributes ]
+            
+            products = self.env['product.product'].search([
+                    ('product_tmpl_id', '=', product_id),
+            ])
+            
+            if products:
+                for product in products:
+                    variants = product.product_template_variant_value_ids
+                    
+                    if variants:
+                        for variant in variants:
+                            if variant.id in values_attributes_ids:
+                                _logger(f'ENTRA CUANDO ES TALLA Y COLOR')
+                                
+        return 'prueba'
+            
+        
 
