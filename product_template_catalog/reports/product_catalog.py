@@ -19,7 +19,7 @@ class ProductTemplateCatalog(models.Model):
         if attributes:
             attribute_lines = [ a.id for a in attributes ]
             
-            values_attributes = self.env['product.template_attribute_value'].search([('attribute_line_id', 'in', attribute_lines)])
+            values_attributes = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines)])
             
             _logger.info(f'VALUES ATTRIBUTES >>> { values_attributes }')
                 
