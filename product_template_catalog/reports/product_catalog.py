@@ -7,28 +7,27 @@ class ProductTemplateCatalog(models.AbstractModel):
     _name = "product.template.catalog"
     
     @api.model
-    def _get_report_values(self, id):
-        products = []
+    def _get_report_values(self):
         query = """
-        SELECT * FROM product_template pt
-        INNER JOIN product_product pp ON pt.id = pp.product_tmpl_id
-        WHERE pt.id = %s
+        SELECT * FROM product_template;
         """
         
         self.env.cr.execute(query, [id])
         result_data = self.env.cr.dictfetchall()
         
-        for r in result_data:
-            data = {
-                "name": r["name"],
-                # "imagen": r['image_512']
-            }
+        # for r in result_data:
+        #     data = {
+        #         "name": r["name"],
+        #         # "imagen": r['image_512']
+        #     }
             
-            products.append(data)
+            # products.append(data)
             
-            _logger.info(f'MOSTRANDO ---> { r }')
+            # _logger.info(f'MOSTRANDO ---> { r }')
         
-        return products
+        return {
+            "options": result_data
+        }
         
     
     # @api.model
