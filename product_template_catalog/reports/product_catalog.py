@@ -105,8 +105,6 @@ class ProductTemplateCatalog(models.Model):
             product_talla = []
             disponibles = []
             
-            _logger.info(f'{ values_attributes_ids_color }  || { values_attributes_ids_talla }')
-            
             if products:
                 for product in products:
                     variants = product.product_template_variant_value_ids
@@ -115,23 +113,26 @@ class ProductTemplateCatalog(models.Model):
                     
                     if product.immediately_usable_qty > 0:
                         if variants:
-                            i = 0
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
                                     if len(product_color) < len(values_attributes_ids_color):
                                         product_color.append(variant.name)
+                                        product_data['color'] = variant.name
                                 
                                 if variant.id in values_attributes_ids_talla:       
                                     if len(product_talla) < len(values_attributes_ids_talla):
                                         # product_talla.append(variant.name)
                                         
                                         if sum(disponibles) < self.immediately_usable_qty:
+                                            product_data['talla'] = variant.name
+                                            product_data['disponible'] = product.immediately_usable_qty
                                             product_talla.append({
-                                                "color": product_color[i] or '',
                                                 "talla": variant.name,
                                                 "disponible": product.immediately_usable_qty
                                             })
                                             disponibles.append(product.immediately_usable_qty)
+                                
+                    _logger.info(product_data)
                                 
             product_color = set(product_color)
             
