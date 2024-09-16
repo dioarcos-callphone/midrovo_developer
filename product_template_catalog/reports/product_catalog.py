@@ -72,7 +72,10 @@ class ProductTemplateCatalog(models.Model):
                 for color in product_color:
                     if products_data:
                         for product in products_data:
+                            suma = product['disponible']
                             if color == product['color']:
+                                suma = suma + product['disponible']
+                                product['disponible'] = suma
                                 _logger.info(f'{ product }')
                         
                     
