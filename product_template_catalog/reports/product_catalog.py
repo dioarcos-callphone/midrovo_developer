@@ -78,11 +78,11 @@ class ProductTemplateCatalog(models.Model):
                             if color == product['color']:
                                 contador = contador + 1
                                 
-                                if contador > 1:
+                                if contador >= 1:
                                     suma = suma + product['disponible']
                                     product['disponible'] = suma
                                     
-                            _logger.info(f'{ product }')
+                            # _logger.info(f'{ product }')
                         
                     
                     
