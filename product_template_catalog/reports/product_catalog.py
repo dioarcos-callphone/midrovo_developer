@@ -50,7 +50,9 @@ class ProductTemplateCatalog(models.Model):
                     ('product_template_variant_value_ids', 'in', values_attributes_ids)
             ])
             
-            for p in products:
+            mi_set = set(products)
+            
+            for p in mi_set:
                 _logger.info(p.product_template_variant_value_ids)
             
             _logger.info(formatted_variants)
