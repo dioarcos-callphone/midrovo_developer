@@ -9,7 +9,9 @@ class ProductTemplateCatalog(models.Model):
     @api.model
     def _get_report_values(self):
         query = """
-        SELECT product_template_variant_value_ids FROM product_product WHERE product_tmpl_id = %s 
+        SELECT product_template_variant_value_ids FROM product_template pt
+        INNER JOIN product_product pp ON pp.id = pt.product_tmpl_id
+        WHERE pt.id = %s
         """
         
         self.env.cr.execute(query, [self.id])
