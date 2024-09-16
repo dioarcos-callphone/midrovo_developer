@@ -139,7 +139,7 @@ class ProductTemplateCatalog(models.Model):
             
                                 
             product_color = set(product_color)
-            _logger.info(product_color)
+            _logger.info(products_data)
             
             _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla } || { disponibles }')
             
