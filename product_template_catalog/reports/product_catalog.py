@@ -104,6 +104,8 @@ class ProductTemplateCatalog(models.Model):
             product_color = []
             product_talla = []
             
+            _logger.info(f'{ values_attributes_ids_color }  || { values_attributes_ids_talla }')
+            
             if products:
                 for product in products:
                     variants = product.product_template_variant_value_ids
