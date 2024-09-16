@@ -131,8 +131,11 @@ class ProductTemplateCatalog(models.Model):
                                                 "disponible": product.immediately_usable_qty
                                             })
                                             disponibles.append(product.immediately_usable_qty)
+                                            
+                                if product_data:
+                                    products_data.append(product_data)
                                 
-                    _logger.info(product_data)
+            _logger.info(products_data)
                                 
             product_color = set(product_color)
             
