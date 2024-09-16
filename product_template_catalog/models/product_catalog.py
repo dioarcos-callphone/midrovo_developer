@@ -21,7 +21,7 @@ class ProductTemplateCatalog(models.Model):
         for r in result_data:
             data = {
                 "name": r["name"],
-                "imagen": r['image_512']
+                # "imagen": r['image_512']
             }
             
             products.append(data)
