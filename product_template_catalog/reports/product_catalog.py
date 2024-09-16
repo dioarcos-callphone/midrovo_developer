@@ -3,92 +3,74 @@ from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
 
-class ProductTemplateCatalog(models.AbstractModel):
-    _name = "product.template.catalog"
+class ProductTemplateCatalog(models.Model):
+    _inherit = "product.template"
     
     @api.model
-    def _get_report_values(self):
-        query = """
-        SELECT * FROM product_template;
-        """
+    def product_variant_group(self):
+        products_data = []
+        product_id = self.id
         
-        self.env.cr.execute(query)
-        result_data = self.env.cr.dictfetchall()
+        attributes = self.env['product.template.attribute.line'].search([
+            ('product_tmpl_id', '=', product_id),
+            ('attribute_id.name', 'in', ['color', 'tallas'])
+        ])
         
-        # for r in result_data:
-        #     data = {
-        #         "name": r["name"],
-        #         # "imagen": r['image_512']
-        #     }
+        
+        
+        _logger.info(f'ATRIBUTOS >>>> { attributes }')
+        
+        if attributes:            
+            variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
             
-            # products.append(data)
+            product_variants = self.env['product.product'].read_group(
+                domain=[
+                    ('product_tmpl_id', '=', product_id),
+                    ('product_template_variant_value_ids', 'in', variant_values)
+                ],
+                fields=['product_template_variant_value_ids'],
+                groupby=[
+                    'product_template_variant_value_ids',
+                ],
+                lazy=False
+            )
             
-            # _logger.info(f'MOSTRANDO ---> { r }')
-        
-        return {
-            "options": result_data
-        }
-        
-    
-    # @api.model
-    # def product_variant_group(self):
-    #     products_data = []
-    #     product_id = self.id
-        
-    #     attributes = self.env['product.template.attribute.line'].search([
-    #         ('product_tmpl_id', '=', product_id),
-    #         ('attribute_id.name', 'in', ['color', 'tallas'])
-    #     ])
-        
-    #     if attributes:            
-    #         variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
-            
-    #         product_variants = self.env['product.product'].read_group(
-    #             domain=[
-    #                 ('product_tmpl_id', '=', product_id),
-    #                 ('product_template_variant_value_ids', 'in', variant_values)
-    #             ],
-    #             fields=['product_template_variant_value_ids'],
-    #             groupby=[
-    #                 'product_template_variant_value_ids',
-    #             ],
-    #             lazy=False
-    #         )
-            
-    #         formatted_variants = []
-    #         for variant in product_variants:                
-    #             value = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
+            formatted_variants = []
+            for variant in product_variants:                
+                value = self.env['product.template.attribute.value'].browse(variant['product_template_variant_value_ids'][0])
                 
-    #             if value.product_attribute_value_id.id in variant_values:
-    #                 formatted_variants.append({
-    #                     'variante': value.name,
-    #                     'count': variant['__count'],
-    #                 })
+                if value.product_attribute_value_id.id in variant_values:
+                    formatted_variants.append({
+                        'variante': value.name,
+                        'count': variant['__count'],
+                    })
             
-    #         _logger.info(formatted_variants)
+            _logger.info(formatted_variants)
             
-    #         products = self.env['product.product'].search([
-    #                 ('product_tmpl_id', '=', product_id),
-    #         ])
+            products = self.env['product.product'].search([
+                    ('product_tmpl_id', '=', product_id),
+            ])
             
-    #         for p in products:
-    #             vals_variant = []
-    #             variantes = p.product_template_variant_value_ids
+            for p in products:
+                vals_variant = []
+                variantes = p.product_template_variant_value_ids
                 
-    #             if variantes:
-    #                 for v in variantes:
-    #                     vals_variant.append(v.name)
+                if variantes:
+                    for v in variantes:
+                        vals_variant.append(v.name)
                         
-    #             else:
-    #                 vals_variant.append('no hay valores de variante')
+                else:
+                    vals_variant.append('no hay valores de variante')
                 
-    #             data = {
-    #                 'name': p.name,
-    #                 'variants': vals_variant
-    #             }
+                data = {
+                    'name': p.name,
+                    'variants': vals_variant
+                }
                 
-    #             products_data.append(data)
-    #             _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
+                products_data.append(data)
+                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
-    #     return products_data or [{ 'name': 'no variant', 'variants': ['no hay valores de variante'] }]
+        # return products_data or [{ 'name': 'no variant', 'variants': ['no hay valores de variante'] }]
+        
+        return 'prueba'
 

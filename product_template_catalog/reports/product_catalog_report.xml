@@ -2,7 +2,7 @@
 <odoo>
     <record id="report_product_catalog" model="ir.actions.report">
         <field name="name">Catálogo de Productos</field>
-        <field name="model">product.template.catalog</field>
+        <field name="model">product.template</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">product_template_catalog.report_product_template_catalog</field>
         <field name="report_file">product_template_catalog.report_product_template_catalog</field>
