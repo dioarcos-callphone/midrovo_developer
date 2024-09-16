@@ -69,12 +69,12 @@ class ProductTemplateCatalog(models.Model):
                                 
                 product_color = set(product_color)
                                 
-                
-                if products_data:
-                    for product in products_data:
-                        for color in product_color:
+                for color in product_color:
+                    if products_data:
+                        for product in products_data:
                             if color == product['color']:
                                 _logger.info(f'{ product }')
+                        
                     
                     
             _logger.info(products_data)
