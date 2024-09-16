@@ -16,12 +16,15 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', 'in', ['color', 'tallas'])
         ])
         
-        
-        
-        _logger.info(f'ATRIBUTOS >>>> { attributes }')
-        
         if attributes:            
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
+            
+            _logger.info(f'VARIANT VALUES >>> { variant_values }')
+            
+            prod = self.env['product.product'].search([('product_tmpl_id', '=', product_id)])
+            
+            for pr in prod:
+                _logger.info(f'PRODUCT VARIANT >>> { pr.product_template_variant_value_ids }')
             
             product_variants = self.env['product.product'].read_group(
                 domain=[
@@ -44,8 +47,6 @@ class ProductTemplateCatalog(models.Model):
                         'variante': value.name,
                         'count': variant['__count'],
                     })
-            
-            _logger.info(formatted_variants)
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
