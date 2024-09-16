@@ -12,7 +12,7 @@ class ProductTemplateCatalog(models.AbstractModel):
         SELECT * FROM product_template;
         """
         
-        self.env.cr.execute(query, [id])
+        self.env.cr.execute(query)
         result_data = self.env.cr.dictfetchall()
         
         # for r in result_data:
