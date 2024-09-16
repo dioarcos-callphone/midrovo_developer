@@ -89,8 +89,6 @@ class ProductTemplateCatalog(models.Model):
             ('attribute_id.name', '=', 'tallas')
         ])
         
-        
-        
         if attributes_color and attributes_talla:
             attribute_lines_color = [ a.id for a in attributes_color ]
             attribute_lines_talla = [ a.id for a in attributes_talla ]
@@ -103,6 +101,9 @@ class ProductTemplateCatalog(models.Model):
                     ('product_tmpl_id', '=', product_id),
             ])
             
+            product_color = []
+            product_talla = []
+            
             if products:
                 for product in products:
                     variants = product.product_template_variant_value_ids
@@ -110,7 +111,15 @@ class ProductTemplateCatalog(models.Model):
                     if variants:
                         for variant in variants:
                             if variant.id in values_attributes_ids_color:
-                                _logger.info(f'ENTRA CUANDO ES COLOR { variant.id } || { values_attributes_ids_color }')
+                                if len(product_color) < len(values_attributes_ids_color):
+                                    product_color.append(variant.name)
+                            
+                            if variant.id in values_attributes_ids_talla:       
+                                if len(product_talla) < len(values_attributes_ids_talla):
+                                    product_color.append(variant.name)
+                                
+            
+            _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla }')
                                 
         return 'prueba'
             
