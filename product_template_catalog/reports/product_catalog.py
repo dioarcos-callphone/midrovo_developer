@@ -47,7 +47,7 @@ class ProductTemplateCatalog(models.Model):
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
-                    ('product_template_variant_value_ids', 'in', values_attributes_ids)
+                    ('product_template_variant_value_ids', 'not in', values_attributes_ids)
             ])
             
             mi_set = set(products)
