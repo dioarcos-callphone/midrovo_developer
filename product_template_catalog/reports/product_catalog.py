@@ -127,13 +127,11 @@ class ProductTemplateCatalog(models.Model):
                                         
                                         if sum(disponibles) < self.immediately_usable_qty:
                                             product_talla.append({
-                                                "color": product_color[i],
+                                                "color": product_color[i] or '',
                                                 "talla": variant.name,
                                                 "disponible": product.immediately_usable_qty
                                             })
                                             disponibles.append(product.immediately_usable_qty)
-                                            
-                                            i = i + 1
                                 
             product_color = set(product_color)
             
