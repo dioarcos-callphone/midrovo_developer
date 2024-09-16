@@ -115,6 +115,7 @@ class ProductTemplateCatalog(models.Model):
                     
                     if product.immediately_usable_qty > 0:
                         if variants:
+                            i = 0
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
                                     if len(product_color) < len(values_attributes_ids_color):
@@ -126,10 +127,13 @@ class ProductTemplateCatalog(models.Model):
                                         
                                         if sum(disponibles) < self.immediately_usable_qty:
                                             product_talla.append({
+                                                "color": product_color[i],
                                                 "talla": variant.name,
                                                 "disponible": product.immediately_usable_qty
                                             })
                                             disponibles.append(product.immediately_usable_qty)
+                                            
+                                            i = i + 1
                                 
             product_color = set(product_color)
             
