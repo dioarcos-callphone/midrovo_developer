@@ -22,16 +22,9 @@ class ProductTemplateCatalog(models.Model):
             values_attributes = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines)])
             
             values_attributes_ids = [ v.id for v in values_attributes ]
-            
-            _logger.info(f'VALUES ATTRIBUTES >>> { values_attributes }')
                 
             variant_values = [v_val.id for v_id in attributes for v_val in v_id.value_ids]
-            
-            prod = self.env['product.product'].search([('product_tmpl_id', '=', product_id)])
-            
-            for pr in prod:
-                _logger.info(f'PRODUCT VARIANT >>> { pr.product_template_variant_value_ids }')
-            
+                 
             product_variants = self.env['product.product'].read_group(
                 domain=[
                     ('product_tmpl_id', '=', product_id),
@@ -58,24 +51,26 @@ class ProductTemplateCatalog(models.Model):
                     ('product_tmpl_id', '=', product_id),
             ])
             
-            for p in products:
-                vals_variant = []
-                variantes = p.product_template_variant_value_ids
+            _logger.info(formatted_variants)
+            
+            # for p in products:
+            #     vals_variant = []
+            #     variantes = p.product_template_variant_value_ids
                 
-                if variantes:
-                    for v in variantes:
-                        vals_variant.append(v.name)
+            #     if variantes:
+            #         for v in variantes:
+            #             vals_variant.append(v.name)
                         
-                else:
-                    vals_variant.append('no hay valores de variante')
+            #     else:
+            #         vals_variant.append('no hay valores de variante')
                 
-                data = {
-                    'name': p.name,
-                    'variants': vals_variant
-                }
+            #     data = {
+            #         'name': p.name,
+            #         'variants': vals_variant
+            #     }
                 
-                products_data.append(data)
-                _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
+            #     products_data.append(data)
+            #     _logger.info(f'MOSTRANDO PRODUCT PRODUCT { p.product_template_variant_value_ids }')
         
         # return products_data or [{ 'name': 'no variant', 'variants': ['no hay valores de variante'] }]
         
