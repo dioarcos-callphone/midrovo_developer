@@ -79,15 +79,25 @@ class ProductTemplateCatalog(models.Model):
         products_data = []
         product_id = self.id
         
-        attributes = self.env['product.template.attribute.line'].search([
+        attributes_color = self.env['product.template.attribute.line'].search([
             ('product_tmpl_id', '=', product_id),
-            ('attribute_id.name', 'in', ['color', 'tallas'])
+            ('attribute_id.name', '=', 'color')
         ])
         
-        if attributes:
-            attribute_lines = [ a.id for a in attributes ]
-            values_attributes = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines)])
-            values_attributes_ids = [ v.id for v in values_attributes ]
+        attributes_talla = self.env['product.template.attribute.line'].search([
+            ('product_tmpl_id', '=', product_id),
+            ('attribute_id.name', '=', 'tallas')
+        ])
+        
+        
+        
+        if attributes_color and attributes_talla:
+            attribute_lines_color = [ a.id for a in attributes_color ]
+            attribute_lines_talla = [ a.id for a in attributes_talla ]
+            values_attributes_color = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines_color)])
+            values_attributes_talla = self.env['product.template.attribute.value'].search([('attribute_line_id', 'in', attribute_lines_talla)])
+            values_attributes_ids_color = [ v.id for v in values_attributes_color ]
+            values_attributes_ids_talla = [ v.id for v in values_attributes_talla ]
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
@@ -99,8 +109,8 @@ class ProductTemplateCatalog(models.Model):
                     
                     if variants:
                         for variant in variants:
-                            if variant.id in values_attributes_ids:
-                                _logger.info(f'ENTRA CUANDO ES TALLA Y COLOR { variant.id } || { values_attributes_ids }')
+                            if variant.id in values_attributes_ids_color:
+                                _logger.info(f'ENTRA CUANDO ES COLOR { variant.id } || { values_attributes_ids_color }')
                                 
         return 'prueba'
             
