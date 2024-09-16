@@ -21,12 +21,12 @@ class ProductTemplateCatalog(models.Model):
         for r in result_data:
             data = {
                 "name": r["name"],
-                "disponible": r['qty_available']
+                # "disponible": r['qty_available']
             }
             
             products.append(data)
             
-            # _logger.info(f'MOSTRANDO ---> { r }')
+            _logger.info(f'MOSTRANDO ---> { r }')
         
         return products
         
