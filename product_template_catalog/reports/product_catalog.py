@@ -116,7 +116,7 @@ class ProductTemplateCatalog(models.Model):
                             
                             if variant.id in values_attributes_ids_talla:       
                                 if len(product_talla) < len(values_attributes_ids_talla):
-                                    product_color.append(variant.name)
+                                    product_talla.append(variant.name)
                                 
             
             _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla }')
