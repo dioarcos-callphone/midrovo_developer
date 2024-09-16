@@ -4,10 +4,10 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class ProductTemplateCatalog(models.AbstractModel):
-    _inherit = "product.template"
+    _name = "product.template.catalog"
     
     @api.model
-    def _get_report_values(self):
+    def _get_report_values(self, id):
         products = []
         query = """
         SELECT * FROM product_template pt
@@ -15,7 +15,7 @@ class ProductTemplateCatalog(models.AbstractModel):
         WHERE pt.id = %s
         """
         
-        self.env.cr.execute(query, [self.id])
+        self.env.cr.execute(query, [id])
         result_data = self.env.cr.dictfetchall()
         
         for r in result_data:
