@@ -8,6 +8,7 @@ class ProductTemplateCatalog(models.Model):
     
     @api.model
     def _get_report_values(self):
+        products = []
         query = """
         SELECT * FROM product_template pt
         INNER JOIN product_product pp ON pt.id = pp.product_tmpl_id
@@ -18,9 +19,16 @@ class ProductTemplateCatalog(models.Model):
         result_data = self.env.cr.dictfetchall()
         
         for r in result_data:
-            _logger.info(f'MOSTRANDO ---> { r }')
+            data = {
+                "name": r["name"],
+                "disponible": r['qty_available']
+            }
+            
+            products.append(data)
+            
+            # _logger.info(f'MOSTRANDO ---> { r }')
         
-        return 'prueba'
+        return products
         
     
     # @api.model
