@@ -103,6 +103,7 @@ class ProductTemplateCatalog(models.Model):
             
             product_color = []
             product_talla = []
+            disponibles = []
             
             _logger.info(f'{ values_attributes_ids_color }  || { values_attributes_ids_talla }')
             
@@ -110,20 +111,24 @@ class ProductTemplateCatalog(models.Model):
                 for product in products:
                     variants = product.product_template_variant_value_ids
                     
-                    if variants:
-                        for variant in variants:
-                            if variant.id in values_attributes_ids_color:
-                                if len(product_color) < len(values_attributes_ids_color):
-                                    product_color.append(variant.name)
-                            
-                            if variant.id in values_attributes_ids_talla:       
-                                if len(product_talla) < len(values_attributes_ids_talla):
-                                    product_talla.append(variant.name)
+                    if product.immediately_usable_qty > 0:
+                        if variants:
+                            for variant in variants:
+                                if variant.id in values_attributes_ids_color:
+                                    if len(product_color) < len(values_attributes_ids_color):
+                                        product_color.append(variant.name)
+                                
+                                if variant.id in values_attributes_ids_talla:       
+                                    if len(product_talla) < len(values_attributes_ids_talla):
+                                        product_talla.append(variant.name)
+                                        disponibles.append(product.immediately_usable_qty)
                                 
             product_color = set(product_color)
             product_talla = set(product_talla)
+            disponibles = set(disponibles)
             
-            _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla }')
+            _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla } || { disponibles }')
+            
                                 
         return 'prueba'
             
