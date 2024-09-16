@@ -134,7 +134,7 @@ class ProductTemplateCatalog(models.Model):
                                             
                             if product_data:
                                 _logger.info(product_data)
-                                    # products_data.append(product_data)
+                                products_data.append(product_data)
                                     
             
                                 
