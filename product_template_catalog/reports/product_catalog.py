@@ -120,9 +120,7 @@ class ProductTemplateCatalog(models.Model):
                                         product_data['color'] = variant.name
                                 
                                 if variant.id in values_attributes_ids_talla:       
-                                    if len(product_talla) < len(values_attributes_ids_talla):
-                                        # product_talla.append(variant.name)
-                                        
+                                    if len(product_talla) < len(values_attributes_ids_talla):                                        
                                         if sum(disponibles) < self.immediately_usable_qty:
                                             product_data['talla'] = variant.name
                                             product_data['disponible'] = product.immediately_usable_qty
@@ -136,12 +134,8 @@ class ProductTemplateCatalog(models.Model):
                                 _logger.info(product_data)
                                 products_data.append(product_data)
                                     
-            
-                                
             product_color = set(product_color)
             _logger.info(products_data)
-            
-            _logger.info(f'COLORES Y TALLAS { product_color } || { product_talla } || { disponibles }')
             
                                 
         return 'prueba'
