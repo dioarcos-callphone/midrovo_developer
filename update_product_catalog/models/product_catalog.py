@@ -87,9 +87,14 @@ class ProductCategory(models.Model):
                 _logger.info(f'color  >>>>  { col }')
                 tallas = d['tallas']
                 suma = 0
+                product_catalogo['color'] = d['color']
+                product_catalogo['img'] = d['img']
+                product_catalogo['disponible']
+                product_catalogo['talla_unica']
                 for ta in talla:
                     contador = 0
                     total = 0
+                    sizes = []
                     for t in tallas:
                         for v in t.product_template_variant_value_ids:
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
@@ -97,8 +102,16 @@ class ProductCategory(models.Model):
                                     contador = contador + 1
                                     suma = suma + t.immediately_usable_qty                                 
                                     if contador > 1:
-                                        total = suma   
-                                         
-                                    _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
+                                        total = suma
+                                    
+                                    if contador == 1:
+                                        # sizes.append({
+                                        #     "talla": v.name,
+                                        #     "total": total if total > 0 else t.qty_available
+                                        # })
+                                        
+                                        # product_catalogo['tallas'] = { "talla": v.name, "total": total }
+                                        
+                                        _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
                 _logger.info(" ")
         return data if data else None
