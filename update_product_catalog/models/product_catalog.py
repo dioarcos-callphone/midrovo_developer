@@ -47,24 +47,24 @@ class ProductCategory(models.Model):
                             for value in values:
                                 val = value.name
                                 if(color == val):
-                                    suma_disponible += int(product.qty_available)
+                                    suma_disponible += int(product.immediately_usable_qty)
                                     
                                     product_variants.append(product)
                                     
                         else:
                             val = values.name
                             if(color == val):
-                                suma_disponible += int(product.qty_available)
+                                suma_disponible += int(product.immediately_usable_qty)
                                 
                                 product_variants.append(product)
                                 
                             elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
-                                suma_disponible += int(product.qty_available)
-                                
-                                product_variants.append(product)
+                                if product.immediately_usable_qty > 0:
+                                    suma_disponible += int(product.immediately_usable_qty)
+                                    product_variants.append(product)
                                 
                     else:
-                        suma_disponible += int(product.qty_available)
+                        suma_disponible += int(product.immediately_usable_qty)
                         product_variants.append(product)
 
                 product_data = {
