@@ -72,6 +72,7 @@ class ProductTemplateCatalog(models.Model):
                 products_catalog = []
                                
                 for color in product_color:
+                    producto = {}
                     contador = 0
                     suma = 0
                     if products_data:
@@ -82,8 +83,12 @@ class ProductTemplateCatalog(models.Model):
                                 suma = suma + product['disponible']
                                 if contador > 1:
                                     product['disponible'] = suma
-                                    
-                            # _logger.info(f'{ product }')
+                                    producto = product
+                            
+                    if contador > 1:
+                        products_catalog.append(producto)        
+                    
+                _logger.info(f'{ products_catalog }')
                         
                     
                     
