@@ -42,19 +42,16 @@ class ProductTemplateCatalog(models.Model):
                     variants = product.product_template_variant_value_ids
                     
                     product_data = {}
-                    
+                                        
                     if product.immediately_usable_qty > 0:
                         if variants:
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
-                                    _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }') 
-                                    # if len(product_color) < len(values_attributes_ids_color):
                                     product_color.append(variant.name)
                                     product_data['color'] = variant.name
+                                    product_data['imagen'] = product.image_512 or self.image_512
                                 
-                                if variant.id in values_attributes_ids_talla:
-                                    # _logger.info(f'DISPONIBLE >>> { product.immediately_usable_qty }')  
-                                    # if len(product_talla) < len(values_attributes_ids_talla):                                        
+                                if variant.id in values_attributes_ids_talla:                                     
                                     if sum(disponibles) < self.immediately_usable_qty:
                                         product_data['talla'] = variant.name
                                         product_data['disponible'] = product.immediately_usable_qty
@@ -94,9 +91,5 @@ class ProductTemplateCatalog(models.Model):
                         products_catalog.append(producto)        
                     
                 _logger.info(f'{ products_catalog }')
-                        
-                    
-                    
-            _logger.info(products_data)
                               
         return 'prueba'       
