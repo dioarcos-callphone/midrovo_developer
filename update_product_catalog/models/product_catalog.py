@@ -89,14 +89,16 @@ class ProductCategory(models.Model):
                 suma = 0
                 for ta in talla:
                     contador = 0
+                    total = 0
                     for t in tallas:
                         for v in t.product_template_variant_value_ids:
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
                                 if v.name == ta:
                                     contador = contador + 1
-                                                                       
-                                    if contador >= 1:    
-                                        suma = suma + t.immediately_usable_qty  
-                                    _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { suma }')
+                                    suma = suma + t.immediately_usable_qty                                 
+                                    if contador > 1:
+                                        total = suma   
+                                         
+                                    _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
                 _logger.info(" ")
         return data if data else None
