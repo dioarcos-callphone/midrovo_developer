@@ -51,7 +51,7 @@ class ProductTemplateCatalog(models.Model):
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
                                     product_color.append(variant.name)
-                                    product_data['color'] = variant.name
+                                    product_data['color'] = variant.name or values_attributes_name_color[0]
                                     product_data['imagen'] = product.id
                                     
                                     if variant.id not in values_attributes_name_talla:
