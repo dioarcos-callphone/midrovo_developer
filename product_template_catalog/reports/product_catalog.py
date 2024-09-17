@@ -66,6 +66,8 @@ class ProductTemplateCatalog(models.Model):
                                 
                 product_color = set(product_color)
                 products_catalog = []
+                
+                _logger.info(f'DATA >>> { products_data }')
                                
                 for color in product_color:
                     producto = {}
