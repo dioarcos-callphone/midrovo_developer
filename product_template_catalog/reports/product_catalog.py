@@ -38,6 +38,7 @@ class ProductTemplateCatalog(models.Model):
             
             product_color = []
             product_talla = []
+            tallas = []
             disponibles =   []
             
             if products:
@@ -63,6 +64,7 @@ class ProductTemplateCatalog(models.Model):
                                     if sum(disponibles) < self.immediately_usable_qty:
                                         product_data['talla'] = variant.name
                                         product_data['disponible'] = product.immediately_usable_qty
+                                        tallas.append(variant.name)
                                         product_talla.append({
                                             "talla": variant.name,
                                             "disponible": product.immediately_usable_qty
@@ -76,6 +78,7 @@ class ProductTemplateCatalog(models.Model):
                                 products_data.append(product_data)
                                 
                 product_color = set(product_color)
+                tallas = set(tallas)
                 products_catalog = []
                 
                 _logger.info(f'DATA >>> { products_data }')
@@ -87,7 +90,7 @@ class ProductTemplateCatalog(models.Model):
                     if products_data:
                         for product in products_data:
                             if product.get('disponible'):
-                                if color == product['color']:
+                                if color == product['color'] and product['talla'] in tallas:
                                     contador = contador + 1
                                     suma = suma + product['disponible']
                                     if contador > 1:
