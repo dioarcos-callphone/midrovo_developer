@@ -95,7 +95,7 @@ class ProductCategory(models.Model):
                                 if v.name == ta:
                                     contador = contador + 1
                                                                        
-                                    if contador > 1:    
+                                    if contador >= 1:    
                                         suma = suma + t.immediately_usable_qty  
                                     _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { suma }')
                 _logger.info(" ")
