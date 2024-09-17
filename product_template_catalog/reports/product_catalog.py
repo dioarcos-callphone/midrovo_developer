@@ -35,7 +35,7 @@ class ProductTemplateCatalog(models.Model):
             
             product_color = []
             product_talla = []
-            disponibles = []
+            disponibles =   []
             
             if products:
                 for product in products:
@@ -65,7 +65,6 @@ class ProductTemplateCatalog(models.Model):
                                 products_data.append(product_data)
                                 
                 product_color = set(product_color)
-                
                 products_catalog = []
                                
                 for color in product_color:
@@ -74,7 +73,7 @@ class ProductTemplateCatalog(models.Model):
                     suma = 0
                     if products_data:
                         for product in products_data:
-                            if product.immediately_usable_qty > 0:
+                            if product.get('disponible'):
                                 if color == product['color']:
                                     contador = contador + 1
                                     suma = suma + product['disponible']
