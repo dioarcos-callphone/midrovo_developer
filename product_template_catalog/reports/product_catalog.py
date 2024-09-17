@@ -83,8 +83,8 @@ class ProductTemplateCatalog(models.Model):
                                
                 for color in product_color:
                     producto = {}
+                    contador = 0
                     for talla in tallas:
-                        contador = 0
                         suma = 0
                         if products_data:
                             for product in products_data:
