@@ -88,7 +88,6 @@ class ProductCategory(models.Model):
                 tallas = d['tallas']
                 suma = 0
                 for t in tallas:
-                    suma = 0
                     for v in t.product_template_variant_value_ids:
                         for ta in talla:
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
