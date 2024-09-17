@@ -89,6 +89,8 @@ class ProductTemplateCatalog(models.Model):
                                     producto = product
                             
                     if contador > 1:
+                        products_catalog.append(producto)
+                    else:
                         products_catalog.append(producto)        
                     
                 _logger.info(f'{ products_catalog }')
