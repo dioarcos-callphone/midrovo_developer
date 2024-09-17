@@ -131,7 +131,6 @@
                     <t t-set="lang" t-value="o.company_id.partner_id.lang or env.company.partner_id.lang"/>
                     <t t-call="amf_product_catalog.report_product_catalog" t-lang="lang"/>
                 </t>
-                
             </t>
         </xpath>
     </template>
