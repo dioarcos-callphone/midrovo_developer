@@ -102,6 +102,4 @@ class ProductCategory(models.Model):
                     product_catalogo['tallas'] = [{'talla': key, 'total': value} for key, value in sizes.items()]
                     data_catalog.append(product_catalogo)
 
-                _logger.info(f'{ data_catalog }')
-
         return data_catalog if data_catalog else None
