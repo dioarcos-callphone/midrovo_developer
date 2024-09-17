@@ -9,6 +9,7 @@ class ProductCategory(models.Model):
     
     @api.model
     def _get_data_product_variants(self):
+        data_catalog = []
         data = []
         colores = []
         talla = []
@@ -79,14 +80,17 @@ class ProductCategory(models.Model):
                 data.append(product_data)
                         
             # return data
+        _logger.info(f'TALLAS >>>> { talla }')
         if data:
             for d in data:
+                product_catalogo = {}
                 col = d['color']
                 _logger.info(f'color  >>>>  { col }')
                 tallas = d['tallas']
                 for t in tallas:
                     for v in t.product_template_variant_value_ids:
                         if v.attribute_id.name.lower() in ['talla', 'tallas']:
+                            
                             _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty }')
                 _logger.info(" ")
         return data if data else None
