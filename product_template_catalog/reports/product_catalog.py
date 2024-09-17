@@ -29,6 +29,9 @@ class ProductTemplateCatalog(models.Model):
             values_attributes_ids_color = [ v.id for v in values_attributes_color ]
             values_attributes_ids_talla = [ v.id for v in values_attributes_talla ]
             
+            values_attributes_name_color = [ v.name for v in values_attributes_color ]
+            values_attributes_name_talla = [ v.name for v in values_attributes_talla ]
+            
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
             ])
@@ -50,6 +53,11 @@ class ProductTemplateCatalog(models.Model):
                                     product_color.append(variant.name)
                                     product_data['color'] = variant.name
                                     product_data['imagen'] = product.id
+                                    
+                                    if variant.id not in values_attributes_name_talla:
+                                        if sum(disponibles) < self.immediately_usable_qty:
+                                            product_data['disponible'] = product.immediately_usable_qty
+                                            product_data['talla'] = values_attributes_name_talla[0]
                                 
                                 if variant.id in values_attributes_ids_talla:                                     
                                     if sum(disponibles) < self.immediately_usable_qty:
