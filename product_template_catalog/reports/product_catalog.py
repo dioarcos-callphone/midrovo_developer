@@ -29,7 +29,7 @@ class ProductTemplateCatalog(models.Model):
             values_attributes_ids_color = [ v.id for v in values_attributes_color ]
             values_attributes_ids_talla = [ v.id for v in values_attributes_talla ]
             
-            _logger.info(f'ATT COLOR >>>> { values_attributes_color }')
+            _logger.info(f'ATT COLOR >>>> { values_attributes_color.name }')
             
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
@@ -81,9 +81,8 @@ class ProductTemplateCatalog(models.Model):
                             
                             if color == product['color']:
                                 contador = contador + 1
-                                
-                                if contador >= 1:
-                                    suma = suma + product['disponible']
+                                suma = suma + product['disponible']
+                                if contador > 1:
                                     product['disponible'] = suma
                                     
                             # _logger.info(f'{ product }')
