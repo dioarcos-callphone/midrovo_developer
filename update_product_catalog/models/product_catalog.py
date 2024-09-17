@@ -116,9 +116,8 @@ class ProductCategory(models.Model):
                                         })
                                         
                                         product_catalogo['tallas'] = sizes
-                                        
-                                        
-                                    _logger.info(f'{ product_catalogo }')    
-                                    _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
-                _logger.info(" ")
+  
+                                    #_logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
+                _logger.info(f'{ product_catalogo }')
+                # _logger.info(" ")
         return data if data else None
