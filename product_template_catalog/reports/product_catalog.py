@@ -100,9 +100,9 @@ class ProductTemplateCatalog(models.Model):
                                         else:
                                             producto = product
                                 
-                        if contador > 1:
+                        if contador > 1 and product:
                             products_catalog.append(producto)
-                        else:
+                        elif product:
                             products_catalog.append(producto)        
                     
                 _logger.info(f'{ products_catalog }')
