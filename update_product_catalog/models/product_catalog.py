@@ -86,5 +86,5 @@ class ProductCategory(models.Model):
                     for v in t.product_template_variant_value_ids:
                         if v.attribute_id.name.lower() in ['talla', 'tallas']:
                             _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty }')
-                    _logger.info(" ")
+                _logger.info(" ")
         return data if data else None
