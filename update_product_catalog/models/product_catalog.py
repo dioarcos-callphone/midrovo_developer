@@ -81,6 +81,8 @@ class ProductCategory(models.Model):
             # return data
         if data:
             for d in data:
+                col = d['color']
+                _logger.info(f'color  >>>>  { col }')
                 tallas = d['tallas']
                 for t in tallas:
                     for v in t.product_template_variant_value_ids:
