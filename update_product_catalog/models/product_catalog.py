@@ -67,12 +67,6 @@ class ProductCategory(models.Model):
                         if product.immediately_usable_qty > 0:
                             suma_disponible += int(product.immediately_usable_qty)
                             product_variants.append(product)
-                            
-                for p in product_variants:
-                    _logger.info(f'{ p.product_template_variant_value_ids }')
-                    for v in p.product_template_variant_value_ids:
-                        if v.attribute_id.name.lower() in ['talla', 'tallas']:
-                            _logger.info(f'talla >>> { v.name } - precio >>> { p.immediately_usable_qty }')
 
                 product_data = {
                     "color": color,
