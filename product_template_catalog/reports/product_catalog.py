@@ -54,10 +54,10 @@ class ProductTemplateCatalog(models.Model):
                                     product_data['color'] = variant.name
                                     product_data['imagen'] = product.id
                                     
-                                    if variant.name not in values_attributes_name_talla:
-                                        if sum(disponibles) < self.immediately_usable_qty:
-                                            product_data['disponible'] = product.immediately_usable_qty
-                                            product_data['talla'] = values_attributes_name_talla[0]
+                                    # if variant.name not in values_attributes_name_talla:
+                                    #     if sum(disponibles) < self.immediately_usable_qty:
+                                    #         product_data['disponible'] = product.immediately_usable_qty
+                                    #         product_data['talla'] = values_attributes_name_talla[0]
                                 
                                 if variant.id in values_attributes_ids_talla:                                     
                                     if sum(disponibles) < self.immediately_usable_qty:
