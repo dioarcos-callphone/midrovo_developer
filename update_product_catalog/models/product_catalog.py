@@ -84,6 +84,6 @@ class ProductCategory(models.Model):
 
                 data.append(product_data)
                         
-            return data
+            # return data
         
-        return None
+        return data if data else None
