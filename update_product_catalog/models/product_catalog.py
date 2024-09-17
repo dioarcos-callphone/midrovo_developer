@@ -76,16 +76,11 @@ class ProductCategory(models.Model):
                 }
 
                 data.append(product_data)
-                        
-            # return data
             
             if data:
                 for d in data:
                     product_catalogo = {}
-                    col = d['color']
-                    _logger.info(f'color  >>>>  { col }')
                     tallas = d['tallas']
-                    suma = 0
                     sizes = {}
                     product_catalogo['color'] = d['color']
                     product_catalogo['img'] = d['img']
