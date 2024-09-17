@@ -105,7 +105,7 @@ class ProductCategory(models.Model):
                                         total = suma
                                     
                                     sizes.append({
-                                        "talla": v.name,
+                                        "talla": v.name if contador == 1 else None,
                                         "total": total if contador > 1 else t.qty_available
                                     })
                                         
