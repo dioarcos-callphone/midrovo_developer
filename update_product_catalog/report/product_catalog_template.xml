@@ -36,7 +36,7 @@
                                                             <tr>
                                                                 <t t-foreach="result['tallas']" t-as="talla">
                                                                     <t t-if="talla.product_template_variant_value_ids">
-                                                                        <t t-foreach="talla.product_template_variant_value_ids" t-as="variant_value">
+                                                                        <t t-foreach="set(talla.product_template_variant_value_ids)" t-as="variant_value">
                                                                             <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
                                                                                 <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
                                                                                     <span t-esc="variant_value.name"/>
