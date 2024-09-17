@@ -109,10 +109,12 @@ class ProductCategory(models.Model):
                                         })
                                         
                                 else:
-                                    sizes.append({
-                                        "talla": v.name,
-                                        "total": t.qty_available
-                                    })
+                                    for size in sizes:
+                                        if size['talla'] != ta:
+                                            sizes.append({
+                                                "talla": v.name,
+                                                "total": t.qty_available
+                                            })
                                         
                                     product_catalogo['tallas'] = sizes                                    
   
