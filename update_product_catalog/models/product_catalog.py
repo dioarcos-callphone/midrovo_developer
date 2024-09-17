@@ -66,14 +66,14 @@ class ProductCategory(models.Model):
                         if product.qty_available > 0:
                             suma_disponible += int(product.qty_available)
                             product_variants.append(product)
-
-                product_data = {
-                    "color": color,
-                    "img": product_variants[0].id,
-                    "tallas": product_variants,
-                    "disponible": suma_disponible,
-                    "talla_unica": talla
-                }
+                if product_variants:
+                    product_data = {
+                        "color": color,
+                        "img": product_variants[0].id,
+                        "tallas": product_variants,
+                        "disponible": suma_disponible,
+                        "talla_unica": talla
+                    }
 
                 data.append(product_data)
             
