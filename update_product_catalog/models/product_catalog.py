@@ -48,25 +48,25 @@ class ProductCategory(models.Model):
                             for value in values:
                                 val = value.name
                                 if(color == val):
-                                    if product.immediately_usable_qty > 0:
-                                        suma_disponible += int(product.immediately_usable_qty)
+                                    if product.qty_available > 0:
+                                        suma_disponible += int(product.qty_available)
                                         product_variants.append(product)
                                     
                         else:
                             val = values.name
                             if(color == val):
-                                if product.immediately_usable_qty > 0:
-                                    suma_disponible += int(product.immediately_usable_qty)
+                                if product.qty_available > 0:
+                                    suma_disponible += int(product.qty_available)
                                     product_variants.append(product)
                                 
                             elif(values.attribute_id.name.lower() == 'tallas' or values.attribute_id.name.lower() == 'talla'):
-                                if product.immediately_usable_qty > 0:
-                                    suma_disponible += int(product.immediately_usable_qty)
+                                if product.qty_available > 0:
+                                    suma_disponible += int(product.qty_available)
                                     product_variants.append(product)
                                 
                     else:
-                        if product.immediately_usable_qty > 0:
-                            suma_disponible += int(product.immediately_usable_qty)
+                        if product.qty_available > 0:
+                            suma_disponible += int(product.qty_available)
                             product_variants.append(product)
 
                 product_data = {
@@ -100,20 +100,14 @@ class ProductCategory(models.Model):
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
                                 if v.name == ta:
                                     contador = contador + 1
-                                    suma = suma + t.immediately_usable_qty                                 
+                                    suma = suma + t.qty_available                                 
                                     if contador > 1:
                                         total = suma
-                                        
-                                        sizes.append({
-                                            "talla": v.name,
-                                            "total": total
-                                        })
                                     
-                                    elif contador == 1:
-                                        sizes.append({
-                                            "talla": v.name,
-                                            "total": t.qty_available
-                                        })
+                                    sizes.append({
+                                        "talla": v.name,
+                                        "total": total if contador > 1 else t.qty_available
+                                    })
                                         
                                     product_catalogo['tallas'] = sizes                                    
   
