@@ -85,30 +85,27 @@ class ProductTemplateCatalog(models.Model):
                                
                 for color in product_color:
                     for talla in tallas:
-                        c = color
-                        t = talla
-                        _logger.info(f'{ c } || { t }')
-                    producto = {}
-                    contador = 0
-                    suma = 0
-                    if products_data:
-                        for product in products_data:
-                            if product.get('disponible'):
+                        producto = {}
+                        contador = 0
+                        suma = 0
+                        if products_data:
+                            for product in products_data:
+                                if product.get('disponible'):
+                                    
+                                    if color == product['color'] and talla == product['talla']:
+                                        contador = contador + 1
+                                        suma = suma + product['disponible']
+                                        if contador > 1:
+                                            product['disponible'] = suma
+                                            producto = product
+                                            
+                                        else:
+                                            producto = product
                                 
-                                if color == product['color']:
-                                    contador = contador + 1
-                                    suma = suma + product['disponible']
-                                    if contador > 1:
-                                        product['disponible'] = suma
-                                        producto = product
-                                        
-                                    else:
-                                        producto = product
-                            
-                    if contador > 1:
-                        products_catalog.append(producto)
-                    else:
-                        products_catalog.append(producto)        
+                        if contador > 1:
+                            products_catalog.append(producto)
+                        else:
+                            products_catalog.append(producto)        
                     
                 _logger.info(f'{ products_catalog }')
                               
