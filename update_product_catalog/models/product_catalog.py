@@ -70,6 +70,9 @@ class ProductCategory(models.Model):
                             
                 for p in product_variants:
                     _logger.info(f'{ p.product_template_variant_value_ids }')
+                    for v in p.product_template_variant_value_ids:
+                        if v.attribute_id.name.lower() in ['talla', 'tallas']:
+                            _logger.info(f'{ v.name }')
 
                 product_data = {
                     "color": color,
