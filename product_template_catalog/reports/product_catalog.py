@@ -99,8 +99,8 @@ class ProductTemplateCatalog(models.Model):
                                             product['disponible'] = suma
                                             producto = product
                                             
-                                        else:
-                                            producto = product
+                                    else:
+                                        producto = product
                                 
                         if contador > 1:
                             products_catalog.append(producto)
