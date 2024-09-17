@@ -105,12 +105,12 @@ class ProductCategory(models.Model):
                                         total = suma
                                     
                                     if contador == 1:
-                                        # sizes.append({
-                                        #     "talla": v.name,
-                                        #     "total": total if total > 0 else t.qty_available
-                                        # })
+                                        sizes.append({
+                                            "talla": v.name,
+                                            "total": total if total > 0 else t.qty_available
+                                        })
                                         
-                                        # product_catalogo['tallas'] = { "talla": v.name, "total": total }
+                                        product_catalogo['tallas'] = sizes
                                         
                                         _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { total }')
                 _logger.info(" ")
