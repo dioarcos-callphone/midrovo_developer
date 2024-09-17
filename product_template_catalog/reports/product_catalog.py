@@ -49,7 +49,7 @@ class ProductTemplateCatalog(models.Model):
                                 if variant.id in values_attributes_ids_color:
                                     product_color.append(variant.name)
                                     product_data['color'] = variant.name
-                                    product_data['imagen'] = product.image_512 or self.image_512
+                                    product_data['imagen'] = product.id
                                 
                                 if variant.id in values_attributes_ids_talla:                                     
                                     if sum(disponibles) < self.immediately_usable_qty:
