@@ -67,6 +67,9 @@ class ProductCategory(models.Model):
                         if product.immediately_usable_qty > 0:
                             suma_disponible += int(product.immediately_usable_qty)
                             product_variants.append(product)
+                            
+                for p in product_variants:
+                    _logger.info(f'{ p.product_template_variant_value_ids }')
 
                 product_data = {
                     "color": color,
