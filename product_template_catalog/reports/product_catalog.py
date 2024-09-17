@@ -29,8 +29,6 @@ class ProductTemplateCatalog(models.Model):
             values_attributes_ids_color = [ v.id for v in values_attributes_color ]
             values_attributes_ids_talla = [ v.id for v in values_attributes_talla ]
             
-            _logger.info(f'ATT COLOR >>>> { values_attributes_color.name }')
-            
             products = self.env['product.product'].search([
                     ('product_tmpl_id', '=', product_id),
             ])
