@@ -72,7 +72,7 @@ class ProductCategory(models.Model):
                     _logger.info(f'{ p.product_template_variant_value_ids }')
                     for v in p.product_template_variant_value_ids:
                         if v.attribute_id.name.lower() in ['talla', 'tallas']:
-                            _logger.info(f'{ v.name }')
+                            _logger.info(f'talla >>> { v.name } - precio >>> { p.immediately_usable_qty }')
 
                 product_data = {
                     "color": color,
