@@ -87,6 +87,7 @@ class ProductCategory(models.Model):
                 _logger.info(f'color  >>>>  { col }')
                 tallas = d['tallas']
                 suma = 0
+                sizes = []
                 product_catalogo['color'] = d['color']
                 product_catalogo['img'] = d['img']
                 product_catalogo['disponible'] = d['disponible']
@@ -94,7 +95,6 @@ class ProductCategory(models.Model):
                 for ta in talla:
                     contador = 0
                     total = 0
-                    sizes = []
                     for t in tallas:
                         for v in t.product_template_variant_value_ids:
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
