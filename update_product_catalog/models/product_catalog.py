@@ -85,5 +85,12 @@ class ProductCategory(models.Model):
                 data.append(product_data)
                         
             # return data
+        if data:
+            for d in data:
+                tallas = d['tallas']
+                for t in tallas:
+                    for v in t.product_template_variant_value_ids:
+                        if v.attribute_id.name.lower() in ['talla', 'tallas']:
+                            _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty }')
         
         return data if data else None
