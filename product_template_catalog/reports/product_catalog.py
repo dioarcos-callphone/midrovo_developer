@@ -90,19 +90,16 @@ class ProductTemplateCatalog(models.Model):
                     if products_data:
                         for product in products_data:
                             if product.get('disponible'):
-                                for talla in tallas:
-                                    c = product['color']
-                                    t = talla
-                                    _logger.info(f'{ c } || { t }')
-                                    if color == product['color'] and product['talla'] == talla:
-                                        contador = contador + 1
-                                        suma = suma + product['disponible']
-                                        if contador > 1:
-                                            product['disponible'] = suma
-                                            producto = product
-                                            
-                                        else:
-                                            producto = product
+                                
+                                if color == product['color']:
+                                    contador = contador + 1
+                                    suma = suma + product['disponible']
+                                    if contador > 1:
+                                        product['disponible'] = suma
+                                        producto = product
+                                        
+                                    else:
+                                        producto = product
                             
                     if contador > 1:
                         products_catalog.append(producto)
