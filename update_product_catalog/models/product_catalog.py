@@ -88,11 +88,11 @@ class ProductCategory(models.Model):
                 tallas = d['tallas']
                 for t in tallas:
                     suma = 0
-                    for ta in talla:
-                        for v in t.product_template_variant_value_ids:
+                    for v in t.product_template_variant_value_ids:
+                        for ta in talla:
                             if v.attribute_id.name.lower() in ['talla', 'tallas']:
                                 if v.name == ta:
-                                    suma += t.immediately_usable_qty
+                                    suma = suma + t.immediately_usable_qty
                                     _logger.info(f'talla >>> { v.name } - precio >>> { t.immediately_usable_qty } - total >>> { suma }')
                 _logger.info(" ")
         return data if data else None
