@@ -86,6 +86,7 @@ class ProductCategory(models.Model):
                 col = d['color']
                 _logger.info(f'color  >>>>  { col }')
                 tallas = d['tallas']
+                suma = 0
                 for t in tallas:
                     suma = 0
                     for v in t.product_template_variant_value_ids:
