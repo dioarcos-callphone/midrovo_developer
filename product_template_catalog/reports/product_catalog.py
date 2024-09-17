@@ -84,10 +84,11 @@ class ProductTemplateCatalog(models.Model):
                 _logger.info(f'DATA >>> { products_data }')
                                
                 for color in product_color:
+                    producto = {}
+                    contador = 0
+                    suma = 0
                     for talla in tallas:
-                        producto = {}
-                        contador = 0
-                        suma = 0
+                        
                         if products_data:
                             for product in products_data:
                                 if product.get('disponible'):
@@ -99,13 +100,13 @@ class ProductTemplateCatalog(models.Model):
                                             product['disponible'] = suma
                                             producto = product
                                             
-                                    else:
-                                        producto = product
+                                        else:
+                                            producto = product
                                 
-                        if contador > 1:
-                            products_catalog.append(producto)
-                        else:
-                            products_catalog.append(producto)        
+                    if contador > 1:
+                        products_catalog.append(producto)
+                    else:
+                        products_catalog.append(producto)        
                     
                 _logger.info(f'{ products_catalog }')
                               
