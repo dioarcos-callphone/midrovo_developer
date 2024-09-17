@@ -51,10 +51,10 @@ class ProductTemplateCatalog(models.Model):
                             for variant in variants:
                                 if variant.id in values_attributes_ids_color:
                                     product_color.append(variant.name)
-                                    product_data['color'] = variant.name or values_attributes_name_color[0]
+                                    product_data['color'] = variant.name
                                     product_data['imagen'] = product.id
                                     
-                                    if variant.id not in values_attributes_name_talla:
+                                    if variant.name not in values_attributes_name_talla:
                                         if sum(disponibles) < self.immediately_usable_qty:
                                             product_data['disponible'] = product.immediately_usable_qty
                                             product_data['talla'] = values_attributes_name_talla[0]
@@ -68,6 +68,9 @@ class ProductTemplateCatalog(models.Model):
                                             "disponible": product.immediately_usable_qty
                                         })
                                         disponibles.append(product.immediately_usable_qty)
+                                        
+                                        if variant.name not in values_attributes_name_color:
+                                            product_data['color'] = values_attributes_name_color[0]
                                             
                             if product_data:
                                 products_data.append(product_data)
