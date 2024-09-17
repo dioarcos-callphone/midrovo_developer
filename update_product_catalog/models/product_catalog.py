@@ -89,8 +89,8 @@ class ProductCategory(models.Model):
                 suma = 0
                 product_catalogo['color'] = d['color']
                 product_catalogo['img'] = d['img']
-                product_catalogo['disponible']
-                product_catalogo['talla_unica']
+                product_catalogo['disponible'] = d['disponible']
+                product_catalogo['talla_unica'] = d['talla_unica']
                 for ta in talla:
                     contador = 0
                     total = 0
