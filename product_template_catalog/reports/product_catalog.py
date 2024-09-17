@@ -84,6 +84,10 @@ class ProductTemplateCatalog(models.Model):
                 _logger.info(f'DATA >>> { products_data }')
                                
                 for color in product_color:
+                    for talla in tallas:
+                        c = color
+                        t = talla
+                        _logger.info(f'{ c } || { t }')
                     producto = {}
                     contador = 0
                     suma = 0
