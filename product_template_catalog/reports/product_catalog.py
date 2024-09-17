@@ -69,8 +69,8 @@ class ProductTemplateCatalog(models.Model):
                                         })
                                         disponibles.append(product.immediately_usable_qty)
                                         
-                                        if variant.name not in values_attributes_name_color:
-                                            product_data['color'] = values_attributes_name_color[0]
+                                        # if variant.name not in values_attributes_name_color:
+                                        #     product_data['color'] = values_attributes_name_color[0]
                                             
                             if product_data:
                                 products_data.append(product_data)
