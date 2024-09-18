@@ -8,7 +8,7 @@ class ProductCatalogReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         docs = self.env['product.template'].browse(docids)
         
-        if len(docs) > 140:
+        if len(docs) > 10:
             raise ValidationError('Solo se permite generar 140 productos en el catálogo.')
 
         for doc in docs:
