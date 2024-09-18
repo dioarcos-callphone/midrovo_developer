@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -110,4 +110,4 @@ class ProductCategory(models.Model):
         if self.qty_available > 0:
             return True
         
-        raise ValidationError(f'Solo se permite crear catálogo con cantidad disponible')
+        raise UserError(f'Solo se permite crear catálogo con cantidad disponible')
