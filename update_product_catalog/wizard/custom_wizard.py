@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class MyErrorWizard(models.TransientModel):
-    _name = 'custom.error.wizard'
+    _name = 'wizard.product.template'
     _description = 'Wizard de Mensaje de Error'
 
     message = fields.Text(string="Mensaje de Error", readonly=True)

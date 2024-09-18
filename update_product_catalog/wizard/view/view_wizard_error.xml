@@ -1,24 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <record id="view_custom_error_wizard_form" model="ir.ui.view">
-        <field name="name">custom.error.wizard.form</field>
-        <field name="model">custom.error.wizard</field>
+    <record id="wizard_product_template_view" model="ir.ui.view">
+        <field name="name">wizard.product.template.view</field>
+        <field name="model">wizard.product.template</field>
         <field name="arch" type="xml">
-            <form string="Error Controlado">
-                <sheet>
-                    <div>
-                        <h2>Se ha producido un error</h2>
-                        <p>
-                            <field name="message"/>
-                        </p>
-                    </div>
-                </sheet>
+            <form string="Product Template Validation">
+                <group>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
                 <footer>
-                    <button string="Cerrar" type="object" name="action_close" class="btn-primary"/>
+                    <button name="action_close" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
-
 </odoo>

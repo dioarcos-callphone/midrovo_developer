@@ -110,18 +110,17 @@ class ProductCategory(models.Model):
     def validate_quantity(self, docs):
         longitud = len(docs)
 
-        if longitud > 10: 
-            raise UserError(f'Solo se permite crear catálogo con cantidad disponible')
+        if longitud > 10:
+            view_id = self.env.ref('update_product_catalog.wizard_product_template_view').id
+            
+            return {
+                'name': 'Warning',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'wizard.product.template',
+                'view_id': view_id,
+                'target': 'new',
+                'context': 'MOSTRAR MENSAJE',
+            }
         
         return True
-    
-    def _open_error_wizard(self):
-        """ Método para abrir el wizard de error """
-        return {
-            'name': 'Error: Exceso de productos',
-            'type': 'ir.actions.act_window',
-            'res_model': 'custom.error.wizard',  # El modelo del wizard
-            'view_mode': 'form',
-            'target': 'new',  # Para que sea modal (popup)
-            'context': {'default_message': 'Solo se permite crear catálogo con cantidad disponible menor a 10.'}
-        }
