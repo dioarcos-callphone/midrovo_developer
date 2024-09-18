@@ -75,7 +75,7 @@ class ProductCategory(models.Model):
                         "talla_unica": talla
                     }
 
-                data.append(product_data)
+                    data.append(product_data)
             
             if data:
                 for d in data:
