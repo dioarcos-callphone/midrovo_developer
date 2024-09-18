@@ -17,8 +17,8 @@
     'depends': [ 'amf_product_catalog', 'sale', 'stock' ],
     'data': [
         'report/product_catalog_template.xml',
+        'wizard/view/view_wizard_error.xml',
         'wizard/record_wizard_error.xml',
-        'wizard/view/view_wizard_error.xml'
     ],
     
     'license': 'LGPL-3',
