@@ -3,8 +3,8 @@
     <template id="template_update_catalog" inherit_id="amf_product_catalog.report_product_catalog">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
-                <!-- <t t-call="web.external_layout"> -->
-                    <!-- <div class="page" style="margin: 0 !important; padding: 0 !important;"> -->
+                <t t-call="web.external_layout">
+                    <div class="page" style="margin: 0 !important; padding: 0 !important;">
                         <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                             <div>
                                 <h3 t-field="o.name"/>
@@ -115,8 +115,8 @@
                                 </table>
                             </article>
                         </t> 
-                    <!-- </div> -->
-                <!-- </t> -->
+                    </div>
+                </t>
             </t>          
         </xpath>
     </template>
