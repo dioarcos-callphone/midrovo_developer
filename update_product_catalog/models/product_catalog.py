@@ -116,7 +116,7 @@ class ProductCategory(models.Model):
                 'type': 'ir.actions.act_window',
                 'res_model': 'wizard.product.template',
                 'view_mode': 'form',
-                'view_id': self.env.ref('update_product_catalog.wizard_product_template_view').id,
+                'view_id': self.env.ref('wizard_product_template_view').id,
                 'target': 'new',
                 'context': {'default_message': 'There are more than 10 items.'},
             }
