@@ -4,7 +4,7 @@
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
-                    <div class="page" style="margin: 0 !important; padding: 0 !important;">
+                    <!-- <div class="page" style="margin: 0 !important; padding: 0 !important;"> -->
                         <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                             <div>
                                 <h3 t-field="o.name"/>
@@ -115,7 +115,7 @@
                                 </table>
                             </article>
                         </t> 
-                    </div>
+                    <!-- </div> -->
                 </t>
             </t>          
         </xpath>
@@ -123,14 +123,12 @@
 
     <template id="product_template_catalog" inherit_id="amf_product_catalog.report_product_template_catalog">
         <xpath expr="//t[@t-call='web.html_container']" position="replace">
-            <!-- <t t-if="env['product.template'].validate_quantity(docs)"> -->
             <t t-foreach="docs" t-as="o">
                 <t t-if="o.qty_available > 0">
                     <t t-set="lang" t-value="o.company_id.partner_id.lang or env.company.partner_id.lang"/>
                     <t t-call="amf_product_catalog.report_product_catalog" t-lang="lang"/>
                 </t>
             </t>
-            <!-- </t> -->
         </xpath>
     </template>
 </odoo>
