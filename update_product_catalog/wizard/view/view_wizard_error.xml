@@ -4,6 +4,7 @@
         <field name="model">wizard.product.template</field>
         <field name="arch" type="xml">
             <form string="Product Template Validation">
+                <field name="message"/>
                 <footer>
                     <button name="action_close" string="Confirm" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>

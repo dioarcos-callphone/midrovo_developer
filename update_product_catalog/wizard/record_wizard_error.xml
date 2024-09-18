@@ -3,6 +3,7 @@
         <field name="name">Error Wizard</field>
         <field name="res_model">wizard.product.template</field>
         <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_product_template_view"/>
         <field name="target">new</field>
     </record>
 </odoo>

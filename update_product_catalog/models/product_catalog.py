@@ -111,8 +111,8 @@ class ProductCategory(models.Model):
         longitud = len(docs)
 
         if longitud > 10:
-            view_id = self.env.ref('update_product_catalog.wizard_product_template_view').id
-            
+            view_id = self.env.ref('wizard_product_template_view').id
+        
             return {
                 'name': 'Warning',
                 'type': 'ir.actions.act_window',
@@ -120,7 +120,7 @@ class ProductCategory(models.Model):
                 'res_model': 'wizard.product.template',
                 'view_id': view_id,
                 'target': 'new',
-                'context': 'MOSTRAR MENSAJE',
+                'context': {'default_message': 'Se ha producido un error: cantidad superior a 10.'},
             }
         
         return True

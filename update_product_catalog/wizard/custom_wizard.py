@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 class MyErrorWizard(models.TransientModel):
     _name = 'wizard.product.template'
@@ -7,5 +7,5 @@ class MyErrorWizard(models.TransientModel):
     message = fields.Text(string="Mensaje de Error", readonly=True)
 
     def action_close(self):
-        """ Método para cerrar el wizard """
+        """Método para cerrar el wizard"""
         return {'type': 'ir.actions.act_window_close'}
