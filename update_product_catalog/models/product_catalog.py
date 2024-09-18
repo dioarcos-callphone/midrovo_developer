@@ -114,3 +114,14 @@ class ProductCategory(models.Model):
             raise UserError(f'Solo se permite crear catálogo con cantidad disponible')
         
         return True
+    
+    def _open_error_wizard(self):
+        """ Método para abrir el wizard de error """
+        return {
+            'name': 'Error: Exceso de productos',
+            'type': 'ir.actions.act_window',
+            'res_model': 'custom.error.wizard',  # El modelo del wizard
+            'view_mode': 'form',
+            'target': 'new',  # Para que sea modal (popup)
+            'context': {'default_message': 'Solo se permite crear catálogo con cantidad disponible menor a 10.'}
+        }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_custom_error_wizard_form" model="ir.ui.view">
+        <field name="name">custom.error.wizard.form</field>
+        <field name="model">custom.error.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Error Controlado">
+                <sheet>
+                    <div>
+                        <h2>Se ha producido un error</h2>
+                        <p>
+                            <field name="message"/>
+                        </p>
+                    </div>
+                </sheet>
+                <footer>
+                    <button string="Cerrar" type="object" name="action_close" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
