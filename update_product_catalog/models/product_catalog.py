@@ -111,7 +111,7 @@ class ProductCategory(models.Model):
         longitud = len(docs)
 
         if longitud > 10:
-            view_id = self.env.ref('wizard_product_template_view').id
+            view_id = self.env.ref('update_product_catalog.wizard_product_template_view').id
         
             return {
                 'name': 'Warning',
