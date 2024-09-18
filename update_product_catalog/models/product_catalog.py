@@ -107,7 +107,7 @@ class ProductCategory(models.Model):
         return data_catalog if data_catalog else None
     
     @api.model
-    def validate_quantity(self):
+    def validate_quantity(self, docs):
         if self.qty_available > 0:
             return True
         
