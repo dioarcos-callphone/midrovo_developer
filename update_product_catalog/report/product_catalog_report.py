@@ -13,7 +13,7 @@ class ProductCatalogReport(models.AbstractModel):
 
         for doc in docs:
             if doc.qty_available <= 0:
-                raise ValidationError('Uno o más productos seleccionados no tienen stock disponible. Por favor, desmarca los productos con stock cero antes de generar el informe.')
+                raise ValidationError('Uno o más productos seleccionados no tienen stock disponible. Por favor, desmarca los productos con stock cero antes de generar el catálogo.')
         
 
         return {
