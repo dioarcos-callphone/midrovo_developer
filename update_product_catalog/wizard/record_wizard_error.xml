@@ -1,7 +1,7 @@
 <odoo>
     <record id="action_custom_error_wizard" model="ir.actions.act_window">
         <field name="name">Error Wizard</field>
-        <field name="res_model">custom.error.wizard</field>
+        <field name="res_model">wizard.product.template</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
