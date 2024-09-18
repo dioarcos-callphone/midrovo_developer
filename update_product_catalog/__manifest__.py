@@ -14,7 +14,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': [ 'amf_product_catalog', 'sale', ],
+    'depends': [ 'amf_product_catalog', 'sale', 'stock' ],
     'data': [
         'report/product_catalog_template.xml', 
     ],
