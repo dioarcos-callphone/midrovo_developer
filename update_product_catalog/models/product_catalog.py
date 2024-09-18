@@ -108,7 +108,9 @@ class ProductCategory(models.Model):
     
     @api.model
     def validate_quantity(self, docs):
-        if self.qty_available > 0:
-            return True
+        longitud = len(docs)
+
+        if longitud > 10: 
+            raise UserError(f'Solo se permite crear catálogo con cantidad disponible')
         
-        raise UserError(f'Solo se permite crear catálogo con cantidad disponible')
+        return True
