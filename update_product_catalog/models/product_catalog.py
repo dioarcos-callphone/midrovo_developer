@@ -106,19 +106,19 @@ class ProductCategory(models.Model):
 
         return data_catalog if data_catalog else None
     
-    @api.model
-    def validate_quantity(self, docs):
-        longitud = len(docs)
+    # @api.model
+    # def validate_quantity(self, docs):
+    #     longitud = len(docs)
 
-        if longitud > 10:
-            return {
-                'name': 'Warning',
-                'type': 'ir.actions.act_window',
-                'res_model': 'wizard.product.template',
-                'view_mode': 'form',
-                'view_id': self.env.ref('wizard_product_template_view').id,
-                'target': 'new',
-                'context': {'default_message': 'There are more than 10 items.'},
-            }
+    #     if longitud > 10:
+    #         return {
+    #             'name': 'Warning',
+    #             'type': 'ir.actions.act_window',
+    #             'res_model': 'wizard.product.template',
+    #             'view_mode': 'form',
+    #             'view_id': self.env.ref('wizard_product_template_view').id,
+    #             'target': 'new',
+    #             'context': {'default_message': 'There are more than 10 items.'},
+    #         }
         
-        return True
+    #     return True

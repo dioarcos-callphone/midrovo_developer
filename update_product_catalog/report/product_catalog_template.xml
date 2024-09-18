@@ -123,14 +123,14 @@
 
     <template id="product_template_catalog" inherit_id="amf_product_catalog.report_product_template_catalog">
         <xpath expr="//t[@t-call='web.html_container']" position="replace">
-            <t t-if="env['product.template'].validate_quantity(docs)">
-                <t t-foreach="docs" t-as="o">
-                    <t t-if="o.qty_available > 0">
-                        <t t-set="lang" t-value="o.company_id.partner_id.lang or env.company.partner_id.lang"/>
-                        <t t-call="amf_product_catalog.report_product_catalog" t-lang="lang"/>
-                    </t>
+            <!-- <t t-if="env['product.template'].validate_quantity(docs)"> -->
+            <t t-foreach="docs" t-as="o">
+                <t t-if="o.qty_available > 0">
+                    <t t-set="lang" t-value="o.company_id.partner_id.lang or env.company.partner_id.lang"/>
+                    <t t-call="amf_product_catalog.report_product_catalog" t-lang="lang"/>
                 </t>
             </t>
+            <!-- </t> -->
         </xpath>
     </template>
 </odoo>
