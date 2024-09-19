@@ -28,7 +28,6 @@
                             <th align="center"/>
                             <th align="center"/>
                             <th align="center"/>
-                            <th align="center"/>
                             <t t-foreach="main_header" t-as="header">
                             <th align="center" colspan="2"><t t-esc="header"/></th>
                             </t>
