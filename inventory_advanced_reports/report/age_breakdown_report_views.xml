@@ -59,6 +59,15 @@
                             </td>
                             <td>
                                 <t t-esc="new['product_code_and_name']"/>
+                                <t t-if="new['atributos']">
+                                    <t t-foreach="new['atributos']" t-as="atributo">
+                                        <t t-foreach="atributo.items()" t-as="variable">
+                                            <span>
+                                                <t t-esc="variable[0]"/>: <t t-esc="variable[1]"/>
+                                            </span>
+                                        </t>
+                                    </t>
+                                </t>
                             </td>
                             <td>
                                 <t t-esc="new['category_name']"/>
