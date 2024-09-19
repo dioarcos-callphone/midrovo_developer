@@ -50,7 +50,7 @@
                     <tbody>
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
-                            <td style:"white-space: nowrap;">
+                            <td style="white-space: nowrap;">
                                 <t t-esc="new['product_code_and_name']"/>
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
