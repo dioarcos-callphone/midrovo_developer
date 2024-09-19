@@ -160,6 +160,8 @@ class AgeBreakdownReport(models.AbstractModel):
         self.env.cr.execute(query, params)
         result_data = self.env.cr.dictfetchall()
         
+        _logger.info(f'MOSTRANDO IDS >>> { product_ids }')
+        
         main_header = age_breakdown_days
         if result_data:
             
