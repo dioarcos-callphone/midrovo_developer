@@ -160,7 +160,8 @@ class AgeBreakdownReport(models.AbstractModel):
         self.env.cr.execute(query, params)
         result_data = self.env.cr.dictfetchall()
         
-        result_data['attribute'] = 'color'
+        for res in result_data:
+            res['atributo'] = 'color'
         
         _logger.info(f'MOSTRANDO IDS >>> { product_ids }')
         
