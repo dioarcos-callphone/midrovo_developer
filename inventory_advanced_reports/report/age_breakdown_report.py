@@ -172,8 +172,6 @@ class AgeBreakdownReport(models.AbstractModel):
                         
                     res['atributos'] = atts_variants
         
-        _logger.info(f'MOSTRANDO IDS >>> { product_ids }')
-        
         main_header = age_breakdown_days
         if result_data:
             
