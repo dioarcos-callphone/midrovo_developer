@@ -54,7 +54,6 @@
                                 <t t-esc="new['product_code_and_name']"/>
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
-                                        <t t-set="last_item" t-value="False"/>
                                         <t t-foreach="atributo.items()" t-as="variable">
                                             <span>valor </span>
                                         </t>
