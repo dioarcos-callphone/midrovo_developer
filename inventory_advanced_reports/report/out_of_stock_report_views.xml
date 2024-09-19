@@ -39,7 +39,7 @@
                 <br/>
                 <div class="page">
                     <div class="text-center">
-                        <h1>Inventory Out Of Stock Report</h1>
+                        <h1>Informe de Inventario sin Stock</h1>
                     </div>
                 </div>
                 <br/>
@@ -47,9 +47,7 @@
                 <div>
                     <div>
                         <t t-if="data.get('start_date') and data.get('end_date')">
-                            <strong>
-                                Sales History from:
-                            </strong>
+                            <strong>Historial de Ventas desde:</strong>
                             <span t-esc="data['start_date']"/>
                             <br/>
                             <strong>
@@ -57,11 +55,9 @@
                             </strong>
                             <span t-esc="data['end_date']"/>
                             <br/>
-                            <strong>
-                                Inventory Analysis For Next:
-                            </strong>
+                            <strong>Análisis de Inventario para los Próximos:</strong>
                             <span t-esc="data['inventory_for_next_x_days']"/>
-                            days
+                            días
                         </t>
                     </div>
                 </div>
@@ -70,24 +66,24 @@
                     <thead>
                         <tr>
                             <th align="center">Sl.no</th>
-                            <th align="center">PRODUCT</th>
-                            <th align="center">CATEGORY</th>
-                            <th align="center">CURRENT STOCK</th>
-                            <th align="center">INCOMING</th>
-                            <th align="center">OUTGOING</th>
-                            <th align="center">VIRTUAL STOCK</th>
-                            <th align="center">SALES</th>
-                            <th align="center">ADS</th>
-                            <th align="center">DEMANDED QTY</th>
-                            <th align="center">IN STOCK DAYS</th>
-                            <th align="center">OUT OF STOCK DAYS</th>
-                            <th align="center">OUT OF STOCK RATIO</th>
-                            <th align="center">COST PRICE</th>
-                            <th align="center">OUT OF STOCK QTY</th>
-                            <th align="center">OUT OF STOCK QTY(%)</th>
-                            <th align="center">OUT OF STOCK VALUE(%)</th>
-                            <th align="center">TURNOVER RATIO(%)</th>
-                            <th align="center">FSN CLASSIFICATION</th>
+                            <th align="center">PRODUCTO</th>
+                            <th align="center">CATEGORÍA</th>
+                            <th align="center">STOCK ACTUAL</th>
+                            <th align="center">ENTRADAS</th>
+                            <th align="center">SALIDAS</th>
+                            <th align="center">STOCK VIRTUAL</th>
+                            <th align="center">VENTAS</th>
+                            <th align="center">ANUNCIOS</th>
+                            <th align="center">CANTIDAD DEMANDADA</th>
+                            <th align="center">DÍAS EN STOCK</th>
+                            <th align="center">DÍAS SIN STOCK</th>
+                            <th align="center">ÍNDICE DE FALTANTE</th>
+                            <th align="center">PRECIO DE COSTO</th>
+                            <th align="center">CANTIDAD SIN STOCK</th>
+                            <th align="center">CANTIDAD SIN STOCK (%)</th>
+                            <th align="center">VALOR SIN STOCK (%)</th>
+                            <th align="center">ÍNDICE DE ROTACIÓN (%)</th>
+                            <th align="center">CLASIFICACIÓN FSN</th>
                         </tr>
                     </thead>
                     <tbody>

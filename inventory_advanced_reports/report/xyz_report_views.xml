@@ -17,20 +17,20 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="text-center">
-                        <h1>Inventory XYZ Report</h1>
+                        <h1>Informe XYZ del Inventario</h1>
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
                             <th align="center">Sl.no</th>
-                            <th align="center">PRODUCT</th>
-                            <th align="center">CATEGORY</th>
-                            <th align="center">CURRENT STOCK</th>
-                            <th align="center">STOCK VALUE</th>
-                            <th align="center">STOCK VALUE(%)</th>
-                            <th align="center">CUMULATIVE STOCK(%)</th>
-                            <th align="center">XYZ CLASSIFICATION</th>
+                            <th align="center">PRODUCTO</th>
+                            <th align="center">CATEGORÍA</th>
+                            <th align="center">STOCK ACTUAL</th>
+                            <th align="center">VALOR DEL STOCK</th>
+                            <th align="center">VALOR DEL STOCK (%)</th>
+                            <th align="center">STOCK ACUMULADO (%)</th>
+                            <th align="center">CLASIFICACIÓN XYZ</th>
                         </tr>
                     </thead>
                     <tbody>

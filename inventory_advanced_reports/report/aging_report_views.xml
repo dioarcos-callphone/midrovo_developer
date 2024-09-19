@@ -17,22 +17,21 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="text-center">
-                        <h1>Inventory Aging Report</h1>
+                        <h1>Informe de Antigüedad del Inventario</h1>
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th align="center">Sl.no</th>
-                            <th align="center">PRODUCT</th>
-                            <th align="center">CATEGORY</th>
-                            <th align="center">CURRENT STOCK</th>
-                            <th align="center">CURRENT VALUE</th>
-                            <th align="center">STOCK QUANT(%)</th>
-                            <th align="center">STOCK VALUE(%)</th>
-                            <th align="center">OLDEST STOCK AGE</th>
-                            <th align="center">OLDEST STOCK</th>
-                            <th align="center">OLDEST STOCK VALUE</th>
+                            <th align="center">PRODUCTO</th>
+                            <th align="center">CATEGORÍA</th>
+                            <th align="center">STOCK ACTUAL</th>
+                            <th align="center">VALOR ACTUAL</th>
+                            <th align="center">CANTIDAD DE STOCK (%)</th>
+                            <th align="center">VALOR DEL STOCK (%)</th>
+                            <th align="center">ANTIGÜEDAD DEL STOCK MÁS ANTIGUO</th>
+                            <th align="center">STOCK MÁS ANTIGUO</th>
+                            <th align="center">VALOR DEL STOCK MÁS ANTIGUO</th>
                         </tr>
                     </thead>
                     <tbody>

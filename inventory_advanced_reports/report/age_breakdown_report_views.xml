@@ -18,7 +18,7 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="text-center">
-                        <h1>Inventory Age Breakdown Report</h1>
+                        <h1>Informe de Desglose por Antigüedad del Inventario</h1>
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped">
@@ -35,20 +35,20 @@
                         </tr>
                         <tr>
                             <th align="center">Sl.no</th>
-                            <th align="center">PRODUCT</th>
-                            <th align="center">CATEGORY</th>
-                            <th align="center">TOTAL STOCK</th>
-                            <th align="center">STOCK VALUE</th>
+                            <th align="center">PRODUCTO</th>
+                            <th align="center">CATEGORÍA</th>
+                            <th align="center">STOCK TOTAL</th>
+                            <th align="center">VALOR DEL STOCK</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALUE</th>
+                            <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALUE</th>
+                            <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALUE</th>
+                            <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALUE</th>
+                            <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALUE</th>
+                            <th align="center">VALOR</th>
                         </tr>
                     </thead>
                     <tbody>

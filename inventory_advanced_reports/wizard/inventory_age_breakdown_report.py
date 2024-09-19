@@ -33,20 +33,20 @@ except ImportError:
 class InventoryAgeBreakdownReport(models.TransientModel):
     """This model is for creating a wizard for inventory age breakdown report"""
     _name = "inventory.age.breakdown.report"
-    _description = "Inventory Age Breakdown Report"
+    _description = "Informe de Desglose por Edad del Inventario"
 
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los cuales desea generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product Categories",
-        help="Select the product categories you want to generate the report for"
+        "product.category", string="Categorías de Productos",
+        help="Seleccione las categorías de productos para las cuales desea generar el informe"
     )
     company_ids = fields.Many2many(
-        'res.company', string="Company",
-        help="Select the companies you want to generate the report for"
+        'res.company', string="Empresa",
+        help="Seleccione las empresas para las cuales desea generar el informe"
     )
-    age_breakdown_days = fields.Integer(string="Age Breakdown Days", default=30)
+    age_breakdown_days = fields.Integer(string="Días de Desglose por Edad", default=30)
 
     def get_report_data(self):
         """Function to return necessary data for printing"""

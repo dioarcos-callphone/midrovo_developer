@@ -21,7 +21,7 @@
             <br/><br/><br/><br/>
                 <div class="page">
                     <div class="text-center">
-                        <h1>Inventory FSN-XYZ Report</h1>
+                        <h1>Informe FSN-XYZ del Inventario</h1>
                     </div>
                 </div>
                 <br/>
@@ -29,14 +29,10 @@
                 <div>
                     <div>
                         <t t-if="data.get('start_date') and data.get('end_date')">
-                            <strong>
-                                Start Date:
-                            </strong>
+                            <strong>Fecha de Inicio:</strong>
                             <span t-esc="data['start_date']"/>
                             <br/>
-                            <strong>
-                                End Date:
-                            </strong>
+                            <strong>Fecha de Fin:</strong>
                             <span t-esc="data['end_date']"/>
                         </t>
                     </div>
@@ -46,16 +42,16 @@
                     <thead>
                         <tr>
                             <th align="center">Sl.no</th>
-                            <th align="center">PRODUCT</th>
-                            <th align="center">CATEGORY</th>
-                            <th align="center">AVERAGE STOCK</th>
-                            <th align="center">SALES</th>
-                            <th align="center">TURNOVER RATIO</th>
-                            <th align="center">CURRENT STOCK</th>
-                            <th align="center">STOCK VALUE</th>
-                            <th align="center">FSN CLASSIFICATION</th>
-                            <th align="center">XYZ CLASSIFICATION</th>
-                            <th align="center">FSN-XYZ CLASSIFICATION</th>
+                            <th align="center">PRODUCTO</th>
+                            <th align="center">CATEGORÍA</th>
+                            <th align="center">STOCK PROMEDIO</th>
+                            <th align="center">VENTAS</th>
+                            <th align="center">ÍNDICE DE ROTACIÓN</th>
+                            <th align="center">STOCK ACTUAL</th>
+                            <th align="center">VALOR DEL STOCK</th>
+                            <th align="center">CLASIFICACIÓN FSN</th>
+                            <th align="center">CLASIFICACIÓN XYZ</th>
+                            <th align="center">CLASIFICACIÓN FSN-XYZ</th>
                         </tr>
                     </thead>
                     <tbody>
