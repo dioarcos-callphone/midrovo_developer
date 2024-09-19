@@ -22,12 +22,6 @@
 from odoo import api, models
 from odoo.exceptions import ValidationError
 
-
-import logging
-_logger = logging.getLogger(__name__)
-
-
-
 class AgeBreakdownReport(models.AbstractModel):
     """Create an abstract model for passing reporting values"""
     _name = 'report.inventory_advanced_reports.report_inventory_breakdown'
@@ -173,10 +167,7 @@ class AgeBreakdownReport(models.AbstractModel):
                     res['atributos'] = atts_variants
         
         main_header = age_breakdown_days
-        if result_data:
-            
-            _logger.info(f'RESULT DATA >>> { result_data }')
-            
+        if result_data:            
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.inventory_advanced_reports.'
