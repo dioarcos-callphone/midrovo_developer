@@ -56,7 +56,7 @@
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-set="last_item" t-value="False"/>
                                         <t t-foreach="atributo.items()" t-as="variable">
-                                            <span t-esc="'%s: %s' % (variable[0].capitalize(), variable[1])"/><t t-if="not loop.last">, </t>
+                                            <span>valor </span>
                                         </t>
                                     </t>
                                 </t>
