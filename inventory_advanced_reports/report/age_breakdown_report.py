@@ -161,9 +161,16 @@ class AgeBreakdownReport(models.AbstractModel):
         result_data = self.env.cr.dictfetchall()
         
         for res in result_data:
+            atts_variants = []
             variantes = self.env['product.product'].search([('id', '=', res['product_id'])])
             if variantes:
-                res['atributos'] = variantes.product_template_variant_value_ids
+                if variantes.product_template_variant_value_ids:
+                    for v in variantes.product_template_variant_value_ids:
+                        _logger.info(f'ATRIBUTO >>> { v.attribute_id.name }')
+                        _logger.info(f'VALOR >>> { v.name }')
+                        # atts_variants.append({
+                        #     f'{ v }' : f'{ v }',
+                        # })
         
         _logger.info(f'MOSTRANDO IDS >>> { product_ids }')
         
