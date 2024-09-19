@@ -34,6 +34,7 @@
                             </t>
                         </tr>
                         <tr>
+                            <th align="center">Sl.no</th>
                             <th align="center">PRODUCTO</th>
                             <th align="center">CATEGORÍA</th>
                             <th align="center">STOCK TOTAL</th>
@@ -54,12 +55,15 @@
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
                             <td>
+                                <t t-esc="new_index + 1"/>
+                            </td>
+                            <td>
                                 <t t-esc="new['product_code_and_name']"/>
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-foreach="atributo.items()" t-as="variable">
                                             <p style="padding:0; margin:0;">
-                                                <strong><t t-esc="variable[0].lower()"/></strong>: <t t-esc="variable[1]"/>
+                                                <strong><t t-esc="variable[0].lower()"/><strong>: <t t-esc="variable[1]"/>
                                             </p>
                                         </t>
                                     </t>
