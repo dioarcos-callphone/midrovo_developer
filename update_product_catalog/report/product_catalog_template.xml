@@ -7,7 +7,7 @@
                     <div class="page" style="margin: 0 !important; padding: 0 !important;">
                         <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                             <div>
-                                <h3 t-field="o.name"/>
+                                <h1 t-field="o.name"/>
                             </div>
                         </header>
                         <t t-if="o._get_data_product_variants()">
