@@ -39,15 +39,15 @@ class InventoryXyzReport(models.TransientModel):
         "product.product", string="Productos",
         help="Seleccione los productos para los que deseas generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product Categories",
+        "product.category", string="Categorías de producto",
         help="Seleccione las categorías de productos para las que deseas generar el informe"
     )
     company_ids = fields.Many2many(
-        'res.company', string="Company",
-        help="Select the companies you want to generate the report for"
+        'res.company', string="Empresa",
+        help="Seleccione las empresas para las que deseas generar el informe"
     )
     xyz = fields.Selection([('x', 'X'), ('y', 'Y'), ('z', 'Z'), ('all', 'All')],
-                           string="XYZ Classification", default='all',
+                           string="Clasificación XYZ", default='all',
                            required=True)
 
     def get_report_data(self):
@@ -154,7 +154,7 @@ class InventoryXyzReport(models.TransientModel):
             }
             return data
         else:
-            raise ValidationError("No records found for the given criteria!")
+            raise ValidationError("No se encontraron registros para los criterios especificados")
 
     def action_pdf(self):
         """Function for printing the pdf report"""
