@@ -69,9 +69,9 @@
                             <td>
                                 <t t-esc="new['stock_value']"/>
                             </td>
-                            <td><t t-esc="new['age_breakdown_qty_1']"/>%
+                            <td><t t-esc="new['age_breakdown_qty_1']"/>
                             </td>
-                            <td><t t-esc="new['age_breakdown_value_1']"/>%
+                            <td><t t-esc="new['age_breakdown_value_1']"/>
                             </td>
                             <td>
                                 <t t-esc="new['age_breakdown_qty_2']"/>
