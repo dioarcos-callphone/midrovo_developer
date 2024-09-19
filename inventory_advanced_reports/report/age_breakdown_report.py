@@ -166,11 +166,11 @@ class AgeBreakdownReport(models.AbstractModel):
             if variantes:
                 if variantes.product_template_variant_value_ids:
                     for v in variantes.product_template_variant_value_ids:
-                        _logger.info(f'ATRIBUTO >>> { v.attribute_id.name }')
-                        _logger.info(f'VALOR >>> { v.name }')
-                        # atts_variants.append({
-                        #     f'{ v }' : f'{ v }',
-                        # })
+                        atts_variants.append({
+                            f'{ v.attribute_id.name }' : f'{ v.name }',
+                        })
+                        
+                    res['atributos'] = atts_variants
         
         _logger.info(f'MOSTRANDO IDS >>> { product_ids }')
         
