@@ -177,4 +177,4 @@ class AgeBreakdownReport(models.AbstractModel):
                 str(age_breakdown1 + 1) + '-' + str(age_breakdown2),
                 str(age_breakdown2 + 1) + '-' + str(age_breakdown3),
                 str(age_breakdown3 + 1) + '-' + str(age_breakdown4),
-                'ABOVE ' + str(age_breakdown4)]
+                'Superior a ' + str(age_breakdown4)]
