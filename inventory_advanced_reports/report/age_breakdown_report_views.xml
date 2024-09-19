@@ -62,7 +62,7 @@
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-foreach="atributo.items()" t-as="variable">
-                                            <p>
+                                            <p style="padding:0; margin:0;">
                                                 <t t-esc="variable[0].lower()"/>: <t t-esc="variable[1]"/>
                                             </p>
                                         </t>
