@@ -54,6 +54,7 @@
                             <td>
                                 <t t-esc="new['product_code_and_name']"/>
                                 <t t-if="new.get('atributos')">
+                                    <p style="margin:0; padding:0;"></p>
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-foreach="atributo.items()" t-as="variable">
                                             <span style="padding:0; margin:0;">
