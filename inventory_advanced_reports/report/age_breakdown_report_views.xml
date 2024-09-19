@@ -56,9 +56,7 @@
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-set="last_item" t-value="False"/>
                                         <t t-foreach="atributo.items()" t-as="variable">
-                                            <t t-esc="'%s: %s' % (variable[0].capitalize(), variable[1])"/>
-                                            <t t-if="not last_item"> </t> <!-- Agregar un espacio entre atributos, pero no al final -->
-                                            <t t-set="last_item" t-value="True"/>
+                                            <span t-esc="'%s: %s' % (variable[0].capitalize(), variable[1])"/><t t-if="not loop.last">, </t>
                                         </t>
                                     </t>
                                 </t>
