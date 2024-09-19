@@ -55,7 +55,8 @@
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-foreach="atributo.items()" t-as="variable">
-                                            <t t-esc="variable[0].lower()">: </t><t t-esc="variable[1]"/>
+                                            <t t-esc="'%s: %s' % (variable[0].capitalize(), variable[1])"/>
+                                            <t t-if="not loop.last"> </t>
                                         </t>
                                     </t>
                                 </t>
