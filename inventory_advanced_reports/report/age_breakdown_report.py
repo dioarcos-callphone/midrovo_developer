@@ -181,7 +181,7 @@ class AgeBreakdownReport(models.AbstractModel):
 
     def get_header(self, main_header):
         """For getting the header for the report"""
-        age_breakdown1 = main_header
+        # age_breakdown1 = main_header
         age_breakdown2 = main_header * 2
         age_breakdown3 = main_header * 3
         age_breakdown4 = main_header * 4
