@@ -54,8 +54,8 @@ class InventoryOutOfStockReport(models.TransientModel):
         "res.company", string="Empresa", default=lambda self: self.env.company,
         help="Selecciona las empresas para las que deseas generar el informe")
     inventory_for_next_x_days = fields.Integer(
-        string="Inventory For Next X Days",
-        help="Select next number of days for the inventory")
+        string="Inventario para los próximos X días",
+        help="Selecciona el siguiente número de días para el inventario")
 
     def get_report_data(self):
         """Function for returning data to print"""
@@ -263,7 +263,7 @@ class InventoryOutOfStockReport(models.TransientModel):
             }
             return data
         else:
-            raise ValidationError("No records found for the given criteria!")
+            raise ValidationError("No se encontraron registros para los criterios especificados")
 
     def action_pdf(self):
         """Function for printing the pdf"""
