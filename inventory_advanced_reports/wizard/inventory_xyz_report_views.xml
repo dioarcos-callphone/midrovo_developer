@@ -23,9 +23,9 @@
                         <button name="action_excel" string="EXCEL" type="object"
                                 data-hotkey="r" class="btn-primary"/>
                         <button name="display_report_views"
-                                string="View Report Data" type="object"
+                                string="Ver datos del informe" type="object"
                                 class="oe_highlight"/>
-                        <button string="Cancel" class="btn-secondary"
+                        <button string="Cancelar" class="btn-secondary"
                                 special="cancel" data-hotkey="z"/>
                     </footer>
                 </sheet>
@@ -34,7 +34,7 @@
     </record>
     <!--   Action for the view -->
     <record id="inventory_xyz_report_action" model="ir.actions.act_window">
-        <field name="name">Inventory XYZ Report</field>
+        <field name="name">Informe de Inventario XYZ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">inventory.xyz.report</field>
         <field name="view_mode">form</field>
@@ -42,7 +42,7 @@
         <field name="target">new</field>
     </record>
 <!--    Menu item for the action-->
-    <menuitem id="inventory_xyz_report_menu" name="Inventory XYZ Report"
+    <menuitem id="inventory_xyz_report_menu" name="Informe de Inventario XYZ"
               action="inventory_xyz_report_action"
               parent="stock.menu_warehouse_report" sequence="8"/>
 </odoo>

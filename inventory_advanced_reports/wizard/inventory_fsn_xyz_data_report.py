@@ -25,17 +25,17 @@ from odoo import fields, models
 class InventoryFsnXyzDataReport(models.TransientModel):
     """This model is for creating a wizard for viewing the report data"""
     _name = "inventory.fsn.xyz.data.report"
-    _description = "Inventory FSN-XYZ Data Report"
+    _description = "Informe de datos de inventario FSN-XYZ"
 
-    product_id = fields.Many2one("product.product", string="Product")
-    category_id = fields.Many2one("product.category", string="Category")
-    company_id = fields.Many2one("res.company", string="Company")
-    average_stock = fields.Float(string="Average Stock")
-    sales = fields.Float(string="Sales")
-    turnover_ratio = fields.Float(string="Turnover Ratio")
-    current_stock = fields.Float(string="Current Stock")
-    stock_value = fields.Float(string="Stock Value")
-    fsn_classification = fields.Char(string="FSN Classification")
-    xyz_classification = fields.Char(string="XYZ Classification")
-    combined_classification = fields.Char(string="FSN-XYZ Classification")
-    data_id = fields.Many2one('inventory.fsn.xyz.report', string="FSN-XYZ Data")
+    product_id = fields.Many2one("product.product", string="Producto")
+    category_id = fields.Many2one("product.category", string="Categoría")
+    company_id = fields.Many2one("res.company", string="Empresa")
+    average_stock = fields.Float(string="Stock Promedio")
+    sales = fields.Float(string="Ventas")
+    turnover_ratio = fields.Float(string="Índice de rotación")
+    current_stock = fields.Float(string="Stock actual")
+    stock_value = fields.Float(string="Valor de inventario")
+    fsn_classification = fields.Char(string="Clasificación FSN")
+    xyz_classification = fields.Char(string="Clasificación XYZ")
+    combined_classification = fields.Char(string="Clasificación FSN-XYZ")
+    data_id = fields.Many2one('inventory.fsn.xyz.report', string="Datos FSN-XYZ")

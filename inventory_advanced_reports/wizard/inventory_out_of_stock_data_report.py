@@ -25,24 +25,24 @@ from odoo import fields, models
 class InventoryOutOfStockDataReport(models.TransientModel):
     """This model is for creating a wizard for viewing the report data"""
     _name = "inventory.out.of.stock.data.report"
-    _description = "Inventory Out Of Stock Data Report"
+    _description = "Análisis de inventario agotado"
 
-    product_id = fields.Many2one("product.product", string="Product")
-    category_id = fields.Many2one("product.category", string="Category")
-    company_id = fields.Many2one("res.company", string="Company")
-    warehouse_id = fields.Many2one("stock.warehouse", string="Warehouse")
-    virtual_stock = fields.Float(string="Forecasted QTY")
-    sales = fields.Float(string="Sales")
+    product_id = fields.Many2one("product.product", string="Producto")
+    category_id = fields.Many2one("product.category", string="Categoría")
+    company_id = fields.Many2one("res.company", string="Empresa")
+    warehouse_id = fields.Many2one("stock.warehouse", string="Almácen")
+    virtual_stock = fields.Float(string="Cantidad pronosticada")
+    sales = fields.Float(string="Ventas")
     ads = fields.Float(string="ADS")
-    demanded_quantity = fields.Float(string="Demanded QTY")
-    in_stock_days = fields.Float(string="In Stock Days")
-    out_of_stock_days = fields.Float(string="Out Of Stock Days")
-    out_of_stock_ratio = fields.Float(string="Out Of Stock Ratio")
-    cost = fields.Float(string="Cost Price")
-    out_of_stock_qty = fields.Float(string="Out Of Stock QTY")
-    out_of_stock_qty_percentage = fields.Float(string="Out Of Stock QTY(%)")
-    out_of_stock_value = fields.Float(string="Out Of Stock Value(%)")
-    turnover_ratio = fields.Float(string="Turnover Ratio")
-    fsn_classification = fields.Char(string="FSN Classification")
+    demanded_quantity = fields.Float(string="Cantidad demandada")
+    in_stock_days = fields.Float(string="Días en stock")
+    out_of_stock_days = fields.Float(string="Días de agotamiento")
+    out_of_stock_ratio = fields.Float(string="Índice de agotamiento")
+    cost = fields.Float(string="Precio de costo")
+    out_of_stock_qty = fields.Float(string="Cantidad agotada")
+    out_of_stock_qty_percentage = fields.Float(string="Porcentaje de cantidad agotada")
+    out_of_stock_value = fields.Float(string="Porcentaje del valor agotado")
+    turnover_ratio = fields.Float(string="Índice de rotación")
+    fsn_classification = fields.Char(string="Clasificación FSN")
     data_id = fields.Many2one('inventory.out.of.stock.report',
-                              string="Out Of Stock Data")
+                              string="Datos de agotamiento")

@@ -33,26 +33,26 @@ except ImportError:
 class InventoryOutOfStockReport(models.TransientModel):
     """This model is for creating a wizard for inventory turnover report."""
     _name = 'inventory.out.of.stock.report'
-    _description = 'Inventory Out of Stock Report'
+    _description = 'Informe de Inventario Agotado'
 
-    start_date = fields.Date('Start Date',
-                             help="Start date to analyse the report",
+    start_date = fields.Date('Fecha de inicio',
+                             help="Fecha de inicio para analizar el informe",
                              required=True)
-    end_date = fields.Date('End Date', help="End date to analyse the report",
+    end_date = fields.Date('Fecha de finalización', help="Fecha de finalización para analizar el informe",
                            required=True)
     warehouse_ids = fields.Many2many(
-        "stock.warehouse", string="Warehouses",
-        help="Select the warehouses to generate the report")
+        "stock.warehouse", string="Almacenes",
+        help="Seleccione los almacenes para generar el informe")
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los que deseas generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product categories",
-        help="Select the product categories you want to generate the report for"
+        "product.category", string="Categorías de productos",
+        help="Selecciona las categorías de productos para las que deseas generar el informe"
     )
     company_ids = fields.Many2many(
-        "res.company", string="Company", default=lambda self: self.env.company,
-        help="Select the companies you want to generate the report for")
+        "res.company", string="Empresa", default=lambda self: self.env.company,
+        help="Selecciona las empresas para las que deseas generar el informe")
     inventory_for_next_x_days = fields.Integer(
         string="Inventory For Next X Days",
         help="Select next number of days for the inventory")

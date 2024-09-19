@@ -33,38 +33,38 @@ except ImportError:
 class InventoryFsnReport(models.TransientModel):
     """This model is for creating a wizard for inventory turnover report."""
     _name = 'inventory.fsn.report'
-    _description = 'Inventory FSN Report'
+    _description = 'Informe FSN de Inventario'
 
-    start_date = fields.Date('Start Date',
-                             help="Start date to analyse the report",
+    start_date = fields.Date('Fecha de inicio',
+                             help="Fecha de inicio para analizar el informe",
                              required=True)
-    end_date = fields.Date('End Date', help="End date to analyse the report",
+    end_date = fields.Date('Fecha de finalización', help="Fecha de finalización para analizar el informe",
                            required=True)
     warehouse_ids = fields.Many2many(
-        "stock.warehouse", string="Warehouses",
-        help="Select the warehouses to generate the report")
+        "stock.warehouse", string="Almacenes",
+        help="Seleccione los almacenes para generar el informe")
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los que desea generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product categories",
-        help="Select the product categories you want to generate the report for"
+        "product.category", string="Categorías de productos",
+        help="Seleccione las categorías de productos para las que deseas generar el informe"
     )
     company_ids = fields.Many2many(
-        "res.company", string="Company", default=lambda self: self.env.company,
-        help="Select the companies you want to generate the report for")
+        "res.company", string="Empresa", default=lambda self: self.env.company,
+        help="Seleccione las empresas para las que deseas generar el informe")
     fsn = fields.Selection([
         ('fast_moving', 'Fast Moving'),
         ('slow_moving', 'Slow Moving'),
         ('non_moving', 'Non Moving'),
         ('all', 'All')
-    ], string='FSN Category', default="all", required=True)
+    ], string='Categoría FSN', default="all", required=True)
 
     def get_report_data(self):
         """Function for returning data for printing"""
         fsn = dict(self._fields['fsn'].selection).get(self.fsn)
         if self.start_date > self.end_date:
-            raise ValidationError("Start date can't be greater than end date")
+            raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
         start_date = self.start_date
         end_date = self.end_date
         filtered_product_stock = []

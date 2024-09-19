@@ -33,14 +33,14 @@ except ImportError:
 class InventoryXyzReport(models.TransientModel):
     """This model is for creating a wizard for inventory aging report"""
     _name = "inventory.xyz.report"
-    _description = "Inventory XYZ Report"
+    _description = "Informe de Inventario XYZ"
 
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los que deseas generar el informe")
     category_ids = fields.Many2many(
         "product.category", string="Product Categories",
-        help="Select the product categories you want to generate the report for"
+        help="Seleccione las categorías de productos para las que deseas generar el informe"
     )
     company_ids = fields.Many2many(
         'res.company', string="Company",

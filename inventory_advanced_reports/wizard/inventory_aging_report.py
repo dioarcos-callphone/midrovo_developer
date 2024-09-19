@@ -33,18 +33,18 @@ except ImportError:
 class InventoryAgingReport(models.TransientModel):
     """This model is for creating a wizard for inventory aging report"""
     _name = "inventory.aging.report"
-    _description = "Inventory Aging Report"
+    _description = "Informe de Antigüedad del Inventario"
 
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los cuales desea generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product Categories",
-        help="Select the product categories you want to generate the report for"
+        "product.category", string="Categorías de Productos",
+        help="Seleccione las categorías de productos para las cuales desea generar el informe"
     )
     company_ids = fields.Many2many(
-        'res.company', string="Company",
-        help="Select the companies you want to generate the report for"
+        'res.company', string="Empresa",
+        help="Seleccione las empresas para las cuales desea generar el informe"
     )
 
     def get_report_data(self):

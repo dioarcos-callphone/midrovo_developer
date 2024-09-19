@@ -33,34 +33,34 @@ except ImportError:
 class InventoryFsnXyzReport(models.TransientModel):
     """This model is for creating a wizard for inventory turnover report."""
     _name = 'inventory.fsn.xyz.report'
-    _description = 'Inventory FSN-XYZ Report'
+    _description = 'Informe de inventario FSN-XYZ'
 
-    start_date = fields.Date('Start Date',
-                             help="Start date to analyse the report",
+    start_date = fields.Date('Fecha de inicio',
+                             help="Fecha de inicio para analizar el informe",
                              required=True)
-    end_date = fields.Date('End Date', help="End date to analyse the report",
+    end_date = fields.Date('Fecha de finalización', help="Fecha de finalización para analizar el informe",
                            required=True)
     warehouse_ids = fields.Many2many(
-        "stock.warehouse", string="Warehouses",
-        help="Select the warehouses to generate the report")
+        "stock.warehouse", string="Almacén",
+        help="Seleccione los almacenes para generar el informe")
     product_ids = fields.Many2many(
-        "product.product", string="Products",
-        help="Select the products you want to generate the report for")
+        "product.product", string="Productos",
+        help="Seleccione los productos para los que deseas generar el informe")
     category_ids = fields.Many2many(
-        "product.category", string="Product categories",
-        help="Select the product categories you want to generate the report for"
+        "product.category", string="Categorías de productos",
+        help="Selecciona las categorías de productos para las que deseas generar el informe"
     )
     company_ids = fields.Many2many(
-        "res.company", string="Company", default=lambda self: self.env.company,
-        help="Select the companies you want to generate the report for")
+        "res.company", string="Empresa", default=lambda self: self.env.company,
+        help="Selecciona las empresas para las que deseas generar el informe")
     fsn = fields.Selection([
         ('fast_moving', 'Fast Moving'),
         ('slow_moving', 'Slow Moving'),
         ('non_moving', 'Non Moving'),
         ('all', 'All')
-    ], string='FSN Category', default="all", required=True)
+    ], string='Categoría FSN', default="all", required=True)
     xyz = fields.Selection([('x', 'X'), ('y', 'Y'), ('z', 'Z'), ('all', 'All')],
-                           string="XYZ Classification", default='all',
+                           string="Clasificación XYZ", default='all',
                            required=True)
 
     def get_report_data(self):
@@ -241,9 +241,9 @@ class InventoryFsnXyzReport(models.TransientModel):
             ):
                 filtered_product_stock.append(fsn_data)
         if (fsn == 'All' or xyz == 'All') and not result_data:
-            raise ValidationError("No corresponding data to print")
+            raise ValidationError("No hay datos correspondientes para imprimir")
         elif not filtered_product_stock:
-            raise ValidationError("No corresponding data to print")
+            raise ValidationError("No hay datos correspondientes para imprimir")
         data = {
             'data': filtered_product_stock,
             'start_date': start_date,

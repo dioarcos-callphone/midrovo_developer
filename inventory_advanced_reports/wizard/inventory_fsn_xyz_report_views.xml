@@ -8,23 +8,23 @@
             <form>
                 <sheet>
                     <group>
-                        <group string="Date Range">
+                        <group string="Rango de fechas">
                             <field name="start_date"/>
                             <field name="end_date"/>
                         </group>
-                        <group expand="0" string="Select Type of Movement">
+                        <group expand="0" string="Seleccionar tipo de movimiento">
                             <field name="fsn"/>
                             <field name="xyz"/>
                         </group>
                     </group>
                     <group>
-                        <group string="Filters">
+                        <group string="Filtros">
                             <field name="product_ids"
                                    widget="many2many_tags"/>
                             <field name="category_ids"
                                    widget="many2many_tags"/>
                         </group>
-                        <group string="Domains">
+                        <group string="Dominios">
                             <field name="company_ids"
                                    widget="many2many_tags"/>
                             <field name="warehouse_ids"
@@ -43,9 +43,9 @@
                                 data-hotkey="r"
                                 class="btn-primary"/>
                         <button name="display_report_views"
-                                string="View Report Data" type="object"
+                                string="Ver datos del informe" type="object"
                                 class="oe_highlight"/>
-                        <button string="Cancel"
+                        <button string="Cancelar"
                                 class="btn-secondary"
                                 special="cancel" data-hotkey="z"/>
                     </footer>
@@ -56,7 +56,7 @@
     <!--  Action for the view-->
     <record id="inventory_fsn_xyz_report_action"
             model="ir.actions.act_window">
-        <field name="name">Inventory FSN-XYZ Report</field>
+        <field name="name">Informe de inventario FSN-XYZ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">inventory.fsn.xyz.report</field>
         <field name="view_mode">form</field>
@@ -65,7 +65,7 @@
     </record>
 <!--    Menu item for the action-->
     <menuitem id="inventory_fsn_xyz_report_menu"
-              name="Inventory FSN-XYZ Report"
+              name="Informe de inventario FSN-XYZ"
               action="inventory_fsn_xyz_report_action"
               parent="stock.menu_warehouse_report"
               sequence="9"/>
