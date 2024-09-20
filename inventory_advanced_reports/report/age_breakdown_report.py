@@ -115,9 +115,7 @@ class AgeBreakdownReport(models.AbstractModel):
             SELECT EXTRACT(day FROM CURRENT_DATE - sm.date) AS days_between
         ) AS age ON true
         INNER JOIN stock_valuation_layer svl ON svl.stock_move_id = sm.id
-        WHERE pt.detailed_type = 'product'
-            AND sm.state = 'done'
-            AND svl.remaining_value IS NOT NULL
+        WHERE 
                         """
         params.extend([age_breakdown_days] * 16)
         if product_ids or category_ids:
@@ -138,7 +136,7 @@ class AgeBreakdownReport(models.AbstractModel):
             query += ")"
         if location_ids:
             location_ids = [location_id for location_id in location_ids]
-            query += " AND (sl.id = ANY(%s))"
+            query += " (sl.id = ANY(%s))"
             params.append(location_ids)
             param_count += 1
         if company_ids:
