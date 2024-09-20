@@ -22,6 +22,9 @@
 from odoo import api, models
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class AgeBreakdownReport(models.AbstractModel):
     """Create an abstract model for passing reporting values"""
     _name = 'report.inventory_advanced_reports.report_inventory_breakdown'
@@ -32,6 +35,7 @@ class AgeBreakdownReport(models.AbstractModel):
         """This function has working in get the pdf report."""
         values = data
         product_ids = data['product_ids']
+        location_ids = data['location_ids']
         category_ids = data['category_ids']
         company_ids = data['company_ids']
         age_breakdown_days = data['age_breakdown_days']
@@ -153,6 +157,8 @@ class AgeBreakdownReport(models.AbstractModel):
                 """
         self.env.cr.execute(query, params)
         result_data = self.env.cr.dictfetchall()
+        
+        _logger.info(f'LOCATION IDS >>> { location_ids }')
         
         for res in result_data:
             atts_variants = []

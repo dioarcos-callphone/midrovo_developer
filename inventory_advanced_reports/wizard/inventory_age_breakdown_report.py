@@ -198,6 +198,7 @@ class InventoryAgeBreakdownReport(models.TransientModel):
         data = {
             'model_id': self.id,
             'product_ids': self.product_ids.ids,
+            'location_ids': self.location_ids.ids,
             'category_ids': self.category_ids.ids,
             'company_ids': self.company_ids.ids,
             'age_breakdown_days': self.age_breakdown_days,
