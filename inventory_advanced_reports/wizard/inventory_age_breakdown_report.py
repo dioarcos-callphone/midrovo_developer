@@ -42,9 +42,9 @@ class InventoryAgeBreakdownReport(models.TransientModel):
         "product.category", string="Categorías de Productos",
         help="Seleccione las categorías de productos para las cuales desea generar el informe"
     )
-    warehouse_ids = fields.Many2many(
-        "stock.warehouse", string="Almacenes",
-        help="Seleccione los almacenes para generar el informe")
+    location_ids = fields.Many2many(
+        "stock.location", string="Ubicaciones",
+        help="Seleccione las ubicaciones para generar el informe")
     company_ids = fields.Many2many(
         'res.company', string="Empresa",
         help="Seleccione las empresas para las cuales desea generar el informe"
