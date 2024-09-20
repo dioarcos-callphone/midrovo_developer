@@ -108,6 +108,7 @@ class AgeBreakdownReport(models.AbstractModel):
         INNER JOIN product_template pt ON pp.product_tmpl_id = pt.id
         INNER JOIN product_category c ON pt.categ_id = c.id
         LEFT JOIN stock_move sm ON sm.product_id = pp.id
+        LEFT JOIN stock_location sl ON sm.location_id = sl.id
         LEFT JOIN stock_picking_type spt ON sm.picking_type_id = spt.id
         LEFT JOIN res_company company ON sm.company_id = company.id
         LEFT JOIN LATERAL (
@@ -135,6 +136,11 @@ class AgeBreakdownReport(models.AbstractModel):
             param_count += 1
         if product_ids or category_ids:
             query += ")"
+        if location_ids:
+            location_ids = [location_id for location_id in location_ids]
+            query += " AND (sm.location_id = ANY(%s))"
+            params.append(location_ids)
+            param_count += 1
         if company_ids:
             company_ids = [company for company in company_ids]
             query += " AND (sm.company_id = ANY(%s))"  # Specify the table alias
