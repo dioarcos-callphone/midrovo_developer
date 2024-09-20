@@ -44,6 +44,7 @@ class InventoryAgeBreakdownReport(models.TransientModel):
     )
     location_ids = fields.Many2many(
         "stock.location", string="Ubicaciones",
+        domain=[('usage','=','internal')],
         help="Seleccione las ubicaciones para generar el informe")
     company_ids = fields.Many2many(
         'res.company', string="Empresa",
