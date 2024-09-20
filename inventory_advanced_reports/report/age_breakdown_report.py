@@ -165,6 +165,7 @@ class AgeBreakdownReport(models.AbstractModel):
         self.env.cr.execute(query, params)
         result_data = self.env.cr.dictfetchall()
         
+        _logger.info(f'PRODUCT IDS >>> { product_ids }')
         _logger.info(f'LOCATION IDS >>> { location_ids }')
         
         for res in result_data:
