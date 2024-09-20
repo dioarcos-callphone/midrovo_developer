@@ -138,7 +138,7 @@ class AgeBreakdownReport(models.AbstractModel):
             query += ")"
         if location_ids:
             location_ids = [location_id for location_id in location_ids]
-            query += " AND (sm.location_id = ANY(%s))"
+            query += " AND (sl.id = ANY(%s))"
             params.append(location_ids)
             param_count += 1
         if company_ids:
