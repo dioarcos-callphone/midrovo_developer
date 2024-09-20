@@ -108,7 +108,7 @@ class AgeBreakdownReport(models.AbstractModel):
         INNER JOIN product_template pt ON pp.product_tmpl_id = pt.id
         INNER JOIN product_category c ON pt.categ_id = c.id
         LEFT JOIN stock_move sm ON sm.product_id = pp.id
-        LEFT JOIN stock_location sl ON sm.location_id = sl.id
+        INNER JOIN stock_location sl ON sm.location_id = sl.id
         LEFT JOIN stock_picking_type spt ON sm.picking_type_id = spt.id
         LEFT JOIN res_company company ON sm.company_id = company.id
         LEFT JOIN LATERAL (
