@@ -26,7 +26,7 @@ class StockQuantityHistory(models.AbstractModel):
         domain = [
             ('location_id', 'in', location_id),
             ('inventory_date', '!=', False),
-            ('invnetory_date', '=', date_format)
+            ('inventory_date', '=', date_format)
         ]
         
         # Agrupamos por el nombre del producto y el precio estándar
