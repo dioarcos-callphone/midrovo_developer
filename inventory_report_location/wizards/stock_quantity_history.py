@@ -35,13 +35,13 @@ class StockQuantityHistoryInherit(models.TransientModel):
         if self.category_ids:
             _logger.info(f'MOSTRANDO CATEGORIES IDS >>> { self.category_ids }')
             category_ids = self.category_ids.ids
-            domain = expression.AND([domain, [('categ_id', 'in', category_ids)]])
+            domain = expression.AND([domain, [('categ_id.id', 'in', category_ids)]])
 
         # Agregar filtros por ubicación
         if self.location_ids:
             _logger.info(f'MOSTRANDO LOCATION IDS >>> { self.location_ids }')
             location_ids = self.location_ids.ids
-            domain = expression.AND([domain, [('location_id', 'in', location_ids)]])
+            domain = expression.AND([domain, [('location_id.id', 'in', location_ids)]])
 
         # Actualizar el dominio en la acción
         action['domain'] = domain
