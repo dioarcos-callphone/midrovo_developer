@@ -31,7 +31,11 @@ class StockQuantityHistory(models.AbstractModel):
                 'standard_price': record['product_id'][2],  # Precio estándar
                 'quantity': record['quantity'],  # Suma de cantidades
             })
-            
-        _logger.info(f'MOSTRANDO RESULTADO >>> { result }')
-
-        return result
+        
+        if result:
+            _logger.info(f'MOSTRANDO RESULTADO >>> { result }')           
+            return {
+                'doc_ids': docids,
+                'doc_model': 'report.stock.quantity.history',
+                'options': result,
+            }
