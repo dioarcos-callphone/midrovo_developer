@@ -33,11 +33,13 @@ class StockQuantityHistoryInherit(models.TransientModel):
         
         # Agregar filtros por categoría
         if self.category_ids:
+            _logger.info(f'MOSTRANDO CATEGORIES IDS >>> { self.category_ids }')
             category_ids = self.category_ids.ids
             domain = expression.AND([domain, [('categ_id', 'in', category_ids)]])
 
         # Agregar filtros por ubicación
         if self.location_ids:
+            _logger.info(f'MOSTRANDO LOCATION IDS >>> { self.location_ids }')
             location_ids = self.location_ids.ids
             domain = expression.AND([domain, [('location_id', 'in', location_ids)]])
 
