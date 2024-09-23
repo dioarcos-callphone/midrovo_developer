@@ -14,7 +14,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'base', 'stock' ],
     'data': [
-        'reports/inventory_template.xml',
+        # 'reports/inventory_template.xml',
         'wizards/stock_quantity_hitory.xml',
     ],
     
