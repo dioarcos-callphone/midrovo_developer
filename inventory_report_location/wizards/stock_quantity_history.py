@@ -46,6 +46,6 @@ class StockQuantityHistoryInherit(models.TransientModel):
         # Actualizar el dominio en la acción
         action['domain'] = domain
         
-        _logger.debug(f"Final domain: {action['domain']}")
+        _logger.info(f"Final domain: {action['domain']}")
         
         return action
