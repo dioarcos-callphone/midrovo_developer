@@ -11,7 +11,7 @@ class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
     category_ids = fields.Many2many('product.category', string='Categorías',)
-    location_ids = fields.Many2many('stock.location', string='Ubicaciones', domain=[('usage','=','internal')],)
+    location_ids = fields.Many2many('stock.location', string='Ubicaciones', domain=[('usage','in',['internal','transit'])],)
     
     def action_pdf(self):        
         """This function is for printing pdf report"""
