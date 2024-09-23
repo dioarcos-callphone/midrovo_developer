@@ -9,7 +9,7 @@ class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
     location_id = fields.Many2many(
-        "stock.location", string="Ubicaciones",
+        "stock.location", string="Ubicacion",
         domain=[('usage','=','internal')],
         help="Seleccione las ubicaciones para generar el informe")
     
