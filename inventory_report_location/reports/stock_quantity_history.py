@@ -5,7 +5,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class StockQuantityHistory(models.AbstractModel):
-    _name = 'report.stock.quantity.history'
+    _name = 'report.inventory_report_location.report_stock_quantity'
     _description = 'Stock Quantity History'
     
     @api.model
