@@ -15,15 +15,12 @@
                             <th align="center"/>
                             <th align="center"/>
                             <th align="center"/>
-                            <t t-foreach="main_header" t-as="header">
-                            <th align="center" colspan="2"><t t-esc="header"/></th>
-                            </t>
                         </tr>
                         <tr>
                             <th align="center">PRODUCTO</th>
                             <th align="center">STOCK TOTAL</th>
                             <th align="center">VALOR DEL STOCK</th>
-                            <th align="center">STOCK</th>
+                            <!-- <th align="center">STOCK</th>
                             <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
                             <th align="center">VALOR</th>
@@ -32,14 +29,14 @@
                             <th align="center">STOCK</th>
                             <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
-                            <th align="center">VALOR</th>
+                            <th align="center">VALOR</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
                             <td style="white-space: nowrap;">
-                                <t t-esc="new['product_code_and_name']"/>
+                                <t t-esc="new['name']"/>
                                 <t t-if="new.get('atributos')">
                                     <t t-foreach="new['atributos']" t-as="atributo">
                                         <t t-set="last_item" t-value="False"/>
