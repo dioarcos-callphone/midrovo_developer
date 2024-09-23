@@ -8,6 +8,11 @@ _logger = logging.getLogger(__name__)
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
+    location_ids = fields.Many2many(
+        "stock.location", string="Ubicaciones",
+        domain=[('usage','=','internal')],
+        help="Seleccione las ubicaciones para generar el informe")
+    
     def action_pdf(self):        
         """This function is for printing pdf report"""
         data = {
