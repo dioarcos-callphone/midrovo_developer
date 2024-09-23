@@ -1,5 +1,6 @@
 from odoo import api, models
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -11,6 +12,7 @@ class StockQuantityHistory(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
         date = data.get('date')
+        date_format = datetime.strptime(date, "%Y-%m-%d %H:%M:%S").date()
         location_id = []
         if data.get('location_id'):
             location_id.append(data['location_id'])
@@ -19,7 +21,7 @@ class StockQuantityHistory(models.AbstractModel):
             location_id.append(8)
             location_id.append(18)
         
-        _logger.info(f'MOSTRANDO FECHA >>> { date }')
+        _logger.info(f'MOSTRANDO FECHA >>> { date_format }')
         
         domain = [
             ('location_id', 'in', location_id),
