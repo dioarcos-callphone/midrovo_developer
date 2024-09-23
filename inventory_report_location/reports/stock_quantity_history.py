@@ -32,6 +32,8 @@ class StockQuantityHistory(models.AbstractModel):
                 'quantity': record['quantity'],  # Suma de cantidades
             })
         
+        _logger.info(f'MOSTRANDO RESULTADO >>> { result }') 
+        
         if result:
             _logger.info(f'MOSTRANDO RESULTADO >>> { result }')           
             return {
