@@ -22,6 +22,8 @@ class StockQuantityHistory(models.AbstractModel):
             ['product_id', 'quantity'],
             ['product_id',],
         )
+        
+        _logger.info(f'MOSTRANDO RESULTADO >>> { quant_records }') 
 
         # Procesamos los resultados
         result = []
