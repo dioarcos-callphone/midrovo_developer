@@ -20,7 +20,7 @@ class StockQuantityHistory(models.AbstractModel):
         quant_records = self.env['stock.quant'].read_group(
             domain,
             ['product_id', 'quantity'],
-            ['product_id:id', 'product_id:standard_price'],
+            ['product_id.id', 'product_id.standard_price'],
         )
 
         # Procesamos los resultados
