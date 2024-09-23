@@ -8,8 +8,8 @@ _logger = logging.getLogger(__name__)
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
-    location_ids = fields.Many2many(
-        "stock.location", string="Ubicaciones",
+    location_ids = fields.Many2one(
+        "stock.location", string="Ubicacion",
         domain=[('usage','=','internal')],
         help="Seleccione las ubicaciones para generar el informe")
     
