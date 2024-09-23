@@ -1,4 +1,6 @@
 from odoo import fields, models
+from odoo.osv import expression
+from odoo.tools.misc import format_datetime
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -24,26 +26,22 @@ class StockQuantityHistoryInherit(models.TransientModel):
             .report_action(None, data=data))
         
         
-    # def open_at_date(self):
-    #     tree_view_id = self.env.ref('stock.view_stock_product_tree').id
-    #     form_view_id = self.env.ref('stock.product_form_view_procurement_button').id
-    #     domain = [('type', '=', 'product')]
-    #     product_id = self.env.context.get('product_id', False)
-    #     product_tmpl_id = self.env.context.get('product_tmpl_id', False)
-    #     if product_id:
-    #         domain = expression.AND([domain, [('id', '=', product_id)]])
-    #     elif product_tmpl_id:
-    #         domain = expression.AND([domain, [('product_tmpl_id', '=', product_tmpl_id)]])
-    #     # We pass `to_date` in the context so that `qty_available` will be computed across
-    #     # moves until date.
-    #     action = {
-    #         'type': 'ir.actions.act_window',
-    #         'views': [(tree_view_id, 'tree'), (form_view_id, 'form')],
-    #         'view_mode': 'tree,form',
-    #         'name': _('Products'),
-    #         'res_model': 'product.product',
-    #         'domain': domain,
-    #         'context': dict(self.env.context, to_date=self.inventory_datetime),
-    #         'display_name': format_datetime(self.env, self.inventory_datetime)
-    #     }
-    #     return action
+    def open_at_date(self):
+        action = super(StockQuantityHistoryInherit, self).open_at_date()
+        
+        domain = action.get('domain', [])
+        
+        # Agregar filtros por categoría
+        if self.category_ids:
+            category_ids = self.category_ids.ids
+            domain = expression.AND([domain, [('categ_id', 'in', category_ids)]])
+
+        # Agregar filtros por ubicación
+        if self.location_ids:
+            location_ids = self.location_ids.ids
+            domain = expression.AND([domain, [('location_id', 'in', location_ids)]])
+
+        # Actualizar el dominio en la acción
+        action['domain'] = domain
+        
+        return action
