@@ -15,7 +15,8 @@ class StockQuantityHistory(models.AbstractModel):
             location_id.append(data['location_id'])
             
         else:
-            location_id.append(8, 18)
+            location_id.append(8)
+            location_id.append(18)
         
         _logger.info(f'MOSTRANDO ID LOCATION >>> { location_id }')
         
