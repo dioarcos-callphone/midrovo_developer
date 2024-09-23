@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
-    category_ids = fields.Many2many('product.category', string='Categorías')
+    category_ids = fields.Many2many('product.category', string='Categorías', domain=[('usage','=','internal')],)
     location_ids = fields.Many2many('stock.location', string='Ubicaciones')
     
     def action_pdf(self):        
