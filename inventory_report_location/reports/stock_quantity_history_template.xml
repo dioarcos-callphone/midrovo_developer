@@ -6,6 +6,7 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <h1>INFORME DE INVENTARIO</h1>
+                    <span t-esc="options"></span>
                 </div>
             </t>
         </t>
