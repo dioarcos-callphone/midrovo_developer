@@ -9,10 +9,10 @@ class StockQuantityHistory(models.AbstractModel):
     _name = 'report.inventory_report_location.report_stock_quantity'
     _description = 'Stock Quantity History'
     
-    location_ids = fields.Many2many(
-        "stock.location", string="Ubicaciones",
-        domain=[('usage','=','internal')],
-        help="Seleccione las ubicaciones para generar el informe")
+    # location_ids = fields.Many2many(
+    #     "stock.location", string="Ubicaciones",
+    #     domain=[('usage','=','internal')],
+    #     help="Seleccione las ubicaciones para generar el informe")
     
     @api.model
     def _get_report_values(self, docids, data=None):
