@@ -8,11 +8,6 @@ _logger = logging.getLogger(__name__)
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
-    ubicacion_ids = fields.Many2many(
-        "stock.location", string="Ubicacion",
-        domain=[('usage','=','internal')],
-        help="Seleccione las ubicaciones para generar el informe")
-    
     def action_pdf(self):
         _logger.info(f'MOSTRANDO DESDE EL WIZARD >>> { self.id }')
         
@@ -20,7 +15,7 @@ class StockQuantityHistoryInherit(models.TransientModel):
         data = {
             'model_id': self.id,
             'product_ids': 'self.product_ids.ids',
-            'location_ids': self.location_ids.ids,
+            'location_id': self.location_id.id,
             'category_ids': 'self.category_ids.ids',
             'company_ids': 'self.company_ids.ids',
             'age_breakdown_days': 'self.age_breakdown_days',
