@@ -135,11 +135,11 @@ class AgeBreakdownReport(models.AbstractModel):
             param_count += 1
         if product_ids or category_ids:
             query += ")"
-        # if location_ids:
-        #     location_ids = [location_id for location_id in location_ids]
-        #     query += " AND (sm.location_dest_id = ANY(%s))"
-        #     params.append(location_ids)
-        #     param_count += 1
+        if location_ids:
+            location_ids = [location_id for location_id in location_ids]
+            query += " AND (sm.location_dest_id = ANY(%s))"
+            params.append(location_ids)
+            param_count += 1
         if company_ids:
             company_ids = [company for company in company_ids]
             query += " AND (sm.company_id = ANY(%s))"  # Specify the table alias
@@ -160,12 +160,8 @@ class AgeBreakdownReport(models.AbstractModel):
                                 company.name,
                                 pp.id;
                 """
-        _logger.info(f'QUERY >>>> { query }')
         self.env.cr.execute(query, params)
         result_data = self.env.cr.dictfetchall()
-        
-        _logger.info(f'PRODUCT IDS >>> { product_ids }')
-        _logger.info(f'LOCATION IDS >>> { location_ids }')
         
         for res in result_data:
             atts_variants = []
