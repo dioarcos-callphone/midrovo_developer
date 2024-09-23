@@ -44,12 +44,25 @@ class StockQuantityHistory(models.AbstractModel):
             producto = self.env['product.product'].browse(record.get('product_id')[0])
 
             result.append({
+                'id': producto.id,
                 'name': producto.product_tmpl_id.name,  # Nombre del producto
                 'costo': producto.standard_price if producto.standard_price else producto.product_tmpl_id.standard_price,  # Precio estándar
                 'cantidad': record.get('quantity'),  # Cantidad de stock
             })
         
-        _logger.info(f'MOSTRANDO RESULTADO >>> { result }') 
+        for res in result:
+            atts_variants = []
+            variantes = self.env['product.product'].search([('id', '=', res['id'])])
+            if variantes:
+                if variantes.product_template_variant_value_ids:
+                    for v in variantes.product_template_variant_value_ids:
+                        atts_variants.append({
+                            f'{ v.attribute_id.name }' : f'{ v.name }',
+                        })
+                        
+                    res['atributos'] = atts_variants
+        
+        _logger.info(f'MOSTRANDO RESULTADO >>> { result }')
         
         if result:          
             return {
