@@ -31,10 +31,12 @@ class StockQuantityHistory(models.AbstractModel):
         # Procesamos los resultados
         result = []
         for record in quant_records:
+            producto = self.env['product.product'].browse(record.get('product_id')[0])
+
             result.append({
-                'name': self.env['product.product'].browse(record.get('product_id')[0]).product_tmpl_id.name,  # Nombre del producto
-                'costo': record.get('quantity'),    # Precio estándar
-                'cantidad': record.get('quantity'),  # Precio estándar
+                'name': producto.product_tmpl_id.name,  # Nombre del producto
+                'costo': producto.standard_price if producto.standard_price else producto.product_tmpl_id.standard_price,  # Precio estándar
+                'cantidad': record.get('quantity'),  # Cantidad de stock
             })
         
         _logger.info(f'MOSTRANDO RESULTADO >>> { result }') 
