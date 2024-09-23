@@ -11,6 +11,7 @@ class StockQuantityHistory(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
         location_id = [ data['location_id'] if data.get('location_id') else 8, 18 ]
+        _logger.info(f'MOSTRANDO ID LOCATION >>> { location_id }')
         
         domain = [
             ('location_id', 'in', location_id),
