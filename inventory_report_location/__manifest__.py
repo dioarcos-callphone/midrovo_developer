@@ -14,8 +14,9 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'stock' ],
     'data': [
-        # 'reports/inventory_template.xml',
         'wizards/stock_quantity_history.xml',
+        'reports/stock_quantity_history_report.xml',
+        'reports/stock_quantity_history_template.xml',
     ],
     
     'license': 'LGPL-3',
