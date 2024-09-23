@@ -11,6 +11,7 @@ class StockQuantityHistory(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
+        categories = data['category_ids']
         date = data.get('date')
         date_format = datetime.strptime(date, "%Y-%m-%d %H:%M:%S").date()
         location_id = []
@@ -26,7 +27,8 @@ class StockQuantityHistory(models.AbstractModel):
         domain = [
             ('location_id', 'in', location_id),
             ('inventory_date', '!=', False),
-            ('inventory_date', '=', date_format)
+            ('inventory_date', '=', date_format),
+            ('product_id.categ_id.id', 'in', categories)
         ]
         
         # Agrupamos por el nombre del producto y el precio estándar
