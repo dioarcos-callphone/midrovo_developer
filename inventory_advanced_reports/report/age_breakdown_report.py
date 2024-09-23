@@ -113,7 +113,7 @@ class AgeBreakdownReport(models.AbstractModel):
         LEFT JOIN LATERAL (
             SELECT EXTRACT(day FROM CURRENT_DATE - sm.date) AS days_between
         ) AS age ON true
-        INNER JOIN stock_valuation_layer svl ON svl.stock_move_id = sm.id
+        INNER JOIN stock_valuation_layer svl ON svl.product_id = pp.id
         WHERE pt.detailed_type = 'product'
             AND sm.state = 'done'
             AND svl.remaining_value IS NOT NULL
