@@ -32,9 +32,8 @@ class StockQuantityHistory(models.AbstractModel):
         result = []
         for record in quant_records:
             result.append({
-                'name': record['product_id'][1],  # Nombre del producto
-                'standard_price': record['product_id'][2],  # Precio estándar
-                'quantity': record['quantity'],  # Suma de cantidades
+                'name': record.get('product_id'),  # Nombre del producto
+                'quantity': record.get('quantity'),  # Precio estándar
             })
         
         _logger.info(f'MOSTRANDO RESULTADO >>> { result }') 
@@ -48,3 +47,4 @@ class StockQuantityHistory(models.AbstractModel):
             
         else:
             raise ValidationError("No records found for the given criteria!")
+        
