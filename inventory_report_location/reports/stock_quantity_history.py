@@ -12,8 +12,6 @@ class StockQuantityHistory(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         location_id = [ data['location_id'] if data.get('location_id') else 8, 18 ]
         
-        _logger.info(f'LOCATION ID >>>> { location_id }')
-        
         domain = [
             ('location_id', 'in', location_id),
             ('inventory_date', '!=', False)
@@ -25,8 +23,6 @@ class StockQuantityHistory(models.AbstractModel):
             ['product_id', 'quantity'],
             ['product_id',],
         )
-        
-        _logger.info(f'MOSTRANDO RESULTADO >>> { quant_records }') 
 
         # Procesamos los resultados
         result = []
