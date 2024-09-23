@@ -10,6 +10,7 @@ class StockQuantityHistory(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
+        date = data.get('date')
         location_id = []
         if data.get('location_id'):
             location_id.append(data['location_id'])
@@ -18,7 +19,7 @@ class StockQuantityHistory(models.AbstractModel):
             location_id.append(8)
             location_id.append(18)
         
-        _logger.info(f'MOSTRANDO ID LOCATION >>> { location_id }')
+        _logger.info(f'MOSTRANDO FECHA >>> { date }')
         
         domain = [
             ('location_id', 'in', location_id),

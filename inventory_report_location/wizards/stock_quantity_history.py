@@ -13,6 +13,7 @@ class StockQuantityHistoryInherit(models.TransientModel):
         data = {
             'model_id': self.id,
             'location_id': self.location_id.id,
+            'date': self.inventory_datetime
         }
         return (
             self.env.ref('inventory_report_location.report_stock_quantity_history')
