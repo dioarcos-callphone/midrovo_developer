@@ -41,3 +41,9 @@ class StockQuantityHistory(models.AbstractModel):
                 'doc_model': 'report.stock.quantity.history',
                 'options': result,
             }
+            
+        return {
+            'doc_ids': docids,
+            'doc_model': 'report.stock.quantity.history',
+            'options': result,
+        }
