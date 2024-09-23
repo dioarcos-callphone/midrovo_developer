@@ -15,7 +15,7 @@
     'depends': [ 'base', 'stock' ],
     'data': [
         'reports/inventory_template.xml',
-        'wizards/inventory_wizard.xml',
+        'wizards/stock_quantity_hitory.xml',
     ],
     
     'license': 'LGPL-3',
