@@ -17,6 +17,7 @@
         'wizards/stock_quantity_history_wizard.xml',
         'reports/stock_quantity_history_report.xml',
         'reports/stock_quantity_history_template.xml',
+        'views/stock_quantity_view.xml'
     ],
     
     'license': 'LGPL-3',
