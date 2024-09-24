@@ -12,10 +12,10 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th align="center">PRODUCTO</th>
-                            <th align="center">STOCK TOTAL</th>
-                            <th align="center">COSTO</th>
-                            <th align="center">VALOR DEL STOCK</th>
+                            <th align="center" style="vertical-align: middle">PRODUCTOS</th>
+                            <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
+                            <th align="center" style="vertical-align: middle">COSTO</th>
+                            <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
                         </tr>
                     </thead>
                     <tbody>
