@@ -76,40 +76,40 @@ class StockQuantityHistory(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
-        data_productos = []
-        productos = data['products']
+        # data_productos = []
+        # productos = data['products']
         
-        _logger.info(f'MOSTRANDO PROUCTOS DESDE GET REPORT >>> { productos }')
+        _logger.info(f'MOSTRANDO PROUCTOS DESDE GET REPORT >>> { data }')
         
-        for producto in productos:
-            variantes = []
-            data = {}
+        # for producto in productos:
+        #     variantes = []
+        #     data = {}
             
-            _logger.info(f'MOSTRANDO PRODUCTO >>> { producto }')
+        #     _logger.info(f'MOSTRANDO PRODUCTO >>> { producto }')
             
-            name = producto['name']
-            _logger.info(f'MOSTRANDO PRODUCTO NAME >>> { name }')
+        #     name = producto['name']
+        #     _logger.info(f'MOSTRANDO PRODUCTO NAME >>> { name }')
             
-            data['nombre'] = producto.name
-            data['cantidad'] = producto.qty_available
-            data['costo'] = producto.standard_price
+        #     data['nombre'] = producto.name
+        #     data['cantidad'] = producto.qty_available
+        #     data['costo'] = producto.standard_price
             
-            if producto.product_template_variant_value_ids:
-                for v in producto.product_template_variant_value_ids:
-                    variantes.append({
-                        f'{ v.attribute_id.name }' : f'{ v.name }',
-                    })
+        #     if producto.product_template_variant_value_ids:
+        #         for v in producto.product_template_variant_value_ids:
+        #             variantes.append({
+        #                 f'{ v.attribute_id.name }' : f'{ v.name }',
+        #             })
                 
-                data['atributos'] = variantes
+        #         data['atributos'] = variantes
                 
-            data_productos.append(data)
+        #     data_productos.append(data)
             
-        if data_productos:
-            return {
-                'doc_ids': docids,
-                'doc_model': 'report.stock.quantity.history',
-                'options': data_productos,
-            }
+        # if data_productos:
+        #     return {
+        #         'doc_ids': docids,
+        #         'doc_model': 'report.stock.quantity.history',
+        #         'options': data_productos,
+        #     }
             
         else:
             raise ValidationError("No records found for the given criteria!")
