@@ -8,8 +8,6 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">inventory_report_location.report_stock_quantity</field>
         <field name="report_file">inventory_report_location.report_stock_quantity</field>
-        <!-- <field name="binding_model_id"
-               ref="model_inventory_age_breakdown_report"/> -->
         <field name="binding_type">report</field>
     </record>
 

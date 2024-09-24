@@ -16,4 +16,15 @@
         </field>
     </record>
 
+    <record id="stock_quantity_view_search" model="ir.ui.view">
+        <field name="name">stock.quantity.view.search</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view" />
+        <field name="arch" type="xml">
+            <search>
+                <filter name="qty_available" string="Cantidad a mano" domain="[('qty_available', '!=', 0)]"/>
+            </search>
+        </field>
+    </record>
+
 </odoo>
