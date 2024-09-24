@@ -12,7 +12,7 @@ class ProductProductInherit(models.Model):
         for producto in self:
             variantes = []
             data = {
-                "id": self.id,
+                # "id": self.id,
                 "nombre": self.name,
                 "cantidad": self.qty_quantity,
                 "costo": self.standard_price,
