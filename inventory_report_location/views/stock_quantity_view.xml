@@ -10,8 +10,7 @@
                 <button name="action_pdf"
                         string="PDF"
                         type="object"
-                        class="oe_highlight"
-                        style="background-color: #017e84;"                        
+                        class="oe_highlight"                     
                         icon="fa-check"/>
             </xpath>
         </field>
