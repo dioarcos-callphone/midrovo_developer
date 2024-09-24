@@ -14,7 +14,7 @@ class ProductProductInherit(models.Model):
             data = {
                 "id": producto.id,
                 "nombre": producto.name,
-                "cantidad": producto.qty_quantity,
+                "cantidad": producto.qty_available,
                 "costo": producto.standard_price,
             }
             
