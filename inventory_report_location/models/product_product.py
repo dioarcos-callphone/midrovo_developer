@@ -28,6 +28,8 @@ class ProductProductInherit(models.Model):
                 
             data_productos.append(data)
             
+        _logger.info(f'MOSTRANDO PRODUCTOS >>> { data_productos }')
+            
         
         return (
             self.env.ref('inventory_report_location.report_stock_quantity_history')
