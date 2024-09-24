@@ -11,18 +11,6 @@ class StockQuantityHistoryInherit(models.TransientModel):
     category_ids = fields.Many2many('product.category', string='Categorías',)
     location_ids = fields.Many2many('stock.location', string='Ubicaciones', domain=[('usage','in',['internal','transit'])],)
     
-    def action_pdf(self):        
-        """This function is for printing pdf report"""
-        data = {
-            'model_id': self.id,
-            'location_id': self.location_ids.ids,
-            'category_ids': self.category_ids.ids,
-            'date': self.inventory_datetime
-        }
-        return (
-            self.env.ref('inventory_report_location.report_stock_quantity_history')
-            .report_action(None, data=data))
-    
     def open_at_date(self):
         action = super().open_at_date()
         context = action["context"]
@@ -46,9 +34,6 @@ class StockQuantityHistoryInherit(models.TransientModel):
             action["display_name"] = f"{category_names} - {action['display_name']}"
             
         context['search_default_qty_available'] = 1
-
         action["context"] = context
-        
-        contexto = action["context"]
-        _logger.info(f'MOSTRANDO CONTEXTO >>> { contexto }')
+
         return action

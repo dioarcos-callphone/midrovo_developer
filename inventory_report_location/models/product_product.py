@@ -28,7 +28,6 @@ class ProductProductInherit(models.Model):
                         })
                     
                 data['atributos'] = variantes
-                
                 data_productos.append(data)
             
         data = {

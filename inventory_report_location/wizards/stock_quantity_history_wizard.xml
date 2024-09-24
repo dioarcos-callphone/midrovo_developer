@@ -13,7 +13,6 @@
                         <field name="category_ids" widget="many2many_tags"/>
                     </group>
                     <footer>
-                        <button name="action_pdf" string="PDF" type="object" data-hotkey="q" class="btn-primary"/>
                         <button name="open_at_date" string="Confirm" type="object" class="btn-primary" data-hotkey="q"/>
                         <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
                     </footer>
