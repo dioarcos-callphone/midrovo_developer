@@ -76,14 +76,13 @@ class StockQuantityHistory(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
-
-        _logger.info(f'MOSTRANDO PROUCTOS DESDE GET REPORT >>> { data }')
+        productos = data['productos']
             
-        if data:
+        if productos:
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.stock.quantity.history',
-                'options': data,
+                'options': productos,
             }
             
         else:
