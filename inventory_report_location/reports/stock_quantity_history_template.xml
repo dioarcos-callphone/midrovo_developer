@@ -6,7 +6,7 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="text-center">
-                        <h1>Informe de Desglose por Antigüedad del Inventario</h1>
+                        <h1>Informe de Desglose del Inventario</h1>
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped">
@@ -34,13 +34,13 @@
                                     </t>
                                 </t>
                             </td>
-                            <td>
+                            <td align="center">
                                 <t t-esc="new['cantidad']"/>
                             </td>
-                            <td>
+                            <td align="center">
                                 <t t-esc="new['costo']"/>
                             </td>
-                            <td>
+                            <td align="center">
                                 <t t-esc="new['valor_stock']"/>
                             </td>
                         </tr>
