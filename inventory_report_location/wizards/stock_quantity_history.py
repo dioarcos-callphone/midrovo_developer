@@ -160,25 +160,25 @@ class StockQuantityHistoryInherit(models.TransientModel):
     
     def open_at_date(self):
         action = super().open_at_date()
-        ctx = action["context"]
-        ctx = safe_eval(ctx) if isinstance(ctx, str) else ctx
+        context = action["context"]
+        context = safe_eval(context) if isinstance(context, str) else context
 
         # Filtro por ubicación
         if self.location_ids:
-            ctx["location"] = self.location_ids.ids  # Filtrar por varias ubicaciones
-            ctx["compute_child"] = self.include_child_locations
-            if ctx.get("company_owned", False):
-                ctx.pop("company_owned")
+            context["location"] = self.location_ids.ids  # Filtrar por varias ubicaciones
+            context["compute_child"] = self.include_child_locations
+            if context.get("company_owned", False):
+                context.pop("company_owned")
             # Modificar el display_name para mostrar todas las ubicaciones seleccionadas
             location_names = ", ".join(self.location_ids.mapped("complete_name"))
             action["display_name"] = f"{location_names} - {action['display_name']}"
 
         # Filtro por categorías
         if self.category_ids:
-            ctx["category"] = self.category_ids.ids  # Filtrar por varias categorías
+            context["category"] = self.category_ids.ids  # Filtrar por varias categorías
             # Modificar el display_name para incluir categorías
             category_names = ", ".join(self.category_ids.mapped("name"))
             action["display_name"] = f"{category_names} - {action['display_name']}"
 
-        action["context"] = ctx
+        action["context"] = context
         return action
