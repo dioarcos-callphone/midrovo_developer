@@ -34,13 +34,13 @@
                                     </t>
                                 </t>
                             </td>
-                            <td align="center">
+                            <td align="center" width="50">
                                 <t t-esc="new['cantidad']"/>
                             </td>
-                            <td align="center">
+                            <td align="center" width="50">
                                 <t t-esc="new['costo']"/>
                             </td>
-                            <td align="center">
+                            <td align="center" width="50">
                                 <t t-esc="new['valor_stock']"/>
                             </td>
                         </tr>

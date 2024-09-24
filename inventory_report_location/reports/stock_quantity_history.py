@@ -2,9 +2,6 @@ from odoo import api, models
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
 class StockQuantityHistory(models.AbstractModel):
     _name = 'report.inventory_report_location.report_stock_quantity'
     _description = 'Stock Quantity History'
