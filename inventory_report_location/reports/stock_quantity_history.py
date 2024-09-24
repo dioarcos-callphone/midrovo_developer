@@ -78,38 +78,12 @@ class StockQuantityHistory(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
 
         _logger.info(f'MOSTRANDO PROUCTOS DESDE GET REPORT >>> { data }')
-        
-        data_productos = []
-        productos = data['products']
-        
-        for producto in productos:
-            variantes = []
-            data = {}
             
-            _logger.info(f'MOSTRANDO PRODUCTO >>> { producto }')
-            
-            name = producto['name']
-            _logger.info(f'MOSTRANDO PRODUCTO NAME >>> { name }')
-            
-            data['nombre'] = producto.name
-            data['cantidad'] = producto.qty_available
-            data['costo'] = producto.standard_price
-            
-            if producto.product_template_variant_value_ids:
-                for v in producto.product_template_variant_value_ids:
-                    variantes.append({
-                        f'{ v.attribute_id.name }' : f'{ v.name }',
-                    })
-                
-                data['atributos'] = variantes
-                
-            data_productos.append(data)
-            
-        if data_productos:
+        if data:
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.stock.quantity.history',
-                'options': data_productos,
+                'options': data,
             }
             
         else:
