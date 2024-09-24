@@ -13,10 +13,9 @@ class ProductProductInherit(models.Model):
             variantes = []
             
             if producto.qty_available > 0 and producto.standard_price > 0 and producto.total_value > 0:
-                costo = producto.standard_price.replace(',', '.')
-                valor_stock = producto.total_value.replace(',', '.')
-                costo = float(costo)
-                valor_stock = float(valor_stock)
+                costo = producto.standard_price
+                valor_stock = producto.total_value
+
                 data = {
                     "id": producto.id,
                     "nombre": producto.name,
