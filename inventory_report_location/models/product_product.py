@@ -15,12 +15,14 @@ class ProductProductInherit(models.Model):
             if producto.qty_available > 0 and producto.standard_price > 0 and producto.total_value > 0:
                 costo = producto.standard_price.replace(',', '.')
                 valor_stock = producto.total_value.replace(',', '.')
+                costo = float(costo)
+                valor_stock = float(valor_stock)
                 data = {
                     "id": producto.id,
                     "nombre": producto.name,
                     "cantidad": producto.qty_available,
-                    "costo": round(float(costo), 3),
-                    "valor_stock": round(float(valor_stock), 3),
+                    "costo": round(costo, 3),
+                    "valor_stock": round(valor_stock, 3),
                 }
             
                 if producto.product_template_variant_value_ids:
