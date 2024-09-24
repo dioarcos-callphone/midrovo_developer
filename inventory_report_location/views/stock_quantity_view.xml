@@ -3,7 +3,7 @@
 
     <record id="stock_quantity_view_tree" model="ir.ui.view">
         <field name="name">stock.quantity.view.tree</field>
-        <field name="model">inventory.report.location</field>
+        <field name="model">product.product</field>
         <field name="inherit_id" ref="stock.view_stock_product_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree//header" position="inside">
