@@ -1,6 +1,10 @@
 from odoo import fields, models
 from odoo.tools.safe_eval import safe_eval
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
@@ -42,4 +46,6 @@ class StockQuantityHistoryInherit(models.TransientModel):
             action["display_name"] = f"{category_names} - {action['display_name']}"
 
         action["context"] = context
+        contexto = action["context"]
+        _logger.info(f'MOSTRANDO CONTEXTO >>> { contexto }')
         return action
