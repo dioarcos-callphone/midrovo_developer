@@ -85,6 +85,11 @@ class StockQuantityHistory(models.AbstractModel):
             variantes = []
             data = {}
             
+            _logger.info(f'MOSTRANDO PRODUCTO >>> { producto }')
+            
+            name = producto['name']
+            _logger.info(f'MOSTRANDO PRODUCTO NAME >>> { name }')
+            
             data['nombre'] = producto.name
             data['cantidad'] = producto.qty_available
             data['costo'] = producto.standard_price
