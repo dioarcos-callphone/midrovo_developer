@@ -40,8 +40,8 @@ class ProductProductInherit(models.Model):
         data = {
             "productos" : data_productos,
             "total_cantidad" : total_cantidad,
-            "total_costo" : total_costo,
-            "total_valor_stock" : total_valor_stock,
+            "total_costo" : round(total_costo, 3),
+            "total_valor_stock" : round(total_valor_stock, 3),
         }
         
         return (
