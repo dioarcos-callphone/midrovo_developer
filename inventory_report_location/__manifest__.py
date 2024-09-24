@@ -12,7 +12,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': [ 'stock', 'product' ],
+    'depends': [ 'stock', ],
     'data': [
         'wizards/stock_quantity_history_wizard.xml',
         'reports/stock_quantity_history_report.xml',
@@ -20,11 +20,11 @@
         'views/stock_quantity_view.xml'
     ],
     
-    'assets': {
-        'web.assets_backend': [
-            'inventory_report_location/static/src/xml/button_add_header.xml'
-        ],
-    },
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'inventory_report_location/static/src/xml/button_add_header.xml'
+    #     ],
+    # },
     
     'license': 'LGPL-3',
     'installable': True,
