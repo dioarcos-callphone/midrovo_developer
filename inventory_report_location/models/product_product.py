@@ -11,19 +11,21 @@ class ProductProductInherit(models.Model):
         
         for producto in self:
             variantes = []
-            data = {
-                "id": producto.id,
-                "nombre": producto.name,
-                "cantidad": producto.qty_available,
-                "costo": round(int(producto.standard_price), 3),
-                "valor_stock": round(int(producto.total_value), 3),
-            }
             
-            if producto.product_template_variant_value_ids:
-                for v in producto.product_template_variant_value_ids:
-                    variantes.append({
-                        f'{ v.attribute_id.name }' : f'{ v.name }',
-                    })
+            if producto.qty_available > 0 and producto.standard_price > 0 and producto.total_value > 0:
+                data = {
+                    "id": producto.id,
+                    "nombre": producto.name,
+                    "cantidad": producto.qty_available,
+                    "costo": round(int(producto.standard_price), 3),
+                    "valor_stock": round(int(producto.total_value), 3),
+                }
+            
+                if producto.product_template_variant_value_ids:
+                    for v in producto.product_template_variant_value_ids:
+                        variantes.append({
+                            f'{ v.attribute_id.name }' : f'{ v.name }',
+                        })
                     
                 data['atributos'] = variantes
                 
