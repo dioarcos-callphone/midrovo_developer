@@ -27,8 +27,12 @@ class ProductProductInherit(models.Model):
                 data['atributos'] = variantes
                 
             data_productos.append(data)
+            
+        data = {
+            "productos" : data_productos
+        }
         
         return (
             self.env.ref('inventory_report_location.report_stock_quantity_history')
-            .report_action(None, data=data_productos)
+            .report_action(None, data=data)
         )
