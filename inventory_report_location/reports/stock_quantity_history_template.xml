@@ -12,26 +12,10 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th align="center"/>
-                            <th align="center"/>
-                            <th align="center"/>
-                        </tr>
-                        <tr>
                             <th align="center">PRODUCTO</th>
                             <th align="center">STOCK TOTAL</th>
                             <th align="center">COSTO</th>
                             <th align="center">VALOR DEL STOCK</th>
-
-                            <!-- <th align="center">STOCK</th>
-                            <th align="center">VALOR</th>
-                            <th align="center">STOCK</th>
-                            <th align="center">VALOR</th>
-                            <th align="center">STOCK</th>
-                            <th align="center">VALOR</th>
-                            <th align="center">STOCK</th>
-                            <th align="center">VALOR</th>
-                            <th align="center">STOCK</th>
-                            <th align="center">VALOR</th> -->
                         </tr>
                     </thead>
                     <tbody>
