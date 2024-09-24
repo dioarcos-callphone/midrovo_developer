@@ -11,6 +11,7 @@
                         string="PDF"
                         type="object"
                         class="oe_highlight"
+                        style="background-color: #017e84;"                        
                         icon="fa-check"/>
             </xpath>
         </field>

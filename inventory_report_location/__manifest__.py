@@ -20,12 +20,6 @@
         'views/stock_quantity_view.xml'
     ],
     
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'inventory_report_location/static/src/xml/button_add_header.xml'
-    #     ],
-    # },
-    
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
