@@ -11,7 +11,7 @@
                         string="PDF"
                         type="object"
                         class="oe_highlight"                     
-                        icon="fa-check"/>
+                        icon="fa-file-pdf"/>
             </xpath>
         </field>
     </record>
