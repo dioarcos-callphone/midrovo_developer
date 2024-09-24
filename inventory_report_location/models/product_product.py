@@ -7,7 +7,6 @@ class ProductProductInherit(models.Model):
         data_productos = []
         
         total_cantidad = 0
-        total_costo = 0
         total_valor_stock = 0 
         
         for producto in self:
@@ -17,7 +16,6 @@ class ProductProductInherit(models.Model):
             valor_stock = round(producto.total_value, 3)
             
             total_cantidad += cantidad
-            total_costo += costo
             total_valor_stock += valor_stock
 
             data = {
@@ -40,7 +38,6 @@ class ProductProductInherit(models.Model):
         data = {
             "productos" : data_productos,
             "total_cantidad" : total_cantidad,
-            "total_costo" : round(total_costo, 3),
             "total_valor_stock" : round(total_valor_stock, 3),
         }
         

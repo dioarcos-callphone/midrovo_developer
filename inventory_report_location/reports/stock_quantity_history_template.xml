@@ -39,7 +39,7 @@
                                 <t t-esc="new['cantidad']"/>
                             </td>
                             <td align="center" width="100">
-                                $ <t t-esc="new['costo']"/>
+                                
                             </td>
                             <td align="center" width="100">
                                 $ <t t-esc="new['valor_stock']"/>
