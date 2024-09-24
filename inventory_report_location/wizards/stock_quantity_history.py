@@ -42,8 +42,8 @@ class StockQuantityHistoryInherit(models.TransientModel):
             _logger.info(f'MOSTRANDO LOCATION IDS >>> { self.location_ids }')
             location_ids = self.location_ids.ids
             products = self.env['stock.quant'].search([('location_id', 'in', location_ids)])
-            ids = [ p.id for p in products ]
-            domain = expression.AND([domain, [('product_tmpl_id', 'in', ids)]])
+            ids = [ p.product_id for p in products ]
+            domain = expression.AND([domain, [('id', 'in', ids)]])
 
         # Actualizar el dominio en la acción
         action['domain'] = domain
