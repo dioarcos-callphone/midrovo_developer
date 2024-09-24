@@ -41,8 +41,9 @@ class StockQuantityHistoryInherit(models.TransientModel):
         if self.location_ids:
             _logger.info(f'MOSTRANDO LOCATION IDS >>> { self.location_ids }')
             location_ids = self.location_ids.ids
+            _logger.info(f'LOCATION IDS >>> { ids }')
             products = self.env['stock.quant'].search([('location_id', 'in', location_ids)])
-            ids = [ p.product_id.qty_available for p in products ]
+            ids = [ p.inventory_quantity_auto_apply for p in products ]
             _logger.info(f'QTY AVAILABLE >>> { ids }')
             domain = expression.AND([domain, [('qty_available', 'in', ids)]])
 
