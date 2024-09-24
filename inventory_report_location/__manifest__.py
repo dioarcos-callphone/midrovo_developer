@@ -20,11 +20,11 @@
         'views/stock_quantity_view.xml'
     ],
     
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'inventory_report_location/static/src/xml/template_inherit.xml'
-    #     ],
-    # },
+    'assets': {
+        'web.assets_backend': [
+            'inventory_report_location/static/src/xml/template_inherit.xml'
+        ],
+    },
     
     'license': 'LGPL-3',
     'installable': True,
