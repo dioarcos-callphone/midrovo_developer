@@ -22,7 +22,7 @@
     
     'assets': {
         'web.assets_backend': [
-            'inventory_report_location/static/src/xml/template_inherit.xml'
+            'inventory_report_location/static/src/xml/button_add_header.xml'
         ],
     },
     
