@@ -19,7 +19,9 @@
                         <tr>
                             <th align="center">PRODUCTO</th>
                             <th align="center">STOCK TOTAL</th>
+                            <th align="center">COSTO</th>
                             <th align="center">VALOR DEL STOCK</th>
+
                             <!-- <th align="center">STOCK</th>
                             <th align="center">VALOR</th>
                             <th align="center">STOCK</th>
@@ -53,6 +55,9 @@
                             </td>
                             <td>
                                 <t t-esc="new['costo']"/>
+                            </td>
+                            <td>
+                                <t t-esc="new['valor_stock']"/>
                             </td>
                         </tr>
                     </tbody>

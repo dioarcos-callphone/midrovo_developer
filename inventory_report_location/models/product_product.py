@@ -16,6 +16,7 @@ class ProductProductInherit(models.Model):
                 "nombre": producto.name,
                 "cantidad": producto.qty_available,
                 "costo": producto.standard_price,
+                "valor_stock": producto.total_value
             }
             
             if producto.product_template_variant_value_ids:
