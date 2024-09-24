@@ -111,8 +111,8 @@ class StockQuantityHistory(models.AbstractModel):
         #         'options': data_productos,
         #     }
             
-        else:
-            raise ValidationError("No records found for the given criteria!")
+        # else:
+        #     raise ValidationError("No records found for the given criteria!")
                 
             
             
