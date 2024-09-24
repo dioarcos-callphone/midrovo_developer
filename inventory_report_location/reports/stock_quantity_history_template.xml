@@ -45,6 +45,8 @@
                                 $<t t-esc="new['valor_stock']"/>
                             </td>
                         </tr>
+                    </tbody>
+                    <tfoot>
                         <tr>
                             <th align="center" style="white-space: nowrap; font-weight: bold;">TOTAL</th>
                             <th align="center" width="70">
@@ -57,7 +59,7 @@
                                 $<t t-esc="total_valor_stock"/>
                             </th>
                         </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
             </t>
         </t>
