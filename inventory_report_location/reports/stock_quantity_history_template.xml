@@ -39,10 +39,10 @@
                                 <t t-esc="new['cantidad']"/>
                             </td>
                             <td align="center" width="70">
-                                $<t t-esc="new['costo']"/>
+                                $ <t t-esc="new['costo']"/>
                             </td>
                             <td align="center" width="70">
-                                $<t t-esc="new['valor_stock']"/>
+                                $ <t t-esc="new['valor_stock']"/>
                             </td>
                         </tr>
                     </tbody>
@@ -53,10 +53,10 @@
                                 <t t-esc="total_cantidad"/>
                             </th>
                             <th align="center" width="70">
-                                $<t t-esc="total_costo"/>
+                                $ <t t-esc="total_costo"/>
                             </th>
                             <th align="center" width="70">
-                                $<t t-esc="total_valor_stock"/>
+                                $ <t t-esc="total_valor_stock"/>
                             </th>
                         </tr>
                     </tfoot>
