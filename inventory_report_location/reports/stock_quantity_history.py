@@ -15,6 +15,9 @@ class StockQuantityHistory(models.AbstractModel):
                 'doc_ids': docids,
                 'doc_model': 'report.stock.quantity.history',
                 'options': productos,
+                'total_cantidad': data['total_cantidad'],
+                "total_costo" : data['total_costo'],
+                "total_valor_stock" : data['total_valor_stock'],
             }
             
         else:

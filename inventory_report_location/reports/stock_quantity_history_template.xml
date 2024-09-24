@@ -38,10 +38,22 @@
                                 <t t-esc="new['cantidad']"/>
                             </td>
                             <td align="center" width="70">
-                                <t t-esc="new['costo']"/>
+                                $<t t-esc="new['costo']"/>
                             </td>
                             <td align="center" width="70">
-                                <t t-esc="new['valor_stock']"/>
+                                $<t t-esc="new['valor_stock']"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: nowrap;">TOTAL</td>
+                            <td align="center" width="70">
+                                <t t-esc="total_cantidad"/>
+                            </td>
+                            <td align="center" width="70">
+                                $<t t-esc="total_costo"/>
+                            </td>
+                            <td align="center" width="70">
+                                $<t t-esc="total_valor_stock"/>
                             </td>
                         </tr>
                     </tbody>

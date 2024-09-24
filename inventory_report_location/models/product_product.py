@@ -6,18 +6,26 @@ class ProductProductInherit(models.Model):
     def action_pdf(self):
         data_productos = []
         
+        total_cantidad = 0
+        total_costo = 0
+        total_valor_stock = 0 
+        
         for producto in self:
             variantes = []
+            cantidad = producto.qty_available
+            costo = round(producto.standard_price, 3)
+            valor_stock = round(producto.total_value, 3)
             
-            costo = producto.standard_price
-            valor_stock = producto.total_value
+            total_cantidad += cantidad
+            total_costo += costo
+            total_valor_stock += valor_stock
 
             data = {
                 "id": producto.id,
                 "nombre": producto.name,
-                "cantidad": producto.qty_available,
-                "costo": round(costo, 3),
-                "valor_stock": round(valor_stock, 3),
+                "cantidad": cantidad,
+                "costo": costo,
+                "valor_stock": valor_stock,
             }
         
             if producto.product_template_variant_value_ids:
@@ -30,7 +38,10 @@ class ProductProductInherit(models.Model):
             data_productos.append(data)
             
         data = {
-            "productos" : data_productos
+            "productos" : data_productos,
+            "total_cantidad" : total_cantidad,
+            "total_costo" : total_costo,
+            "total_valor_stock" : total_valor_stock,
         }
         
         return (
