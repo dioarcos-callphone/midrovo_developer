@@ -1,0 +1,12 @@
+<odoo>
+    <template id="inherit_loyalty_x2many_field" inherit_id="loyalty.LoyaltyX2ManyField">
+        <xpath expr="//div[@class='o_cp_buttons']" position="inside">
+            <!-- Nuevo botón adicional -->
+            <div>
+                <button type="button" class="btn btn-primary" title="Custom Action" t-on-click="() => this.onCustomAction()">
+                    PDF
+                </button>
+            </div>
+        </xpath>
+    </template>
+</odoo>
