@@ -65,12 +65,15 @@ class StockQuantityHistoryInherit(models.TransientModel):
         
         # Agregar filtros por categoría
         if self.category_ids:
+            _logger.info(f'MOSTRANDO CATEGORIES IDS >>> {self.category_ids}')
             category_ids = self.category_ids.ids
             domain = expression.AND([domain, [('categ_id', 'in', category_ids)]])
         
         # Agregar filtros por ubicación
         if self.location_ids:
+            _logger.info(f'MOSTRANDO LOCATION IDS >>> {self.location_ids}')
             location_ids = self.location_ids.ids
+            _logger.info(f'LOCATION IDS >>> {location_ids}')
             
             # Buscar los productos y sus cantidades por ubicación
             quants = self.env['stock.quant'].search([('location_id', 'in', location_ids)])
@@ -84,15 +87,13 @@ class StockQuantityHistoryInherit(models.TransientModel):
                     product_quantities[product_id] = 0.0
                 product_quantities[product_id] += quant.quantity
             
-            # Obtener los IDs de productos y las cantidades correspondientes
+            # Obtener los IDs de productos
             product_ids = list(product_quantities.keys())
-            quantities = list(product_quantities.values())
             
             _logger.info(f'PRODUCT IDS >>> {product_ids}')
-            _logger.info(f'QUANTITIES >>> {quantities}')
             
-            # Filtrar por productos y sus cantidades específicas en las ubicaciones seleccionadas
-            domain = expression.AND([domain, [('id', 'in', product_ids), ('qty_available', 'in', quantities)]])
+            # Filtrar solo por productos en las ubicaciones seleccionadas
+            domain = expression.AND([domain, [('id', 'in', product_ids)]])
         
         # Actualizar el dominio en la acción
         action['domain'] = domain
@@ -100,4 +101,3 @@ class StockQuantityHistoryInherit(models.TransientModel):
         _logger.info(f"Final domain: {action['domain']}")
         
         return action
-
