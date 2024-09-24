@@ -10,8 +10,8 @@
                 <button name="action_pdf"
                         string="PDF"
                         type="object"
-                        class="oe_highlight"                     
-                        icon="fa-file-pdf"/>
+                        class="btn btn-primary o_list_button_add"                     
+                        icon="fa-check"/>
             </xpath>
         </field>
     </record>
