@@ -6,9 +6,9 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="stock.view_stock_product_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//tree//header" position="inside">
-                <button name="action_pdf"
-                        string="Mi Botón"
+            <xpath expr="//tree/header" position="inside">
+                <button name="action_custom_button"
+                        string="PDF"
                         type="object"
                         class="oe_highlight"
                         icon="fa-check"/>
