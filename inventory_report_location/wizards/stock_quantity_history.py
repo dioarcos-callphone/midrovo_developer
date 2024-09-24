@@ -44,8 +44,11 @@ class StockQuantityHistoryInherit(models.TransientModel):
             # Modificar el display_name para incluir categorías
             category_names = ", ".join(self.category_ids.mapped("name"))
             action["display_name"] = f"{category_names} - {action['display_name']}"
+            
+        context['search_default_qty_available'] = 1
 
         action["context"] = context
+        
         contexto = action["context"]
         _logger.info(f'MOSTRANDO CONTEXTO >>> { contexto }')
         return action
