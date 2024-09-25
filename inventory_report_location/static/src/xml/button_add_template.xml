@@ -1,0 +1,10 @@
+<odoo>
+    <template id="custom_list_buttons" inherit_id="web.ListView.Buttons">
+        <xpath expr="//div[@class='o_list_buttons']" position="inside">
+            <!-- Añadir un nuevo botón -->
+            <button type="button" class="btn btn-info" t-on-click="onCustomAction">
+                PDF
+            </button>
+        </xpath>
+    </template>
+</odoo>
