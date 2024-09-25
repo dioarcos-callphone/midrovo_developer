@@ -9,6 +9,7 @@ export class SaleListController extends ListController {
     }
     
     async actionPDF() {
+        console.log(this)
         try {
             const result = await rpc.query({
                 model: 'product.product',
