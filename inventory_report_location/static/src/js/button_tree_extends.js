@@ -26,7 +26,7 @@ export class SaleListController extends ListController {
             console.log("Resultado:", recordIds);
 
         } catch (error) {
-            
+            console.log(error);
         }
     }
 }
