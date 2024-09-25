@@ -3,7 +3,7 @@
     <t t-inherit="stock.InventoryReport.Buttons" t-inherit-mode="extension" owl="1">
         <xpath expr="//button[contains(@t-if, 'stock.quant')]" position="before">
             <t t-if="multi_location" t-set="text_multi_location">
-                Inventory at Date &amp; Location
+                PDF
             </t>
             <t t-else="" t-set="text_multi_location">Inventory at Date</t>
         </xpath>
