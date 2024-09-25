@@ -27,4 +27,19 @@
         </field>
     </record>
 
+    <record id="view_custom_list_inherit" model="ir.ui.view">
+        <field name="name">custom.list.view.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="web.ListView.Buttons"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_list_buttons']" position="inside">
+                <button type="button" class="btn btn-info o_list_button_pdf" 
+                        t-on-click="onClickGeneratePdf" 
+                        title="Generate PDF">
+                    PDF
+                </button>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
