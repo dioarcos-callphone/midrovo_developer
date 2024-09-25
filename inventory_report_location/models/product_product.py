@@ -42,9 +42,8 @@ class ProductProductInherit(models.Model):
             "total_valor_stock" : round(total_valor_stock, 3),
         }
         
-        # return (
-        #     self.env.ref('inventory_report_location.report_stock_quantity_history')
-        #     .report_action(None, data=data)
-        # )
+        return (
+            self.env.ref('inventory_report_location.report_stock_quantity_history')
+            .report_action(self, data=data)
+        )
         
-        return self.env.ref('inventory_report_location.report_stock_quantity_history').report_action(None, data=data)
