@@ -2,14 +2,13 @@
 import { ListController } from "@web/views/list/list_controller";
 import { registry } from '@web/core/registry';
 import { listView } from '@web/views/list/list_view';
-import rpc from 'web.rpc';
 export class SaleListController extends ListController {
    setup() {
        super.setup();
    }
    async actionPDF() {
        // Hacer una llamada RPC al método 'action_pdf' en el modelo 'product.product'
-       return await rpc.query({
+       const { data } = await this._rpc.query({
            model: 'product.product',
            method: 'action_pdf',
        });
