@@ -14,6 +14,8 @@ export class SaleListController extends ListController {
            method: 'action_pdf',
        });
 
+       return
+
    }
 }
 registry.category("views").add("button_in_tree", {
