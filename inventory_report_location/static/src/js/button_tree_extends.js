@@ -17,6 +17,12 @@ export class SaleListController extends ListController {
 
             if(result) {
                 console.log('ENTRA AL RESULTADO')
+                console.log(result)
+
+                // const report = await rpc.query({
+                //     model: 'report.inventory_report_location.report_stock_quantity',
+                //     method: '_get_report_values'
+                // })
             }
 
         } catch (error) {
