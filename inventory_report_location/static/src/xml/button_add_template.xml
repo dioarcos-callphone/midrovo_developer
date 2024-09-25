@@ -2,7 +2,7 @@
 <templates>
    <t t-name="button_sale.ListView.Buttons" t-inherit="web.ListView.Buttons">
        <xpath expr="//*[@class='btn btn-primary o_list_button_add']" position="after">
-           <button type="object" class="btn btn-primary" name="action_pdf" style="margin-left: 10px;">
+           <button type="button" class="btn btn-primary" style="margin-left: 10px;" t-on-click="actionPDF">
                PDF
            </button>
        </xpath>
