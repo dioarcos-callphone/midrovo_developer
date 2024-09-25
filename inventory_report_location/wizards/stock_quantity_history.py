@@ -26,9 +26,9 @@ class StockQuantityHistoryInherit(models.TransientModel):
 
         # Filtro por categorías
         if self.category_ids:
-            context["category"] = self.category_ids.ids  # Filtrar por varias categorías
+            context["categ_id"] = self.category_ids.ids  # Filtrar por varias categorías
             # Modificar el display_name para incluir categorías
-            category_names = ", ".join(self.category_ids.mapped("complete_name"))
+            category_names = ", ".join(self.category_ids.mapped("name"))
             action["display_name"] = f"{category_names} - {action['display_name']}"
             
         context['search_default_qty_available'] = 1
