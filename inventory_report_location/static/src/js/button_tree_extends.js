@@ -12,8 +12,8 @@ export class SaleListController extends ListController {
         console.log(this)
         try {
             const result = await rpc.query({
-                model: 'product.product',
-                method: 'action_pdf',
+                model: 'report.inventory_report_location.report_stock_quantity',
+                method: '_get_report_values',
             });
 
             if(result) {

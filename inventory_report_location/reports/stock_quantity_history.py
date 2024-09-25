@@ -7,12 +7,13 @@ class StockQuantityHistory(models.AbstractModel):
     _description = 'Stock Quantity History'
     
     @api.model
-    def _get_report_values(self, docids, data=None):
+    def _get_report_values(self):
+        data = self.env['product.product'].action_pdf()
         productos = data['productos']
             
         if productos:
             return {
-                'doc_ids': docids,
+                # 'doc_ids': docids,
                 'doc_model': 'report.stock.quantity.history',
                 'options': productos,
                 'total_cantidad': data['total_cantidad'],
