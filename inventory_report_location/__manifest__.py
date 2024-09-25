@@ -22,8 +22,8 @@
     
     'assets': {
         'web.assets_backend': [
-            'inventory_report_location/static/src/js/button_tree_extends.js',
-            'inventory_report_location/static/src/xml/button_add_template.xml',
+            '/inventory_report_location/static/src/js/button_tree_extends.js',
+            '/inventory_report_location/static/src/xml/button_add_template.xml',
         ],
     },
     
