@@ -10,17 +10,14 @@ export class SaleListController extends ListController {
     
     async actionPDF() {
         try {
-            // Obtiene los registros seleccionados en la lista
-            const selectedRecords = this.getSelectedRecords();
+            const selectedRecords = this.state.selectedIds;
 
             if (selectedRecords.length === 0) {
                 // Manejo de caso donde no hay registros seleccionados
                 console.warn("No hay registros seleccionados");
                 return;
             }
-
-            // Aquí puedes procesar los registros seleccionados
-            // Ejemplo: obtén los IDs de los registros seleccionados
+            
             const recordIds = selectedRecords.map(record => record.id);
 
             console.log("Resultado:", recordIds);
