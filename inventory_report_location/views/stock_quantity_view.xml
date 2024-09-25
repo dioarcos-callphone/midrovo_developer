@@ -6,7 +6,7 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="stock.view_stock_product_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//tree/header" position="inside">
+            <xpath expr="//*" position="inside">
                 <button name="action_pdf"
                         string="PDF"
                         type="object"
@@ -24,21 +24,6 @@
             <search>
                 <filter name="qty_available" string="Cantidad a mano" domain="[('qty_available', '!=', 0)]"/>
             </search>
-        </field>
-    </record>
-
-    <record id="view_custom_list_inherit" model="ir.ui.view">
-        <field name="name">custom.list.view.inherit</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="web.ListView.Buttons"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@class='o_list_buttons']" position="inside">
-                <button type="button" class="btn btn-info o_list_button_pdf" 
-                        t-on-click="onClickGeneratePdf" 
-                        title="Generate PDF">
-                    PDF
-                </button>
-            </xpath>
         </field>
     </record>
 
