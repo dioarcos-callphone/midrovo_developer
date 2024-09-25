@@ -6,17 +6,22 @@ export class SaleListController extends ListController {
    setup() {
        super.setup();
    }
-   OnTestClick() {
-       this.actionService.doAction({
-          type: 'ir.actions.act_window',
-          res_model: 'product.product',
-          name:'Open Wizard',
-          view_mode: 'form',
-          view_type: 'form',
-          views: [[false, 'form']],
-          target: 'new',
-          res_id: false,
-      });
+   async actionPDF() {
+       // Obtener los IDs de los productos seleccionados
+       const selectedIds = this.selectedRecordIds;
+
+       if (selectedIds.length === 0) {
+           this._notify("No se han seleccionado productos", { type: "warning" });
+           return;
+       }
+
+       // Hacer una llamada RPC al método 'action_pdf' en el modelo 'product.product'
+       const { data } = await this._rpc({
+           model: 'product.product',
+           method: 'action_pdf',
+           args: [selectedIds],
+       });
+
    }
 }
 registry.category("views").add("button_in_tree", {

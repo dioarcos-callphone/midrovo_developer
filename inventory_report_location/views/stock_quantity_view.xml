@@ -9,14 +9,6 @@
             <xpath expr="//tree" position="attributes">
                <attribute name="js_class">button_in_tree</attribute>
            </xpath>
-            <!-- <xpath expr="//tree/header" position="inside">
-                <button name="action_pdf"
-                        string="PDF"
-                        type="object"
-                        class="btn btn-primary"
-                        invisible="0"
-                        icon="fa-check"/>
-            </xpath> -->
         </field>
     </record>
 
