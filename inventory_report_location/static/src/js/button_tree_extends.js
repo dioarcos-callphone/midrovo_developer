@@ -7,11 +7,26 @@ export class SaleListController extends ListController {
        super.setup();
    }
    async actionPDF() {
-       // Hacer una llamada RPC al método 'action_pdf' en el modelo 'product.product'
-       const { data } = await this._rpc({
-           model: 'product.product',
-           method: 'action_pdf',
-       });
+    try {
+        // Llamar al método action_pdf sin pasar ningún argumento
+        const { data } = await this._rpc({
+            model: 'product.product',
+            method: 'action_pdf',
+            args: [],  // No se pasan argumentos ya que no hay selección
+        });
+
+        // Manejar la respuesta para abrir el PDF
+        if (data && data.pdf_url) {
+            window.open(data.pdf_url, '_blank');
+        } else {
+            this._notify("Error al generar el PDF", { type: "warning" });
+        }
+    }
+    
+    catch (error) {
+        console.error("Error al ejecutar actionPDF:", error);
+        this._notify("Ocurrió un error al generar el PDF", { type: "danger" });
+    }
 
    }
 }
