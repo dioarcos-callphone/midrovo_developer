@@ -15,6 +15,7 @@ export class SaleListController extends ListController {
         });
 
         if (result) {
+            console.log(`MOSTRANDO RESULT ${ result }`)
             const blob = new Blob([result], { type: 'application/pdf' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
