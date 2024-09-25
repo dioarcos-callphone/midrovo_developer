@@ -8,9 +8,9 @@ export class SaleListController extends ListController {
        super.setup();
     }
     
-    async actionPDF() {
+    // async actionPDF() {
         
-    }
+    // }
 }
 
 registry.category("views").add("button_in_tree", {
