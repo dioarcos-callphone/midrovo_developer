@@ -9,24 +9,7 @@ export class SaleListController extends ListController {
     }
     
     async actionPDF() {
-        try {
-            // Llamar a la acción del informe en el backend
-            const reportAction = await rpc.query({
-                model: 'product.product',
-                method: 'action_pdf', // El método que genera el informe PDF
-                args: [], // Si necesitas pasar argumentos, agrégales aquí
-            });
- 
-            // Verifica si la acción reportAction tiene una URL para descargar
-            if (reportAction && reportAction.url) {
-                // Abre la URL en una nueva pestaña (esto iniciará la descarga)
-                window.open(reportAction.url, '_blank');
-            } else {
-                console.error("No se recibió una URL de descarga");
-            }
-        } catch (error) {
-            console.error("Error al generar el PDF:", error);
-        }
+        
     }
 }
 
