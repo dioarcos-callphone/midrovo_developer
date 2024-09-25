@@ -13,7 +13,7 @@ export class SaleListController extends ListController {
         try {
             const result = await rpc.query({
                 model: 'report.inventory_report_location.report_stock_quantity',
-                method: '_get_report_values',
+                method: 'get_report_values',
             });
 
             if(result) {
