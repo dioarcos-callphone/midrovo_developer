@@ -9,12 +9,10 @@ export class SaleListController extends ListController {
    }
    async actionPDF() {
        // Hacer una llamada RPC al método 'action_pdf' en el modelo 'product.product'
-       const { data } = await rpc.query({
+       return await rpc.query({
            model: 'product.product',
            method: 'action_pdf',
        });
-
-       return
 
    }
 }
