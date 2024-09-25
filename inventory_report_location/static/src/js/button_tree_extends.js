@@ -15,6 +15,10 @@ export class SaleListController extends ListController {
                 method: 'action_pdf',
             });
 
+            if(result) {
+                console.log('ENTRA AL RESULTADO')
+            }
+
         } catch (error) {
             console.error("Error al generar el PDF:", error);
         }
