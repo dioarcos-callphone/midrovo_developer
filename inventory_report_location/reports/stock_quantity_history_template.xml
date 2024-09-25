@@ -46,21 +46,21 @@
                             </td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th align="center" style="white-space: nowrap; font-weight: bold;">TOTAL</th>
-                            <th align="center" width="100">
-                                <t t-esc="total_cantidad"/>
-                            </th>
-                            <th align="center" width="100">
-                                 
-                            </th>
-                            <th align="center" width="100">
-                                $ <t t-esc="total_valor_stock"/>
-                            </th>
-                        </tr>
-                    </tfoot>
                 </table>
+                <tfoot>
+                    <tr>
+                        <th align="center" style="white-space: nowrap; font-weight: bold;">TOTAL</th>
+                        <th align="center" width="100">
+                            <t t-esc="total_cantidad"/>
+                        </th>
+                        <th align="center" width="100">
+                                
+                        </th>
+                        <th align="center" width="100">
+                            $ <t t-esc="total_valor_stock"/>
+                        </th>
+                    </tr>
+                </tfoot>
             </t>
         </t>
     </template>
