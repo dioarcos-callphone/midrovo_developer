@@ -5,8 +5,9 @@
             <t t-if="multi_location" t-set="text_multi_location">
                 PDF
             </t>
+            <t t-else="" t-set="text_multi_location">Inventory at Date</t>
         </xpath>
-        <xpath expr="//button[contains(@t-if, 'product.product')]" position="attributes">
+        <xpath expr="//button[contains(@t-if, 'stock.quant')]" position="attributes">
             <attribute name="t-out">text_multi_location</attribute>
         </xpath>
     </t>
