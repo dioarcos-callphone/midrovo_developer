@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<templates id="template" xml:space="preserve">
-
-<t t-name="ProductProduct.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary" owl="1">
-    <xpath expr="(//div/*)[last()]" position="after">
-        <button class="btn btn-secondary" type="button" >
-            PDF
-        </button>
-    </xpath>
-</t>
-
-<!-- t-on-click="onClickApplyAll" -->
-
+<templates>
+   <t t-name="button_sale.ListView.Buttons" t-inherit="web.ListView.Buttons">
+       <xpath expr="//*[@class='btn btn-primary o_list_button_add']" position="after">
+           <button type="button" class="btn btn-primary" style="margin-left: 10px;"  t-on-click="OnTestClick">
+               PDF
+           </button>
+       </xpath>
+   </t>
 </templates>
