@@ -11,7 +11,7 @@ export class SaleListController extends ListController {
     async actionPDF() {
         try {
             // Hacer una llamada al controlador
-            const result = await rpc({
+            const result = await rpc.query({
                 route: '/product/pdf_report',
                 params: {}, // Aquí puedes enviar parámetros si lo necesitas
             });
