@@ -1,10 +1,13 @@
-<odoo>
-    <t t-name="custom_list_buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary" owl="1">
-        <xpath expr="//(//div/*)[last()]" position="after">
-            <!-- Añadir un nuevo botón -->
-            <button type="button" class="btn btn-info" t-on-click="onCustomAction">
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="stock.InventoryReport.Buttons" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[contains(@t-if, 'product.product')]" position="before">
+            <t t-if="multi_location" t-set="text_multi_location">
                 PDF
-            </button>
+            </t>
+        </xpath>
+        <xpath expr="//button[contains(@t-if, 'product.product')]" position="attributes">
+            <attribute name="t-out">text_multi_location</attribute>
         </xpath>
     </t>
-</odoo>
+</templates>
