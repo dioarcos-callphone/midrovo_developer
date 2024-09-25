@@ -12,7 +12,6 @@
                         type="object"
                         class="btn btn-primary"
                         invisible="0"
-                        required="1"
                         icon="fa-check"/>
             </xpath>
         </field>
