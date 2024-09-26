@@ -28,7 +28,7 @@
         <field name="name">Reporte de detalles de facturas</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.details.wizard</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">form,tree</field>
         <field name="view_id" ref="invoice_details_report_view_form"/>
         <field name="target">new</field>
     </record>
