@@ -18,6 +18,12 @@
                         </group>
                     </group>
                 </sheet>
+                <footer>
+                    <button name="action_pdf" string="PDF" type="object"
+                            data-hotkey="q" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel" data-hotkey="z"/>
+                </footer>
             </form>
         </field>
     </record>
