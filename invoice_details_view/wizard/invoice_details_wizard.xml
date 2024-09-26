@@ -28,7 +28,7 @@
         <field name="name">Reporte de detalles de facturas</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.details.wizard</field>
-        <field name="view_mode">form,tree</field>
+        <field name="view_mode">form</field>
         <field name="view_id" ref="invoice_details_report_view_form"/>
         <field name="target">new</field>
     </record>
@@ -37,6 +37,6 @@
               name="Reporte de detalles de facturas"
               action="invoice_details_report_action"
               parent="account.menu_finance_receivables"
-              sequence="310"/>
+              sequence="4"/>
 
 </odoo>
