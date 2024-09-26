@@ -16,13 +16,18 @@ class InvoiceDetails(models.AbstractModel):
         diario = data['diario']
         comercial = data['comercial']
         
-        invoice_details = self.env['account.move.line'].search([
+        domain = [
+            ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
-            ('journal_id', 'in', diario),
-            ('product_id', '!=', False),
-            # ('comercial', 'in', comercial),    
-        ])
+        ]
+        
+        if diario:
+            domain.append(('journal_id', 'in', diario))
+        if comercial:
+            domain.append(('move_id.invoice_user_id', 'in', comercial))
+        
+        invoice_details = self.env['account.move.line'].search(domain)
         
         if invoice_details:
             _logger.info(f'MOSTRANDO INVOICE DETAILS >>> { invoice_details }')
