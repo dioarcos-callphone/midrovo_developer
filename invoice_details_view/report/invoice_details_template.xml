@@ -18,7 +18,26 @@
                             <th align="center" style="vertical-align: middle">PRECIO</th>
                             <th align="center" style="vertical-align: middle">COSTO</th>
                         </tr>
-                    </thead>                
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="options" t-as="result">
+                            <td>
+                                <t t-esc="result['numero']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['producto']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['cantidad']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['precio']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['subtotal']"/>
+                            </td>
+                        </tr>
+                    </tbody>              
                 </table>
             </t>
         </t>
