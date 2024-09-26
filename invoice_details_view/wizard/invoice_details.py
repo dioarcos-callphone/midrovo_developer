@@ -28,6 +28,8 @@ class InvoiceDetails(models.TransientModel):
     )
     
     def action_pdf(self):
-        pass
+        if self.start_date > self.end_date:
+            raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
+        return
     
     
