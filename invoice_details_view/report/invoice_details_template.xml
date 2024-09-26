@@ -34,7 +34,7 @@
                                 <t t-esc="result['precio']"/>
                             </td>
                             <td align="center" width="100">
-                                <t t-esc="result['subtotal']"/>
+                                <t t-esc="result['costo']"/>
                             </td>
                         </tr>
                     </tbody>              
