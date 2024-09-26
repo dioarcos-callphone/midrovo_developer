@@ -15,8 +15,8 @@ class InvoiceDetails(models.AbstractModel):
         invoice_details = self.env['account.move.line'].search([
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
-            ('diario', 'in', diario),
-            ('comercial', 'in', comercial),    
+            ('journal_id', 'in', diario),
+            # ('comercial', 'in', comercial),    
         ])
         
         if invoice_details:

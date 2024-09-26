@@ -37,8 +37,8 @@ class InvoiceDetails(models.TransientModel):
             'model_id': self.id,
             'fecha_inicio': self.start_date,
             'fecha_fin': self.end_date,
-            'diario': self.journal_ids,
-            'comercial': self.comercial_ids
+            'diario': self.journal_ids.ids,
+            'comercial': self.comercial_ids.ids
         }
         
         return (
