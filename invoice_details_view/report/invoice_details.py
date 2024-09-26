@@ -29,9 +29,7 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        if invoice_details:
-            _logger.info(f'MOSTRANDO INVOICE DETAILS >>> { invoice_details }')
-            
+        if invoice_details:            
             for detail in invoice_details:
                 data_detail = {
                     "numero": detail.move_name,
@@ -51,4 +49,4 @@ class InvoiceDetails(models.AbstractModel):
                 'options': data_invoice_details,
             }
         else:
-            raise ValidationError("No records found for the given criteria!")
+            raise ValidationError("¡No se encontraron registros para los criterios dados!")
