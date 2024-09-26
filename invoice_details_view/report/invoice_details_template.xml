@@ -12,7 +12,7 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th align="center" style="vertical-align: middle">FACTURA</th>
+                            <th align="center" style="vertical-align: middle">NUMERO</th>
                             <th align="center" style="vertical-align: middle">PRODUCTO</th>
                             <th align="center" style="vertical-align: middle">CANTIDAD</th>
                             <th align="center" style="vertical-align: middle">PRECIO</th>
