@@ -9,7 +9,7 @@
                         <h3>Informe de Detalles de Facturas</h3>
                     </div>
                 </div>
-                <table>
+                <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
                             <th align="center" style="vertical-align: middle">FACTURA</th>
