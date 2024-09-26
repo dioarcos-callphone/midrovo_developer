@@ -27,6 +27,8 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='res.users'
     )
     
+    # Esta funcion retorna valores del filtro wizard a la funcion get_values
+    # permitiendo generar el reporte en PDF
     def action_pdf(self):
         if self.start_date > self.end_date:
             raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
