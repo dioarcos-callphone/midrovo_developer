@@ -15,6 +15,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'account', ],
     'data': [
+        'security/ir.model.access.csv',
         'wizard/invoice_details_wizard.xml',
     ],
     
