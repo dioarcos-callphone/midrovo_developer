@@ -27,7 +27,7 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='res.users'
     )
     
-    def open_tree_by_filters():
+    def action_pdf(self):
         pass
     
     
