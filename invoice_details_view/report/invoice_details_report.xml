@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="report_invoice_details_action"
+            model="ir.actions.report">
+        <field name="name">Reporte de Detalles de Facturas</field>
+        <field name="model">report.invoice_details_view.report_invoice_details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_details_view.report_invoice_details</field>
+        <field name="report_file">invoice_details_view.report_invoice_details</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
