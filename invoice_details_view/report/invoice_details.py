@@ -20,6 +20,7 @@ class InvoiceDetails(models.AbstractModel):
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
             ('journal_id', 'in', diario),
+            ('product_id', '!=', False),
             # ('comercial', 'in', comercial),    
         ])
         
