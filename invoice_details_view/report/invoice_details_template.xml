@@ -4,9 +4,22 @@
     <template id="report_invoice_details">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
-                <div class="page">
-                    <h3>Informe de Detalles de Facturas</h3>
+                <div class="page" style="margin: 0; padding: 0;">
+                    <div class="text-center" style="margin-bottom: 20px;">
+                        <h3>Informe de Detalles de Facturas</h3>
+                    </div>
                 </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th align="center" style="vertical-align: middle">FACTURA</th>
+                            <th align="center" style="vertical-align: middle">PRODUCTO</th>
+                            <th align="center" style="vertical-align: middle">CANTIDAD</th>
+                            <th align="center" style="vertical-align: middle">PRECIO</th>
+                            <th align="center" style="vertical-align: middle">COSTO</th>
+                        </tr>
+                    </thead>                
+                </table>
             </t>
         </t>
     </template>
