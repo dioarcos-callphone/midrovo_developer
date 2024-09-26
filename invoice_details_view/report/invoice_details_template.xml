@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th align="center" style="vertical-align: middle">NUMERO</th>
+                            <th align="center" style="vertical-align: middle">COMERCIAL</th>
                             <th align="center" style="vertical-align: middle">PRODUCTO</th>
                             <th align="center" style="vertical-align: middle">CANTIDAD</th>
                             <th align="center" style="vertical-align: middle">PRECIO</th>
@@ -23,6 +24,9 @@
                         <tr t-foreach="options" t-as="result">
                             <td>
                                 <t t-esc="result['numero']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['comercial']"/>
                             </td>
                             <td>
                                 <t t-esc="result['producto']"/>
