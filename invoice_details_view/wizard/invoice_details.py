@@ -27,6 +27,12 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='res.users'
     )
     
+    cashier = fields.Many2many(
+        string = 'Vendedor',
+        comodel_name='pos.order'
+        
+    )
+    
     # Esta funcion retorna valores del filtro wizard a la funcion get_values
     # permitiendo generar el reporte en PDF
     def action_pdf(self):
