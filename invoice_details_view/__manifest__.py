@@ -15,7 +15,7 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'account' ],
     'data': [
-        
+        'wizard/xml/invoice_details_wizard.xml',
     ],
     
     'license': 'LGPL-3',
