@@ -37,6 +37,6 @@
               name="Reporte de detalles de facturas"
               action="invoice_details_report_action"
               parent="account.menu_finance_receivables"
-              sequence="2"/>
+              sequence="6"/>
 
 </odoo>
