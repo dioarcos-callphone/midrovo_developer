@@ -5,9 +5,7 @@
         <field name="name">invoice.details.report.view.form</field>
         <field name="model">invoice.details.wizard</field>
         <field name="arch" type="xml">
-            <form string="">
-                <!-- <header>
-                </header> -->
+            <form>
                 <sheet>
                     <group>
                         <group string="Rango de Fechas">

@@ -2,8 +2,8 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 class InvoiceDetails(models.TransientModel):
-    _name = 'invoice.details.wizard'
-    _description = 'Informe de Detalles de las Facturas'
+    _name = "invoice.details.wizard"
+    _description = "Informe de Detalles de las Facturas"
     
     start_date = fields.Date(
         string = 'Fecha de inicio',
