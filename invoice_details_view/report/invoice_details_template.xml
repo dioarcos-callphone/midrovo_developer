@@ -2,14 +2,13 @@
 <odoo>
     
     <template id="report_invoice_details">
-        <t t-call="web.html_container"/>
-        <t t-call="web.external_layout"/>
-        <div class="page">
-            <h3>Informe de Detalles de Facturas</h3>
-        </div>
-
-
-
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h3>Informe de Detalles de Facturas</h3>
+                </div>
+            </t>
+        </t>
     </template>
 
 </odoo>
