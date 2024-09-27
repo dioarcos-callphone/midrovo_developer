@@ -45,6 +45,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail = {
                     "numero": detail.move_name,
                     "comercial": detail.move_id.invoice_user_id.partner_id.name,
+                    "pos": detail.move_id.pos_order_ids.employee_id.name,
                     "producto": detail.product_id.name,
                     "cantidad": detail.quantity,
                     "precio": detail.price_unit,
