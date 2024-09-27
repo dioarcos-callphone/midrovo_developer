@@ -138,7 +138,7 @@ class InvoiceDetails(models.TransientModel):
              'align': 'left'})
         head = workbook.add_format(
             {'align': 'center', 'bold': True, 'font_size': '20px'})
-        sheet.merge_range('C2:I3', 'Informe de Detalles de Facturas', head)
+        sheet.merge_range('A2:F3', 'Informe de Detalles de Facturas', head)
 
         headers = ['Número', 'Comercial', 'Producto', 'Cantidad', 'Precio',
                    'Costo',]
@@ -147,7 +147,7 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(8, col, header, header_style)
         sheet.set_column('A:B', 27, cell_format)
         sheet.set_column('C:D', 13, cell_format)
-        row = 9
+        row = 5
         number = 1
         for val in datas:
             sheet.write(row, 0, val['numero'], text_style)
