@@ -37,6 +37,7 @@ class InvoiceDetails(models.AbstractModel):
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                rentabilidad = detail.price_subtotal - total_costo
                 
                 data_detail = {
                     "numero": detail.move_name,
@@ -48,7 +49,7 @@ class InvoiceDetails(models.AbstractModel):
                     "subtotal": detail.price_subtotal,
                     "costo": round(detail.product_id.standard_price, 2),
                     "total_costo": total_costo,
-                    "rentabilidad": detail.price_subtotal - total_costo
+                    "rentabilidad": round(rentabilidad, 2)
                 }
                 
                 data_invoice_details.append(data_detail)
