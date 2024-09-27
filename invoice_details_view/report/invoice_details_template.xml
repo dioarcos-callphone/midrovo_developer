@@ -54,7 +54,7 @@
                                 <t t-esc="result['total_costo']"/>
                             </td>
                             <td align="center" width="100">
-                                <t t-esc="result['rentabilidad_costo']"/>
+                                <t t-esc="result['rentabilidad']"/>
                             </td>
                         </tr>
                     </tbody>              
