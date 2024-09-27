@@ -36,7 +36,7 @@ class InvoiceDetails(models.TransientModel):
     
     cashier = fields.Many2many(
         string = 'Vendedor',
-        comodel_name='pos.order'
+        comodel_name='hr.employee'
         
     )
     
