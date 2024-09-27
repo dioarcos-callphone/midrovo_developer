@@ -112,7 +112,7 @@ class InvoiceDetails(models.TransientModel):
         data = self.get_report_data()
         return {
             'type': 'ir.actions.report',
-            'data': {'model': 'inventory.age.breakdown.report',
+            'data': {'model': 'invoice.details.wizard',
                      'options': json.dumps(
                          data, default=fields.date_utils.json_default),
                      'output_format': 'xlsx',
