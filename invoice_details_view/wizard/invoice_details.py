@@ -173,7 +173,7 @@ class InvoiceDetails(models.TransientModel):
         })
 
         # Título del informe
-        sheet.merge_range('A1:J1', 'Informe de Detalles de Facturas', title_format)
+        sheet.merge_range('A1:K1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
         headers = [
