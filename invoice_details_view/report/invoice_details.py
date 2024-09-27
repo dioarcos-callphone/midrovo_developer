@@ -34,7 +34,7 @@ class InvoiceDetails(models.AbstractModel):
                 descuento = 0.00
                 subtotal = detail.price_unit * detail.quantity
                 if detail.discount:
-                    descuento = subtotal - (subtotal * (detail.discount/100))
+                    descuento = subtotal * (detail.discount/100)
                 
                 data_detail = {
                     "numero": detail.move_name,
@@ -43,7 +43,7 @@ class InvoiceDetails(models.AbstractModel):
                     "cantidad": detail.quantity,
                     "precio": detail.price_unit,
                     "descuento": descuento,
-                    "subtotal": subtotal,
+                    "subtotal": detail.price_subtotal,
                     "costo": round(detail.product_id.standard_price, 2),
                 }
                 
