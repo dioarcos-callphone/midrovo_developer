@@ -37,7 +37,6 @@ class InvoiceDetails(models.TransientModel):
     cashier = fields.Many2many(
         string = 'Vendedor',
         comodel_name='hr.employee'
-        
     )
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel

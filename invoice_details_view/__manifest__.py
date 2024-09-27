@@ -17,15 +17,14 @@
     'data': [
         'security/ir.model.access.csv',
         'wizard/invoice_details_wizard.xml',
-        # 'report/invoice_details_report_xls.xml'
         'report/invoice_details_report.xml',
         'report/invoice_details_template.xml',
     ],
     
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'invoice_details_view/static/src/js/action_report.js']
-    # },
+    'assets': {
+        'web.assets_backend': [
+            'invoice_details_view/static/src/js/action_report.js']
+    },
     
     'license': 'LGPL-3',
     'installable': True,
