@@ -7,7 +7,7 @@ from odoo.tools import html_escape
 class XLSXReportController(http.Controller):
     """This model is used to connect the frontend to the backend"""
 
-    @http.route('/xlsx_reports', type='http', auth='public', methods=['POST'],
+    @http.route('/xlsx_reports_invoice_details', type='http', auth='public', methods=['POST'],
                 csrf=False)
     def get_report_xlsx(self, model, options, output_format, report_name):
         """This function is called when a post request is made to this route"""

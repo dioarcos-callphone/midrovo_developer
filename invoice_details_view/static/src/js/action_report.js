@@ -8,7 +8,7 @@ registry.category("ir.actions.report handlers").add("xlsx", async (action) => {
        framework.blockUI();
        var def = $.Deferred();
        session.get_file({
-           url: '/xlsx_reports',
+           url: '/xlsx_reports_invoice_details',
            data: action.data,
            success: def.resolve.bind(def),
            error: (error) => this.call('crash_manager', 'rpc_error', error),
