@@ -144,10 +144,10 @@ class InvoiceDetails(models.TransientModel):
                    'Costo',]
 
         for col, header in enumerate(headers):
-            sheet.write(8, col, header, header_style)
+            sheet.write(5, col, header, header_style)
         sheet.set_column('A:B', 27, cell_format)
         sheet.set_column('C:D', 13, cell_format)
-        row = 5
+        row = 6
         number = 1
         for val in datas:
             sheet.write(row, 0, val['numero'], text_style)
