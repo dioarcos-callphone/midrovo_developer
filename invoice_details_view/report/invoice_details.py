@@ -37,7 +37,9 @@ class InvoiceDetails(models.AbstractModel):
                     "producto": detail.product_id.name,
                     "cantidad": detail.quantity,
                     "precio": detail.price_unit,
-                    "costo": detail.price_subtotal,
+                    "descuento": detail.price_subtotal,
+                    "subtotal": detail.price_subtotal,
+                    "costo": detail.product_id.standard_price,
                 }
                 
                 data_invoice_details.append(data_detail)

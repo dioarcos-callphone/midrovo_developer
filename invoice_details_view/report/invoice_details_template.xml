@@ -17,6 +17,8 @@
                             <th align="center" style="vertical-align: middle">PRODUCTO</th>
                             <th align="center" style="vertical-align: middle">CANTIDAD</th>
                             <th align="center" style="vertical-align: middle">PRECIO</th>
+                            <th align="center" style="vertical-align: middle">DESC %</th>
+                            <th align="center" style="vertical-align: middle">SUBTOTAL</th>
                             <th align="center" style="vertical-align: middle">COSTO</th>
                         </tr>
                     </thead>
@@ -36,6 +38,12 @@
                             </td>
                             <td align="center" width="100">
                                 <t t-esc="result['precio']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['descuento']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['subtotal']"/>
                             </td>
                             <td align="center" width="100">
                                 <t t-esc="result['costo']"/>
