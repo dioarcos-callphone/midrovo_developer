@@ -72,7 +72,9 @@ class InvoiceDetails(models.TransientModel):
                     "producto": detail.product_id.name,
                     "cantidad": detail.quantity,
                     "precio": detail.price_unit,
-                    "costo": detail.price_subtotal,
+                    "descuento": detail.price_subtotal,
+                    "subtotal": detail.price_subtotal,
+                    "costo": round(detail.product_id.standard_price, 2),
                 }
                 
                 data_invoice_details.append(data_detail)
@@ -159,7 +161,16 @@ class InvoiceDetails(models.TransientModel):
         sheet.merge_range('A1:F1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
-        headers = ['Número', 'Comercial', 'Producto', 'Cantidad', 'Precio', 'Costo']
+        headers = [
+            'Número',
+            'Comercial',
+            'Producto',
+            'Cantidad',
+            'Precio',
+            'Desc. %',
+            'Subtotal',
+            'Costo',
+        ]
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
 
@@ -169,7 +180,9 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('C:C', 25)  # Producto
         sheet.set_column('D:D', 12)  # Cantidad
         sheet.set_column('E:E', 15)  # Precio
-        sheet.set_column('F:F', 15)  # Costo
+        sheet.set_column('F:F', 15)  # Desc. %
+        sheet.set_column('G:G', 15)  # Subtotal
+        sheet.set_column('H:H', 15)  # Costo
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -179,7 +192,9 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 2, val['producto'], text_format)
             sheet.write(row, 3, val['cantidad'], text_format)
             sheet.write(row, 4, val['precio'], text_format)
-            sheet.write(row, 5, val['costo'], text_format)
+            sheet.write(row, 5, val['descuento'], text_format)
+            sheet.write(row, 6, val['subtotal'], text_format)
+            sheet.write(row, 7, val['costo'], text_format)
             row += 1
 
         # Cerrar el libro
