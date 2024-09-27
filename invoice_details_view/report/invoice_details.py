@@ -31,7 +31,7 @@ class InvoiceDetails(models.AbstractModel):
         
         if invoice_details:            
             for detail in invoice_details:
-                descuento = 0.00
+                descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
