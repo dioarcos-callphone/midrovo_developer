@@ -31,7 +31,7 @@ class InvoiceDetails(models.AbstractModel):
         
         if invoice_details:           
             for detail in invoice_details:
-                _logger.info(f'MOSTRAR POS ORDER IDS >>> { detail.move_id.pos_order_ids }')
+                _logger.info(f'MOSTRAR POS ORDER IDS >>> { detail.move_id.pos_order_ids.employee_id.name }')
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
                 if detail.discount:
