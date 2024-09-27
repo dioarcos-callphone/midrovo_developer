@@ -39,7 +39,7 @@ class InvoiceDetails(models.AbstractModel):
                     "precio": detail.price_unit,
                     "descuento": detail.price_subtotal,
                     "subtotal": detail.price_subtotal,
-                    "costo": detail.product_id.standard_price,
+                    "costo": round(detail.product_id.standard_price, 2),
                 }
                 
                 data_invoice_details.append(data_detail)
