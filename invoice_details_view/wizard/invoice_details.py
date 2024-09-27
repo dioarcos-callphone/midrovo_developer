@@ -158,7 +158,7 @@ class InvoiceDetails(models.TransientModel):
         })
 
         # Título del informe
-        sheet.merge_range('A1:F1', 'Informe de Detalles de Facturas', title_format)
+        sheet.merge_range('A1:H1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
         headers = [
@@ -175,14 +175,14 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(2, col, header, header_format)
 
         # Ajuste de columnas
-        sheet.set_column('A:A', 15)  # Número
+        sheet.set_column('A:A', 22)  # Número
         sheet.set_column('B:B', 20)  # Comercial
         sheet.set_column('C:C', 25)  # Producto
-        sheet.set_column('D:D', 12)  # Cantidad
-        sheet.set_column('E:E', 15)  # Precio
-        sheet.set_column('F:F', 15)  # Desc. %
-        sheet.set_column('G:G', 15)  # Subtotal
-        sheet.set_column('H:H', 15)  # Costo
+        sheet.set_column('D:D', 10)  # Cantidad
+        sheet.set_column('E:E', 10)  # Precio
+        sheet.set_column('F:F', 10)  # Desc. %
+        sheet.set_column('G:G', 10)  # Subtotal
+        sheet.set_column('H:H', 10)  # Costo
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
