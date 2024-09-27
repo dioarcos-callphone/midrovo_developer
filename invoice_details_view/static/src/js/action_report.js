@@ -4,20 +4,16 @@ import framework from 'web.framework';
 import session from 'web.session';
 
 registry.category("ir.actions.report handlers").add("xlsx", async (action) => {
-    try {
-        if (action.report_type === 'xlsx') {
-            framework.blockUI();
-            var def = $.Deferred();
-            session.get_file({
-                url: '/xlsx_reports',
-                data: action.data,
-                success: def.resolve.bind(def),
-                error: (error) => this.call('crash_manager', 'rpc_error', error),
-                complete: framework.unblockUI,
-            });
-            return def;
-        }   
-    } catch (error) {
-        console.log(error)
-    }
+   if (action.report_type === 'xlsx') {
+       framework.blockUI();
+       var def = $.Deferred();
+       session.get_file({
+           url: '/xlsx_reports',
+           data: action.data,
+           success: def.resolve.bind(def),
+           error: (error) => this.call('crash_manager', 'rpc_error', error),
+           complete: framework.unblockUI,
+       });
+       return def;
+   }
 });

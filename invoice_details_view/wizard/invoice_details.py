@@ -120,11 +120,9 @@ class InvoiceDetails(models.TransientModel):
                      },
             'report_type': 'xlsx',
         }
-        
 
-
+    # Formato de hoja de Excel para imprimir los datos
     def get_xlsx_report(self, data, response):
-        """Excel sheet format for printing the data"""
         datas = data['result_data']
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -135,7 +133,7 @@ class InvoiceDetails(models.TransientModel):
         
         # Definición de estilos
         header_format = workbook.add_format({
-            'font_name': 'Arial',
+            'font_name': 'Times New Roman',
             'bold': True,
             'bg_color': '#f2f2f2',  # Color de fondo gris claro para los encabezados
             'border': 1,
@@ -144,14 +142,14 @@ class InvoiceDetails(models.TransientModel):
         })
         
         text_format = workbook.add_format({
-            'font_name': 'Arial',
+            'font_name': 'Times New Roman',
             'border': 1,
             'align': 'left',
             'valign': 'vcenter'
         })
         
         title_format = workbook.add_format({
-            'font_name': 'Arial',
+            'font_name': 'Times New Roman',
             'bold': True,
             'font_size': 16,
             'align': 'center',
