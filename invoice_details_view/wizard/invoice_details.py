@@ -31,7 +31,7 @@ class InvoiceDetails(models.TransientModel):
         string = 'Vendedor',
         comodel_name='pos.order'
         
-    )
+    )        
     
     # Esta funcion retorna valores del filtro wizard a la funcion get_values
     # permitiendo generar el reporte en PDF
@@ -53,5 +53,22 @@ class InvoiceDetails(models.TransientModel):
             )
             .report_action(None, data=data)
         )
-    
-    
+        
+    def action_xls(self):
+        if self.start_date > self.end_date:
+            raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
+        
+        data = {
+            'model_id': self.id,
+            'fecha_inicio': self.start_date,
+            'fecha_fin': self.end_date,
+            'diario': self.journal_ids.ids,
+            'comercial': self.comercial_ids.ids
+        }
+        
+        return (
+            self.env.ref(
+                'invoice_details_view.report_invoice_details_xlsx_action'
+            )
+            .report_action(None, data=data)
+        )
