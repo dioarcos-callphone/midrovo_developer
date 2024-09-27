@@ -17,9 +17,11 @@
                             <th align="center" style="vertical-align: middle">PRODUCTO</th>
                             <th align="center" style="vertical-align: middle">CANTIDAD</th>
                             <th align="center" style="vertical-align: middle">PRECIO</th>
-                            <th align="center" style="vertical-align: middle">DESC %</th>
+                            <th align="center" style="vertical-align: middle">DESCUENTO</th>
                             <th align="center" style="vertical-align: middle">SUBTOTAL</th>
                             <th align="center" style="vertical-align: middle">COSTO</th>
+                            <th align="center" style="vertical-align: middle">TOTAL COSTO</th>
+                            <th align="center" style="vertical-align: middle">RENTABILIDAD</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,12 @@
                             </td>
                             <td align="center" width="100">
                                 <t t-esc="result['costo']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['total_costo']"/>
+                            </td>
+                            <td align="center" width="100">
+                                <t t-esc="result['rentabilidad_costo']"/>
                             </td>
                         </tr>
                     </tbody>              
