@@ -21,7 +21,7 @@
                 </sheet>
                 <footer>
                     <button name="action_pdf" string="PDF" type="object"
-                            data-hotkey="q" class="btn-primary"/>
+                            data-hotkey="q" class="btn-pdf"/>
                     <button name="action_excel" string="EXCEL" type="object"
                             data-hotkey="q" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary"

@@ -21,10 +21,10 @@
         'report/invoice_details_template.xml',
     ],
     
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'invoice_details_view/static/src/js/action_report.js']
-    # },
+    'assets': {
+        'web.assets_backend': [
+            'invoice_details_view/static/src/css/style.css']
+    },
     
     'license': 'LGPL-3',
     'installable': True,
