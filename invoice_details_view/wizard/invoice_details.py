@@ -71,6 +71,8 @@ class InvoiceDetails(models.TransientModel):
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
+                total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                
                 data_detail = {
                     "numero": detail.move_name,
                     "comercial": detail.move_id.invoice_user_id.partner_id.name,
@@ -80,6 +82,8 @@ class InvoiceDetails(models.TransientModel):
                     "descuento": descuento,
                     "subtotal": detail.price_subtotal,
                     "costo": round(detail.product_id.standard_price, 2),
+                    "total_costo": total_costo,
+                    "rentabilidad": detail.price_subtotal - total_costo
                 }
                 
                 data_invoice_details.append(data_detail)
@@ -172,7 +176,7 @@ class InvoiceDetails(models.TransientModel):
             'Producto',
             'Cantidad',
             'Precio',
-            'Desc. %',
+            'Descuento',
             'Subtotal',
             'Costo',
         ]
