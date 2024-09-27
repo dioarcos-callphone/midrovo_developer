@@ -192,11 +192,11 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('C:C', 25)  # Producto
         sheet.set_column('D:D', 10)  # Cantidad
         sheet.set_column('E:E', 10)  # Precio
-        sheet.set_column('F:F', 10)  # Desc. %
+        sheet.set_column('F:F', 11)  # Descuento
         sheet.set_column('G:G', 10)  # Subtotal
         sheet.set_column('H:H', 10)  # Costo
-        sheet.set_column('I:I', 10)  # Total Costo
-        sheet.set_column('J:J', 10)  # Rentabilidad
+        sheet.set_column('I:I', 12)  # Total Costo
+        sheet.set_column('J:J', 12)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
