@@ -15,6 +15,7 @@ class InvoiceDetails(models.AbstractModel):
         fecha_fin = data['fecha_fin']
         diario = data['diario']
         comercial = data['comercial']
+        cashier = data['cashier']
         
         domain = [
             ('product_id', '!=', False),
@@ -26,12 +27,13 @@ class InvoiceDetails(models.AbstractModel):
             domain.append(('journal_id', 'in', diario))
         if comercial:
             domain.append(('move_id.invoice_user_id', 'in', comercial))
+        if cashier:
+            domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
         if invoice_details:           
             for detail in invoice_details:
-                _logger.info(f'MOSTRAR POS ORDER IDS >>> { detail.move_id.pos_order_ids.employee_id.name }')
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
                 if detail.discount:

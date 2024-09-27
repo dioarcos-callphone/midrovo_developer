@@ -34,7 +34,7 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='res.users'
     )
     
-    cashier = fields.Many2many(
+    cashier_ids = fields.Many2many(
         string = 'Vendedor',
         comodel_name='hr.employee'
     )
@@ -49,6 +49,7 @@ class InvoiceDetails(models.TransientModel):
         fecha_fin = self.end_date
         diario = self.journal_ids.ids
         comercial = self.comercial_ids.ids
+        cashier = self.cashier_ids.ids
         
         domain = [
             ('product_id', '!=', False),
@@ -60,6 +61,8 @@ class InvoiceDetails(models.TransientModel):
             domain.append(('journal_id', 'in', diario))
         if comercial:
             domain.append(('move_id.invoice_user_id', 'in', comercial))
+        if cashier:
+            domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
@@ -108,7 +111,8 @@ class InvoiceDetails(models.TransientModel):
             'fecha_inicio': self.start_date,
             'fecha_fin': self.end_date,
             'diario': self.journal_ids.ids,
-            'comercial': self.comercial_ids.ids
+            'comercial': self.comercial_ids.ids,
+            'cashier': self.cashier_ids.ids
         }
         
         return (
