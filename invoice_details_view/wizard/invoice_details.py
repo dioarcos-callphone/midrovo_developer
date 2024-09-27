@@ -167,7 +167,7 @@ class InvoiceDetails(models.TransientModel):
         })
 
         # Título del informe
-        sheet.merge_range('A1:H1', 'Informe de Detalles de Facturas', title_format)
+        sheet.merge_range('A1:J1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
         headers = [
@@ -179,6 +179,8 @@ class InvoiceDetails(models.TransientModel):
             'Descuento',
             'Subtotal',
             'Costo',
+            'Total Costo',
+            'Rentabilidad',
         ]
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
@@ -192,6 +194,8 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('F:F', 10)  # Desc. %
         sheet.set_column('G:G', 10)  # Subtotal
         sheet.set_column('H:H', 10)  # Costo
+        sheet.set_column('I:I', 10)  # Total Costo
+        sheet.set_column('J:J', 10)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -204,6 +208,8 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 5, val['descuento'], text_format)
             sheet.write(row, 6, val['subtotal'], text_format)
             sheet.write(row, 7, val['costo'], text_format)
+            sheet.write(row, 8, val['total_costo'], text_format)
+            sheet.write(row, 9, val['rentabilidad'], text_format)
             row += 1
 
         # Cerrar el libro
