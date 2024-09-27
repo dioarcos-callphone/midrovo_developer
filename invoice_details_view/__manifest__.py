@@ -17,7 +17,7 @@
     'data': [
         'security/ir.model.access.csv',
         'wizard/invoice_details_wizard.xml',
-        'report/invoice_details_report_xls.xml'
+        # 'report/invoice_details_report_xls.xml'
         'report/invoice_details_report.xml',
         'report/invoice_details_template.xml',
     ],
