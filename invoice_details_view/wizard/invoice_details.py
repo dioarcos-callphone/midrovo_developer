@@ -121,47 +121,72 @@ class InvoiceDetails(models.TransientModel):
             'report_type': 'xlsx',
         }
         
+
+
     def get_xlsx_report(self, data, response):
         """Excel sheet format for printing the data"""
         datas = data['result_data']
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
+        
+        # Configurar márgenes
         sheet.set_margins(0.5, 0.5, 0.5, 0.5)
-        cell_format = workbook.add_format(
-            {'font_size': '12px', 'align': 'left'})
-        header_style = workbook.add_format(
-            {'font_name': 'Times', 'bold': True, 'left': 1, 'bottom': 1,
-             'right': 1, 'top': 1, 'align': 'center'})
-        text_style = workbook.add_format(
-            {'font_name': 'Times', 'left': 1, 'bottom': 1, 'right': 1, 'top': 1,
-             'align': 'left'})
-        head = workbook.add_format(
-            {'align': 'center', 'bold': True, 'font_size': '20px'})
-        sheet.merge_range('A2:F3', 'Informe de Detalles de Facturas', head)
+        
+        # Definición de estilos
+        header_format = workbook.add_format({
+            'font_name': 'Arial',
+            'bold': True,
+            'bg_color': '#f2f2f2',  # Color de fondo gris claro para los encabezados
+            'border': 1,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
+        
+        text_format = workbook.add_format({
+            'font_name': 'Arial',
+            'border': 1,
+            'align': 'left',
+            'valign': 'vcenter'
+        })
+        
+        title_format = workbook.add_format({
+            'font_name': 'Arial',
+            'bold': True,
+            'font_size': 16,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
 
-        headers = ['Número', 'Comercial', 'Producto', 'Cantidad', 'Precio',
-                   'Costo',]
+        # Título del informe
+        sheet.merge_range('A1:F1', 'Informe de Detalles de Facturas', title_format)
 
+        # Encabezados
+        headers = ['Número', 'Comercial', 'Producto', 'Cantidad', 'Precio', 'Costo']
         for col, header in enumerate(headers):
-            sheet.write(5, col, header, header_style)
-        sheet.set_column('A:B', 27, cell_format)
-        sheet.set_column('C:D', 13, cell_format)
-        row = 6
-        number = 1
+            sheet.write(2, col, header, header_format)
+
+        # Ajuste de columnas
+        sheet.set_column('A:A', 15)  # Número
+        sheet.set_column('B:B', 20)  # Comercial
+        sheet.set_column('C:C', 25)  # Producto
+        sheet.set_column('D:D', 12)  # Cantidad
+        sheet.set_column('E:E', 15)  # Precio
+        sheet.set_column('F:F', 15)  # Costo
+
+        # Escribir datos
+        row = 3  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
-            sheet.write(row, 0, val['numero'], text_style)
-            sheet.write(row, 1, val['comercial'], text_style)
-            sheet.write(row, 2, val['producto'], text_style)
-            sheet.write(row, 3, val['cantidad'], text_style)
-            sheet.write(row, 4, val['precio'], text_style)
-            sheet.write(row, 5, val['costo'], text_style)
+            sheet.write(row, 0, val['numero'], text_format)
+            sheet.write(row, 1, val['comercial'], text_format)
+            sheet.write(row, 2, val['producto'], text_format)
+            sheet.write(row, 3, val['cantidad'], text_format)
+            sheet.write(row, 4, val['precio'], text_format)
+            sheet.write(row, 5, val['costo'], text_format)
             row += 1
-            number += 1
+
+        # Cerrar el libro
         workbook.close()
         output.seek(0)
         response.stream.write(output.read())
         output.close()
-
-        
-    
