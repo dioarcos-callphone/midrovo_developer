@@ -24,7 +24,10 @@ class StockQuantityHistory(models.AbstractModel):
             ])
             localidad_fecha = str(localidad_fecha) + " " + str(localidad.complete_name)
             
-        localidad_fecha += " " + str(fecha)
+        fecha_date = datetime.strptime(fecha, '%Y-%m-%d')
+        fecha_str_convertida = fecha_date.strftime('%d/%m/%Y')
+            
+        localidad_fecha += "/" + str(fecha_str_convertida)
         
         _logger.info(f'localidad y fecha >> { localidad_fecha }')
             
