@@ -8,6 +8,9 @@ try:
 except ImportError:
     import xlsxwriter
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -77,10 +80,18 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
+                producto = detail.product_id
+                category = producto.categ_id
+                account = category.property_account_expense_categ_id
+                
+                _logger.info(f'MOSTRANDO ACCOUNT >>> { account }')
+                
                 data_detail = {
+                    "fecha": detail.move_id.invoice_date,
                     "numero": detail.move_name,
                     "comercial": detail.move_id.invoice_user_id.partner_id.name,
                     "pos": detail.move_id.pos_order_ids.employee_id.name,
+                    "cliente": detail.partner_id.name,
                     "producto": detail.product_id.name,
                     "cantidad": detail.quantity,
                     "precio": detail.price_unit,
@@ -173,13 +184,15 @@ class InvoiceDetails(models.TransientModel):
         })
 
         # Título del informe
-        sheet.merge_range('A1:K1', 'Informe de Detalles de Facturas', title_format)
+        sheet.merge_range('A1:M1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
         headers = [
+            'Fecha',
             'Número',
             'Comercial',
             'Cajero',
+            'Cliente',
             'Producto',
             'Cantidad',
             'Precio',
@@ -193,32 +206,36 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(2, col, header, header_format)
 
         # Ajuste de columnas
-        sheet.set_column('A:A', 22)  # Número
-        sheet.set_column('B:B', 20)  # Comercial
-        sheet.set_column('C:C', 25)  # Cajero
-        sheet.set_column('D:D', 10)  # Product
-        sheet.set_column('E:E', 10)  # Cantidad
-        sheet.set_column('F:F', 11)  # Precio
-        sheet.set_column('G:G', 10)  # Descuento
-        sheet.set_column('H:H', 10)  # Subtotal
-        sheet.set_column('I:I', 12)  # Costo
-        sheet.set_column('J:J', 12)  # Total Costo
-        sheet.set_column('K:K', 12)  # Rentabilidad
+        sheet.set_column('A:A', 22)  # Fecha
+        sheet.set_column('B:B', 22)  # Número
+        sheet.set_column('C:C', 20)  # Comercial
+        sheet.set_column('D:D', 25)  # Cajero
+        sheet.set_column('E:E', 25)  # Cliente
+        sheet.set_column('F:F', 10)  # Product
+        sheet.set_column('G:G', 10)  # Cantidad
+        sheet.set_column('H:H', 11)  # Precio
+        sheet.set_column('I:I', 10)  # Descuento
+        sheet.set_column('J:J', 10)  # Subtotal
+        sheet.set_column('K:K', 12)  # Costo
+        sheet.set_column('L:L', 12)  # Total Costo
+        sheet.set_column('M:M', 12)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
-            sheet.write(row, 0, val['numero'], text_format)
-            sheet.write(row, 1, val['comercial'], text_format)
-            sheet.write(row, 2, val['pos'], text_format)
-            sheet.write(row, 3, val['producto'], text_format)
-            sheet.write(row, 4, val['cantidad'], text_format)
-            sheet.write(row, 5, val['precio'], text_format)
-            sheet.write(row, 6, val['descuento'], text_format)
-            sheet.write(row, 7, val['subtotal'], text_format)
-            sheet.write(row, 8, val['costo'], text_format)
-            sheet.write(row, 9, val['total_costo'], text_format)
-            sheet.write(row, 10, val['rentabilidad'], text_format)
+            sheet.write(row, 0, val['fecha'], text_format)
+            sheet.write(row, 1, val['numero'], text_format)
+            sheet.write(row, 2, val['comercial'], text_format)
+            sheet.write(row, 3, val['pos'], text_format)
+            sheet.write(row, 4, val['numero'], text_format)
+            sheet.write(row, 5, val['producto'], text_format)
+            sheet.write(row, 6, val['cantidad'], text_format)
+            sheet.write(row, 7, val['precio'], text_format)
+            sheet.write(row, 8, val['descuento'], text_format)
+            sheet.write(row, 9, val['subtotal'], text_format)
+            sheet.write(row, 10, val['costo'], text_format)
+            sheet.write(row, 11, val['total_costo'], text_format)
+            sheet.write(row, 12, val['rentabilidad'], text_format)
             row += 1
 
         # Cerrar el libro
