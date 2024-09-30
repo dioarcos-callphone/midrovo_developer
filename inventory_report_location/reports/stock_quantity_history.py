@@ -14,16 +14,17 @@ class StockQuantityHistory(models.AbstractModel):
         locations = self.env.context.get('location',[])
         fecha = self.env.context.get('date',[])
         
-        for location in locations:
-            localidad = self.env['stock.location'].search([
-                ('id','=', location)
-            ])
-            localidad_fecha = str(localidad_fecha) + " " + str(localidad.complete_name)
-            
         fecha_date = datetime.strptime(fecha, '%Y-%m-%d %H:%M:%S').date()
         fecha_str_convertida = fecha_date.strftime('%d/%m/%Y')
-            
-        localidad_fecha += " - " + str(fecha_str_convertida)
+        
+        if locations:
+            for location in locations:
+                localidad = self.env['stock.location'].search([
+                    ('id','=', location)
+                ])
+                localidad_fecha = str(localidad_fecha) + " " + str(localidad.complete_name)
+                
+            localidad_fecha += " - " + str(fecha_str_convertida)            
             
         if productos:
             return {
@@ -32,7 +33,7 @@ class StockQuantityHistory(models.AbstractModel):
                 'options': productos,
                 'total_cantidad': data['total_cantidad'],
                 "total_valor_stock" : data['total_valor_stock'],
-                'localidad_fecha': localidad_fecha
+                'localidad_fecha': localidad_fecha if localidad_fecha != '' else fecha_str_convertida
             }
             
         else:
