@@ -12,6 +12,7 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th align="center" style="vertical-align: middle">UBICACIONES</th>
                             <th align="center" style="vertical-align: middle">PRODUCTOS</th>
                             <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
                             <th align="center" style="vertical-align: middle">COSTO</th>
@@ -21,6 +22,9 @@
                     <tbody>
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
+                            <td align="center" width="100">
+                                <t t-esc="new['localidad']"/>
+                            </td>
                             <td style="white-space: nowrap;">
                                 <t t-esc="new['nombre']"/>
                                 <t t-if="new.get('atributos')">
