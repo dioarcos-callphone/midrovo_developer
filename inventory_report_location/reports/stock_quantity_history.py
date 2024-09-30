@@ -21,7 +21,7 @@ class StockQuantityHistory(models.AbstractModel):
         _logger.info(f'fecha >> { fecha }')
         
         for location in locations:
-            localidad_fecha = localidad_fecha + " " + location
+            localidad_fecha = str(localidad_fecha) + " " + str(location)
             
         localidad_fecha += fecha     
         
