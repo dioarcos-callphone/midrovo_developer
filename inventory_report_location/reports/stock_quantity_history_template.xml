@@ -6,7 +6,7 @@
             <t t-call="web.external_layout">
                 <div class="page" style="margin: 0; padding: 0;">
                     <div>
-                        <h3><t t-esc="localidad_fecha"/></h3>
+                        <h5><t t-esc="localidad_fecha"/></h5>
                     </div>
                     <div class="text-center" style="margin-bottom: 20px;">
                         <h2>Informe de Desglose del Inventario</h2>
