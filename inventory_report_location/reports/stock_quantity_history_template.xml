@@ -24,7 +24,7 @@
                     <tbody>
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
-                            <td style="width: 400px; word-wrap: break-word;">
+                            <td style="width: 500px; word-wrap: break-word;">
                                 <t t-esc="new['nombre']"/>
                                 <t t-if="new.get('atributos')">
                                  - 
@@ -53,7 +53,7 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <tfoot>
                         <tr>
-                            <th align="center" style="width: 400px; word-wrap: break-word; font-weight: bold;">TOTAL</th>
+                            <th align="center" style="width: 500px; word-wrap: break-word; font-weight: bold;">TOTAL</th>
                             <th align="center" width="120">
                                 <t t-esc="total_cantidad"/>
                             </th>
