@@ -14,12 +14,6 @@ class ProductProductInherit(models.Model):
         total_valor_stock = 0 
         
         for producto in self:
-            stock_quant = self.env['stock.quant'].search([
-                ('product_id', '=', producto.id),
-                ('quantity', '=', producto.qty_available)
-            ], limit=1)
-            _logger.info(f'MOSTRANDO UBICACION >>> { stock_quant.location_id }')
-
             variantes = []
             cantidad = producto.qty_available
             costo = round(producto.standard_price, 3)
@@ -30,7 +24,6 @@ class ProductProductInherit(models.Model):
 
             data = {
                 "id": producto.id,
-                "localidad": stock_quant.location_id.complete_name,
                 "nombre": producto.name,
                 "cantidad": cantidad,
                 "costo": costo,

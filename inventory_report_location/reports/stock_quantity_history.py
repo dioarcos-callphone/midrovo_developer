@@ -18,14 +18,12 @@ class StockQuantityHistory(models.AbstractModel):
         locations = self.env.context.get('location',[])
         fecha = self.env.context.get('date',[])
         
-        _logger.info(f'fecha >> { fecha }')
-        
         for location in locations:
             localidad_fecha = str(localidad_fecha) + " " + str(location)
             
-        localidad_fecha += fecha     
+        localidad_fecha += fecha
         
-        
+        _logger.info(f'localidad y fecha >> { localidad_fecha }')
             
         if productos:
             return {
