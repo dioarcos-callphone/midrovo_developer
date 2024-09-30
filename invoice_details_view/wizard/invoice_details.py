@@ -1,5 +1,6 @@
 import io
 import json
+from datetime import datetime
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -86,8 +87,11 @@ class InvoiceDetails(models.TransientModel):
                 
                 _logger.info(f'MOSTRANDO ACCOUNT >>> { account }')
                 
+                date = datetime.strptime(detail.move_id.invoice_date, "%Y-%m-%d")
+                date_formated = datetime.strftime(date, "%d/%m/%Y")
+                
                 data_detail = {
-                    "fecha": detail.move_id.invoice_date,
+                    "fecha": date_formated,
                     "numero": detail.move_name,
                     "comercial": detail.move_id.invoice_user_id.partner_id.name,
                     "pos": detail.move_id.pos_order_ids.employee_id.name,
