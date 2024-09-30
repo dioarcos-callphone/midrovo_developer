@@ -15,6 +15,7 @@ class ProductProductInherit(models.Model):
         
         for producto in self:
             _logger.info(f'MOSTRANDO UBICACION >>> { producto.location_id }')
+            _logger.info(f'MOSTRANDO STOCK QUANT >>> { producto.stock_quant_ids }')
             variantes = []
             cantidad = producto.qty_available
             costo = round(producto.standard_price, 3)
