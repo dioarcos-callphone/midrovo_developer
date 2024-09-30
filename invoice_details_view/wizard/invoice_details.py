@@ -85,7 +85,7 @@ class InvoiceDetails(models.TransientModel):
                 # category = producto.categ_id
                 # account = category.property_account_expense_categ_id
                 
-                _logger.info(f'MOSTRANDO ACCOUNT >>> { detail.debit }')
+                _logger.info(f'MOSTRANDO ACCOUNT >>> { detail.move_name }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
