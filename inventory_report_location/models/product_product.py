@@ -17,7 +17,7 @@ class ProductProductInherit(models.Model):
             stock_quant = self.env['stock.quant'].search([
                 ('product_id', '=', producto.id),
                 ('quantity', '=', producto.qty_available)
-            ])
+            ], limit=1)
             _logger.info(f'MOSTRANDO UBICACION >>> { stock_quant.location_id }')
 
             variantes = []
