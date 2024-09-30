@@ -32,6 +32,7 @@ class StockQuantityHistoryInherit(models.TransientModel):
             action["display_name"] = f"{category_names} - {action['display_name']}"
             
         context['search_default_qty_available'] = 1
+        context['date'] = self.inventory_datetime
         action["context"] = context
 
         return action

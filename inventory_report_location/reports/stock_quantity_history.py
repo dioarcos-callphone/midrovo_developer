@@ -13,10 +13,19 @@ class StockQuantityHistory(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
         productos = data['productos']
+        localidad_fecha = ''
         
-        localtion = self.env.context.get('location',[])
+        locations = self.env.context.get('location',[])
+        fecha = self.env.context.get('date',[])
         
-        _logger.info(f'LOCALIDAD >> { localtion }')
+        _logger.info(f'fecha >> { fecha }')
+        
+        for location in locations:
+            localidad_fecha = localidad_fecha + " " + location
+            
+        localidad_fecha += fecha     
+        
+        
             
         if productos:
             return {
@@ -25,6 +34,7 @@ class StockQuantityHistory(models.AbstractModel):
                 'options': productos,
                 'total_cantidad': data['total_cantidad'],
                 "total_valor_stock" : data['total_valor_stock'],
+                'localidad_fecha': localidad_fecha
             }
             
         else:
