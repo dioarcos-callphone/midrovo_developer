@@ -2,10 +2,6 @@ from odoo import api, models
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class StockQuantityHistory(models.AbstractModel):
     _name = 'report.inventory_report_location.report_stock_quantity'
     _description = 'Stock Quantity History'
@@ -28,8 +24,6 @@ class StockQuantityHistory(models.AbstractModel):
         fecha_str_convertida = fecha_date.strftime('%d/%m/%Y')
             
         localidad_fecha += " - " + str(fecha_str_convertida)
-        
-        _logger.info(f'localidad y fecha >> { localidad_fecha }')
             
         if productos:
             return {
