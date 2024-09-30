@@ -81,11 +81,11 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                producto = detail.product_id
-                category = producto.categ_id
-                account = category.property_account_expense_categ_id
+                # producto = detail.product_id
+                # category = producto.categ_id
+                # account = category.property_account_expense_categ_id
                 
-                _logger.info(f'MOSTRANDO ACCOUNT >>> { account }')
+                _logger.info(f'MOSTRANDO ACCOUNT >>> { detail.debit }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
