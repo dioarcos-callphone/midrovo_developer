@@ -12,7 +12,7 @@
                         <h2>Informe de Desglose del Inventario</h2>
                     </div>
                 </div>
-                <table class="table table-condensed table-bordered table-striped" style="margin-top=20px;">
+                <table class="table table-condensed table-bordered table-striped" style="margin-top:20px;">
                     <thead>
                         <tr>
                             <th align="center" style="vertical-align: middle">PRODUCTOS</th>
