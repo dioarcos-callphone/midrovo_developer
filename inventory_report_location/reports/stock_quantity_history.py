@@ -22,7 +22,7 @@ class StockQuantityHistory(models.AbstractModel):
             localidad = self.env['stock.location'].search([
                 ('id','=', location)
             ])
-            localidad_fecha = str(localidad_fecha) + " " + str(location.complete_name)
+            localidad_fecha = str(localidad_fecha) + " " + str(localidad.complete_name)
             
         localidad_fecha += " " + str(fecha)
         
