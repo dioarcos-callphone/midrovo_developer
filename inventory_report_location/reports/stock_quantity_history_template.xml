@@ -24,7 +24,7 @@
                     <tbody>
                         <tr t-foreach="options" t-as="new">
                             <t t-log="new"/>
-                            <td style="width: 200px; word-wrap: break-word;">
+                            <td style="width: 300px; word-wrap: break-word;">
                                 <t t-esc="new['nombre']"/>
                                 <t t-if="new.get('atributos')">
                                  - 
