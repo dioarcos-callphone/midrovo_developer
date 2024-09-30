@@ -14,7 +14,7 @@ class ProductProductInherit(models.Model):
         total_valor_stock = 0 
         
         for producto in self:
-            _logger.info(f'MOSTRANDO UBICACION >>> { producto.location_id.complete_name }')
+            _logger.info(f'MOSTRANDO UBICACION >>> { producto.location_id }')
             variantes = []
             cantidad = producto.qty_available
             costo = round(producto.standard_price, 3)
