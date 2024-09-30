@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="paperformat_normal" model="report.paperformat">
-        <field name="name">Landscape Paper</field>
+        <field name="name">Portrait Paper</field>
         <field name="default" eval="False"/>
         <field name="format">A4</field>
+        <field name="orientation">portrait</field>
         <field name="margin_top">30</field>
         <field name="margin_bottom">30</field>
         <field name="header_spacing">20</field>
