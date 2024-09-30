@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="paperformat_landscape" model="report.paperformat">
+        <field name="name">Landscape Paper</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">30</field>
+        <field name="header_spacing">20</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+    </record>
 
     <record id="report_stock_quantity_history"
             model="ir.actions.report">
