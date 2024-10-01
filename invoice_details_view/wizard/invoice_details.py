@@ -88,12 +88,14 @@ class InvoiceDetails(models.TransientModel):
                 # _logger.info(f'MOSTRANDO CATEGORY >>> { category }')
                 
                 
-                debit_detail = self.env['account.move.line'].search([
-                    ('id', '=', detail.id),
-                    ('account_id.code', 'like', '5%')
-                ])
+                # debit_detail = self.env['account.move.line'].search([
+                #     ('id', '=', detail.id),
+                #     ('account_id.code', 'like', '5%')
+                # ])
                 
-                _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
+                # _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
+                
+                _logger.info(f'MOVE ID >>> { detail.move_id }')
                 
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
