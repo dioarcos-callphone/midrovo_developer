@@ -102,11 +102,12 @@ class InvoiceDetails(models.TransientModel):
                 
                 # _logger.info(f'MOVE ID >>> { detail.move_id }')
                 
-                line_ids = detail.move_id.line_ids
+                # line_ids = detail.move_id.line_ids
                 
-                for line in line_ids:
-                    _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
+                # for line in line_ids:
+                #     _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
                 
+                _logger.info(f'MOSTRAR CREDIT >>> { detail.credit }')
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
@@ -124,7 +125,7 @@ class InvoiceDetails(models.TransientModel):
                     "costo": round(detail.product_id.standard_price, 2),
                     "total_costo": total_costo,
                     "rentabilidad": round(rentabilidad, 2),
-                    "debito": round(detail.debit, 2)
+                    "debito": round(detail.credit, 2)
                 }
                 
                 data_invoice_details.append(data_detail)
