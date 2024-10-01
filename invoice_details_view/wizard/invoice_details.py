@@ -72,9 +72,6 @@ class InvoiceDetails(models.TransientModel):
         
         
         if invoice_details:
-            debit_details = invoice_details.filtered(lambda d: d.account_id.code and d.account_id.code.startswith('5'))
-            
-            _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_details }')
             
             for detail in invoice_details:
                 descuento = round(0.00, 2)
@@ -89,6 +86,14 @@ class InvoiceDetails(models.TransientModel):
                 # category = product.categ_id
                 
                 # _logger.info(f'MOSTRANDO CATEGORY >>> { category }')
+                
+                
+                debit_detail = self.env['account.move.line'].search([
+                    ('id', '=', detail.id),
+                    ('account_id.code', 'ilike', '5%')
+                ])
+                _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail }')
+                
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
