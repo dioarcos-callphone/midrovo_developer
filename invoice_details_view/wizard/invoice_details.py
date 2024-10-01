@@ -56,6 +56,7 @@ class InvoiceDetails(models.TransientModel):
         cashier = self.cashier_ids.ids
         
         domain = [
+            ('move_id', '!=', False)
             ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
