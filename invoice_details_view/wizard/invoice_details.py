@@ -82,16 +82,16 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                product = detail.product_id
-                category = product.categ_id
-                account_five = category.property_stock_account_output_categ_id
+                # product = detail.product_id
+                # category = product.categ_id
+                # account_five = category.property_stock_account_output_categ_id
                 
-                d = self.env['account.move.line'].search([
-                    ('id', '=', detail.id),
-                    ('account_id', '=', account_five.id),
-                ])
+                # d = self.env['account.move.line'].search([
+                #     ('id', '=', detail.id),
+                #     ('account_id', '=', account_five.id),
+                # ])
                 
-                _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
+                # _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
                 
                 # debit_detail = self.env['account.move.line'].search([
                 #     ('id', '=', detail.id),
@@ -101,6 +101,11 @@ class InvoiceDetails(models.TransientModel):
                 # _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
                 
                 # _logger.info(f'MOVE ID >>> { detail.move_id }')
+                
+                line_ids = detail.move_id.line_ids
+                
+                for line in line_ids:
+                    _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line }')
                 
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
