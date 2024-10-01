@@ -86,7 +86,7 @@ class InvoiceDetails(models.TransientModel):
                 account = category.property_account_expense_categ_id
                 
                 account_move_line = self.env['account.move.line'].search([
-                    ('id', '=', detail.id)
+                    ('id', '=', detail.id),
                     ('account_id.code', 'ilike', '5%')
                 ])
                 
