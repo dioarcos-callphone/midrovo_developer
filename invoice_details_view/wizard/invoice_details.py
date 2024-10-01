@@ -59,7 +59,6 @@ class InvoiceDetails(models.TransientModel):
             ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
-            ('account_id.code', '=like', '5%'),
         ]
         
         if diario:
