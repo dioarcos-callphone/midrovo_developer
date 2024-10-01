@@ -105,7 +105,7 @@ class InvoiceDetails(models.TransientModel):
                 line_ids = detail.move_id.line_ids
                 
                 for line in line_ids:
-                    _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line }')
+                    _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
                 
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
