@@ -72,6 +72,10 @@ class InvoiceDetails(models.TransientModel):
         
         
         if invoice_details:
+            debit_details = invoice_details.filtered(lambda d: d.account_id.code and d.account_id.code.startswith('5'))
+            
+            _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_details }')
+            
             for detail in invoice_details:
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
@@ -81,10 +85,10 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                product = detail.product_id
-                category = product.categ_id
+                # product = detail.product_id
+                # category = product.categ_id
                 
-                _logger.info(f'MOSTRANDO CATEGORY >>> { category }')
+                # _logger.info(f'MOSTRANDO CATEGORY >>> { category }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
