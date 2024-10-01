@@ -56,7 +56,6 @@ class InvoiceDetails(models.TransientModel):
         cashier = self.cashier_ids.ids
         
         domain = [
-            ('move_id', '!=', False),
             ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
@@ -83,7 +82,10 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                _logger.info(f'MOSTRANDO DEBITO >>> { detail.debit }')
+                product = detail.product_id
+                category = product.categ_id
+                
+                _logger.info(f'MOSTRANDO CATEGORY >>> { category }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
