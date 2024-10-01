@@ -96,7 +96,7 @@ class InvoiceDetails(models.TransientModel):
                 _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail }')
                 
                 
-                date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
+                date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
                 data_detail = {
                     "fecha": date_formated,
