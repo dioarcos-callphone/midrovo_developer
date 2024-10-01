@@ -118,7 +118,8 @@ class InvoiceDetails(models.TransientModel):
                     "subtotal": detail.price_subtotal,
                     "costo": round(detail.product_id.standard_price, 2),
                     "total_costo": total_costo,
-                    "rentabilidad": round(rentabilidad, 2)
+                    "rentabilidad": round(rentabilidad, 2),
+                    "debito": round(detail.debit, 2)
                 }
                 
                 data_invoice_details.append(data_detail)
@@ -220,6 +221,7 @@ class InvoiceDetails(models.TransientModel):
             'Costo',
             'Total Costo',
             'Rentabilidad',
+            'debito'
         ]
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
@@ -238,6 +240,7 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('K:K', 12)  # Costo
         sheet.set_column('L:L', 12)  # Total Costo
         sheet.set_column('M:M', 12)  # Rentabilidad
+        sheet.set_column('N:N', 12)  # Debito
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -255,6 +258,7 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 10, val['costo'], text_format)
             sheet.write(row, 11, val['total_costo'], text_format)
             sheet.write(row, 12, val['rentabilidad'], text_format)
+            sheet.write(row, 12, val['debito'], text_format)
             row += 1
 
         # Cerrar el libro
