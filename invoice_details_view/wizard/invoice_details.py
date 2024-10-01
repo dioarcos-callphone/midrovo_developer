@@ -84,9 +84,14 @@ class InvoiceDetails(models.TransientModel):
                 
                 product = detail.product_id
                 category = product.categ_id
+                account_five = category.property_stock_account_output_categ_id
                 
-                _logger.info(f'MOSTRANDO CATEGORY >>> { category.property_stock_account_output_categ_id }')
+                d = self.env['account.move.line'].search([
+                    ('id', '=', detail.id),
+                    ('account_id', '=', account_five.id),
+                ])
                 
+                _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
                 
                 # debit_detail = self.env['account.move.line'].search([
                 #     ('id', '=', detail.id),
