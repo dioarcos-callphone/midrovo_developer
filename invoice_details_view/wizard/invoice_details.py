@@ -85,9 +85,12 @@ class InvoiceDetails(models.TransientModel):
                 category = producto.categ_id
                 account = category.property_account_expense_categ_id
                 
-                detail._compute_debit_credit()
+                account_move_line = self.env['account.move.line'].search([
+                    ('id', '=', detail.id)
+                    ('account_id.code', 'ilike', '5%')
+                ])
                 
-                _logger.info(f'MOSTRANDO ACCOUNT >>> { detail.debit }')
+                _logger.info(f'MOSTRANDO ACCOUNT >>> { account_move_line.debit }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
