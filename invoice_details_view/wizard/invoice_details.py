@@ -93,7 +93,7 @@ class InvoiceDetails(models.TransientModel):
                     ('account_id.code', 'like', '5%')
                 ])
                 
-                _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail }')
+                _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
                 
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
