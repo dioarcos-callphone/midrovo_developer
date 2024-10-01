@@ -90,8 +90,9 @@ class InvoiceDetails(models.TransientModel):
                 
                 debit_detail = self.env['account.move.line'].search([
                     ('id', '=', detail.id),
-                    ('account_id.code', 'ilike', '5%')
+                    ('account_id.code', 'like', '5%')
                 ])
+                
                 _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail }')
                 
                 
