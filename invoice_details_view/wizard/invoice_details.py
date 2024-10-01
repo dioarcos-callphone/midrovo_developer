@@ -59,6 +59,7 @@ class InvoiceDetails(models.TransientModel):
             ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
+            ('account_id.code', '=like', '5%'),
         ]
         
         if diario:
@@ -81,16 +82,7 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                producto = detail.product_id
-                category = producto.categ_id
-                account = category.property_account_expense_categ_id
-                
-                account_move_line = self.env['account.move.line'].search([
-                    ('id', '=', detail.id),
-                    ('account_id.code', 'ilike', '5%')
-                ])
-                
-                _logger.info(f'MOSTRANDO ACCOUNT >>> { account_move_line.debit }')
+                _logger.info(f'MOSTRANDO DEBITO >>> { detail.debit }')
                 
                 date_formated = datetime.strftime(detail.move_id.invoice_date, "%d/%m/%Y")
                 
