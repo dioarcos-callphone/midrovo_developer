@@ -95,7 +95,8 @@ class InvoiceDetails(models.TransientModel):
                     if(
                         detail.date == d_five['date'] and
                         detail.product_id.id == d_five['product_id'] and
-                        detail.quantity == d_five['quantity']
+                        detail.quantity == d_five['quantity'] and
+                        detail.journal_id.id == 1
                         ## detail.move_name != d_five['move_name'] and
                         # detail.debit != d_five['debit']
                         
