@@ -98,6 +98,8 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                         _logger.info(f'MOSTRANDO VALOR DEBITO >>> { debito }')
+                        break
+                        
                 
                 data_detail['debito'] = debito
             
