@@ -99,6 +99,12 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                         
+                    elif(
+                        detail.date == d_five['date'] and
+                        detail.product_id.id == d_five['product_id'] and
+                        detail.quantity == d_five['quantity']
+                    ):
+                        debito = round(d_five['debit'], 2)
                 
                 data_detail['debito'] = debito
             
