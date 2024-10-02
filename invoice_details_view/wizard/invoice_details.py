@@ -75,8 +75,6 @@ class InvoiceDetails(models.TransientModel):
                 lambda d : d.account_id.code.startswith('5')
             )
             
-            _logger.info(f'MOSTRANDO ACCOUNT FIVE DE FILTERED >>> { details_account_five }')
-            
             details_account_five = [{
                 'id': d.id,
                 'date': d.date,
@@ -89,8 +87,6 @@ class InvoiceDetails(models.TransientModel):
                 'quantity': abs(d.quantity)
             } for d in details_account_five]
             
-            _logger.info(f'MOSTRANDO ACCOUNT FIVE >>> { details_account_five }')
-            
             for detail in invoice_details:
                 data_detail = {}
                 debito = 0
@@ -101,6 +97,7 @@ class InvoiceDetails(models.TransientModel):
                         detail.quantity == d_five['quantity']
                     ):
                         debito = round(d_five['debit'], 2)
+                        _logger.info(f'MOSTRANDO VALOR DEBITO >>> { debito }')
                 
                 data_detail['debito'] = debito
             
@@ -142,6 +139,12 @@ class InvoiceDetails(models.TransientModel):
             #         _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
                 
             #     _logger.info(f'MOSTRAR ACCOUNT >>>> { detail.move_id }')
+                # if diario or comercial or cashier:
+                #     if(
+                #         detail.journal_id in diario or
+                #         detail.move_id.invoice_user_id in comercial or
+                #         detail.move_id.pos_order_ids.employee_id in cashier
+                #     ):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
