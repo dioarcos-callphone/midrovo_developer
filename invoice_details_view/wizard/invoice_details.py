@@ -61,19 +61,49 @@ class InvoiceDetails(models.TransientModel):
             ('date', '<=', fecha_fin),
         ]
         
-        if diario:
-            domain.append(('journal_id', 'in', diario))
-        if comercial:
-            domain.append(('move_id.invoice_user_id', 'in', comercial))
-        if cashier:
-            domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
+        # if diario:
+        #     domain.append(('journal_id', 'in', diario))
+        # if comercial:
+        #     domain.append(('move_id.invoice_user_id', 'in', comercial))
+        # if cashier:
+        #     domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        
         if invoice_details:
+            details_account_five = invoice_details.filtered(
+                lambda d : d.account_id.code.startswith('5')
+            )
+            details_account_five = details_account_five.map(
+                lambda d : {
+                    'id': d.id,
+                    'date': d.date,
+                    'move_id': d.move_id.id,
+                    'journal_id': d.journal_id.id,
+                    'account_id': d.account_id.id,
+                    'product_id': d.product_id.id,
+                    'move_name': d.move_name,
+                    'debit': d.debit,
+                    'quantity': abs(d.quantity)
+                }, details_account_five
+            )
+            
+            _logger.info(f'MOSTRANDO ACCOUNT FIVE >>> { details_account_five }')
             
             for detail in invoice_details:
+                data_detail = {}
+                debito = 0
+                for d_five in details_account_five:
+                    if(
+                        detail.date == d_five.date and
+                        detail.product_id.id == d_five.product_id and
+                        detail.quantity == d_five.quantity
+                    ):
+                        debito = round(d_five.debit, 2)
+                
+                data_detail['debito'] = debito
+            
+            # for detail in invoice_details:
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
                 if detail.discount:
@@ -82,51 +112,68 @@ class InvoiceDetails(models.TransientModel):
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                # product = detail.product_id
-                # category = product.categ_id
-                # account_five = category.property_stock_account_output_categ_id
                 
-                # d = self.env['account.move.line'].search([
-                #     ('id', '=', detail.id),
-                #     ('account_id', '=', account_five.id),
-                # ])
                 
-                # _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
                 
-                # debit_detail = self.env['account.move.line'].search([
-                #     ('id', '=', detail.id),
-                #     ('account_id.code', 'like', '5%')
-                # ])
+            #     # product = detail.product_id
+            #     # category = product.categ_id
+            #     # account_five = category.property_stock_account_output_categ_id
                 
-                # _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
+            #     # d = self.env['account.move.line'].search([
+            #     #     ('id', '=', detail.id),
+            #     #     ('account_id', '=', account_five.id),
+            #     # ])
                 
-                # _logger.info(f'MOVE ID >>> { detail.move_id }')
+            #     # _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
                 
-                # line_ids = detail.move_id.line_ids
+            #     # debit_detail = self.env['account.move.line'].search([
+            #     #     ('id', '=', detail.id),
+            #     #     ('account_id.code', 'like', '5%')
+            #     # ])
                 
-                # for line in line_ids:
-                #     _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
+            #     # _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
                 
-                _logger.info(f'MOSTRAR ACCOUNT >>>> { detail.move_id }')
+            #     # _logger.info(f'MOVE ID >>> { detail.move_id }')
+                
+            #     line_ids = detail.move_id.line_ids
+                
+            #     for line in line_ids:
+            #         _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
+                
+            #     _logger.info(f'MOSTRAR ACCOUNT >>>> { detail.move_id }')
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
-                data_detail = {
-                    "fecha": date_formated,
-                    "numero": detail.move_name,
-                    "comercial": detail.move_id.invoice_user_id.partner_id.name,
-                    "pos": detail.move_id.pos_order_ids.employee_id.name or "",
-                    "cliente": detail.partner_id.name,
-                    "producto": detail.product_id.name,
-                    "cantidad": detail.quantity,
-                    "precio": detail.price_unit,
-                    "descuento": descuento,
-                    "subtotal": detail.price_subtotal,
-                    "costo": round(detail.product_id.standard_price, 2),
-                    "total_costo": total_costo,
-                    "rentabilidad": round(rentabilidad, 2),
-                    "debito": round(detail.credit, 2)
-                }
+                data_detail['fecha'] = date_formated
+                data_detail['numero'] = detail.move_name
+                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
+                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['cliente'] = detail.partner_id.name
+                data_detail['producto'] = detail.product_id.name
+                data_detail['cantidad'] = detail.quantity
+                data_detail['precio'] = detail.price_unit
+                data_detail['descuento'] = descuento
+                data_detail['subtotal'] = detail.price_subtotal
+                data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                data_detail['total_costo'] = total_costo
+                data_detail['rentabilidad'] = round(rentabilidad, 2)
+                
+                # data_detail = {
+                #     "fecha": date_formated,
+                #     "numero": detail.move_name,
+                #     "comercial": detail.move_id.invoice_user_id.partner_id.name,
+                #     "pos": detail.move_id.pos_order_ids.employee_id.name or "",
+                #     "cliente": detail.partner_id.name,
+                #     "producto": detail.product_id.name,
+                #     "cantidad": detail.quantity,
+                #     "precio": detail.price_unit,
+                #     "descuento": descuento,
+                #     "subtotal": detail.price_subtotal,
+                #     "costo": round(detail.product_id.standard_price, 2),
+                #     "total_costo": total_costo,
+                #     "rentabilidad": round(rentabilidad, 2),
+                #     "debito": round(detail.credit, 2)
+                # }
                 
                 data_invoice_details.append(data_detail)
             
