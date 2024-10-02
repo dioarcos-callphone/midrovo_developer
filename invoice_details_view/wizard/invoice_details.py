@@ -87,29 +87,29 @@ class InvoiceDetails(models.TransientModel):
                 'quantity': abs(d.quantity)
             } for d in details_account_five]
             
-            for d_five in details_account_five:
-                # data_detail = {}
-                # debito = 0
-                for detail in invoice_details:
-                    data_detail = {}
-                    debito = 0
+            for detail in invoice_details:
+                data_detail = {}
+                debito = 0
+                for d_five in details_account_five:
                     if(
                         detail.date == d_five['date'] and
                         detail.product_id.id == d_five['product_id'] and
-                        detail.quantity == d_five['quantity']
+                        detail.quantity == d_five['quantity'] and
+                        detail.debit == d_five['debit']
                     ):
                         debito = round(d_five['debit'], 2)
                         
-                    data_detail['debito'] = debito
+                
+                data_detail['debito'] = debito
             
             # for detail in invoice_details:
-                    descuento = round(0.00, 2)
-                    subtotal = detail.price_unit * detail.quantity
-                    if detail.discount:
-                        descuento = round((subtotal * (detail.discount/100)),2)
-                    
-                    total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
-                    rentabilidad = detail.price_subtotal - total_costo
+                descuento = round(0.00, 2)
+                subtotal = detail.price_unit * detail.quantity
+                if detail.discount:
+                    descuento = round((subtotal * (detail.discount/100)),2)
+                
+                total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                rentabilidad = detail.price_subtotal - total_costo
                 
                 
                 
@@ -147,21 +147,21 @@ class InvoiceDetails(models.TransientModel):
                 #         detail.move_id.pos_order_ids.employee_id in cashier
                 #     ):
                 
-                    date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
-                    
-                    data_detail['fecha'] = date_formated
-                    data_detail['numero'] = detail.move_name
-                    data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
-                    data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
-                    data_detail['cliente'] = detail.partner_id.name
-                    data_detail['producto'] = detail.product_id.name
-                    data_detail['cantidad'] = detail.quantity
-                    data_detail['precio'] = detail.price_unit
-                    data_detail['descuento'] = descuento
-                    data_detail['subtotal'] = detail.price_subtotal
-                    data_detail['costo'] = round(detail.product_id.standard_price, 2)
-                    data_detail['total_costo'] = total_costo
-                    data_detail['rentabilidad'] = round(rentabilidad, 2)
+                date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
+                
+                data_detail['fecha'] = date_formated
+                data_detail['numero'] = detail.move_name
+                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
+                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['cliente'] = detail.partner_id.name
+                data_detail['producto'] = detail.product_id.name
+                data_detail['cantidad'] = detail.quantity
+                data_detail['precio'] = detail.price_unit
+                data_detail['descuento'] = descuento
+                data_detail['subtotal'] = detail.price_subtotal
+                data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                data_detail['total_costo'] = total_costo
+                data_detail['rentabilidad'] = round(rentabilidad, 2)
                 
                 # data_detail = {
                 #     "fecha": date_formated,
@@ -180,7 +180,7 @@ class InvoiceDetails(models.TransientModel):
                 #     "debito": round(detail.credit, 2)
                 # }
                 
-                    data_invoice_details.append(data_detail)
+                data_invoice_details.append(data_detail)
             
             data = {
                 'result_data': data_invoice_details,
