@@ -77,19 +77,17 @@ class InvoiceDetails(models.TransientModel):
             
             _logger.info(f'MOSTRANDO ACCOUNT FIVE DE FILTERED >>> { details_account_five }')
             
-            details_account_five = details_account_five.map(
-                lambda d : {
-                    'id': d.id,
-                    'date': d.date,
-                    'move_id': d.move_id.id,
-                    'journal_id': d.journal_id.id,
-                    'account_id': d.account_id.id,
-                    'product_id': d.product_id.id,
-                    'move_name': d.move_name,
-                    'debit': d.debit,
-                    'quantity': abs(d.quantity)
-                }, details_account_five
-            )
+            details_account_five = [{
+                'id': d.id,
+                'date': d.date,
+                'move_id': d.move_id.id,
+                'journal_id': d.journal_id.id,
+                'account_id': d.account_id.id,
+                'product_id': d.product_id.id,
+                'move_name': d.move_name,
+                'debit': d.debit,
+                'quantity': abs(d.quantity)
+            } for d in details_account_five]
             
             _logger.info(f'MOSTRANDO ACCOUNT FIVE >>> { details_account_five }')
             
