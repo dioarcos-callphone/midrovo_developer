@@ -74,6 +74,9 @@ class InvoiceDetails(models.TransientModel):
             details_account_five = invoice_details.filtered(
                 lambda d : d.account_id.code.startswith('5')
             )
+            
+            _logger.info(f'MOSTRANDO ACCOUNT FIVE DE FILTERED >>> { details_account_five }')
+            
             details_account_five = details_account_five.map(
                 lambda d : {
                     'id': d.id,
