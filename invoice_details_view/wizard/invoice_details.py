@@ -89,7 +89,7 @@ class InvoiceDetails(models.TransientModel):
             
             for detail in invoice_details:
                 data_detail = {}
-                debito = 0
+                debito = detail.debit
                 for d_five in details_account_five:
                     if(
                         detail.date == d_five['date'] and
@@ -101,9 +101,6 @@ class InvoiceDetails(models.TransientModel):
                         
                     ):
                         debito = round(d_five['debit'], 2)
-                        
-                    else:
-                        debito = detail.debit
                         
                         
                     # elif(
