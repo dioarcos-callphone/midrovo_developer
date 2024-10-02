@@ -95,14 +95,12 @@ class InvoiceDetails(models.TransientModel):
                 data_detail = {}
                 debito = 0
                 for d_five in details_account_five:
-                    date = d_five['date']
-                    _logger.info(f'MOSTRANDO DATE >>> { date } TIPO { type(date) }')
                     if(
-                        detail.date == d_five.date and
-                        detail.product_id.id == d_five.product_id and
-                        detail.quantity == d_five.quantity
+                        detail.date == d_five['date'] and
+                        detail.product_id.id == d_five['product_id'] and
+                        detail.quantity == d_five['quantity']
                     ):
-                        debito = round(d_five.debit, 2)
+                        debito = round(d_five['debit'], 2)
                 
                 data_detail['debito'] = debito
             
