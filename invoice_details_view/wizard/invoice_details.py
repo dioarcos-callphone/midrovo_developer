@@ -91,6 +91,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail = {}
                 debito = 0
                 for d_five in details_account_five:
+                    debito = detail.debit
                     if(
                         detail.date == d_five['date'] and
                         detail.product_id.id == d_five['product_id'] and
