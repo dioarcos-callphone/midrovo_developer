@@ -89,7 +89,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['numero'] = detail.move_name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
-                data_detail['cliente'] = detail.partner_id.name
+                data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['producto'] = detail.product_id.name
                 data_detail['cantidad'] = detail.quantity
                 data_detail['precio'] = detail.price_unit
