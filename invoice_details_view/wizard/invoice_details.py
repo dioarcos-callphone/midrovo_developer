@@ -43,6 +43,11 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='hr.employee'
     )
     
+    cost_options = fields.Selection([
+        ('master', 'Costo Maestro'),
+        ('movement', 'Costo Movimiento')
+    ], string = 'Tipo de Costo', default = 'master')
+    
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
         if self.start_date > self.end_date:
@@ -61,14 +66,15 @@ class InvoiceDetails(models.TransientModel):
             ('date', '<=', fecha_fin),
         ]
         
-        # if diario:
-        #     domain.append(('journal_id', 'in', diario))
-        # if comercial:
-        #     domain.append(('move_id.invoice_user_id', 'in', comercial))
-        # if cashier:
-        #     domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
+        if diario:
+            domain.append(('journal_id', 'in', diario))
+        if comercial:
+            domain.append(('move_id.invoice_user_id', 'in', comercial))
+        if cashier:
+            domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
         invoice_details = self.env['account.move.line'].search(domain)
+        #invoice_details = self.
         
         if invoice_details:
             details_account_five = invoice_details.filtered(

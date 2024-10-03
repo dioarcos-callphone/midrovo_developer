@@ -11,6 +11,9 @@
                         <group string="Rango de Fechas">
                             <field name="start_date"/>
                             <field name="end_date"/>
+                            <group string="Tipo de Costo">
+                                <field name="cost_options" />
+                            </group>
                         </group>
                         <group string="Filtros">
                             <field name="journal_ids" widget="many2many_tags"/>
