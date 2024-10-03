@@ -156,7 +156,7 @@ class InvoiceDetails(models.TransientModel):
             return data
         
         else:
-            raise ValidationError("No records found for the given criteria!")    
+            raise ValidationError("¡No se encontraron registros para los criterios dados!")    
     
     # Esta funcion retorna valores del filtro wizard a la funcion get_values
     # permitiendo generar el reporte en PDF
@@ -258,17 +258,17 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(2, col, header, header_format)
 
         # Ajuste de columnas
-        sheet.set_column('A:A', 22)  # Fecha
+        sheet.set_column('A:A', 10)  # Fecha
         sheet.set_column('B:B', 22)  # Número
         sheet.set_column('C:C', 20)  # Comercial
-        sheet.set_column('D:D', 25)  # Cajero
-        sheet.set_column('E:E', 25)  # Cliente
-        sheet.set_column('F:F', 10)  # Product
+        sheet.set_column('D:D', 20)  # Cajero
+        sheet.set_column('E:E', 20)  # Cliente
+        sheet.set_column('F:F', 15)  # Product
         sheet.set_column('G:G', 10)  # Cantidad
-        sheet.set_column('H:H', 11)  # Precio
+        sheet.set_column('H:H', 10)  # Precio
         sheet.set_column('I:I', 10)  # Descuento
         sheet.set_column('J:J', 10)  # Subtotal
-        sheet.set_column('K:K', 12)  # Costo o Debito
+        sheet.set_column('K:K', 10)  # Costo o Debito
         sheet.set_column('L:L', 12)  # Total Costo
         sheet.set_column('M:M', 12)  # Rentabilidad
 
@@ -279,7 +279,7 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 1, val['numero'], text_format)
             sheet.write(row, 2, val['comercial'], text_format)
             sheet.write(row, 3, val['pos'], text_format)
-            sheet.write(row, 4, val['numero'], text_format)
+            sheet.write(row, 4, val['cliente'], text_format)
             sheet.write(row, 5, val['producto'], text_format)
             sheet.write(row, 6, val['cantidad'], text_format)
             sheet.write(row, 7, val['precio'], text_format)
