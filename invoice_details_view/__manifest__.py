@@ -24,7 +24,9 @@
     
     'assets': {
         'web.assets_backend': [
-            'invoice_details_view/static/src/css/style.css']
+            'invoice_details_view/static/src/js/action_manager.js',
+            'invoice_details_view/static/src/css/style.css'
+        ]
     },
     
     'license': 'LGPL-3',
