@@ -12,7 +12,7 @@
                             <field name="start_date"/>
                             <field name="end_date"/>
                             <group string="Tipo de Costo">
-                                <field name="cost_options" />
+                                <field name="cost_options" widget="radio"/>
                             </group>
                         </group>
                         <group string="Filtros">
