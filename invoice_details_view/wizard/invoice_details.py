@@ -46,7 +46,7 @@ class InvoiceDetails(models.TransientModel):
     cost_options = fields.Selection([
         ('master', 'Costo Maestro'),
         ('movement', 'Costo Movimiento')
-    ], string = 'Tipo de Costo', default = 'master')
+    ], string = 'Costo', default = 'master')
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
