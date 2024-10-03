@@ -95,10 +95,7 @@ class InvoiceDetails(models.TransientModel):
                         detail.date == d_five['date'] and
                         detail.product_id.id == d_five['product_id'] and
                         detail.quantity == d_five['quantity'] and
-                        detail.journal_id.id == 1
-                        ## detail.move_name != d_five['move_name'] and
-                        # detail.debit != d_five['debit']
-                        
+                        detail.journal_id.id == 1                        
                     ):
                         debito = round(d_five['debit'], 2)
                         
@@ -189,8 +186,17 @@ class InvoiceDetails(models.TransientModel):
                 #     "rentabilidad": round(rentabilidad, 2),
                 #     "debito": round(detail.credit, 2)
                 # }
+                if diario:
+                    if detail.journal_id in diario:
+                        data_invoice_details.append(data_detail)
+                        
+                if comercial:
+                    if detail.move_id.invoice_user_id in comercial:
+                        data_invoice_details.append(data_detail)
                 
-                data_invoice_details.append(data_detail)
+                if cashier:
+                    if detail.move_id.pos_order_ids.employee_id in cashier:
+                        data_invoice_details.append(data_detail)
             
             data = {
                 'result_data': data_invoice_details,
