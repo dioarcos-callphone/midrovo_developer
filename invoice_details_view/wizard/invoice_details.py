@@ -120,8 +120,7 @@ class InvoiceDetails(models.TransientModel):
                         detail.date == d_five['date'] and
                         detail.move_id.id == d_five['move_id'] and
                         detail.product_id.id == d_five['product_id'] and
-                        detail.quantity == d_five['quantity'] and
-                        detail.journal_id.id == 1                        
+                        detail.quantity == d_five['quantity']                     
                     ):
                         debito = round(d_five['debit'], 2)
                 
