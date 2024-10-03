@@ -170,7 +170,8 @@ class InvoiceDetails(models.TransientModel):
             'fecha_fin': self.end_date,
             'diario': self.journal_ids.ids,
             'comercial': self.comercial_ids.ids,
-            'cashier': self.cashier_ids.ids
+            'cashier': self.cashier_ids.ids,
+            'is_cost_or_debit': self.cost_options
         }
         
         return (

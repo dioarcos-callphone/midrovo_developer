@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -16,12 +17,16 @@ class InvoiceDetails(models.AbstractModel):
         diario = data['diario']
         comercial = data['comercial']
         cashier = data['cashier']
+        is_cost_or_debit = data['is_cost_or_debit']
         
         domain = [
             ('product_id', '!=', False),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
         ]
+        
+        # trae todas las lineas de factura para filtrar las que son de la cuenta 5
+        details_account_five = self.env['account.move.line'].search(domain)
         
         if diario:
             domain.append(('journal_id', 'in', diario))
@@ -32,30 +37,68 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        if invoice_details:           
+        if invoice_details:
+            # filtramos las lineas de factura cuyo codigo de cuenta comienza con 5
+            details_account_five = details_account_five.filtered(
+                lambda d : d.account_id.code.startswith('5')
+            )
+            
+            # recorremos las lineas de factura de codigo 5 y traemos ciertos campos
+            details_account_five = [ {
+                'id': d.id,
+                'date': d.date,
+                'move_id': d.move_id.id,
+                'journal_id': d.journal_id.id,
+                'account_id': d.account_id.id,
+                'product_id': d.product_id.id,
+                'move_name': d.move_name,
+                'debit': d.debit,
+                'quantity': abs(d.quantity)
+            } for d in details_account_five ]
+            
             for detail in invoice_details:
+                data_detail = {}
+                debito = detail.debit
+                
+                for d_five in details_account_five:
+                    # comparamos las lineas de factura de la cuenta 5 con las lineas de factura
+                    # del asiento contable de facturas de cliente
+                    if(
+                        detail.date == d_five['date'] and
+                        detail.product_id.id == d_five['product_id'] and
+                        detail.quantity == d_five['quantity'] and
+                        detail.journal_id.id == 1                        
+                    ):
+                        debito = round(d_five['debit'], 2)
+                
+                data_detail['debito'] = debito
+
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
+                
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                data_detail = {
-                    "numero": detail.move_name,
-                    "comercial": detail.move_id.invoice_user_id.partner_id.name,
-                    "pos": detail.move_id.pos_order_ids.employee_id.name,
-                    "producto": detail.product_id.name,
-                    "cantidad": detail.quantity,
-                    "precio": detail.price_unit,
-                    "descuento": descuento,
-                    "subtotal": detail.price_subtotal,
-                    "costo": round(detail.product_id.standard_price, 2),
-                    "total_costo": total_costo,
-                    "rentabilidad": round(rentabilidad, 2)
-                }
+                date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
+                # añadimos los valores a los campos del diccionario
+                data_detail['fecha'] = date_formated
+                data_detail['numero'] = detail.move_name
+                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
+                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['cliente'] = detail.partner_id.name
+                data_detail['producto'] = detail.product_id.name
+                data_detail['cantidad'] = detail.quantity
+                data_detail['precio'] = detail.price_unit
+                data_detail['descuento'] = descuento
+                data_detail['subtotal'] = detail.price_subtotal
+                data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                data_detail['total_costo'] = total_costo
+                data_detail['rentabilidad'] = round(rentabilidad, 2)
+
                 data_invoice_details.append(data_detail)
             
             return {
@@ -63,6 +106,7 @@ class InvoiceDetails(models.AbstractModel):
                 'doc_model': 'report.invoice_details_view.report_invoice_details',
                 'data': data,
                 'options': data_invoice_details,
+                'is_cost_or_debit': is_cost_or_debit
             }
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")

@@ -52,7 +52,13 @@
                                 <t t-esc="result['subtotal']"/>
                             </td>
                             <td align="center" width="100">
-                                <t t-esc="result['costo']"/>
+                                <t t-if="is_cost_or_debit == 'master'">
+                                    <t t-esc="result['costo']"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="result['debito']"/>
+                                </t>
+                                
                             </td>
                             <td align="center" width="100">
                                 <t t-esc="result['total_costo']"/>
