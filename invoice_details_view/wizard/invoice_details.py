@@ -119,9 +119,7 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                 
-                if self.cost_options == 'movement':
-                    _logger.info('ENTRA A MOVEMENT')
-                    data_detail['debito'] = debito
+                data_detail['debito'] = debito
 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
@@ -145,11 +143,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['precio'] = detail.price_unit
                 data_detail['descuento'] = descuento
                 data_detail['subtotal'] = detail.price_subtotal
-                
-                if self.cost_options == 'master':
-                    _logger.info('ENTRA A MASTER')
-                    data_detail['costo'] = round(detail.product_id.standard_price, 2)
-                    
+                data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
 
@@ -157,6 +151,7 @@ class InvoiceDetails(models.TransientModel):
             
             data = {
                 'result_data': data_invoice_details,
+                'is_cost_or_debit': self.cost_options
             }
             return data
         
@@ -202,6 +197,7 @@ class InvoiceDetails(models.TransientModel):
     # Formato de hoja de Excel para imprimir los datos
     def get_xlsx_report(self, data, response):
         datas = data['result_data']
+        is_cost_or_debit = data['is_cost_or_debit']
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
@@ -249,11 +245,15 @@ class InvoiceDetails(models.TransientModel):
             'Precio',
             'Descuento',
             'Subtotal',
-            'Costo',
             'Total Costo',
             'Rentabilidad',
-            'debito'
         ]
+        
+        if is_cost_or_debit == 'master':
+            headers.insert(10, 'Costo')
+        elif is_cost_or_debit == 'movement':
+            headers.insert(10, 'Debito')
+        
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
 
@@ -268,10 +268,9 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('H:H', 11)  # Precio
         sheet.set_column('I:I', 10)  # Descuento
         sheet.set_column('J:J', 10)  # Subtotal
-        sheet.set_column('K:K', 12)  # Costo
+        sheet.set_column('K:K', 12)  # Costo o Debito
         sheet.set_column('L:L', 12)  # Total Costo
         sheet.set_column('M:M', 12)  # Rentabilidad
-        sheet.set_column('N:N', 12)  # Debito
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -286,10 +285,14 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 7, val['precio'], text_format)
             sheet.write(row, 8, val['descuento'], text_format)
             sheet.write(row, 9, val['subtotal'], text_format)
-            sheet.write(row, 10, val['costo'], text_format)
+            
+            if is_cost_or_debit == 'master':
+                sheet.write(row, 10, val['costo'], text_format)
+            elif is_cost_or_debit == 'movement':
+                sheet.write(row, 10, val['debito'], text_format)
+            
             sheet.write(row, 11, val['total_costo'], text_format)
             sheet.write(row, 12, val['rentabilidad'], text_format)
-            sheet.write(row, 13, val['debito'], text_format)
             row += 1
 
         # Cerrar el libro
