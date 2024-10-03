@@ -46,7 +46,7 @@ class InvoiceDetails(models.TransientModel):
     cost_options = fields.Selection([
         ('master', 'Costo Maestro'),
         ('movement', 'Costo Movimiento')
-    ], string = 'Costo', default = 'master')
+    ], string = 'Costo', default = 'master', help = '"Costo Maestro" para el costo precio estandar del producto, "Costo Movimiento" para el debito de la línea de factura.')
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
@@ -66,6 +66,8 @@ class InvoiceDetails(models.TransientModel):
             ('date', '<=', fecha_fin),
         ]
         
+        details_account_five = self.env['account.move.line'].search(domain)
+        
         if diario:
             domain.append(('journal_id', 'in', diario))
         if comercial:
@@ -74,10 +76,10 @@ class InvoiceDetails(models.TransientModel):
             domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
         invoice_details = self.env['account.move.line'].search(domain)
-        #invoice_details = self.
+        
         
         if invoice_details:
-            details_account_five = invoice_details.filtered(
+            details_account_five = details_account_five.filtered(
                 lambda d : d.account_id.code.startswith('5')
             )
             
@@ -192,11 +194,11 @@ class InvoiceDetails(models.TransientModel):
                 #     "rentabilidad": round(rentabilidad, 2),
                 #     "debito": round(detail.credit, 2)
                 # }
-                if diario:
-                    _logger.info(f'MOSTRANDO JOURNAL ID >>> { detail.journal_id } || MOSTRANDO DIARIOS >>> { diario }')
-                    if detail.journal_id.id in diario:
-                        _logger.info('ENTRA SI ES DIARIO')
-                        data_invoice_details.append(data_detail)
+                # if diario:
+                #     _logger.info(f'MOSTRANDO JOURNAL ID >>> { detail.journal_id } || MOSTRANDO DIARIOS >>> { diario }')
+                #     if detail.journal_id.id in diario:
+                #         _logger.info('ENTRA SI ES DIARIO')
+                data_invoice_details.append(data_detail)
                         
                 # if comercial:
                 #     _logger.info(f'MOSTRANDO COMERCIAL ID >>> { detail.move_id.invoice_user_id } || MOSTRANDO COMERCIAL >>> { comercial }')
