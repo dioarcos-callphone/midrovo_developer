@@ -59,6 +59,7 @@ class InvoiceDetails(models.TransientModel):
         diario = self.journal_ids.ids
         comercial = self.comercial_ids.ids
         cashier = self.cashier_ids.ids
+        options = self.cost_options
         
         domain = [
             ('product_id', '!=', False),
@@ -113,7 +114,7 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                 
-                if self.cost_options == 'movement':
+                if options == 'movement':
                     data_detail['debito'] = debito
 
                 descuento = round(0.00, 2)
@@ -139,7 +140,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['descuento'] = descuento
                 data_detail['subtotal'] = detail.price_subtotal
                 
-                if self.cost_options == 'master':
+                if options == 'master':
                     data_detail['costo'] = round(detail.product_id.standard_price, 2)
                     
                 data_detail['total_costo'] = total_costo
