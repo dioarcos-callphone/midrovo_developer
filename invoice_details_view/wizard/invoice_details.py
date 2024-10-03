@@ -59,17 +59,12 @@ class InvoiceDetails(models.TransientModel):
         if self.start_date > self.end_date:
             raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
         
-        _logger.info(f'HOLAAAAAAAAAAAAAAAA')
-        _logger.info(f"MOSTRANDO COST OPTIONS >>>> {self.cost_options}")  # Para ver el valor en los logs
-
-        
         data_invoice_details = []
         fecha_inicio = self.start_date
         fecha_fin = self.end_date
         diario = self.journal_ids.ids
         comercial = self.comercial_ids.ids
         cashier = self.cashier_ids.ids
-        options = self.cost_options
         
         domain = [
             ('product_id', '!=', False),
@@ -124,8 +119,9 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                 
-                # if options == 'movement':
-                data_detail['debito'] = debito
+                if self.cost_options == 'movement':
+                    _logger.info('ENTRA A MOVEMENT')
+                    data_detail['debito'] = debito
 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
@@ -150,8 +146,9 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['descuento'] = descuento
                 data_detail['subtotal'] = detail.price_subtotal
                 
-                # if options == 'master':
-                data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                if self.cost_options == 'master':
+                    _logger.info('ENTRA A MASTER')
+                    data_detail['costo'] = round(detail.product_id.standard_price, 2)
                     
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
