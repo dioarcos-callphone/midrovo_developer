@@ -113,7 +113,8 @@ class InvoiceDetails(models.TransientModel):
                     ):
                         debito = round(d_five['debit'], 2)
                 
-                data_detail['debito'] = debito
+                if self.cost_options == 'movement':
+                    data_detail['debito'] = debito
 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
@@ -137,7 +138,10 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['precio'] = detail.price_unit
                 data_detail['descuento'] = descuento
                 data_detail['subtotal'] = detail.price_subtotal
-                data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                
+                if self.cost_options == 'master':
+                    data_detail['costo'] = round(detail.product_id.standard_price, 2)
+                    
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
 
