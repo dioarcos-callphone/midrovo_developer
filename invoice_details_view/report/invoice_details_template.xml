@@ -5,11 +5,11 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page" style="margin: 0; padding: 0;">
-                    <div class="text-center" style="margin-bottom: 20px;">
+                    <div class="text-center">
                         <h3>Informe de Detalles de Facturas</h3>
                     </div>
                 </div>
-                <table class="table table-condensed table-bordered table-striped">
+                <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
                     <thead>
                         <tr>
                             <th align="center" style="vertical-align: middle">NUMERO</th>
