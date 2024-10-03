@@ -12,9 +12,11 @@
                 <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
                     <thead>
                         <tr>
+                            <th align="center" style="vertical-align: middle">FECHA</th>
                             <th align="center" style="vertical-align: middle">NUMERO</th>
                             <th align="center" style="vertical-align: middle">COMERCIAL</th>
                             <th align="center" style="vertical-align: middle">CAJERO</th>
+                            <th align="center" style="vertical-align: middle">CLIENTE</th>
                             <th align="center" style="vertical-align: middle">PRODUCTO</th>
                             <th align="center" style="vertical-align: middle">CANTIDAD</th>
                             <th align="center" style="vertical-align: middle">PRECIO</th>
@@ -28,6 +30,9 @@
                     <tbody>
                         <tr t-foreach="options" t-as="result">
                             <td>
+                                <t t-esc="result['fecha']"/>
+                            </td>
+                            <td>
                                 <t t-esc="result['numero']"/>
                             </td>
                             <td>
@@ -35,6 +40,9 @@
                             </td>
                             <td>
                                 <t t-esc="result['pos']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['cliente']"/>
                             </td>
                             <td>
                                 <t t-esc="result['producto']"/>
