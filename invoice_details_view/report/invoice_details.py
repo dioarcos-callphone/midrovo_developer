@@ -18,6 +18,7 @@ class InvoiceDetails(models.AbstractModel):
         
         domain = [
             ('product_id', '!=', False),
+            ('display_type', '=', 'product')
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
         ]
