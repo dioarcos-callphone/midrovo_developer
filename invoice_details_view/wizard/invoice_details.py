@@ -43,10 +43,16 @@ class InvoiceDetails(models.TransientModel):
         comodel_name='hr.employee'
     )
     
-    cost_options = fields.Selection([
-        ('master', 'Costo Maestro'),
-        ('movement', 'Costo Movimiento')
-    ], string = 'Costo', default = 'master', help = '"Costo Maestro" para el costo precio estandar del producto, "Costo Movimiento" para el debito de la línea de factura.')
+    cost_options = fields.Selection(
+        [
+            ('master', 'Costo Maestro'),
+            ('movement', 'Costo Movimiento')
+        ],
+        string = 'Costo',
+        default = 'master',
+        help=""""Costo Maestro" para el costo precio estandar del producto, 
+        "Costo Movimiento" para el debito de la línea de factura."""        
+    )
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
