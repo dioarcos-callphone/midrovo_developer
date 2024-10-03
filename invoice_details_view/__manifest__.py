@@ -6,7 +6,7 @@
         - El wizard filtra por rango de fecha, diario contable, comercial, sales person
         - Contiene opciones para traer el informe segun el costo
         - La vista tree del account move line muestra los detalles de la factura
-        - Cuando genere el informe seleccione los registros y de click en PDF
+        - Cuando genere el informe seleccione los registros y de click en PDF o EXCEL
     """,
     
     "category": "Account Move",
