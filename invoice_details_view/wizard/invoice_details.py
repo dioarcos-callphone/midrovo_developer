@@ -65,9 +65,10 @@ class InvoiceDetails(models.TransientModel):
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
         ]
-        
+        # trae todas las lineas de factura para filtrar las que son de la cuenta 5
         details_account_five = self.env['account.move.line'].search(domain)
         
+        # condiciones de dominio de acuerdo a los filtros que selecciona el usuario
         if diario:
             domain.append(('journal_id', 'in', diario))
         if comercial:
@@ -75,15 +76,17 @@ class InvoiceDetails(models.TransientModel):
         if cashier:
             domain.append(('move_id.pos_order_ids.employee_id', 'in', cashier))
         
+        # trae las lineas de factura en base al dominio que se le establece
         invoice_details = self.env['account.move.line'].search(domain)
         
-        
         if invoice_details:
+            # filtramos las lineas de factura cuyo codigo de cuenta comienza con 5
             details_account_five = details_account_five.filtered(
                 lambda d : d.account_id.code.startswith('5')
             )
             
-            details_account_five = [{
+            # recorremos las lineas de factura de codigo 5 y traemos ciertos campos
+            details_account_five = [ {
                 'id': d.id,
                 'date': d.date,
                 'move_id': d.move_id.id,
@@ -93,12 +96,15 @@ class InvoiceDetails(models.TransientModel):
                 'move_name': d.move_name,
                 'debit': d.debit,
                 'quantity': abs(d.quantity)
-            } for d in details_account_five]
+            } for d in details_account_five ]
             
             for detail in invoice_details:
                 data_detail = {}
                 debito = detail.debit
+                
                 for d_five in details_account_five:
+                    # comparamos las lineas de factura de la cuenta 5 con las lineas de factura
+                    # del asiento contable de facturas de cliente
                     if(
                         detail.date == d_five['date'] and
                         detail.product_id.id == d_five['product_id'] and
@@ -106,64 +112,21 @@ class InvoiceDetails(models.TransientModel):
                         detail.journal_id.id == 1                        
                     ):
                         debito = round(d_five['debit'], 2)
-                        
-                        
-                    # elif(
-                    #     detail.date == d_five['date'] and
-                    #     detail.product_id.id == d_five['product_id'] and
-                    #     detail.quantity == d_five['quantity']
-                    # ):
-                    #     debito = round(d_five['debit'], 2)
                 
                 data_detail['debito'] = debito
-            
-            # for detail in invoice_details:
+
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
+                
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
                 total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                
-                
-                
-            #     # product = detail.product_id
-            #     # category = product.categ_id
-            #     # account_five = category.property_stock_account_output_categ_id
-                
-            #     # d = self.env['account.move.line'].search([
-            #     #     ('id', '=', detail.id),
-            #     #     ('account_id', '=', account_five.id),
-            #     # ])
-                
-            #     # _logger.info(f'MOSTRANDO CATEGORY >>> { d.debit }')
-                
-            #     # debit_detail = self.env['account.move.line'].search([
-            #     #     ('id', '=', detail.id),
-            #     #     ('account_id.code', 'like', '5%')
-            #     # ])
-                
-            #     # _logger.info(f'MOSTRANDO LOS DEBIT DETAILS >>> { debit_detail.debit }')
-                
-            #     # _logger.info(f'MOVE ID >>> { detail.move_id }')
-                
-            #     line_ids = detail.move_id.line_ids
-                
-            #     for line in line_ids:
-            #         _logger.info(f'MOSTRANDO LINEAS DE LA FACTURA >>> { line.debit }')
-                
-            #     _logger.info(f'MOSTRAR ACCOUNT >>>> { detail.move_id }')
-                # if diario or comercial or cashier:
-                #     if(
-                #         detail.journal_id in diario or
-                #         detail.move_id.invoice_user_id in comercial or
-                #         detail.move_id.pos_order_ids.employee_id in cashier
-                #     ):
-                
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
+                # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
@@ -177,39 +140,8 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                
-                # data_detail = {
-                #     "fecha": date_formated,
-                #     "numero": detail.move_name,
-                #     "comercial": detail.move_id.invoice_user_id.partner_id.name,
-                #     "pos": detail.move_id.pos_order_ids.employee_id.name or "",
-                #     "cliente": detail.partner_id.name,
-                #     "producto": detail.product_id.name,
-                #     "cantidad": detail.quantity,
-                #     "precio": detail.price_unit,
-                #     "descuento": descuento,
-                #     "subtotal": detail.price_subtotal,
-                #     "costo": round(detail.product_id.standard_price, 2),
-                #     "total_costo": total_costo,
-                #     "rentabilidad": round(rentabilidad, 2),
-                #     "debito": round(detail.credit, 2)
-                # }
-                # if diario:
-                #     _logger.info(f'MOSTRANDO JOURNAL ID >>> { detail.journal_id } || MOSTRANDO DIARIOS >>> { diario }')
-                #     if detail.journal_id.id in diario:
-                #         _logger.info('ENTRA SI ES DIARIO')
+
                 data_invoice_details.append(data_detail)
-                        
-                # if comercial:
-                #     _logger.info(f'MOSTRANDO COMERCIAL ID >>> { detail.move_id.invoice_user_id } || MOSTRANDO COMERCIAL >>> { comercial }')
-                #     if detail.move_id.invoice_user_id.id in comercial:
-                #         _logger.info('ENTRA SI ES COMERCIAL')
-                #         data_invoice_details.append(data_detail)
-                
-                # if cashier:
-                #     if detail.move_id.pos_order_ids.employee_id.id in cashier:
-                #         _logger.info('ENTRA SI ES CASHIER')
-                #         data_invoice_details.append(data_detail)
             
             data = {
                 'result_data': data_invoice_details,
