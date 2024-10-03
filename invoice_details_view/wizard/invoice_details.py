@@ -188,18 +188,18 @@ class InvoiceDetails(models.TransientModel):
                 # }
                 if diario:
                     _logger.info(f'MOSTRANDO JOURNAL ID >>> { detail.journal_id } || MOSTRANDO DIARIOS >>> { diario }')
-                    if detail.journal_id in diario:
+                    if detail.journal_id.id in diario:
                         _logger.info('ENTRA SI ES DIARIO')
                         data_invoice_details.append(data_detail)
                         
                 if comercial:
                     _logger.info(f'MOSTRANDO COMERCIAL ID >>> { detail.move_id.invoice_user_id } || MOSTRANDO COMERCIAL >>> { comercial }')
-                    if detail.move_id.invoice_user_id in comercial:
+                    if detail.move_id.invoice_user_id.id in comercial:
                         _logger.info('ENTRA SI ES COMERCIAL')
                         data_invoice_details.append(data_detail)
                 
                 if cashier:
-                    if detail.move_id.pos_order_ids.employee_id in cashier:
+                    if detail.move_id.pos_order_ids.employee_id.id in cashier:
                         _logger.info('ENTRA SI ES CASHIER')
                         data_invoice_details.append(data_detail)
             
