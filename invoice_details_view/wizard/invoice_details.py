@@ -53,7 +53,7 @@ class InvoiceDetails(models.TransientModel):
         if self.start_date > self.end_date:
             raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
         
-        _logger.debug(f"cost_options: {self.cost_options}")  # Para ver el valor en los logs
+        _logger.debug(f"MOSTRANDO COST OPTIONS >>>> {self.cost_options}")  # Para ver el valor en los logs
 
         
         data_invoice_details = []
