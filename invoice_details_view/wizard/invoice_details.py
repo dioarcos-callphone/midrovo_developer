@@ -245,14 +245,10 @@ class InvoiceDetails(models.TransientModel):
             'Precio',
             'Descuento',
             'Subtotal',
+            'Costo',
             'Total Costo',
             'Rentabilidad',
         ]
-        
-        if is_cost_or_debit == 'master':
-            headers.insert(10, 'Costo')
-        elif is_cost_or_debit == 'movement':
-            headers.insert(10, 'Debito')
         
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
