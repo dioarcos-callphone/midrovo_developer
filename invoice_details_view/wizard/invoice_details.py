@@ -65,11 +65,19 @@ class InvoiceDetails(models.TransientModel):
         
         domain = [
             ('product_id', '!=', False),
+            ('display_type', '=', 'product'),
+            ('date', '>=', fecha_inicio),
+            ('date', '<=', fecha_fin),
+        ]
+        
+        domain_cogs = [
+            ('product_id', '!=', False),
+            ('display_type', '=', 'cogs'),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
         ]
         # trae todas las lineas de factura para filtrar las que son de la cuenta 5
-        details_account_five = self.env['account.move.line'].search(domain)
+        details_account_five = self.env['account.move.line'].search(domain_cogs)
         
         # condiciones de dominio de acuerdo a los filtros que selecciona el usuario
         if diario:
@@ -110,6 +118,7 @@ class InvoiceDetails(models.TransientModel):
                     # del asiento contable de facturas de cliente
                     if(
                         detail.date == d_five['date'] and
+                        detail.move_id.id == d_five['move_id'] and
                         detail.product_id.id == d_five['product_id'] and
                         detail.quantity == d_five['quantity'] and
                         detail.journal_id.id == 1                        
