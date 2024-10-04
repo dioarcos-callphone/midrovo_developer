@@ -24,6 +24,10 @@ from odoo import http
 from odoo.http import content_disposition, request
 from odoo.tools import html_escape
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 
 class XLSXReportController(http.Controller):
     """This model is used to connect the frontend to the backend"""
@@ -32,6 +36,7 @@ class XLSXReportController(http.Controller):
                 csrf=False)
     def get_report_xlsx(self, model, options, output_format, report_name):
         """This function is called when a post request is made to this route"""
+        _logger.info(f'MOSTRANDO MODEL >>> { model } || OPTIONS { options } || OUTPUT FORMAT { output_format } || REPORT NAME { report_name }')
         uid = request.session.uid
         report_obj = request.env[model].with_user(uid)
         options = json.loads(options)
