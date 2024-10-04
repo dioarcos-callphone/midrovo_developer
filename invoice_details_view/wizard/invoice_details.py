@@ -133,7 +133,7 @@ class InvoiceDetails(models.TransientModel):
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
-                total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                total_costo = round(data_detail['debito'], 2)
                 rentabilidad = detail.price_subtotal - total_costo
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
