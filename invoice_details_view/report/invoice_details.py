@@ -21,7 +21,7 @@ class InvoiceDetails(models.AbstractModel):
             ('display_type', '=', 'product'),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
-            ('move_type', 'in', ['out_invoice', 'out_refund']),
+            ('move_id.move_type', 'in', ['out_invoice', 'out_refund']),
         ]
         
         domain_cogs = [
@@ -85,7 +85,12 @@ class InvoiceDetails(models.AbstractModel):
                 if detail.discount:
                     descuento = round((subtotal * (detail.discount/100)),2)
                 
-                total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                if is_cost_or_debit == 'master':
+                    total_costo = round((detail.product_id.standard_price * detail.quantity), 2)
+                    
+                if is_cost_or_debit == 'movement':
+                    total_costo = round(data_detail['debito'], 2)
+                    
                 rentabilidad = detail.price_subtotal - total_costo
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
