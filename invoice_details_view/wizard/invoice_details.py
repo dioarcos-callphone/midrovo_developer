@@ -68,6 +68,7 @@ class InvoiceDetails(models.TransientModel):
             ('display_type', '=', 'product'),
             ('date', '>=', fecha_inicio),
             ('date', '<=', fecha_fin),
+            ('move_type', 'in', ['out_invoice', 'out_refund']),
         ]
         
         domain_cogs = [
