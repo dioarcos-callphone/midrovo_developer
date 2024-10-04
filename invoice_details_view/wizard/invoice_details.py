@@ -28,6 +28,8 @@ class InvoiceDetails(models.TransientModel):
     journal_ids = fields.Many2many(
         string = 'Diario',
         comodel_name='account.journal',
+        domain=[('type','=','sale')]
+        
     )
     
     comercial_ids = fields.Many2many(
