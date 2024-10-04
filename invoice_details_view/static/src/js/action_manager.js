@@ -7,6 +7,9 @@ registry.category("ir.actions.report handlers").add("xlsx", async (action) => {
    if (action.report_type === 'xlsx') {
        framework.blockUI();
        var def = $.Deferred();
+
+       console.log('Report name:', action);
+
        session.get_file({
            url: '/xlsx_reports',
            data: action.data,
