@@ -13,9 +13,9 @@
     'website': "https://www.callphoneecuador.com",
     'depends': [ 'base', 'sale_management' ],
     'data': [
-        "product_catalog_advanced/reports/report_product_catalog.xml",
-        "product_catalog_advanced/reports/product_catalog_template.xml",
-        "product_catalog_advanced/views/view_product_catalog.xml",
+        "reports/report_product_catalog.xml",
+        "reports/product_catalog_template.xml",
+        "views/view_product_catalog.xml",
     ],
     
     'license': 'LGPL-3',
