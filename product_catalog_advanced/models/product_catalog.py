@@ -149,9 +149,9 @@ class ProductCatalog(models.Model):
                 'name': p.name,
                 'color': [
                     {
-                        f'{ [v.name for v in p.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']][0] }' : [{
+                        f'{ [v.name for v in p.product_template_variant_value_ids if v.attribute_id.name.lower() in ["color", "colores"]][0] }' : [{
                             f'{ v.name }': p.qty_available
-                        } for v in p.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']]
+                        } for v in p.product_template_variant_value_ids if v.attribute_id.name.lower() in ["talla", "tallas"]]
                     }
                 ],
                 'imagen': p.id,
