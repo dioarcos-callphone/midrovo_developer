@@ -112,10 +112,13 @@ class ProductCatalog(models.Model):
             .report_action(self, data=data_products)
         )
         
-        
+       
     def action_product_catalog_pdf(self):
         ids = [ p.id for p in self ]
-        self.product_product(ids)
+        products = self.get_product_by_ids(ids)
+        
+        _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
+        
         
         data = {
             'productos': ids
@@ -127,19 +130,35 @@ class ProductCatalog(models.Model):
         )
     
     
-    def product_product(self, ids):
+    def get_product_by_ids(self, ids):
         products = self.env['product.product'].search([ ('product_tmpl_id', 'in', ids) ],)
         
-        if products:
-            product_filtered = products.filtered(
-                lambda p : 'talla' in p.product_template_variant_value_ids.mapped('attribute_id.name') or
-                'color' in p.product_template_variant_value_ids.mapped('attribute_id.name')
-            )
-            
-            _logger.info(f'PRODUCT FILTERED >>> { product_filtered }')
-            
-            return product_filtered or None
+        if products:            
+            return self.get_product_filtered(products)
         
         return None
+    
+    def get_product_filtered(self, products):
+        products_filtered = products.filtered(
+            lambda p : 
+                'talla' in p.product_template_variant_value_ids.mapped('attribute_id.name')
+                or 'color' in p.product_template_variant_value_ids.mapped('attribute_id.name')
+        )
+        
+        if products_filtered:
+            return [ {
+                'name': p.name,
+                'variants': p.product_template_variant_value_ids,
+                'imagen': p.id,
+                'cantidad': p.qty_available,
+            } for p in products_filtered ]
+        
+        return None
+    
+    def get_product_catalog(self, products):
+        
+        
+        
+        pass
     
     
