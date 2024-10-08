@@ -13,7 +13,7 @@ class ReportProductCatalog(models.AbstractModel):
         if productos:
             return {
                 'doc_ids': docids,
-                'doc_model': 'report.stock.quantity.history',
+                'doc_model': 'product.product',
                 'options': productos,
             }
             
