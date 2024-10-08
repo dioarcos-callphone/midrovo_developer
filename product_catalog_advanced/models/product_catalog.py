@@ -114,7 +114,7 @@ class ProductCatalog(models.Model):
         
        
     def action_product_catalog_pdf(self):
-        ids = [ p.id for p in self ]
+        ids = [ p.id for p in self if p.qty_available > 0 ]
         products = self.get_product_by_ids(ids)
         
         # _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
