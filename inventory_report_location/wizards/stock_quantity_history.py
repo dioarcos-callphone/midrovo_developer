@@ -1,8 +1,6 @@
 from odoo import fields, models
 from odoo.tools.safe_eval import safe_eval
 
-import logging
-
 class StockQuantityHistoryInherit(models.TransientModel):
     _inherit = 'stock.quantity.history'
     
