@@ -148,7 +148,7 @@ class ProductCatalog(models.Model):
         if products_filtered:
             return [ {
                 'name': p.name,
-                'variants': p.product_template_variant_value_ids,
+                'variantes': [ v.name for v in p.product_template_variant_value_ids],
                 'imagen': p.id,
                 'cantidad': p.qty_available,
             } for p in products_filtered ]
