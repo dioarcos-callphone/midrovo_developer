@@ -152,21 +152,11 @@ class ProductCatalog(models.Model):
                 'color': [
                     v.name for v in p.product_template_variant_value_ids
                     if v.attribute_id.name.lower()in ['color', 'colores']
-                ] or [ value_id.name for line in self.env['product.template.attribute.line'].search_read(
-                    [
-                        ('product_tmpl_id', '=', p.product_tmpl_id.id),
-                        ('attribute_id.name', 'in', ['color', 'colores'])
-                    ], ['value_ids']
-                ) for value_id in line['value_ids'] ] or None,
+                ] or None,
                 'talla': [
                     v.name for v in p.product_template_variant_value_ids
                     if v.attribute_id.name.lower() in ['talla', 'tallas'] 
-                ] or [ value_id.name for line in self.env['product.template.attribute.line'].search_read(
-                    [
-                        ('product_tmpl_id', '=', p.product_tmpl_id.id),
-                        ('attribute_id.name', 'in', ['talla', 'tallas'])
-                    ], ['value_ids']
-                ) for value_id in line['value_ids'] ] or None,
+                ] or None,
                 'cantidad': p.qty_available,
             } for p in products_filtered ]
         
