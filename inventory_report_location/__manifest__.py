@@ -27,13 +27,6 @@
     #     ],
     # },
     
-    "assets": {
-        "web.assets_backend": [
-            "inventory_report_location/static/src/components/inventory_report.esm.js",
-            "inventory_report_location/static/src/components/inventory_report.xml",
-        ],
-    },
-    
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
