@@ -162,14 +162,28 @@ class ProductCatalog(models.Model):
         
         return None
     
-    def get_products_catalog(self, products):       
-        for i in range(len(products)):
-            for j in range(len(products) - 1):
-                if(
-                    products[i]['name'] == products[j + 1]['name'] and
-                    products[i]['color'] == products[j + 1]['color'] and
-                    products[i]['talla'] == products[j + 1]['talla'] 
-                ):
-                    _logger.info(f'MOSTRANDO PRODUCTO >>> { products[i] }')
+    def get_products_catalog(self, products):
+        data_products = {}
+        
+        for product in products:
+            key = (product['name'], product['color'], product['talla'])  # Crea una clave única para el producto
+            if key not in data_products:
+                data_products[key] = {
+                    'name': product['name'],
+                    'color': product['color'],
+                    'talla': product['talla'],
+                    'cantidad': 0  # Inicializa la cantidad
+                }
+            
+            data_products[key]['cantidad'] += product['cantidad']  # Suma la cantidad del producto
+        
+        # Convierte el diccionario a una lista
+        result = list(data_products.values())
+        
+        for item in result:
+            _logger.info(f'MOSTRANDO PRODUCTO >>> {item}')
+        
+        return result  # Devuelve la lista con los productos agrupados
+
     
     
