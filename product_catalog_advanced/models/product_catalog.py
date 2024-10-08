@@ -141,8 +141,7 @@ class ProductCatalog(models.Model):
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
             lambda p : 
-                'talla' in p.product_template_variant_value_ids.mapped('attribute_id.name')
-                and 'color' in p.product_template_variant_value_ids.mapped('attribute_id.name')
+                any(attr.lower() in ['talla', 'tallas', 'color', 'colores',] for attr in p.product_template_variant_value_ids.mapped('attribute_id.name'))
         )
         
         if products_filtered:
