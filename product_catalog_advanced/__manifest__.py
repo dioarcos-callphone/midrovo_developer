@@ -15,6 +15,7 @@
     'data': [
         "reports/report_product_catalog.xml",
         "reports/product_catalog_template.xml",
+        "views/assets_backend.xml",
         "views/view_product_catalog.xml",
     ],
     
