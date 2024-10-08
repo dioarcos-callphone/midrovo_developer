@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ProductCatalog(models.Model):
     _inherit = 'product.template'
     _description = 'Catalogo de Productos'
@@ -108,5 +111,26 @@ class ProductCatalog(models.Model):
             self.env.ref('product_catalog_advanced.report_product_catalog')
             .report_action(self, data=data_products)
         )
+        
+        
+    def action_product_catalog_pdf(self):
+        ids = [ p.id for p in self ]
+        self.product_product(ids)
+    
+    
+    def product_product(self, ids):
+        products = self.env['product.product'].search([ ('product_tmpl_id', 'in', ids) ],)
+        
+        if products:
+            product_filtered = products.filtered(
+                lambda p : 'talla' in p.product_template_variant_value_ids.mapped('attribute_id.name') or
+                'color' in p.product_template_variant_value_ids.mapped('attribute_id.name')
+            )
+            
+            _logger.info(f'PRODUCT FILTERED >>> { product_filtered }')
+            
+            return product_filtered or None
+        
+        return None
     
     
