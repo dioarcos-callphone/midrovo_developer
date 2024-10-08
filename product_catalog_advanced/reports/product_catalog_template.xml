@@ -1,134 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <template id="product_catalog_template">
-        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
-            <t t-call="web.html_container">
-                <t t-call="web.external_layout">
-                    <div class="page" style="margin: 0 !important; padding: 0 !important;">
-                        <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
-                            <div>
-                                <h1 t-field="o.name"/>
-                            </div>
-                        </header>
-                        <t t-if="o._get_data_product_variants()">
-                            <t t-foreach="o._get_data_product_variants()" t-as="result">
-                                <article style="margin: 10px 0 !important; padding: 10px 7px !important;">
-                                    <table style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
-                                        <tr>
-                                            <td style="vertical-align: top; border: none !important;">
-                                                <span t-field="env['product.product'].search([('id','=',result['img'])]).image_128"
-                                                        t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
-                                            </td>
-                                            <td style="vertical-align: top; border: none !important; width: 70%;">
-                                                <div style="text-align: center;">
-                                                    <table style="float: right; margin-bottom: 5px; border: none !important; border: transparent !important; width: 40%; border-collapse: collapse; text-align: right; padding: 10px 5px !important;">
-                                                        <tr>
-                                                            <td style="vertical-align: top; border: none !important;">
-                                                                <strong>Color:</strong>
-                                                            </td>
-                                                            <td style="vertical-align: top; border: none !important;">
-                                                                <span t-esc="result['color'].upper()"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table style="float: right; width: 80%; border-collapse: collapse;">
-                                                        <thead style="border: 1px solid #2196f3 !important;">
-                                                            <tr>
-                                                                <t t-foreach="result['tallas']" t-as="talla">
-                                                                    <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
-                                                                        <span t-esc="talla['talla']"/>
-                                                                    </th>
-                                                                    <!-- <t t-if="talla.product_template_variant_value_ids">
-                                                                        <t t-foreach="talla.product_template_variant_value_ids)" t-as="variant_value">
-                                                                            <t t-if="variant_value.attribute_id.name.lower() == 'tallas' or variant_value.attribute_id.name.lower() == 'talla'">
-                                                                                <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
-                                                                                    <span t-esc="variant_value.name"/>
-                                                                                </th>
-                                                                            </t>
-                                                                            <t t-if="len(result['talla_unica']) == 1">
-                                                                                <t t-foreach="result['talla_unica']" t-as="t">
-                                                                                    <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
-                                                                                        <span t-esc="t"/>
-                                                                                    </th>
-                                                                                </t>
-                                                                            </t>
-                                                                        </t>
-                                                                    </t>
-                                                                    <t t-else="">
-                                                                        <t t-foreach="result['talla_unica']" t-as="t">
-                                                                            <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
-                                                                                <span t-esc="t"/>
-                                                                            </th>
-                                                                        </t>
-                                                                    </t> -->
-                                                                    
-                                                                </t>
-                                                                <th style="border: 1px solid #2196f3 !important; padding: 8px !important; font-weight: 500; background-color: #f2f2f2;">
-                                                                    <span>Pares</span>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody>
-                                                            <tr>
-                                                                <t t-foreach="result['tallas']" t-as="talla">
-                                                                    <td style="border: 1px solid #2196f3 !important; padding: 8px !important;">
-                                                                        <span t-esc="int(talla['total'])"/>
-                                                                    </td>
-                                                                </t>
-                                                                <td style="border: 1px solid #2196f3 !important; padding: 8px !important;">
-                                                                    <span t-esc="result['disponible']"/>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>                        
-                                                </div> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </article>
-                            </t>
-                        </t>
-                        <t t-else="">
-                            <article>
-                                <table style="border: none !important; border: transparent !important; border-collapse: collapse; width: 100%; height: 50%;">
-                                    <tr>
-                                        <td class="column-img" style="vertical-align: middle; border: none !important;">
-                                            <span t-field="o.image_1920"
-                                                    t-options='{"widget": "image", "style": "width: 220px; height: 220px;" }'></span>
-                                        </td>
-                                        <td style="vertical-align: middle; border: none !important;">
-                                            <div style="text-align: center;">
-                                                <table style="margin: auto; border: none !important; border: transparent !important; width: 50%; border-collapse: collapse; padding: 10px 5px !important;">
-                                                    <tr>
-                                                        <td style="vertical-align: middle; border: none !important;">
-                                                            <h2>Disponible:</h2>
-                                                        </td>
-                                                        <td style="vertical-align: middle; border: none !important;">
-                                                            <h2 t-esc="int(o.qty_available)"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>                       
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </article>
-                        </t> 
-                    </div>
-                </t>
-            </t>          
-        </xpath>
-    </template>
-
-    <template id="product_template_catalog" inherit_id="amf_product_catalog.report_product_template_catalog">
-        <xpath expr="//t[@t-call='web.html_container']" position="replace">
-            <t t-foreach="docs" t-as="o">
-                <t t-if="o.qty_available > 0">
-                    <t t-set="lang" t-value="o.company_id.partner_id.lang or env.company.partner_id.lang"/>
-                    <t t-call="amf_product_catalog.report_product_catalog" t-lang="lang"/>
-                </t>
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin: 0 !important; padding: 0 !important;">
+                    <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
+                        <div>
+                            <h3>
+                                Catalogo de Productos
+                            </h3>
+                        </div>
+                    </header>
+                </div> 
             </t>
-        </xpath>
+        </t>
     </template>
+
 </odoo>
