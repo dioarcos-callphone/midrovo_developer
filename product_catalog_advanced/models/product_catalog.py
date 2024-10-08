@@ -117,10 +117,10 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self if p.qty_available > 0 ]
         products = self.get_product_by_ids(ids)
         
-        self.get_products_catalog(products)
+        productos = self.get_products_catalog(products)
         
         data = {
-            'productos': ids
+            'productos': productos
         }
         
         return (
@@ -148,6 +148,7 @@ class ProductCatalog(models.Model):
         
         if products_filtered:
             return [ {
+                'id': p.product_tmpl_id.id,
                 'name': p.name,
                 'color': (
                     next((v.name for v in p.product_template_variant_value_ids
@@ -166,37 +167,47 @@ class ProductCatalog(models.Model):
         data_products = {}
 
         for product in products:
-            key = (product['name'], product['color'])  # Clave única basada en nombre y color
-            if key not in data_products:
-                data_products[key] = {
-                    'name': product['name'],
-                    'color': product['color'],
-                    'tallas': []  # Inicializa una lista para tallas
+            name = product['name']
+            color = product['color']
+            talla = product['talla']
+            cantidad = product['cantidad']
+
+            # Crear la estructura para el producto si no existe
+            if name not in data_products:
+                data_products[name] = {
+                    'name': name,
+                    'colores': []
                 }
 
-            # Verificar si la talla ya está en la lista
-            talla = product['talla']
-            found = False
-            for talla_dict in data_products[key]['tallas']:
-                if talla_dict['talla'] == talla:
-                    talla_dict['cantidad'] += product['cantidad']  # Sumar cantidad si la talla ya existe
-                    found = True
-                    break
-            
-            if not found:
-                # Agregar nueva talla si no existe
-                data_products[key]['tallas'].append({
-                    'talla': talla,
-                    'cantidad': product['cantidad']
+            # Buscar el color en la lista de colores
+            color_found = next((color_entry for color_entry in data_products[name]['colores'] if color_entry['color'] == color), None)
+
+            if color_found:
+                # Si el color ya existe, buscar la talla
+                talla_found = next((talla_entry for talla_entry in color_found['tallas'] if talla_entry['talla'] == talla), None)
+
+                if talla_found:
+                    # Si la talla existe, sumar la cantidad
+                    talla_found['cantidad'] += cantidad
+                else:
+                    # Si la talla no existe, agregarla
+                    color_found['tallas'].append({
+                        'talla': talla,
+                        'cantidad': cantidad
+                    })
+            else:
+                # Si el color no existe, agregar un nuevo color con la talla
+                data_products[name]['colores'].append({
+                    'color': color,
+                    'tallas': [{
+                        'talla': talla,
+                        'cantidad': cantidad
+                    }]
                 })
 
-        # Formatear el resultado
-        result = []
-        for key, value in data_products.items():
-            result.append(value)  # Agrega el producto al resultado
-            _logger.info(f'MOSTRANDO PRODUCTO >>> {value}')  # Muestra el producto
+        # Convertir el diccionario a una lista (opcional)
+        return list(data_products.values())
 
-        return result  # Devuelve la lista con los productos agrupados
 
     
     
