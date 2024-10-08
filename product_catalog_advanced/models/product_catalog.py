@@ -164,7 +164,7 @@ class ProductCatalog(models.Model):
     
     def get_products_catalog(self, products):       
         for i in range(len(products)):
-            for j in range(len(products)):
+            for j in range(len(products) - 1):
                 if(
                     products[i]['name'] == products[j + 1]['name'] and
                     products[i]['color'] == products[j + 1]['color'] and
