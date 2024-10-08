@@ -19,7 +19,7 @@
     ],
     
     'assets': {
-        'web.assets_backend': [
+        'web.assets_frontend': [
             'product_catalog_advanced/static/src/css/style.css'
         ]
     },
