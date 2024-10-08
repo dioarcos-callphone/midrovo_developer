@@ -118,7 +118,7 @@ class ProductCatalog(models.Model):
         self.product_product(ids)
         
         data = {
-            'ids': ids
+            'productos': ids
         }
         
         return (
