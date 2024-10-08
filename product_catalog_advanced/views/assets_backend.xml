@@ -1,7 +1,9 @@
 <odoo>
-    <template id="assets_backend" name="custom_styles_assets" inherit_id="web.assets_backend">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/scss" href="/product_catalog_advanced/static/src/css/styles.css"/>
-        </xpath>
-    </template>
+    <data>
+        <template id="assets_backend" name="custom_styles_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/tu_modulo/static/src/css/custom_styles.css"/>
+            </xpath>
+        </template>
+    </data>
 </odoo>
