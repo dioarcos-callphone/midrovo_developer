@@ -11,7 +11,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone sa',
     'website': "https://www.callphoneecuador.com",
-    'depends': [ 'base', 'sale_management', 'stock', 'web' ],
+    'depends': [ 'base', 'sale_management', 'stock', ],
     'data': [
         "reports/report_product_catalog.xml",
         "reports/product_catalog_template.xml",
@@ -21,7 +21,7 @@
     
     'assets': {
         'web.assets_backend': [
-            'product_catalog_advanced/static/src/css/style.css'
+            '/product_catalog_advanced/static/src/css/style.css'
         ]
     },
     
