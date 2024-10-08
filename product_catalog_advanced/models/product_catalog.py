@@ -166,9 +166,9 @@ class ProductCatalog(models.Model):
         for i in range(len(products)):
             for j in range(len(products)):
                 if(
-                    products[i].name == products[j].name and
-                    products[i].color == products[j].color and
-                    products[i].talla == products[j].talla 
+                    products[i]['name'] == products[j]['name'] and
+                    products[i]['color'] == products[j]['color'] and
+                    products[i]['talla'] == products[j]['talla'] 
                 ):
                     _logger.info(f'MOSTRANDO PRODUCTO >>> { products[i] }')
     
