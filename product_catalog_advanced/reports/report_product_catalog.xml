@@ -15,10 +15,10 @@
     <record id="report_product_catalog"
             model="ir.actions.report">
         <field name="name">Catalogo de Productos</field>
-        <field name="model">report.inventory_report_location.report_stock_quantity</field>
+        <field name="model">report.product_catalog_advanced.product_catalog_template</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">inventory_report_location.report_stock_quantity</field>
-        <field name="report_file">inventory_report_location.report_stock_quantity</field>
+        <field name="report_name">product_catalog_advanced.product_catalog_template</field>
+        <field name="report_file">product_catalog_advanced.product_catalog_template</field>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="paperformat_normal"/>
     </record>
