@@ -148,7 +148,7 @@ class ProductCatalog(models.Model):
         
         if products_filtered:
             return [ {
-                'id': p.product_tmpl_id.id,
+                'id': p.image_128,
                 'name': p.name,
                 'color': (
                     next((v.name for v in p.product_template_variant_value_ids
@@ -167,6 +167,7 @@ class ProductCatalog(models.Model):
         data_products = {}
 
         for product in products:
+            id = product['id']
             name = product['name']
             color = product['color']
             talla = product['talla']
@@ -204,8 +205,6 @@ class ProductCatalog(models.Model):
                         'cantidad': cantidad
                     }]
                 })
-                
-        _logger.info(f'Productos finales: {data_products}')
         # Convertir el diccionario a una lista (opcional)
         return list(data_products.values())
 
