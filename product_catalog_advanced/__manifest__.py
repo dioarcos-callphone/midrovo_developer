@@ -1,0 +1,25 @@
+{
+    "name": "Product Catalog Advanced",
+    
+    "summary": "Optimizacion y Personalizacion Nueva del Catalogo de Productos.",
+    "description": """
+        Quita los espacios en blanco
+    """,
+    
+    "category": "Product Template",
+    "version": "16.0.1.0.0",
+    'author': 'Mauricio Idrovo',
+    'company': 'Callphone sa',
+    'website': "https://www.callphoneecuador.com",
+    'depends': [ 'base', 'sale_management' ],
+    'data': [
+        "product_catalog_advanced/reports/report_product_catalog.xml",
+        "product_catalog_advanced/reports/product_catalog_template.xml",
+        "product_catalog_advanced/views/view_product_catalog.xml",
+    ],
+    
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': True,
+    'auto_install': True,
+}
