@@ -117,8 +117,9 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self ]
         products = self.get_product_by_ids(ids)
         
-        _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
+        # _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
         
+        self.get_products_catalog(products)
         
         data = {
             'productos': ids
@@ -170,10 +171,8 @@ class ProductCatalog(models.Model):
         
         return None
     
-    def get_product_catalog(self, products):
-        
-        
-        
-        pass
+    def get_products_catalog(self, products):
+        for product in products:
+            _logger.info(f'MOSTRANDO PRODUCTO >>> { product }')
     
     
