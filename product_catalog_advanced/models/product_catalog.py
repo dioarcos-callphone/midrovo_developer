@@ -162,12 +162,14 @@ class ProductCatalog(models.Model):
         
         return None
     
-    def get_products_catalog(self, products):
-        # productos = [{
-        #     'name': producto.name,
-        #     'color': f for f in producto.color
-        # } producto in products]
-        
-        _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
+    def get_products_catalog(self, products):       
+        for i in range(len(products)):
+            for j in range(len(products)):
+                if(
+                    products[i].name == products[j].name and
+                    products[i].color == products[j].color and
+                    products[i].talla == products[j].talla 
+                ):
+                    _logger.info(f'MOSTRANDO PRODUCTO >>> { products[i] }')
     
     
