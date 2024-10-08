@@ -164,25 +164,38 @@ class ProductCatalog(models.Model):
     
     def get_products_catalog(self, products):
         data_products = {}
-        
+
         for product in products:
-            key = (product['name'], product['color'], product['talla'])  # Crea una clave única para el producto
+            key = (product['name'], product['color'])  # Clave única basada en nombre y color
             if key not in data_products:
                 data_products[key] = {
                     'name': product['name'],
                     'color': product['color'],
-                    'talla': product['talla'],
-                    'cantidad': 0  # Inicializa la cantidad
+                    'tallas': []  # Inicializa una lista para tallas
                 }
+
+            # Verificar si la talla ya está en la lista
+            talla = product['talla']
+            found = False
+            for talla_dict in data_products[key]['tallas']:
+                if talla_dict['talla'] == talla:
+                    talla_dict['cantidad'] += product['cantidad']  # Sumar cantidad si la talla ya existe
+                    found = True
+                    break
             
-            data_products[key]['cantidad'] += product['cantidad']  # Suma la cantidad del producto
-        
-        # Convierte el diccionario a una lista
-        result = list(data_products.values())
-        
-        for item in result:
-            _logger.info(f'MOSTRANDO PRODUCTO >>> {item}')
-        
+            if not found:
+                # Agregar nueva talla si no existe
+                data_products[key]['tallas'].append({
+                    'talla': talla,
+                    'cantidad': product['cantidad']
+                })
+
+        # Formatear el resultado
+        result = []
+        for key, value in data_products.items():
+            result.append(value)  # Agrega el producto al resultado
+            _logger.info(f'MOSTRANDO PRODUCTO >>> {value}')  # Muestra el producto
+
         return result  # Devuelve la lista con los productos agrupados
 
     
