@@ -16,6 +16,7 @@
         "reports/report_product_catalog.xml",
         "reports/product_catalog_template.xml",
         "views/view_product_catalog.xml",
+        "views/assets.xml"
     ],
     
     'assets': {
