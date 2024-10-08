@@ -13,7 +13,7 @@ class ReportProductCatalog(models.AbstractModel):
         if productos:
             return {
                 'doc_ids': docids,
-                'doc_model': 'product.template',
+                'doc_model': 'report.product_catalog_advanced.product_catalog_template',
                 'options': productos,
             }
             
