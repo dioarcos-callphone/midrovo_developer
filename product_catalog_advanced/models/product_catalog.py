@@ -117,7 +117,7 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self ]
         products = self.get_product_by_ids(ids)
         
-        _logger.info(f'MOSTRANDO PRODUCTOS >>> { len(products) }')
+        _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
         
         
         data = {
