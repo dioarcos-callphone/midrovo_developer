@@ -116,6 +116,15 @@ class ProductCatalog(models.Model):
     def action_product_catalog_pdf(self):
         ids = [ p.id for p in self ]
         self.product_product(ids)
+        
+        data = {
+            'ids': ids
+        }
+        
+        return (
+            self.env.ref('product_catalog_advanced.report_product_catalog')
+            .report_action(self, data=data)
+        )
     
     
     def product_product(self, ids):

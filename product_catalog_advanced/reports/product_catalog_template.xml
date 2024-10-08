@@ -3,7 +3,7 @@
     <template id="product_catalog_template">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
-                <div class="page" style="margin: 0 !important; padding: 0 !important;">
+                <div class="page">
                     <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                         <div>
                             <h3>
