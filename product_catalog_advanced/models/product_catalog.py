@@ -149,21 +149,25 @@ class ProductCatalog(models.Model):
         if products_filtered:
             return [ {
                 'name': p.name,
-                'color': [
-                    v.name for v in p.product_template_variant_value_ids
-                    if v.attribute_id.name.lower()in ['color', 'colores']
-                ] or None,
-                'talla': [
-                    v.name for v in p.product_template_variant_value_ids
-                    if v.attribute_id.name.lower() in ['talla', 'tallas'] 
-                ] or None,
+                'color': (
+                    next((v.name for v in p.product_template_variant_value_ids
+                          if v.attribute_id.name.lower() in ['color', 'colores']), None)
+                ),
+                'talla': (
+                    next((v.name for v in p.product_template_variant_value_ids
+                          if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
+                ),
                 'cantidad': p.qty_available,
             } for p in products_filtered ]
         
         return None
     
     def get_products_catalog(self, products):
-        for product in products:
-            _logger.info(f'MOSTRANDO PRODUCTO >>> { product }')
+        # productos = [{
+        #     'name': producto.name,
+        #     'color': f for f in producto.color
+        # } producto in products]
+        
+        _logger.info(f'MOSTRANDO PRODUCTOS >>> { products }')
     
     
