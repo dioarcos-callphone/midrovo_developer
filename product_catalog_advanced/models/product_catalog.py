@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 
-class ProductCatalog(models.TransientModel):
+class ProductCatalog(models.Model):
     _inherit = 'product.template'
     _description = 'Catalogo de Productos'
     
