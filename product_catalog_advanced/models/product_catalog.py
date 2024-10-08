@@ -204,7 +204,8 @@ class ProductCatalog(models.Model):
                         'cantidad': cantidad
                     }]
                 })
-
+                
+        _logger.info(f'Productos finales: {data_products}')
         # Convertir el diccionario a una lista (opcional)
         return list(data_products.values())
 
