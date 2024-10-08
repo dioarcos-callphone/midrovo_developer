@@ -134,7 +134,7 @@ class ProductCatalog(models.Model):
     def get_product_by_ids(self, ids):
         products = self.env['product.product'].search([
             ('product_tmpl_id', 'in', ids),
-            ('qty_availble', '>', 0)
+            ('qty_available', '>', 0)
         ])
         
         if products:            
