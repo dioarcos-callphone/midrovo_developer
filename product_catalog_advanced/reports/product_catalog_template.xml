@@ -20,52 +20,50 @@
                             
                             <!-- Colores -->
                             <t t-foreach="producto['colores']" t-as="color">
-                                <div class="color-section" style="display: flex; align-items: flex-start;">
-                                    <!-- Imagen del color (solo si existe) -->
+                                <div class="color-section">
+                                    <!-- Imagen del color (flotando a la izquierda) -->
                                     <t t-if="color['image']">
                                         <img t-att-src="'data:image/png;base64,' + color['image']" 
                                             alt="Imagen del producto" 
                                             class="o_image_64_contain" 
-                                            style="max-width: 150px; max-height: 150px; margin-right: 20px;"/>
+                                            style="max-width: 150px; max-height: 150px; float: left; margin-right: 20px;"/>
                                     </t>
                                     <t t-else="">
-                                        <!-- Mostrar imagen por defecto si no hay imagen -->
+                                        <!-- Mostrar imagen por defecto si no hay imagen (flotando a la izquierda) -->
                                         <img src="/product_catalog_advanced/static/src/img/placeholder.png" 
                                             alt="Imagen no disponible" 
                                             class="o_image_64_contain" 
-                                            style="max-width: 150px; max-height: 150px; margin-right: 20px;"/>
+                                            style="max-width: 150px; max-height: 150px; float: left; margin-right: 20px;"/>
                                     </t>
 
-                                    <div>
-                                        <!-- Nombre del color -->
-                                        <p>Color: <t t-esc="color['color']"/></p>
-
-                                        <!-- Tabla de tallas -->
-                                        <table style="border-collapse: collapse; width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <t t-foreach="color['tallas']" t-as="talla">
-                                                        <th style="border: 1px solid blue; padding: 5px;">
-                                                            <t t-esc="talla['talla']"/>
-                                                        </th>
-                                                    </t>
-                                                    <th style="border: 1px solid blue; padding: 5px;">Cantidad</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <t t-foreach="color['tallas']" t-as="talla">
-                                                        <td style="border: 1px solid blue; padding: 5px; text-align: center;">
-                                                            <t t-esc="talla['cantidad']"/>
-                                                        </td>
-                                                    </t>
+                                    <!-- Tabla de tallas (flotando a la derecha de la imagen) -->
+                                    <table style="border-collapse: collapse; border: 1px solid blue; width: auto;">
+                                        <thead>
+                                            <tr>
+                                                <t t-foreach="color['tallas']" t-as="talla">
+                                                    <th style="border: 1px solid blue; padding: 5px;">
+                                                        <t t-esc="talla['talla']"/>
+                                                    </th>
+                                                </t>
+                                                <th style="border: 1px solid blue; padding: 5px;">Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <t t-foreach="color['tallas']" t-as="talla">
                                                     <td style="border: 1px solid blue; padding: 5px; text-align: center;">
-                                                        <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
+                                                        <t t-esc="talla['cantidad']"/>
                                                     </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </t>
+                                                <td style="border: 1px solid blue; padding: 5px; text-align: center;">
+                                                    <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <!-- Limpiar flotación -->
+                                    <div style="clear: both;"></div>
                                 </div>
                             </t>
                         </div>
