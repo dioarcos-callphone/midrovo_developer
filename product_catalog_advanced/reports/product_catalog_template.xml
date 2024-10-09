@@ -22,16 +22,9 @@
                             <t t-foreach="producto['colores']" t-as="color">
                                 <div class="color-section">
                                     <!-- Imagen del color (solo si existe) -->
-                                    <t t-if="color['image']">
-                                        <img t-att-src="'data:image/png;base64,' + color['image']" 
+                                    <t>
+                                        <img t-att-src="'data:image/png;base64,' + (color['image'] or default_image)" 
                                             alt="Imagen del producto" 
-                                            class="product-image" 
-                                            style="max-width: 150px; max-height: 150px;"/>
-                                    </t>
-                                    <t t-else="">
-                                        <!-- Mostrar imagen por defecto si no hay imagen -->
-                                        <img src="/web/static/src/img/placeholder.png" 
-                                            alt="Imagen no disponible" 
                                             class="product-image" 
                                             style="max-width: 150px; max-height: 150px;"/>
                                     </t>
