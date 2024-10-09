@@ -2,7 +2,7 @@
     <data>
         <record id="access_res_partner_no_update_delete" model="ir.model.access">
             <field name="name">No Update/Delete Partner Access</field>
-            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="model_id" ref="sale.model_res_partner"/>
             <field name="group_id" ref="custom_security_rules.group_no_update_delete"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="0"/>
