@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='price_unit']" position="attributes">
                     <attribute name="readonly">1</attribute>
+                    <attribute name="required">0</attribute>
                 </xpath>
             </field>
         </record>
