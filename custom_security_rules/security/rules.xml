@@ -1,25 +1,23 @@
 <odoo>
     <data>
-        <record id="model_quote_access" model="ir.model.access">
-            <field name="name">cotización acceso limitado</field>
+        <record id="access_limited_sale_order" model="ir.model.access">
+            <field name="name">Cotización acceso limitado</field>
             <field name="model_id" ref="sale.model_sale_order"/>
             <field name="group_id" ref="group_limited_access"/>
             <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
             <field name="perm_create" eval="1"/>
-            <field name="perm_write" eval="0"/>  <!-- Sin permiso de escritura -->
-            <field name="perm_unlink" eval="0"/> <!-- Sin permiso de eliminación -->
+            <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="model_partner_access" model="ir.model.access">
-            <field name="name">contacto acceso limitado</field>
+        <record id="access_limited_res_partner" model="ir.model.access">
+            <field name="name">Contacto acceso limitado</field>
             <field name="model_id" ref="base.model_res_partner"/>
             <field name="group_id" ref="group_limited_access"/>
             <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
             <field name="perm_create" eval="1"/>
-            <field name="perm_write" eval="0"/>  <!-- Sin permiso de escritura -->
-            <field name="perm_unlink" eval="0"/> <!-- Sin permiso de eliminación -->
+            <field name="perm_unlink" eval="0"/>
         </record>
-
-
     </data>
 </odoo>
