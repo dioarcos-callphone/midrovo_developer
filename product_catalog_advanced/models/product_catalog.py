@@ -52,7 +52,7 @@ class ProductCatalog(models.Model):
                           if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
                 ),
                 'cantidad': p.qty_available,
-                'image': p.image_128 or p.product_tmpl_id.image_128,
+                'image': p.image_128 or p.product_tmpl_id.image_1920,
             } for p in products_filtered ]
         
         return None
