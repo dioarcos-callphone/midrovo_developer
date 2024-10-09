@@ -30,7 +30,7 @@
                                     </t>
                                     <t t-else="">
                                         <!-- Mostrar imagen por defecto si no hay imagen -->
-                                        <img src="/product_catalog_advanced/static/src/img/image_default.webp" 
+                                        <img src="/product_catalog_advanced/static/src/img/image_default.png" 
                                             alt="Imagen no disponible" 
                                             class="o_image_64_contain" 
                                             style="max-width: 150px; max-height: 150px;"/>
