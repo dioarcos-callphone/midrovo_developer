@@ -21,7 +21,7 @@
                             <!-- Colores -->
                             <t t-foreach="producto['colores']" t-as="color">
                                 <!-- Tabla principal sin bordes que contiene la imagen y la tabla de tallas -->
-                                <table style="width: 100%; border-collapse: collapse;">
+                                <table style="width: 100%; border-collapse: collapse; border: none !important;">
                                     <tr>
                                         <!-- Columna de la imagen -->
                                         <td style="vertical-align: top; border: none !important;">
