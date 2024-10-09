@@ -11,7 +11,36 @@
                             </h3>
                         </div>
                     </header>
-                </div> 
+                </div>
+                <t t-name="product_catalog_advanced.product_catalog_template">
+                    <t t-foreach="options" t-as="producto">
+                        <div class="product">
+                            <!-- Nombre del producto -->
+                            <h2><t t-esc="producto['name']"/></h2>
+                            
+                            <!-- Colores -->
+                            <t t-foreach="producto['colores']" t-as="color">
+                                <div class="color-section">
+                                    <!-- Imagen del color -->
+                                    <img t-att-src="'data:image/png;base64,' + color['image']" 
+                                        alt="Imagen del producto" 
+                                        class="product-image" 
+                                        style="max-width: 150px; max-height: 150px;"/>
+
+                                    <!-- Nombre del color -->
+                                    <p>Color: <t t-esc="color['color']"/></p>
+
+                                    <!-- Tallas -->
+                                    <ul>
+                                        <t t-foreach="color['tallas']" t-as="talla">
+                                            <li>Talla: <t t-esc="talla['talla']"/> - Cantidad: <t t-esc="talla['cantidad']"/></li>
+                                        </t>
+                                    </ul>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
             </t>
         </t>
     </template>
