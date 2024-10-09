@@ -1,0 +1,9 @@
+<odoo>
+    <record id="group_no_update_sales" model="res.groups">
+        <field name="name">No Update Sales</field>
+    </record>
+
+    <record id="group_no_update_contacts" model="res.groups">
+        <field name="name">No Update Contacts</field>
+    </record>
+</odoo>
