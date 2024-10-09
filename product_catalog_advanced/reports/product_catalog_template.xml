@@ -24,7 +24,7 @@
                                 <table style="width: 100%; border-collapse: collapse;">
                                     <tr>
                                         <!-- Columna de la imagen -->
-                                        <td style="vertical-align: top; padding-right: 20px;">
+                                        <td style="vertical-align: top; border: none !important;">
                                             <t t-if="color['image']">
                                                 <img t-att-src="'data:image/png;base64,' + color['image']" 
                                                     alt="Imagen del producto" 
@@ -38,7 +38,7 @@
                                         </td>
                                         
                                         <!-- Columna de la tabla de tallas -->
-                                        <td style="vertical-align: top;">
+                                        <td style="vertical-align: top; border: none !important; width: 70%;">
                                             <p>Color: <t t-esc="color['color']"/></p>
                                             <table style="border-collapse: collapse; width: 100%;">
                                                 <thead>
