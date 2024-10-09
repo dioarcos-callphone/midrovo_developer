@@ -16,25 +16,23 @@
                     <t t-foreach="options" t-as="producto">
                         <div class="product" style="margin: 10px 0; padding: 10px 0;">
                             <!-- Nombre del producto -->
-                            <h4><t t-esc="producto['name']"/></h4>
+                            <h4 style="padding: 10px 0;"><t t-esc="producto['name']"/></h4>
                             
                             <!-- Colores -->
                             <t t-foreach="producto['colores']" t-as="color">
                                 <div class="color-section">
                                     <!-- Imagen del color (solo si existe) -->
-                                    <t t-if="color['image']">
-                                        <img t-att-src="'data:image/png;base64,' + color['image']" 
-                                            alt="Imagen del producto" 
-                                            class="o_image_64_contain" 
-                                            style="max-width: 150px; max-height: 150px;"/>
-                                    </t>
-                                    <t t-else="">
+                                    <img t-att-src="'data:image/png;base64,' + (color['image'] or '/product_catalog_advanced/static/src/img/image_default.png')" 
+                                        alt="Imagen del producto" 
+                                        class="o_image_64_contain" 
+                                        style="max-width: 150px; max-height: 150px;"/>
+                                    <!-- <t t-else="">
                                         <!-- Mostrar imagen por defecto si no hay imagen -->
                                         <img src="/product_catalog_advanced/static/src/img/image_default.png" 
                                             alt="Imagen no disponible" 
                                             class="o_image_64_contain" 
                                             style="max-width: 150px; max-height: 150px;"/>
-                                    </t>
+                                    </t> -->
 
                                     <!-- Nombre del color -->
                                     <p>Color: <t t-esc="color['color']"/></p>
