@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Regla para restringir actualizaciones en el modelo sale.order -->
+    <record id="rule_no_update_sales" model="ir.rule">
+        <field name="name">No Actualiza Pedidos de Venta</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="domain_force">[('state', '!=', 'draft')]  <!-- Cambia esto según lo que necesites --></field>
+        <field name="groups" eval="[(4, ref('custom_security_rules.group_no_update_sales'))]"/>
+    </record>
+
+    <!-- Regla para restringir actualizaciones en el modelo res.partner -->
+    <record id="rule_no_update_contacts" model="ir.rule">
+        <field name="name">No Actualiza Contactos</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">[('customer', '=', True)] <!-- Cambia esto según lo que necesites --></field>
+        <field name="groups" eval="[(4, ref('custom_security_rules.group_no_update_contacts'))]"/>
+    </record>
+</odoo>
