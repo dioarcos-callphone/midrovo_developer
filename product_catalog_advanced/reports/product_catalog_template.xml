@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <template id="report_product_catalog">
+    <template id="product_catalog_template">
         <t t-call="web.html_container">
             <t t-foreach="options" t-as="producto">
                 <div class="page">
