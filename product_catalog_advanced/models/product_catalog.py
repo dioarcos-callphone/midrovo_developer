@@ -42,7 +42,6 @@ class ProductCatalog(models.Model):
         
         if products_filtered:
             return [ {
-                'id': p.id,
                 'name': p.name,
                 'color': (
                     next((v.name for v in p.product_template_variant_value_ids
@@ -53,6 +52,7 @@ class ProductCatalog(models.Model):
                           if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
                 ),
                 'cantidad': p.qty_available,
+                'image': p.image_128,
             } for p in products_filtered ]
         
         return None
@@ -61,16 +61,15 @@ class ProductCatalog(models.Model):
         data_products = {}
 
         for product in products:
-            id = product['id']
             name = product['name']
             color = product['color']
             talla = product['talla']
             cantidad = product['cantidad']
+            image = product['image']  # Obtener la imagen del producto
 
             # Crear la estructura para el producto si no existe
             if name not in data_products:
                 data_products[name] = {
-                    'id': id,
                     'name': name,
                     'colores': []
                 }
@@ -92,13 +91,15 @@ class ProductCatalog(models.Model):
                         'cantidad': cantidad
                     })
             else:
-                # Si el color no existe, agregar un nuevo color con la talla
+                # Si el color no existe, agregar un nuevo color con la talla y la imagen
                 data_products[name]['colores'].append({
                     'color': color,
+                    'image': image,  # Asignar la imagen al color
                     'tallas': [{
                         'talla': talla,
                         'cantidad': cantidad
                     }]
                 })
+
         # Convertir el diccionario a una lista (opcional)
         return list(data_products.values())
