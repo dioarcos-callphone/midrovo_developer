@@ -1,14 +1,12 @@
 <odoo>
     <data>
-        <!-- Heredar la vista de árbol (tree) de las líneas de pedido de venta -->
-        <record id="view_order_line_tree_inherit_price_unit" model="ir.ui.view">
-            <field name="name">sale.order.line.tree.inherit.price.unit</field>
-            <field name="model">sale.order.line</field>
-            <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <record id="view_order_form_inherit_price_unit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.price.unit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='price_unit']" position="attributes">
-                    <attribute name="readonly">1</attribute>
-                    <attribute name="required">0</attribute>
+                    <attribute name="attrs">{'readonly': True, 'required': False}</attribute>
                 </xpath>
             </field>
         </record>
