@@ -41,24 +41,24 @@
                                         <td style="vertical-align: top; border: none !important; width: 70%;">
                                             <p>Color: <t t-esc="color['color']"/></p>
                                             <table style="border-collapse: collapse; width: 100%;">
-                                                <thead>
+                                                <thead style="border: 1px solid #2196f3 !important;">>
                                                     <tr>
                                                         <t t-foreach="color['tallas']" t-as="talla">
-                                                            <th style="border: 1px solid blue; padding: 5px; text-align: center;">
+                                                            <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
                                                                 <t t-esc="talla['talla']"/>
                                                             </th>
                                                         </t>
-                                                        <th style="border: 1px solid blue; padding: 5px; text-align: center;">Cantidad</th>
+                                                        <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">Cantidad</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <t t-foreach="color['tallas']" t-as="talla">
-                                                            <td style="border: 1px solid blue; padding: 5px; text-align: center;">
+                                                            <td style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
                                                                 <t t-esc="talla['cantidad']"/>
                                                             </td>
                                                         </t>
-                                                        <td style="border: 1px solid blue; padding: 5px; text-align: center;">
+                                                        <td style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
                                                             <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
                                                         </td>
                                                     </tr>
