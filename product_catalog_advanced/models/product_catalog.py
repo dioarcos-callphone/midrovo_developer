@@ -12,7 +12,7 @@ class ProductCatalog(models.Model):
         products = self.get_product_by_ids(ids)
         
         productos = self.get_products_catalog(products)
-        
+        _logger.info(f'MOSTRANDO PRODUCTOS >>> { productos }')
         data = {
             'productos': productos
         }
