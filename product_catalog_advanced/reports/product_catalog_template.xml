@@ -7,7 +7,7 @@
                     <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
                         <div>
                             <h3>
-                                Catalogo de Productos
+                                Catálogo de Productos
                             </h3>
                         </div>
                     </header>
@@ -39,12 +39,27 @@
                                     <!-- Nombre del color -->
                                     <p>Color: <t t-esc="color['color']"/></p>
 
-                                    <!-- Tallas -->
-                                    <ul>
-                                        <t t-foreach="color['tallas']" t-as="talla">
-                                            <li>Talla: <t t-esc="talla['talla']"/> - Cantidad: <t t-esc="talla['cantidad']"/></li>
-                                        </t>
-                                    </ul>
+                                    <!-- Tallas en tabla -->
+                                    <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="border: 1px solid #2196f3; padding: 8px; background-color: #f2f2f2;">Talla</th>
+                                                <th style="border: 1px solid #2196f3; padding: 8px; background-color: #f2f2f2;">Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="color['tallas']" t-as="talla">
+                                                <tr>
+                                                    <td style="border: 1px solid #2196f3; padding: 8px;">
+                                                        <t t-esc="talla['talla']"/>
+                                                    </td>
+                                                    <td style="border: 1px solid #2196f3; padding: 8px;">
+                                                        <t t-esc="talla['cantidad']"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </t>
                         </div>
@@ -53,5 +68,4 @@
             </t>
         </t>
     </template>
-
 </odoo>
