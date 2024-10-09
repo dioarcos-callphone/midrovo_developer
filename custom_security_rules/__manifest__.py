@@ -8,7 +8,8 @@
     'data': [
         'security/custom_security_access.xml',
         'security/ir.model.access.csv',
-        'data/rules.xml'
+        'data/rules.xml',
+        'views/inherit_view.xml'
     ],
     
     'license': 'LGPL-3',

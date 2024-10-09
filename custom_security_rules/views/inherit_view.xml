@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <!-- Heredar la vista de formulario de 'sale.order' -->
+        <record id="view_order_form_price_unit_readonly" model="ir.ui.view">
+            <field name="name">sale.order.form.price.unit.readonly</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
