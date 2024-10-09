@@ -41,7 +41,7 @@
                                         <td style="vertical-align: top; border: none !important; width: 70%;">
                                             <p>Color: <t t-esc="color['color']"/></p>
                                             <table style="border-collapse: collapse; width: 100%;">
-                                                <thead style="border: 1px solid #2196f3 !important;">>
+                                                <thead style="border: 1px solid #2196f3 !important;">
                                                     <tr>
                                                         <t t-foreach="color['tallas']" t-as="talla">
                                                             <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
