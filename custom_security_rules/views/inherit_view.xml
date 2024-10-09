@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='price_unit']" position="attributes">
-                    <attribute name="attrs">{'readonly': True, 'required': False}</attribute>
+                    <attribute name="attrs">{'readonly': [('user_id.groups_id', 'in', [ref('custom_security_rules.group_no_update_sales')])], 'required': False}</attribute>
                 </xpath>
             </field>
         </record>
