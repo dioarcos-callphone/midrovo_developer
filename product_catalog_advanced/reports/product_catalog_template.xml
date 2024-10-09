@@ -1,76 +1,62 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <template id="product_catalog_template">
+    <template id="report_product_catalog">
         <t t-call="web.html_container">
-            <t t-call="web.external_layout">
+            <t t-foreach="options" t-as="producto">
                 <div class="page">
-                    <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
-                        <div>
-                            <h3>
-                                Catálogo de Productos
-                            </h3>
-                        </div>
-                    </header>
-                </div>
-                <t t-name="product_catalog_advanced.product_catalog_template">
-                    <t t-foreach="options" t-as="producto">
-                        <div class="product" style="margin: 10px 0; padding: 10px 0;">
-                            <!-- Nombre del producto -->
-                            <h4 style="padding: 10px 0;"><t t-esc="producto['name']"/></h4>
-                            
-                            <!-- Colores -->
-                            <t t-foreach="producto['colores']" t-as="color">
-                                <div class="color-section">
-                                    <!-- Imagen del color (solo si existe) -->
-                                    <t t-if="color['image']">
-                                        <img t-att-src="'data:image/png;base64,' + color['image']" 
-                                            alt="Imagen del producto" 
-                                            class="o_image_64_contain" 
-                                            style="max-width: 150px; max-height: 150px;"/>
-                                    </t>
-                                    <t t-else="">
-                                        <!-- Mostrar imagen por defecto si no hay imagen -->
-                                        <img src="/product_catalog_advanced/static/src/img/placeholder.png" 
-                                            alt="Imagen no disponible" 
-                                            class="o_image_64_contain" 
-                                            style="max-width: 150px; max-height: 150px;"/>
-                                    </t>
+                    <h2 style="text-align: center;">Catálogo de Productos</h2>
+                    <div style="display: flex; margin: 20px 0;">
+                        <!-- Nombre del producto -->
+                        <h3 style="flex: 1; text-align: center;"><t t-esc="producto['name']"/></h3>
+                    </div>
+                    <t t-foreach="producto['colores']" t-as="color">
+                        <div style="margin-bottom: 20px; display: flex;">
+                            <!-- Imagen del color -->
+                            <div style="flex: 1; text-align: center; margin-right: 20px;">
+                                <t t-if="color['image']">
+                                    <img t-att-src="'data:image/png;base64,' + color['image']"
+                                         alt="Imagen del producto"
+                                         style="max-width: 150px; max-height: 150px;"/>
+                                </t>
+                                <t t-else="">
+                                    <img src="/product_catalog_advanced/static/src/img/placeholder.png"
+                                         alt="Imagen no disponible"
+                                         style="max-width: 150px; max-height: 150px;"/>
+                                </t>
+                            </div>
 
-                                    <!-- Nombre del color -->
-                                    <p>Color: <t t-esc="color['color']"/></p>
-
-                                    <!-- Tabla de Tallas y Cantidades -->
-                                    <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
-                                        <thead>
-                                            <tr>
-                                                <t t-foreach="color['tallas']" t-as="talla">
-                                                    <th style="border: 1px solid #000; padding: 8px; text-align: center;">
-                                                        <t t-esc="talla['talla']"/>
-                                                    </th>
-                                                </t>
+                            <!-- Tabla de Tallas y Cantidades -->
+                            <div style="flex: 1;">
+                                <table style="border-collapse: collapse; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <t t-foreach="color['tallas']" t-as="talla">
                                                 <th style="border: 1px solid #000; padding: 8px; text-align: center;">
-                                                    Cantidad
+                                                    <t t-esc="talla['talla']"/>
                                                 </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <t t-foreach="color['tallas']" t-as="talla">
-                                                    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
-                                                        <t t-esc="talla['cantidad']"/>
-                                                    </td>
-                                                </t>
+                                            </t>
+                                            <th style="border: 1px solid #000; padding: 8px; text-align: center;">
+                                                Cantidad
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <t t-foreach="color['tallas']" t-as="talla">
                                                 <td style="border: 1px solid #000; padding: 8px; text-align: center;">
-                                                    <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
+                                                    <t t-esc="talla['cantidad']"/>
                                                 </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </t>
+                                            </t>
+                                            <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+                                                <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </t>
-                </t>
+                </div>
             </t>
         </t>
     </template>
