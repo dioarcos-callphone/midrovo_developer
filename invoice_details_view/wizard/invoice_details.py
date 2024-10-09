@@ -4,6 +4,9 @@ from datetime import datetime
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -49,8 +52,7 @@ class InvoiceDetails(models.TransientModel):
         ],
         string = 'Costo',
         default = 'master',
-        help=""""Costo Maestro" para el costo precio estandar del producto, 
-        "Costo Movimiento" para el debito de la línea de factura."""        
+        help="""Costo Maestro para el costo precio estandar del producto, Costo Movimiento para el debito de la línea de factura."""        
     )
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
@@ -196,6 +198,7 @@ class InvoiceDetails(models.TransientModel):
         
     def action_excel(self):
         """This function is for printing excel report"""
+        _logger.info('ENTRA EN EL ACTION EXCEL DEL WIZARD')
         data = self.get_report_data()
         return {
             'type': 'ir.actions.report',
@@ -203,13 +206,14 @@ class InvoiceDetails(models.TransientModel):
                      'options': json.dumps(
                          data, default=fields.date_utils.json_default),
                      'output_format': 'xlsx',
-                     'report_name': 'Excel Report',
+                     'report_name': 'reporte_detalle_facturas',
                      },
             'report_type': 'xlsx',
         }
 
     # Formato de hoja de Excel para imprimir los datos
     def get_xlsx_report(self, data, response):
+        _logger.info('ENTRA EN EL GET XLSX REPORT DEL WIZARD')
         datas = data['result_data']
         is_cost_or_debit = data['is_cost_or_debit']
         output = io.BytesIO()

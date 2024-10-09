@@ -14,7 +14,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone S.A.',
     'website': "https://www.callphoneecuador.com",
-    'depends': [ 'account', 'point_of_sale' ],
+    'depends': [ 'account', 'point_of_sale', 'base', 'web' ],
     'data': [
         'security/ir.model.access.csv',
         'wizard/invoice_details_wizard.xml',

@@ -12,8 +12,7 @@
         <field name="margin_right">8</field>
     </record>
 
-    <record id="report_invoice_details_action"
-            model="ir.actions.report">
+    <record id="report_invoice_details_action" model="ir.actions.report">
         <field name="name">Reporte de Detalles de Facturas</field>
         <field name="model">report.invoice_details_view.report_invoice_details</field>
         <field name="report_type">qweb-pdf</field>
