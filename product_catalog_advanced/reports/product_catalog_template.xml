@@ -30,7 +30,7 @@
                                     </t>
                                     <t t-else="">
                                         <!-- Mostrar imagen por defecto si no hay imagen -->
-                                        <img src="../web/static/src/img/placeholder.png" 
+                                        <img src="reports/image_default.webp" 
                                             alt="Imagen no disponible" 
                                             class="o_image_64_contain" 
                                             style="max-width: 150px; max-height: 150px;"/>
