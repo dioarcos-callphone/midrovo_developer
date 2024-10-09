@@ -8,8 +8,10 @@
     'data': [
         'security/custom_security_access.xml',
         'security/ir.model.access.csv',
-        
     ],
+    
+    'license': 'LGPL-3',
     'installable': True,
     'application': True,
+    'auto_install': True,
 }
