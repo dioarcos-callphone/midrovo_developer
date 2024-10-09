@@ -33,7 +33,7 @@
                                         <img src="/product_catalog_advanced/static/src/img/placeholder.png" 
                                             alt="Imagen no disponible" 
                                             class="o_image_64_contain" 
-                                            style="max-width: 200px; max-height: 20px;"/>
+                                            style="max-width: 200px; max-height: 200px;"/>
                                     </t>
 
                                     <!-- Nombre del color -->
