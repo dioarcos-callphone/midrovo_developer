@@ -14,7 +14,7 @@
                 </div>
                 <t t-name="product_catalog_advanced.product_catalog_template">
                     <t t-foreach="options" t-as="producto">
-                        <div class="product" style="margin: 10px 0;">
+                        <div class="product" style="margin: 10px 0; padding: 10px 0;">
                             <!-- Nombre del producto -->
                             <h2><t t-esc="producto['name']"/></h2>
                             
@@ -48,7 +48,6 @@
                                 </div>
                             </t>
                         </div>
-                        <div class="page"></div>
                     </t>
                 </t>
             </t>
