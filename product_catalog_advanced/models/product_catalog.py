@@ -48,11 +48,21 @@ class ProductCatalog(models.Model):
         if products_filtered:
             result = []
             for p in products_filtered:
+                attribute_map = {
+                    attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
+                    for attribute_line in p.product_tmpl_id.attribute_line_ids
+                }
+
+                # Verificamos si tanto color como talla existen en attribute_line_ids
+                color_values = attribute_map.get('color', []) or attribute_map.get('colores', [])
+                talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
+
+                if color_values and talla_values:
                 # Captura color y talla de product_product
-                color = next((v.name for v in p.product_template_variant_value_ids
-                            if v.attribute_id.name.lower() in ['color', 'colores']), None)
-                talla = next((v.name for v in p.product_template_variant_value_ids
-                            if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
+                    color = next((v.name for v in p.product_template_variant_value_ids
+                                if v.attribute_id.name.lower() in ['color', 'colores']), None)
+                    talla = next((v.name for v in p.product_template_variant_value_ids
+                                if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
                 
                 # Si no se encontró color o talla en product_product, buscar en attribute_line_ids
                 if not color or not talla:
@@ -102,12 +112,12 @@ class ProductCatalog(models.Model):
                 if talla_found:
                     # Si la talla existe, sumar la cantidad
                     talla_found['cantidad'] += cantidad
-                # else:
-                #     # Si la talla no existe, agregarla
-                #     color_found['tallas'].append({
-                #         'talla': talla,
-                #         'cantidad': cantidad
-                #     })
+                else:
+                    # Si la talla no existe, agregarla
+                    color_found['tallas'].append({
+                        'talla': talla,
+                        'cantidad': cantidad
+                    })
             else:
                 # Si el color no existe, agregar un nuevo color con la talla y la imagen
                 data_products[name]['colores'].append({
