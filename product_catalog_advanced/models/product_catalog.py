@@ -89,6 +89,30 @@ class ProductCatalog(models.Model):
             
             return result
         
+        if product_tmpl_filtered:
+            result = []
+            for p in products_filtered:
+                attribute_map = {
+                    attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
+                    for attribute_line in p.product_tmpl_id.attribute_line_ids
+                }
+
+                # Verificamos si tanto color como talla existen en attribute_line_ids
+                color_values = attribute_map.get('color', []) or attribute_map.get('colores', [])
+                talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
+
+                if color_values and talla_values:
+                    color = next((v.name for v in p.product_template_variant_value_ids
+                                if v.attribute_id.name.lower() in ['color', 'colores']), None)
+                    talla = next((v.name for v in p.product_template_variant_value_ids
+                                if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
+                    
+                    _logger.info(f'MOSTRAMOS COLOR Y TALLA >>> { color } || { talla }')
+                    
+                    
+            
+        
+        
         raise ValidationError("Este producto no tiene variantes con color y talla.")
     
     def get_products_catalog(self, products):
