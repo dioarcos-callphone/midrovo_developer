@@ -49,10 +49,9 @@ class ProductCatalog(models.Model):
             lambda p: any(attr.lower() in ['talla', 'tallas', 'color', 'colores'] for attr in p.product_tmpl_id.attribute_line_ids.mapped('attribute_id.name'))
         )
         
-        _logger.info(f'MOSTRANDO VARIANTS DEL PRODUC TMPL >>> { product_tmpl_filtered }')
+        result = []
         
         if products_filtered:
-            result = []
             for p in products_filtered:
                 attribute_map = {
                     attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
@@ -90,7 +89,6 @@ class ProductCatalog(models.Model):
             return result
         
         if product_tmpl_filtered:
-            result = []
             for p in product_tmpl_filtered:
                 attribute_map = {
                     attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
@@ -102,15 +100,26 @@ class ProductCatalog(models.Model):
                 talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
 
                 if color_values and talla_values:
+                    color = None
+                    talla = None
                     for attribute_line in p.product_tmpl_id.attribute_line_ids:
                         for value in attribute_line.value_ids:
                             if attribute_line.attribute_id.name.lower() in ['color', 'colores']:
                                 color = value.name
-                                _logger.info(f'MOSTRANDO COLOR >>> { color }')
                             if attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
                                 talla = value.name
-                                _logger.info(f'MOSTRANDO TALLA >>> { talla }')
-
+                                
+                    result.append({
+                        'name': p.name,
+                        'color': color,
+                        'talla': talla,
+                        'cantidad': p.qty_available,
+                        'image': p.image_128,
+                    })
+        
+        if result:
+            return result
+                    
         raise ValidationError("Este producto no tiene variantes con color y talla.")
     
     def get_products_catalog(self, products):
