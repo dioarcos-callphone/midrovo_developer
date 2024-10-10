@@ -12,7 +12,13 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self if p.qty_available > 0 ]
         products = self.get_product_by_ids(ids)
         
-        productos = self.get_products_catalog(products)
+        try:
+            productos = self.get_products_catalog(products)
+            if not productos:  # Verificamos si productos es una lista vacía
+                raise ValidationError('Este producto no contiene variantes.')
+            
+        except TypeError:
+            raise ValidationError('Este producto no contiene variantes.')
         
         data = {
             'productos': productos
@@ -33,7 +39,7 @@ class ProductCatalog(models.Model):
         if products:            
             return self.get_product_filtered(products)
         
-        raise ValidationError('Este producto no contiene variantes')
+        return None
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
