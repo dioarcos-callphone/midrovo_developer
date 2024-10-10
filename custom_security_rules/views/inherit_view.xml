@@ -8,6 +8,7 @@
                 <attribute name="attrs">
                     { 'readonly': True }
                 </attribute>
+                <attribute name="groups">custom_security_rules.group_no_update_sales</attribute>
             </xpath>
         </field>
     </record>
