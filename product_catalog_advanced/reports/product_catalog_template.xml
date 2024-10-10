@@ -48,7 +48,7 @@
                                                                 <t t-esc="talla['talla']"/>
                                                             </th>
                                                         </t>
-                                                        <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">Cantidad</th>
+                                                        <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">Pares</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
