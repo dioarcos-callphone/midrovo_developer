@@ -5,6 +5,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='price_unit']" position="attributes">
+                <attribute name="attrs">{'readonly': [('user_id', 'in', [uid]), ('id', 'not in', group_no_update_sales)]}</attribute>
             </xpath>
         </field>
     </record>
