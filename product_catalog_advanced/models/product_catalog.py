@@ -78,7 +78,7 @@ class ProductCatalog(models.Model):
                         'color': color,
                         'talla': talla,
                         'cantidad': p.qty_available,
-                        'image': p.image_512,
+                        'image': p.image_1024,
                     })
         
         if product_tmpl_filtered:
