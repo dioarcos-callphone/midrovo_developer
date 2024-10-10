@@ -13,6 +13,8 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self if p.qty_available > 0 ]  # Obtiene la lista de ids del product.template
         products = self.get_product_by_ids(ids)  # Metodo que filtra los product_product
         
+        
+        
         productos = self.get_products_catalog(products)
             
         data = {
@@ -35,10 +37,34 @@ class ProductCatalog(models.Model):
         if products:     
             return self.get_product_filtered(products)
         
-        # else:
-            
+        if not products:
+            return self.get_product_template_attributes(ids)
         
-        raise ValidationError("Este producto no tiene cantidad disponible.")
+        raise ValidationError("Seleccione productos con cantidad disponible.")
+    
+    def get_product_template_attributes(self, ids):
+        productos = self.search_read([
+            ('id', 'in', ids),
+            ('qty_available', '>', 0),
+            ('attribute_line_ids', '!=', False)
+        ])
+        
+        if productos:
+            for p in productos:
+                attribute_map = {
+                    attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
+                    for attribute_line in p.attribute_line_ids
+                }
+
+                # Verificamos si tanto color como talla existen en attribute_line_ids
+                color_values = attribute_map.get('color', []) or attribute_map.get('colores', [])
+                talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
+
+                if color_values and talla_values:
+                    _logger.info(f'PRODUCTO { p.name } | { color_values } | { talla_values }')
+                    
+        
+            
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
