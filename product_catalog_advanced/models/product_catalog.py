@@ -73,13 +73,13 @@ class ProductCatalog(models.Model):
                                 if not talla and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
                                     talla = value.name
                 
-                result.append({
-                    'name': p.name,
-                    'color': color,
-                    'talla': talla,
-                    'cantidad': p.qty_available,
-                    'image': p.image_128,
-                })
+                    result.append({
+                        'name': p.name,
+                        'color': color,
+                        'talla': talla,
+                        'cantidad': p.qty_available,
+                        'image': p.image_128,
+                    })
             
             return result
         
