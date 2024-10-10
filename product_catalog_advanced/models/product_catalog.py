@@ -41,19 +41,30 @@ class ProductCatalog(models.Model):
         )
         
         if products_filtered:
-            return [ {
-                'name': p.name,
-                'color': (
-                    next((v.name for v in p.product_template_variant_value_ids
-                          if v.attribute_id.name.lower() in ['color', 'colores']), None)
-                ),
-                'talla': (
-                    next((v.name for v in p.product_template_variant_value_ids
-                          if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
-                ),
-                'cantidad': p.qty_available,
-                'image': p.image_128,
-            } for p in products_filtered ]
+            result = []
+            for p in products_filtered:
+                # Captura color y talla de product_product
+                color = next((v.name for v in p.product_template_variant_value_ids
+                            if v.attribute_id.name.lower() in ['color', 'colores']), None)
+                talla = next((v.name for v in p.product_template_variant_value_ids
+                            if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
+                
+                # Si no se encontró color o talla en product_product, buscar en attribute_line_ids
+                if not color or not talla:
+                    for attribute_line in p.product_tmpl_id.attribute_line_ids:
+                        for value in attribute_line.value_ids:
+                            if not color and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
+                                color = value.name
+                            if not talla and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
+                                talla = value.name
+                
+                result.append({
+                    'name': p.name,
+                    'color': color,
+                    'talla': talla,
+                    'cantidad': p.qty_available,
+                    'image': p.image_128,
+                })
         
         return None
     
