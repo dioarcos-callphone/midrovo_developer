@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='price_unit']" position="attributes">
                 <attribute name="attrs">
-                    { 'readonly': [('user_id', '=', '1')] }
+                    { 'readonly': [('partner_id', '=', '1')] }
                 </attribute>
             </xpath>
         </field>
