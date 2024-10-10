@@ -38,39 +38,18 @@ class ProductCatalog(models.Model):
         if products:     
             return self.get_product_filtered(products)
         
-        if not products:
-            return self.get_product_template_attributes(ids)
-        
         raise ValidationError("Seleccione productos con cantidad disponible.")
-    
-    def get_product_template_attributes(self, ids):
-        productos = self.search_read([
-            ('id', 'in', ids),
-            ('qty_available', '>', 0),
-            ('attribute_line_ids', '!=', False)
-        ])
-        
-        if productos:
-            for p in productos:
-                attribute_map = {
-                    attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
-                    for attribute_line in p.attribute_line_ids
-                }
-
-                # Verificamos si tanto color como talla existen en attribute_line_ids
-                color_values = attribute_map.get('color', []) or attribute_map.get('colores', [])
-                talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
-
-                if color_values and talla_values:
-                    _logger.info(f'PRODUCTO { p.name } | { color_values } | { talla_values }')
-                    
-        
-            
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
             lambda p: any(attr.lower() in ['talla', 'tallas', 'color', 'colores'] for attr in p.product_template_variant_value_ids.mapped('attribute_id.name'))
         )
+        
+        product_tmpl_filtered = products.filtered(
+            lambda p: any(attr.lower() in ['talla', 'tallas', 'color', 'colores'] for attr in p.product_tmpl_id.attribute_line_ids.mapped('attribute_id.name'))
+        )
+        
+        _logger.info(f'MOSTRANDO VARIANTS DEL PRODUC TMPL >>> { product_tmpl_filtered }')
         
         if products_filtered:
             result = []
