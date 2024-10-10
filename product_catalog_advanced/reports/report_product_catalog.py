@@ -18,4 +18,4 @@ class ReportProductCatalog(models.AbstractModel):
             }
             
         else:
-            raise ValidationError("¡Revise que los productos tengan talla color y cantidad!")
+            raise ValidationError("¡Revise que los productos tengan cantidad, talla y color disponible!")
