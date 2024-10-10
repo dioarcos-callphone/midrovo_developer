@@ -8,8 +8,8 @@
                 <button name="action_product_catalog_pdf"
                         string="CATALOGO DE PRODUCTOS"
                         type="object"
-                        class="btn btn-danger"
-                        icon="fa-file-pdf"/>
+                        class="btn btn-primary"
+                        icon="fa-file-pdf-o"/>
             </xpath>
         </field>
     </record>
