@@ -29,6 +29,7 @@ class ProductCatalog(models.Model):
         products = self.env['product.product'].search([
             ('product_tmpl_id', 'in', ids),
             ('qty_available', '>', 0),
+            ('product_template_variant_value_ids', '!=', False)
         ])
         
         if products:     
