@@ -8,18 +8,13 @@ class ProductCatalog(models.Model):
     _inherit = 'product.template'
     _description = 'Catalogo de Productos'
 
+    # Genera la data de los productos que seran mostrados en el catalogo
     def action_product_catalog_pdf(self):
-        ids = [ p.id for p in self if p.qty_available > 0 ]
-        products = self.get_product_by_ids(ids)
+        ids = [ p.id for p in self if p.qty_available > 0 ]  # Obtiene la lista de ids del product.template
+        products = self.get_product_by_ids(ids)  # Metodo que filtra los product_product
         
-        try:
-            productos = self.get_products_catalog(products)
-            if not productos:  # Verificamos si productos es una lista vacía
-                raise ValidationError('Este producto no contiene variantes.')
+        productos = self.get_products_catalog(products)
             
-        except TypeError:
-            raise ValidationError('Este producto no contiene variantes.')
-        
         data = {
             'productos': productos
         }
@@ -39,7 +34,7 @@ class ProductCatalog(models.Model):
         if products:            
             return self.get_product_filtered(products)
         
-        return None
+        raise ValidationError("Este producto no tiene cantidad disponible.")
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
@@ -74,7 +69,7 @@ class ProductCatalog(models.Model):
             
             return result
         
-        return None
+        raise ValidationError("Este producto no tiene variantes con color y talla.")
     
     def get_products_catalog(self, products):
         data_products = {}
