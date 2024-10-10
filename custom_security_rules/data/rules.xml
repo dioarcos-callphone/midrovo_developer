@@ -1,12 +1,12 @@
 <odoo>
+    <!-- Regla para restringir actualizaciones en el modelo sale.order -->
     <record id="rule_no_edit_price_unit" model="ir.rule">
-        <field name="name">No editar price_unit en sale.order.line</field>
-        <field name="model_id" ref="sale.model_sale_order_line"/> <!-- Cambiar al modelo correcto -->
+        <field name="name">No editar price_unit en sale.order</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
         <field name="domain_force">[(1, '=', 1)]</field> <!-- Siempre verdadero para aplicar la regla -->
         <field name="groups" eval="[(4, ref('custom_security_rules.group_no_update_sales'))]"/> <!-- Grupo específico -->
         <field name="perm_write" eval="0"/> <!-- Desactivar el permiso de escritura -->
     </record>
-
 
     <!-- Regla para restringir actualizaciones en el modelo res.partner -->
     <record id="rule_no_update_contacts" model="ir.rule">

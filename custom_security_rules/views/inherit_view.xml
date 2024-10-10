@@ -1,11 +1,11 @@
 <odoo>
     <record id="view_order_form_inherit_price_unit" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.price.unit</field>
-        <field name="model">sale.order.line</field>
-        <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='price_unit']" position="attributes">
-                <attribute name="attrs">{'readonly': [('user_id', 'in', [uid]), ('id', 'not in', group_no_update_sales)]}</attribute>
+                <attribute name="attrs">{'readonly': [('user_id', 'not in', [user.id for user in user.groups_id if user.id == ref('custom_security_rules.group_no_update_sales')])]}</attribute>
             </xpath>
         </field>
     </record>
