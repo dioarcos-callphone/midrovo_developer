@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='price_unit']" position="attributes">
                 <attribute name="attrs">
-                    {'readonly': [('self.env.user', 'in', [ref('custom_security_rules.group_no_update_sales')])]}
+                    { 'readonly': True }
                 </attribute>
             </xpath>
         </field>
