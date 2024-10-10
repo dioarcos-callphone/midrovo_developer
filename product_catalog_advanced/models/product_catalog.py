@@ -107,7 +107,7 @@ class ProductCatalog(models.Model):
                         'color': color,
                         'talla': talla,
                         'cantidad': p.qty_available,
-                        'image': p.image_128,
+                        'image': p.image_1024,
                     })
         
         if result:
