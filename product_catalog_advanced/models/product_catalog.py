@@ -1,9 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
-import logging
-_logger = logging.getLogger(__name__)
-
 class ProductCatalog(models.Model):
     _inherit = 'product.template'
     _description = 'Catalogo de Productos'
@@ -13,9 +10,7 @@ class ProductCatalog(models.Model):
         ids = [ p.id for p in self if p.qty_available > 0 ]  # Obtiene la lista de ids del product.template
         products = self.get_product_by_ids(ids)  # Metodo que filtra los product_product
         
-        
-        
-        productos = self.get_products_catalog(products)
+        productos = self.get_products_catalog(products) # Metodo que genera la data para el proceso del catalogo
             
         data = {
             'productos': productos
