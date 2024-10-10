@@ -100,6 +100,8 @@ class ProductCatalog(models.Model):
                 # Verificamos si tanto color como talla existen en attribute_line_ids
                 color_values = attribute_map.get('color', []) or attribute_map.get('colores', [])
                 talla_values = attribute_map.get('talla', []) or attribute_map.get('tallas', [])
+                
+                _logger.info(f'MOSTRAMOS COLOR Y TALLA >>> { color_values } || { talla_values }')
 
                 if color_values and talla_values:
                     color = next((v.name for v in p.product_template_variant_value_ids
