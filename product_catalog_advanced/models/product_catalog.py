@@ -35,6 +35,9 @@ class ProductCatalog(models.Model):
         if products:     
             return self.get_product_filtered(products)
         
+        else:
+            
+        
         raise ValidationError("Este producto no tiene cantidad disponible.")
     
     def get_product_filtered(self, products):
@@ -45,7 +48,6 @@ class ProductCatalog(models.Model):
         if products_filtered:
             result = []
             for p in products_filtered:
-                _logger.info(f'MOSTRANDO PRODUCT TEMPLATE >>> { p.product_tmpl_id }')
                 # Captura color y talla de product_product
                 color = next((v.name for v in p.product_template_variant_value_ids
                             if v.attribute_id.name.lower() in ['color', 'colores']), None)
@@ -100,12 +102,12 @@ class ProductCatalog(models.Model):
                 if talla_found:
                     # Si la talla existe, sumar la cantidad
                     talla_found['cantidad'] += cantidad
-                else:
-                    # Si la talla no existe, agregarla
-                    color_found['tallas'].append({
-                        'talla': talla,
-                        'cantidad': cantidad
-                    })
+                # else:
+                #     # Si la talla no existe, agregarla
+                #     color_found['tallas'].append({
+                #         'talla': talla,
+                #         'cantidad': cantidad
+                #     })
             else:
                 # Si el color no existe, agregar un nuevo color con la talla y la imagen
                 data_products[name]['colores'].append({
