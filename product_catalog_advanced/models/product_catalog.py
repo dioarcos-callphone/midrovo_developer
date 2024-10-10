@@ -35,7 +35,7 @@ class ProductCatalog(models.Model):
         if products:     
             return self.get_product_filtered(products)
         
-        else:
+        # else:
             
         
         raise ValidationError("Este producto no tiene cantidad disponible.")
