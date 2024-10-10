@@ -29,11 +29,9 @@ class ProductCatalog(models.Model):
         products = self.env['product.product'].search([
             ('product_tmpl_id', 'in', ids),
             ('qty_available', '>', 0),
-            ('product_template_variant_value_ids', '!=', False)
         ])
         
-        if products:
-                        
+        if products:     
             return self.get_product_filtered(products)
         
         raise ValidationError("Este producto no tiene cantidad disponible.")
@@ -46,6 +44,7 @@ class ProductCatalog(models.Model):
         if products_filtered:
             result = []
             for p in products_filtered:
+                _logger.info(f'MOSTRANDO PRODUCT TEMPLATE >>> { p.product_tmpl_id }')
                 # Captura color y talla de product_product
                 color = next((v.name for v in p.product_template_variant_value_ids
                             if v.attribute_id.name.lower() in ['color', 'colores']), None)
