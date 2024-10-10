@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -32,7 +33,7 @@ class ProductCatalog(models.Model):
         if products:            
             return self.get_product_filtered(products)
         
-        return None
+        raise ValidationError('Este producto no contiene variantes')
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
