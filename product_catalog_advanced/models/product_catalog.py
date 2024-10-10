@@ -91,7 +91,7 @@ class ProductCatalog(models.Model):
         
         if product_tmpl_filtered:
             result = []
-            for p in products_filtered:
+            for p in product_tmpl_filtered:
                 attribute_map = {
                     attribute_line.attribute_id.name.lower(): [value.name for value in attribute_line.value_ids]
                     for attribute_line in p.product_tmpl_id.attribute_line_ids
