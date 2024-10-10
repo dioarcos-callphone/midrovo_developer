@@ -38,7 +38,7 @@ class ProductCatalog(models.Model):
         if products:     
             return self.get_product_filtered(products)
         
-        raise ValidationError("Seleccione productos con cantidad disponible.")
+        raise ValidationError("Seleccione productos con cantidad y variantes disponibles.")
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
