@@ -18,4 +18,4 @@ class ReportProductCatalog(models.AbstractModel):
             }
             
         else:
-            raise ValidationError("¡No se encontraron registros para los criterios dados!")
+            raise ValidationError("¡Revise que los productos tengan talla color y cantidad!")
