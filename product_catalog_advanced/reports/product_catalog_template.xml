@@ -24,7 +24,7 @@
                                 <table style="width: 100%; border-collapse: collapse; border: transparent !important; margin: 25px 0;">
                                     <tr>
                                         <!-- Columna de la imagen -->
-                                        <td style="vertical-align: top; border: none !important;">
+                                        <td style="vertical-align: middle; border: none !important;">
                                             <t t-if="color['image']">
                                                 <img t-att-src="'data:image/png;base64,' + color['image']" 
                                                     alt="Imagen del producto" 
