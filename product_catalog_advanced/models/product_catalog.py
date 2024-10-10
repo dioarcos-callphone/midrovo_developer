@@ -36,8 +36,7 @@ class ProductCatalog(models.Model):
     
     def get_product_filtered(self, products):
         products_filtered = products.filtered(
-            lambda p : 
-                any(attr.lower() in ['talla', 'tallas', 'color', 'colores',] for attr in p.product_template_variant_value_ids.mapped('attribute_id.name'))
+            lambda p: any(attr.lower() in ['talla', 'tallas', 'color', 'colores'] for attr in p.product_template_variant_value_ids.mapped('attribute_id.name'))
         )
         
         if products_filtered:
@@ -65,6 +64,8 @@ class ProductCatalog(models.Model):
                     'cantidad': p.qty_available,
                     'image': p.image_128,
                 })
+            
+            return result
         
         return None
     
