@@ -119,7 +119,7 @@ class ProductCatalog(models.Model):
         data_products = {}
 
         for product in products:
-            name = product['name'].capitalize()
+            name = product['name'].title()
             color = product['color']
             talla = product['talla']
             cantidad = product['cantidad']
