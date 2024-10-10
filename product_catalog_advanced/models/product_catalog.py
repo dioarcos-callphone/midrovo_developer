@@ -85,8 +85,6 @@ class ProductCatalog(models.Model):
                         'cantidad': p.qty_available,
                         'image': p.image_128,
                     })
-            
-            return result
         
         if product_tmpl_filtered:
             for p in product_tmpl_filtered:
