@@ -38,7 +38,7 @@
                                         </td>
                                         
                                         <!-- Columna de la tabla de tallas -->
-                                        <td style="vertical-align: top; border: none !important; width: 60%;">
+                                        <td style="vertical-align: middle; border: none !important; width: 60%;">
                                             <p>Color: <t t-esc="color['color']"/></p>
                                             <table style="border-collapse: collapse; width: 100%;">
                                                 <thead style="border: 1px solid #2196f3 !important;">
