@@ -28,10 +28,12 @@ class ProductCatalog(models.Model):
     def get_product_by_ids(self, ids):
         products = self.env['product.product'].search([
             ('product_tmpl_id', 'in', ids),
-            ('qty_available', '>', 0)
+            ('qty_available', '>', 0),
+            ('product_template_variant_value_ids', '!=', False)
         ])
         
-        if products:            
+        if products:
+                        
             return self.get_product_filtered(products)
         
         raise ValidationError("Este producto no tiene cantidad disponible.")
