@@ -14,14 +14,14 @@
                 </div>
                 <t t-name="product_catalog_advanced.product_catalog_template">
                     <t t-foreach="options" t-as="producto">
-                        <div class="product" style="margin-top: 10px; height: 300px;">
+                        <div class="product" style="margin-top: 10px;">
                             <!-- Nombre del producto -->
                             <h4 style="margin: 10px 0;"><t t-esc="producto['name']"/></h4>
                             
                             <!-- Colores -->
                             <t t-foreach="producto['colores']" t-as="color">
                                 <!-- Tabla principal sin bordes que contiene la imagen y la tabla de tallas -->
-                                <table style="vertical-align: middle; width: 100%; border-collapse: collapse; border: transparent !important; margin: 25px 0;">
+                                <table style="vertical-align: middle; width: 100%; height: 300px; border-collapse: collapse; border: transparent !important; margin: 25px 0;">
                                     <tr>
                                         <!-- Columna de la imagen -->
                                         <td style="vertical-align: middle; border: none !important;">
