@@ -151,6 +151,7 @@ class ProductCatalog(models.Model):
             else:
                 # Si el color no existe, agregar un nuevo color con la talla y la imagen
                 data_products[name]['colores'].append({
+                    'name': name,
                     'color': color,
                     'image': image,  # Asignar la imagen al color
                     'tallas': [{
