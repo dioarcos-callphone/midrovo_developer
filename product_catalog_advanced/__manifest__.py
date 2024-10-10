@@ -21,12 +21,6 @@
         "views/view_product_catalog.xml"
     ],
     
-    "assets": {
-        "web.assets_backend": [
-            "/product_catalog_advanced/static/src/css/style.css"
-        ]
-    },
-    
     "license": "LGPL-3",
     "installable": True,
     "application": True,
