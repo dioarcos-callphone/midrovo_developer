@@ -16,7 +16,7 @@
                     <t t-foreach="options" t-as="producto">
                         <div class="product" style="margin-top: 25px 0;">
                             <!-- Nombre del producto -->
-                            <h4 style="padding: 10px 0;"><t t-esc="producto['name']"/></h4>
+                            <h4 style="margin: 10px 0;"><t t-esc="producto['name']"/></h4>
                             
                             <!-- Colores -->
                             <t t-foreach="producto['colores']" t-as="color">
