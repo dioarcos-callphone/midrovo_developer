@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_create,perm_write,perm_unlink
-access_no_edit_delete_res_partner,res.partner access no edit delete,base.model_res_partner,group_no_edit_delete,1,1,0,0
+access_no_edit_delete_res_partner,res.partner access no edit delete,base.model_res_partner,group_no_edit_delete,1,1,1,0
 access_no_edit_delete_sale_order,sale.order access no edit delete,sale.model_sale_order,group_no_edit_delete,1,1,0,0
 access_no_edit_delete_sale_order_line,sale.order.line access no edit delete,sale.model_sale_order_line,group_no_edit_delete,1,1,0,0
