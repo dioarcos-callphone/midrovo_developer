@@ -44,17 +44,7 @@
             </field>
         </record>
 
-        <!-- Acción para mostrar la vista de formulario -->
-        <!-- <record id="action_res_partner" model="ir.actions.act_window">
-            <field name="name">Partners</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_mode">tree,form,kanban</field>
-            <field name="view_id" ref="res_partner_form"/> <!-- Vista de formulario -->
-            <field name="help" type="html">
-                <p>Use esta acción para gestionar los socios.</p>
-            </field>
-            <!-- <field name="context">{}</field> -->
-        </record> -->
+        
     
     </data>
 </odoo>
