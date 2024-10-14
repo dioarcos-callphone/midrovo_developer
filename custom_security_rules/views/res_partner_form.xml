@@ -1,0 +1,10 @@
+<record id="res_partner_form" model="ir.ui.view">
+    <field name="name">res.partner.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="res.partner.form" />
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+            <button string="Guardar" name="action_create" type="object" class="oe_highlight"/>
+        </xpath>
+    </field>
+</record>
