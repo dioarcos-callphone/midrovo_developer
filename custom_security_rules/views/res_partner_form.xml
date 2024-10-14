@@ -15,10 +15,10 @@
             </field>
         </record>
 
-        <record id="_tree" model="ir.ui.view">
-            <field name="name">.tree</field>
-            <field name="model"></field>
-            <field name="inherit_id" ref="" />
+        <record id="res_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="attributes">
                     <attribute name="create">false</attribute>
