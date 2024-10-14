@@ -8,6 +8,20 @@
             <field name="arch" type="xml">
                 <xpath expr="//form" position="attributes">
                     <attribute name="create">true</attribute>
+                    <attribute name="edit">true</attribute>
+                    <attribute name="delete">false</attribute>
+                    <attribute name="groups">custom_security_rules.group_no_edit_delete</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="_tree" model="ir.ui.view">
+            <field name="name">.tree</field>
+            <field name="model"></field>
+            <field name="inherit_id" ref="" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
                     <attribute name="edit">false</attribute>
                     <attribute name="delete">false</attribute>
                     <attribute name="groups">custom_security_rules.group_no_edit_delete</attribute>
