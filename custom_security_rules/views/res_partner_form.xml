@@ -45,7 +45,7 @@
         </record>
 
         <!-- Acción para mostrar la vista de formulario -->
-        <record id="action_res_partner" model="ir.actions.act_window">
+        <!-- <record id="action_res_partner" model="ir.actions.act_window">
             <field name="name">Partners</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">tree,form,kanban</field>
@@ -54,7 +54,7 @@
                 <p>Use esta acción para gestionar los socios.</p>
             </field>
             <!-- <field name="context">{}</field> -->
-        </record>
+        </record> -->
     
     </data>
 </odoo>
