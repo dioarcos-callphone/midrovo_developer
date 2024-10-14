@@ -10,17 +10,6 @@
         <field name="perm_unlink" eval="False"/>
     </record>
 
-    <record id="no_edit_delete_sale_management_rule" model="ir.rule">
-        <field name="name">Permisos en Sales Management</field>
-        <field name="model_id" ref="sale_management.model_sale_order"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('group_no_edit_delete'))]"/> <!-- Solo afecta al grupo restringido -->
-        <field name="perm_read" eval="True"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-    </record>
-
     <record id="no_edit_delete_sale_order_line_rule" model="ir.rule">
         <field name="name">Permisos en Sales Order Lines</field>
         <field name="model_id" ref="sale.model_sale_order_line"/>
