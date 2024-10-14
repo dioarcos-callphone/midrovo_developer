@@ -4,13 +4,6 @@ from odoo.exceptions import UserError
 class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
     
-    @api.model
-    def create(self, vals):
-        if self.env.user.has_group('custom_security_rules.group_no_edit_delete'):
-            return super(ResPartnerInherit, self).create(vals)
-        
-        return super(ResPartnerInherit, self).create(vals)
-    
     def write(self, vals):
         # Verificar si el usuario pertenece al grupo 'group_no_edit_delete'
         if self.env.user.has_group('custom_security_rules.group_no_edit_delete'):
