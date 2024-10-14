@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form" position="attributes">
                     <attribute name="create">true</attribute>
-                    <attribute name="edit">true</attribute>
+                    <attribute name="edit">false</attribute>
                     <attribute name="delete">false</attribute>
                     <attribute name="groups">custom_security_rules.group_no_edit_delete</attribute>
                 </xpath>
