@@ -21,12 +21,12 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree" />
             <field name="arch" type="xml">
-                <xpath expr="//tree" position="attributes">
+                <!-- <xpath expr="//tree" position="attributes">
                     <attribute name="create">false</attribute>
                     <attribute name="edit">false</attribute>
                     <attribute name="delete">false</attribute>
                     <attribute name="groups">custom_security_rules.group_no_edit_delete</attribute>
-                </xpath>
+                </xpath> -->
             </field>
         </record>
 
