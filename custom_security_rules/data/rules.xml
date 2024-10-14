@@ -21,14 +21,14 @@
         <field name="perm_unlink" eval="False"/>
     </record>
 
-    <record id="no_edit_delete_res_partner_rule" model="ir.rule">
+    <record id="no_edit_res_partner_rule" model="ir.rule">
         <field name="name">Permisos en Contacts</field>
         <field name="model_id" ref="base.model_res_partner"/>
-        <field name="domain_force">[(1, '=', 1)]</field> <!-- Esto permite que vean todos los registros -->
-        <field name="groups" eval="[(4, ref('group_no_edit_delete'))]"/> <!-- Solo afecta al grupo restringido -->
+        <field name="domain_force">[(1, '=', 1)]</field> <!-- Permite acceder a todos los registros -->
+        <field name="groups" eval="[(4, ref('group_no_edit_delete'))]"/> <!-- Afecta solo al grupo restringido -->
         <field name="perm_read" eval="True"/>
         <field name="perm_create" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="False"/> <!-- No permite la edición -->
+        <field name="perm_unlink" eval="False"/> <!-- No permite eliminar -->
     </record>
 </odoo>
