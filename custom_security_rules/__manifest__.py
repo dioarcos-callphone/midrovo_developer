@@ -6,8 +6,8 @@
     'website': "https://www.callphoneecuador.com",
     'depends': ['base', 'sale', 'contacts'],
     'data': [
-        'security/custom_security_access.xml',
         'security/ir.model.access.csv',
+        'security/custom_security_access.xml',
         'data/rules.xml',
         'views/inherit_view.xml'
     ],

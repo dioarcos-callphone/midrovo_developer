@@ -1,2 +1,3 @@
-from . import partner_model
-from . import sale_model
+from . import res_partner
+from . import sale_order
+from . import sale_order_line

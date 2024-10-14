@@ -1,9 +1,6 @@
 <odoo>
-    <record id="group_no_update_sales" model="res.groups">
-        <field name="name">No Actualiza Registros de Ventas</field>
-    </record>
-
-    <record id="group_no_update_contacts" model="res.groups">
-        <field name="name">No Actualiza Registro de Contactos</field>
+    <record id="group_no_edit_delete" model="res.groups">
+        <field name="name">No Edit/Delete Permissions</field>
+        <field name="category_id" ref="base.module_category_sales_management"/> <!-- O una categoría adecuada -->
     </record>
 </odoo>
