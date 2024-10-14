@@ -7,13 +7,21 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <xpath expr="//kanban" position="attributes">
+                <xpath expr="//form" position="attributes">
                     <attribute name="create">true</attribute>
                     <attribute name="edit">false</attribute>
                     <attribute name="delete">false</attribute>
                 </xpath>
+                <!-- Agregar un campo nuevo después de 'some_field' con restricciones de grupo -->
+                <xpath expr="//field[@name='some_field']" position="after">
+                    <field name="some_other_field" groups="custom_security_rules.group_no_edit_delete"/>
+                </xpath>
+                
+                <!-- Agregar grupos al campo existente si es necesario -->
+                <xpath expr="//field[@name='some_field']" position="attributes">
+                    <attribute name="groups">custom_security_rules.group_no_edit_delete</attribute>
+                </xpath>
             </field>
-            <attribute name="groups" eval="[(4, ref('custom_security_rules.group_no_edit_delete'))]"/>
         </record>
     
         <record id="res_partner_tree" model="ir.ui.view">
