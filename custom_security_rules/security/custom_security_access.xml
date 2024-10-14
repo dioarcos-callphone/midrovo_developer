@@ -9,7 +9,7 @@
     </record>
 
     <record id="group_no_edit_delete" model="res.groups">
-        <field name="name">Otorgar Permisos</field>
+        <field name="name">Usuario Predeterminado</field>
         <field name="category_id" ref="custom_security_rules.custom_security_subcategory"/>
     </record>
 </odoo>
