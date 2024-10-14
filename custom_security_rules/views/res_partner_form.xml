@@ -7,10 +7,8 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <xpath expr="//form" position="attributes">
-                    <attribute name="create" groups="custom_security_rules.group_no_edit_delete">true</attribute>  <!-- habilitar creación -->
-                    <attribute name="edit" groups="custom_security_rules.group_no_edit_delete">false</attribute>    <!-- Deshabilitar edición -->
-                    <attribute name="delete" groups="custom_security_rules.group_no_edit_delete">false</attribute>  <!-- Deshabilitar eliminación -->
+                <xpath expr="//form" position="replace">
+                    <form create='true' edit='false' delete='false' groups="custom_security_rules.group_no_edit_delete"/>
                 </xpath>
             </field>
         </record>
@@ -20,10 +18,8 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree" />
             <field name="arch" type="xml">
-                <xpath expr="//tree" position="attributes">
-                    <attribute name="create" groups="custom_security_rules.group_no_edit_delete">true</attribute>  <!-- habilitar creación -->
-                    <attribute name="edit" groups="custom_security_rules.group_no_edit_delete">false</attribute>    <!-- Deshabilitar edición -->
-                    <attribute name="delete" groups="custom_security_rules.group_no_edit_delete">false</attribute>  <!-- Deshabilitar eliminación -->
+                <xpath expr="//tree" position="replace">
+                    <tree create='true' edit='false' delete='false' groups="custom_security_rules.group_no_edit_delete"/>
                 </xpath>
             </field>
         </record>
@@ -33,10 +29,8 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.res_partner_kanban_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//kanban" position="attributes">
-                    <attribute name="create" groups="custom_security_rules.group_no_edit_delete">true</attribute>  <!-- habilitar creación -->
-                    <attribute name="edit" groups="custom_security_rules.group_no_edit_delete">false</attribute>    <!-- Deshabilitar edición -->
-                    <attribute name="delete" groups="custom_security_rules.group_no_edit_delete">false</attribute>  <!-- Deshabilitar eliminación -->
+                <xpath expr="//kanban" position="replace">
+                    <kanban create='true' edit='false' delete='false' groups="custom_security_rules.group_no_edit_delete"/>
                 </xpath>
             </field>
         </record>
