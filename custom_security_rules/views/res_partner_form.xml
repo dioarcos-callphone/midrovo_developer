@@ -16,6 +16,21 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="res_partner_kanban" model="ir.ui.view">
+            <field name="name">res.partner.knaban</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <group id="custom_security_rules.group_no_edit_delete">
+                        <attribute name="create">true</attribute>  <!-- Deshabilitar creación para el grupo -->
+                        <attribute name="edit">false</attribute>    <!-- Deshabilitar edición para el grupo -->
+                        <attribute name="delete">false</attribute>  <!-- Deshabilitar eliminación para el grupo -->
+                    </group>
+                </xpath>
+            </field>
+        </record>
     
     </data>
     
