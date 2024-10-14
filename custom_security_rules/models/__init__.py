@@ -1,4 +1,4 @@
-# from . import res_partner
+from . import res_partner
 # from . import sale_order
 # from . import sale_order_line
-from . import custom_security_rules
+# from . import custom_security_rules
