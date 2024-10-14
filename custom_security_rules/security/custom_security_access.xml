@@ -1,6 +1,6 @@
 <odoo>
     <record id="custom_security_category" model="ir.module.category">
-        <field name="name">Ventas/Contactos</field>
+        <field name="name">Ventas / Contactos</field>
     </record>
 
     <record id="custom_security_subcategory" model="ir.module.category">
