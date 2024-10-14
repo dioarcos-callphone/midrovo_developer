@@ -1,6 +1,6 @@
 <odoo>
     <record id="group_no_edit_delete" model="res.groups">
         <field name="name">No Edit/Delete Permissions</field>
-        <field name="category_id" ref="base.module_category_sales_management"/> <!-- O una categoría adecuada -->
+        <field name="category_id" ref="base.module_category_sales"/> <!-- O una categoría adecuada -->
     </record>
 </odoo>
