@@ -10,6 +10,6 @@
 
     <record id="group_no_edit_delete" model="res.groups">
         <field name="name">Restringir Permisos</field>
-        <field name="category_id" ref="sale.group_sale_manager"/> <!-- O una categoría adecuada -->
+        <field name="category_id" ref="base.module_category_sales_sales"/> <!-- O una categoría adecuada -->
     </record>
 </odoo>
