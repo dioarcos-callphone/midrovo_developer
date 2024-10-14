@@ -8,7 +8,9 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <xpath expr="//form" position="inside">
-                    <button string="Guardar" name="action_create" type="object" class="oe_highlight"/>
+                    <header>
+                        <button string="Guardar" name="action_create" type="object" class="oe_highlight"/>
+                    </header>
                 </xpath>
             </field>
         </record>
