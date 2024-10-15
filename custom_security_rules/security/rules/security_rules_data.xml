@@ -3,14 +3,14 @@
 
     <data>
     
-        <record id="rule_custom_security_sale_order_line" model="ir.rule">
-            <field name="name">rule.custom.security.sale.order.line</field>
-            <field name="model_id" ref="sale.model_sale_order"/>
+        <record id="rule_sale_order_line_price_unit_edit" model="ir.rule">
+            <field name="name">Restrict edit of price_unit for non-group users</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="domain_force">[('price_unit', '=', False)]</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
-            <!-- <field name="perm_create" eval="True"/> -->
+            <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
         </record>
     
