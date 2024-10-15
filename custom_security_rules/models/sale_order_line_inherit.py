@@ -3,22 +3,11 @@ from odoo.exceptions import UserError
 
 class SaleOrderLineInherit(models.Model):
     _inherit = 'sale.order.line'
-
-    def _check_readonly_price_unit(self):
-        # Comprobar si el usuario pertenece a un grupo específico
+    
+    @api.depends('price_unit')  # Añade otros campos relevantes si es necesario
+    def _compute_price_unit_readonly(self):
         group_id = self.env.ref('custom_security_rules.group_custom_security_role_user').id
-        return not self.env.user.has_group(group_id)
-    
-    @api.model
-    def is_active(self):
-        return True
-    
-    price_unit = fields.Float(
-        readonly=lambda self: self.is_active()
-    )
+        for record in self:
+            record.price_unit_readonly = not self.env.user.has_group(group_id)
 
-    # @api.depends('price_unit')
-    # def _check_price_unit(self):
-    #     # Verifica si el usuario pertenece al grupo restringido
-    #     if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
-    #         raise UserError("No tiene permisos para modificar los precios.")
+    price_unit_readonly = fields.Boolean(compute='_compute_price_unit_readonly', store=False)
