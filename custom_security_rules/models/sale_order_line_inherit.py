@@ -1,11 +1,11 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
-class SaleOrderInherit(models.Model):
-    _inherit = 'sale.order'  # Cambiar a 'sale.order.line' si es necesario
+class SaleOrderLineInherit(models.Model):
+    _inherit = 'sale.order.line'
 
-    can_edit_price = fields.Boolean(compute='_compute_can_edit_price', store=True)
-
-    @api.depends('user_id')
-    def _compute_can_edit_price(self):
-        for order in self:
-            order.can_edit_price = order.user_has_groups('custom_security_rules.group_custom_security_role_user')
+    @api.constrains('price_unit')
+    def _check_price_unit(self):
+        # Verifica si el usuario pertenece al grupo restringido
+        if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
+            raise UserError("No tiene permisos para modificar los precios.")
