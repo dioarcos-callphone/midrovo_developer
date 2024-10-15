@@ -3,7 +3,7 @@
         <!-- Grupo para Crear y Leer Contactos -->
         <record id="group_create_read_contacts" model="res.groups">
             <field name="name">Crear y Leer Contactos</field>
-            <field name="category_id" ref="base.user_groups"/>
+            <field name="category_id" ref="base.res_partner"/>
         </record>
     </data>
 </odoo>
