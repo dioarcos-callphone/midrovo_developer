@@ -14,7 +14,7 @@
                     <!-- <attribute name="attrs">{'readonly': [('user_id.groups_id', 'in', [ref('custom_security_rules.group_custom_security_role_user')])]}</attribute> -->
                     <attribute name="attrs">
                         {
-                            'readonly': [('user_id.groups_id', 'not in', [group_custom_security_role_user_id])]
+                            'readonly': [('can_edit_price', '=', False)]
                         }
                     </attribute>
                 </xpath>
