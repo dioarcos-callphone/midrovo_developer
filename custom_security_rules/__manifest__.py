@@ -9,6 +9,7 @@
         'security/groups/security_groups_data.xml',
         'security/rules/security_rules_data.xml',
         'security/ir.model.access.csv',
+        'views/sale_order_line_tree.xml'
         # 'data/rules.xml',
         # 'views/res_partner_form.xml',
     ],
