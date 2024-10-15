@@ -6,14 +6,8 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form" position="inside">
-                    <header>
-                        <field name="authorized_transaction_ids" invisible="1"/>
-                        <field name="qty" attrs="{'readonly': [('qty_invoiced', '>', 0), ('user_id', '=', uid) and user_has_group('your_module.group_custom_security_role_user')] }"/>
-                    </header>
-                </xpath>
-                <xpath expr="//field[@name='order_line']//field[@name='price_unit']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('qty_invoiced', '&gt;', 0), ('user_id.group_custom_security_role_user', '=', True)]}</attribute>
+                <xpath expr="//field[@name='order_line']//field[@name='price_unit']" position="replace">
+                    <field name="price_unit" attrs="{'readonly': [('user_id', 'in', [ref('custom_security_rules.group_custom_security_role_user')])]}" />
                 </xpath>
             </field>
         </record>
