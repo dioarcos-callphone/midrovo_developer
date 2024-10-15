@@ -5,7 +5,7 @@ class SaleOrderLineInherit(models.Model):
     _inherit = 'sale.order.line'
     
     price_unit = fields.Float(
-        readonly=lambda self: self._check_readonly_price_unit()
+        readonly=lambda self: self._check_readonly_price_unit
     )
 
     @api.model
