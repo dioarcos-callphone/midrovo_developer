@@ -8,9 +8,10 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
                     <!-- Hacer el campo solo lectura para los usuarios que no pertenezcan al grupo especificado -->
-                    <attribute name="readonly">1</attribute>
+                    <!-- <attribute name="readonly">1</attribute> -->
                     <!-- Permitir acceso de edición solo a un grupo específico -->
-                    <attribute name="groups">custom_security_rules.group_custom_security_role_user</attribute>
+                    <!-- <attribute name="groups">custom_security_rules.group_custom_security_role_user</attribute> -->
+                    <attribute name="attrs">{'readonly': [('user_id.groups_id', 'in', [ref('custom_security_rules.group_custom_security_role_user')])]}</attribute>
                 </xpath>
             </field>
         </record>
