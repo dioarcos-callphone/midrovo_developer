@@ -6,12 +6,11 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//header" position="inside">
-                    <field name="user_id" invisible="1"/>
-                </xpath>
-                <xpath expr="//tree/field[@name='price_unit']" position="replace">
-                    <field name="price_unit" 
-                           attrs="{'readonly': [('id', '!=', False), ('user_id', 'not in', [user.id for user in env['res.groups'].search([('name', '=', 'custom_security_rules.group_custom_security_role_user')]).users])]}"/>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <!-- Hacer el campo solo lectura para los usuarios que no pertenezcan al grupo especificado -->
+                    <attribute name="readonly">1</attribute>
+                    <!-- Permitir acceso de edición solo a un grupo específico -->
+                    <attribute name="groups">custom_security_rules.group_custom_security_role_user</attribute>
                 </xpath>
             </field>
         </record>
