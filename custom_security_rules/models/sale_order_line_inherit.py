@@ -10,7 +10,7 @@ class SaleOrderLineInherit(models.Model):
 
     @api.model
     def _check_readonly_price_unit(self):
-        # Comprueba si el usuario pertenece al grupo específico
+        # Comprobar si el usuario pertenece a un grupo específico
         group_id = self.env.ref('custom_security_rules.group_custom_security_role_user').id
         return not self.env.user.has_group(group_id)
 
