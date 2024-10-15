@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Grupo para Crear y Leer Contactos -->
+        <record id="group_create_read_contacts" model="res.groups">
+            <field name="name">Crear y Leer Contactos</field>
+            <field name="category_id" ref="base.module_category_contact_management"/>
+        </record>
+    </data>
+</odoo>

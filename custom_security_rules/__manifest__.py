@@ -6,10 +6,10 @@
     'website': "https://www.callphoneecuador.com",
     'depends': ['base', 'sale', 'contacts', 'sale_management'],
     'data': [
-        'security/custom_security_access.xml',
+        'security/security_groups_data.xml',
         'security/ir.model.access.csv',
-        'data/rules.xml',
-        'views/res_partner_form.xml',
+        # 'data/rules.xml',
+        # 'views/res_partner_form.xml',
     ],
     
     'license': 'LGPL-3',
