@@ -1,5 +1,5 @@
 <odoo>
-    <data noupdate="1">
+    <data>
         <!-- Grupo para Crear y Leer Contactos -->
         <record id="group_create_read_contacts" model="res.groups">
             <field name="name">Crear y Leer Contactos</field>
