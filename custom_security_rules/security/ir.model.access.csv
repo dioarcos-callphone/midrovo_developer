@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_partner_create_read,res.partner,model_res_partner,group_create_read_contacts,1,0,1,0
+access_partner_create_read,res.partner,base.model_res_partner,group_create_read_contacts,1,0,1,0
