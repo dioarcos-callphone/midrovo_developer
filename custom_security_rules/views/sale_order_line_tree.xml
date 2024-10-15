@@ -7,7 +7,9 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='price_unit']" position="replace">
-                    <field name="price_unit" groups="custom_security_rules.group_custom_security_role_user" attrs="{'readonly': True}"/>
+                    <field name="price_unit" groups="custom_security_rules.group_custom_security_role_user" 
+                    readonly="1"
+                    />
                 </xpath>
             </field>
         </record>
