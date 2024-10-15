@@ -6,7 +6,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']//field[@name='price_unit']" position="replace">
+                <xpath expr="//tree/field[@name='price_unit']" position="replace">
                     <field name="price_unit" groups="custom_security_rules.group_custom_security_role_user" attrs="{'readonly': True}"/>
                 </xpath>
             </field>
