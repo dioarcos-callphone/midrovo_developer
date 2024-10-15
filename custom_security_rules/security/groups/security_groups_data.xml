@@ -8,13 +8,13 @@
 
         <record id="custom_security_role_subcategory" model="ir.module.category">
             <field name="name">Permisos de lectura y creacion</field>
-            <field name="parent_id" ref="custom_security_rules.custom_security_rules_category" />
+            <field name="parent_id" ref="custom_security_rules.custom_security_role_category" />
         </record>
 
         <record id="group_custom_security_role_user" model="res.groups">
             <field name="name">Usuario Personalizado</field>
             <field name="comment">Comment</field>
-            <field name="category_id" ref="custom_security_rules.custom_security_rules_subcategory"/>
+            <field name="category_id" ref="custom_security_rules.custom_security_role_subcategory"/>
         </record>
         
     </data>
