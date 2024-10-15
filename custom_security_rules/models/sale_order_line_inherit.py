@@ -9,4 +9,4 @@ class SaleOrderLineInherit(models.Model):
     def _compute_can_edit_price(self):
         for line in self:
             # Por ejemplo, puedes basarlo en el usuario que crea la orden o en otras reglas de negocio
-            line.can_edit_price = line.order_id.user_has_groups('custom_group_allow_price_edit')
+            line.can_edit_price = line.order_id.user_has_groups('custom_security_rules.group_custom_security_role_user')
