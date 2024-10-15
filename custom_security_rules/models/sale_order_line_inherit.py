@@ -5,10 +5,9 @@ class SaleOrderLineInherit(models.Model):
     _inherit = 'sale.order.line'
     
     price_unit = fields.Float(
-        readonly=lambda self: self._check_readonly_price_unit
+        readonly=lambda self: self._check_readonly_price_unit()
     )
 
-    @api.model
     def _check_readonly_price_unit(self):
         # Comprobar si el usuario pertenece a un grupo específico
         group_id = self.env.ref('custom_security_rules.group_custom_security_role_user').id
