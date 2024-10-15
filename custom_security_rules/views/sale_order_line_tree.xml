@@ -6,8 +6,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree/field[@name='price_unit']" position="replace">
-                    <field name="price_unit" readonly="1" groups="custom_security_rules.group_custom_security_role_user" />                    
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <!-- Añadir restricción de solo lectura según el grupo de usuarios -->
+                    <attribute name="attrs">{'readonly': [('qty_invoiced', '>', 0), ('state', 'in', ('done', 'sale'))], 'readonly_group': [('user_groups_id', 'in', [ref('custom_security_rules.group_custom_security_role_user')])]}</attribute>
                 </xpath>
             </field>
         </record>
