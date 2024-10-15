@@ -6,12 +6,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//header" position="inside">
-                    <field name="can_edit_price" invisible="1"/> <!-- Agregar el campo a la vista heredada -->
-                </xpath>
-                <xpath expr="//field[@name='price_unit']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('can_edit_price', '=', False)]}</attribute>
-                </xpath>
+                
             </field>
         </record>
     </data>
