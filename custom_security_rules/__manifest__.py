@@ -7,6 +7,7 @@
     'depends': ['base', 'sale', 'contacts', 'sale_management'],
     'data': [
         'security/security_groups_data.xml',
+        'security/security_rules_data.xml',
         'security/ir.model.access.csv',
         # 'data/rules.xml',
         # 'views/res_partner_form.xml',
