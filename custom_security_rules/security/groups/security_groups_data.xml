@@ -1,7 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <data>
-        
+    
         <record id="custom_security_role_category" model="ir.module.category">
             <field name="name">Ventas / Contactos</field>
         </record>
@@ -16,7 +17,8 @@
             <field name="comment">Comment</field>
             <field name="category_id" ref="custom_security_rules.custom_security_role_subcategory"/>
         </record>
-        
+    
     </data>
     
+
 </odoo>
