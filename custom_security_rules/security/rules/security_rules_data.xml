@@ -14,7 +14,7 @@
 
         <record id="rule_custom_security_product_pricelist" model="ir.rule">
             <field name="name">rule.custom.security.product.pricelist</field>
-            <field name="model_id" ref="model_product_pricelist"/>
+            <field name="model_id" ref="product.model_product_pricelist"/>
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="perm_read" eval="True"/>
