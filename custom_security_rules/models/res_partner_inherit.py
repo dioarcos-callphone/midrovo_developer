@@ -1,15 +1,10 @@
 from odoo import models, api
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.model
     def create(self, vals):
-        _logger.info(f"ENTRA AL CREATE")
         # Obtener el grupo
         group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
 
@@ -22,12 +17,6 @@ class ResPartner(models.Model):
             ('group_id', '=', group_user.id),
             ('model_id.model', '=', 'res.partner')
         ], limit=1)
-
-        # Registrar en el log para verificar
-        if write_permission:
-            _logger.info(f"Permiso de escritura encontrado para el grupo {group_user.name}")
-        else:
-            _logger.warning(f"No se encontró el permiso de escritura para el grupo {group_user.name}")
 
         if write_permission:
             # Habilitar el permiso de escritura temporalmente
