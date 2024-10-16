@@ -1,8 +1,8 @@
-<template id="show_save_buttons" inherit_id="web.FormController">
+<!-- <template id="show_save_buttons" inherit_id="web.FormController">
     <xpath expr="//button[@class='o_form_button_save']" position="attributes">
         <attribute name="t-attf-class">#{'d-none' if not has_write_permission else ''}</attribute>
     </xpath>
     <xpath expr="//button[@class='o_form_button_cancel']" position="attributes">
         <attribute name="t-attf-class">#{'d-none' if not has_write_permission else ''}</attribute>
     </xpath>
-</template>
+</template> -->
