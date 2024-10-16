@@ -24,7 +24,7 @@
         </record>
 
         <!-- Regla de acceso para ir.model.fields -->
-        <record id="rule_custom_security_ir_model_fields" model="ir.rule">
+        <!-- <record id="rule_custom_security_ir_model_fields" model="ir.rule">
             <field name="name">rule.custom.security.ir.model.fields</field>
             <field name="model_id" ref="base.model_ir_model_fields"/>
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
@@ -33,6 +33,6 @@
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="False"/>
-        </record>
+        </record> -->
     </data>
 </odoo>
