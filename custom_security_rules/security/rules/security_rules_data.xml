@@ -12,14 +12,25 @@
             <field name="perm_unlink" eval="False"/>
         </record> -->
 
+        <record id="rule_custom_security_product_pricelist" model="ir.rule">
+            <field name="name">rule.custom.security.product.pricelist</field>
+            <field name="model_id" ref="product.model_product_pricelist"/>
+            <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
         <record id="rule_custom_security_sale_order_line" model="ir.rule">
             <field name="name">rule.custom.security.sale.order.line</field>
             <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
         </record>
     </data>
