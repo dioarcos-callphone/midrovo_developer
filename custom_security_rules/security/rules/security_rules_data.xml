@@ -3,7 +3,7 @@
     <data>
         <record id="rule_custom_security_partner" model="ir.rule">
             <field name="name">rule.custom.security.partner</field>
-            <field name="model_id" ref="base.model_contacts"/>
+            <field name="model_id" ref="base.model_res_partner"/>
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="perm_read" eval="True"/>
