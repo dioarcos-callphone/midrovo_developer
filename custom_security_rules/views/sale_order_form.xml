@@ -19,7 +19,7 @@
                     <button name="action_cancel" type="object" string="Cancel" invisible="1" groups="custom_security_rules.group_custom_security_role_user_2" attrs="{'invisible': ['|', ('state', 'not in', ['draft', 'sent','sale']), ('id', '=', False)]}" data-hotkey="z"/>
                 </xpath>
                 <xpath expr="//header/button[@name='action_cancel']" position="after">
-                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', ('state', 'not in', ['draft', 'sent','sale']), ('id', '=', False)]}" data-hotkey="z"/>
+                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', ('state', 'not in', ['draft', 'sent','sale']), ('id', '=', False)]}" data-hotkey="z" groups="!custom_security_rules.group_custom_security_role_user_2"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                     <field name="price_unit" string="Precio Unitario" groups="!custom_security_rules.group_custom_security_role_user" />
