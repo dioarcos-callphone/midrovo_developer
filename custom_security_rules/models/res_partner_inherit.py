@@ -1,4 +1,4 @@
-from odoo import models, api, _
+from odoo import models, api
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -9,6 +9,7 @@ class ResPartner(models.Model):
 
     @api.model
     def create(self, vals):
+        _logger.info(f"ENTRA AL CREATE")
         # Obtener el grupo
         group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
 
