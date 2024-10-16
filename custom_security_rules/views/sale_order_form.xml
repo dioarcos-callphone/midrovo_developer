@@ -6,6 +6,12 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//header/button[@string='Create Invoice']" position="replace">
+                    <button id="create_invoice_percentage" name="405" data-hotkey="q" string="Crear Factura" invisible="1" groups="custom_security_rules.group_custom_security_role_user_2" />
+                </xpath>
+                <xpath expr="//header/button[@string='Create Invoice']" position="after">
+                    <button id="create_invoice_percentage" name="405" string="Create Invoice" type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="q" attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}" groups="!custom_security_rules.group_custom_security_role_user_2"/>
+                </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="replace">
                     <field name="price_unit" string="Precio Unitario" readonly="1" groups="custom_security_rules.group_custom_security_role_user" />
                 </xpath>
