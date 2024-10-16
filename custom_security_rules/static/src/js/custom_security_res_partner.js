@@ -17,6 +17,7 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
                 method: 'toggle_write_permission',
                 args: [true],  // Habilitar permisos de escritura
             }).then(function () {
+                console.log('>>> ENTRA <<<')
                 self.$buttons.find('.o_form_button_save').show();
                 self.$buttons.find('.o_form_button_cancel').show();
             });
