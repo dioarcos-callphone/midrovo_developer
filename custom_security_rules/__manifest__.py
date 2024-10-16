@@ -1,5 +1,12 @@
 {
     'name': 'Custom Security',
+    
+    "summary": "Restriccion de modificacion para el sale order line y res partner",
+    "description": """
+        No permite actualizar precios unitarios de la orden de venta y tambien restringe actualizacion
+        en el modulo de contactos (res_partner)
+    """,
+    
     'version': '1.0',
     'author': 'Mauricio Idrovo',
     'company': 'Callphone S.A.',
