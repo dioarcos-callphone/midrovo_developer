@@ -4,7 +4,7 @@
         <record id="rule_custom_security_partner" model="ir.rule">
             <field name="name">rule.custom.security.partner</field>
             <field name="model_id" ref="base.model_res_partner"/>
-            <field name="groups" eval="[(6, ref('custom_security_rules.group_custom_security_role_user'))]"/>
+            <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
@@ -21,6 +21,16 @@
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="access_res_partner_restricted" model="ir.model.access">
+            <field name="name">access_res_partner_restricted</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="group_id" ref="custom_security_rules.group_custom_security_role_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
         </record>
     </data>
 </odoo>
