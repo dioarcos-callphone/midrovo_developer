@@ -10,7 +10,7 @@ class ResPartner(models.Model):
     @api.model
     def create(self, vals):
         # Obtener el grupo
-        group_user = self.env.ref('your_module.group_custom_security_role_user')
+        group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
 
         # Verificar si el grupo se obtiene correctamente
         if not group_user:
