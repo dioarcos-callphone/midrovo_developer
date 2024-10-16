@@ -1,5 +1,9 @@
 from odoo import models, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
@@ -7,7 +11,7 @@ class ResPartner(models.Model):
     def create(self, vals):
         # Obtener el grupo
         group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
-        
+        _logger.info('ENTRA')
         # Obtener el permiso actual del grupo para res.partner
         write_permission = self.env['ir.model.access'].search([
             ('group_id', '=', group_user.id),
