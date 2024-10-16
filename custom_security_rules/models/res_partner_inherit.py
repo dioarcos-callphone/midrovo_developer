@@ -19,14 +19,15 @@ class ResPartner(models.Model):
         ], limit=1)
         
         if write_permission:
+            _logger.info('ENTRA A LA CONDICION')
             # Habilitar el permiso de escritura temporalmente
             write_permission.perm_write = True
 
         # Crear el registro
         partner = super(ResPartner, self).create(vals)
 
-        if write_permission:
-            # Deshabilitar el permiso de escritura nuevamente
-            write_permission.perm_write = False
+        # if write_permission:
+        #     # Deshabilitar el permiso de escritura nuevamente
+        #     write_permission.perm_write = False
 
         return partner
