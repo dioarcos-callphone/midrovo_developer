@@ -18,7 +18,7 @@ class ResPartner(models.Model):
             raise ValueError(_("El grupo no se encontró: 'group_custom_security_role_user'"))
 
         # Buscar el permiso de acceso en ir.model.access
-        write_permission = self.env['ir.model.access'].search([
+        write_permission = self.env['ir.model.access'].sudo().search([
             ('group_id', '=', group_user.id),
             ('model_id.model', '=', 'res.partner')
         ], limit=1)
