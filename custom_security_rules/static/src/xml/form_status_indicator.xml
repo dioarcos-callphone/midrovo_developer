@@ -9,12 +9,12 @@
 
         <!-- Modificar el botón de guardar -->
         <xpath expr="//button[@class='o_form_button_save btn btn-light py-0']" position="attributes">
-            <attribute name="t-att-disabled">"props.isDisabled and !userHasEditAccess"</attribute>
+            <attribute name="t-att-disabled">"!userHasEditAccess"</attribute>
         </xpath>
 
         <!-- Modificar el botón de descartar -->
         <xpath expr="//button[@class='o_form_button_cancel btn btn-light py-0']" position="attributes">
-            <attribute name="t-att-disabled">"props.isDisabled and !userHasEditAccess"</attribute>
+            <attribute name="t-att-disabled">"!userHasEditAccess"</attribute>
         </xpath>
     </t>
 </templates>
