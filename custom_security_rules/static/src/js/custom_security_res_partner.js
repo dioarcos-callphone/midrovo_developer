@@ -1,28 +1,21 @@
 odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
     "use strict";
 
-    var FormController = require('web.FormController');
-    var rpc = require('web.rpc');
+    const KanbanView = require('web.KanbanView');
+    const KanbanController = require('web.KanbanController');
 
-    FormController.include({
-        _renderButtons: function () {
-            this._super.apply(this, arguments);  // Llamar al método original
-            var self = this;
+    KanbanController.include({
+        renderButtons: function ($node) {
+            this._super.apply(this, arguments);
 
-            console.log('Renderizando botones de formulario');
+            let $btnNew = this.$el.find('.o-kanban-button-new');
+            $btnNew.on('click', this._onNewButtonClick.bind(this));
+        },
 
-            // Verificar permisos del usuario con una llamada RPC
-            rpc.query({
-                model: 'res.users',
-                method: 'has_group',
-                args: ['custom_security_rules.group_custom_security_role_user'],  // Verificar si pertenece al grupo
-            }).then(function (hasPermission) {
-                if (hasPermission) {
-                    // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
-                    self.$buttons.find('.o_form_button_save').show();
-                    self.$buttons.find('.o_form_button_cancel').show();
-                }
-            });
+        _onNewButtonClick: function (event) {
+            // Aquí puedes personalizar lo que hace el botón programáticamente
+            console.log('Botón nuevo presionado');
         },
     });
+
 });
