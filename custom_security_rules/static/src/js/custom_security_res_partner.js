@@ -1,6 +1,6 @@
 odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
     "use strict";
-
+    
     var FormController = require('web.FormController');
     var rpc = require('web.rpc');
 
@@ -11,40 +11,21 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
 
             var self = this;
 
-            // Habilitar permisos de escritura al hacer clic en "Nuevo"
+            // Verificar permisos del usuario con una llamada RPC
             rpc.query({
                 model: 'res.users',
-                method: 'toggle_write_permission',
-                args: [true],  // Habilitar permisos de escritura
-            }).then(function () {
-                self.$buttons.find('.o_form_button_save').show();
-                self.$buttons.find('.o_form_button_cancel').show();
-            });
-        },
-
-        // Sobreescribir el método para el guardado
-        _onSave: function (event) {
-            var self = this;
-            return this._super.apply(this, arguments).then(function () {
-                // Después de guardar, deshabilitar nuevamente los permisos de escritura
-                rpc.query({
-                    model: 'res.users',
-                    method: 'toggle_write_permission',
-                    args: [false],  // Deshabilitar permisos de escritura
-                });
-            });
-        },
-
-        // Sobreescribir el método para el descarte
-        _onDiscard: function (event) {
-            var self = this;
-            return this._super.apply(this, arguments).then(function () {
-                // Después de descartar, deshabilitar nuevamente los permisos de escritura
-                rpc.query({
-                    model: 'res.users',
-                    method: 'toggle_write_permission',
-                    args: [false],  // Deshabilitar permisos de escritura
-                });
+                method: 'has_group',
+                args: ['your_module.group_show_save_buttons'],  // Verificar si pertenece al grupo
+            }).then(function (hasPermission) {
+                if (hasPermission) {
+                    // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
+                    self.$buttons.find('.o_form_button_save').show();
+                    self.$buttons.find('.o_form_button_cancel').show();
+                } else {
+                    // Ocultar los botones si el usuario no tiene permiso
+                    self.$buttons.find('.o_form_button_save').hide();
+                    self.$buttons.find('.o_form_button_cancel').hide();
+                }
             });
         },
     });
