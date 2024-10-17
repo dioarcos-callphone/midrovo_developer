@@ -10,6 +10,8 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
     patch(KanbanController.prototype, 'custom_security_rules.custom_security_res_partner', {
         async render() {
             await this._super(...arguments);
+
+            console.log('ENTRAAAA')
             
             // Aquí puedes manipular los botones después de que se haya renderizado la vista
             if (this.$buttons) {
