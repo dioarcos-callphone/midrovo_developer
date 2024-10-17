@@ -10,6 +10,10 @@
                 <xpath expr="//form/header" position="attributes">
                     <attribute name="groups">!custom_security_rules.group_custom_security_role_user_2</attribute>
                 </xpath>
+                <xpath expr="//form/header" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="groups">custom_security_rules.group_custom_security_role_user_2</attribute>
+                </xpath>
             </field>
         </record>
     
