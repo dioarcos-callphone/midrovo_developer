@@ -1,4 +1,4 @@
-odoo.define('custom_security_rules.custom_form_controller', function (require) {
+odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
     "use strict";
 
     const FormController = require('web.FormController');
