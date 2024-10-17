@@ -1,9 +1,9 @@
-from odoo import models, fields, api
+from odoo import models, api
 from odoo.exceptions import AccessError
 
 class StockPickingInherit(models.Model):
     _inherit = 'stock.picking'
-    
+
     @api.model
     def unlink(self):
         # Verificar si el usuario pertenece al grupo restringido
