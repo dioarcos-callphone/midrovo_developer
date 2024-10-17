@@ -19,6 +19,13 @@
         'views/sale_order_form.xml'
     ],
     
+    'assets': {
+        'web.assets_backend': [
+            'custom_security_rules/static/src/js/custom_security_res_partner.js',
+            'custom_security_rules/static/src/xml/show_save_buttons.xml'          
+        ]
+    },
+    
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
