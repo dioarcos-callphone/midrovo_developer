@@ -22,5 +22,16 @@
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
         </record>
+
+        <record id="rule_custom_security_stock_picking" model="ir.rule">
+            <field name="name">rule.custom.security.stock.picking</field>
+            <field name="model_id" ref="sale.model_stock_picking"/>
+            <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user_2'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
     </data>
 </odoo>
