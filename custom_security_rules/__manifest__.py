@@ -11,7 +11,7 @@
     'author': 'Mauricio Idrovo',
     'company': 'Callphone S.A.',
     'website': "https://www.callphoneecuador.com",
-    'depends': ['base', 'sale', 'contacts', 'sale_management',],
+    'depends': ['base', 'sale', 'contacts', 'sale_management', 'stock'],
     'data': [
         'security/groups/security_groups_data.xml',
         'security/rules/security_rules_data.xml',
