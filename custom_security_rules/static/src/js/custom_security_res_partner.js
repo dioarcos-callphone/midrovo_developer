@@ -20,8 +20,14 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
                 if (hasPermission) {
                     // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
                     console.log('ENTRA TIENE PERMISOS')
-                    $('.o_form_button_save').hide();
-                    $('.o_form_button_cancel').hide();
+                    
+                    document.querySelectorAll('.o_form_button_save').forEach(button => {
+                        button.style.display = 'none';  // Oculta el botón
+                    });
+                    
+                    document.querySelectorAll('.o_form_button_cancel').forEach(button => {
+                        button.style.display = 'none';  // Oculta el botón
+                    });
                 }
             });
 
