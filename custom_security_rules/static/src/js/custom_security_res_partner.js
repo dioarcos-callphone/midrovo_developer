@@ -1,6 +1,6 @@
 odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
     "use strict";
-    
+
     var FormController = require('web.FormController');
     var rpc = require('web.rpc');
 
@@ -15,7 +15,7 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
             rpc.query({
                 model: 'res.users',
                 method: 'has_group',
-                args: ['your_module.group_show_save_buttons'],  // Verificar si pertenece al grupo
+                args: ['custom_security_rules.group_custom_security_role_user'],  // Verificar si pertenece al grupo
             }).then(function (hasPermission) {
                 if (hasPermission) {
                     // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
