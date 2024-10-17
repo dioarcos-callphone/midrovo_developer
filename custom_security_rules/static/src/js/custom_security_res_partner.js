@@ -26,6 +26,7 @@ odoo.define('custom_security_rules.custom_form_controller', function (require) {
 
             if (hasPermission) {
                 // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
+                console.log('ENTRA AQUI TIENE PERMISOS')
                 self.$buttons.find('.o_form_button_save').show();
                 self.$buttons.find('.o_form_button_cancel').show();
             } else {
