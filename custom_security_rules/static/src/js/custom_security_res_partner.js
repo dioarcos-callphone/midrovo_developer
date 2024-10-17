@@ -1,7 +1,7 @@
 odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
     "use strict";
 
-    var FormController = require('web.FormController');
+    var FormController = require('web.KanbanController');
     var rpc = require('web.rpc');
 
     FormController.include({
