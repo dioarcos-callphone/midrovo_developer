@@ -19,7 +19,7 @@
         </record>
 
         <record id="custom_security_role_subcategory_2" model="ir.module.category">
-            <field name="name">Restringir confirmación de facturas</field>
+            <field name="name">Restringir confirmación de facturas y Despachos</field>
             <field name="parent_id" ref="custom_security_rules.custom_security_role_category" />
         </record>
 
