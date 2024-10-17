@@ -1,11 +1,16 @@
 from odoo import models, api, _
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.model
     def create(self, vals):
         # Obtener el grupo
+        _logger.info('ENTRA AQUI')
         group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
 
         # Verificar si el grupo se obtiene correctamente
@@ -19,6 +24,8 @@ class ResPartner(models.Model):
         ], limit=1)
 
         if write_permission:
+            _logger.info('ACTIVAMOS')
+            _logger.info('ENTRA AQUI CUANDO EL GRUPO ES group_custom_security_role_user')
             # Habilitar el permiso de escritura temporalmente
             write_permission.perm_write = True
 
@@ -26,6 +33,7 @@ class ResPartner(models.Model):
         partner = super(ResPartner, self).create(vals)
 
         if write_permission:
+            _logger.info('DESACTIVAMOS')
             # Deshabilitar el permiso de escritura nuevamente
             write_permission.perm_write = False
 
