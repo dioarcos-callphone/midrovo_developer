@@ -9,20 +9,17 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
     // Parchear el KanbanController para extender su funcionalidad
     patch(KanbanController.prototype, 'custom_security_rules.custom_security_res_partner', {
         createRecord() {
-            const self = this;
-
-            // Llamar al método RPC para verificar el grupo
+            // No es necesario usar self, ya que utilizamos una función flecha
             rpc.query({
                 model: 'res.users',
                 method: 'has_group',
                 args: ['custom_security_rules.group_custom_security_role_user'],  // Verificar si pertenece al grupo
-            }).then(function (hasPermission) {
+            }).then((hasPermission) => {  // Función flecha aquí
+                console.log(this);  // Ahora `this` se refiere a la instancia de KanbanController
                 if (hasPermission) {
-                    console.log(this)
-                    // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
-                    console.log('ENTRA TIENE PERMISOS')
-                    self.$buttons.find('.o_form_button_save').show();
-                    self.$buttons.find('.o_form_button_cancel').show();
+                    console.log('ENTRA TIENE PERMISOS');
+                    this.$buttons.find('.o_form_button_save').show();
+                    this.$buttons.find('.o_form_button_cancel').show();
                 }
             });
 
