@@ -11,6 +11,8 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
 
             var self = this;
 
+            console.log('ENTRAMOS EN EL JAVASCRIPT ON BUTTON NEW')
+
             // Verificar permisos del usuario con una llamada RPC
             rpc.query({
                 model: 'res.users',
