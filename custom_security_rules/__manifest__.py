@@ -23,6 +23,7 @@
     
     'assets': {
         'web.assets_backend': [
+            'custom_security_rules/static/src/xml/custom_security_res_partner.js',
             'custom_security_rules/static/src/xml/form_status_indicator.xml',         
         ]
     },
