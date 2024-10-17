@@ -2,9 +2,11 @@
 <templates xml:space="preserve">
     <t t-inherit="web.FormStatusIndicator" t-inherit-mode="extension" owl="1">
         <!-- Extender la parte de los botones de guardado y cancelación -->
-        <xpath expr="//div[contains(@class, 'o_form_status_indicator_buttons')]" position="attributes">
-            <!-- Agregamos la condición para que los botones solo sean visibles para el grupo específico -->
-            <attribute name="t-if">user.has_group('custom_security_rules.group_custom_security_role_user')</attribute>
+        <xpath expr="//div[@class='o_form_status_indicator_buttons']" position="attributes">
+            <!-- Condición para mostrar los botones solo si el usuario pertenece al grupo específico -->
+            <attribute name="t-att-class">{
+                invisible: !(props.model.root.isVirtual or displayButtons) or not request.env.user.has_group('custom_security_rules.group_custom_security_role_user')
+            }</attribute>
         </xpath>
     </t>
 </templates>
