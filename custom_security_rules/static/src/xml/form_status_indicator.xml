@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name='FormStatusIndicator' t-inherit='web.FormStatusIndicator' t-inherit-mode='extension' owl='1'>
-        <!-- Localizamos el div donde están los botones para luego modificarlos -->
-        <xpath expr="//div[@class='o_form_status_indicator_buttons d-flex']" position="attributes">
-            <!-- Aquí puedes agregar una condición para evitar la duplicación o modificar la visibilidad -->
-            <attribute name="t-att-class">"{ invisible: !(props.model.root.isVirtual or displayButtons) } and userHasEditAccess"</attribute>
-        </xpath>
-
-        <!-- Modificar el botón de guardar -->
-        <xpath expr="//button[@class='o_form_button_save btn btn-light py-0']" position="attributes">
-            <attribute name="t-att-disabled">"!userHasEditAccess"</attribute>
-        </xpath>
-
-        <!-- Modificar el botón de descartar -->
-        <xpath expr="//button[@class='o_form_button_cancel btn btn-light py-0']" position="attributes">
-            <attribute name="t-att-disabled">"!userHasEditAccess"</attribute>
+    <t t-inherit="web.FormStatusIndicator" t-inherit-mode="extension" owl="1">
+        <!-- Extender la parte de los botones de guardado y cancelación -->
+        <xpath expr="//div[contains(@class, 'o_form_status_indicator_buttons')]" position="attributes">
+            <!-- Agregamos la condición para que los botones solo sean visibles para el grupo específico -->
+            <attribute name="t-if">user.has_group('custom_security_rules.group_custom_security_role_user')</attribute>
         </xpath>
     </t>
 </templates>
