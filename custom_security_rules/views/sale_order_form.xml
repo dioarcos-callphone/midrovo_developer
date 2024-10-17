@@ -6,12 +6,20 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//header/button[@name='405']" position="replace">
-                    <button id="create_invoice_percentage" name="405" string="Crear Factura" invisible="1" groups="custom_security_rules.group_custom_security_role_user_2" />
+                <xpath expr="//header/button[@id='create_invoice']" position="replace">
+                    <button id="create_invoice" invisible='1' groups="custom_security_rules.group_custom_security_role_user_2" name="405" string="Crear Factura" type="action" class="btn-primary" data-hotkey="q" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
                 </xpath>
 
-                <xpath expr="//header/button[@name='405']" position="after">
-                    <button id="create_invoice_percentage" groups="!custom_security_rules.group_custom_security_role_user_2" name="405" string="Crear Factura" type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="q" attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
+                <xpath expr="//header/button[@id='create_invoice']" position="after">
+                    <button id="create_invoice" groups="!custom_security_rules.group_custom_security_role_user_2" name="405" string="Crear Factura" type="action" class="btn-primary" data-hotkey="q" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
+                </xpath>
+
+                <xpath expr="//header/button[@id='create_invoice_percentage']" position="replace">
+                    <button id="create_invoice_percentage" invisible='1' groups="custom_security_rules.group_custom_security_role_user_2" name="405" string="Create Invoice" type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="q" attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
+                </xpath>
+
+                <xpath expr="//header/button[@id='create_invoice_percentage']" position="after">
+                    <button id="create_invoice_percentage" groups="!custom_security_rules.group_custom_security_role_user_2" name="405" string="Create Invoice" type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="q" attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
                 </xpath>
                 
                 <xpath expr="//header/button[@name='action_cancel']" position="replace">
