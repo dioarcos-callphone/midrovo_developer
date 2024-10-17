@@ -16,7 +16,8 @@
         'security/groups/security_groups_data.xml',
         'security/rules/security_rules_data.xml',
         'security/ir.model.access.csv',
-        'views/sale_order_form.xml'
+        'views/sale_order_form.xml',
+        'views/stock_picking_form.xml'
     ],
     
     'assets': {
