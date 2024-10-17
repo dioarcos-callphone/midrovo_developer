@@ -1,3 +1,4 @@
+/** @odoo-module **/
 import { KanbanController } from "@web/views/kanban/kanban_controller";  // Si es necesario manipular el controlador
 import { registry } from "@web/core/registry";  // Para manejar registros si lo necesitas
 
