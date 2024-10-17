@@ -1,17 +1,11 @@
-/** @odoo-module **/
-import { KanbanView } from "@web/views/kanban/kanban_view";
+import { KanbanController } from "@web/views/kanban/kanban_controller";  // Si es necesario manipular el controlador
+import { registry } from "@web/core/registry";  // Para manejar registros si lo necesitas
 
-const { patch } = owl;
-
-patch(KanbanView.prototype, "custom_kanban_view", {
-    setup() {
-        this._super();
-    },
-    
-    createRecord() {
+const KanbanControllerExtended = KanbanController.extend({
+    createRecord: function () {
         console.log("Botón Nuevo presionado!");
-        // Aquí puedes hacer lo que necesites, como abrir un formulario customizado
-        // O heredar más funcionalidades antes o después del comportamiento original
         this._super();
-    },
+    }
 });
+
+registry.category("views").add("kanban", KanbanControllerExtended);
