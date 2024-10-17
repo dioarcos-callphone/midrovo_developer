@@ -5,13 +5,17 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
     var core = require('web.core');
     var qweb = core.qweb;
 
-    FormController.include({
-        // Método para inicializar el controlador
-        _onButtonNew: function (ev) {
-            this._super(ev); // Llama al método original para mantener la funcionalidad
+    var FormController = require('web.FormController');
 
-            // Agrega un console.log cuando se hace clic en el botón "Nuevo"
-            console.log('¡Se hizo clic en el botón Nuevo!');
+    FormController.include({
+        constructor: function (parent, action) {
+            this._super(parent, action);
+            console.log('FormController extendido'); // Log para verificar que se extiende
+        },
+        _onButtonNew: function (ev) {
+            this._super(ev);
+            console.log('¡Se hizo clic en el botón Nuevo!'); // Log al hacer clic en el botón Nuevo
         },
     });
+
 });
