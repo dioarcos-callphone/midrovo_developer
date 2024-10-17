@@ -1,21 +1,17 @@
-odoo.define('custom_security_rules.custom_security_res_partner', function (require) {
-    "use strict";
+/** @odoo-module **/
+import { KanbanView } from "@web/views/kanban/kanban_view";
 
-    const KanbanView = require('web.KanbanView');
-    const KanbanController = require('web.KanbanController');
+const { patch } = owl;
 
-    KanbanController.include({
-        renderButtons: function ($node) {
-            this._super.apply(this, arguments);
-
-            let $btnNew = this.$el.find('.o-kanban-button-new');
-            $btnNew.on('click', this._onNewButtonClick.bind(this));
-        },
-
-        _onNewButtonClick: function (event) {
-            // Aquí puedes personalizar lo que hace el botón programáticamente
-            console.log('Botón nuevo presionado');
-        },
-    });
-
+patch(KanbanView.prototype, "custom_kanban_view", {
+    setup() {
+        this._super();
+    },
+    
+    createRecord() {
+        console.log("Botón Nuevo presionado!");
+        // Aquí puedes hacer lo que necesites, como abrir un formulario customizado
+        // O heredar más funcionalidades antes o después del comportamiento original
+        this._super();
+    },
 });
