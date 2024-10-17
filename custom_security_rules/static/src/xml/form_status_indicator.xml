@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-inherit="web.FormStatusIndicator" t-inherit-mode="extension" owl="1">
-        <!-- Extender la parte de los botones de guardado y cancelación -->
-        <xpath expr="//div[@class='o_form_status_indicator_buttons']" position="attributes">
-            <!-- Condición para mostrar los botones solo si el usuario pertenece al grupo específico -->
-            <attribute name="t-att-class">{
-                invisible: !(props.model.root.isVirtual or displayButtons) or not request.env.user.has_group('custom_security_rules.group_custom_security_role_user')
-            }</attribute>
-        </xpath>
+    <t t-name='FormStatusIndicator' t-inherit='web.FormStatusIndicator' t-inherit-mode='extension' owl='1'>
+        <div class="o_form_status_indicator_buttons d-flex" t-att-class="{ invisible: !(props.model.root.isVirtual or displayButtons) }">
+            <button
+                type="button"
+                class="o_form_button_save btn btn-light py-0"
+                t-att-disabled="props.isDisabled and !userHasEditAccess"
+                data-hotkey="s"
+                t-on-click.stop="save"
+                data-tooltip="Save manually"
+                aria-label="Save manually">
+                <i class="fa fa-cloud-upload fa-fw" />
+            </button>
+            <button
+                type="button"
+                class="o_form_button_cancel btn btn-light py-0"
+                t-att-disabled="props.isDisabled and !userHasEditAccess"
+                data-hotkey="j"
+                t-on-click.stop="discard"
+                data-tooltip="Discard changes"
+                aria-label="Discard changes">
+                <i class="fa fa-undo fa-fw" />
+            </button>
+        </div>
     </t>
 </templates>
