@@ -19,10 +19,12 @@ odoo.define('custom_security_rules.custom_security_res_partner', function (requi
             }).then(function (hasPermission) {
                 if (hasPermission) {
                     // Mostrar los botones de Guardar y Descartar si el usuario tiene permiso
+                    console.log('>> ENTRA HAS PERMISSION')
                     self.$buttons.find('.o_form_button_save').show();
                     self.$buttons.find('.o_form_button_cancel').show();
                 } else {
                     // Ocultar los botones si el usuario no tiene permiso
+                    console.log('>> ENTRA NOT HAS PERMISSION')
                     self.$buttons.find('.o_form_button_save').hide();
                     self.$buttons.find('.o_form_button_cancel').hide();
                 }
