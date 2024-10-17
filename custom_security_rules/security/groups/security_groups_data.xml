@@ -29,7 +29,6 @@
             <field name="category_id" ref="custom_security_rules.custom_security_role_subcategory_2"/>
         </record>
     
-    </data>
-    
+    </data>  
 
 </odoo>

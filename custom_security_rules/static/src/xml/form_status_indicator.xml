@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <template id="inherit_kanban_view" inherit_id="web.KanbanView">
+            <xpath expr="//t[@t-name='web.KanbanView.Buttons']" position="inside">
+                <t t-if="userHasGroup('custom_security_rules.group_custom_security_role_user_2')">
+                    <div class="o_form_status_indicator_buttons d-flex">
+                        <button
+                            type="button"
+                            class="o_form_button_save btn btn-light py-0"
+                            t-on-click="save"
+                            data-tooltip="Save manually"
+                            aria-label="Save manually">
+                            <i class="fa fa-cloud-upload fa-fw" />
+                        </button>
+                        <button
+                            type="button"
+                            class="o_form_button_cancel btn btn-light py-0"
+                            t-on-click="discard"
+                            data-tooltip="Discard changes"
+                            aria-label="Discard changes">
+                            <i class="fa fa-undo fa-fw" />
+                        </button>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>
