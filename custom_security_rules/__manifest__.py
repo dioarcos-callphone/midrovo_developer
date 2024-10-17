@@ -21,8 +21,7 @@
     
     'assets': {
         'web.assets_backend': [
-            'custom_security_rules/static/src/js/custom_security_res_partner.js',
-            # 'custom_security_rules/static/src/xml/show_save_buttons.xml'          
+            'custom_security_rules/static/src/js/custom_security_res_partner.js',         
         ]
     },
     
