@@ -18,7 +18,7 @@
         'security/ir.model.access.csv',
         'views/sale_order_form.xml',
         'views/stock_picking_form.xml',
-        # 'views/res_partner_form.xml'
+        'views/res_partner_form.xml'
         
     ],
     

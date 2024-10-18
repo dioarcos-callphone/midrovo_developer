@@ -2,12 +2,12 @@
 <odoo>
     <data>
     
-        <record id="res_partner_form" model="ir.ui.view">
-            <field name="name">res.partner.form</field>
+        <record id="res_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="inherit_id" ref="base.view_partner_tree" />
             <field name="arch" type="xml">
-                <xpath expr="//form" position="attributes">
+                <xpath expr="//tree" position="attributes">
                     <attribute name="create">false</attribute>
                     <attribute name="edit">false</attribute>
                 </xpath>
