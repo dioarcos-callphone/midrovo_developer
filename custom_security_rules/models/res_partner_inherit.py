@@ -32,9 +32,9 @@ class ResPartner(models.Model):
 
         return partner
 
-    def write(self, vals):
-        # Solo bloquear si el registro ya existe
-        if self and self.ids:  # Si el registro ya tiene un ID, es una actualización
-            if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
-                raise UserError("You are not allowed to update records.")
-        return super(ResPartner, self).write(vals)
+    # def write(self, vals):
+    #     # Solo bloquear si el registro ya existe
+    #     if self and self.ids:  # Si el registro ya tiene un ID, es una actualización
+    #         if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
+    #             raise UserError("You are not allowed to update records.")
+    #     return super(ResPartner, self).write(vals)
