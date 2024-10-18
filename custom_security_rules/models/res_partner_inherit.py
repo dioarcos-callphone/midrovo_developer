@@ -1,4 +1,5 @@
 from odoo import models, api, _
+from odoo.exceptions import UserError
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -30,3 +31,9 @@ class ResPartner(models.Model):
             write_permission.perm_write = False
 
         return partner
+
+    def write(self, vals):
+        # Verificar si el usuario pertenece al grupo que no debe actualizar
+        if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
+            raise UserError("You are not allowed to update records.")
+        return super(ResPartner, self).write(vals)
