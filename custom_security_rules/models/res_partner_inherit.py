@@ -1,6 +1,10 @@
 from odoo import models, api, _
 from odoo.exceptions import UserError
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
@@ -8,7 +12,7 @@ class ResPartner(models.Model):
     def create(self, vals):
         # Obtener el grupo
         group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
-
+        _logger.info('ENTRA EN EL CREATE')
         # Verificar si el grupo se obtiene correctamente
         if not group_user:
             raise ValueError(_("El grupo no se encontró: 'group_custom_security_role_user'"))
@@ -20,6 +24,7 @@ class ResPartner(models.Model):
         ], limit=1)
 
         if write_permission:
+            _logger.info('ENTRA AQUI')
             # Habilitar el permiso de escritura temporalmente
             write_permission.perm_write = True
 
