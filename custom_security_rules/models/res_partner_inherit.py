@@ -48,7 +48,9 @@ class ResPartner(models.Model):
             # Realizar un search para verificar si el ID existe en la base de datos
             existing_partners = self.search([('id', 'in', self.ids)])
             if existing_partners:
-                _logger.info(f'ESTADO >>> { self.state }')
+                for partner in existing_partners:
+                    estado = partner['state']
+                    _logger.info(f'ESTADO >>> { estado }')
                 # Si hay registros existentes, prohibir la actualización
                 raise UserError(_('No tiene permisos para actualizar contactos.'))
         
