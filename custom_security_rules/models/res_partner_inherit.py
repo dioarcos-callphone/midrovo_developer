@@ -43,10 +43,13 @@ class ResPartner(models.Model):
         return super(ResPartner, self).create(vals)
 
     def write(self, vals):
-        # Verificar si el usuario pertenece al grupo que solo debe crear contactos
+        # Comprobar si el usuario pertenece al grupo que solo debe crear contactos
         if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
-            # Revisar si el registro está en proceso de creación (mediante el contexto)
-            if not self.env.context.get('skip_security_check', False):
+            # Realizar un search para verificar si el ID existe en la base de datos
+            existing_partners = self.search([('id', 'in', self.ids)])
+            if existing_partners:
+                # Si hay registros existentes, prohibir la actualización
                 raise UserError(_('No tiene permisos para actualizar contactos.'))
-        # Si no pertenece al grupo, proceder con la actualización
+        
+        # Si no pertenece al grupo o si no está actualizando un registro existente, proceder con la escritura
         return super(ResPartner, self).write(vals)
