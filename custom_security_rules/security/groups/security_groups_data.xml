@@ -13,9 +13,9 @@
         </record>
 
         <record id="group_custom_security_role_user" model="res.groups">
-            <field name="name">Usuario Personalizado</field>
+            <field name="name">No actualizar contactos</field>
             <field name="comment">Comment</field>
-            <field name="category_id" ref="custom_security_rules.custom_security_role_subcategory"/>
+            <field name="category_id" ref="base.module_category_sales_sales"/>
         </record>
 
         <record id="custom_security_role_subcategory_2" model="ir.module.category">
