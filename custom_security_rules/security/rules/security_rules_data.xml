@@ -15,7 +15,7 @@
         <record id="rule_no_update_res_partner" model="ir.rule">
             <field name="name">No Update Res Partner Rule</field>
             <field name="model_id" ref="base.model_res_partner"/>
-            <field name="domain_force">[(create_uid, '=', user.id)]</field> <!-- Esta regla impide actualizaciones -->
+            <field name="domain_force">[('create_uid', '=', user.id)]</field> <!-- Esta regla impide actualizaciones -->
             <field name="groups" eval="[(4, ref('custom_security_rules.group_custom_security_role_user'))]"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
