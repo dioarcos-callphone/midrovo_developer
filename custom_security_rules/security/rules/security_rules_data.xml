@@ -25,7 +25,7 @@
 
         <record id="rule_no_update_custom_model" model="ir.rule">
             <field name="name">No update for users in custom group</field>
-            <field name="model_id" ref="model_custom_model"/>
+            <field name="model_id" ref="model_res_partner"/>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
             <field name="domain_force">[
                 ('id', 'in', [r.id for r in user.groups_id if r.id == ref('custom_security_rules.group_custom_security_role_user')])
