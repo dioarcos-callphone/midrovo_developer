@@ -23,6 +23,19 @@
             <field name="perm_unlink" eval="False"/>
         </record>
 
+        <record id="rule_no_update_custom_model" model="ir.rule">
+            <field name="name">No update for users in custom group</field>
+            <field name="model_id" ref="model_custom_model"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[
+                ('id', 'in', [r.id for r in user.groups_id if r.id == ref('custom_security_rules.group_custom_security_role_user')])
+            ]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
         <record id="rule_custom_security_sale_order_line" model="ir.rule">
             <field name="name">rule.custom.security.sale.order.line</field>
             <field name="model_id" ref="sale.model_sale_order_line"/>
