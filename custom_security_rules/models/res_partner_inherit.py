@@ -49,7 +49,7 @@ class ResPartner(models.Model):
             existing_partners = self.search([('id', 'in', self.ids)])
             if existing_partners:
                 for partner in existing_partners:
-                    estado = partner['state']
+                    estado = partner['name']
                     _logger.info(f'ESTADO >>> { estado }')
                 # Si hay registros existentes, prohibir la actualización
                 raise UserError(_('No tiene permisos para actualizar contactos.'))
