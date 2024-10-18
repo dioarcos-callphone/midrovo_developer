@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
     <t t-name='FormStatusIndicator' t-inherit='web.FormStatusIndicator' t-inherit-mode='extension' owl='1'>
         <xpath expr="//div[contains(@class, 'o_form_status_indicator_buttons')]" position="replace">
-            <div class="o_form_status_indicator_buttons d-flex" t-att-class="{ invisible: !(props.model.root.isVirtual or displayButtons) }">
+            <div class="o_form_status_indicator_buttons d-flex">
                 <button
                     type="button"
                     class="o_form_button_save btn btn-light py-0"
