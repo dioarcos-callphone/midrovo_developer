@@ -7,6 +7,7 @@
         - Contiene opciones para traer el informe segun el costo
         - La vista tree del account move line muestra los detalles de la factura
         - Cuando genere el informe seleccione los registros y de click en PDF o EXCEL
+        - Los usuarios que pertenecen al grupo group_invoice_details_view_user no tienen permitido ver el costo, total costo y rentabilidad.
     """,
     
     "category": "Account Move",
