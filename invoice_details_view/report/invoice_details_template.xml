@@ -23,9 +23,11 @@
                             <th align="center" style="vertical-align: middle">PRECIO</th>
                             <th align="center" style="vertical-align: middle">DESCUENTO</th>
                             <th align="center" style="vertical-align: middle">SUBTOTAL</th>
-                            <th align="center" style="vertical-align: middle">COSTO</th>
-                            <th align="center" style="vertical-align: middle">TOTAL COSTO</th>
-                            <th align="center" style="vertical-align: middle">RENTABILIDAD</th>
+                            <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                <th align="center" style="vertical-align: middle">COSTO</th>
+                                <th align="center" style="vertical-align: middle">TOTAL COSTO</th>
+                                <th align="center" style="vertical-align: middle">RENTABILIDAD</th>
+                            </t>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,21 +65,23 @@
                             <td align="center" width="100">
                                 <t t-esc="result['subtotal']"/>
                             </td>
-                            <td align="center" width="100">
-                                <t t-if="is_cost_or_debit == 'master'">
-                                    <t t-esc="result['costo']"/>
-                                </t>
-                                <t t-else="">
-                                    <t t-esc="result['debito']"/>
-                                </t>
-                                
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['total_costo']"/>
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['rentabilidad']"/>
-                            </td>
+                            <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                <td align="center" width="100">
+                                    <t t-if="is_cost_or_debit == 'master'">
+                                        <t t-esc="result['costo']"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="result['debito']"/>
+                                    </t>
+                                    
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['total_costo']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['rentabilidad']"/>
+                                </td>
+                            </t>
                         </tr>
                     </tbody>              
                 </table>

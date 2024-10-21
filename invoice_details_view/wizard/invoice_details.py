@@ -281,6 +281,11 @@ class InvoiceDetails(models.TransientModel):
             'Rentabilidad',
         ]
         
+        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+            headers.append('Costo')
+            headers.append('Total Costo')
+            headers.append('Rentabilidad')
+
         for col, header in enumerate(headers):
             sheet.write(2, col, header, header_format)
 
@@ -296,9 +301,11 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('I:I', 10)  # Precio
         sheet.set_column('J:J', 10)  # Descuento
         sheet.set_column('K:K', 10)  # Subtotal
-        sheet.set_column('L:L', 10)  # Costo o Debito
-        sheet.set_column('M:M', 10)  # Total Costo
-        sheet.set_column('N:N', 12)  # Rentabilidad
+        
+        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+            sheet.set_column('L:L', 10)  # Costo o Debito
+            sheet.set_column('M:M', 10)  # Total Costo
+            sheet.set_column('N:N', 12)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -315,14 +322,15 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 9, val['descuento'], text_format)
             sheet.write(row, 10, val['subtotal'], text_format)
             
-            if is_cost_or_debit == 'master':
-                sheet.write(row, 10, val['costo'], text_format)
-            elif is_cost_or_debit == 'movement':
-                sheet.write(row, 10, val['debito'], text_format)
-            
-            sheet.write(row, 11, val['total_costo'], text_format)
-            sheet.write(row, 12, val['rentabilidad'], text_format)
-            row += 1
+            if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+                if is_cost_or_debit == 'master':
+                    sheet.write(row, 10, val['costo'], text_format)
+                elif is_cost_or_debit == 'movement':
+                    sheet.write(row, 10, val['debito'], text_format)
+                
+                sheet.write(row, 11, val['total_costo'], text_format)
+                sheet.write(row, 12, val['rentabilidad'], text_format)
+                row += 1
 
         # Cerrar el libro
         workbook.close()
