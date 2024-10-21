@@ -3,8 +3,10 @@
     
     "summary": "Restriccion de modificacion para el sale order line y res partner",
     "description": """
-        No permite actualizar precios unitarios de la orden de venta y tambien restringe actualizacion
-        en el modulo de contactos (res_partner)
+        - No permite actualizar precios unitarios de la orden de venta
+        - Restringe confirmacion de factura y despacho, no permite eliminar el stock picking
+        - Restringe actualizacion en el modulo de contactos (res_partner)
+        
     """,
     
     'version': '1.0',
@@ -22,11 +24,11 @@
         
     ],
     
-    'assets': {
-        'web.assets_backend': [
-            'custom_security_rules/static/src/xml/form_status_indicator.xml',         
-        ]
-    },
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'custom_security_rules/static/src/xml/form_status_indicator.xml',         
+    #     ]
+    # },
     
     'license': 'LGPL-3',
     'installable': True,
