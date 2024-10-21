@@ -45,9 +45,15 @@
 
     <menuitem id="invoice_details_report_menu"
               name="Reporte de detalles de facturas"
-              action="invoice_details_report_action"
-              parent="account.menu_finance_receivables"
-              sequence="111">
+              parent="account.menu_finance_reports"
+              sequence="5">
     </menuitem>
+
+    <menuitem
+        id="invoice_detail_report_view_menu"
+        name="Informes de factura y notas de crédito"
+        action="invoice_details_report_action"
+        parent="invoice_details_report_menu"
+        sequence="1"/>
 
 </odoo>
