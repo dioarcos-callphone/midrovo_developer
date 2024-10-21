@@ -20,7 +20,7 @@ class ResPartner(models.Model):
                     return super(ResPartner, self).write(vals)
                 else:
                     # Lanzar un error si no coinciden
-                    raise exceptions.AccessError("No tienes permisos para actualizar contactos.")
+                    raise exceptions.AccessError("No tienes permisos para actualizar contactos, comuníquese con el Administrador de Sistemas.")
 
         # Si no se encuentra una restricción, permitir la operación
         return super(ResPartner, self).write(vals)
@@ -28,7 +28,7 @@ class ResPartner(models.Model):
     def unlink(self):
         # Verificar si el usuario pertenece al grupo restringido
         if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
-            raise exceptions.AccessError("No tienes permiso para eliminar este registro.")
+            raise exceptions.AccessError("No tienes permisos para eliminar contactos, comuníquese con el Administrador de Sistemas.")
         
         # Lógica personalizada antes de eliminar, si es necesario
         return super(ResPartner, self).unlink()
