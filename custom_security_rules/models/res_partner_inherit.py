@@ -1,58 +1,26 @@
-from odoo import models, api, _
-from odoo.exceptions import UserError
-
-import logging
-_logger = logging.getLogger(__name__)
-
+from odoo import models, api, exceptions, fields
+from datetime import datetime
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    # @api.model
-    # def create(self, vals):
-    #     # Obtener el grupo
-    #     group_user = self.env.ref('custom_security_rules.group_custom_security_role_user')
-    #     _logger.info('ENTRA EN EL CREATE')
-    #     # Verificar si el grupo se obtiene correctamente
-    #     if not group_user:
-    #         raise ValueError(_("El grupo no se encontró: 'group_custom_security_role_user'"))
-
-    #     # Buscar el permiso de acceso en ir.model.access
-    #     write_permission = self.env['ir.model.access'].sudo().search([
-    #         ('group_id', '=', group_user.id),
-    #         ('model_id.model', '=', 'res.partner')
-    #     ], limit=1)
-
-    #     if write_permission:
-    #         _logger.info('ENTRA AQUI')
-    #         # Habilitar el permiso de escritura temporalmente
-    #         write_permission.perm_write = True
-
-    #     # Crear el registro de partner
-    #     partner = super(ResPartner, self).create(vals)
-
-    #     if write_permission:
-    #         # Deshabilitar el permiso de escritura nuevamente
-    #         write_permission.perm_write = False
-
-    #     return partner
-
-    @api.model
-    def create(self, vals):
-        # Permitir creación sin restricciones
-        return super(ResPartner, self).create(vals)
-
     def write(self, vals):
-        # Comprobar si el usuario pertenece al grupo que solo debe crear contactos
-        if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
-            # Realizar un search para verificar si el ID existe en la base de datos
-            existing_partners = self.search([('id', 'in', self.ids)])
-            if existing_partners:
-                for partner in existing_partners:
-                    estado = partner['name']
-                    _logger.info(f'ESTADO >>> { estado }')
-                # Si hay registros existentes, prohibir la actualización
-                raise UserError(_('No tiene permisos para actualizar contactos.'))
-        
-        # Si no pertenece al grupo o si no está actualizando un registro existente, proceder con la escritura
+        # Comprobar si se está intentando actualizar un registro creado por un usuario restringido
+        for record in self:
+            # Comprobar si el usuario pertenece al grupo con acceso limitado
+            if self.env.user.has_group('custom_security_rules.group_custom_security_role_user'):
+                # Obtener la fecha de creación del registro
+                fecha_creacion = record.create_date
+                # Obtener la fecha y hora actual en la zona horaria de Odoo
+                fecha_actual = datetime.now()
+
+                # Comparar las fechas redondeando los microsegundos
+                if fecha_creacion.replace(microsecond=0) == fecha_actual.replace(microsecond=0):
+                    # Permitir la actualización si las fechas coinciden
+                    return super(ResPartner, self).write(vals)
+                else:
+                    # Lanzar un error si no coinciden
+                    raise exceptions.AccessError("No tienes permisos para actualizar contactos.")
+
+        # Si no se encuentra una restricción, permitir la operación
         return super(ResPartner, self).write(vals)
