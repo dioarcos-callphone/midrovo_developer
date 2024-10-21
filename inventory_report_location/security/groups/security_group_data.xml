@@ -3,17 +3,17 @@
     <data>
     
         <record id="inventory_report_location_category" model="ir.module.category">
-            <field name="name">Reporte de Inventario por Localidad</field>
+            <field name="name">Reportes Excel o PDF</field>
         </record>
 
         <record id="inventory_report_location_subcategory" model="ir.module.category">
-            <field name="name">Inventario</field>
+            <field name="name">Varios</field>
             <field name="parent_id" ref="inventory_report_location.inventory_report_location_category" />
         </record>
 
         <record id="group_inventory_report_location_user" model="res.groups">
-            <field name="name">Mostrar solo por Stock</field>
-            <field name="comment">Comment</field>
+            <field name="name">Restringir campos</field>
+            <field name="comment">Este grupo sive para validar campos que serán visibles en los reportes PDF o EXCEL.</field>
             <field name="category_id" ref="inventory_report_location.inventory_report_location_subcategory"/>
         </record>
     
