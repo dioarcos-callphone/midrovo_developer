@@ -5,7 +5,7 @@
         <record id="group_inventory_report_location" model="res.groups">
             <field name="name">Reporte de Inventario por Localidad, Campos no Visibles Costo y Total Costo.</field>
             <field name="comment">Restringe la visualización del costo y total costo en el reporte pdf.</field>
-            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="category_id" ref="stock.module_category_inventory_management"/>
         </record>
     
     </data>
