@@ -262,12 +262,13 @@ class InvoiceDetails(models.TransientModel):
         })
 
         # Título del informe
-        sheet.merge_range('A1:M1', 'Informe de Detalles de Facturas', title_format)
+        sheet.merge_range('A1:N1', 'Informe de Detalles de Facturas', title_format)
 
         # Encabezados
         headers = [
             'Fecha',
             'Número',
+            'Tipo',
             'Comercial',
             'Cajero',
             'Cliente',
@@ -276,9 +277,6 @@ class InvoiceDetails(models.TransientModel):
             'Precio',
             'Descuento',
             'Subtotal',
-            'Costo',
-            'Total Costo',
-            'Rentabilidad',
         ]
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
@@ -330,7 +328,8 @@ class InvoiceDetails(models.TransientModel):
                 
                 sheet.write(row, 11, val['total_costo'], text_format)
                 sheet.write(row, 12, val['rentabilidad'], text_format)
-                row += 1
+            
+            row += 1
 
         # Cerrar el libro
         workbook.close()
