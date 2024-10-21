@@ -14,8 +14,10 @@ class ProductProductInherit(models.Model):
         total_valor_stock = 0 
         
         for producto in self:
+            
             variantes = []
             cantidad = producto.qty_available
+            
             costo = round(producto.standard_price, 3)
             valor_stock = round((costo * cantidad), 3)
             

@@ -17,8 +17,10 @@
                         <tr>
                             <th align="center" style="vertical-align: middle">PRODUCTOS</th>
                             <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
-                            <th align="center" style="vertical-align: middle">COSTO</th>
-                            <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
+                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <th align="center" style="vertical-align: middle">COSTO</th>
+                                <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
+                            </t>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,12 +43,14 @@
                             <td align="center" width="120">
                                 <t t-esc="new['cantidad']"/>
                             </td>
-                            <td align="center" width="120">
-                                $ <t t-esc="new['costo']"/>
-                            </td>
-                            <td align="center" width="120">
-                                $ <t t-esc="new['valor_stock']"/>
-                            </td>
+                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <td align="center" width="120">
+                                    $ <t t-esc="new['costo']"/>
+                                </td>
+                                <td align="center" width="120">
+                                    $ <t t-esc="new['valor_stock']"/>
+                                </td>
+                            </t>
                         </tr>
                     </tbody>
                 </table>
@@ -60,9 +64,11 @@
                             <th align="center" width="120">
                                     
                             </th>
-                            <th align="center" width="120">
-                                $ <t t-esc="total_valor_stock"/>
-                            </th>
+                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <th align="center" width="120">
+                                    $ <t t-esc="total_valor_stock"/>
+                                </th>
+                            </t>
                         </tr>
                     </tfoot>
                 </table>
