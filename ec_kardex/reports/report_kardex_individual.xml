@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <template id="report_kardex_individual">
+            <t t-call="web.html_container">
+                <t t-set="report_title" t-value="'Kardex Valorizado Producto'"/>
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div class="row">
+                            <strong id="company_name_title">Empresa:</strong>
+                            <span id="company_name_title" t-esc="company.name"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="company_vat_title">RUC:</strong>
+                            <span id="company_vat_title" t-esc="company.vat"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="product_id_title">Producto:</strong>
+                            <span id="product_id_value" t-esc="product.display_name"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="product_default_code_title">Referencia Interna:</strong>
+                            <span id="product_default_code_value" t-esc="product.default_code"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="product_barcode_title">Codigo Barra:</strong>
+                            <span id="product_barcode_value" t-esc="product.barcode"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="uom_id_title">Unidad de Medida:</strong>
+                            <span id="uom_id_value" t-esc="product.uom_id.name"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="product_cost_method_title">Metodo de Valorización Usado:</strong>
+                            <span id="product_cost_method_value" t-esc="product.cost_method_name()"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="location_id_title">Bodega:</strong>
+                            <span id="location_id_value" t-esc="location.display_name"></span>
+                        </div>
+                        <div class="row">
+                            <strong id="dates_title">Fechas de Corte:</strong>
+                            <span id="date_from_value"
+                                  t-esc="date_from and 'Desde: ' + date_from or ''"></span>
+                            <span id="date_to_value"
+                                  t-esc="date_to and ' Hasta: ' + date_to or ''"></span>
+                        </div>
+
+                        <table class="table table-condensed table-bordered" border="1">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" id="date_title">Fecha</th>
+                                    <th class="text-center" id="origin_title">Bodega de Origen</th>
+                                    <th class="text-center" id="destino_title">Bodega de Destino</th>
+                                    <th class="text-center" id="asiento_title">Asiento</th>
+                                    <th class="text-center" id="origin_title2">Documento de Origen</th>
+                                    <th class="text-center" id="partner_name">Usuario</th>
+                                    <th class="text-center" id="partner_title">Referencia</th>
+                                    <th class="text-center" id="reference_title">Descripción</th>
+                                    <t t-if="show_costs == true">
+                                        <th class="text-center" id="price_unit_title">Costo Unitario $</th>
+                                        <th class="text-center" id="amount_title">Total $</th>
+                                    </t>
+                                    <th class="text-center" id="type_title">Tipo</th>
+                                    <th class="text-center" id="in_title">Entrada</th>
+                                    <th class="text-center" id="out_title">Salida</th>
+                                    <th class="text-center" id="balance_title">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="lines" t-as="line">
+                                    <tr>
+                                        <td class="text-left" style="min-width: 80px;">
+                                            <span id="date_value" t-esc="line.get('date', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="origin_value" t-esc="line.get('src', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="destino_value" t-esc="line.get('dest', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="asiento_value" t-esc="line.get('asiento', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="origin_value2" t-esc="line.get('origin', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="partner_name" t-esc="line.get('partner_name', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="partner_value" t-esc="line.get('partner', '')"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span id="reference_value" t-esc="line.get('ref', '')"/>
+                                        </td>
+                                        <t t-if="show_costs == true">
+                                            <td class="text-right" style="min-width: 80px;">
+                                                <span id="price_unit_value"
+                                                      t-esc="formatLang(line.get('price_unit', 0.0), currency_obj=company.currency_id)"/>
+                                            </td>
+                                            <td class="text-right" style="min-width: 80px;">
+                                                <span id="amount_value"
+                                                      t-esc="formatLang(line.get('amount', 0.0), currency_obj=company.currency_id)"/>
+                                            </td>
+                                        </t>
+                                        <td class="text-left">
+                                            <span id="type_value" t-esc="line.get('type', 'Interno')"/>
+                                        </td>
+                                        <td class="text-right" style="min-width: 80px;">
+                                            <span id="in_value"
+                                                  t-esc="formatLang(line.get('qty_in', 0.0), dp='Product Unit of Measure')"/>
+                                        </td>
+                                        <td class="text-right" style="min-width: 80px;">
+                                            <span id="out_value"
+                                                  t-esc="formatLang(line.get('qty_out', 0.0), dp='Product Unit of Measure')"/>
+                                        </td>
+                                        <td class="text-right" style="min-width: 80px;">
+                                            <span id="balance_value"
+                                                  t-esc="formatLang(line.get('balance', 0.0), dp='Product Unit of Measure')"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

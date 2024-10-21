@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_kardex_individual_form_view">
+            <field name="name">wizard.ec_kardex.individual.report.form</field>
+            <field name="model">wizard.ec_kardex.individual.report</field>
+            <field name="arch" type="xml">
+                <form string="Kardex Individual por producto">
+                    <group>
+                        <group>
+                            <field name="product_id" required="1" options="{'no_create': True}"
+                                   domain="[('type','!=','service')]"/>
+                            <field name="date_from"/>
+                            <field name="show_costs"/>
+                        </group>
+                        <group>
+                            <field name="location_id" required="1" options="{'no_create': True}"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <div class="oe_left">
+                            <button string="Generar Vista Previa" name="action_view_report"
+                                    type="object" icon="fa-list" class="oe_highlight"/>
+                            <br/>
+                            <br/>
+                            <button string="Generar PDF" name="action_print_report"
+                                    type="object" icon="fa-print" class="oe_highlight"/>
+                            <button class="oe_link"/>
+                            <button string="Generar Excel" name="action_get_report"
+                                    type="object" icon="fa-print" class="oe_highlight"/>
+                            <button class="oe_link"/>
+                            <button string="Cerrar" special="cancel" type="object"
+                                    icon="fa-close" class="oe_link"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_wizard_kardex_individual_tree_view">
+            <field name="name">Kardex Individual por producto</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.ec_kardex.individual.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="wizard_kardex_individual_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="wizard_kardex_individual_menu" name="Kardex Individual por producto"
+                  sequence="10" parent="stock_reporting_main_menu" action="action_wizard_kardex_individual_tree_view"/>
+
+
+    </data>
+</odoo>

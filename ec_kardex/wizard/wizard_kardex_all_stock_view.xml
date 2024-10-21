@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="wizard_kardex_all_stock_form_view">
+			<field name="name">wizard.ec_kardex.all.stock.form.view</field>
+			<field name="model">wizard.ec_kardex.all.stock.report</field>
+			<field name="arch" type="xml">
+				<form string="Kardex Individual por producto">
+					<group col="4">
+						<field name="type" widget="radio"/>
+					</group>
+					<group col="4">
+						<field name="start_date" string="Desde" attrs="{'invisible': [('type', '!=', 'range')],'required': [('type', '=', 'range')]}" />
+						<field name="end_date" string="Hasta" attrs="{'invisible': [('type', '!=', 'range')],'required': [('type', '=', 'range')]}"/>
+						<field name="location_id" required="1" options="{'no_create': True}"  domain="[('usage', '=', 'internal')]"/>
+						<field name="categ_id" options="{'no_create': True}" />
+						<field name="mostrar_costos"  group="ec_cash.group_cash_box_manager"/>
+
+					</group>
+					<footer>
+						<div class="oe_left">
+							<button string="Generar reporte" name="action_print_report"
+									type="object" icon="fa-print" class="oe_highlight" />
+							<button string="Generar reporte en Excel" name="action_get_report"
+									type="object" icon="fa-print" class="oe_highlight" />
+							<button string="Cerrar" special="cancel" type="object"
+									icon="fa-close" class="oe_link" />
+						</div>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_wizard_kardex_all_stock_tree_view">
+			<field name="name">Stock por Almacen</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">wizard.ec_kardex.all.stock.report</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="wizard_kardex_all_stock_form_view" />
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="wizard_kardex_all_stock_menu" name="Stock por Almacen"
+				  sequence="20" parent="stock_reporting_main_menu" action="action_wizard_kardex_all_stock_tree_view" />
+
+
+	</data>
+</odoo>
