@@ -6,6 +6,8 @@
         - No permite actualizar precios unitarios de la orden de venta
         - Restringe confirmacion de factura y despacho, no permite eliminar el stock picking
         - Restringe actualizacion en el modulo de contactos (res_partner)
+        - Los grupos definidos son group_custom_security_role_user (No actualizar contactos)
+        group_custom_security_role_user_2 (No confirmar facturas ni despachos)
         
     """,
     
