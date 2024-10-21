@@ -13,9 +13,12 @@
                         class="btn btn-primary"
                         icon="fa-check"/>
             </xpath>
-            <!-- <xpath expr="//field[@name='standard_price']" position="attributes">
-                <attribute name="invisible">1</attribute>                
-            </xpath> -->
+            <xpath expr="//field[@name='standard_price']" position="replace">
+                <field name="standard_price" groups="stock.group_stock_manager" invisible="1" />               
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="after">
+                <field name="standard_price" groups="!stock.group_stock_manager" />               
+            </xpath>
         </field>
     </record>
 
