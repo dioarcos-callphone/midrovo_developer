@@ -293,7 +293,7 @@ class InvoiceDetails(models.TransientModel):
         # Ajuste de columnas
         sheet.set_column('A:A', 10)  # Fecha
         sheet.set_column('B:B', 22)  # Número
-        sheet.set_column('C:C', 22)  # Tipo
+        sheet.set_column('C:C', 15)  # Tipo
         sheet.set_column('D:D', 22)  # Comercial
         sheet.set_column('E:E', 20)  # Cajero
         sheet.set_column('F:F', 20)  # Cliente
