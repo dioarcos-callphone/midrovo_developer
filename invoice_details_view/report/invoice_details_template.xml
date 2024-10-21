@@ -14,6 +14,7 @@
                         <tr>
                             <th align="center" style="vertical-align: middle">FECHA</th>
                             <th align="center" style="vertical-align: middle">NUMERO</th>
+                            <th align="center" style="vertical-align: middle">TIPO</th>
                             <th align="center" style="vertical-align: middle">COMERCIAL</th>
                             <th align="center" style="vertical-align: middle">CAJERO</th>
                             <th align="center" style="vertical-align: middle">CLIENTE</th>
@@ -34,6 +35,9 @@
                             </td>
                             <td>
                                 <t t-esc="result['numero']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['tipo']"/>
                             </td>
                             <td>
                                 <t t-esc="result['comercial']"/>

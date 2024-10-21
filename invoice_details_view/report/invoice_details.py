@@ -109,7 +109,20 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-
+                
+                if detail.move_id.move_type == 'out_invoice':
+                    data_detail['tipo'] = 'Factura'
+                    
+                elif detail.move_id.move_type == 'out_refund':
+                    data_detail['tipo'] = 'Nota de crédito'
+                    data_detail['rentabilidad'] = - data_detail['rentabilidad']
+                    data_detail['total_costo'] = - data_detail['total_costo']
+                    data_detail['costo'] = - data_detail['costo']
+                    data_detail['cantidad'] = - data_detail['cantidad']
+                    data_detail['precio'] = - data_detail['precio']
+                    data_detail['descuento'] = - data_detail['descuento']
+                    data_detail['subtotal'] = - data_detail['subtotal']
+                    
                 data_invoice_details.append(data_detail)
             
             return {
