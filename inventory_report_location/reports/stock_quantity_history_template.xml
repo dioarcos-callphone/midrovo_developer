@@ -61,10 +61,10 @@
                             <th align="center" width="120">
                                 <t t-esc="total_cantidad"/>
                             </th>
-                            <th align="center" width="120">
-                                    
-                            </th>
                             <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <th align="center" width="120">
+                                        
+                                </th>
                                 <th align="center" width="120">
                                     $ <t t-esc="total_valor_stock"/>
                                 </th>
