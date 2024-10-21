@@ -17,7 +17,7 @@
                         <tr>
                             <th align="center" style="vertical-align: middle">PRODUCTOS</th>
                             <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
-                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
                                 <th align="center" style="vertical-align: middle">COSTO</th>
                                 <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
                             </t>
@@ -43,7 +43,7 @@
                             <td align="center" width="120">
                                 <t t-esc="new['cantidad']"/>
                             </td>
-                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
                                 <td align="center" width="120">
                                     $ <t t-esc="new['costo']"/>
                                 </td>
@@ -64,7 +64,7 @@
                             <th align="center" width="120">
                                     
                             </th>
-                            <t t-if="!env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
                                 <th align="center" width="120">
                                     $ <t t-esc="total_valor_stock"/>
                                 </th>
