@@ -4,7 +4,7 @@
     <data>
 
         <record id="group_custom_security_role_user" model="res.groups">
-            <field name="name">No actualizar contactos</field>
+            <field name="name">No actualizar contactos y precio unitario</field>
             <field name="comment">Comment</field>
             <field name="category_id" ref="base.module_category_sales_sales"/>
         </record>
