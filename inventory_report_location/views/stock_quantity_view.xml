@@ -13,9 +13,9 @@
                         class="btn btn-primary"
                         icon="fa-check"/>
             </xpath>
-            <xpath expr="//field[@name='standard_price']" position="attributes">
+            <!-- <xpath expr="//field[@name='standard_price']" position="attributes">
                 <attribute name="invisible">1</attribute>                
-            </xpath>
+            </xpath> -->
         </field>
     </record>
 
