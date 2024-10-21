@@ -161,6 +161,19 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
+                
+                if detail.move_id.move_type == 'out_invoice':
+                    data_detail['tipo'] = 'Factura'
+                    
+                elif detail.move_id.move_type == 'out_refund':
+                    data_detail['tipo'] = 'Nota de crédito'
+                    data_detail['rentabilidad'] = - data_detail['rentabilidad']
+                    data_detail['total_costo'] = - data_detail['total_costo']
+                    data_detail['costo'] = - data_detail['costo']
+                    data_detail['cantidad'] = - data_detail['cantidad']
+                    data_detail['precio'] = - data_detail['precio']
+                    data_detail['descuento'] = - data_detail['descuento']
+                    data_detail['subtotal'] = - data_detail['subtotal']
 
                 data_invoice_details.append(data_detail)
             
@@ -274,31 +287,33 @@ class InvoiceDetails(models.TransientModel):
         # Ajuste de columnas
         sheet.set_column('A:A', 10)  # Fecha
         sheet.set_column('B:B', 22)  # Número
-        sheet.set_column('C:C', 20)  # Comercial
-        sheet.set_column('D:D', 20)  # Cajero
-        sheet.set_column('E:E', 20)  # Cliente
-        sheet.set_column('F:F', 15)  # Product
-        sheet.set_column('G:G', 10)  # Cantidad
-        sheet.set_column('H:H', 10)  # Precio
-        sheet.set_column('I:I', 10)  # Descuento
-        sheet.set_column('J:J', 10)  # Subtotal
-        sheet.set_column('K:K', 10)  # Costo o Debito
-        sheet.set_column('L:L', 12)  # Total Costo
-        sheet.set_column('M:M', 12)  # Rentabilidad
+        sheet.set_column('C:C', 22)  # Tipo
+        sheet.set_column('D:D', 22)  # Comercial
+        sheet.set_column('E:E', 20)  # Cajero
+        sheet.set_column('F:F', 20)  # Cliente
+        sheet.set_column('G:G', 20)  # Product
+        sheet.set_column('H:H', 15)  # Cantidad
+        sheet.set_column('I:I', 10)  # Precio
+        sheet.set_column('J:J', 10)  # Descuento
+        sheet.set_column('K:K', 10)  # Subtotal
+        sheet.set_column('L:L', 10)  # Costo o Debito
+        sheet.set_column('M:M', 10)  # Total Costo
+        sheet.set_column('N:N', 12)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
             sheet.write(row, 0, val['fecha'], text_format)
             sheet.write(row, 1, val['numero'], text_format)
-            sheet.write(row, 2, val['comercial'], text_format)
-            sheet.write(row, 3, val['pos'], text_format)
-            sheet.write(row, 4, val['cliente'], text_format)
-            sheet.write(row, 5, val['producto'], text_format)
-            sheet.write(row, 6, val['cantidad'], text_format)
-            sheet.write(row, 7, val['precio'], text_format)
-            sheet.write(row, 8, val['descuento'], text_format)
-            sheet.write(row, 9, val['subtotal'], text_format)
+            sheet.write(row, 2, val['tipo'], text_format)
+            sheet.write(row, 3, val['comercial'], text_format)
+            sheet.write(row, 4, val['pos'], text_format)
+            sheet.write(row, 5, val['cliente'], text_format)
+            sheet.write(row, 6, val['producto'], text_format)
+            sheet.write(row, 7, val['cantidad'], text_format)
+            sheet.write(row, 8, val['precio'], text_format)
+            sheet.write(row, 9, val['descuento'], text_format)
+            sheet.write(row, 10, val['subtotal'], text_format)
             
             if is_cost_or_debit == 'master':
                 sheet.write(row, 10, val['costo'], text_format)
