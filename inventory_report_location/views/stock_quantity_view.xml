@@ -17,7 +17,7 @@
                 <field name="standard_price" groups="stock.group_stock_user" invisible="1" />               
             </xpath>
             <xpath expr="//field[@name='standard_price']" position="after">
-                <field name="standard_price" groups="!stock.group_stock_user" />               
+                <field name="standard_price" groups="!stock.group_stock_user" invisible="0" />               
             </xpath>
         </field>
     </record>
