@@ -332,7 +332,7 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 11, val['total_costo'], text_format)
                 sheet.write(row, 12, val['rentabilidad'], text_format)
             
-            row += 1
+                row += 1
 
         # Cerrar el libro
         workbook.close()
