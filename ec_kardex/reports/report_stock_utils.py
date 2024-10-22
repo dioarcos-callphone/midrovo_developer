@@ -456,7 +456,7 @@ class ReportStockUtils(models.AbstractModel):
 					"qty_in": qty_in,
 					"qty_out": qty_out,
 					"balance": total_qty_in - total_qty_out,
-					"costo_promedio": (total_qty_in - total_qty_out) * product.standard_price
+					"costo_promedio": product.qty_available * product.standard_price
 				})
 			else:
 				partner = ""
