@@ -316,16 +316,15 @@ class ReportStockUtils(models.AbstractModel):
 			start_time = datetime.strptime(start_time,'%Y-%m-%d')
    
 		start_time = start_time.strftime('%Y-%m-%d')
-   
-		if isinstance(start_time, str):
-			start_time = datetime.strptime(start_time+" 00:00:00", DTF)
+		start_time = datetime.strptime(start_time+" 00:00:00", DTF)
 
 		end_time = date_to
-		end_time = datetime.strptime(end_time,'%Y-%m-%d')
-		end_time = end_time.strftime('%Y-%m-%d')
-
 		if isinstance(end_time, str):
-			end_time = datetime.strptime(end_time + " 23:59:59", DTF) + timedelta(hours=5)
+			end_time = datetime.strptime(end_time,'%Y-%m-%d')
+   
+		end_time = end_time.strftime('%Y-%m-%d')
+		end_time = datetime.strptime(end_time + " 23:59:59", DTF) + timedelta(hours=5)
+  
 		common_domain = [
 			("product_id", "=", product.id),
 			("date", ">=", start_time),
