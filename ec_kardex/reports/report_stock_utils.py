@@ -312,8 +312,11 @@ class ReportStockUtils(models.AbstractModel):
 		# date_to = date_to - timedelta(hours=5)
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = date_from
-		start_time = datetime.strptime(start_time,'%Y-%m-%d')
+		if isinstance(start_time, str):
+			start_time = datetime.strptime(start_time,'%Y-%m-%d')
+   
 		start_time = start_time.strftime('%Y-%m-%d')
+   
 		if isinstance(start_time, str):
 			start_time = datetime.strptime(start_time+" 00:00:00", DTF)
 
