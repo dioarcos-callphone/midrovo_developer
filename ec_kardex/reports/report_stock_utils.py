@@ -322,6 +322,7 @@ class ReportStockUtils(models.AbstractModel):
 			start_time = datetime.strptime(start_time+" 00:00:00", DTF)
 
 		end_time = date_to
+		end_time = datetime.strptime(end_time,'%Y-%m-%d')
 		end_time = end_time.strftime('%Y-%m-%d')
 
 		if isinstance(end_time, str):
