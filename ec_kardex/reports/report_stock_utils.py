@@ -382,7 +382,7 @@ class ReportStockUtils(models.AbstractModel):
 			"partner": "",
 			"qty_in": start_qty_in,
 			"qty_out": start_qty_out,
-			"balance": start_qty_in - start_qty_out,
+			"balance": 0,
 		})
 		# add move lines of report
 		total_qty_in = start_qty_in
