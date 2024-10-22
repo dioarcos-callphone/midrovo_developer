@@ -8,8 +8,7 @@
     "depends" : [
         'stock_account',
         'purchase',
-        'ec_tools',
-        'inventory_report_location'
+        'ec_tools'
     ],
     "init": [],
     "data": [
