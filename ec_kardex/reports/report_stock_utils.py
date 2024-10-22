@@ -382,7 +382,7 @@ class ReportStockUtils(models.AbstractModel):
 			"partner": "",
 			"qty_in": start_qty_in,
 			"qty_out": start_qty_out,
-			"balance": 0,
+			"balance": start_qty_in - start_qty_out,
 		})
 		# add move lines of report
 		total_qty_in = start_qty_in
@@ -455,7 +455,8 @@ class ReportStockUtils(models.AbstractModel):
 					"partner": move.picking_id and move.picking_id.name or '',
 					"qty_in": qty_in,
 					"qty_out": qty_out,
-					"balance": 0,
+					"balance": total_qty_in - total_qty_out,
+					"costo_promedio": (total_qty_in - total_qty_out) * product.standard_price
 				})
 			else:
 				partner = ""
@@ -476,7 +477,7 @@ class ReportStockUtils(models.AbstractModel):
 					"partner": move.picking_id and move.picking_id.name or '',
 					"qty_in": qty_in,
 					"qty_out": qty_out,
-					"balance": 0,
+					"balance": total_qty_in-total_qty_out,
 				})
 		else:
 			lines.append({
@@ -493,7 +494,7 @@ class ReportStockUtils(models.AbstractModel):
 				"partner": "",
 				"qty_in": total_qty_in,
 				"qty_out": total_qty_out,
-				"balance": 0,
+				"balance": total_qty_in - total_qty_out,
 			})
 		return lines
 
