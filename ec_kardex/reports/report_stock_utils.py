@@ -614,7 +614,6 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'Entrada',
 			'qty_out': 'Salida',
 			'balance': 'Saldo',
-			'costo_promedio': 'Costo Promedio'
 		}
 		COLUM_HEADER = {
 			'date': 'Fecha',
