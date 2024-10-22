@@ -12,6 +12,10 @@ except ImportError:
 	import xlsxwriter
 import io
 
+
+import logging
+_logger = logging.getLogger(__name__)
+
 from odoo import models, api, fields
 from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
@@ -519,6 +523,7 @@ class ReportStockUtils(models.AbstractModel):
 
 	@api.model
 	def MakeReportxls(self):
+		_logger.info('ENTRA EN EL MAKE REPORT XLS')
 		context = self.env.context.copy()
 		location_name = context.get('location_name')
 		date_from = context.get('date_from', False)
