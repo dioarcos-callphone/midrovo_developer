@@ -67,13 +67,11 @@ class ReportStockUtils(models.AbstractModel):
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = date_from
 		_logger.info(f'START TIME DE REPORT STOCK 1 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
 		start_time = start_time.strftime('%Y-%m-%d')
 		if isinstance(start_time, str):
 			start_time = datetime.strptime(start_time + " 00:00:00", DTF)
 
 		end_time = date_to
-		end_time = datetime.strptime(end_time, '%Y-%m-%d')
 		end_time = end_time.strftime('%Y-%m-%d')
 
 		if isinstance(end_time, str):
@@ -185,13 +183,11 @@ class ReportStockUtils(models.AbstractModel):
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = date_from
 		_logger.info(f'START TIME DE REPORT STOCK 2 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
 		start_time = start_time.strftime(DTF)
 		# cuando me pasen solo fecha, debo considerar todo el dia
 		# end_time = date_to
 		# end_time=date_to + timedelta(days=1)
 		end_time = date_to
-		end_time = datetime.strptime(end_time, '%Y-%m-%d')
 		end_time = end_time.strftime(DTF)
 		common_domain = [
 			("product_id", "=", product.id),
@@ -319,15 +315,13 @@ class ReportStockUtils(models.AbstractModel):
 		# date_to = date_to - timedelta(hours=5)
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = date_from
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
 		_logger.info(f'START TIME DE REPORT STOCK 3 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
+		start_time = start_time.strptime(start_time,'%Y-%m-%d')
 		start_time = start_time.strftime('%Y-%m-%d')
 		if isinstance(start_time, str):
 			start_time = datetime.strptime(start_time+" 00:00:00", DTF)
 
 		end_time = date_to
-		end_time = datetime.strptime(end_time, '%Y-%m-%d')
 		end_time = end_time.strftime('%Y-%m-%d')
 
 		if isinstance(end_time, str):
@@ -964,7 +958,6 @@ class ReportStockUtils(models.AbstractModel):
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = start_date
 		_logger.info(f'START TIME DE REPORT STOCK 4 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
 		start_time = start_time.strftime(DTF)
 		end_date = end_date + timedelta(days=1)
 		end_time = end_date.strftime(DTF)
@@ -1058,7 +1051,6 @@ class ReportStockUtils(models.AbstractModel):
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = start_date
 		_logger.info(f'START TIME DE REPORT STOCK 5 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = datetime.strptime(start_time, '%Y-%m-%d')
 		start_time = start_time.strftime(DTF)
 		end_date = end_date + timedelta(days=1)
 		end_time = end_date.strftime(DTF)
