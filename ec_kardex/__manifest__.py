@@ -27,12 +27,6 @@
         'wizard/wizard_kardex_all_stock_view.xml',
     ],
     
-    'assets': {
-        'web.assets_backend': [
-            'ec_kardex/static/src/css/style.css',
-        ]      
-    },
-    
     "installable": True,
     "active": False,
     'license': 'LGPL-3',

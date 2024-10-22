@@ -1,4 +1,0 @@
-.o_form_width .o_notebook {
-    max-width: 100%;  /* Asegúrate de que el notebook no exceda el 100% del contenedor */
-    overflow-x: auto;  /* Para manejar el desbordamiento horizontal si es necesario */
-}
