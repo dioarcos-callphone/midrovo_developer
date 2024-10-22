@@ -15,11 +15,8 @@ from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF, DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
-
 import logging
 _logger = logging.getLogger(__name__)
-
-
 
 
 class WizardKardexIndividualReport(models.TransientModel):
@@ -52,6 +49,7 @@ class WizardKardexIndividualReport(models.TransientModel):
     def action_print_report(self):
         company = self.env.user.company_id
         ctx = self._get_context_for_report()
+        _logger.info(f'MOSTRANDO CTX >>> { ctx }')
         ctx['active_model'] = 'res.company'
         ctx['active_ids'] = [company.id]
         ctx['active_id'] = company.id
@@ -117,13 +115,11 @@ class WizardKardexIndividualReport(models.TransientModel):
         # date_to = date_to - timedelta(hours=5)
         # pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
         start_time = date_from
-        _logger.info(f'START TIME DE WIZARD KARDEX >>> { start_time } || TIPO >>> { type(start_time) }')
         start_time = start_time.strftime(DTF)
         # cuando me pasen solo fecha, debo considerar todu el dia
         # end_time = date_to
         # end_time=date_to + timedelta(days=1)
         end_time = date_to
-        _logger.info(f'END TIME DE WIZARD KARDEX >>> { end_time } || TIPO >>> { type(end_time) }')
         end_time = end_time.strftime(DTF)
         common_domain = [
             ("product_id", "=", product.id),
