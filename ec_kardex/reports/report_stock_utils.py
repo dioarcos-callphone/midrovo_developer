@@ -612,6 +612,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'Entrada',
 			'qty_out': 'Salida',
 			'balance': 'Saldo',
+			'costo_promedio': 'Costo Promedio'
 		}
 		COLUM_HEADER = {
 			'date': 'Fecha',
@@ -628,6 +629,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'Entrada',
 			'qty_out': 'Salida',
 			'balance': 'Saldo',
+			'costo_promedio': 'Costo Promedio'
 		}
 		COLUM_FORMAT = {
 			'date': 'date',
@@ -645,6 +647,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'number',
 			'qty_out': 'number',
 			'balance': 'number',
+			'costo_promedio': 'number',
 		}
 		if location_name in ["MATRIZ SUMINISTROS DE LIMPIEZA", "URDESA SUMINISTROS DE LIMPIEZA",
 							 "QUITO SUMINISTROS DE LIMPIEZA",
@@ -668,6 +671,7 @@ class ReportStockUtils(models.AbstractModel):
 				'qty_in': 12,
 				'qty_out': 13,
 				'balance': 14,
+				'costo_promedio': 15,
 			}
 			sin_COLUM_POS = {
 				'date': 0,
@@ -683,6 +687,7 @@ class ReportStockUtils(models.AbstractModel):
 				'qty_in': 10,
 				'qty_out': 11,
 				'balance': 12,
+				'costo_promedio': 13,
 			}
 			COLUM_SIZE["fecha_req"]=30
 			COLUM_HEADER["fecha_req"]="Fecha Requisión"
