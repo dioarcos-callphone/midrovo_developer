@@ -148,7 +148,7 @@ class ReportStockUtils(models.AbstractModel):
 				"type": picking_type and move_type.get(picking_type.code, u'Interno') or u'Interno',
 				"qty_in": qty_in,
 				"qty_out": qty_out,
-				"balance": 'total_qty_in - total_qty_out',
+				"balance": total_qty_in - total_qty_out,
 			})
 		return lines
 
@@ -476,7 +476,7 @@ class ReportStockUtils(models.AbstractModel):
 					"partner": move.picking_id and move.picking_id.name or '',
 					"qty_in": qty_in,
 					"qty_out": qty_out,
-					"balance": total_qty_in-total_qty_out,
+					"balance": 'total_qty_in-total_qty_out',
 				})
 		else:
 			lines.append({
@@ -493,7 +493,7 @@ class ReportStockUtils(models.AbstractModel):
 				"partner": "",
 				"qty_in": total_qty_in,
 				"qty_out": total_qty_out,
-				"balance": total_qty_in - total_qty_out,
+				"balance": 'total_qty_in - total_qty_out',
 			})
 		return lines
 
