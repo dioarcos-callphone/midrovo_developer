@@ -15,10 +15,7 @@
 						<field name="end_date" string="Hasta" attrs="{'invisible': [('type', '!=', 'range')],'required': [('type', '=', 'range')]}"/>
 						<field name="location_id" required="1" options="{'no_create': True}"  domain="[('usage', '=', 'internal')]"/>
 						<field name="categ_id" options="{'no_create': True}" />
-						<field name="mostrar_costos"
-							   group="ec_cash.group_cash_box_manager"
-							   attrs="{'invisible': [('is_inventory_user', '=', True)]}"
-						/>
+						<field name="mostrar_costos" groups="!inventory_report_location.group_inventory_report_location_user"/>
 					</group>
 					<footer>
 						<button string="Generar reporte" name="action_print_report"

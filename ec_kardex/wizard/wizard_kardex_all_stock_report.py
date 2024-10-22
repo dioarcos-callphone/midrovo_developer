@@ -17,14 +17,6 @@ class WizardEcKardexAllStockReport(models.TransientModel):
     end_date = fields.Date(u'Hasta', help=u"", )
     categ_id = fields.Many2one('product.category')
     mostrar_costos = fields.Boolean(default=False)
-    
-    is_inventory_user = fields.Boolean(compute='_compute_is_inventory_user')
-
-    def _compute_is_inventory_user(self):
-        for record in self:
-            is_group = self.env.user.has_group('inventory_report_location.group_inventory_report_location_user')
-            _logger.info(f'PERTENECE AL GRUPO INVENTORY REPORT LOCATION? >>> { is_group }')
-            record.is_inventory_user = is_group
 
     def _get_context_for_report(self):
         self.ensure_one()
