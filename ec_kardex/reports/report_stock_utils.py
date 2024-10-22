@@ -455,7 +455,7 @@ class ReportStockUtils(models.AbstractModel):
 					"partner": move.picking_id and move.picking_id.name or '',
 					"qty_in": qty_in,
 					"qty_out": qty_out,
-					"balance": total_qty_in - total_qty_out,
+					"balance": 0,
 				})
 			else:
 				partner = ""
