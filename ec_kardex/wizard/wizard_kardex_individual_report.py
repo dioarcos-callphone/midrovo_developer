@@ -15,10 +15,6 @@ from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF, DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class WizardKardexIndividualReport(models.TransientModel):
     _name = 'wizard.ec_kardex.individual.report'
     _description = u'Asistente para kardex individual'
@@ -49,7 +45,6 @@ class WizardKardexIndividualReport(models.TransientModel):
     def action_print_report(self):
         company = self.env.user.company_id
         ctx = self._get_context_for_report()
-        _logger.info(f'MOSTRANDO CTX >>> { ctx }')
         ctx['active_model'] = 'res.company'
         ctx['active_ids'] = [company.id]
         ctx['active_id'] = company.id
