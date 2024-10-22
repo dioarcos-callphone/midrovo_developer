@@ -974,7 +974,7 @@ class ReportStockUtils(models.AbstractModel):
 						LEFT JOIN product_product pp ON pp.id = sm.product_id
 						LEFT JOIN product_template pt ON pt.id = pp.product_tmpl_id
 						LEFT JOIN stock_picking pi ON pi.id = sm.picking_id
-					WHERE sm.date =< %(end_time)s and sm.date >= %(start_time)s
+					WHERE sm.date <= %(end_time)s and sm.date >= %(start_time)s
 						AND product_id = %(product_id)s
 						AND (sm.location_id = %(location_id)s OR sm.location_dest_id = %(location_id)s)
 						AND sm.location_id != sm.location_dest_id
