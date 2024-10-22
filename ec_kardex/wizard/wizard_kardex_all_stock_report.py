@@ -3,6 +3,10 @@
 from odoo import models, api, fields
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class WizardEcKardexAllStockReport(models.TransientModel):
     _name = 'wizard.ec_kardex.all.stock.report'
     _description = u'Asistente para Stock por Almacen'
@@ -18,7 +22,9 @@ class WizardEcKardexAllStockReport(models.TransientModel):
 
     def _compute_is_inventory_user(self):
         for record in self:
-            record.is_inventory_user = self.env.user.has_group('inventory_report_location.group_inventory_report_location_user')
+            is_group = self.env.user.has_group('inventory_report_location.group_inventory_report_location_user')
+            _logger.info(f'PERTENECE AL GRUPO INVENTORY REPORT LOCATION? >>> { is_group }')
+            record.is_inventory_user = is_group
 
     def _get_context_for_report(self):
         self.ensure_one()
