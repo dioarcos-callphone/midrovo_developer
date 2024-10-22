@@ -10,7 +10,6 @@
 						<field name="type" widget="radio"/>
 					</group>
 					<group col="4">
-						<field name="is_inventory_user" invisible="1"/>
 						<field name="start_date" string="Desde" attrs="{'invisible': [('type', '!=', 'range')],'required': [('type', '=', 'range')]}" />
 						<field name="end_date" string="Hasta" attrs="{'invisible': [('type', '!=', 'range')],'required': [('type', '=', 'range')]}"/>
 						<field name="location_id" required="1" options="{'no_create': True}"  domain="[('usage', '=', 'internal')]"/>
