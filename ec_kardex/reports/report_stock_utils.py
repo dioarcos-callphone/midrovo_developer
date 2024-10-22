@@ -566,6 +566,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 11,
 			'qty_out': 12,
 			'balance': 13,
+			'costo_promedio': 14,
 		}
 		sin_COLUM_POS = {
 			'date': 0,
@@ -597,6 +598,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 15,
 			'qty_out': 15,
 			'balance': 15,
+			'costo_promedio': 15,
 
 		}
 		sin_COLUM_HEADER = {
