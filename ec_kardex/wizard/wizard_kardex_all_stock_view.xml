@@ -16,7 +16,7 @@
 						<field name="location_id" required="1" options="{'no_create': True}"  domain="[('usage', '=', 'internal')]"/>
 						<field name="categ_id" options="{'no_create': True}" />
 						<field name="mostrar_costos"
-							   groups="ec_cash.group_cash_box_manager"
+							   group="ec_cash.group_cash_box_manager"
 							   
 						/>
 					</group>
