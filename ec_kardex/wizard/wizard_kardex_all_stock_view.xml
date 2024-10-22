@@ -18,14 +18,12 @@
 
 					</group>
 					<footer>
-						<div class="oe_left">
-							<button string="Generar reporte" name="action_print_report"
-									type="object" icon="fa-print" class="oe_highlight" />
-							<button string="Generar reporte en Excel" name="action_get_report"
-									type="object" icon="fa-print" class="oe_highlight" />
-							<button string="Cerrar" special="cancel" type="object"
-									icon="fa-close" class="oe_link" />
-						</div>
+						<button string="Generar reporte" name="action_print_report"
+								type="object" icon="fa-print" class="oe_highlight" />
+						<button string="Generar reporte en Excel" name="action_get_report"
+								type="object" icon="fa-print" class="oe_highlight" />
+						<button string="Cerrar" special="cancel" type="object"
+								icon="fa-close" class="oe_link" />
 					</footer>
 				</form>
 			</field>
