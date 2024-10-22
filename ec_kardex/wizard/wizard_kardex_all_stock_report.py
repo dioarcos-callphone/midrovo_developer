@@ -16,11 +16,9 @@ class WizardEcKardexAllStockReport(models.TransientModel):
     
     is_inventory_user = fields.Boolean(compute='_compute_is_inventory_user')
 
-    @api.depends('user_id')
     def _compute_is_inventory_user(self):
-        inventory_group = self.env.ref('inventory_report_location.group_inventory_report_location_user')
         for record in self:
-            record.is_inventory_user = inventory_group in record.env.user.groups_id
+            record.is_inventory_user = self.env.user.has_group('inventory_report_location.group_inventory_report_location_user')
 
     def _get_context_for_report(self):
         self.ensure_one()
