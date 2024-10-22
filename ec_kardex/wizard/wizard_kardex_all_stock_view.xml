@@ -16,7 +16,7 @@
 						<field name="categ_id" options="{'no_create': True}" />
 						<field name="mostrar_costos"
 							   groups="ec_cash.group_cash_box_manager"
-							   attrs="{'invisible': [('user_id.groups_id', 'in', [ref('inventory_report_location.group_inventory_report_location_user')])]}"
+							   attrs="{'invisible': [('is_inventory_user', '=', True)]}"
 						/>
 
 					</group>
