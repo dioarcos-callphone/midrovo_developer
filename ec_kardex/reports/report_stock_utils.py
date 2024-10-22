@@ -316,7 +316,7 @@ class ReportStockUtils(models.AbstractModel):
 		# pasar la fecha a UTC, para que al tomar por SQL considere los datos correctamente
 		start_time = date_from
 		_logger.info(f'START TIME DE REPORT STOCK 3 >>> { start_time } || TIPO >>> { type(start_time) }')
-		start_time = start_time.strptime(start_time,'%Y-%m-%d')
+		start_time = datetime.strptime(start_time,'%Y-%m-%d')
 		start_time = start_time.strftime('%Y-%m-%d')
 		if isinstance(start_time, str):
 			start_time = datetime.strptime(start_time+" 00:00:00", DTF)
