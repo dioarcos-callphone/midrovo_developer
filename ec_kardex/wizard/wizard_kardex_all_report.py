@@ -10,19 +10,19 @@ class WizardEcKardexIndividualReport(models.TransientModel):
     _name = 'wizard.ec_kardex.all.report'
     _description = u'Asistente para kardex General'
 
-    start_date = fields.Date(u'Start Date', default=lambda *a: time.strftime('%Y-%m-01'), help=u"",)
-    end_date = fields.Date(u'End Date', default=datetime.now(), help=u"",)
+    start_date = fields.Date(u'Fecha de Inicio', default=lambda *a: time.strftime('%Y-%m-01'), help=u"",)
+    end_date = fields.Date(u'Fecha de Fin', default=datetime.now(), help=u"",)
     filter = fields.Selection([
-        ('by_product', u'By Product'),
-        ('by_category', u'By Category'),
-        ('by_lot', u'By Lot'),
-    ], string=u'Filter', default=u'by_category',  help=u"",)
+        ('by_product', u'Por Producto'),
+        ('by_category', u'Por Categoria'),
+        ('by_lot', u'Por Lote'),
+    ], string=u'Filtro', default=u'by_category',  help=u"",)
     location_ids = fields.Many2many('stock.location', 'wizard_kardex_all_location_rel', 'wizard_id', 'location_id',
-                                    u'Locations', help=u"")
+                                    u'Localidades', help=u"")
     category_ids = fields.Many2many('product.category', 'wizard_kardex_all_category_rel', 'wizard_id', 'category_id',
-                                    u'Categories', help=u"")
+                                    u'Categorias', help=u"")
     product_ids = fields.Many2many('product.product', 'wizard_kardex_all_product_rel', 'wizard_id', 'product_id',
-                                   u'Products', help=u"")
+                                   u'Productos', help=u"")
     lot_ids = fields.Many2many('stock.lot', 'wizard_kardex_all_lot_rel', 'wizard_id', 'lot_id', u'Lots',
                                help=u"")
 
