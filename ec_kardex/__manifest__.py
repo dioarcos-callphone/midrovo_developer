@@ -2,9 +2,22 @@
 
 {
     "name" : "KARDEX",
-    "version" : "1.0",
-    "author" : "",
+    "summary": "Reportes Kardex - Inventario",
+    "description": """
+    Modulo Ec_Kardex depende de Ec_tools
+    Genera reportes kardex
 
+    - Individual por producto
+    - General
+    - Stock en almacén
+    Dirijase al modulo de inventario - informes - reportes kardex
+
+    Los costos no son visibles para el grupo Reportes - Ocultar valores de costo y total costo
+    """
+    "version" : "1.0",
+    "author" : "Mauricio Idrovo",
+    'company': 'Callphone S.A.',
+    'website': "https://www.callphoneecuador.com",
     "depends" : [
         'stock_account',
         'purchase',
@@ -27,8 +40,9 @@
         'wizard/wizard_kardex_all_stock_view.xml',
     ],
     
-    "installable": True,
-    "active": False,
+    'installable': True,
+    'application': True,
+    'auto_install': True,
     'license': 'LGPL-3',
 }
 
