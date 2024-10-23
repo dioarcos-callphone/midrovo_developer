@@ -35,8 +35,8 @@
 						<table class="table table-condensed">
 							<thead>
 								<tr>
-									<th class="text-center">Codigo</th>
-									<th class="text-center">Nombreasdasda</th>
+									<th class="text-center">Código</th>
+									<th class="text-center">Nombres</th>
 									<th class="text-center">Unidad de Medida</th>
 									<th class="text-center">Existencia</th>
 									<th class="text-center">Tipo de Producto</th>
