@@ -289,22 +289,8 @@ class ReportStockUtils(models.AbstractModel):
 			"qty_in": total_qty_in,
 			"qty_out": total_qty_out,
 			"balance": total_qty_in - total_qty_out,
-			"costo_balance": (total_qty_in - total_qty_out) * product.standard_price
 		})
   
-		lines.append({
-			"date": '',
-			"src": '',
-			"dest": '',
-			"ref": "Costo x Saldo",
-			"price_unit": "",
-			"amount": "",
-			"type": "",
-			"qty_in": 0,
-			"qty_out": 0,
-			"balance": 0,
-			"costo_balance": (total_qty_in - total_qty_out) * product.standard_price
-		})
 		return lines
 
 	@api.model
@@ -514,6 +500,20 @@ class ReportStockUtils(models.AbstractModel):
 				"qty_in": total_qty_in,
 				"qty_out": total_qty_out,
 				"balance": total_qty_in - total_qty_out,
+			})
+   
+			lines.append({
+				"date": '',
+				"src": '',
+				"dest": '',
+				"ref": "Costo x Saldo",
+				"price_unit": "",
+				"amount": "",
+				"type": "",
+				"qty_in": 0,
+				"qty_out": 0,
+				"balance": 0,
+				"costo_balance": (total_qty_in - total_qty_out) * product.standard_price
 			})
 		return lines
 
