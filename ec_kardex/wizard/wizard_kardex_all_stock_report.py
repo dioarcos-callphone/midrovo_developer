@@ -3,10 +3,6 @@
 from odoo import models, api, fields
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class WizardEcKardexAllStockReport(models.TransientModel):
     _name = 'wizard.ec_kardex.all.stock.report'
     _description = u'Asistente para Stock por Almacen'
