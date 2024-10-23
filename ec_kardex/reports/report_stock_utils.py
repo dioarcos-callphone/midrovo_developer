@@ -17,10 +17,6 @@ from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF, DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class ReportStockUtils(models.AbstractModel):
 	_name = 'report.stock.utils'
 	_description = u'Utilidad para generar reporte de stock'
@@ -461,7 +457,6 @@ class ReportStockUtils(models.AbstractModel):
 					"qty_in": qty_in,
 					"qty_out": qty_out,
 					"balance": total_qty_in - total_qty_out,
-					# "costo_promedio": product.qty_available * product.standard_price
 				})
 			else:
 				partner = ""
@@ -501,7 +496,7 @@ class ReportStockUtils(models.AbstractModel):
 				"qty_in": total_qty_in,
 				"qty_out": total_qty_out,
 				"balance": saldo,
-				"costo_balance": saldo * product.standard_price
+				"costo_balance": saldo * product.standard_price # SE MULTIPLICA EL SALDO TOTAL POR EL STANDARD PRICE (COSTO)
 			})
    
 		return lines
@@ -518,8 +513,6 @@ class ReportStockUtils(models.AbstractModel):
 		lines = self.get_lines(product, location, date_from, date_to)
 		sum_inputs = self._sum_inputs(lines)
 		sum_outputs = self._sum_inputs(lines)
-		line = lines[-1]
-		balance = line['balance']
 		return {
 			'product': product ,
 			'location': location,
@@ -528,7 +521,6 @@ class ReportStockUtils(models.AbstractModel):
 			'sum_outputs': sum_outputs,
 			'date_from': date_from,
 			'date_to': date_to,
-			'costo_balance': product.standard_price * balance # SE MULTIPLICA EL SALDO TOTAL POR EL STANDARD PRICE (COSTO)
 		}
 
 	@api.model
@@ -577,7 +569,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 11,
 			'qty_out': 12,
 			'balance': 13,
-			'costo_promedio': 14,
+			'costo_balance': 14,
 		}
 		sin_COLUM_POS = {
 			'date': 0,
@@ -609,7 +601,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 15,
 			'qty_out': 15,
 			'balance': 15,
-			'costo_promedio': 15,
+			'costo_balance': 15,
 
 		}
 		sin_COLUM_HEADER = {
@@ -641,7 +633,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'Entrada',
 			'qty_out': 'Salida',
 			'balance': 'Saldo',
-			'costo_promedio': 'Costo Promedio'
+			'costo_balance': 'Costo x Saldo'
 		}
 		COLUM_FORMAT = {
 			'date': 'date',
@@ -659,7 +651,7 @@ class ReportStockUtils(models.AbstractModel):
 			'qty_in': 'number',
 			'qty_out': 'number',
 			'balance': 'number',
-			'costo_promedio': 'number',
+			'costo_balance': 'number',
 		}
 		if location_name in ["MATRIZ SUMINISTROS DE LIMPIEZA", "URDESA SUMINISTROS DE LIMPIEZA",
 							 "QUITO SUMINISTROS DE LIMPIEZA",
@@ -683,7 +675,7 @@ class ReportStockUtils(models.AbstractModel):
 				'qty_in': 12,
 				'qty_out': 13,
 				'balance': 14,
-				'costo_promedio': 15,
+				'costo_balance': 15,
 			}
 			sin_COLUM_POS = {
 				'date': 0,
@@ -699,7 +691,7 @@ class ReportStockUtils(models.AbstractModel):
 				'qty_in': 10,
 				'qty_out': 11,
 				'balance': 12,
-				'costo_promedio': 13,
+				'costo_balance': 13,
 			}
 			COLUM_SIZE["fecha_req"]=30
 			COLUM_HEADER["fecha_req"]="Fecha Requisión"
