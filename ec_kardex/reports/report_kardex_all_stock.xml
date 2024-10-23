@@ -40,6 +40,9 @@
 									<th class="text-center">Unidad de Medida</th>
 									<th class="text-center">Existencia</th>
 									<th class="text-center">Tipo de Producto</th>
+									<t t-if="show_costs == True">
+										<th class="text-center">Total Costo</th>
+									</t>
 								</tr>
 							</thead>
 							<tbody>
@@ -60,9 +63,11 @@
 										<td class="text-left">
 											<span t-esc="product['detailed_type']"></span>
 										</td>
-										<td class="text-left">
-											<span t-esc="product['costo_unit']"></span>
-										</td>
+										<t t-if="show_costs == True">
+											<td class="text-left">
+												<span t-esc="product['tot_costo_unit']"></span>
+											</td>
+										</t>
 									</tr>
 								</t>
 							</tbody>

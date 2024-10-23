@@ -1032,7 +1032,7 @@ class ReportStockUtils(models.AbstractModel):
 								'product_uom_name': product_id.uom_id.name,
 								'quantity': self._get_kardex_stock_from_product(data_aux, location_id),
 								'costo_unit': product_id.standard_price,
-								'tot_costo_unit':product_id.standard_price*self._get_kardex_stock_from_product(data_aux, location_id) if self._get_kardex_stock_from_product(data_aux, location_id)>0 else 0})
+								'tot_costo_unit':product_id.standard_price*self._get_kardex_stock_from_product(data_aux, location_id) if self._get_kardex_stock_from_product(data_aux, location_id)> 0 else 0})
 		return results
 
 	def GetKardexAllData(self):
