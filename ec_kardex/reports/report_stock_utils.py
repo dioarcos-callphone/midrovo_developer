@@ -289,7 +289,7 @@ class ReportStockUtils(models.AbstractModel):
 			"qty_in": total_qty_in,
 			"qty_out": total_qty_out,
 			"balance": total_qty_in - total_qty_out,
-			"costo_balance": (total_qty_in - total_qty_out) * product.standar_price
+			"costo_balance": (total_qty_in - total_qty_out) * product.standard_price
 		})
   
 		lines.append({
