@@ -121,10 +121,10 @@
                                             <span id="balance_value"
                                                   t-esc="formatLang(line.get('balance', 0.0), dp='Product Unit of Measure')"/>
                                         </td>
-                                        <!-- <td class="text-right" style="min-width: 80px;">
+                                        <td class="text-right" style="min-width: 80px;">
                                             <span id="cost_avg_value"
                                                   t-esc="formatLang(line.get('costo_balance', 0.0), dp='Product Unit of Measure')"/>
-                                        </td> -->
+                                        </td>
                                     </tr>
                                 </t>
                             </tbody>

@@ -291,6 +291,20 @@ class ReportStockUtils(models.AbstractModel):
 			"balance": total_qty_in - total_qty_out,
 			"costo_balance": (total_qty_in - total_qty_out) * product.standar_price
 		})
+  
+		lines.append({
+			"date": '',
+			"src": '',
+			"dest": '',
+			"ref": "Costo x Saldo",
+			"price_unit": "",
+			"amount": "",
+			"type": "",
+			"qty_in": 0,
+			"qty_out": 0,
+			"balance": 0,
+			"costo_balance": (total_qty_in - total_qty_out) * product.standard_price
+		})
 		return lines
 
 	@api.model
@@ -517,8 +531,6 @@ class ReportStockUtils(models.AbstractModel):
 		sum_outputs = self._sum_inputs(lines)
 		line = lines[-1]
 		balance = line['balance']
-		ref = line['ref']
-		_logger.info(f'OBTENIENDO BALANCE { balance } DE { ref }')
 		return {
 			'product': product ,
 			'location': location,
@@ -527,7 +539,7 @@ class ReportStockUtils(models.AbstractModel):
 			'sum_outputs': sum_outputs,
 			'date_from': date_from,
 			'date_to': date_to,
-			# 'costo_balance': product.standard_price * 
+			'costo_balance': product.standard_price * balance # SE MULTIPLICA EL SALDO TOTAL POR EL STANDARD PRICE (COSTO)
 		}
 
 	@api.model
