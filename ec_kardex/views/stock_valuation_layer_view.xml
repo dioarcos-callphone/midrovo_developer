@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-<!--        <record id="stock_account.action_stock_inventory_valuation" model="ir.actions.act_window">-->
-<!--            <field name="domain">[('product_id.type', '!=', 'service')]</field>-->
-<!--            <field name="context">{'group_by': ['product_type', 'product_id']}</field>-->
-<!--        </record>-->
-    </data>
-</odoo>

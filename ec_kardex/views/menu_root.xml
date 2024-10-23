@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-	<data>
-		<menuitem id="stock_reporting_main_menu" name="Reportes Kardex"
-				  sequence="10" parent="stock.menu_warehouse_report" />
-	</data>
-</odoo>
