@@ -60,6 +60,9 @@
 										<td class="text-left">
 											<span t-esc="product['detailed_type']"></span>
 										</td>
+										<td class="text-left">
+											<span t-esc="product['costo_unit']"></span>
+										</td>
 									</tr>
 								</t>
 							</tbody>
