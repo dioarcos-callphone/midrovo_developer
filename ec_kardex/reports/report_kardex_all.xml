@@ -78,9 +78,10 @@
 													<th class="text-center" id="type_title">Tipo</th>
 													<th class="text-center" id="product_qty_title" style="min-width: 80px;">Cant.
 													</th>
-													<th class="text-center" id="price_unit_title" style="min-width: 80px;">Costo Promedio
-													</th>
-
+													<t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+														<th class="text-center" id="price_unit_title" style="min-width: 80px;">Costo Promedio
+														</th>
+													</t>
 													<th class="text-center" id="inv_acum_title" style="min-width: 80px;">Inv.
 														Acum.
 													</th>
