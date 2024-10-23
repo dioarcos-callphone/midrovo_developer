@@ -4,6 +4,10 @@ from functools import partial
 from odoo import api, models
 
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ReportEcKardexAll(models.AbstractModel):
     
     _name = 'report.ec_kardex.report_kardex_all'
@@ -15,6 +19,9 @@ class ReportEcKardexAll(models.AbstractModel):
             context.update(data)
         report_model = self.env['report.stock.utils']
         data = report_model.with_context(context).GetKardexAllData()
+        
+        _logger.info(f'MOSTRANDO DATA >>> { data }')
+        
         return {
             'formatLang': partial(formatLang, self.env),
             'format_date': partial(format_date, self.env),
