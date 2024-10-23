@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_kardex_all_stock">
+			<t t-call="web.html_container">
+				<t t-call="web.external_layout">
+					<t t-set="report_title" t-value="'Kardex Valorizado por Almacen'" />
+					<div class="page">
+						<table class="table table-condensed table-bordered">
+							<thead>
+								<tr>
+									<td class="text-left">
+										<strong >Desde:</strong>
+									</td>
+									<td class="text-left">
+										<span t-esc="start_date"></span>
+									</td>
+									<td class="text-left">
+										<strong >Hasta:</strong>
+									</td>
+									<td class="text-left">
+										<span t-esc="end_date"></span>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left">
+										<strong >Ubicación:</strong>
+									</td>
+									<td class="text-left" colspan="3">
+										<span t-esc="location_name"></span>
+									</td>
+								</tr>
+							</thead>
+						</table>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th class="text-center">Código</th>
+									<th class="text-center">Nombres</th>
+									<th class="text-center">Unidad de Medida</th>
+									<th class="text-center">Existencia</th>
+									<th class="text-center">Tipo de Producto</th>
+									<t t-if="mostrar_costos == True">
+										<th class="text-center">Total Costo</th>
+									</t>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="products"  t-as="product">
+									<tr>
+										<td class="text-left">
+											<span t-esc="product['product_code']"></span>
+										</td>
+										<td class="text-left">
+											<span t-esc="product['product_name']"></span>
+										</td>
+										<td class="text-left">
+											<span t-esc="product['product_uom_name']"></span>
+										</td>
+										<td class="text-left">
+											<span t-esc="'%.0f' % product['quantity']"></span>
+										</td>
+										<td class="text-left">
+											<span t-esc="product['detailed_type']"></span>
+										</td>
+										<t t-if="mostrar_costos == True">
+											<td class="text-left">
+												<span t-esc="product['tot_costo_unit']"></span>
+											</td>
+										</t>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>
