@@ -283,6 +283,7 @@ class WizardKardexIndividualReport(models.TransientModel):
                     "balance": total_qty_in - total_qty_out,
                 })
         else:
+            saldo = total_qty_in - total_qty_out
             lines.append({
                 "date": date_to,
                 "src": " ",
@@ -296,7 +297,8 @@ class WizardKardexIndividualReport(models.TransientModel):
                 "partner": " ",
                 "qty_in": total_qty_in,
                 "qty_out": total_qty_out,
-                "balance": total_qty_in - total_qty_out,
+                "balance": saldo,
+                "costo_balance": saldo * product.standard_price,
             })
 
         for aux in lines:
