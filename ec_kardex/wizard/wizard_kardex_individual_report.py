@@ -314,16 +314,24 @@ class WizardKardexIndividualReport(models.TransientModel):
             self.env['kardex.report.reg.lines'].create({'name': aux['origin'],
                                                         'ref': aux['partner'],
                                                         'description': aux['ref'],
-                                                        'costs': "%0.4f" % costs,
-                                                        'total': "%0.4f" % total,
+                                                        # 'costs': "%0.4f" % costs,
+                                                        # 'total': "%0.4f" % total,
                                                         'type': aux['type'],
                                                         'income': aux['qty_in'],
                                                         'partner': aux['partner'],
                                                         'outcome': aux['qty_out'],
                                                         'value': aux['balance'],
-                                                        'cost_balance': aux['costo_balance'],
+                                                        # 'cost_balance': aux['costo_balance'],
                                                         'reg_id': kardex.id,
                                                         })
+            
+            if self.show_costs:
+                self.env['kardex.report.reg.lines'].write({
+                    'costs': "%0.4f" % costs,
+                    'total': "%0.4f" % total,
+                    'cost_balance': aux['costo_balance'],
+                })
+            
         # ahora redirijo a la vista form donde mostrara el proceso
         if kardex:
             form_view = [(self.env.ref('ec_kardex.kardex_report_reg_form_view').id, 'form')]
