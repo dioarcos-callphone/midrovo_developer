@@ -318,6 +318,7 @@ class WizardKardexIndividualReport(models.TransientModel):
                                                         'partner': aux['partner'],
                                                         'outcome': aux['qty_out'],
                                                         'value': aux['balance'],
+                                                        'cost_balance': aux['costo_balance'],
                                                         'reg_id': kardex.id,
                                                         })
         # ahora redirijo a la vista form donde mostrara el proceso
