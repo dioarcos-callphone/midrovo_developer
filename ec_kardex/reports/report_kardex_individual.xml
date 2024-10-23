@@ -67,7 +67,6 @@
                                     <th class="text-center" id="in_title">Entrada</th>
                                     <th class="text-center" id="out_title">Salida</th>
                                     <th class="text-center" id="balance_title">Saldo</th>
-                                    <th class="text-center" id="cost_avg_title">Costo Promedio</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,10 +121,10 @@
                                             <span id="balance_value"
                                                   t-esc="formatLang(line.get('balance', 0.0), dp='Product Unit of Measure')"/>
                                         </td>
-                                        <td class="text-right" style="min-width: 80px;">
+                                        <!-- <td class="text-right" style="min-width: 80px;">
                                             <span id="cost_avg_value"
-                                                  t-esc="formatLang(line.get('costo_promedio', 0.0), dp='Product Unit of Measure')"/>
-                                        </td>
+                                                  t-esc="formatLang(line.get('costo_balance', 0.0), dp='Product Unit of Measure')"/>
+                                        </td> -->
                                     </tr>
                                 </t>
                             </tbody>

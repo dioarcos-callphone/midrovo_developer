@@ -17,6 +17,10 @@ from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF, DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ReportStockUtils(models.AbstractModel):
 	_name = 'report.stock.utils'
 	_description = u'Utilidad para generar reporte de stock'
@@ -285,6 +289,7 @@ class ReportStockUtils(models.AbstractModel):
 			"qty_in": total_qty_in,
 			"qty_out": total_qty_out,
 			"balance": total_qty_in - total_qty_out,
+			"costo_balance": (total_qty_in - total_qty_out) * product.standar_price
 		})
 		return lines
 
@@ -456,7 +461,7 @@ class ReportStockUtils(models.AbstractModel):
 					"qty_in": qty_in,
 					"qty_out": qty_out,
 					"balance": total_qty_in - total_qty_out,
-					"costo_promedio": product.qty_available * product.standard_price
+					# "costo_promedio": product.qty_available * product.standard_price
 				})
 			else:
 				partner = ""
@@ -510,6 +515,10 @@ class ReportStockUtils(models.AbstractModel):
 		lines = self.get_lines(product, location, date_from, date_to)
 		sum_inputs = self._sum_inputs(lines)
 		sum_outputs = self._sum_inputs(lines)
+		line = lines[-1]
+		balance = line['balance']
+		ref = line['ref']
+		_logger.info(f'OBTENIENDO BALANCE { balance } DE { ref }')
 		return {
 			'product': product ,
 			'location': location,
@@ -518,6 +527,7 @@ class ReportStockUtils(models.AbstractModel):
 			'sum_outputs': sum_outputs,
 			'date_from': date_from,
 			'date_to': date_to,
+			# 'costo_balance': product.standard_price * 
 		}
 
 	@api.model
@@ -1030,7 +1040,6 @@ class ReportStockUtils(models.AbstractModel):
 								'quantity': self._get_kardex_stock_from_product(data_aux, location_id),
 								'costo_unit': product_id.standard_price,
 								'tot_costo_unit':product_id.standard_price*self._get_kardex_stock_from_product(data_aux, location_id) if self._get_kardex_stock_from_product(data_aux, location_id)>0 else 0})
-		print (results)
 		return results
 
 	def GetKardexAllData(self):
