@@ -66,3 +66,4 @@ class WizardEcKardexAllStockReport(models.TransientModel):
             'target': 'self'
         }
         return res
+    

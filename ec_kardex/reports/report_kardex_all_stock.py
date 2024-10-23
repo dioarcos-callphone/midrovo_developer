@@ -16,7 +16,7 @@ class ReportEcKardexAllStockXls(models.AbstractModel):
         fp = io.BytesIO()
         # crear el reporte en memoria, no en archivo
         workbook = xlsxwriter.Workbook(fp, {'in_memory': True, 'constant_memory': False})
-        worksheet = workbook.add_worksheet(page_string)
+        worksheet = workbook.add_worksheet(page_string) 
         FORMATS = {
             'title': workbook.add_format(
                 {'bold': True, 'align': 'center', 'valign': 'vcenter', 'font_color': 'white', 'bg_color': '#0F1570',

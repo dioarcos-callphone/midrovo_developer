@@ -337,3 +337,4 @@ class WizardKardexIndividualReport(models.TransientModel):
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
+    

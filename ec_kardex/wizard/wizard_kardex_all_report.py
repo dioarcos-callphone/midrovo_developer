@@ -67,3 +67,4 @@ class WizardEcKardexIndividualReport(models.TransientModel):
         }
 
         return res
+    

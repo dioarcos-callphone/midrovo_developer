@@ -57,3 +57,4 @@
         <menuitem id="wizard_kardex_all_menu" name="Kardex General" sequence="12" parent="stock_reporting_main_menu" action="action_wizard_kardex_all_tree_view" />
     </data>
 </odoo>
+

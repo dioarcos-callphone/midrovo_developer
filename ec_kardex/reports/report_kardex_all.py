@@ -20,3 +20,4 @@ class ReportEcKardexAll(models.AbstractModel):
             'format_date': partial(format_date, self.env),
             "products": data
         }
+        
