@@ -7,7 +7,7 @@ from odoo.osv import expression
 from odoo.tools import pycompat,float_is_zero
 from odoo.tools.float_utils import float_round
 from datetime import datetime
-import operator as py_operator
+import operator as py_operator 
 
 
 

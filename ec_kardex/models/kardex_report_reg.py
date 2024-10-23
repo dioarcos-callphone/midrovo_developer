@@ -53,7 +53,7 @@ class KardexReportReg(models.Model):
     def action_print_report(self):
         company = self.env.user.company_id
         ctx = self._get_context_for_report()
-        ctx['active_model'] = 'res.company'
+        ctx['active_model'] = 'res.company' 
         ctx['active_ids'] = [company.id]
         ctx['active_id'] = company.id
         report_name = self.env.ref("ec_kardex.kardex_individual_report")
