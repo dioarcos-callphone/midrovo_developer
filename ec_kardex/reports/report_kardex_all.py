@@ -22,6 +22,7 @@ class ReportEcKardexAll(models.AbstractModel):
         
         for d in data:
             _logger.info(f'MOSTRANDO DATA >>> { d }')
+            _logger.info(f'--------------------------------------')
         
         return {
             'formatLang': partial(formatLang, self.env),
