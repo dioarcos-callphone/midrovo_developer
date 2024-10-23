@@ -21,6 +21,7 @@ class KardexReportRegLines(models.Model):
     income = fields.Float(u'Entrada')
     outcome = fields.Float(u'Salida')
     value = fields.Float(u'Saldo')
+    cost_balance = fields.Float(u'Costo x Saldo')
     reg_id = fields.Many2one('kardex.report.reg', 'Kardex Registration')
 
 
