@@ -13,7 +13,7 @@
     Dirijase al modulo de inventario - informes - reportes kardex
 
     Los costos no son visibles para el grupo Reportes - Ocultar valores de costo y total costo
-    """
+    """,
     "version" : "1.0",
     "author" : "Mauricio Idrovo",
     'company': 'Callphone S.A.',
