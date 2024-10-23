@@ -118,11 +118,12 @@
 														<span id="product_qty_value"
 															t-esc="formatLang(line.get('qty',0.0), dp='Product Unit of Measure')" />
 													</td>
-													<td class="text-right">
-														<span id="price_unit_value"
-															t-esc="formatLang(line.get('average_price',0.0), currency_obj=currency_id)" />
-													</td>
-
+													<t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+														<td class="text-right">
+															<span id="price_unit_value"
+																t-esc="formatLang(line.get('average_price',0.0), currency_obj=currency_id)" />
+														</td>
+													</t>
 													<td class="text-right">
 														<span id="inv_acum_value"
 															t-esc="formatLang(line.get('inventory_value',0.0), dp='Product Unit of Measure')" />
