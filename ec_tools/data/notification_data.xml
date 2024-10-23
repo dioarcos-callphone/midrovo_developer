@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<record model="util.notification" id="not_invoice_logs_notifications">
+			<field name="name">Facturas en lotes no procesadas</field>
+			<field name="header"></field>
+		</record>
+		
+		<record model="util.notification" id="not_picking_logs_notifications">
+			<field name="name">Picking en lotes no procesadas</field>
+			<field name="header"></field>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<template id="report_internal_header">
+			<div class="header">
+				<div class="text-center">
+					<h3 t-esc="company.name" />
+					<h4 t-esc="report_title" />
+				</div>
+			</div>
+
+		</template>
+
+		<template id="report_internal_footer">
+			<div class="footer" style="font-size: 9px;">
+				<table width="100%" border="0">
+					<tr>
+						<td>
+							<div align="left">
+								<strong>Usuario:</strong>
+								<span t-field="user.name" />
+							</div>
+						</td>
+						<td>
+							<div align="center">
+								<strong>Fecha de impresión:</strong>
+								<span
+									t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')" />
+							</div>
+						</td>
+						<td>
+							<div align="right">
+								<strong>Pág.: </strong>
+								<span class="page" />
+								<span> / </span>
+								<span class="topage" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</template>
+
+		<template id="internal_layout">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+
+			<t t-call="ec_tools.report_internal_header" />
+			<t t-raw="0" />
+			<t t-call="ec_tools.report_internal_footer" />
+		</template>
+
+		<template id="internal_layout_no_header">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+
+			<div class="header">
+			</div>
+			<t t-raw="0" />
+			<t t-call="ec_tools.report_internal_footer" />
+		</template>
+
+		<template id="internal_layout_no_footer">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+
+			<t t-call="ec_tools.report_internal_header" />
+			<t t-raw="0" />
+			<div class="footer" style="font-size: 9px;">
+			</div>
+		</template>
+
+		<template id="internal_layout_no_clear">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+
+			<div class="header">
+			</div>
+			<t t-raw="0" />
+			<div class="footer" style="font-size: 9px;">
+			</div>
+		</template>
+
+<!--		<template id="ec_tools_external_layout" inherit_id="web.external_layout">-->
+<!--			&lt;!&ndash; Multicompany &ndash;&gt;-->
+<!--			<t t-if="not o and doc">-->
+<!--				<t t-set="o" t-value="doc" />-->
+<!--			</t>-->
+<!--			<t t-if="o and 'company_id' in o">-->
+<!--				<t t-set="company" t-value="o.company_id"></t>-->
+<!--			</t>-->
+<!--			<t t-if="not o or not 'company_id' in o">-->
+<!--				<t t-set="company" t-value="res_company"></t>-->
+<!--			</t>-->
+
+<!--			<div class="header">-->
+<!--				<div class="row">-->
+<!--					<div class="col-xs-3">-->
+<!--						<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"-->
+<!--							style="max-height: 45px;" />-->
+<!--					</div>-->
+<!--					<div class="col-xs-6 pull-right text-right" >-->
+<!--						<span t-esc="'RUC: ' + company.partner_id.vat"></span>-->
+<!--						<br />-->
+<!--						<span t-esc="company.partner_id.street"></span>-->
+<!--						<br />-->
+<!--						<span-->
+<!--							t-esc="(company.partner_id.country_id and (company.partner_id.country_id.name.upper() + ' ') or '') + (company.partner_id.state_id and (company.partner_id.state_id.name.upper() + ' ') or '') + (company.partner_id.city and company.partner_id.city.upper() or '')"></span>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="row zero_min_height">-->
+<!--					<div class="col-xs-12">-->
+<!--						<div style="border-bottom: 1px solid black;"></div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<t t-raw="0" />-->
+<!--			<div class="footer">-->
+<!--				<div class="row zero_min_height">-->
+<!--					<div class="col-xs-12">-->
+<!--						<div style="border-bottom: 2px solid black;"></div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="row">-->
+<!--					<div class="col-xs-6">-->
+<!--						<span t-esc="company.name + ' | ' + company.street" />-->
+<!--						<br />-->
+<!--						<span t-esc="(company.city and company.city.upper() or '') + ' | ' + (company.state_id and company.state_id.name or '') + ' | ' + (company.zip and company.zip or '')" />-->
+<!--					</div>-->
+<!--					<div class="col-xs-6 text-right">-->
+<!--						<span t-esc="'T: ' + (company.phone and company.phone or '')" />-->
+<!--						<br />-->
+<!--						<span t-esc="'E: ' + (company.email and company.email or '')"/>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</template>-->
+
+	</data>
+</odoo>
