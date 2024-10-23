@@ -20,9 +20,9 @@ class ReportEcKardexAll(models.AbstractModel):
         report_model = self.env['report.stock.utils']
         data = report_model.with_context(context).GetKardexAllData()
         
-        for d in data:
-            _logger.info(f'MOSTRANDO DATA >>> { d }')
-            _logger.info(f'--------------------------------------')
+        # for d in data:
+        #     _logger.info(f'MOSTRANDO DATA >>> { d }')
+        #     _logger.info(f'--------------------------------------')
         
         return {
             'formatLang': partial(formatLang, self.env),

@@ -18,6 +18,10 @@ from odoo.tools.translate import _
 from odoo.exceptions import except_orm, Warning, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF, DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class ReportStockUtils(models.AbstractModel):
 	_name = 'report.stock.utils'
 	_description = u'Utilidad para generar reporte de stock'
@@ -1119,6 +1123,8 @@ class ReportStockUtils(models.AbstractModel):
 				data_aux = self.env.cr.dictfetchall()
 				initial_stock = self._get_initial_stock(location_id, start_time, product_id)
 				results[product_id.name + default_code][location_id.display_name] = self._get_kardex_from_product(data_aux, location_id, initial_stock)
+    
+		_logger.info(f'MOSTRANDO RESULT >>> { results }')
 		return results
 
 	@api.model
