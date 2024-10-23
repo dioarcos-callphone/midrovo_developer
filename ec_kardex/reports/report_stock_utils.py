@@ -1151,7 +1151,8 @@ class ReportStockUtils(models.AbstractModel):
 		sheet.write(0, 3, "Movimiento", bold)
 		sheet.write(0, 4, "Cantidad", bold)
 		sheet.write(0, 5, "Precio unitario", bold)
-		sheet.write(0, 6, "Coste promedio", bold_color)
+		if not self.env.user.has_group('inventory_report_location.group_inventory_report_location_user'):
+			sheet.write(0, 6, "Coste promedio", bold_color)
 		sheet.write(0, 7, "Total Cantidad", bold)
 		sheet.write(0, 8, "Total inventario", bold)
 		i = 1
@@ -1173,7 +1174,8 @@ class ReportStockUtils(models.AbstractModel):
 						sheet.write(i, 3, data['name'])
 						sheet.write(i, 4, data['qty'])
 						sheet.write(i, 5, data['price_unit'], monetary)
-						sheet.write(i, 6, data['average_price'], monetary_color)
+						if not self.env.user.has_group('inventory_report_location.group_inventory_report_location_user'):
+							sheet.write(i, 6, data['average_price'], monetary_color)
 						sheet.write(i, 7, data['total_qty'])
 						sheet.write(i, 8, data['inventory_value'], monetary)
 						i += 1
