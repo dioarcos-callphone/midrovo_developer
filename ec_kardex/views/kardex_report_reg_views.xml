@@ -66,6 +66,7 @@
                                     <field name="income"/>
                                     <field name="outcome"/>
                                     <field name="value"/>
+                                    <field name="costo_balance" attrs="{'invisible': [('parent.show_costs','=', False)]}" />
                                     <field name="reg_id" invisible="1"/>
                                 </tree>
                             </field>
