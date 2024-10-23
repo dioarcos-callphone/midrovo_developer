@@ -261,6 +261,7 @@ class WizardKardexIndividualReport(models.TransientModel):
                     "qty_in": qty_in,
                     "qty_out": qty_out,
                     "balance": total_qty_in - total_qty_out,
+                    "costo_balance": saldo * product.standard_price,
                 })
             else:
                 partner_id = ""
@@ -281,6 +282,7 @@ class WizardKardexIndividualReport(models.TransientModel):
                     "qty_in": qty_in,
                     "qty_out": qty_out,
                     "balance": total_qty_in - total_qty_out,
+                    "costo_balance": saldo * product.standard_price,
                 })
         else:
             saldo = total_qty_in - total_qty_out
