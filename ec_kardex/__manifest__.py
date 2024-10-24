@@ -34,10 +34,10 @@
         # 'reports/report_kardex_all.xml', # KARDEX GENERAL
         'reports/report_kardex_individual.xml',
         'reports/stock_reports.xml',
-        'reports/report_kardex_all_stock.xml',
+        # 'reports/report_kardex_all_stock.xml',
         # 'wizard/wizard_kardex_all_view.xml', # KARDEX GENERAL
         'wizard/wizard_kardex_individual_view.xml',
-        'wizard/wizard_kardex_all_stock_view.xml',
+        # 'wizard/wizard_kardex_all_stock_view.xml', # KARDEX STOCK POR ALMACEN
     ],
     
     'installable': True,
