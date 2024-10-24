@@ -25,7 +25,7 @@
                             <span id="product_default_code_value" t-esc="product.default_code"></span>
                         </div>
                         <div class="row">
-                            <strong id="product_barcode_title">Codigo Barra:</strong>
+                            <strong id="product_barcode_title">Código de Barra:</strong>
                             <span id="product_barcode_value" t-esc="product.barcode"></span>
                         </div>
                         <div class="row">
@@ -33,7 +33,7 @@
                             <span id="uom_id_value" t-esc="product.uom_id.name"></span>
                         </div>
                         <div class="row">
-                            <strong id="product_cost_method_title">Metodo de Valorización Usado:</strong>
+                            <strong id="product_cost_method_title">Método de Valorización Usado:</strong>
                             <span id="product_cost_method_value" t-esc="product.cost_method_name()"></span>
                         </div>
                         <div class="row">
