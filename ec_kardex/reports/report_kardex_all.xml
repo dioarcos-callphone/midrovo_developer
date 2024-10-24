@@ -75,15 +75,15 @@
 													<t t-if="line['type'] == 'out'">SALIDA</t>
 												</td>
 												<td class="text-right">
-													<span t-esc="formatLang(line['qty'], dp='Product Unit of Measure')"/>
+													<span t-esc="line['qty']"/>
 												</td>
 												<t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
 													<td class="text-right">
-														<span t-esc="formatLang(line['average_price'], currency_obj=currency_id)"/>
+														<span t-esc="line['average_price']"/>
 													</td>
 												</t>
 												<td class="text-right">
-													<span t-esc="formatLang(line['inventory_value'], dp='Product Unit of Measure')"/>
+													<span t-esc="line['inventory_value']"/>
 												</td>
 											</tr>
 										</tbody>
