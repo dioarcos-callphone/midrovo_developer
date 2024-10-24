@@ -133,7 +133,7 @@ class InvoiceDetails(models.TransientModel):
                 
                 # Obtener variantes del producto (marca, talla, color)
                 product = detail.product_id
-                marca = product.product_tmpl_id.brand_id.name if product.product_tmpl_id.brand_id else "N/A"
+                # marca = product.product_tmpl_id.brand_id.name if product.product_tmpl_id.brand_id else "N/A"
                 talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), "N/A")
                 color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), "N/A")
 
@@ -161,7 +161,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['producto'] = detail.product_id.name
-                data_detail['marca'] = marca
+                # data_detail['marca'] = marca
                 data_detail['talla'] = talla
                 data_detail['color'] = color
                 data_detail['cantidad'] = detail.quantity
@@ -285,7 +285,7 @@ class InvoiceDetails(models.TransientModel):
             'Cajero',
             'Cliente',
             'Producto',
-            'Marca',
+            # 'Marca',
             'Talla',
             'Color'
             'Cantidad',
@@ -310,18 +310,18 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('E:E', 20)  # Cajero
         sheet.set_column('F:F', 20)  # Cliente
         sheet.set_column('G:G', 20)  # Product
-        sheet.set_column('H:H', 20)  # Marca
-        sheet.set_column('I:I', 20)  # Talla
-        sheet.set_column('J:J', 20)  # Color
-        sheet.set_column('K:K', 15)  # Cantidad
-        sheet.set_column('L:L', 10)  # Precio
-        sheet.set_column('M:M', 10)  # Descuento
-        sheet.set_column('N:N', 10)  # Subtotal
+        # sheet.set_column('H:H', 20)  # Marca
+        sheet.set_column('H:H', 20)  # Talla
+        sheet.set_column('I:I', 20)  # Color
+        sheet.set_column('J:J', 15)  # Cantidad
+        sheet.set_column('K:K', 10)  # Precio
+        sheet.set_column('L:L', 10)  # Descuento
+        sheet.set_column('M:M', 10)  # Subtotal
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('O:O', 10)  # Costo o Debito
-            sheet.set_column('P:P', 10)  # Total Costo
-            sheet.set_column('Q:Q', 12)  # Rentabilidad
+            sheet.set_column('N:N', 10)  # Costo o Debito
+            sheet.set_column('O:O', 10)  # Total Costo
+            sheet.set_column('P:P', 12)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -333,22 +333,22 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 4, val['pos'], text_format)
             sheet.write(row, 5, val['cliente'], text_format)
             sheet.write(row, 6, val['producto'], text_format)
-            sheet.write(row, 7, val['marca'], text_format)
-            sheet.write(row, 8, val['talla'], text_format)
-            sheet.write(row, 9, val['color'], text_format)
-            sheet.write(row, 10, val['cantidad'], text_format)
-            sheet.write(row, 11, val['precio'], text_format)
-            sheet.write(row, 12, val['descuento'], text_format)
-            sheet.write(row, 13, val['subtotal'], text_format)
+            # sheet.write(row, 7, val['marca'], text_format)
+            sheet.write(row, 7, val['talla'], text_format)
+            sheet.write(row, 8, val['color'], text_format)
+            sheet.write(row, 9, val['cantidad'], text_format)
+            sheet.write(row, 10, val['precio'], text_format)
+            sheet.write(row, 11, val['descuento'], text_format)
+            sheet.write(row, 12, val['subtotal'], text_format)
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
-                    sheet.write(row, 14, val['costo'], text_format)
+                    sheet.write(row, 13, val['costo'], text_format)
                 elif is_cost_or_debit == 'movement':
-                    sheet.write(row, 14, val['debito'], text_format)
+                    sheet.write(row, 13, val['debito'], text_format)
                 
-                sheet.write(row, 15, val['total_costo'], text_format)
-                sheet.write(row, 16, val['rentabilidad'], text_format)
+                sheet.write(row, 14, val['total_costo'], text_format)
+                sheet.write(row, 15, val['rentabilidad'], text_format)
             
             row += 1
 
