@@ -304,24 +304,24 @@ class InvoiceDetails(models.TransientModel):
 
         # Ajuste de columnas
         sheet.set_column('A:A', 10)  # Fecha
-        sheet.set_column('B:B', 22)  # Número
-        sheet.set_column('C:C', 15)  # Tipo
-        sheet.set_column('D:D', 22)  # Comercial
-        sheet.set_column('E:E', 20)  # Cajero
-        sheet.set_column('F:F', 20)  # Cliente
+        sheet.set_column('B:B', 23)  # Número
+        sheet.set_column('C:C', 14)  # Tipo
+        sheet.set_column('D:D', 23)  # Comercial
+        sheet.set_column('E:E', 28)  # Cajero
+        sheet.set_column('F:F', 30)  # Cliente
         sheet.set_column('G:G', 20)  # Product
-        sheet.set_column('H:H', 20)  # Marca
-        sheet.set_column('I:I', 20)  # Talla
-        sheet.set_column('J:J', 20)  # Color
-        sheet.set_column('K:K', 15)  # Cantidad
-        sheet.set_column('L:L', 10)  # Precio
-        sheet.set_column('M:M', 10)  # Descuento
-        sheet.set_column('N:N', 10)  # Subtotal
+        sheet.set_column('H:H', 10)  # Marca
+        sheet.set_column('I:I', 10)  # Talla
+        sheet.set_column('J:J', 10)  # Color
+        sheet.set_column('K:K', 9)  # Cantidad
+        sheet.set_column('L:L', 9)  # Precio
+        sheet.set_column('M:M', 11)  # Descuento
+        sheet.set_column('N:N', 8)  # Subtotal
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('O:O', 10)  # Costo o Debito
-            sheet.set_column('P:P', 10)  # Total Costo
-            sheet.set_column('Q:Q', 12)  # Rentabilidad
+            sheet.set_column('O:O', 9)  # Costo o Debito
+            sheet.set_column('P:P', 12)  # Total Costo
+            sheet.set_column('Q:Q', 13)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
