@@ -287,7 +287,7 @@ class InvoiceDetails(models.TransientModel):
             'Producto',
             # 'Marca',
             'Talla',
-            'Color'
+            'Color',
             'Cantidad',
             'Precio',
             'Descuento',
