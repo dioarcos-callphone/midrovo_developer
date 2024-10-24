@@ -359,9 +359,9 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('I:I', 10)  # Talla
         sheet.set_column('J:J', 10)  # Color
         sheet.set_column('K:K', 10)  # Material
-        sheet.set_column('L:L', 10)  # Material Capellada
-        sheet.set_column('M:M', 10)  # Tipo de Calzado
-        sheet.set_column('N:N', 10)  # Pais de Origen
+        sheet.set_column('L:L', 19)  # Material Capellada
+        sheet.set_column('M:M', 16)  # Tipo de Calzado
+        sheet.set_column('N:N', 15)  # Pais de Origen
         sheet.set_column('O:O', 9)  # Cantidad
         sheet.set_column('P:P', 9)  # Precio
         sheet.set_column('Q:Q', 11)  # Descuento
