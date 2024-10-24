@@ -35,7 +35,7 @@
     </record>
 
     <record id="invoice_details_report_action" model="ir.actions.act_window">
-        <field name="name">Reporte de detalles de facturas</field>
+        <field name="name">Reporte de detalles de facturas y notas de crédito</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.details.wizard</field>
         <field name="view_mode">form</field>
