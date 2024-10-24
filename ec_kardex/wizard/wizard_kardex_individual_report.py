@@ -28,7 +28,7 @@ class WizardKardexIndividualReport(models.TransientModel):
         ('xls', u'Archivo Excel(.xls)'),
         ('pdf', u'Archivo PDF(.pdf)'),
     ], string=u'Tipo de reporte', default=u'pdf', help=u"", )
-    show_costs = fields.Boolean("Mostrar costos?", default=False)
+    show_costs = fields.Boolean("Mostrar costos ?", default=False)
 
     def _get_context_for_report(self):
         self.ensure_one()
