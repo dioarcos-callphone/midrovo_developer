@@ -154,6 +154,9 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['producto'] = detail.product_id.name
+                
+                variantes = self.variantes_de_producto(detail.product_id)         
+                
                 data_detail['cantidad'] = detail.quantity
                 data_detail['precio'] = detail.price_unit
                 data_detail['descuento'] = descuento
@@ -186,6 +189,10 @@ class InvoiceDetails(models.TransientModel):
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")    
     
+    def variantes_de_producto(self, product):
+        variantes = product.product_template_variant_value_ids
+        _logger.info(f'VARIANTES >>> { variantes }')
+        
     # Esta funcion retorna valores del filtro wizard a la funcion get_values
     # permitiendo generar el reporte en PDF
     def action_pdf(self):
@@ -226,7 +233,6 @@ class InvoiceDetails(models.TransientModel):
 
     # Formato de hoja de Excel para imprimir los datos
     def get_xlsx_report(self, data, response):
-        _logger.info('ENTRA EN EL GET XLSX REPORT DEL WIZARD')
         datas = data['result_data']
         is_cost_or_debit = data['is_cost_or_debit']
         output = io.BytesIO()
