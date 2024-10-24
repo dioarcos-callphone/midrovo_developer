@@ -142,10 +142,18 @@ class InvoiceDetails(models.TransientModel):
                         for value in attribute_line.value_ids:
                             if not color and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
                                 color = value.name
+                            else:
+                                color = "N/A"
+                                
                             if not talla and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
                                 talla = value.name
+                            else:
+                                talla = "N/A"
+                                
                             if not marca and attribute_line.attribute_id.name.lower() in ['marca', 'marcas']:
                                 marca = value.name
+                            else:
+                                marca = "N/A"
                                 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
