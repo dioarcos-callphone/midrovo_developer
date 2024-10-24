@@ -133,17 +133,19 @@ class InvoiceDetails(models.TransientModel):
                 
                 # Obtener variantes del producto (marca, talla, color)
                 product = detail.product_id
-                marca = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['marca', 'marcas']), "N/A")
-                talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), "N/A")
-                color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), "N/A")
+                marca = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['marca', 'marcas']), None)
+                talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
+                color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), None)
 
-                if not color or not talla:
+                if not color or not talla or not marca:
                     for attribute_line in product.product_tmpl_id.attribute_line_ids:
                         for value in attribute_line.value_ids:
                             if not color and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
                                 color = value.name
                             if not talla and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
                                 talla = value.name
+                            if not marca and attribute_line.attribute_id.name.lower() in ['marca', 'marcas']:
+                                marca = value.name
                                 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
