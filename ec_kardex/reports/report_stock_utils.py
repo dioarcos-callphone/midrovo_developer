@@ -904,10 +904,9 @@ class ReportStockUtils(models.AbstractModel):
 			if move['location_id'] == location_id.id:
 				total_qty -= move['product_qty']
 				fecha = datetime.strftime(move['date'], '%d/%m/%Y')
-
-				_logger.info(f'TIPO DE FECHA >>> { type(fecha) } || { fecha }')
+    
 				result.append({
-					'date': move['date'],
+					'date': fecha,
 					'name': move['reference'] or move['name'],
 					'location': location_obj.browse(move['location_id']).name,
 					'type': 'out',

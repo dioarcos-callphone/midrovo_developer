@@ -68,7 +68,7 @@
 													<span t-esc="line['doc_origen']"/>
 												</td>
 												<td class="text-left">
-													<span t-esc="format_date(line['date'], lang_code='es')"/>
+													<span t-esc="line['date']"/>
 												</td>
 												<td class="text-left">
 													<t t-if="line['type'] == 'in'">ENTRADA</t>
