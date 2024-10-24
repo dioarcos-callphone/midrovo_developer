@@ -1113,6 +1113,7 @@ class ReportStockUtils(models.AbstractModel):
 
 			results[product_id.name + default_code] = {}
 			for location_id in location_model.browse(location_ids):
+				_logger.info(f'TIPO DE FECHA >>> { type(start_time) } || { type(end_time) }')
 				params = {
 					'start_time': start_time,
 					'end_time': end_time,
