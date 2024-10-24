@@ -932,8 +932,9 @@ class ReportStockUtils(models.AbstractModel):
 					average = 1
 
 				total_qty += move['product_qty']
+				fecha = datetime.strftime(move['date'], '%d/%m/%Y')
 				result.append({
-					'date': move['date'],
+					'date': fecha,
 					'name': move['reference'] or move['name'],
 					'location': location_obj.browse(move['location_id']).name,
 					'type': 'in',
