@@ -131,22 +131,24 @@ class InvoiceDetails(models.TransientModel):
                 
                 data_detail['debito'] = debito
                 
-                # Obtener variantes del producto (marca, talla, color)
                 product = detail.product_id
-                marca = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['marca', 'marcas']), None)
-                talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), None)
-                color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), None)
 
-                if not color or not talla or not marca:
+                # Inicializar las variables y asignar N/A si no se encuentra
+                marca = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['marca', 'marcas']), "N/A")
+                talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), "N/A")
+                color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), "N/A")
+
+                # Buscar en attribute_line_ids solo si no se encontraron los valores
+                if color == "N/A" or talla == "N/A" or marca == "N/A":
                     for attribute_line in product.product_tmpl_id.attribute_line_ids:
                         for value in attribute_line.value_ids:
-                            if not color and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
+                            if color == "N/A" and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
                                 color = value.name
-                                
-                            if not talla and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
+                            
+                            if talla == "N/A" and attribute_line.attribute_id.name.lower() in ['talla', 'tallas']:
                                 talla = value.name
                             
-                            if not marca and attribute_line.attribute_id.name.lower() in ['marca', 'marcas']:
+                            if marca == "N/A" and attribute_line.attribute_id.name.lower() in ['marca', 'marcas']:
                                 marca = value.name
                                 
                 descuento = round(0.00, 2)
