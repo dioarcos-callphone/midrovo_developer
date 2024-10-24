@@ -1113,7 +1113,7 @@ class ReportStockUtils(models.AbstractModel):
 
 			results[product_id.name + default_code] = {}
 			for location_id in location_model.browse(location_ids):
-				_logger.info(f'TIPO DE FECHA >>> { type(start_time) } || { type(end_time) }')
+				# _logger.info(f'TIPO DE FECHA >>> { type(start_time) } || { type(end_time) }')
 				params = {
 					'start_time': start_time,
 					'end_time': end_time,
@@ -1125,7 +1125,7 @@ class ReportStockUtils(models.AbstractModel):
 				initial_stock = self._get_initial_stock(location_id, start_time, product_id)
 				results[product_id.name + default_code][location_id.display_name] = self._get_kardex_from_product(data_aux, location_id, initial_stock)
     
-		# _logger.info(f'MOSTRANDO RESULT >>> { results }')
+		_logger.info(f'MOSTRANDO RESULT >>> { results }')
 		return results
 
 	@api.model
