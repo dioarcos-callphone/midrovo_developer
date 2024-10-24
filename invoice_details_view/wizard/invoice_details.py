@@ -137,9 +137,21 @@ class InvoiceDetails(models.TransientModel):
                 marca = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['marca', 'marcas']), "N/A")
                 talla = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['talla', 'tallas']), "N/A")
                 color = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['color', 'colores']), "N/A")
+                material = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['material', 'materiales']), "N/A")
+                material_capellada = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['material capellada']), "N/A")
+                pais = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['país de origen']), "N/A")
+                tipo_calzado = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['tipo de calzado']), "N/A")
 
                 # Buscar en attribute_line_ids solo si no se encontraron los valores
-                if color == "N/A" or talla == "N/A" or marca == "N/A":
+                if (
+                    color == "N/A" or
+                    talla == "N/A" or
+                    marca == "N/A" or
+                    material == "N/A" or
+                    material_capellada == "N/A" or
+                    pais == "N/A" or
+                    tipo_calzado == "N/A"
+                ):
                     for attribute_line in product.product_tmpl_id.attribute_line_ids:
                         for value in attribute_line.value_ids:
                             if color == "N/A" and attribute_line.attribute_id.name.lower() in ['color', 'colores']:
@@ -150,6 +162,18 @@ class InvoiceDetails(models.TransientModel):
                             
                             if marca == "N/A" and attribute_line.attribute_id.name.lower() in ['marca', 'marcas']:
                                 marca = value.name
+                                
+                            if material == "N/A" and attribute_line.attribute_id.name.lower() in ['material', 'materiales']:
+                                material = value.name
+                                
+                            if material_capellada == "N/A" and attribute_line.attribute_id.name.lower() in ['material capellada']:
+                                material_capellada = value.name
+                                
+                            if pais == "N/A" and attribute_line.attribute_id.name.lower() in ['país de origen']:
+                                pais = value.name
+                            
+                            if tipo_calzado == "N/A" and attribute_line.attribute_id.name.lower() in ['tipo de calzado']:
+                                tipo_calzado = value.name
                                 
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
@@ -177,6 +201,10 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['marca'] = marca
                 data_detail['talla'] = talla
                 data_detail['color'] = color
+                data_detail['material'] = material
+                data_detail['material_capellada'] = material_capellada
+                data_detail['pais'] = pais
+                data_detail['tipo'] = tipo_calzado
                 data_detail['cantidad'] = detail.quantity
                 data_detail['precio'] = detail.price_unit
                 data_detail['descuento'] = descuento
@@ -285,9 +313,9 @@ class InvoiceDetails(models.TransientModel):
 
         # Título del informe
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.merge_range('A1:Q1', 'Informe de Detalles de Facturas', title_format)
+            sheet.merge_range('A1:V1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
         else:
-            sheet.merge_range('A1:N1', 'Informe de Detalles de Facturas', title_format)
+            sheet.merge_range('A1:S1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
 
         # Encabezados
         headers = [
@@ -301,6 +329,10 @@ class InvoiceDetails(models.TransientModel):
             'Marca',
             'Talla',
             'Color',
+            'Material',
+            'Material Capellada',
+            'Tipo de Calzado',
+            'País de Origen',
             'Cantidad',
             'Precio',
             'Descuento',
@@ -326,15 +358,19 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('H:H', 10)  # Marca
         sheet.set_column('I:I', 10)  # Talla
         sheet.set_column('J:J', 10)  # Color
-        sheet.set_column('K:K', 9)  # Cantidad
-        sheet.set_column('L:L', 9)  # Precio
-        sheet.set_column('M:M', 11)  # Descuento
-        sheet.set_column('N:N', 8)  # Subtotal
+        sheet.set_column('L:L', 10)  # Material
+        sheet.set_column('M:M', 10)  # Material Capellada
+        sheet.set_column('N:N', 10)  # Tipo de Calzado
+        sheet.set_column('O:O', 10)  # Pais de Origen
+        sheet.set_column('P:P', 9)  # Cantidad
+        sheet.set_column('Q:Q', 9)  # Precio
+        sheet.set_column('R:R', 11)  # Descuento
+        sheet.set_column('S:S', 8)  # Subtotal
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('O:O', 9)  # Costo o Debito
-            sheet.set_column('P:P', 12)  # Total Costo
-            sheet.set_column('Q:Q', 13)  # Rentabilidad
+            sheet.set_column('T:T', 9)  # Costo o Debito
+            sheet.set_column('U:U', 12)  # Total Costo
+            sheet.set_column('V:V', 13)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -349,19 +385,25 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 7, val['marca'], text_format)
             sheet.write(row, 8, val['talla'], text_format)
             sheet.write(row, 9, val['color'], text_format)
-            sheet.write(row, 10, val['cantidad'], text_format)
-            sheet.write(row, 11, val['precio'], text_format)
-            sheet.write(row, 12, val['descuento'], text_format)
-            sheet.write(row, 13, val['subtotal'], text_format)
+            
+            sheet.write(row, 10, val['material'], text_format)
+            sheet.write(row, 11, val['material_capellada'], text_format)
+            sheet.write(row, 12, val['tipo'], text_format)
+            sheet.write(row, 13, val['pais'], text_format)
+            
+            sheet.write(row, 14, val['cantidad'], text_format)
+            sheet.write(row, 15, val['precio'], text_format)
+            sheet.write(row, 16, val['descuento'], text_format)
+            sheet.write(row, 17, val['subtotal'], text_format)
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
-                    sheet.write(row, 14, val['costo'], text_format)
+                    sheet.write(row, 18, val['costo'], text_format)
                 elif is_cost_or_debit == 'movement':
-                    sheet.write(row, 14, val['debito'], text_format)
+                    sheet.write(row, 18, val['debito'], text_format)
                 
-                sheet.write(row, 15, val['total_costo'], text_format)
-                sheet.write(row, 16, val['rentabilidad'], text_format)
+                sheet.write(row, 19, val['total_costo'], text_format)
+                sheet.write(row, 20, val['rentabilidad'], text_format)
             
             row += 1
 
