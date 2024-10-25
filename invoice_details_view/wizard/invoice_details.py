@@ -386,7 +386,7 @@ class InvoiceDetails(models.TransientModel):
             'bold': True,
             'font_size': 16,
             'align': 'center',
-            'valign': 'vcenter'
+            'valign': 'vcenter',
             'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
         })
         sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format)
