@@ -194,7 +194,9 @@ class InvoiceDetails(models.TransientModel):
                 pos_order = detail.move_id.pos_order_ids
                 
                 if pos_order:
-                    _logger.info(f'POS ORDER >>> { pos_order.payment_ids }')
+                    payments = pos_order.payment_ids
+                    for payment in payments:
+                        _logger.info(f'POS ORDER >>> { payment.name }')
                 
                 # metodos = []
                 # if payment_method_sri:
