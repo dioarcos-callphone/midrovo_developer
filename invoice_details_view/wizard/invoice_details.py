@@ -398,7 +398,7 @@ class InvoiceDetails(models.TransientModel):
         
         
         # Escribir datos
-        row = 3  # Comenzar desde la fila 3 después de los encabezados
+        row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
             sheet.write(row, 0, val['fecha'], text_format)
             sheet.write(row, 1, val['numero'], text_format)
