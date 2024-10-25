@@ -379,6 +379,15 @@ class InvoiceDetails(models.TransientModel):
             sheet.set_column('T:T', 9)  # Costo o Debito
             sheet.set_column('U:U', 12)  # Total Costo
             sheet.set_column('V:V', 13)  # Rentabilidad
+            
+        number = len(datas)
+        title_format_method = workbook.add_format({
+            'bold': True,
+            'align': 'center',
+            'valign': 'vcenter',
+            # 'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
+        })
+        sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format)
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
