@@ -196,7 +196,7 @@ class InvoiceDetails(models.TransientModel):
                 if pos_order:
                     payments = pos_order.payment_ids
                     for payment in payments:
-                        _logger.info(f'POS ORDER >>> { payment.name }')
+                        _logger.info(f'POS ORDER >>> { payment }')
                 
                 # metodos = []
                 # if payment_method_sri:
@@ -276,7 +276,6 @@ class InvoiceDetails(models.TransientModel):
         
     def action_excel(self):
         """This function is for printing excel report"""
-        _logger.info('ENTRA EN EL ACTION EXCEL DEL WIZARD')
         data = self.get_report_data()
         return {
             'type': 'ir.actions.report',
