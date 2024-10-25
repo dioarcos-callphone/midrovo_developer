@@ -374,6 +374,7 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('R:R', 8)  # Subtotal
         
         number = len(datas)
+        title_format['text_rotation'] = 90
         sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format)
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
