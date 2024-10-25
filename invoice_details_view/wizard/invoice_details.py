@@ -195,7 +195,7 @@ class InvoiceDetails(models.TransientModel):
 
                 if payment_method_sri:
                     for metodo in payment_method_sri:
-                        _logger.info(f'PAYMENT METODO SRI >>> { metodo.l10n_ec_sri_payment }')
+                        _logger.info(f'PAYMENT METODO SRI >>> { metodo.l10n_ec_sri_payment_id.name }')
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
