@@ -327,9 +327,9 @@ class InvoiceDetails(models.TransientModel):
 
         # Título del informe
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.merge_range('A1:U1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
+            sheet.merge_range('A1:V1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
         else:
-            sheet.merge_range('A1:T1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
+            sheet.merge_range('A1:S1', 'Informe de Detalles de Facturas y Notas de Crédito', title_format)
 
         # Encabezados
         headers = [
