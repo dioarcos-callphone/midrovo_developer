@@ -364,7 +364,12 @@ class InvoiceDetails(models.TransientModel):
 
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
-            sheet.merge_range(2, col, 3, col, header, header_format)
+            if header == 'Costo' or header == 'Total Costo' or header == 'Rentabilidad':
+                if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+                    sheet.merge_range(2, col, 3, col, header, header_format)
+                
+            else:
+                sheet.merge_range(2, col, 3, col, header, header_format)
 
         # Ajuste de columnas
         # sheet.set_column('A:A', 10)  # Fecha
