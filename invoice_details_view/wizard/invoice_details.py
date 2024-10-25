@@ -383,8 +383,9 @@ class InvoiceDetails(models.TransientModel):
         number = len(datas) + 3
         title_format_method = workbook.add_format({
             'font_name': 'Times New Roman',
+            'border': 1,
             'bold': True,
-            'font_size': 16,
+            'font_size': 14,
             'align': 'center',
             'valign': 'vcenter'
         })
