@@ -386,10 +386,12 @@ class InvoiceDetails(models.TransientModel):
             'bold': True,
             'font_size': 16,
             'align': 'center',
-            'valign': 'vcenter',
-            'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
+            'valign': 'vcenter'
         })
-        sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format)
+        
+        title_format_method.set_rotation(90)
+        
+        sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format_method)
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
