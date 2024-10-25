@@ -387,11 +387,11 @@ class InvoiceDetails(models.TransientModel):
         # sheet.set_column('S:S', 20)  # Metodos de Pago
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('T:T', 9)  # Costo o Debito
-            sheet.set_column('U:U', 12)  # Total Costo
-            sheet.set_column('V:V', 13)  # Rentabilidad
+            sheet.set_column('S:S', 9)  # Costo o Debito
+            sheet.set_column('T:T', 12)  # Total Costo
+            sheet.set_column('U:U', 13)  # Rentabilidad
             
-            sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format_method)
+            sheet.merge_range(f'V3:V{number}', 'Métodos de Pago', title_format_method)
         
         else:
             sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
