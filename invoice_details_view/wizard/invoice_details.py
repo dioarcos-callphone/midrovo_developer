@@ -380,7 +380,7 @@ class InvoiceDetails(models.TransientModel):
             'valign': 'vcenter',
             'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
         })
-        sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
+        sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format)
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             sheet.set_column('T:T', 9)  # Costo o Debito
