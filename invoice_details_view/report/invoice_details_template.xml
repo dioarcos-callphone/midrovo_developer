@@ -28,6 +28,7 @@
                                 <th align="center" style="vertical-align: middle">TOTAL COSTO</th>
                                 <th align="center" style="vertical-align: middle">RENTABILIDAD</th>
                             </t>
+                            <th align="center" style="vertical-align: middle">MÉTODOS DE PAGO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,6 +83,11 @@
                                     <t t-esc="result['rentabilidad']"/>
                                 </td>
                             </t>
+                            <td>
+                                <t t-foreach="result['metodo_pago']" t-as="metodos">
+                                    <t t-esc="metodos"/>
+                                </t>
+                            </td>
                         </tr>
                     </tbody>              
                 </table>
