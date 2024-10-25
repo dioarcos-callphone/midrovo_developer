@@ -191,9 +191,10 @@ class InvoiceDetails(models.TransientModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
-                payment_method_sri = detail.move_id.pos_order_ids
+                pos_order = detail.move_id.pos_order_ids
                 
-                _logger.info(f'POS ORDER >>> { payment_method_sri }')
+                if pos_order:
+                    _logger.info(f'POS ORDER >>> { pos_order.payment_ids }')
                 
                 # metodos = []
                 # if payment_method_sri:
