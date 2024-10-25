@@ -193,10 +193,11 @@ class InvoiceDetails(models.TransientModel):
                 
                 pos_order = detail.move_id.pos_order_ids
                 
+                metodos = []
                 if pos_order:
                     payments = pos_order.payment_ids
                     for payment in payments:
-                        _logger.info(f'POS ORDER >>> { payment.payment_method_id.name }')
+                        metodos.append(payment.payment_method_id.name)
                 
                 # metodos = []
                 # if payment_method_sri:
@@ -224,7 +225,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                data_detail['metodo_pago'] = ['metodos']
+                data_detail['metodo_pago'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
