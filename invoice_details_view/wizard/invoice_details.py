@@ -382,10 +382,12 @@ class InvoiceDetails(models.TransientModel):
             
         number = len(datas) + 3
         title_format_method = workbook.add_format({
+            'font_name': 'Times New Roman',
             'bold': True,
+            'font_size': 16,
             'align': 'center',
-            'valign': 'vcenter',
-            # 'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
+            'valign': 'vcenter'
+            'text_rotation': 90  # Rotar el texto 90 grados para orientación vertical
         })
         sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format)
 
