@@ -343,7 +343,7 @@ class InvoiceDetails(models.TransientModel):
             'Precio',
             'Descuento',
             'Subtotal',
-            'Métodos de Pago',
+            # 'Métodos de Pago',
         ]
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
@@ -373,12 +373,7 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('P:P', 9)  # Precio
         sheet.set_column('Q:Q', 11)  # Descuento
         sheet.set_column('R:R', 8)  # Subtotal
-        sheet.set_column('S:S', 20)  # Metodos de Pago
-        
-        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('T:T', 9)  # Costo o Debito
-            sheet.set_column('U:U', 12)  # Total Costo
-            sheet.set_column('V:V', 13)  # Rentabilidad
+        # sheet.set_column('S:S', 20)  # Metodos de Pago
             
         number = len(datas) + 3
         title_format_method = workbook.add_format({
@@ -392,7 +387,12 @@ class InvoiceDetails(models.TransientModel):
         
         title_format_method.set_rotation(90)
         
-        sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format_method)
+        sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
+        
+        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+            sheet.set_column('T:T', 9)  # Costo o Debito
+            sheet.set_column('U:U', 12)  # Total Costo
+            sheet.set_column('V:V', 13)  # Rentabilidad
 
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
@@ -417,17 +417,17 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 17, val['subtotal'], text_format)
             
             # Crear un formato con ajuste de texto habilitado
-            text_wrap = workbook.add_format({
-                'text_wrap': True,
-                'font_name': 'Times New Roman',
-                'border': 1,
-                'align': 'left',
-                'valign': 'vcenter'
-            })
+            # text_wrap = workbook.add_format({
+            #     'text_wrap': True,
+            #     'font_name': 'Times New Roman',
+            #     'border': 1,
+            #     'align': 'left',
+            #     'valign': 'vcenter'
+            # })
             
-            metodo_pago = val['metodo_pago']
-            metodo_pago_str = "\n".join(metodo_pago)  # Unir elementos con salto de línea
-            sheet.write(row, 18, metodo_pago_str, text_wrap)
+            # metodo_pago = val['metodo_pago']
+            # metodo_pago_str = "\n".join(metodo_pago)  # Unir elementos con salto de línea
+            # sheet.write(row, 18, metodo_pago_str, text_wrap)
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
