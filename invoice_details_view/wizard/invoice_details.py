@@ -363,38 +363,39 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Rentabilidad')
 
         for col, header in enumerate(headers):
-            sheet.write(2, col, header, header_format)
+            #sheet.write(2, col, header, header_format)
+            sheet.merge_range(2, col, 3, col, header, header_format)
 
         # Ajuste de columnas
-        sheet.set_column('A:A', 10)  # Fecha
-        sheet.set_column('B:B', 23)  # Número
-        sheet.set_column('C:C', 14)  # Tipo
-        sheet.set_column('D:D', 23)  # Comercial
-        sheet.set_column('E:E', 28)  # Cajero
-        sheet.set_column('F:F', 30)  # Cliente
-        sheet.set_column('G:G', 20)  # Product
-        sheet.set_column('H:H', 10)  # Marca
-        sheet.set_column('I:I', 10)  # Talla
-        sheet.set_column('J:J', 10)  # Color
-        sheet.set_column('K:K', 10)  # Material
-        sheet.set_column('L:L', 19)  # Material Capellada
-        sheet.set_column('M:M', 16)  # Tipo de Calzado
-        sheet.set_column('N:N', 15)  # Pais de Origen
-        sheet.set_column('O:O', 9)  # Cantidad
-        sheet.set_column('P:P', 9)  # Precio
-        sheet.set_column('Q:Q', 11)  # Descuento
-        sheet.set_column('R:R', 8)  # Subtotal
-        # sheet.set_column('S:S', 20)  # Metodos de Pago
+        # sheet.set_column('A:A', 10)  # Fecha
+        # sheet.set_column('B:B', 23)  # Número
+        # sheet.set_column('C:C', 14)  # Tipo
+        # sheet.set_column('D:D', 23)  # Comercial
+        # sheet.set_column('E:E', 28)  # Cajero
+        # sheet.set_column('F:F', 30)  # Cliente
+        # sheet.set_column('G:G', 20)  # Product
+        # sheet.set_column('H:H', 10)  # Marca
+        # sheet.set_column('I:I', 10)  # Talla
+        # sheet.set_column('J:J', 10)  # Color
+        # sheet.set_column('K:K', 10)  # Material
+        # sheet.set_column('L:L', 19)  # Material Capellada
+        # sheet.set_column('M:M', 16)  # Tipo de Calzado
+        # sheet.set_column('N:N', 15)  # Pais de Origen
+        # sheet.set_column('O:O', 9)  # Cantidad
+        # sheet.set_column('P:P', 9)  # Precio
+        # sheet.set_column('Q:Q', 11)  # Descuento
+        # sheet.set_column('R:R', 8)  # Subtotal
+        # # sheet.set_column('S:S', 20)  # Metodos de Pago
         
-        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            sheet.set_column('S:S', 9)  # Costo o Debito
-            sheet.set_column('T:T', 12)  # Total Costo
-            sheet.set_column('U:U', 13)  # Rentabilidad
+        # if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+        #     sheet.set_column('S:S', 9)  # Costo o Debito
+        #     sheet.set_column('T:T', 12)  # Total Costo
+        #     sheet.set_column('U:U', 13)  # Rentabilidad
             
-            sheet.merge_range(f'V3:V{number}', 'Métodos de Pago', title_format_method)
+        #     sheet.merge_range(f'V3:V{number}', 'Métodos de Pago', title_format_method)
         
-        else:
-            sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
+        # else:
+        #     sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
         
         
         # Escribir datos
