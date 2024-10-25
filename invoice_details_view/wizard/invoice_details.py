@@ -380,7 +380,7 @@ class InvoiceDetails(models.TransientModel):
             sheet.set_column('U:U', 12)  # Total Costo
             sheet.set_column('V:V', 13)  # Rentabilidad
             
-        number = len(datas)
+        number = len(datas) + 1
         title_format_method = workbook.add_format({
             'bold': True,
             'align': 'center',
