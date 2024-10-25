@@ -85,7 +85,7 @@
                             </t>
                             <td>
                                 <t t-foreach="result['metodo_pago']" t-as="metodos">
-                                    <t t-esc="f'- { metodos }'"/>
+                                    <t t-esc="metodos"/>
                                 </t>
                             </td>
                         </tr>
