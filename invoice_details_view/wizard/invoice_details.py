@@ -192,10 +192,11 @@ class InvoiceDetails(models.TransientModel):
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
                 payment_method_sri = detail.move_id.l10n_ec_sri_payment_ids
-
+                
+                metodos = []
                 if payment_method_sri:
                     for metodo in payment_method_sri:
-                        _logger.info(f'PAYMENT METODO SRI >>> { metodo.l10n_ec_sri_payment_id.name }')
+                        metodos.append(metodo.l10n_ec_sri_payment_id.name)
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
@@ -218,7 +219,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                data_detail['metodo_pago'] = ''
+                data_detail['metodo_pago'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
@@ -239,6 +240,9 @@ class InvoiceDetails(models.TransientModel):
                 'result_data': data_invoice_details,
                 'is_cost_or_debit': self.cost_options
             }
+            
+            _logger.info(f'MOSTRANDO DATA >>> { data }')
+            
             return data
         
         else:
