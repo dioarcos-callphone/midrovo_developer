@@ -410,9 +410,18 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 16, val['descuento'], text_format)
             sheet.write(row, 17, val['subtotal'], text_format)
             
+            # Crear un formato con ajuste de texto habilitado
+            text_wrap = workbook.add_format({
+                'text_wrap': True,
+                'font_name': 'Times New Roman',
+                'border': 1,
+                'align': 'left',
+                'valign': 'vcenter'
+            })
+            
             metodo_pago = val['metodo_pago']
             metodo_pago_str = "\n".join(metodo_pago)  # Unir elementos con salto de línea
-            sheet.write(row, 18, metodo_pago_str, text_format)
+            sheet.write(row, 18, metodo_pago_str, text_wrap)
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
