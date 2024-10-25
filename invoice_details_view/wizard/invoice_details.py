@@ -4,9 +4,6 @@ from datetime import datetime
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
-import logging
-_logger = logging.getLogger(__name__)
-
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -198,11 +195,6 @@ class InvoiceDetails(models.TransientModel):
                     payments = pos_order.payment_ids
                     for payment in payments:
                         metodos.append(payment.payment_method_id.name)
-                
-                # metodos = []
-                # if payment_method_sri:
-                #     for metodo in payment_method_sri:
-                #         metodos.append(metodo.l10n_ec_sri_payment_id.name)
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
