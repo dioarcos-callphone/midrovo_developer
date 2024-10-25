@@ -191,6 +191,14 @@ class InvoiceDetails(models.TransientModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
+                # TO DO
+                payment_method_origin = detail.move_id.payment_method_id
+                payment_method_sri = detail.move_id.l10n_ec_sri_payment_ids
+                
+                _logger.info(f'PAYMENT METODO ORIGINAL >>> { payment_method_origin }')
+                
+                _logger.info(f'PAYMENT METODO SRI >>> { payment_method_sri }')
+                
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
