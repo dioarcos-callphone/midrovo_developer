@@ -316,6 +316,17 @@ class InvoiceDetails(models.TransientModel):
             'align': 'center',
             'valign': 'vcenter'
         })
+        
+        number = len(datas) + 3
+        title_format_method = workbook.add_format({
+            'font_name': 'Times New Roman',
+            'border': 1,
+            'bold': True,
+            'font_size': 14,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
+        title_format_method.set_rotation(90)
 
         # Título del informe
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
@@ -374,26 +385,18 @@ class InvoiceDetails(models.TransientModel):
         sheet.set_column('Q:Q', 11)  # Descuento
         sheet.set_column('R:R', 8)  # Subtotal
         # sheet.set_column('S:S', 20)  # Metodos de Pago
-            
-        number = len(datas) + 3
-        title_format_method = workbook.add_format({
-            'font_name': 'Times New Roman',
-            'border': 1,
-            'bold': True,
-            'font_size': 14,
-            'align': 'center',
-            'valign': 'vcenter'
-        })
-        
-        title_format_method.set_rotation(90)
-        
-        sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             sheet.set_column('T:T', 9)  # Costo o Debito
             sheet.set_column('U:U', 12)  # Total Costo
             sheet.set_column('V:V', 13)  # Rentabilidad
-
+            
+            sheet.merge_range(f'W3:W{number}', 'Métodos de Pago', title_format_method)
+        
+        else:
+            sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
+        
+        
         # Escribir datos
         row = 3  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
