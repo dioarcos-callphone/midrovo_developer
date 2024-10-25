@@ -194,7 +194,7 @@ class InvoiceDetails(models.TransientModel):
                 if pos_order:
                     payments = pos_order.payment_ids
                     for payment in payments:
-                        metodos.append(payment.payment_method_id.name)
+                        metodos.append(f'- { payment.payment_method_id.name }')
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
