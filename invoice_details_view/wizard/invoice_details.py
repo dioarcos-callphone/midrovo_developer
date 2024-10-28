@@ -371,7 +371,8 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Rentabilidad')
         
         for data in datas:
-            _logger.info(f'MOSTRANDO METODOS >>> { data['metodos'] }')
+            metodos = data['metodos']
+            _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
         
         # if datas['metodos']:
         #     metodos =  datas['metodos']
