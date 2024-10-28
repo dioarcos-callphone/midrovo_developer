@@ -127,13 +127,10 @@
                                     </td>
                                 </t>
                                 <td>
-                                    <t t-esc="result['Efectivo']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['Banco']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['Cuenta de cliente']"/>
+                                    <t t-foreach="result['metodos']" t-as="metodo">
+                                        <t t-esc="'- {}%'.format(metodos)"></t>
+                                        <br/>
+                                    </t>
                                 </td>
                             </t>
                             
