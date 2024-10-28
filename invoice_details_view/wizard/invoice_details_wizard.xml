@@ -21,11 +21,9 @@
                         <field name="comercial_ids" widget="many2many_tags"/>
                         <field name="cashier_ids" widget="many2many_tags"/>
                     </group>
-                    <!-- <group string="Tipo de Informe">
-                        <field name="journal_ids" widget="many2many_tags"/>
-                        <field name="comercial_ids" widget="many2many_tags"/>
-                        <field name="cashier_ids" widget="many2many_tags"/>
-                    </group> -->
+                    <group string="Tipo de Informe">
+                        <field name="informe" widget="radio" options="{'horizontal': true}"/>
+                    </group>
                 </sheet>
                 <footer>
                     <button name="action_pdf" string="PDF" type="object"
