@@ -334,7 +334,7 @@ class InvoiceDetails(models.TransientModel):
                 'result_data': data_invoice_details,
                 'is_cost_or_debit': self.cost_options,
             }
-            
+            _logger.info(f'MOSTRANDO DATA >>> { data }')
             return data
         
         else:
