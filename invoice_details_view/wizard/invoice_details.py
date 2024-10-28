@@ -384,7 +384,16 @@ class InvoiceDetails(models.TransientModel):
                 sheet.merge_range(2, col, 3, col, header, header_format)
                 
             header_length = len(header)  # Longitud del encabezado
-            sheet.set_column(col, col, header_length + 5)  
+            sheet.set_column(col, col, header_length + 5)
+            
+            if header == 'Fecha' or header == 'Cajero':
+                sheet.set_column(col, col, header_length + 6) 
+                
+            if header == 'Número' or header == 'Diario contable':
+                sheet.set_column(col, col, header_length + 20)
+                
+            if header == 'Comercial' or header == 'Cajero':
+                sheet.set_column(col, col, header_length + 10)
         
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
