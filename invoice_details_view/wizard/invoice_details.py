@@ -190,23 +190,11 @@ class InvoiceDetails(models.TransientModel):
                 rentabilidad = detail.price_subtotal - total_costo
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
-                
-                # pos_order = detail.move_id.pos_order_ids
-                
-                # metodos = []
-                # if pos_order:
-                #     payments = pos_order.payment_ids
-                #     for payment in payments:
-                #         # metodos.append(f'- { payment.payment_method_id.name}')
-                #         name = payment.payment_method_id.name
-                #         value = payment.amount
-                #         metodos.append({
-                #             name: value,
-                #         })
-                
+
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
+                data_detail['diario_contable'] = detail.journal_id.name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
@@ -358,6 +346,7 @@ class InvoiceDetails(models.TransientModel):
         headers = [
             'Fecha',
             'Número',
+            'Diario contable',
             'Tipo',
             'Comercial',
             'Cajero',
@@ -374,15 +363,8 @@ class InvoiceDetails(models.TransientModel):
             'Precio',
             'Descuento',
             'Subtotal',
-            # 'Métodos de Pago',
         ]
-        
-        # if datas:
-        #     data = datas[0]
-        #     for name in data.keys():
-        #         _logger.info(f'MOSTRANDO NAME { name }')
-            
-        
+
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             headers.append('Costo')
             headers.append('Total Costo')
@@ -392,15 +374,6 @@ class InvoiceDetails(models.TransientModel):
         headers.append('Banco')
         headers.append('Cuenta de cliente')
         
-        # for data in datas:
-        #     metodos = data['metodos']
-        #     _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
-        
-        # if datas['metodos']:
-        #     metodos =  datas['metodos']
-        #     for metodo in metodos.keys():
-        #         headers.append(metodo)   
-        
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
             if header == 'Costo' or header == 'Total Costo' or header == 'Rentabilidad':
@@ -408,87 +381,42 @@ class InvoiceDetails(models.TransientModel):
                     sheet.merge_range(2, col, 3, col, header, header_format)
                 
             else:
-                sheet.merge_range(2, col, 3, col, header, header_format)
-
-        # Ajuste de columnas
-        # sheet.set_column('A:A', 10)  # Fecha
-        # sheet.set_column('B:B', 23)  # Número
-        # sheet.set_column('C:C', 14)  # Tipo
-        # sheet.set_column('D:D', 23)  # Comercial
-        # sheet.set_column('E:E', 28)  # Cajero
-        # sheet.set_column('F:F', 30)  # Cliente
-        # sheet.set_column('G:G', 20)  # Product
-        # sheet.set_column('H:H', 10)  # Marca
-        # sheet.set_column('I:I', 10)  # Talla
-        # sheet.set_column('J:J', 10)  # Color
-        # sheet.set_column('K:K', 10)  # Material
-        # sheet.set_column('L:L', 19)  # Material Capellada
-        # sheet.set_column('M:M', 16)  # Tipo de Calzado
-        # sheet.set_column('N:N', 15)  # Pais de Origen
-        # sheet.set_column('O:O', 9)  # Cantidad
-        # sheet.set_column('P:P', 9)  # Precio
-        # sheet.set_column('Q:Q', 11)  # Descuento
-        # sheet.set_column('R:R', 8)  # Subtotal
-        # # sheet.set_column('S:S', 20)  # Metodos de Pago
-        
-        # if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-        #     sheet.set_column('S:S', 9)  # Costo o Debito
-        #     sheet.set_column('T:T', 12)  # Total Costo
-        #     sheet.set_column('U:U', 13)  # Rentabilidad
-            
-        #     sheet.merge_range(f'V3:V{number}', 'Métodos de Pago', title_format_method)
-        
-        # else:
-        #     sheet.merge_range(f'S3:S{number}', 'Métodos de Pago', title_format_method)
-        
+                sheet.merge_range(2, col, 3, col, header, header_format)        
         
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
             sheet.write(row, 0, val['fecha'], text_format)
             sheet.write(row, 1, val['numero'], text_format)
-            sheet.write(row, 2, val['tipo'], text_format)
-            sheet.write(row, 3, val['comercial'], text_format)
-            sheet.write(row, 4, val['pos'], text_format)
-            sheet.write(row, 5, val['cliente'], text_format)
-            sheet.write(row, 6, val['producto'], text_format)
-            sheet.write(row, 7, val['marca'], text_format)
-            sheet.write(row, 8, val['talla'], text_format)
-            sheet.write(row, 9, val['color'], text_format)
-            sheet.write(row, 10, val['material'], text_format)
-            sheet.write(row, 11, val['material_capellada'], text_format)
-            sheet.write(row, 12, val['tipo_calzado'], text_format)
-            sheet.write(row, 13, val['pais'], text_format)
-            sheet.write(row, 14, val['cantidad'], text_format)
-            sheet.write(row, 15, val['precio'], text_format)
-            sheet.write(row, 16, val['descuento'], text_format)
-            sheet.write(row, 17, val['subtotal'], text_format)
-            sheet.write(row, 18, val['Efectivo'], text_format)
-            sheet.write(row, 19, val['Banco'], text_format)
-            sheet.write(row, 20, val['Cuenta de cliente'], text_format)
-            
-            
-            # Crear un formato con ajuste de texto habilitado
-            # text_wrap = workbook.add_format({
-            #     'text_wrap': True,
-            #     'font_name': 'Times New Roman',
-            #     'border': 1,
-            #     'align': 'left',
-            #     'valign': 'vcenter'
-            # })
-            
-            # metodo_pago = val['metodo_pago']
-            # metodo_pago_str = "\n".join(metodo_pago)  # Unir elementos con salto de línea
-            # sheet.write(row, 18, metodo_pago_str, text_wrap)
+            sheet.write(row, 2, val['diario_contable'], text_format)
+            sheet.write(row, 3, val['tipo'], text_format)
+            sheet.write(row, 4, val['comercial'], text_format)
+            sheet.write(row, 5, val['pos'], text_format)
+            sheet.write(row, 6, val['cliente'], text_format)
+            sheet.write(row, 7, val['producto'], text_format)
+            sheet.write(row, 8, val['marca'], text_format)
+            sheet.write(row, 9, val['talla'], text_format)
+            sheet.write(row, 10, val['color'], text_format)
+            sheet.write(row, 11, val['material'], text_format)
+            sheet.write(row, 12, val['material_capellada'], text_format)
+            sheet.write(row, 13, val['tipo_calzado'], text_format)
+            sheet.write(row, 14, val['pais'], text_format)
+            sheet.write(row, 15, val['cantidad'], text_format)
+            sheet.write(row, 16, val['precio'], text_format)
+            sheet.write(row, 17, val['descuento'], text_format)
+            sheet.write(row, 18, val['subtotal'], text_format)
+            sheet.write(row, 19, val['Efectivo'], text_format)
+            sheet.write(row, 20, val['Banco'], text_format)
+            sheet.write(row, 21, val['Cuenta de cliente'], text_format)
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
-                    sheet.write(row, 21, val['costo'], text_format)
+                    sheet.write(row, 22, val['costo'], text_format)
                 elif is_cost_or_debit == 'movement':
-                    sheet.write(row, 21, val['debito'], text_format)
+                    sheet.write(row, 22, val['debito'], text_format)
                 
-                sheet.write(row, 22, val['total_costo'], text_format)
-                sheet.write(row, 23, val['rentabilidad'], text_format)
+                sheet.write(row, 23, val['total_costo'], text_format)
+                sheet.write(row, 24, val['rentabilidad'], text_format)
             
             row += 1
 
