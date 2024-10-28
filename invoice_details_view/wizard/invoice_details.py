@@ -375,6 +375,8 @@ class InvoiceDetails(models.TransientModel):
         is_cost_or_debit = data.get('is_cost_or_debit', None)
         is_resumen = data.get('is_resumen', None)
         
+        _logger.info(f'MOSTRANDO INFORME >>> { is_resumen }')
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
