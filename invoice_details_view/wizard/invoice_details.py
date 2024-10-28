@@ -194,7 +194,12 @@ class InvoiceDetails(models.TransientModel):
                 if pos_order:
                     payments = pos_order.payment_ids
                     for payment in payments:
-                        metodos.append(f'- { payment.payment_method_id.name}')
+                        # metodos.append(f'- { payment.payment_method_id.name}')
+                        name = payment.payment_method_id.name
+                        value = payment.amount
+                        metodos.append({
+                            name: value,
+                        })
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
@@ -217,7 +222,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                data_detail['metodo_pago'] = metodos
+                data_detail['metodos'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
@@ -361,7 +366,12 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Costo')
             headers.append('Total Costo')
             headers.append('Rentabilidad')
-
+        
+        if datas['metodos']:
+            metodos =  datas['metodos']
+            for metodo in metodos.keys():
+                headers.append(metodo)   
+        
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
             if header == 'Costo' or header == 'Total Costo' or header == 'Rentabilidad':
