@@ -242,7 +242,8 @@ class InvoiceDetails(models.TransientModel):
                     
                 methods = self.env['pos.payment.method'].search_read([], ['name'])
                 
-                _logger.info(f'MOSTRANDO METODOS DE POS PAYMENT { methods }')
+                for method in methods:
+                    _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { method['name'] }")
 
                 data_invoice_details.append(data_detail)
             
