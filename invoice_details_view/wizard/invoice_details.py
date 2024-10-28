@@ -389,7 +389,7 @@ class InvoiceDetails(models.TransientModel):
             if header == 'Fecha' or header == 'Cajero':
                 sheet.set_column(col, col, header_length + 6) 
                 
-            if header == 'Número' or header == 'Diario contable':
+            if header == 'Número' or header == 'Diario contable' or header == 'Producto':
                 sheet.set_column(col, col, header_length + 18)
                 
             if header == 'Comercial' or header == 'Cajero' or header == 'Cliente':
