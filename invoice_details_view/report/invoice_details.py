@@ -18,7 +18,19 @@ class InvoiceDetails(models.AbstractModel):
         diario = data['diario']
         comercial = data['comercial']
         cashier = data['cashier']
-        is_cost_or_debit = data['is_cost_or_debit']
+        is_cost_or_debit = data.get('is_cost_or_debit', None)
+        is_resumen = data.get('is_resumen', None)
+        
+        if is_resumen == 'r':
+            data_invoices = self.get_report_facturas(fecha_inicio, fecha_fin, comercial, cashier, diario)
+            
+            return {
+                'doc_ids': docids,
+                'doc_model': 'report.invoice_details_view.report_invoice_details',
+                'data': data,
+                'options': data_invoices,
+                'is_resumen': is_resumen
+            }
         
         domain = [
             ('product_id', '!=', False),
@@ -137,13 +149,13 @@ class InvoiceDetails(models.AbstractModel):
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
-                    # else:
-                    #     if detail.move_id.invoice_payments_widget:
-                    #         content = detail.move_id.invoice_payments_widget['content']
+                    else:
+                        if detail.move_id.invoice_payments_widget:
+                            content = detail.move_id.invoice_payments_widget['content']
                             
-                    #         for c in content:
-                    #             if method['name'] == c['journal_name']:
-                    #                 data_detail[method['name']] = c['amount']
+                            for c in content:
+                                if method['name'] == c['journal_name']:
+                                    data_detail[method['name']] = c['amount']
 
                     
                 data_invoice_details.append(data_detail)
@@ -159,10 +171,66 @@ class InvoiceDetails(models.AbstractModel):
             raise ValidationError("¡No se encontraron registros para los criterios dados!")
         
     
-    def _get_report_facturas(self, data):
-        fecha_inicio = data['fecha_inicio']
-        fecha_fin = data['fecha_fin']
-        diario = data['diario']
-        comercial = data['comercial']
-        cashier = data['cashier']
-        is_cost_or_debit = data['is_cost_or_debit']
+    def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):
+        data_invoice_details = []
+        domain = [
+            ('date', '>=', fecha_inicio),
+            ('date', '<=', fecha_fin),
+            ('move_type', 'in', ['out_invoice', 'out_refund']),
+        ]
+        
+        if diario:
+            domain.append(('journal_id', 'in', diario))
+        if comercial:
+            domain.append(('invoice_user_id', 'in', comercial))
+        if cashier:
+            domain.append(('pos_order_ids.employee_id', 'in', cashier))
+            
+        invoices = self.env['account.move'].search(domain)
+        
+        if invoices:
+            for invoice in invoices:
+                data_detail = {}
+                date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
+
+                data_detail['fecha'] = date_formated
+                data_detail['numero'] = invoice.name
+                data_detail['diario_contable'] = invoice.journal_id.name
+                data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
+                data_detail['pos'] = invoice.pos_order_ids.employee_id.name or ""
+                data_detail['cliente'] = invoice.partner_id.name or ""
+                data_detail['subtotal'] = invoice.amount_untaxed_signed
+                data_detail['iva'] = invoice.amount_tax
+                data_detail['total'] = invoice.amount_total_signed
+                
+                if invoice.move_type == 'out_invoice':
+                    data_detail['tipo'] = 'Factura'
+                    
+                elif invoice.move_type == 'out_refund':
+                    data_detail['subtotal'] = - invoice.amount_untaxed_signed
+                    data_detail['iva'] = - invoice.amount_tax
+                    data_detail['total'] = - invoice.amount_total_signed
+                
+                methods = self.env['pos.payment.method'].search_read([], ['name'])
+                pos_order = invoice.pos_order_ids
+                
+                for method in methods:
+                    data_detail[method['name']] = 0
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            if method['name'] == payment.payment_method_id.name:
+                                data_detail[method['name']] = payment.amount
+                    else:
+                        if invoice.invoice_payments_widget:
+                            content = invoice.invoice_payments_widget['content']
+                            
+                            for c in content:
+                                if method['name'] == c['journal_name']:
+                                    data_detail[method['name']] = c['amount']
+                                    
+                data_invoice_details.append(data_detail)
+            
+            return data_invoice_details
+        
+        else:
+            raise ValidationError("¡No se encontraron registros para los criterios dados!")  

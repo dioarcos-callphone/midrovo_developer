@@ -19,19 +19,33 @@
                             <th align="center" style="vertical-align: middle">Comercial</th>
                             <th align="center" style="vertical-align: middle">Cajero</th>
                             <th align="center" style="vertical-align: middle">Cliente</th>
-                            <th align="center" style="vertical-align: middle">Producto</th>
-                            <th align="center" style="vertical-align: middle">Cantidad</th>
-                            <th align="center" style="vertical-align: middle">Precio</th>
-                            <th align="center" style="vertical-align: middle">Descuento</th>
-                            <th align="center" style="vertical-align: middle">Subtotal</th>
-                            <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
-                                <th align="center" style="vertical-align: middle">Costo</th>
-                                <th align="center" style="vertical-align: middle">Total costo</th>
-                                <th align="center" style="vertical-align: middle">Rentabilidad</th>
+                            
+                            <t t-if="is_resumen == 'r'">
+                                <th align="center" style="vertical-align: middle">Subtotal</th>
+                                <th align="center" style="vertical-align: middle">Iva</th>
+                                <th align="center" style="vertical-align: middle">Total</th>
+                                <th align="center" style="vertical-align: middle">Efectivo</th>
+                                <th align="center" style="vertical-align: middle">Banco</th>
+                                <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
+                                
                             </t>
-                            <th align="center" style="vertical-align: middle">Efectivo</th>
-                            <th align="center" style="vertical-align: middle">Banco</th>
-                            <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
+
+                            <t t-if="is_resumen == None">
+                                <th align="center" style="vertical-align: middle">Producto</th>
+                                <th align="center" style="vertical-align: middle">Cantidad</th>
+                                <th align="center" style="vertical-align: middle">Precio</th>
+                                <th align="center" style="vertical-align: middle">Descuento</th>
+                                <th align="center" style="vertical-align: middle">Subtotal</th>
+                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                    <th align="center" style="vertical-align: middle">Costo</th>
+                                    <th align="center" style="vertical-align: middle">Total costo</th>
+                                    <th align="center" style="vertical-align: middle">Rentabilidad</th>
+                                </t>
+                                <th align="center" style="vertical-align: middle">Efectivo</th>
+                                <th align="center" style="vertical-align: middle">Banco</th>
+                                <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
+                            </t>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -57,47 +71,72 @@
                             <td>
                                 <t t-esc="result['cliente']"/>
                             </td>
-                            <td>
-                                <t t-esc="result['producto']"/>
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['cantidad']"/>
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['precio']"/>
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['descuento']"/>
-                            </td>
-                            <td align="center" width="100">
-                                <t t-esc="result['subtotal']"/>
-                            </td>
-                            <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+
+                            <t t-if="is_resumen == 'r'">
                                 <td align="center" width="100">
-                                    <t t-if="is_cost_or_debit == 'master'">
-                                        <t t-esc="result['costo']"/>
-                                    </t>
-                                    <t t-else="">
-                                        <t t-esc="result['debito']"/>
-                                    </t>
-                                    
+                                    <t t-esc="result['subtotal']"/>
                                 </td>
                                 <td align="center" width="100">
-                                    <t t-esc="result['total_costo']"/>
+                                    <t t-esc="result['iva']"/>
                                 </td>
                                 <td align="center" width="100">
-                                    <t t-esc="result['rentabilidad']"/>
+                                    <t t-esc="result['total']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['Efectivo']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['Banco']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['Cuenta de cliente']"/>
                                 </td>
                             </t>
-                            <td>
-                                <t t-esc="result['Efectivo']"/>
-                            </td>
-                            <td>
-                                <t t-esc="result['Banco']"/>
-                            </td>
-                            <td>
-                                <t t-esc="result['Cuenta de cliente']"/>
-                            </td>
+
+                            <t t-if="is_resumen == None">
+                                <td>
+                                    <t t-esc="result['producto']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['cantidad']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['precio']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['descuento']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['subtotal']"/>
+                                </td>
+                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                    <td align="center" width="100">
+                                        <t t-if="is_cost_or_debit == 'master'">
+                                            <t t-esc="result['costo']"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="result['debito']"/>
+                                        </t>
+                                        
+                                    </td>
+                                    <td align="center" width="100">
+                                        <t t-esc="result['total_costo']"/>
+                                    </td>
+                                    <td align="center" width="100">
+                                        <t t-esc="result['rentabilidad']"/>
+                                    </td>
+                                </t>
+                                <td>
+                                    <t t-esc="result['Efectivo']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['Banco']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['Cuenta de cliente']"/>
+                                </td>
+                            </t>
+                            
                         </tr>
                     </tbody>              
                 </table>
