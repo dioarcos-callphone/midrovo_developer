@@ -437,9 +437,12 @@ class InvoiceDetails(models.TransientModel):
         ]
         
         if is_resumen == 'r':
-            headers.append('subtotal')
-            headers.append('iva')
-            headers.append('total')
+            headers.append('Subtotal')
+            headers.append('Iva')
+            headers.append('Total')
+            headers.append('Efectivo')
+            headers.append('Banco')
+            headers.append('Cuenta de cliente')
             
         if is_resumen == None:
             headers.append('Producto')
