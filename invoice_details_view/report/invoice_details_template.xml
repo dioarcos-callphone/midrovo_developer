@@ -12,23 +12,26 @@
                 <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
                     <thead>
                         <tr>
-                            <th align="center" style="vertical-align: middle">FECHA</th>
-                            <th align="center" style="vertical-align: middle">NUMERO</th>
-                            <th align="center" style="vertical-align: middle">TIPO</th>
-                            <th align="center" style="vertical-align: middle">COMERCIAL</th>
-                            <th align="center" style="vertical-align: middle">CAJERO</th>
-                            <th align="center" style="vertical-align: middle">CLIENTE</th>
-                            <th align="center" style="vertical-align: middle">PRODUCTO</th>
-                            <th align="center" style="vertical-align: middle">CANTIDAD</th>
-                            <th align="center" style="vertical-align: middle">PRECIO</th>
-                            <th align="center" style="vertical-align: middle">DESCUENTO</th>
-                            <th align="center" style="vertical-align: middle">SUBTOTAL</th>
+                            <th align="center" style="vertical-align: middle">Fecha</th>
+                            <th align="center" style="vertical-align: middle">Número</th>
+                            <th align="center" style="vertical-align: middle">Diario contable</th>
+                            <th align="center" style="vertical-align: middle">Tipo</th>
+                            <th align="center" style="vertical-align: middle">Comercial</th>
+                            <th align="center" style="vertical-align: middle">Cajero</th>
+                            <th align="center" style="vertical-align: middle">Cliente</th>
+                            <th align="center" style="vertical-align: middle">Producto</th>
+                            <th align="center" style="vertical-align: middle">Cantidad</th>
+                            <th align="center" style="vertical-align: middle">Precio</th>
+                            <th align="center" style="vertical-align: middle">Descuento</th>
+                            <th align="center" style="vertical-align: middle">Subtotal</th>
                             <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
-                                <th align="center" style="vertical-align: middle">COSTO</th>
-                                <th align="center" style="vertical-align: middle">TOTAL COSTO</th>
-                                <th align="center" style="vertical-align: middle">RENTABILIDAD</th>
+                                <th align="center" style="vertical-align: middle">Costo</th>
+                                <th align="center" style="vertical-align: middle">Total costo</th>
+                                <th align="center" style="vertical-align: middle">Rentabilidad</th>
                             </t>
-                            <th align="center" style="vertical-align: middle">MÉTODOS DE PAGO</th>
+                            <th align="center" style="vertical-align: middle">Efectivo</th>
+                            <th align="center" style="vertical-align: middle">Banco</th>
+                            <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +41,9 @@
                             </td>
                             <td>
                                 <t t-esc="result['numero']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['diario_contable']"/>
                             </td>
                             <td>
                                 <t t-esc="result['tipo']"/>
@@ -84,10 +90,13 @@
                                 </td>
                             </t>
                             <td>
-                                <t t-foreach="result['metodo_pago']" t-as="metodos">
-                                    <t t-esc="metodos"/>
-                                    <br/>
-                                </t>
+                                <t t-esc="result['Efectivo']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['Banco']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['Cuenta de cliente']"/>
                             </td>
                         </tr>
                     </tbody>              

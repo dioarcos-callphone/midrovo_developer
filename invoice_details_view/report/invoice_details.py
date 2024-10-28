@@ -95,17 +95,10 @@ class InvoiceDetails(models.AbstractModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
-                pos_order = detail.move_id.pos_order_ids
-                
-                metodos = []
-                if pos_order:
-                    payments = pos_order.payment_ids
-                    for payment in payments:
-                        metodos.append(f'- { payment.payment_method_id.name }')
-                
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
+                data_detail['diario_contable'] = detail.journal_id.name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
@@ -117,7 +110,6 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                data_detail['metodo_pago'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
@@ -131,6 +123,16 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['precio'] = - data_detail['precio']
                     data_detail['descuento'] = - data_detail['descuento']
                     data_detail['subtotal'] = - data_detail['subtotal']
+                    
+                methods = self.env['pos.payment.method'].search_read([], ['name'])
+                pos_order = detail.move_id.pos_order_ids
+                
+                for method in methods:
+                    data_detail[method['name']] = 0
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            if method['name'] == payment.payment_method_id.name:
+                                data_detail[method['name']] = payment.amount
                     
                 data_invoice_details.append(data_detail)
             
