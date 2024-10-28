@@ -9,6 +9,9 @@ try:
 except ImportError:
     import xlsxwriter
 
+import logging
+_logger = logging.getLogger(__name__)
+        
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -367,19 +370,13 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Total Costo')
             headers.append('Rentabilidad')
         
+        for data in datas:
+            _logger.info(f'MOSTRANDO METODOS >>> { data['metodos'] }')
         
-        
-        import logging
-        _logger = logging.getLogger(__name__)
-        
-        m = datas['metodos']
-        
-        _logger.info(f'MOSTRANDO METODOS >>> { m }')
-        
-        if datas['metodos']:
-            metodos =  datas['metodos']
-            for metodo in metodos.keys():
-                headers.append(metodo)   
+        # if datas['metodos']:
+        #     metodos =  datas['metodos']
+        #     for metodo in metodos.keys():
+        #         headers.append(metodo)   
         
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
