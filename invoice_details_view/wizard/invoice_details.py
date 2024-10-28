@@ -62,14 +62,48 @@ class InvoiceDetails(models.TransientModel):
         ],
         string = 'Informe',
         default = 'r',
-        help = """Seleccione el tipo de informe a visualizar."""
+        help = """Seleccione el tipo de informe a visualizar"""
     )
+    
+    def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):
+        data_invoice_details = []
+        domain = [
+            ('date', '>=', fecha_inicio),
+            ('date', '<=', fecha_fin),
+            ('move_type', 'in', ['out_invoice', 'out_refund']),
+        ]
+        
+        if diario:
+            domain.append(('journal_id', 'in', diario))
+        if comercial:
+            domain.append(('invoice_user_id', 'in', comercial))
+        if cashier:
+            domain.append(('pos_order_ids.employee_id', 'in', cashier))
+            
+        invoices = self.env['account.move'].search(domain)
+        
+        if invoices:
+            for invoice in invoices:
+                date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
+                data_invoice_details.append({
+                    'fecha': date_formated,
+                    'numero': invoice.name,
+                    'diario_contable': invoice.journal_id.name,
+                    'comercial': invoice.invoice_user_id.partner_id.name,
+                    'pos': invoice.pos_order_ids.employee_id.name,
+                    'cliente': invoice.partner_id.name,
+                    'subtotal': invoice.amount_untaxed_signed,
+                    'iva': invoice.amount_tax,
+                    'total': invoice.amount_total_signed,
+                })
+        
+        return data_invoice_details
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
         if self.start_date > self.end_date:
             raise ValidationError("La fecha de inicio no puede ser mayor que la fecha de fin")
-        
+                
         data_invoice_details = []
         fecha_inicio = self.start_date
         fecha_fin = self.end_date
@@ -77,6 +111,19 @@ class InvoiceDetails(models.TransientModel):
         comercial = self.comercial_ids.ids
         cashier = self.cashier_ids.ids
         
+        if self.informe == 'r':
+            data_invoices = self.get_report_facturas(fecha_inicio, fecha_fin, comercial, cashier, diario)
+            
+            if data_invoices:
+                data = {
+                    'result_data': data_invoices,
+                    'is_resumen': self.informe,
+                }
+                return data
+            
+            else:
+                raise ValidationError("¡No se encontraron registros para los criterios dados!")   
+            
         domain = [
             ('product_id', '!=', False),
             ('display_type', '=', 'product'),
@@ -258,7 +305,7 @@ class InvoiceDetails(models.TransientModel):
             
             data = {
                 'result_data': data_invoice_details,
-                'is_cost_or_debit': self.cost_options
+                'is_cost_or_debit': self.cost_options,
             }
             
             return data
@@ -306,7 +353,9 @@ class InvoiceDetails(models.TransientModel):
     # Formato de hoja de Excel para imprimir los datos
     def get_xlsx_report(self, data, response):
         datas = data['result_data']
-        is_cost_or_debit = data['is_cost_or_debit']
+        is_cost_or_debit = data.get('is_cost_or_debit', None)
+        is_resumen = data.get('is_resumen', None)
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
@@ -364,28 +413,34 @@ class InvoiceDetails(models.TransientModel):
             'Comercial',
             'Cajero',
             'Cliente',
-            'Producto',
-            'Marca',
-            'Talla',
-            'Color',
-            'Material',
-            'Material capellada',
-            'Tipo de calzado',
-            'País de origen',
-            'Cantidad',
-            'Precio',
-            'Descuento',
-            'Subtotal',
         ]
         
-        headers.append('Efectivo')
-        headers.append('Banco')
-        headers.append('Cuenta de cliente')
+        if is_resumen == 'r':
+            headers.append('subtotal')
+            headers.append('iva')
+            headers.append('total')
+            
+        if is_resumen == 'd':
+            headers.append('Producto')
+            headers.append('Marca')
+            headers.append('Talla')
+            headers.append('Color')
+            headers.append('Material')
+            headers.append('Material capellada')
+            headers.append('Tipo de calzado')
+            headers.append('País de origen')
+            headers.append('Cantidad')
+            headers.append('Precio')
+            headers.append('Descuento')
+            headers.append('Subtotal')
+            headers.append('Efectivo')
+            headers.append('Banco')
+            headers.append('Cuenta de cliente')
 
-        if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
-            headers.append('Costo')
-            headers.append('Total Costo')
-            headers.append('Rentabilidad')
+            if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
+                headers.append('Costo')
+                headers.append('Total Costo')
+                headers.append('Rentabilidad')
         
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
@@ -418,17 +473,18 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 4, val['comercial'], text_format)
             sheet.write(row, 5, val['pos'], text_format)
             sheet.write(row, 6, val['cliente'], text_format)
-            sheet.write(row, 7, val['producto'], text_format)
-            sheet.write(row, 8, val['marca'], text_format)
-            sheet.write(row, 9, val['talla'], text_format)
-            sheet.write(row, 10, val['color'], text_format)
-            sheet.write(row, 11, val['material'], text_format)
-            sheet.write(row, 12, val['material_capellada'], text_format)
-            sheet.write(row, 13, val['tipo_calzado'], text_format)
-            sheet.write(row, 14, val['pais'], text_format)
-            sheet.write(row, 15, val['cantidad'], text_format)
-            sheet.write(row, 16, val['precio'], text_format)
-            sheet.write(row, 17, val['descuento'], text_format)
+            if is_resumen == 'd':
+                sheet.write(row, 7, val['producto'], text_format)
+                sheet.write(row, 8, val['marca'], text_format)
+                sheet.write(row, 9, val['talla'], text_format)
+                sheet.write(row, 10, val['color'], text_format)
+                sheet.write(row, 11, val['material'], text_format)
+                sheet.write(row, 12, val['material_capellada'], text_format)
+                sheet.write(row, 13, val['tipo_calzado'], text_format)
+                sheet.write(row, 14, val['pais'], text_format)
+                sheet.write(row, 15, val['cantidad'], text_format)
+                sheet.write(row, 16, val['precio'], text_format)
+                sheet.write(row, 17, val['descuento'], text_format)
             sheet.write(row, 18, val['subtotal'], text_format)
             sheet.write(row, 19, val['Efectivo'], text_format)
             sheet.write(row, 20, val['Banco'], text_format)
