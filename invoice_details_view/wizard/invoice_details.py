@@ -347,7 +347,7 @@ class InvoiceDetails(models.TransientModel):
             'Fecha',
             'Número',
             'Diario contable',
-            'Tipo',
+            'Tipo de documento',
             'Comercial',
             'Cajero',
             'Cliente',
@@ -356,9 +356,9 @@ class InvoiceDetails(models.TransientModel):
             'Talla',
             'Color',
             'Material',
-            'Material Capellada',
-            'Tipo de Calzado',
-            'País de Origen',
+            'Material capellada',
+            'Tipo de calzado',
+            'País de origen',
             'Cantidad',
             'Precio',
             'Descuento',
@@ -384,7 +384,7 @@ class InvoiceDetails(models.TransientModel):
                 sheet.merge_range(2, col, 3, col, header, header_format)
                 
             header_length = len(header)  # Longitud del encabezado
-            sheet.set_column(col, col, header_length + 2)  
+            sheet.set_column(col, col, header_length + 5)  
         
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
