@@ -377,16 +377,20 @@ class InvoiceDetails(models.TransientModel):
             # 'Métodos de Pago',
         ]
         
-        if datas:
-            data = datas[0]
-            for name in data.keys():
-                _logger.info(f'MOSTRANDO NAME { name }')
+        # if datas:
+        #     data = datas[0]
+        #     for name in data.keys():
+        #         _logger.info(f'MOSTRANDO NAME { name }')
             
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             headers.append('Costo')
             headers.append('Total Costo')
             headers.append('Rentabilidad')
+        
+        headers.append('Efectivo')
+        headers.append('Banco')
+        headers.append('Cuenta de cliente')
         
         # for data in datas:
         #     metodos = data['metodos']
@@ -459,6 +463,10 @@ class InvoiceDetails(models.TransientModel):
             sheet.write(row, 15, val['precio'], text_format)
             sheet.write(row, 16, val['descuento'], text_format)
             sheet.write(row, 17, val['subtotal'], text_format)
+            sheet.write(row, 18, val['Efectivo'], text_format)
+            sheet.write(row, 19, val['Banco'], text_format)
+            sheet.write(row, 20, val['Cuenta de cliente'], text_format)
+            
             
             # Crear un formato con ajuste de texto habilitado
             # text_wrap = workbook.add_format({
@@ -475,12 +483,12 @@ class InvoiceDetails(models.TransientModel):
             
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 if is_cost_or_debit == 'master':
-                    sheet.write(row, 18, val['costo'], text_format)
+                    sheet.write(row, 21, val['costo'], text_format)
                 elif is_cost_or_debit == 'movement':
-                    sheet.write(row, 18, val['debito'], text_format)
+                    sheet.write(row, 21, val['debito'], text_format)
                 
-                sheet.write(row, 19, val['total_costo'], text_format)
-                sheet.write(row, 20, val['rentabilidad'], text_format)
+                sheet.write(row, 22, val['total_costo'], text_format)
+                sheet.write(row, 23, val['rentabilidad'], text_format)
             
             row += 1
 
