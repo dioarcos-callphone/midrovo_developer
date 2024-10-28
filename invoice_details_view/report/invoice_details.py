@@ -2,6 +2,10 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -133,6 +137,8 @@ class InvoiceDetails(models.AbstractModel):
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
+                                
+                _logger.info(f'MOSTRANDO CONTENT >>> {detail.move_id.invoice_payments_widget}')
                     
                 data_invoice_details.append(data_detail)
             
