@@ -139,6 +139,7 @@ class InvoiceDetails(models.AbstractModel):
                                 data_detail[method['name']] = payment.amount
                     else:
                         if detail.move_id.invoice_payments_widget:
+                            _logger.info(f'MOSTRANDO PAYMENT WIDGET >>> {detail.move_id.invoice_payments_widget}')
                             journal_name = detail.move_id.invoice_payments_widget['journal_name']
                             amount = detail.move_id.invoice_payments_widget['amount']
                             if method['name'] == journal_name:
