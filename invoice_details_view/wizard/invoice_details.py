@@ -242,12 +242,17 @@ class InvoiceDetails(models.TransientModel):
                 
                 for method in methods:
                     data_detail[method['name']] = 0
-                    
-                if pos_order:
-                    for payment in pos_order.payment_ids:
-                        for data in data_detail:
-                            if data == payment.payment_method_id.name:
-                                data = payment.amount
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            if method['name'] == payment.payment_method_id.name:
+                                data_detail[method['name']] = payment.amount
+                    else:
+                        if detail.move_id.invoice_payments_widget:
+                            content = detail.move_id.invoice_payments_widget['content']
+                            
+                            for c in content:
+                                if method['name'] == c['journal_name']:
+                                    data_detail[method['name']] = c['amount']
                     
                     # else:
                     #     if detail.move_id.invoice_payments_widget:
