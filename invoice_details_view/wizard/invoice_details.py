@@ -198,7 +198,7 @@ class InvoiceDetails(models.TransientModel):
                         name = payment.payment_method_id.name
                         value = payment.amount
                         metodos.append({
-                            f'{name}': value,
+                            name: value,
                         })
                 
                 # añadimos los valores a los campos del diccionario
@@ -366,6 +366,15 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Costo')
             headers.append('Total Costo')
             headers.append('Rentabilidad')
+        
+        
+        
+        import logging
+        _logger = logging.getLogger(__name__)
+        
+        m = datas['metodos']
+        
+        _logger.info(f'MOSTRANDO METODOS >>> { m }')
         
         if datas['metodos']:
             metodos =  datas['metodos']
