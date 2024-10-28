@@ -198,7 +198,7 @@ class InvoiceDetails(models.TransientModel):
                         name = payment.payment_method_id.name
                         value = payment.amount
                         metodos.append({
-                            name: value,
+                            f'{name}': value,
                         })
                 
                 # añadimos los valores a los campos del diccionario
