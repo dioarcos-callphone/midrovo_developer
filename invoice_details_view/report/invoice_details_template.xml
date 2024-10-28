@@ -30,7 +30,7 @@
                                 
                             </t>
 
-                            <t t-if="is_resumen == None">
+                            <t t-if="is_resumen == 'd'">
                                 <th align="center" style="vertical-align: middle">Producto</th>
                                 <th align="center" style="vertical-align: middle">Cantidad</th>
                                 <th align="center" style="vertical-align: middle">Precio</th>
@@ -93,7 +93,7 @@
                                 </td>
                             </t>
 
-                            <t t-if="is_resumen == None">
+                            <t t-if="is_resumen == 'd'">
                                 <td>
                                     <t t-esc="result['producto']"/>
                                 </td>
