@@ -41,9 +41,7 @@
                                     <th align="center" style="vertical-align: middle">Total costo</th>
                                     <th align="center" style="vertical-align: middle">Rentabilidad</th>
                                 </t>
-                                <th align="center" style="vertical-align: middle">Efectivo</th>
-                                <th align="center" style="vertical-align: middle">Banco</th>
-                                <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
+                                <th align="center" style="vertical-align: middle">Métodos de pago</th>
                             </t>
                             
                         </tr>
@@ -128,7 +126,7 @@
                                 </t>
                                 <td>
                                     <t t-foreach="result['metodos']" t-as="metodo">
-                                        <t t-esc="'- {}%'.format(metodos)"></t>
+                                        <t t-esc="'- {}%'.format(metodo)"></t>
                                         <br/>
                                     </t>
                                 </td>
