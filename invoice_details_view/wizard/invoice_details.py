@@ -84,20 +84,42 @@ class InvoiceDetails(models.TransientModel):
         
         if invoices:
             for invoice in invoices:
+                data_detail = {}
                 date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
-                data_invoice_details.append({
-                    'fecha': date_formated,
-                    'numero': invoice.name,
-                    'diario_contable': invoice.journal_id.name,
-                    'comercial': invoice.invoice_user_id.partner_id.name,
-                    'pos': invoice.pos_order_ids.employee_id.name,
-                    'cliente': invoice.partner_id.name,
-                    'subtotal': invoice.amount_untaxed_signed,
-                    'iva': invoice.amount_tax,
-                    'total': invoice.amount_total_signed,
-                })
+
+                data_detail['fecha'] = date_formated
+                data_detail['numero'] = invoice.name
+                data_detail['diario_contable'] = invoice.journal_id.name,
+                data_detail['comercial'] = invoice.invoice_user_id.partner_id.name,
+                data_detail['pos'] = invoice.pos_order_ids.employee_id.name,
+                data_detail['cliente'] = invoice.partner_id.name,
+                data_detail['subtotal'] = invoice.amount_untaxed_signed,
+                data_detail['iva'] = invoice.amount_tax,
+                data_detail['total'] = invoice.amount_total_signed
+                
+                methods = self.env['pos.payment.method'].search_read([], ['name'])
+                pos_order = invoice.pos_order_ids
+                
+                for method in methods:
+                    data_detail[method['name']] = 0
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            if method['name'] == payment.payment_method_id.name:
+                                data_detail[method['name']] = payment.amount
+                    else:
+                        if invoice.invoice_payments_widget:
+                            content = invoice.invoice_payments_widget['content']
+                            
+                            for c in content:
+                                if method['name'] == c['journal_name']:
+                                    data_detail[method['name']] = c['amount']
+                                    
+                data_invoice_details.append(data_detail)
+                
+            return data_invoice_details
         
-        return data_invoice_details
+        else:
+            raise ValidationError("¡No se encontraron registros para los criterios dados!")  
     
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
@@ -113,16 +135,11 @@ class InvoiceDetails(models.TransientModel):
         
         if self.informe == 'r':
             data_invoices = self.get_report_facturas(fecha_inicio, fecha_fin, comercial, cashier, diario)
-            
-            if data_invoices:
-                data = {
-                    'result_data': data_invoices,
-                    'is_resumen': self.informe,
-                }
-                return data
-            
-            else:
-                raise ValidationError("¡No se encontraron registros para los criterios dados!")   
+            data = {
+                'result_data': data_invoices,
+                'is_resumen': self.informe,
+            }
+            return data
             
         domain = [
             ('product_id', '!=', False),
