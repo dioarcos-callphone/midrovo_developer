@@ -97,6 +97,14 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['iva'] = invoice.amount_tax,
                 data_detail['total'] = invoice.amount_total_signed
                 
+                if invoice.move_type == 'out_invoice':
+                    data_detail['tipo'] = 'Factura'
+                    
+                elif invoice.move_type == 'out_refund':
+                    data_detail['subtotal'] = - invoice.amount_untaxed_signed,
+                    data_detail['iva'] = - invoice.amount_tax,
+                    data_detail['total'] = - invoice.amount_total_signed
+                
                 methods = self.env['pos.payment.method'].search_read([], ['name'])
                 pos_order = invoice.pos_order_ids
                 
