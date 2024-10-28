@@ -239,6 +239,10 @@ class InvoiceDetails(models.TransientModel):
                     data_detail['precio'] = - data_detail['precio']
                     data_detail['descuento'] = - data_detail['descuento']
                     data_detail['subtotal'] = - data_detail['subtotal']
+                    
+                methods = self.env['pos.payment.method'].search_read([], ['name'])
+                
+                _logger.info(f'MOSTRANDO METODOS DE POS PAYMENT { methods }')
 
                 data_invoice_details.append(data_detail)
             
