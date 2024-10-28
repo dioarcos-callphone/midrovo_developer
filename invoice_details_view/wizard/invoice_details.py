@@ -116,8 +116,6 @@ class InvoiceDetails(models.TransientModel):
                                     
                 data_invoice_details.append(data_detail)
             
-            _logger.info(f'MOSTRANDO FACTURAS >>> { data_invoice_details }')
-            
             return data_invoice_details
         
         else:
@@ -141,6 +139,8 @@ class InvoiceDetails(models.TransientModel):
                 'result_data': data_invoices,
                 'is_resumen': self.informe,
             }
+            
+            _logger.info(f'MOSTRANDO DATA >>> { data }')
             return data
             
         domain = [
