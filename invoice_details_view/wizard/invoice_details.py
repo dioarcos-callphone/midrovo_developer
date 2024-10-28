@@ -420,7 +420,7 @@ class InvoiceDetails(models.TransientModel):
             headers.append('iva')
             headers.append('total')
             
-        if is_resumen == 'd':
+        if is_resumen == None:
             headers.append('Producto')
             headers.append('Marca')
             headers.append('Talla')
@@ -482,7 +482,7 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 11, val['Banco'], text_format)
                 sheet.write(row, 12, val['Cuenta de cliente'], text_format)
             
-            if is_resumen == 'd':
+            if is_resumen == None:
                 sheet.write(row, 7, val['producto'], text_format)
                 sheet.write(row, 8, val['marca'], text_format)
                 sheet.write(row, 9, val['talla'], text_format)
