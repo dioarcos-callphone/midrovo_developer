@@ -55,6 +55,16 @@ class InvoiceDetails(models.TransientModel):
         help="""Costo Maestro para el costo precio estandar del producto, Costo Movimiento para el debito de la línea de factura."""        
     )
     
+    informe = fields.Selection(
+        [
+            ('r', 'Resumido'),
+            ('d', 'Detallado')
+        ],
+        string = 'Informe',
+        default = 'r',
+        help = """Seleccione el tipo de informe a visualizar."""
+    )
+    
     # Esta funcion se vincula con action_excel genera los datos que van a ser expuestos en el excel
     def get_report_data(self):
         if self.start_date > self.end_date:
@@ -213,7 +223,6 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                # data_detail['metodos'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'

@@ -137,13 +137,13 @@ class InvoiceDetails(models.AbstractModel):
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
-                    else:
-                        if detail.move_id.invoice_payments_widget:
-                            content = detail.move_id.invoice_payments_widget['content']
+                    # else:
+                    #     if detail.move_id.invoice_payments_widget:
+                    #         content = detail.move_id.invoice_payments_widget['content']
                             
-                            for c in content:
-                                if method['name'] == c['journal_name']:
-                                    data_detail[method['name']] = c['amount']
+                    #         for c in content:
+                    #             if method['name'] == c['journal_name']:
+                    #                 data_detail[method['name']] = c['amount']
 
                     
                 data_invoice_details.append(data_detail)
@@ -157,3 +157,12 @@ class InvoiceDetails(models.AbstractModel):
             }
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")
+        
+    
+    def _get_report_facturas(self, data):
+        fecha_inicio = data['fecha_inicio']
+        fecha_fin = data['fecha_fin']
+        diario = data['diario']
+        comercial = data['comercial']
+        cashier = data['cashier']
+        is_cost_or_debit = data['is_cost_or_debit']
