@@ -208,7 +208,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
-                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['cajero'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['producto'] = detail.product_id.name
                 data_detail['marca'] = marca
@@ -249,9 +249,8 @@ class InvoiceDetails(models.TransientModel):
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
-                
-                
-                _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { data_detail }")
+
+                # _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { data_detail }")
 
                 data_invoice_details.append(data_detail)
             
@@ -377,6 +376,12 @@ class InvoiceDetails(models.TransientModel):
             'Subtotal',
             # 'Métodos de Pago',
         ]
+        
+        if datas:
+            data = datas[0]
+            for name in data.keys():
+                _logger.info(f'MOSTRANDO NAME { name }')
+            
         
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             headers.append('Costo')
