@@ -191,18 +191,18 @@ class InvoiceDetails(models.TransientModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
-                pos_order = detail.move_id.pos_order_ids
+                # pos_order = detail.move_id.pos_order_ids
                 
-                metodos = []
-                if pos_order:
-                    payments = pos_order.payment_ids
-                    for payment in payments:
-                        # metodos.append(f'- { payment.payment_method_id.name}')
-                        name = payment.payment_method_id.name
-                        value = payment.amount
-                        metodos.append({
-                            name: value,
-                        })
+                # metodos = []
+                # if pos_order:
+                #     payments = pos_order.payment_ids
+                #     for payment in payments:
+                #         # metodos.append(f'- { payment.payment_method_id.name}')
+                #         name = payment.payment_method_id.name
+                #         value = payment.amount
+                #         metodos.append({
+                #             name: value,
+                #         })
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
@@ -225,7 +225,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['costo'] = round(detail.product_id.standard_price, 2)
                 data_detail['total_costo'] = total_costo
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
-                data_detail['metodos'] = metodos
+                # data_detail['metodos'] = metodos
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
@@ -241,9 +241,17 @@ class InvoiceDetails(models.TransientModel):
                     data_detail['subtotal'] = - data_detail['subtotal']
                     
                 methods = self.env['pos.payment.method'].search_read([], ['name'])
+                pos_order = detail.move_id.pos_order_ids
                 
                 for method in methods:
-                    _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { method['name'] }")
+                    data_detail[method['name']] = 0
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            if method['name'] == payment.payment_method_id.name:
+                                data_detail[method['name']] = payment.amount
+                
+                
+                _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { data_detail }")
 
                 data_invoice_details.append(data_detail)
             
