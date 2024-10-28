@@ -138,8 +138,8 @@ class InvoiceDetails(models.AbstractModel):
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
                     else:
-                        journal_name = detail.move_id.invoice_payments_widget.journal_name
-                        amount = detail.move_id.invoice_payments_widget.amount
+                        journal_name = detail.move_id.invoice_payments_widget['journal_name']
+                        amount = detail.move_id.invoice_payments_widget['amount']
                         if method['name'] == journal_name:
                             data_detail[method['name']] = amount
 
