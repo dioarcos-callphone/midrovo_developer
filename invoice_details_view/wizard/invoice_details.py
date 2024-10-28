@@ -343,8 +343,7 @@ class InvoiceDetails(models.TransientModel):
             'align': 'center',
             'valign': 'vcenter'
         })
-        
-        number = len(datas) + 3
+
         title_format_method = workbook.add_format({
             'font_name': 'Times New Roman',
             'border': 1,
@@ -383,15 +382,15 @@ class InvoiceDetails(models.TransientModel):
             'Descuento',
             'Subtotal',
         ]
+        
+        headers.append('Efectivo')
+        headers.append('Banco')
+        headers.append('Cuenta de cliente')
 
         if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
             headers.append('Costo')
             headers.append('Total Costo')
             headers.append('Rentabilidad')
-        
-        headers.append('Efectivo')
-        headers.append('Banco')
-        headers.append('Cuenta de cliente')
         
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
