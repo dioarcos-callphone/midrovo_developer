@@ -9,6 +9,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/header" position="replace">
                     <header groups='custom_security_rules.group_custom_security_role_user_2'>
+                        <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': ['|', '|', ('id', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', '!=', 'done')]}" full_name="partner_id" groups="stock.group_stock_sign_delivery"/>
+                        <widget name="signature" string="Sign" attrs="{'invisible': ['|', '|', ('id', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', '=', 'done')]}" full_name="partner_id" groups="stock.group_stock_sign_delivery"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,assigned,done"/>
                     </header>
                 </xpath>
