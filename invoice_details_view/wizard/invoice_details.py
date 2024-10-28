@@ -250,7 +250,7 @@ class InvoiceDetails(models.TransientModel):
                             if method['name'] == payment.payment_method_id.name:
                                 data_detail[method['name']] = payment.amount
 
-                # _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { data_detail }")
+                _logger.info(f"MOSTRANDO METODOS DE POS PAYMENT { data_detail }")
 
                 data_invoice_details.append(data_detail)
             
