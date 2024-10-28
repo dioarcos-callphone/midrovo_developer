@@ -88,22 +88,22 @@ class InvoiceDetails(models.TransientModel):
                 date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
 
                 data_detail['fecha'] = date_formated
-                data_detail['numero'] = f'{ invoice.name }'
-                data_detail['diario_contable'] = f'{ invoice.journal_id.name }',
-                data_detail['comercial'] = f'{ invoice.invoice_user_id.partner_id.name }',
-                data_detail['pos'] = f'{ invoice.pos_order_ids.employee_id.name }' or "",
-                data_detail['cliente'] = f'{ invoice.partner_id.name }' or "",
-                data_detail['subtotal'] = f'{ invoice.amount_untaxed_signed }',
-                data_detail['iva'] = f'{ invoice.amount_tax }',
-                data_detail['total'] = f'{ invoice.amount_total_signed }'
+                data_detail['numero'] = invoice.name
+                data_detail['diario_contable'] = invoice.journal_id.name
+                data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
+                data_detail['pos'] = invoice.pos_order_ids.employee_id.name or ""
+                data_detail['cliente'] = invoice.partner_id.name or ""
+                data_detail['subtotal'] = invoice.amount_untaxed_signed
+                data_detail['iva'] = invoice.amount_tax
+                data_detail['total'] = invoice.amount_total_signed
                 
                 if invoice.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
                     
                 elif invoice.move_type == 'out_refund':
-                    data_detail['subtotal'] = f'- { invoice.amount_untaxed_signed }',
-                    data_detail['iva'] = f'- { invoice.amount_tax }',
-                    data_detail['total'] = f'- { invoice.amount_total_signed }'
+                    data_detail['subtotal'] = - invoice.amount_untaxed_signed
+                    data_detail['iva'] = - invoice.amount_tax
+                    data_detail['total'] = - invoice.amount_total_signed
                 
                 methods = self.env['pos.payment.method'].search_read([], ['name'])
                 pos_order = invoice.pos_order_ids
