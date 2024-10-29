@@ -131,7 +131,7 @@ class InvoiceDetails(models.TransientModel):
                                 if method['name'] == c['journal_name']:
                                     metodos.append({
                                         'metodo': method['name'],
-                                        'monto': payment.amount
+                                        'monto': c['amount']
                                     })
                                     # data_detail[method['name']] = c['amount']
                                     
