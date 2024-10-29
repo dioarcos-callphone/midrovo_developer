@@ -115,20 +115,23 @@ class InvoiceDetails(models.TransientModel):
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
                                 metodos.append({
-                                    method['name']: payment.amount
+                                    
+                                    'metodo': method['name'],
+                                    'monto': payment.amount
                                 })
                                 # data_detail[method['name']] = payment.amount
                     else:
                         if invoice.invoice_payments_widget:
-                            
+                            _logger.info(f'MOSTRANDO WIDGET >>> { invoice.invoice_payments_widget }')
                             content = invoice.invoice_payments_widget['content']
                             
-                            _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
+                            # _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
                             
                             for c in content:
                                 if method['name'] == c['journal_name']:
                                     metodos.append({
-                                        method['name']: c['amount']
+                                        'metodo': method['name'],
+                                        'monto': payment.amount
                                     })
                                     # data_detail[method['name']] = c['amount']
                                     
