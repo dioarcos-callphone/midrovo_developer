@@ -126,7 +126,7 @@
                                 </t>
                                 <td>
                                     <t t-foreach="result['metodos']" t-as="metodo">
-                                        <t t-esc="'- {}%'.format(metodo)"></t>
+                                        <t t-esc="'- {}'.format(metodo)"></t>
                                         <br/>
                                     </t>
                                 </td>
