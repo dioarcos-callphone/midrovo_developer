@@ -87,7 +87,15 @@
                                 </td>
                                 <t t-foreach="result['metodos']" t-as="metodo">
                                     <td>
-                                        <t t-esc="metodo['monto']"/>
+                                        <t t-if="metodo['tipo'] == 'cash'">
+                                            <t t-esc="metodo['monto']"/>    
+                                        </t>
+                                        <t t-if="metodo['tipo'] == 'bank'">
+                                            <t t-esc="metodo['monto']"/>    
+                                        </t>
+                                        <t t-if="metodo['tipo'] == False">
+                                            <t t-esc="metodo['monto']"/>    
+                                        </t>                                        
                                     </td>
                                 </t>
                                 <!-- <td>
