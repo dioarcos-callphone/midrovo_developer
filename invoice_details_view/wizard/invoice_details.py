@@ -110,11 +110,14 @@ class InvoiceDetails(models.TransientModel):
                 
                 metodos = []
                 for method in methods:
+                    journal_type = method['journal_id']
                     data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method['name'] == payment.payment_method_id.name:
-                                _logger.info(f'MOSTRANDO JOURNAL { payment.payment_method_id.journal_id.type }')
+                            if method['name'] == payment.payment_method_id.name and journal_type.type == payment.payment_method_id.journal_id.type:
+                                _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type.type }')
+                                _logger.info(f'MOSTRANDO PAYMENT METHOD { payment.payment_method_id.name }')
+                                
                                 metodos.append({
                                     
                                     'metodo': method['name'],
