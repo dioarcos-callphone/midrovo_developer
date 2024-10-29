@@ -235,8 +235,8 @@ class InvoiceDetails(models.AbstractModel):
                 for method in methods:
                     journal = method.journal_id
                     journal_type = journal.type
-                    if not journal_type:
-                        data_detail['client'] = 0
+                    if journal_type:
+                        data_detail[journal_type] = 0
                         
                     else:
                         data_detail['client'] = 0
