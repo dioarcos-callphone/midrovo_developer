@@ -92,7 +92,7 @@
                                     <t t-esc="result['bank']"/>
                                 </td>
                                 <td>
-                                    <t t-esc="result['client']"/>
+                                    <t t-esc="result[False]"/>
                                 </td>
                             </t>
 
