@@ -105,24 +105,23 @@ class InvoiceDetails(models.TransientModel):
                     data_detail['iva'] = - invoice.amount_tax
                     data_detail['total'] = - invoice.amount_total_signed
                 
-                methods = self.env['pos.payment.method'].search_read([], ['name', 'journal_id'])
+                methods = self.env['pos.payment.method'].search([])
                 pos_order = invoice.pos_order_ids
                 
                 metodos = []
                 for method in methods:
-                    journal = method['journal_id']
-                    _logger.info(f'MOSTRANDO JOURNAL >>> { journal }')
-                    journal_type = journal['type']
+                    journal = method.journal_id
+                    journal_type = journal.type
                     data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method['name'] == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:
+                            if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:
                                 _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
                                 _logger.info(f'MOSTRANDO PAYMENT METHOD { payment.payment_method_id.name }')
                                 
                                 metodos.append({
                                     
-                                    'metodo': method['name'],
+                                    'metodo': method.name,
                                     'monto': payment.amount
                                 })
                                 # data_detail[method['name']] = payment.amount
@@ -134,9 +133,9 @@ class InvoiceDetails(models.TransientModel):
                             # _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
                             
                             for c in content:
-                                if method['name'] == c['journal_name']:
+                                if method.name == c['journal_name']:
                                     metodos.append({
-                                        'metodo': method['name'],
+                                        'metodo': method.name,
                                         'monto': c['amount']
                                     })
                                     # data_detail[method['name']] = c['amount']
