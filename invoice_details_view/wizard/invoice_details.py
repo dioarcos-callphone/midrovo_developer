@@ -107,26 +107,17 @@ class InvoiceDetails(models.TransientModel):
                 
                 methods = self.env['pos.payment.method'].search([])
                 pos_order = invoice.pos_order_ids
-                
-                metodos = []
+
                 for method in methods:
                     journal = method.journal_id
                     journal_type = journal.type
-                    data_detail[method['name']] = 0
+                    data_detail[journal_type] = 0
+                        
                     if pos_order:
                         for payment in pos_order.payment_ids:
                             if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
-                                metodos.append({
-                                    'tipo': payment.payment_method_id.journal_id.type,
-                                    'metodo': method.name,
-                                    'monto': payment.amount
-                                })
-                            else:
-                                metodos.append({
-                                    'tipo': None,
-                                    'metodo': method.name,
-                                    'monto': payment.amount
-                                })
+                                data_detail[journal_type] = payment.amount
+                                
                     else:
                         if invoice.invoice_payments_widget:
                             content = invoice.invoice_payments_widget['content']
@@ -134,22 +125,10 @@ class InvoiceDetails(models.TransientModel):
                             for c in content:
                                 content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
                                 if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
-                                    metodos.append({
-                                        'tipo': content_journal_type.type,
-                                        'metodo': method.name,
-                                        'monto': c['amount']
-                                    })
-                                else:
-                                    metodos.append({
-                                        'tipo': None,
-                                        'metodo': method.name,
-                                        'monto': payment.amount
-                                    })
-                                    
-                data_detail['metodos'] = metodos             
+                                    data_detail[journal_type] = c['amount']            
+                
                 data_invoice_details.append(data_detail)
-            
-            _logger.info(f'MOSTRANDO FACTURAS >>> { data_invoice_details }')
+
             return data_invoice_details
         
         else:
@@ -537,9 +516,9 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 7, val['subtotal'], text_format)
                 sheet.write(row, 8, val['iva'], text_format)
                 sheet.write(row, 9, val['total'], text_format)
-                sheet.write(row, 10, val['Efectivo'], text_format)
-                sheet.write(row, 11, val['Banco'], text_format)
-                sheet.write(row, 12, val['Cuenta de cliente'], text_format)
+                sheet.write(row, 10, val['cash'], text_format)
+                sheet.write(row, 11, val['bank'], text_format)
+                sheet.write(row, 12, val[False], text_format)
             
             if is_resumen == None:
                 sheet.write(row, 7, val['producto'], text_format)
