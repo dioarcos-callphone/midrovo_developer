@@ -89,13 +89,17 @@
                                     <td>
                                         <t t-if="metodo['tipo'] == 'cash'">
                                             <t t-esc="metodo['monto']"/>    
-                                        </t>
+                                        </t>                                        
+                                    </td>
+                                    <td>
                                         <t t-if="metodo['tipo'] == 'bank'">
                                             <t t-esc="metodo['monto']"/>    
                                         </t>
+                                    </td>
+                                    <td>
                                         <t t-if="metodo['tipo'] == False">
                                             <t t-esc="metodo['monto']"/>    
-                                        </t>                                        
+                                        </t>
                                     </td>
                                 </t>
                                 <!-- <td>
