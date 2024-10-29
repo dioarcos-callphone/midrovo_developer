@@ -108,20 +108,31 @@ class InvoiceDetails(models.TransientModel):
                 methods = self.env['pos.payment.method'].search_read([], ['name'])
                 pos_order = invoice.pos_order_ids
                 
+                metodos = []
                 for method in methods:
                     data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
                             if method['name'] == payment.payment_method_id.name:
-                                data_detail[method['name']] = payment.amount
+                                metodos.append({
+                                    method['name']: payment.amount
+                                })
+                                # data_detail[method['name']] = payment.amount
                     else:
                         if invoice.invoice_payments_widget:
+                            
                             content = invoice.invoice_payments_widget['content']
+                            
+                            _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
                             
                             for c in content:
                                 if method['name'] == c['journal_name']:
-                                    data_detail[method['name']] = c['amount']
+                                    metodos.append({
+                                        method['name']: c['amount']
+                                    })
+                                    # data_detail[method['name']] = c['amount']
                                     
+                data_detail['metodos'] = metodos             
                 data_invoice_details.append(data_detail)
             
             return data_invoice_details
@@ -147,6 +158,7 @@ class InvoiceDetails(models.TransientModel):
                 'result_data': data_invoices,
                 'is_resumen': self.informe,
             }
+            
             return data
             
         domain = [
@@ -334,7 +346,7 @@ class InvoiceDetails(models.TransientModel):
                 'result_data': data_invoice_details,
                 'is_cost_or_debit': self.cost_options,
             }
-            _logger.info(f'MOSTRANDO DATA >>> { data }')
+            
             return data
         
         else:
@@ -383,8 +395,6 @@ class InvoiceDetails(models.TransientModel):
         datas = data['result_data']
         is_cost_or_debit = data.get('is_cost_or_debit', None)
         is_resumen = data.get('is_resumen', None)
-        
-        _logger.info(f'MOSTRANDO INFORME >>> { is_resumen }')
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -452,6 +462,9 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Subtotal')
             headers.append('Iva')
             headers.append('Total')
+            
+            datas
+            
             headers.append('Efectivo')
             headers.append('Banco')
             headers.append('Cuenta de cliente')
