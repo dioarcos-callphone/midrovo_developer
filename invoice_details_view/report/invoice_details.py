@@ -244,12 +244,12 @@ class InvoiceDetails(models.AbstractModel):
                                     'metodo': method.name,
                                     'monto': payment.amount
                                 })
-                            else:
-                                metodos.append({
-                                    'tipo': None,
-                                    'metodo': method.name,
-                                    'monto': payment.amount
-                                })
+                            # else:
+                            #     metodos.append({
+                            #         'tipo': None,
+                            #         'metodo': method.name,
+                            #         'monto': payment.amount
+                            #     })
                     else:
                         if invoice.invoice_payments_widget:
                             content = invoice.invoice_payments_widget['content']
@@ -262,12 +262,12 @@ class InvoiceDetails(models.AbstractModel):
                                         'metodo': method.name,
                                         'monto': c['amount']
                                     })
-                                else:
-                                    metodos.append({
-                                        'tipo': None,
-                                        'metodo': method.name,
-                                        'monto': payment.amount
-                                    })
+                                # else:
+                                #     metodos.append({
+                                #         'tipo': None,
+                                #         'metodo': method.name,
+                                #         'monto': payment.amount
+                                #     })
                                     
                 data_detail['metodos'] = metodos                 
                 data_invoice_details.append(data_detail)
