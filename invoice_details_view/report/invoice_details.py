@@ -271,7 +271,7 @@ class InvoiceDetails(models.AbstractModel):
                                 #         'monto': payment.amount
                                 #     })
                                     
-                data_detail['metodos'] = metodos                 
+                # data_detail['metodos'] = metodos                 
                 data_invoice_details.append(data_detail)
             _logger.info(f'MOSTRANDO FACTURAS >>> { data_invoice_details }')
             return data_invoice_details
