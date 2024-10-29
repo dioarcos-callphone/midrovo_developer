@@ -85,32 +85,15 @@
                                 <td align="center" width="100">
                                     <t t-esc="result['total']"/>
                                 </td>
-                                <t t-foreach="result['metodos']" t-as="metodo">
-                                    <td>
-                                        <t t-if="metodo['tipo'] == 'cash'">
-                                            <t t-esc="metodo['monto']"/>    
-                                        </t>                                        
-                                    </td>
-                                    <td>
-                                        <t t-if="metodo['tipo'] == 'bank'">
-                                            <t t-esc="metodo['monto']"/>    
-                                        </t>
-                                    </td>
-                                    <td>
-                                        <t t-if="metodo['tipo'] == False">
-                                            <t t-esc="metodo['monto']"/>    
-                                        </t>
-                                    </td>
-                                </t>
-                                <!-- <td>
-                                    <t t-esc="result['Efectivo']"/>
+                                <td>
+                                    <t t-esc="result['cash']"/>
                                 </td>
                                 <td>
-                                    <t t-esc="result['Banco']"/>
+                                    <t t-esc="result['bank']"/>
                                 </td>
                                 <td>
-                                    <t t-esc="result['Cuenta de cliente']"/>
-                                </td> -->
+                                    <t t-esc="result['client']"/>
+                                </td>
                             </t>
 
                             <t t-if="is_resumen == 'd'">
