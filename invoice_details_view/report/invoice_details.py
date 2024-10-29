@@ -212,23 +212,64 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['iva'] = - invoice.amount_tax
                     data_detail['total'] = - invoice.amount_total_signed
                 
-                methods = self.env['pos.payment.method'].search_read([], ['name'])
+                # methods = self.env['pos.payment.method'].search_read([], ['name'])
+                # pos_order = invoice.pos_order_ids
+                
+                # for method in methods:
+                #     data_detail[method['name']] = 0
+                #     if pos_order:
+                #         for payment in pos_order.payment_ids:
+                #             if method['name'] == payment.payment_method_id.name:
+                #                 data_detail[method['name']] = payment.amount
+                #     else:
+                #         if invoice.invoice_payments_widget:
+                #             content = invoice.invoice_payments_widget['content']
+                            
+                #             for c in content:
+                #                 if method['name'] == c['journal_name']:
+                #                     data_detail[method['name']] = c['amount']
+                methods = self.env['pos.payment.method'].search([])
                 pos_order = invoice.pos_order_ids
                 
+                metodos = []
                 for method in methods:
+                    journal = method.journal_id
+                    journal_type = journal.type
                     data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method['name'] == payment.payment_method_id.name:
-                                data_detail[method['name']] = payment.amount
+                            if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
+                                metodos.append({
+                                    'tipo': payment.payment_method_id.journal_id.type,
+                                    'metodo': method.name,
+                                    'monto': payment.amount
+                                })
+                            else:
+                                metodos.append({
+                                    'tipo': None,
+                                    'metodo': method.name,
+                                    'monto': payment.amount
+                                })
                     else:
                         if invoice.invoice_payments_widget:
                             content = invoice.invoice_payments_widget['content']
                             
                             for c in content:
-                                if method['name'] == c['journal_name']:
-                                    data_detail[method['name']] = c['amount']
+                                content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
+                                if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
+                                    metodos.append({
+                                        'tipo': content_journal_type.type,
+                                        'metodo': method.name,
+                                        'monto': c['amount']
+                                    })
+                                else:
+                                    metodos.append({
+                                        'tipo': None,
+                                        'metodo': method.name,
+                                        'monto': payment.amount
+                                    })
                                     
+                data_detail['metodos'] = metodos                 
                 data_invoice_details.append(data_detail)
             
             return data_invoice_details

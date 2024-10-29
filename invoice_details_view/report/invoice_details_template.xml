@@ -31,7 +31,7 @@
                                 <th align="center" style="vertical-align: middle">Total</th>
                                 <th align="center" style="vertical-align: middle">Efectivo</th>
                                 <th align="center" style="vertical-align: middle">Banco</th>
-                                <th align="center" style="vertical-align: middle">Cuenta de cliente</th>
+                                <th align="center" style="vertical-align: middle">Cuenta por cobrar</th>
                                 
                             </t>
 
@@ -85,7 +85,12 @@
                                 <td align="center" width="100">
                                     <t t-esc="result['total']"/>
                                 </td>
-                                <td>
+                                <t t-foreach="result['metodos']" t-as="metodo">
+                                    <td>
+                                        <t t-esc="metodo['monto']"/>
+                                    </td>
+                                </t>
+                                <!-- <td>
                                     <t t-esc="result['Efectivo']"/>
                                 </td>
                                 <td>
@@ -93,7 +98,7 @@
                                 </td>
                                 <td>
                                     <t t-esc="result['Cuenta de cliente']"/>
-                                </td>
+                                </td> -->
                             </t>
 
                             <t t-if="is_resumen == 'd'">
