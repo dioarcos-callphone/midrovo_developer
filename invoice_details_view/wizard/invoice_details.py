@@ -130,7 +130,7 @@ class InvoiceDetails(models.TransientModel):
                             
                             for c in content:
                                 content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
-                                if method.name == c['journal_name'] and journal_type == content_journal_type.type:
+                                if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
                                     _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
                                     _logger.info(f"MOSTRANDO PAYMENT METHOD { c['journal_name'] }")
                                     
