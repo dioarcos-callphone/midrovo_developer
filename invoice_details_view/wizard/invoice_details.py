@@ -8,10 +8,7 @@ try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
     import xlsxwriter
-
-import logging
-_logger = logging.getLogger(__name__)
-        
+      
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -393,8 +390,6 @@ class InvoiceDetails(models.TransientModel):
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
-        
-        _logger.info(f'DATA >>> { datas }')
         
         # Configurar márgenes
         sheet.set_margins(0.5, 0.5, 0.5, 0.5)
