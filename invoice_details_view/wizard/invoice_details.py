@@ -520,7 +520,7 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 9, val['total'], text_format)
                 sheet.write(row, 10, val['cash'], text_format)
                 sheet.write(row, 11, val['bank'], text_format)
-                sheet.write(row, 12, val[False], text_format)
+                sheet.write(row, 12, val['false'], text_format)
             
             if is_resumen == None:
                 sheet.write(row, 7, val['producto'], text_format)
