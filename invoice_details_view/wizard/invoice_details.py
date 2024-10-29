@@ -467,9 +467,7 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Precio')
             headers.append('Descuento')
             headers.append('Subtotal')
-            headers.append('Efectivo')
-            headers.append('Banco')
-            headers.append('Cuenta de cliente')
+            headers.append('Métodos de pago')
 
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                 headers.append('Costo')
@@ -529,9 +527,11 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 16, val['precio'], text_format)
                 sheet.write(row, 17, val['descuento'], text_format)
                 sheet.write(row, 18, val['subtotal'], text_format)
-                sheet.write(row, 19, val['Efectivo'], text_format)
-                sheet.write(row, 20, val['Banco'], text_format)
-                sheet.write(row, 21, val['Cuenta de cliente'], text_format)
+                
+                metodos = val['metodos']
+                
+                for metodo in metodos:
+                    sheet.write(row, 19, metodo, text_format)
             
                 if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     if is_cost_or_debit == 'master':
