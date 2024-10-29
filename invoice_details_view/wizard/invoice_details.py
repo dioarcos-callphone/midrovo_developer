@@ -111,6 +111,7 @@ class InvoiceDetails(models.TransientModel):
                 metodos = []
                 for method in methods:
                     journal = method['journal_id']
+                    _logger.info(f'MOSTRANDO JOURNAL >>> { journal }')
                     journal_type = journal['type']
                     data_detail[method['name']] = 0
                     if pos_order:
