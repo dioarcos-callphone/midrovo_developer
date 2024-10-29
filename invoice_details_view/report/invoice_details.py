@@ -235,7 +235,7 @@ class InvoiceDetails(models.AbstractModel):
                 for method in methods:
                     journal = method.journal_id
                     journal_type = journal.type
-                    data_detail[method['name']] = 0
+                    # data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
                             if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
