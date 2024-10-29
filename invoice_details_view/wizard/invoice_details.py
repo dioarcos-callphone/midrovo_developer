@@ -394,6 +394,8 @@ class InvoiceDetails(models.TransientModel):
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
         
+        _logger.info(f'DATA >>> { datas }')
+        
         # Configurar márgenes
         sheet.set_margins(0.5, 0.5, 0.5, 0.5)
         
