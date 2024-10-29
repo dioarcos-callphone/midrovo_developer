@@ -115,12 +115,8 @@ class InvoiceDetails(models.TransientModel):
                     data_detail[method['name']] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:
-                                _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
-                                _logger.info(f'MOSTRANDO PAYMENT METHOD { payment.payment_method_id.name }')
-                                
+                            if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
                                 metodos.append({
-                                    
                                     'metodo': method.name,
                                     'monto': payment.amount
                                 })
@@ -133,7 +129,11 @@ class InvoiceDetails(models.TransientModel):
                             # _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
                             
                             for c in content:
-                                if method.name == c['journal_name']:
+                                content_journal_type = self.env['account.journal'].search_read([],['type'])
+                                if method.name == c['journal_name'] and journal_type == content_journal_type:
+                                    _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
+                                    _logger.info(f'MOSTRANDO PAYMENT METHOD { payment.payment_method_id.name }')
+                                    
                                     metodos.append({
                                         'metodo': method.name,
                                         'monto': c['amount']
