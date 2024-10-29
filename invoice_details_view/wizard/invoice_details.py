@@ -132,7 +132,7 @@ class InvoiceDetails(models.TransientModel):
                                 content_journal_type = self.env['account.journal'].search_read([],['type'])
                                 if method.name == c['journal_name'] and journal_type == content_journal_type:
                                     _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
-                                    _logger.info(f'MOSTRANDO PAYMENT METHOD { payment.payment_method_id.name }')
+                                    _logger.info(f"MOSTRANDO PAYMENT METHOD { c['journal_name'] }")
                                     
                                     metodos.append({
                                         'metodo': method.name,
