@@ -235,15 +235,16 @@ class InvoiceDetails(models.AbstractModel):
                 for method in methods:
                     journal = method.journal_id
                     journal_type = journal.type
-                    # data_detail[method['name']] = 0
+                    data_detail[journal_type] = 0
                     if pos_order:
                         for payment in pos_order.payment_ids:
                             if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
-                                metodos.append({
-                                    'tipo': payment.payment_method_id.journal_id.type,
-                                    'metodo': method.name,
-                                    'monto': payment.amount
-                                })
+                                data_detail[journal_type] = payment.amount
+                                # metodos.append({
+                                #     'tipo': payment.payment_method_id.journal_id.type,
+                                #     'metodo': method.name,
+                                #     'monto': payment.amount
+                                # })
                             # else:
                             #     metodos.append({
                             #         'tipo': None,
@@ -257,11 +258,12 @@ class InvoiceDetails(models.AbstractModel):
                             for c in content:
                                 content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
                                 if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
-                                    metodos.append({
-                                        'tipo': content_journal_type.type,
-                                        'metodo': method.name,
-                                        'monto': c['amount']
-                                    })
+                                    data_detail[journal_type] = c['amount']
+                                    # metodos.append({
+                                    #     'tipo': content_journal_type.type,
+                                    #     'metodo': method.name,
+                                    #     'monto': c['amount']
+                                    # })
                                 # else:
                                 #     metodos.append({
                                 #         'tipo': None,
