@@ -117,32 +117,27 @@ class InvoiceDetails(models.TransientModel):
                         for payment in pos_order.payment_ids:
                             if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
                                 metodos.append({
+                                    'tipo': payment.payment_method_id.journal_id.type,
                                     'metodo': method.name,
                                     'monto': payment.amount
                                 })
-                                # data_detail[method['name']] = payment.amount
                     else:
                         if invoice.invoice_payments_widget:
-                            # _logger.info(f'MOSTRANDO WIDGET >>> { invoice.invoice_payments_widget }')
                             content = invoice.invoice_payments_widget['content']
-                            
-                            # _logger.info(f'MOSTRANDO CONTENIDO >>> { content }')
                             
                             for c in content:
                                 content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
                                 if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
-                                    _logger.info(f'MOSTRANDO JOURNAL TYPE { journal_type }')
-                                    _logger.info(f"MOSTRANDO PAYMENT METHOD { c['journal_name'] }")
-                                    
                                     metodos.append({
+                                        'tipo': content_journal_type.type,
                                         'metodo': method.name,
                                         'monto': c['amount']
                                     })
-                                    # data_detail[method['name']] = c['amount']
                                     
                 data_detail['metodos'] = metodos             
                 data_invoice_details.append(data_detail)
             
+            _logger.info(f'MOSTRANDO FACTURAS >>> { data_invoice_details }')
             return data_invoice_details
         
         else:
@@ -469,13 +464,10 @@ class InvoiceDetails(models.TransientModel):
         if is_resumen == 'r':
             headers.append('Subtotal')
             headers.append('Iva')
-            headers.append('Total')
-            
-            datas
-            
+            headers.append('Total')            
             headers.append('Efectivo')
             headers.append('Banco')
-            headers.append('Cuenta de cliente')
+            headers.append('Cuenta por cobrar')
             
         if is_resumen == None:
             headers.append('Producto')
