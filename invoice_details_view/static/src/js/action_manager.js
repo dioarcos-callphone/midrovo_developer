@@ -4,7 +4,6 @@ import framework from 'web.framework';
 import session from 'web.session';
 
 registry.category("ir.actions.report handlers").add("xlsx", async (action) => {
-    console.log('>>> ENTRA EN EL ACTION MANAGER JAVASCRIPT <<<')
    if (action.report_type === 'xlsx') {
        framework.blockUI();
        var def = $.Deferred();
