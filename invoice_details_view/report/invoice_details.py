@@ -219,6 +219,9 @@ class InvoiceDetails(models.AbstractModel):
                     journal = method.journal_id
                     journal_type = journal.type
                     data_detail[journal_type] = 0
+                    
+                    widget = invoice.invoice_payments_widget
+                    _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
                         
                     if pos_order:
                         for payment in pos_order.payment_ids:
@@ -227,8 +230,8 @@ class InvoiceDetails(models.AbstractModel):
                                 
                     else:
                         if invoice.invoice_payments_widget:
-                            widget = invoice.invoice_payments_widget
-                            _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
+                            # widget = invoice.invoice_payments_widget
+                            # _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
                             content = invoice.invoice_payments_widget['content']
                             
                             for c in content:
