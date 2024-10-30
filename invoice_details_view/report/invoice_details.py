@@ -2,6 +2,9 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -224,6 +227,8 @@ class InvoiceDetails(models.AbstractModel):
                                 
                     else:
                         if invoice.invoice_payments_widget:
+                            widget = invoice.invoice_payments_widget
+                            _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
                             content = invoice.invoice_payments_widget['content']
                             
                             for c in content:
