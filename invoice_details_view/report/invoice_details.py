@@ -240,6 +240,7 @@ class InvoiceDetails(models.AbstractModel):
                             data_detail[ journal.type ] = content['amount']
                 
                 else:
+                    invoice_name = invoice.name
                     pos_order = invoice.pos_order_ids
                     
                     if pos_order:
