@@ -85,15 +85,21 @@
                                 <td align="center" width="100">
                                     <t t-esc="result['total']"/>
                                 </td>
-                                <td>
-                                    <t t-esc="result['cash']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['bank']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result[False]"/>
-                                </td>
+                                <t t-if="result['cash']">
+                                    <td>
+                                        <t t-esc="result['cash']"/>
+                                    </td>    
+                                </t>
+                                <t t-if="result['bank']">
+                                    <td>
+                                        <t t-esc="result['bank']"/>
+                                    </td>                                    
+                                </t>
+                                <t t-if="result[False]">
+                                    <td>
+                                        <t t-esc="result[False]"/>
+                                    </td>
+                                </t>
                             </t>
 
                             <t t-if="is_resumen == 'd'">
