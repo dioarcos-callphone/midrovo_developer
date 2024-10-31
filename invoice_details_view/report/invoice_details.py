@@ -164,7 +164,7 @@ class InvoiceDetails(models.AbstractModel):
                     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            metodos.append(payment.paymeny_method_id.name)
+                            metodos.append(payment.payment_method_id.name)
                 
                 # for method in methods:
                 #     data_detail[method['name']] = 0
