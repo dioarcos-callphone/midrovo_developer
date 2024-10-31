@@ -169,8 +169,9 @@ class InvoiceDetails(models.AbstractModel):
                             metodos.append(payment.payment_method_id.name)
                 
                 metodos_set = set(metodos)
+                metodos_list = list(metodos_set)
                                     
-                data_detail['metodos'] = metodos_set
+                data_detail['metodos'] = metodos_list
                 data_invoice_details.append(data_detail)
             
             return {

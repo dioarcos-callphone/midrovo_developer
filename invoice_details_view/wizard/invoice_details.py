@@ -585,13 +585,8 @@ class InvoiceDetails(models.TransientModel):
                     'valign': 'vcenter'
                 })
                 
-                metodos = val['metodos']  
-                
-                _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
-                            
+                metodos = val['metodos']                            
                 metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
-                
-                _logger.info(f'MOSTRANDO METODOS STR >>> { metodos_str }')
                 
                 sheet.write(row, 19, metodos_str, text_wrap)
             
