@@ -202,6 +202,9 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['subtotal'] = invoice.amount_untaxed_signed
                 data_detail['iva'] = invoice.amount_tax
                 data_detail['total'] = invoice.amount_total_signed
+                data_detail['cash'] = 0
+                data_detail['bank'] = 0
+                data_detail['receivable'] = 0
                 
                 if invoice.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
@@ -243,11 +246,12 @@ class InvoiceDetails(models.AbstractModel):
                     invoice_name = invoice.name
                     pos_order = invoice.pos_order_ids
                     
+                    # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            _logger.info(f'NO FACTURA >>> { invoice_name }')
-                            _logger.info(f'METODO >>> { payment.payment_method_id.name } || MONTO >>> { payment.amount }')
-                                
+                            data_detail['receivable'] = payment.amount
+                            
+                                 
                 # for method in methods:
                 #     journal = method.journal_id
                 #     journal_type = journal.type
