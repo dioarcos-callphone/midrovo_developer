@@ -2,9 +2,6 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -137,10 +134,7 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['precio'] = - data_detail['precio']
                     data_detail['descuento'] = - data_detail['descuento']
                     data_detail['subtotal'] = - data_detail['subtotal']
-                    
-                # methods = self.env['pos.payment.method'].search_read([], ['name'])
-                # pos_order = detail.move_id.pos_order_ids
-                
+  
                 metodos = []
                 
                 payment_widget = detail.move_id.invoice_payments_widget
@@ -165,20 +159,6 @@ class InvoiceDetails(models.AbstractModel):
                     if pos_order:
                         for payment in pos_order.payment_ids:
                             metodos.append(payment.payment_method_id.name)
-                
-                # for method in methods:
-                #     data_detail[method['name']] = 0
-                #     if pos_order:
-                #         for payment in pos_order.payment_ids:
-                #             if method['name'] == payment.payment_method_id.name:
-                #                 metodos.append(payment.payment_method_id.name)
-                #     else:
-                #         if detail.move_id.invoice_payments_widget:
-                #             content = detail.move_id.invoice_payments_widget['content']
-                            
-                #             for c in content:
-                #                 if method['name'] == c['journal_name']:
-                #                     metodos.append(c['journal_name'])
                                     
                 data_detail['metodos'] = metodos
                     

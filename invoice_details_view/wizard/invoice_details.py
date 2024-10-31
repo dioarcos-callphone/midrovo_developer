@@ -320,24 +320,32 @@ class InvoiceDetails(models.TransientModel):
                     data_detail['descuento'] = - data_detail['descuento']
                     data_detail['subtotal'] = - data_detail['subtotal']
                     
-                methods = self.env['pos.payment.method'].search_read([], ['name'])
-                pos_order = detail.move_id.pos_order_ids
-                
                 metodos = []
-                for method in methods:
-                    data_detail[method['name']] = 0
+                
+                payment_widget = detail.move_id.invoice_payments_widget
+                
+                if payment_widget:
+                    contents = payment_widget['content']
+                    
+                    for content in contents:
+                        pos_payment_name = content['pos_payment_name']
+                        
+                        if not pos_payment_name:
+                            journal_name = content['journal_name']
+                            metodos.append(journal_name)
+                                
+                        else:
+                            metodos.append(pos_payment_name)
+                
+                else:
+                    pos_order = detail.move_id.pos_order_ids
+                    
+                    # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method['name'] == payment.payment_method_id.name:
-                                metodos.append(payment.payment_method_id.name)
-                    else:
-                        if detail.move_id.invoice_payments_widget:
-                            content = detail.move_id.invoice_payments_widget['content']
-                            
-                            for c in content:
-                                if method['name'] == c['journal_name']:
-                                    metodos.append(c['journal_name'])
-                                    
+                            metodos.append(payment.payment_method_id.name)
+                
+                                 
                 data_detail['metodos'] = metodos
                 data_invoice_details.append(data_detail)
             
@@ -523,7 +531,7 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 9, val['total'], text_format)
                 sheet.write(row, 10, val['cash'], text_format)
                 sheet.write(row, 11, val['bank'], text_format)
-                sheet.write(row, 12, val['false'], text_format)
+                sheet.write(row, 12, val['receivable'], text_format)
             
             if is_resumen == None:
                 sheet.write(row, 7, val['producto'], text_format)
