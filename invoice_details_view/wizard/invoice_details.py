@@ -9,6 +9,10 @@ try:
 except ImportError:
     import xlsxwriter
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -582,7 +586,11 @@ class InvoiceDetails(models.TransientModel):
                 
                 metodos = val['metodos']
                 
+                _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
+                
                 metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
+                
+                _logger.info(f'MOSTRANDO METODOS >>> { metodos_str }')
                 
                 sheet.write(row, 19, 'Holaaaa', text_wrap)
             
