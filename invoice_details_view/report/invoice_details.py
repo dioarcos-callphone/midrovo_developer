@@ -242,10 +242,10 @@ class InvoiceDetails(models.AbstractModel):
                 else:
                     invoice_name = invoice.name
                     pos_order = invoice.pos_order_ids
-                    
+                    _logger.info(f'NO FACTURA >>> { invoice_name }')
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            _logger.info(f'NO FACTURA >>> { invoice_name }')
+                            
                             _logger.info(f'METODO >>> { payment.payment_method_id.name } || MONTO >>> { payment.amount }')
                                 
                 # for method in methods:
