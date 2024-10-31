@@ -93,37 +93,44 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['subtotal'] = invoice.amount_untaxed_signed
                 data_detail['iva'] = invoice.amount_tax
                 data_detail['total'] = invoice.amount_total_signed
+                data_detail['cash'] = 0
+                data_detail['bank'] = 0
+                data_detail['receivable'] = 0
                 
                 if invoice.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
                     
                 elif invoice.move_type == 'out_refund':
                     data_detail['tipo'] = 'Nota de crédito'
-                    data_detail['subtotal'] = - invoice.amount_untaxed_signed
-                    data_detail['iva'] = - invoice.amount_tax
-                    data_detail['total'] = - invoice.amount_total_signed
+                    data_detail['subtotal'] = - data_detail['subtotal']
+                    data_detail['iva'] = - data_detail['iva']
+                    data_detail['total'] = - data_detail['total']
                 
-                methods = self.env['pos.payment.method'].search([])
-                pos_order = invoice.pos_order_ids
-
-                for method in methods:
-                    journal = method.journal_id
-                    journal_type = journal.type
-                    data_detail[journal_type] = 0
+                payment_widget = invoice.invoice_payments_widget
+                
+                if payment_widget:
+                    contents = payment_widget['content']
+                    
+                    for content in contents:
+                        pos_payment_name = content['pos_payment_name']
                         
+                        if not pos_payment_name:
+                            journal_name = content['journal_name']
+                            journal = self.env['account.journal'].search([('name', '=', journal_name)])
+                            data_detail[ journal.type ] = content['amount']
+                                
+                        else:
+                            pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
+                            journal = pos_payment.journal_id
+                            data_detail[ journal.type ] = content['amount']
+                
+                else:
+                    pos_order = invoice.pos_order_ids
+                    
+                    # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
                         for payment in pos_order.payment_ids:
-                            if method.name == payment.payment_method_id.name and journal_type == payment.payment_method_id.journal_id.type:                                
-                                data_detail[journal_type] = payment.amount
-                                
-                    else:
-                        if invoice.invoice_payments_widget:
-                            content = invoice.invoice_payments_widget['content']
-                            
-                            for c in content:
-                                content_journal_type = self.env['account.journal'].search([('name', '=', c['journal_name'])], limit=1)
-                                if journal.name == c['journal_name'] and journal_type == content_journal_type.type:
-                                    data_detail[journal_type] = c['amount']            
+                            data_detail['receivable'] = payment.amount          
                 
                 data_invoice_details.append(data_detail)
 
