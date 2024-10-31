@@ -216,7 +216,7 @@ class InvoiceDetails(models.AbstractModel):
                 pos_order = invoice.pos_order_ids
                 
                 payment_widget = invoice.invoice_payments_widget
-                journals = self.env['account_journal'].search([])
+                journals = self.env['account.journal'].search([])
                 
                 if payment_widget:
                     contents = payment_widget['content']
