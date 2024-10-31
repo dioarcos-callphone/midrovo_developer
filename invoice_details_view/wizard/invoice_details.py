@@ -469,16 +469,6 @@ class InvoiceDetails(models.TransientModel):
             'valign': 'vcenter'
         })
 
-        title_format_method = workbook.add_format({
-            'font_name': 'Times New Roman',
-            'border': 1,
-            'bold': True,
-            'font_size': 14,
-            'align': 'center',
-            'valign': 'vcenter'
-        })
-        title_format_method.set_rotation(90)
-
         # Título del informe
         if is_resumen == None:
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
@@ -591,7 +581,7 @@ class InvoiceDetails(models.TransientModel):
                 })
                 
                 metodos = val['metodos']
-                metodos_str = "\n".join(f"- {metodo}" for metodo in metodos)  # Unir elementos con salto de línea
+                metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
                 sheet.write(row, 19, metodos_str, text_wrap)
             
