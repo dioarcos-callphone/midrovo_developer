@@ -238,7 +238,7 @@ class InvoiceDetails(models.AbstractModel):
                             journal = pos_payment.journal_id
                             
                             _logger.info(f'Factura No. >>> { invoice.name }')
-                            _logger.info(f'Metodo de Pos >>> { pos_payment }')
+                            _logger.info(f'Metodo de Pos >>> { pos_payment_name }')
                             _logger.info(f'Tipo de diario >>> { journal.type }')
                             _logger.info(f"Monto >>> { content['amount'] }")
                             
