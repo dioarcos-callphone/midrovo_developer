@@ -171,7 +171,6 @@ class InvoiceDetails(models.AbstractModel):
                 metodos_set = set(metodos)
                                     
                 data_detail['metodos'] = metodos_set
-                    
                 data_invoice_details.append(data_detail)
             
             return {

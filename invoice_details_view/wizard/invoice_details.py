@@ -360,6 +360,14 @@ class InvoiceDetails(models.TransientModel):
                             metodos.append(journal_name)
                                 
                         else:
+                            pos_order = detail.move_id.pos_order_ids
+                    
+                            # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
+                            if pos_order:
+                                for payment in pos_order.payment_ids:
+                                    if not payment.payment_method_id.journal_id:
+                                        metodos.append(payment.payment_method_id.name)
+                            
                             metodos.append(pos_payment_name)
                 
                 else:
@@ -370,8 +378,9 @@ class InvoiceDetails(models.TransientModel):
                         for payment in pos_order.payment_ids:
                             metodos.append(payment.payment_method_id.name)
                 
+                metodos_set = set(metodos)
                                  
-                data_detail['metodos'] = metodos
+                data_detail['metodos'] = metodos_set
                 data_invoice_details.append(data_detail)
             
             data = {
