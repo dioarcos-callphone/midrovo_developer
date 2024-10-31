@@ -151,6 +151,13 @@ class InvoiceDetails(models.AbstractModel):
                         
                         if not pos_payment_name:
                             _logger.info(f'CONTENT >>> { content }')
+                            
+                            pos_order = detail.move_id.pos_order_ids
+                            
+                            if pos_order:
+                                for payment in pos_order.payment_ids:
+                                    _logger.info(f'POS >>> { payment.payment_method_id.name }')
+                            
                             journal_name = content['journal_name']
                             metodos.append(journal_name)
                                 
