@@ -161,6 +161,9 @@ class InvoiceDetails(models.TransientModel):
                         for payment in pos_order.payment_ids:
                             data_detail['receivable'] = payment.amount          
                 
+                monto_cuenta_por_cobrar = data_detail['cash'] + data_detail['bank']
+                data_detail['receivable'] = data_detail['total'] - monto_cuenta_por_cobrar
+                
                 data_invoice_details.append(data_detail)
 
             return data_invoice_details
