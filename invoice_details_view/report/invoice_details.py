@@ -216,35 +216,32 @@ class InvoiceDetails(models.AbstractModel):
                 pos_order = invoice.pos_order_ids
                 
                 payment_widget = invoice.invoice_payments_widget
-                journals = self.env['account.journal'].search([])
+                # journals = self.env['account.journal'].search([])
                 
                 if payment_widget:
                     contents = payment_widget['content']
-                    
                     for content in contents:
-                        for journal in journals:
-                            pos_payment_name = content['pos_payment_name']
+                        pos_payment_name = content['pos_payment_name']
+                        
+                        if not pos_payment_name:
+                            journal_name = content['journal_name']
+                            journal = self.env['account.journal'].search([('name', '=', journal_name)])
                             
-                            if not pos_payment_name:
-                                journal_name = content['journal_name']
-                                if journal.name == journal_name:
-                                    _logger.info(f'Factura No. >>> { invoice.name }')
-                                    _logger.info(f'Metodo de Contabilidad >>> { journal_name }')
-                                    _logger.info(f'Tipo de diario >>> { journal_type }')
-                                    _logger.info(f"Monto >>> { content['amount'] }")
-                                    # data_detail[f'{ journal.type }'] = content['amount']
-                            else:
-                                for method in methods:
-                                    journal = method.journal_id
-                                    journal_type = journal.type
-                                    if method.name == pos_payment_name:
-                                        _logger.info(f'Factura No. >>> { invoice.name }')
-                                        _logger.info(f'Metodo del pos >>> { pos_payment_name }')
-                                        _logger.info(f'Tipo de diario >>> { journal_type }')
-                                        _logger.info(f"Monto >>> { content['amount'] }")
-                                        # data_detail[f'{ journal_type }'] = content['amount']
+                            _logger.info(f'Factura No. >>> { invoice.name }')
+                            _logger.info(f'Metodo de Contabilidad >>> { journal_name }')
+                            _logger.info(f'Tipo de diario >>> { journal.type }')
+                            _logger.info(f"Monto >>> { content['amount'] }")
+                                # data_detail[f'{ journal.type }'] = content['amount']
+                                
+                        else:
+                            pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
+                            journal = pos_payment.journal_id
                             
-                            # if journal_name == journal.name:
+                            _logger.info(f'Factura No. >>> { invoice.name }')
+                            _logger.info(f'Metodo de Pos >>> { pos_payment }')
+                            _logger.info(f'Tipo de diario >>> { journal.type }')
+                            _logger.info(f"Monto >>> { content['amount'] }")
+                            
                                 
                         
                 
