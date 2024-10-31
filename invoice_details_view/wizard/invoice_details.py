@@ -383,8 +383,9 @@ class InvoiceDetails(models.TransientModel):
                             metodos.append(payment.payment_method_id.name)
                 
                 metodos_set = set(metodos)
+                metodos_list = list(metodos_set)
                                  
-                data_detail['metodos'] = metodos_set
+                data_detail['metodos'] = metodos_list
                 data_invoice_details.append(data_detail)
             
             data = {
@@ -584,8 +585,7 @@ class InvoiceDetails(models.TransientModel):
                     'valign': 'vcenter'
                 })
                 
-                metodos = val['metodos']
-                metodos = list(metodos)    
+                metodos = val['metodos']  
                 
                 _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
                             
