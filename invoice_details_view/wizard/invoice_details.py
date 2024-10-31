@@ -584,15 +584,10 @@ class InvoiceDetails(models.TransientModel):
                     'valign': 'vcenter'
                 })
                 
-                metodos = val['metodos']
-                
-                _logger.info(f'MOSTRANDO METODOS >>> { metodos }')
-                
+                metodos = list(val['metodos'])                
                 metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
-                _logger.info(f'MOSTRANDO METODOS >>> { metodos_str }')
-                
-                sheet.write(row, 19, 'Holaaaa', text_wrap)
+                sheet.write(row, 19, metodos_str, text_wrap)
             
                 if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     if is_cost_or_debit == 'master':
