@@ -557,7 +557,7 @@ class InvoiceDetails(models.TransientModel):
                 })
                 
                 metodos = val['metodos']
-                metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
+                metodos_str = "\n".join(f"- {metodo}" for metodo in metodos)  # Unir elementos con salto de línea
                 
                 sheet.write(row, 19, metodos_str, text_wrap)
             
