@@ -224,7 +224,7 @@ class InvoiceDetails(models.AbstractModel):
                     
                     contents = payment_widget['content']
                     
-                    _logger.info(f'CONTENIDO >>> { content }')
+                    _logger.info(f'CONTENIDO >>> { contents }')
                     
                     for content in contents:
                         pos_payment_name = content['pos_payment_name']
