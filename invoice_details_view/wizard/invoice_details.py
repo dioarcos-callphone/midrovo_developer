@@ -8,7 +8,7 @@ try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
     import xlsxwriter
-      
+
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -133,9 +133,7 @@ class InvoiceDetails(models.TransientModel):
                             # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                             if pos_order:
                                 for payment in pos_order.payment_ids:
-                                    _logger.info(f'MOSTRANDO PAYMENT >>> { payment }')
                                     if not payment.payment_method_id.journal_id:
-                                        _logger.info(f'MOSTRANDO PAYMENT >>> { payment.payment_method_id }')
                                         data_detail['receivable'] = payment.amount
                             
                             
