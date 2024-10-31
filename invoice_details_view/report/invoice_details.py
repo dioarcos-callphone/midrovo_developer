@@ -218,7 +218,14 @@ class InvoiceDetails(models.AbstractModel):
                 payment_widget = invoice.invoice_payments_widget
                 
                 if payment_widget:
+                    invoice_name = invoice.name
+                    
+                    _logger.info(f'NO FACTURA >>> { invoice_name }')
+                    
                     contents = payment_widget['content']
+                    
+                    _logger.info(f'CONTENIDO >>> { content }')
+                    
                     for content in contents:
                         pos_payment_name = content['pos_payment_name']
                         
