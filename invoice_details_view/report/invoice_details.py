@@ -225,12 +225,12 @@ class InvoiceDetails(models.AbstractModel):
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             journal = self.env['account.journal'].search([('name', '=', journal_name)])
-                            data_detail[f'{ journal.type }'] = content['amount']
+                            data_detail[ journal.type ] = content['amount']
                                 
                         else:
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
-                            data_detail[f'{ journal.type }'] = content['amount']
+                            data_detail[ journal.type ] = content['amount']
                                 
                 # for method in methods:
                 #     journal = method.journal_id
