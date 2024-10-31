@@ -2,10 +2,6 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -150,16 +146,15 @@ class InvoiceDetails(models.AbstractModel):
                         pos_payment_name = content['pos_payment_name']
                         
                         if not pos_payment_name:
-                            _logger.info(f'CONTENT >>> { content }')
-                            
-                            pos_order = detail.move_id.pos_order_ids
-                            
-                            if pos_order:
-                                for payment in pos_order.payment_ids:
-                                    _logger.info(f'POS >>> { payment.payment_method_id.name }')
-                            
                             journal_name = content['journal_name']
-                            metodos.append(journal_name)
+                            
+                            if journal_name == 'Point of Sale':
+                                pos_order = detail.move_id.pos_order_ids
+                                if pos_order:
+                                    for payment in pos_order.payment_ids:
+                                        metodos.append(payment.payment_method_id.name)
+                            else:              
+                                metodos.append(journal_name)
                                 
                         else:
                             pos_order = detail.move_id.pos_order_ids
@@ -249,7 +244,11 @@ class InvoiceDetails(models.AbstractModel):
                         pos_payment_name = content['pos_payment_name']
                         if not pos_payment_name:
                             journal_name = content['journal_name']
-                            journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)
+                            
+                            if journal_name == 'Point of Sale':
+                                data_detail['receivable'] = content.get('amount', 0)
+                            
+                            journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)                           
                             
                             if journal.type in data_detail:
                                 # Sumar el monto si el método ya existe
