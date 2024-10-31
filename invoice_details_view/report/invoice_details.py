@@ -214,14 +214,29 @@ class InvoiceDetails(models.AbstractModel):
                 
                 methods = self.env['pos.payment.method'].search([])
                 pos_order = invoice.pos_order_ids
-
+                
+                payment_widget = invoice.invoice_payments_widget
+                journals = self.env['account_journal'].search([])
+                
+                if payment_widget:
+                    contents = payment_widget['content']
+                    
+                    for content in contents:
+                        for journal in journals:
+                            pos_payment_name = content['pos_payment_name']
+                            
+                            if not pos_payment_name:
+                                _logger.info(f"MOSTRANDO METODO DE PAGO >>> { content['journal_name'] }")
+                            
+                            # if journal_name == journal.name:
+                                
+                        
+                
+                
                 for method in methods:
                     journal = method.journal_id
                     journal_type = journal.type
                     data_detail[journal_type] = 0
-                    
-                    widget = invoice.invoice_payments_widget
-                    _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
                         
                     if pos_order:
                         for payment in pos_order.payment_ids:
@@ -230,8 +245,6 @@ class InvoiceDetails(models.AbstractModel):
                                 
                     else:
                         if invoice.invoice_payments_widget:
-                            # widget = invoice.invoice_payments_widget
-                            # _logger.info(f'MOSTRNAOD PAYMENT WIDGET >>> { widget }')
                             content = invoice.invoice_payments_widget['content']
                             
                             for c in content:
