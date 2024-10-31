@@ -582,13 +582,9 @@ class InvoiceDetails(models.TransientModel):
                 
                 metodos = val['metodos']
                 
-                # Verificar si hay un solo string en el conjunto
-                if isinstance(metodos, set) and len(metodos) == 1:
-                    metodos_str = list(metodos)[0]  # Obtén el único string
-                else:
-                    metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
+                metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
-                sheet.write(row, 19, metodos_str, text_wrap)
+                sheet.write(row, 19, 'Holaaaa', text_wrap)
             
                 if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     if is_cost_or_debit == 'master':
