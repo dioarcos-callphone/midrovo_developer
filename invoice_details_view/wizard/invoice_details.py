@@ -9,10 +9,6 @@ try:
 except ImportError:
     import xlsxwriter
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
