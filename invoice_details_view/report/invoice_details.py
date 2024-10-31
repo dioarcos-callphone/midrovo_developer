@@ -252,7 +252,8 @@ class InvoiceDetails(models.AbstractModel):
                 #                     data_detail[journal_type] = c['amount']
               
                 data_invoice_details.append(data_detail)
-                _logger.info(f'MOSTRANDO DATA >>> { data_invoice_details }')
+            
+            _logger.info(f'MOSTRANDO DATA >>> { data_invoice_details }')
                 
             return data_invoice_details
         
