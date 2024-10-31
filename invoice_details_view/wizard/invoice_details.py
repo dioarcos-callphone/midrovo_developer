@@ -90,9 +90,9 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
                 data_detail['pos'] = invoice.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = invoice.partner_id.name or ""
-                data_detail['subtotal'] = invoice.amount_untaxed_signed
-                data_detail['iva'] = invoice.amount_tax
-                data_detail['total'] = invoice.amount_total_signed
+                data_detail['subtotal'] = abs(invoice.amount_untaxed_signed)
+                data_detail['iva'] = abs(invoice.amount_tax)
+                data_detail['total'] = abs(invoice.amount_total_signed)
                 data_detail['cash'] = 0
                 data_detail['bank'] = 0
                 data_detail['receivable'] = 0
@@ -324,13 +324,13 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['material_capellada'] = material_capellada
                 data_detail['pais'] = pais
                 data_detail['tipo_calzado'] = tipo_calzado
-                data_detail['cantidad'] = detail.quantity
-                data_detail['precio'] = detail.price_unit
-                data_detail['descuento'] = descuento
-                data_detail['subtotal'] = detail.price_subtotal
-                data_detail['costo'] = round(detail.product_id.standard_price, 2)
-                data_detail['total_costo'] = total_costo
-                data_detail['rentabilidad'] = round(rentabilidad, 2)
+                data_detail['cantidad'] = abs(detail.quantity)
+                data_detail['precio'] = abs(detail.price_unit)
+                data_detail['descuento'] = abs(descuento)
+                data_detail['subtotal'] = abs(detail.price_subtotal)
+                data_detail['costo'] = abs(round(detail.product_id.standard_price, 2))
+                data_detail['total_costo'] = abs(total_costo)
+                data_detail['rentabilidad'] = abs(round(rentabilidad, 2))
                 
                 if detail.move_id.move_type == 'out_invoice':
                     data_detail['tipo'] = 'Factura'
