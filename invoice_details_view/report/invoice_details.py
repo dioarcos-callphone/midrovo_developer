@@ -238,6 +238,14 @@ class InvoiceDetails(models.AbstractModel):
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
                             data_detail[ journal.type ] = content['amount']
+                
+                else:
+                    pos_order = invoice.pos_order_ids
+                    
+                    if pos_order:
+                        for payment in pos_order.payment_ids:
+                            _logger.info(f'NO FACTURA >>> { invoice_name }')
+                            _logger.info(f'METODO >>> { payment.payment_method_id.name } || MONTO >>> { payment.amount }')
                                 
                 # for method in methods:
                 #     journal = method.journal_id
