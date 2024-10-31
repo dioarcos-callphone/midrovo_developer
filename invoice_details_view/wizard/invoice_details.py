@@ -117,12 +117,28 @@ class InvoiceDetails(models.TransientModel):
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             journal = self.env['account.journal'].search([('name', '=', journal_name)])
-                            data_detail[ journal.type ] = content['amount']
+                            
+                            if journal.type in data_detail:
+                                # Sumar el monto si el método ya existe
+                                data_detail[journal.type] += content.get('amount', 0)
+                            else:
+                                # Inicializar con el monto
+                                data_detail[journal.type] = content.get('amount', 0)
+                            
+                            # data_detail[ journal.type ] = content['amount']
                                 
                         else:
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
-                            data_detail[ journal.type ] = content['amount']
+                            
+                            if journal.type in data_detail:
+                                # Sumar el monto si el método ya existe
+                                data_detail[journal.type] += content.get('amount', 0)
+                            else:
+                                # Inicializar con el monto
+                                data_detail[journal.type] = content.get('amount', 0)
+                            
+                            # data_detail[ journal.type ] = content['amount']
                 
                 else:
                     pos_order = invoice.pos_order_ids

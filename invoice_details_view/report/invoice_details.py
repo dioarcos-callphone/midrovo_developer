@@ -252,6 +252,7 @@ class InvoiceDetails(models.AbstractModel):
                             else:
                                 # Inicializar con el monto
                                 data_detail[journal.type] = content.get('amount', 0)
+                                
                             # data_detail[ journal.type ] = content['amount']
                 
                 else:
