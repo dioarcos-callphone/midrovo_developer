@@ -237,7 +237,7 @@ class InvoiceDetails(models.AbstractModel):
                         pos_payment_name = content['pos_payment_name']
                         if not pos_payment_name:
                             journal_name = content['journal_name']
-                            journal = self.env['account.journal'].search([('name', '=', journal_name)])
+                            journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)
                             
                             if journal.type in data_detail:
                                 # Sumar el monto si el método ya existe
