@@ -581,7 +581,12 @@ class InvoiceDetails(models.TransientModel):
                 })
                 
                 metodos = val['metodos']
-                metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
+                
+                # Verificar si hay un solo string en el conjunto
+                if isinstance(metodos, set) and len(metodos) == 1:
+                    metodos_str = list(metodos)[0]  # Obtén el único string
+                else:
+                    metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
                 sheet.write(row, 19, metodos_str, text_wrap)
             
