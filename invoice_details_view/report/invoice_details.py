@@ -2,6 +2,9 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -230,9 +233,17 @@ class InvoiceDetails(models.AbstractModel):
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             journal = self.env['account.journal'].search([('name', '=', journal_name)])
+                            
+                            _logger.info(f'MOSTRANDO CONTENT >>> { content }')
+                            
                             data_detail[ journal.type ] = content['amount']
-                                
+                            
+                            
+                            
+                            
+                                                      
                         else:
+                            _logger.info(f'MOSTRANDO CONTENT >>> { content }')
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
                             data_detail[ journal.type ] = content['amount']
