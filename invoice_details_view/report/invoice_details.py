@@ -226,9 +226,9 @@ class InvoiceDetails(models.AbstractModel):
                             pos_payment_name = content['pos_payment_name']
                             
                             if not pos_payment_name:
-                                _logger.info(f"MOSTRANDO METODO DE PAGO >>> { content['journal_name'] }")
+                                _logger.info(f"MOSTRANDO METODO DE PAGO CONTABILIDAD >>> { content['journal_name'] }")
                             else:
-                                _logger.info(f"MOSTRANDO METODO DE PAGO >>> { pos_payment_name }")
+                                _logger.info(f"MOSTRANDO METODO DE PAGO POS >>> { pos_payment_name }")
                             
                             # if journal_name == journal.name:
                                 
