@@ -5,7 +5,7 @@
         <record id="account_journal_inherit_form" model="ir.ui.view">
             <field name="name">account.journal.inherit.form</field>
             <field name="model">account.journal</field>
-            <field name="inherit_id" ref="l10n_latam_invoice_document.view_account_journal_form" />
+            <field name="inherit_id" ref="account.view_account_journal_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='type']" position="after">
                     <field name="analytic_id" />
