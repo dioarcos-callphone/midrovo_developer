@@ -16,7 +16,7 @@ class AccountMoveLineInherit(models.Model):
         analytic_account = self.move_id.journal_id.analytic_id
         
         if analytic_account:
-        
+            _logger.info(f'MOSTRAR CUENTA ANALITICA >>> { analytic_account }')
         # Establecer la distribución analítica por defecto si existe la cuenta
         # if default_analytic_account_id:
             res['analytic_distribution'] = {str(analytic_account.id): 100}  # Distribuir 100% a esa cuenta
