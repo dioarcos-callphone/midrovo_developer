@@ -4,7 +4,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class AccountMoveLineInherit(models.AbstractModel):
+class AccountMoveLineInherit(models.Model):
     _inherit = 'account.move.line'
     
     def default_get(self, fields_list):
