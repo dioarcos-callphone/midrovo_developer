@@ -7,6 +7,7 @@ _logger = logging.getLogger(__name__)
 class AccountMoveLineInherit(models.AbstractModel):
     _inherit = 'account.move.line'
     
+    @api.model
     def default_get(self, fields_list):
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
         # Definir la cuenta analítica por defecto (ID de la cuenta analítica)
