@@ -19,8 +19,9 @@ class AccountMoveLineInherit(models.AbstractModel):
         
         if self.journal_id and self.account_id:
             analytic_account = self.journal_id.analytic_id
-            
-            
-            _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { analytic_account }')
-            _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { self.account_id }')
+            if analytic_account:
+                code_account = self.account_id.code
+                _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { analytic_account }')
+                _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { code_account }')
+                
         return res
