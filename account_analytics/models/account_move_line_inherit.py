@@ -11,8 +11,8 @@ class AccountMoveLineInherit(models.AbstractModel):
     def default_get(self, fields_list):
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
         
-        if self.journal_id and self.account_id:
-            analytic_account = self.journal_id.analytic_id
+        if self.move_id.journal_id and self.account_id:
+            analytic_account = self.move_id.journal_id.analytic_id
             
             # Establecer la distribución analítica por defecto si existe la cuenta
             if analytic_account:
