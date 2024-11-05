@@ -10,18 +10,16 @@ class AccountMoveLineInherit(models.AbstractModel):
     @api.model
     def default_get(self, fields_list):
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
-        # Definir la cuenta analítica por defecto (ID de la cuenta analítica)
-        default_analytic_account_id = self.env['account.analytic.account'].search([('name', '=', 'Proyecto XYZ')], limit=1)
-        
-        # Establecer la distribución analítica por defecto si existe la cuenta
-        if default_analytic_account_id:
-            res['analytic_distribution'] = {str(default_analytic_account_id.id): 100}  # Distribuir 100% a esa cuenta
         
         if self.journal_id and self.account_id:
             analytic_account = self.journal_id.analytic_id
+            
+            # Establecer la distribución analítica por defecto si existe la cuenta
             if analytic_account:
                 code_account = self.account_id.code
-                _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { analytic_account }')
-                _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { code_account }')
+                
+                # Si el codigo de la cuenta contiene 4 o 5 se establece la cuenta analitica
+                if code_account.startswith(('4', '5')):
+                    res['analytic_distribution'] = {str(analytic_account.id): 100}
                 
         return res
