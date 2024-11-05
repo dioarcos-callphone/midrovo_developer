@@ -20,7 +20,7 @@ class AccountMoveLineInherit(models.AbstractModel):
                 code_account = self.account_id.code
                 
                 # Si el codigo de la cuenta contiene 4 o 5 se establece la cuenta analitica
-                if code_account.startswith(('4', '5')):
-                    res['analytic_distribution'] = {str(analytic_account.id): 100}
+                # if code_account.startswith(('4', '5')):
+                res['analytic_distribution'] = {str(analytic_account.id): 100}
                 
         return res
