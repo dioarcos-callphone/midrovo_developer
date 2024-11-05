@@ -16,5 +16,6 @@ class AccountMoveLineInherit(models.AbstractModel):
         if default_analytic_account_id:
             res['analytic_distribution'] = {str(default_analytic_account_id.id): 100}  # Distribuir 100% a esa cuenta
         
+        _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { self.journal_id }')
         _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { self.account_id }')
         return res
