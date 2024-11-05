@@ -7,7 +7,7 @@
             <field name="model">account.journal</field>
             <field name="inherit_id" ref="account.view_account_journal_form" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='l10n_ec_emission_address_id']" position="after">
+                <xpath expr="//fields[@name='l10n_ec_emission_address_id']" position="after">
                     <field name="analytic_id" />
                 </xpath>
             </field>
