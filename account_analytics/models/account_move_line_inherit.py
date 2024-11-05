@@ -9,7 +9,7 @@ class AccountMoveLineInherit(models.Model):
     
     analytic_distribution = fields.Json(
         default_get = lambda self: {
-            str(self.env['account.analytic.account'].search([('name', '=', self.move_id.journal_id.analytic_id)], limit=1).id): 100
+            str(self.env['account.analytic.account'].search([('name', '=', self.journal_id.analytic_id)], limit=1).id): 100
         },
         inverse="_inverse_analytic_distribution",
     )
