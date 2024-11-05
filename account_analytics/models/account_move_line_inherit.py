@@ -18,6 +18,6 @@ class AccountMoveLineInherit(models.AbstractModel):
             if analytic_account:                
                 _logger.info(f'CUENTA ANALITICA >>> { analytic_account }')
 
-                res['analytic_distribution'] = {str(analytic_account.id): 100}
+                res['analytic_distribution'] = {str(analytic_account.id): 100,}
                 
         return res
