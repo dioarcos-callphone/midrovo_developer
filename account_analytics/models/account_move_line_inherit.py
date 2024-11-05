@@ -9,7 +9,6 @@ class AccountMoveLineInherit(models.AbstractModel):
     
     @api.model
     def default_get(self, fields_list):
-        _logger.info(f'MOSTRANDO LISTADO DE FIELDS >>> { fields_list }')
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
         # Definir la cuenta analítica por defecto (ID de la cuenta analítica)
         default_analytic_account_id = self.env['account.analytic.account'].search([('name', '=', 'Proyecto XYZ')], limit=1)
@@ -19,6 +18,9 @@ class AccountMoveLineInherit(models.AbstractModel):
             res['analytic_distribution'] = {str(default_analytic_account_id.id): 100}  # Distribuir 100% a esa cuenta
         
         if self.journal_id and self.account_id:
-            _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { self.journal_id }')
+            analytic_account = self.journal_id.analytic_id
+            
+            
+            _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { analytic_account }')
             _logger.info(f'MOSTRANDO ACCOUNT MOVE LINE >>> { self.account_id }')
         return res
