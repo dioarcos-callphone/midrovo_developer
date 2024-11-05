@@ -8,7 +8,7 @@ class AccountMoveLineInherit(models.AbstractModel):
     _inherit = 'account.move.line'
     
     def default_get(self, fields_list):
-        _logger.info(f'MOSTRANDO ACCOUNT MOV LINE >>> { self }')
+        _logger.info(f'MOSTRANDO ACCOUNT MOV LINE >>> { self.move_id }')
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
         # Definir la cuenta analítica por defecto (ID de la cuenta analítica)
         default_analytic_account_id = self.env['account.analytic.account'].search([('name', '=', 'Proyecto XYZ')], limit=1)
