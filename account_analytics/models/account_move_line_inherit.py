@@ -12,7 +12,7 @@ class AccountMoveLineInherit(models.AbstractModel):
         res = super(AccountMoveLineInherit, self).default_get(fields_list)
         
         if self.move_id.journal_id and self.account_id:
-            _logger.info(f'CUENTA ANALITICA >>> { self.move_id.journal_id }')
+            _logger.info(f'CUENTA ANALITICA >>> { self.move_id.journal_id.analytic_id }')
             analytic_account = self.move_id.journal_id.analytic_id
             
             # Establecer la distribución analítica por defecto si existe la cuenta
