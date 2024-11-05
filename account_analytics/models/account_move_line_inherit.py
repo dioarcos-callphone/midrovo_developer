@@ -18,6 +18,9 @@ class AccountMoveLineInherit(models.Model):
         if analytic_account:
             _logger.info(f'MOSTRAR CUENTA ANALITICA >>> { analytic_account }')
             analytic_account_id = self.env['account.analytic.account'].search([('id', '=', analytic_account.id)], limit=1)
+            
+            _logger.info(f'BUSQUEDA >>> { analytic_account_id }')
+            
         # Establecer la distribución analítica por defecto si existe la cuenta
         # if default_analytic_account_id:
             res['analytic_distribution'] = {str(analytic_account_id.id): 100}  # Distribuir 100% a esa cuenta
