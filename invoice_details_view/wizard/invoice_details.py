@@ -9,6 +9,10 @@ try:
 except ImportError:
     import xlsxwriter
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class InvoiceDetails(models.TransientModel):
     _name = "invoice.details.wizard"
     _description = "Informe de Detalles de las Facturas"
@@ -162,6 +166,9 @@ class InvoiceDetails(models.TransientModel):
                             data_detail['receivable'] = payment.amount          
                 
                 monto_cuenta_por_cobrar = round((data_detail['cash'] + data_detail['bank']),2)
+                
+                _logger.info(f"MOSTRANDO MONTO >>> { monto_cuenta_por_cobrar }")
+                
                 data_detail['receivable'] = round((data_detail['total'] - monto_cuenta_por_cobrar),2)
                 
                 data_invoice_details.append(data_detail)
