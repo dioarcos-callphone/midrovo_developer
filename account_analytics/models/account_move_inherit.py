@@ -13,20 +13,26 @@ class AccountMoveInherit(models.Model):
         Se puede usar para actualizar las cuentas analíticas en las líneas del asiento.
         """
         if self:
-            # if self.journal_id.analytic_id:
-            #     context = { 'analytic_account': self.journal_id.analytic_id }
-            #     line = self.env['account.move.line'].with_context(context)
+            if self.journal_id.analytic_id:
+                self = self.with_context(analytic_account=self.journal_id.analytic_id.id)
+                # context = { 'analytic_account': self.journal_id.analytic_id }
+                # line = self.env['account.move.line'].with_context(context)
                 
-            #     line.actualizar_cuenta_analitica()
-            _logger.info(f'LINEAS DE FACTURA >>> {self.line_ids}')
-            for line in self.line_ids:
-                if self.journal_id.analytic_id:
-                    if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
-                        line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
+                # line.actualizar_cuenta_analitica()
+            # _logger.info(f'LINEAS DE FACTURA >>> {self.line_ids}')
+            # for line in self.line_ids:
+            #     if self.journal_id.analytic_id:
+            #         if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
+            #             line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
     
 
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
+    
+    analytic_distribution = fields.Json(
+        default=lambda self: {str(self.env.context.get('analytic_account', 'default')): 100},
+        inverse="_inverse_analytic_distribution",
+    )
     
     @api.model
     def actualizar_cuenta_analitica(self):
