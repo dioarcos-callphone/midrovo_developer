@@ -13,15 +13,23 @@ class AccountMoveInherit(models.Model):
         Se puede usar para actualizar las cuentas analíticas en las líneas del asiento.
         """
         if self:
-            for line in self.line_ids:
-                if self.journal_id.analytic_id:
-                    move_lines = self.env['account.move.line'].browse(line.id)
-                    _logger.info(f'MOVE LINES >>> { move_lines }')
-                    # if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
-                    line['analytic_distribution'] = { str(self.journal_id.analytic_id.id): 100 }
+            if self.journal_id.analytic_id:
+                context = { 'analytic_account': self.journal_id.analytic_id }
+                line = self.env['account.move.line'].with_context(context)
+                
+                line.actualizar_cuenta_analitica()
+                
+            # for line in self.line_ids:
+            #     if self.journal_id.analytic_id:
+            #         if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
+            #             line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
     
 
-# class AccountMoveLineInherit(models.Model):
-#     _inherit = "account.move.line"
+class AccountMoveLineInherit(models.Model):
+    _inherit = "account.move.line"
     
-    
+    def actualizar_cuenta_analitica(self):
+        context = self.env.context
+        
+        if 'analytic_account' in context:
+            _logger.info(f"MOSTRANDO CONTEXTO >>> { context['analytic_account'] }")
