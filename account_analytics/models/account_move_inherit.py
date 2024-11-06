@@ -28,6 +28,7 @@ class AccountMoveInherit(models.Model):
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
+    @api.model
     def actualizar_cuenta_analitica(self):
         _logger.info(f"MOSTRANDO SELF >>> { self }")
         if self:
