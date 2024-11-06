@@ -29,4 +29,6 @@ class AccountMoveLineInherit(models.Model):
                 if self.account_id.account_type == 'income' or self.account_id.account_type == 'expense':
                     analytic_id = self.move_id.journal_id.analytic_id
                     vals['analytic_distribution'] = { str(analytic_id.id): 100 }
+                    
+        return super(AccountMoveLineInherit).create(vals)
     
