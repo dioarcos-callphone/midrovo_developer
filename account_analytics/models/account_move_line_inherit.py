@@ -22,8 +22,8 @@ class AccountMoveLineInherit(models.Model):
         
         return super(AccountMoveLineInherit, self).default_get(fields_list)
     
-    @api.onchange('move_id')
+    @api.onchange('move_id.journal_id')
     def onchange_move_id(self):
-        analytic_account = self.journal_id.analytic_id
+        analytic_account = self.move_id.journal_id.analytic_id
         self.move_analytic_distributionid = {str(analytic_account.id): 100}
     
