@@ -28,14 +28,15 @@ class AccountMoveLineInherit(models.Model):
     #     self.move_analytic_distributionid = {str(analytic_account.id): 100}
     
     @api.onchange('journal_id')
-    def onchange_journal_Id(self):
+    def onchange_journal(self):
         """
         Cuando el usuario cambia el diario (journal_id), este método se ejecuta.
         Se puede usar para actualizar las cuentas analíticas en las líneas del asiento.
         
         """
-        for line in self.line_ids:
-            if self.journal_id.analytic_id:
-                line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
-    
+        if self:
+            for line in self.line_ids:
+                if self.journal_id.analytic_id:
+                    line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
+        
     
