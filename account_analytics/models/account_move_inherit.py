@@ -21,13 +21,12 @@ class AccountMoveInherit(models.Model):
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
-    
-    @api.depends('account_id')
-    def analytic_account(self):
+    @api.model
+    def create(self, vals):
         if self:
             if self.account_id:
                 _logger.info(f'ACCOUNT >>> { self.account_id }')
                 if self.account_id.account_type == 'income' or self.account_id.account_type == 'expense':
                     analytic_id = self.move_id.journal_id.analytic_id
-                    self.analytic_distribution = { str(analytic_id.id): 100 }
+                    vals['analytic_distribution'] = { str(analytic_id.id): 100 }
     
