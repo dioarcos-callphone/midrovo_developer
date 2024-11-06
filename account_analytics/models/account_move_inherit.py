@@ -24,23 +24,17 @@ class AccountMoveLineInherit(models.Model):
     )
 
     # Función que calcula el valor del campo computado
+    @api.depends('move_id.journal_id')
     def _compute_analytic_distribution(self):
-        for record in self:
-            _logger.info(f'MOSTRANDO MOVE ID >>> { self.move_id.journal_id }')
-            # Aquí puedes poner tu lógica para calcular el valor
-            analytic = self.env['account.analytic.account'].search([('id', '=', 1)], limit=1)
-            record.analytic_distribution = { str(analytic.id): 100 }
-
-    
-    # def default_get(self, fields_list):
-    #     defaults = super().default_get(fields_list)
-        
-    #     if self.move_id.journal_id:
-    #         journal_id = self.move_id.journal_id
-    #         if journal_id.analytic_id:
-    #             if self.move_id.onchange_journal():
-    #                 analytic_id = journal_id.analytic_id
-    #                 self.analytic_distribution = { str(analytic_id.id): 100 }
-
-    #     return defaults
-    
+        for record in self:            
+            # Buscamos la cuenta analítica relacionada con el journal_id
+            analytic_account = self.env['account.analytic.account'].search([
+                ('journal_id', '=', record.move_id.journal_id.id)
+            ], limit=1)
+            
+            # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
+            if analytic_account:
+                record.analytic_distribution = {str(analytic_account.id): 100}
+            else:
+                # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
+                record.analytic_distribution = {}
