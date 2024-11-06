@@ -28,7 +28,7 @@ class AccountMoveLineInherit(models.Model):
             journal_id = self.move_id.journal_id
             if journal_id.analytic_id:
                 analytic_id = journal_id.analytic_id
-                defaults['analytic_distribution'] = { str(analytic_id.id): 100 }
+                self.analytic_distribution = { str(analytic_id.id): 100 }
 
         return defaults
     
