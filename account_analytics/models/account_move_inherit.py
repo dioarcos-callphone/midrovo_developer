@@ -28,9 +28,7 @@ class AccountMoveLineInherit(models.Model):
     def _compute_analytic_distribution(self):
         for record in self:            
             # Buscamos la cuenta analítica relacionada con el journal_id
-            analytic_account = self.env['account.analytic.account'].search([
-                ('journal_id', '=', record.move_id.journal_id.id)
-            ], limit=1)
+            analytic_account = record.move_id.journal_id.analytic_id
             
             # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
             if analytic_account:
