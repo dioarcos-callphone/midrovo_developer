@@ -32,7 +32,8 @@ class AccountMoveLineInherit(models.Model):
             
             # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
             if analytic_account:
-                record.analytic_distribution = {str(analytic_account.id): 100}
+                if record.account_id.account_type == 'income' or record.account_id.account_type == 'expense':
+                    record.analytic_distribution = {str(analytic_account.id): 100}
             else:
                 # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
                 record.analytic_distribution = {}
