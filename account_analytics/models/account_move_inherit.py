@@ -21,13 +21,12 @@ class AccountMoveInherit(models.Model):
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
-    @api.model
-    def actualizar_cuenta_analitica(self):
-        _logger.info(f"MOSTRANDO SELF >>> { self }")
+    
+    @api.depends('account_id')
+    def analytic_account(self):
         if self:
-            context = self.env.context
-            
-            if 'analytic_account' in context:
-                analytic_account = context['analytic_account']        
-                self.analytic_distribution =  { str(analytic_account.id): 100 }
-                _logger.info(f"MOSTRANDO CONTEXTO >>> { context['analytic_account'] }")
+            if self.account_id:
+                if self.account_id.account_type == 'income' or self.account_id.account_type == 'expense':
+                    analytic_id = self.move_id.journal_id.analytic_id
+                    self.analytic_distribution = { str(analytic_id.id): 100 }
+    
