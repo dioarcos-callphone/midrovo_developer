@@ -16,10 +16,18 @@ class AccountMoveInherit(models.Model):
             for line in self.line_ids:
                 if self.journal_id.analytic_id:
                     if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
-                        _logger.info(f'MOSTRANDO ACCOUNT >>> { line.account_id.account_type }')
                         line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
+                        
+    @api.onchange('line_ids')
+    def onchange_line_ids(self):
+        if self:
+            for line in self.line_ids:
+                if self.journal_id.analytic_id:
+                    if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
+                        line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
+    
 
-class AccountMoveLineInherit(models.Model):
-    _inherit = "account.move.line"
+# class AccountMoveLineInherit(models.Model):
+#     _inherit = "account.move.line"
     
     
