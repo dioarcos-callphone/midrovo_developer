@@ -15,7 +15,7 @@ class AccountMoveInherit(models.Model):
         if self:
             for line in self.line_ids:
                 if self.journal_id.analytic_id:
-                    _logger.info(f'MOSTRANDO ACCOUNT >>> { line.account_id.type }')
+                    _logger.info(f'MOSTRANDO ACCOUNT >>> { line.account_id.account_type }')
                     line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
 
 class AccountMoveLineInherit(models.Model):
