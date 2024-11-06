@@ -22,11 +22,11 @@ class AccountMoveInherit(models.Model):
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
-    @api.model
-    def default_get(self, fields_list):
+    @api.depends('move_id.journal_id')    
+    def _compute_journal_id(self):
         if self.move_id:
             analytic_account = self.move_id.journal_id.analytic_id
             if analytic_account:
                 self.analytic_distribution = { str(analytic_account.id): 100 }  # Distribuir 100% a esa cuenta
         
-        return super(AccountMoveLineInherit, self).default_get(fields_list)
+        # return super(AccountMoveLineInherit, self).default_get(fields_list)
