@@ -29,7 +29,10 @@ class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
     def actualizar_cuenta_analitica(self):
-        context = self.env.context
-        
-        if 'analytic_account' in context:
-            _logger.info(f"MOSTRANDO CONTEXTO >>> { context['analytic_account'] }")
+        if self:
+            context = self.env.context
+            
+            if 'analytic_account' in context:
+                analytic_account = context['analytic_account']        
+                self.analytic_distribution =  { str(analytic_account.id): 100 }
+                # _logger.info(f"MOSTRANDO CONTEXTO >>> { context['analytic_account'] }")
