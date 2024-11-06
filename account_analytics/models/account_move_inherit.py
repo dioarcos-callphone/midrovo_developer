@@ -26,6 +26,7 @@ class AccountMoveLineInherit(models.Model):
     def analytic_account(self):
         if self:
             if self.account_id:
+                _logger.info(f'ACCOUNT >>> { self.account_id }')
                 if self.account_id.account_type == 'income' or self.account_id.account_type == 'expense':
                     analytic_id = self.move_id.journal_id.analytic_id
                     self.analytic_distribution = { str(analytic_id.id): 100 }
