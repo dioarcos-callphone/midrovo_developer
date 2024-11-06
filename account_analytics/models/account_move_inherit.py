@@ -8,19 +8,28 @@ class AccountMoveInherit(models.Model):
     
     @api.onchange('journal_id')
     def onchange_journal(self):
-        return {
-            
-            'value': { 'analytic_distribution': { str(self.journal_id.analytic_id.id): 100 } }
-            
-        }
-        # if self:
-        #     for line in self.line_ids:
-        #         if self.journal_id.analytic_id:
-        #             if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
-        #                 line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
+        if self:
+            for line in self.line_ids:
+                if self.journal_id.analytic_id:
+                    if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
+                        line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
     
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
+    
+    analytic_distribution = fields.Json(
+        compute='_compute_analytic_distribution',  # Función que calculará el valor
+        inverse='_inverse_analytic_distribution',  # Función para manejar el cambio de valor
+        store=True,  # Indicamos que el campo se guarda en la base de datos
+    )
+
+    # Función que calcula el valor del campo computado
+    def _compute_analytic_distribution(self):
+        for record in self:
+            # Aquí puedes poner tu lógica para calcular el valor
+            analytic = self.env['account.analytic.account'].search([('id', '=', 1)], limit=1)
+            record.analytic_distribution = { str(analytic.id): 100 }
+
     
     # def default_get(self, fields_list):
     #     defaults = super().default_get(fields_list)
