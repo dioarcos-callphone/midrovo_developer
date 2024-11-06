@@ -15,13 +15,13 @@ class AccountMoveInherit(models.Model):
         if self:
             move_lines = self.env['account.move.line'].browse(self.line_ids)
             _logger.info(f'MOVE LINES >>> { move_lines }')
-            for line in self.line_ids:
+            for line in move_lines:
                 if self.journal_id.analytic_id:
                     if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
                         line.analytic_distribution = { str(self.journal_id.analytic_id.id): 100 }
     
 
-class AccountMoveLineInherit(models.Model):
-    _inherit = "account.move.line"
+# class AccountMoveLineInherit(models.Model):
+#     _inherit = "account.move.line"
     
     
