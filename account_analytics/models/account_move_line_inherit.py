@@ -20,9 +20,8 @@ class AccountMoveLineInherit(models.Model):
         # Definir la cuenta analítica por defecto (ID de la cuenta analítica)
         # default_analytic_account_id = self.env['account.analytic.account'].search([('name', '=', 'Proyecto XYZ')], limit=1)
         
-        analytic_account = self.journal_id.analytic_id
-        
-        if analytic_account:
+        if self.journal_id:
+            analytic_account = self.journal_id.analytic_id
             _logger.info(f'MOSTRAR CUENTA ANALITICA >>> { analytic_account }')
             analytic_account_id = self.env['account.analytic.account'].search([('name', '=', analytic_account.name)], limit=1)
             
