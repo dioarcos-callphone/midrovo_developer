@@ -8,7 +8,11 @@ class AccountMoveInherit(models.Model):
     
     @api.onchange('journal_id')
     def onchange_journal(self):
-        return True
+        return {
+            
+            'value': { 'analytic_distribution': { str(self.journal_id.analytic_id.id): 100 } }
+            
+        }
         # if self:
         #     for line in self.line_ids:
         #         if self.journal_id.analytic_id:
