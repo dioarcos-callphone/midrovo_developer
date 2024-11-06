@@ -22,15 +22,15 @@ class AccountMoveInherit(models.Model):
 class AccountMoveLineInherit(models.Model):
     _inherit = "account.move.line"
     
-    def default_get(self, fields_list):
-        defaults = super().default_get(fields_list)
+    # def default_get(self, fields_list):
+    #     defaults = super().default_get(fields_list)
         
-        if self.move_id.journal_id:
-            journal_id = self.move_id.journal_id
-            if journal_id.analytic_id:
-                if self.move_id.onchange_journal():
-                    analytic_id = journal_id.analytic_id
-                    self.analytic_distribution = { str(analytic_id.id): 100 }
+    #     if self.move_id.journal_id:
+    #         journal_id = self.move_id.journal_id
+    #         if journal_id.analytic_id:
+    #             if self.move_id.onchange_journal():
+    #                 analytic_id = journal_id.analytic_id
+    #                 self.analytic_distribution = { str(analytic_id.id): 100 }
 
-        return defaults
+    #     return defaults
     
