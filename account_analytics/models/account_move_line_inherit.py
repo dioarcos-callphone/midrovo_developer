@@ -28,5 +28,5 @@ class AccountMoveLineInherit(models.Model):
         # Establecer la distribución analítica por defecto si existe la cuenta
         # if default_analytic_account_id:
             self.analytic_distribution = {str(analytic_account_id.id): 100}  # Distribuir 100% a esa cuenta
-            _logger.info(f"BUSQUEDA >>> { res['analytic_distribution'] }")
+            # _logger.info(f"BUSQUEDA >>> { res['analytic_distribution'] }")
         return res
