@@ -26,7 +26,7 @@ class AccountMoveLineInherit(models.Model):
     # Función que calcula el valor del campo computado
     def _compute_analytic_distribution(self):
         for record in self:
-            _logger.info(f'MOSTRANDO MOVE ID >>> { self.move_id }')
+            _logger.info(f'MOSTRANDO MOVE ID >>> { self.move_id.journal_id }')
             # Aquí puedes poner tu lógica para calcular el valor
             analytic = self.env['account.analytic.account'].search([('id', '=', 1)], limit=1)
             record.analytic_distribution = { str(analytic.id): 100 }
