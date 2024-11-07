@@ -26,6 +26,8 @@ class AccountMoveLineInherit(models.Model):
     # Función que calcula el valor del campo computado
     @api.depends('move_id.journal_id')
     def _compute_analytic_distribution(self):
+        if self:
+            _logger.info(f'ENTRA { self }')
         for record in self:            
             # Buscamos la cuenta analítica relacionada con el journal_id
             analytic_account = record.move_id.journal_id.analytic_id
