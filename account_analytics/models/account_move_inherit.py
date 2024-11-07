@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValuationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -38,3 +39,13 @@ class AccountMoveLineInherit(models.Model):
             else:
                 # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
                 record.analytic_distribution = {}
+                
+    
+    @api.constrains('product_id')
+    def _check_product_id(self):
+        for record in self:
+            if not record.product_id:
+                raise ValuationError('No puede completar la acción. Ingrese un producto')
+                
+            
+    
