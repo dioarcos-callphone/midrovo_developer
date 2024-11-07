@@ -40,6 +40,19 @@ class AccountMoveLineInherit(models.Model):
                 # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
                 record.analytic_distribution = {}
                 
+    @api.onchange('move_id.journal_id')
+    def onchange_analytic_distribution(self):
+        for record in self:            
+            # Buscamos la cuenta analítica relacionada con el journal_id
+            analytic_account = record.move_id.journal_id.analytic_id
+
+            # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
+            if analytic_account:
+                
+                if record.account_id.account_type == 'income' or record.account_id.account_type == 'expense':
+                    _logger.info(f'CAMBIA EN EL ONCHANGE')
+                    record.analytic_distribution = {str(analytic_account.id): 100}
+                
     
     @api.constrains('product_id')
     def _check_product_id(self):
