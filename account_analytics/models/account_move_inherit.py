@@ -38,9 +38,9 @@ class AccountMoveLineInherit(models.Model):
                 # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
                 record.analytic_distribution = {}
                 
-    @api.constrains('product_id')
-    def _check_product_id(self):
-        for record in self:
-            if not record.product_id:
-                raise ValidationError('La factura contiene una o más líneas sin un producto asignado.')
+    # @api.constrains('product_id')
+    # def _check_product_id(self):
+    #     for record in self:
+    #         if not record.product_id:
+    #             raise ValidationError('La factura contiene una o más líneas sin un producto asignado.')
 
