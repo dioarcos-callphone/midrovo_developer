@@ -27,9 +27,10 @@ class AccountMoveLineInherit(models.Model):
     @api.depends('move_id.journal_id')
     def _compute_analytic_distribution(self):
         if self:
-            _logger.info(f'MOSTRANDO SELF MOVE ID >>> { self.move_id.journal_id }')        
-                # Buscamos la cuenta analítica relacionada con el journal_id
-            analytic_account = self.move_id.journal_id.analytic_id
+            journal_id = self.move_id.journal_id
+            _logger.info(f'MOSTRANDO JOURNAL >>> { journal_id }')        
+            
+            analytic_account = journal_id.analytic_id
             _logger.info(f'ENTRA EN EL FOR >>> { analytic_account }')
             # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
             if analytic_account:
