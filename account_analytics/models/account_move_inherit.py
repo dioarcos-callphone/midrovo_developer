@@ -29,10 +29,12 @@ class AccountMoveLineInherit(models.Model):
         for record in self:            
             # Buscamos la cuenta analítica relacionada con el journal_id
             analytic_account = record.move_id.journal_id.analytic_id
-            
+            _logger.info('ENTRA EN EL FOR')
             # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
             if analytic_account:
+                _logger.info('ENTRA AL PRIMER IF')
                 if record.account_id.account_type == 'income' or record.account_id.account_type == 'expense':
+                    _logger.info('ENTRA AL SEGUNDO IF')
                     record.analytic_distribution = {str(analytic_account.id): 100}
             else:
                 # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
