@@ -13,6 +13,7 @@
     'depends': [ 'account', ],
     'data': [
         'views/journal_form_inherit.xml',
+        'views/account_form_inherit.xml',
     ],
     
     'license': 'LGPL-3',
