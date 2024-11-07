@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='analytic_distribution']" position="replace">
                     <field  name="analytic_distribution" widget="analytic_distribution"
-                            context="{'default_analytic_distribution': { str(journal_id.analytic_id.id): 100 }, }"
+                            context="{'default_analytic_distribution': { journal_id.analytic_id and {journal_id.analytic_id.id: 100} or {} }, }"
                             groups="analytic.group_analytic_accounting"
                             optional="show"
                             options="{'product_field': 'product_id', 'account_field': 'account_id'}"
