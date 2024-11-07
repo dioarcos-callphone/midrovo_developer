@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValuationError
+from odoo.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ class AccountMoveLineInherit(models.Model):
     def _check_product_id(self):
         for record in self:
             if not record.product_id:
-                raise ValuationError('No puede completar la acción. Ingrese un producto')
+                raise ValidationError('No puede completar la acción. Ingrese un producto')
                 
             
     
