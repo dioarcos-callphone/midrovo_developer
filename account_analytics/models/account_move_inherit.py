@@ -27,17 +27,16 @@ class AccountMoveLineInherit(models.Model):
     @api.depends('move_id.journal_id')
     def _compute_analytic_distribution(self):
         if self:
-            _logger.info(f'MOSTRANDO SELF MOVE ID >>> { self.move_id.journal_id }')
-            for record in self:            
+            _logger.info(f'MOSTRANDO SELF MOVE ID >>> { self.move_id.journal_id }')        
                 # Buscamos la cuenta analítica relacionada con el journal_id
-                analytic_account = record.move_id.journal_id.analytic_id
-                _logger.info(f'ENTRA EN EL FOR >>> { analytic_account }')
-                # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
-                if analytic_account:
-                    _logger.info('ENTRA AL PRIMER IF')
-                    if record.account_id.account_type == 'income' or record.account_id.account_type == 'expense':
-                        _logger.info('ENTRA AL SEGUNDO IF')
-                        record.analytic_distribution = {str(analytic_account.id): 100}
-                else:
-                    # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
-                    record.analytic_distribution = {}
+            analytic_account = self.move_id.journal_id.analytic_id
+            _logger.info(f'ENTRA EN EL FOR >>> { analytic_account }')
+            # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
+            if analytic_account:
+                _logger.info('ENTRA AL PRIMER IF')
+                if self.account_id.account_type == 'income' or self.account_id.account_type == 'expense':
+                    _logger.info('ENTRA AL SEGUNDO IF')
+                    self.analytic_distribution = {str(analytic_account.id): 100}
+            else:
+                # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
+                self.analytic_distribution = {}
