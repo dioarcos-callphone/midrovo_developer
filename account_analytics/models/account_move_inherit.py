@@ -41,11 +41,17 @@ class AccountMoveLineInherit(models.Model):
                 record.analytic_distribution = {}
                 
     
-    @api.constrains('product_id')
+    @api.constrains('product_id', 'quantity', 'price_subtotal')
     def _check_product_id(self):
         for record in self:
             if not record.product_id:
                 raise ValidationError('No puede completar la acción. Ingrese un producto')
+            
+            if record.quantity <= 0:
+                raise ValidationError('la cantidad del producto no debe ser menor a 1')
+            
+            if record.price_subtotal <= 0:
+                raise ValidationError('El susbtotal del producto no debe ser menor a 0')
                 
             
     
