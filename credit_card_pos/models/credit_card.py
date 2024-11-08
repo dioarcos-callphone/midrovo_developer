@@ -8,7 +8,7 @@ class CreditCard(models.Model):
     _description = 'CreditCard'
 
     name = fields.Char(
-        string='Name',
+        string='Nombre',
         required=True,
     )
     
