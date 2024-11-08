@@ -8,12 +8,21 @@
     
     "category": "POS",
     "version": "16.0.1.0.0",
-    'author': 'Mauricio Idrovo',
-    'company': 'Callphone S.A.',
-    'website': "https://www.callphoneecuador.com",
+    "author": "Mauricio Idrovo",
+    "company": "Callphone S.A.",
+    "website": "https://www.callphoneecuador.com",
     
-    'depends': [],
-    'data': [],
+    "depends": ["point_of_sale"],
+    "data": [
+    
+    ],
+    
+    "assets": {
+        "web.assets_backend": [
+            "credit_card_pos/static/src/js/Screens/PaymentScreen/PaymentScreenExtends.js",
+            # "credit_card_pos/static/src/xml/Popups/CreditCardListPopup.xml",
+        ],
+    },
     
     'license': 'LGPL-3',
     'installable': True,
