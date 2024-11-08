@@ -20,7 +20,5 @@ class CreditCard(models.Model):
     banco = fields.Many2one(
         comodel_name='res.bank',
         string="Banco",
-    )
-
-    
+    )    
 

@@ -1,0 +1,9 @@
+from odoo import api, fields, models
+
+class PosPaymentMethodInherit(models.Model):
+    _inherit = 'pos.payment.method'
+
+    apply_card = fields.Boleean(
+        string='Aplica Tarjetas de Crédito ?',
+        default='False'
+    )
