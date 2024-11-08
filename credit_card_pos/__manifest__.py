@@ -14,7 +14,7 @@
     
     "depends": ["point_of_sale"],
     "data": [
-    
+        "views/credit_card_view.xml",
     ],
     
     "assets": {

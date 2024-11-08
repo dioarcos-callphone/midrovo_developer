@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="credit_card_form" model="ir.ui.view">
+            <field name="name">credit.card.form</field>
+            <field name="model">credit.card</field>
+            <field name="arch" type="xml">
+                <form string="Tarjeta de Crédito">
+                    <sheet>
+                        <field name="name" />
+                        <field name="tipo" />
+                        <field name="banco" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="credit_card_tree" model="ir.ui.view">
+            <field name="name">credit.card.tree</field>
+            <field name="model">credit.card</field>
+            <field name="arch" type="xml">
+                <tree string="Tarjetas de Crédito">
+                    <field name="name" />
+                    <field name="tipo" />
+                    <field name="banco" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="credit_card_action" model="ir.actions.act_window">
+            <field name="name">credit.card.action</field>
+            <field name="res_model">credit.card</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Añada una tarjeta de crédito.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_pos_credit_card" parent="point_of_sale.menu_point_config_product" action="credit_card_action" sequence="4" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+    
+    </data>
+    
+</odoo>
