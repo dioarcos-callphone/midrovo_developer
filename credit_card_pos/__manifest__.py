@@ -19,7 +19,7 @@
     
     "assets": {
         "web.assets_backend": [
-            "credit_card_pos/static/src/js/Screens/PaymentScreen/PaymentScreenExtends.js",
+            "credit_card_pos/static/src/js/Screens/PaymentScreen/CustomPaymentScreen.js",
             # "credit_card_pos/static/src/xml/Popups/CreditCardListPopup.xml",
         ],
     },
