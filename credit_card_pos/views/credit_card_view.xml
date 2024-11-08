@@ -8,9 +8,11 @@
             <field name="arch" type="xml">
                 <form string="Tarjeta de Crédito">
                     <sheet>
-                        <field name="name" />
-                        <field name="tipo" />
-                        <field name="banco" />
+                        <group>
+                            <field name="name" />
+                            <field name="tipo" />
+                            <field name="banco" />
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -29,7 +31,7 @@
         </record>
 
         <record id="credit_card_action" model="ir.actions.act_window">
-            <field name="name">credit.card.action</field>
+            <field name="name">Tarjetas de Crédito</field>
             <field name="res_model">credit.card</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
