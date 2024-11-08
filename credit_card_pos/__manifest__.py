@@ -16,6 +16,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/credit_card_view.xml",
+        "views/pos_payment_method_form.xml",
     ],
     
     "assets": {
