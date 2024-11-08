@@ -10,8 +10,10 @@ const CustomPaymentScreen = (PaymentScreen) =>
         setup() {
             super.setup();  // Llamar al método padre
             // Añade o modifica comportamiento aquí
-            console.log("Bienvenido a la pantalla de Pagos");
+            this.bienvenida()
         }
+        
+        bienvenida = () => console.log("Bienvenido a la pantalla de Pagos");
 
     };
 
