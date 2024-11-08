@@ -5,5 +5,5 @@ class PosPaymentMethodInherit(models.Model):
 
     apply_card = fields.Boolean(
         string='Aplica Tarjetas de Crédito ?',
-        default='false'
+        default=False
     )
