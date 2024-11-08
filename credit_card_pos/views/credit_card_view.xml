@@ -40,7 +40,13 @@
             </field>
         </record>
 
-        <menuitem id="menu_pos_credit_card" parent="point_of_sale.menu_point_config_product" action="credit_card_action" sequence="4" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+        <menuitem
+                id="menu_pos_credit_card"
+                name="Tarjetas de Crédito"
+                parent="point_of_sale.menu_point_config_product"
+                action="credit_card_action"
+                sequence="4"
+                groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
     
     </data>
     
