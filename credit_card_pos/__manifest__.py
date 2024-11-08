@@ -14,7 +14,7 @@
     
     "depends": ["point_of_sale"],
     "data": [
-        "security/ir.mode.access.csv",
+        "security/ir.model.access.csv",
         "views/credit_card_view.xml",
     ],
     
