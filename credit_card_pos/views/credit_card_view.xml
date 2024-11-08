@@ -9,7 +9,6 @@
                 <form string="Tarjeta de Crédito">
                     <sheet>
                         <group>
-                            <field name="metodo_pago" />
                             <field name="name" />
                             <field name="tipo" />
                             <field name="banco" />

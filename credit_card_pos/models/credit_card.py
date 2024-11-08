@@ -6,11 +6,6 @@ _logger = logging.getLogger(__name__)
 class CreditCard(models.Model):
     _name = 'credit.card'
     _description = 'CreditCard'
-
-    metodo_pago = fields.Many2one(
-        string="Método de Pago",
-        comodel_name='pos.payment.method',
-    )
     
     name = fields.Char(
         string='Nombre',
