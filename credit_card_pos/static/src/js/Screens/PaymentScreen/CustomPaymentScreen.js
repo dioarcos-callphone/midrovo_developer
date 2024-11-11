@@ -38,7 +38,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 }
 
                 // Retornamos el método original de PaymentScreen utilizando super
-                return super.addNewPaymentLine({ detail: paymentMethod });
+                // return super.addNewPaymentLine({ detail: paymentMethod });
             }
 
         };
