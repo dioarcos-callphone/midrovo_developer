@@ -58,6 +58,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 return super.addNewPaymentLine({ detail: paymentMethod });
             }
 
+            render() {
+                // Renderizamos el componente PaymentScreen original
+                return super.render() + `<div>${new CreditCardModal({
+                    isVisible: this.state.isModalVisible,
+                    closeModal: this.closeModal.bind(this)
+                })}</div>`;
+            }
+
         };
 
     // Registramos la nueva clase heredada en los registros de Odoo
