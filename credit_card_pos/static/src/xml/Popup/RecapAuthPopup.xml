@@ -10,10 +10,10 @@
                 <p t-esc="props.body" />
 
                 <!-- Campo para RECAP -->
-                <input type="text" t-model="state.recap" t-ref="inputRecap" t-att-placeholder="props.recapPlaceholder"/>
+                <input class="input-recap" type="text" t-model="state.recap" t-ref="inputRecap" t-att-placeholder="props.recapPlaceholder"/>
 
                 <!-- Campo para Autorización -->
-                <input type="text" t-model="state.autorizacion" t-ref="inputAutorizacion" t-att-placeholder="props.autorizacionPlaceholder"/>
+                <input class="input-autorizacion" type="text" t-model="state.autorizacion" t-ref="inputAutorizacion" t-att-placeholder="props.autorizacionPlaceholder"/>
             </main>
             <div class="footer footer-flex">
                 <div class="button confirm highlight" t-on-click="confirm">
