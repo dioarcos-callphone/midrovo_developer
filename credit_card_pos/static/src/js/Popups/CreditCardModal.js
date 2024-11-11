@@ -7,8 +7,13 @@ odoo.define("credit_card_pos.CreditCardModal", (require) => {
         selectCard(card) {
             this.trigger('close-popup', { card });
         }
+
+        // Método para cerrar el modal
+        closeModal() {
+            this.state.showModal = false;
+        }
     }
     
     CreditCardModal.template = "CreditCardModal";
     Registries.Component.add(CreditCardModal);
-})
+});

@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <t t-name="CreditCardModal" owl="1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><t t-esc="props.title"/></h5>
-                </div>
-                <div class="modal-body">
-                    <ul>
-                        <t t-foreach="props.creditCards" t-as="card" t-key="card.id">
-                            <li>
-                                <button t-att-data-card="card" t-on-click="() => selectCard(card)">
-                                    <t t-esc="card.name" />
-                                </button>
-                            </li>
-                        </t>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" t-on-click="() => trigger('close-popup')">Cancelar</button>
+        <t t-if="state.showModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><t t-esc="props.title"/></h5>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <t t-foreach="props.creditCards" t-as="card" t-key="card.id">
+                                <li>
+                                    <button t-att-data-card="card" t-on-click="() => selectCard(card)">
+                                        <t t-esc="card.name" />
+                                    </button>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" t-on-click="() => trigger('close-popup')">Cancelar</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </t>
     </t>
 </templates>
