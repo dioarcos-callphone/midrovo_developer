@@ -24,7 +24,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 if(result_rpc) {
                     // Si el resultado del RPC es true, mostramos el modal
-                    // this.state.showModal = true;
+                    const { confirmed, payload: selectedFiscalPosition } = await this.showPopup(
+                        "SelectionPopup",
+                        {
+                            title: this.env._t("Seleccione la Tarjeta de Credito"),
+                            list: ['Visa', 'MasterCard', 'Dinners Club'],
+                        }
+                    );
                 }
 
                 // Retornamos el método original de PaymentScreen utilizando super
