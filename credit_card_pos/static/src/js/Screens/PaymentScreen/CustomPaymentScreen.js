@@ -14,32 +14,31 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name
 
-                const result_rpc = await this.rpc({
+                const isCard = await this.rpc({
                     model: "pos.payment.method",
                     method: "is_card",
                     args: [ method_name ]
                 })
 
-                if(result_rpc) {
-                    const result_rpc_cards = await this.rpc({
+                if(isCard) {
+                    const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
                     })
 
-                    if(result_rpc_cards) {
-                        console.log(result_rpc_cards)
-                    }
+                    // Formatear las tarjetas para el popup
+                    const cardOptions = getCards.map(card => ({
+                        id: card.id,
+                        label: card.name,
+                        item: card.name,
+                    }));
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",  // Usamos el popup correcto para selección de lista
                         {
                             title: this.env._t("Seleccione la Tarjeta de Crédito"),
-                            list: [
-                                { id: 1, label: "Visa", item: "Visa" },
-                                { id: 2, label: "MasterCard", item: "MasterCard" },
-                                { id: 3, label: "Diners Club", item: "Diners Club" },
-                            ],
+                            list: cardOptions,
                         }
                     );
 

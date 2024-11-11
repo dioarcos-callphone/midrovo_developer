@@ -24,7 +24,9 @@ class CreditCard(models.Model):
     
     @api.model
     def get_cards(self):
-        cards = self.search([], order='name asc')
+        model_card = self.search([], order='name asc')
         
+        cards = [ card.name for card in model_card ]
+
         return cards
 
