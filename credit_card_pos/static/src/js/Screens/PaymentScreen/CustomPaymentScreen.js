@@ -33,6 +33,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
+                    console.log(cardOptions)
+
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",  // Usamos el popup correcto para selección de lista
