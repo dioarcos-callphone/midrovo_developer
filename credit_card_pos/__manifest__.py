@@ -22,8 +22,8 @@
     "assets": {
         "point_of_sale.assets": [
             "credit_card_pos/static/src/js/Screens/PaymentScreen/CustomPaymentScreen.js",
-            "credit_card_pos/static/src/js/Popups/CreditCardModal.js",
-            "credit_card_pos/static/src/xml/Popups/CreditCardModal.xml",
+            "credit_card_pos/static/src/js/Popups/SelectCreditCardPopup.js",
+            "credit_card_pos/static/src/xml/Popups/SelectCreditCardPopup.xml",
         ],
     },
     
