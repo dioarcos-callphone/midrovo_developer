@@ -21,4 +21,10 @@ class CreditCard(models.Model):
         comodel_name='res.bank',
         string="Banco",
     )    
+    
+    @api.model
+    def get_cards(self):
+        cards = self.search([], order='name asc')
+        
+        return cards
 
