@@ -16,7 +16,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const line = this.paymentLines.find((line) => line.cid === cid);
                 // Puedes agregar lógica adicional aquí si lo necesitas
                 this.currentOrder.select_paymentline(line);
-                NumberBuffer.reset();
+                this.NumberBuffer.reset();
                 this.render(true);
             }
 
