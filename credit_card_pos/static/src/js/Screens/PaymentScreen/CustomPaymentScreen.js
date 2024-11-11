@@ -33,8 +33,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    console.log(cardOptions)
-
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",  // Usamos el popup correcto para selección de lista
@@ -45,8 +43,22 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
-                        console.log("ENTRA EN CONFIRMED")
-                        console.log(selectedCreditCard)
+                        const { confirmed, payload } = await this.showPopup(
+                            "RecapAuthPopup",
+                            {
+                                title: this.env._t("Ingrese los datos"), // Título del popup
+                                recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
+                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
+                                startingRecapValue: "",
+                                startingAutorizacionValue: "",
+                            }
+                        );
+                        
+                        if (confirmed) {
+                            const { recap, autorizacion } = payload;
+                            console.log("RECAP:", recap);
+                            console.log("Autorización:", autorizacion);
+                        }
                     }
                 }
 

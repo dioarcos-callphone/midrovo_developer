@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="RecapAuthPopup" owl="1">  <!-- Cambiar el nombre aquí -->
+        <div class="popup popup-textinput">
+            <header class="title">
+                <t t-esc="props.title" />
+            </header>
+            <main>
+                <p t-esc="props.body" />
+
+                <!-- Campo para RECAP -->
+                <label for="recap">RECAP</label>
+                <input type="text" t-model="state.recap" t-ref="inputRecap" t-att-placeholder="props.recapPlaceholder"/>
+
+                <!-- Campo para Autorización -->
+                <label for="autorizacion">Autorización</label>
+                <input type="text" t-model="state.autorizacion" t-ref="inputAutorizacion" t-att-placeholder="props.autorizacionPlaceholder"/>
+            </main>
+            <div class="footer footer-flex">
+                <div class="button confirm highlight" t-on-click="confirm">
+                    <t t-esc="props.confirmText" />
+                </div>
+                <div class="button cancel" t-on-click="cancel">
+                    <t t-esc="props.cancelText" />
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
