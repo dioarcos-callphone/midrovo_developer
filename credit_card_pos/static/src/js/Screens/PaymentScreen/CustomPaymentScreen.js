@@ -33,6 +33,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
+                        console.log("ENTRA EN CONFIRMED")
                         console.log(selectedCreditCard)
                     }
                 }
