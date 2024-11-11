@@ -7,3 +7,12 @@ class PosPaymentMethodInherit(models.Model):
         string='Tarjetas de Crédito ?',
         default=False
     )
+    
+    def is_card(self, name_method):
+        pos_payment_method = self.search([('name', '=', name_method)], limit=1)
+        
+        if pos_payment_method:
+            if pos_payment_method.apply_card:
+                return True
+        
+        return False       
