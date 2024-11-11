@@ -1,7 +1,7 @@
 odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const { useState } = require("owl");
+    // const { useState } = require("owl");
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -9,7 +9,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
-                this.state = useState({ showModal: false }); // Estado para controlar el modal
+                // this.state = useState({ showModal: false }); // Estado para controlar el modal
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -24,7 +24,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 if(result_rpc) {
                     // Si el resultado del RPC es true, mostramos el modal
-                    this.state.showModal = true;
+                    // this.state.showModal = true;
                 }
 
                 // Retornamos el método original de PaymentScreen utilizando super
