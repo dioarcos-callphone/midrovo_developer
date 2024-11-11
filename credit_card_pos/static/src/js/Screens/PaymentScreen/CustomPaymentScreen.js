@@ -13,6 +13,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name
+                console.log(`MOSTRANDO METHO NAME >>> ${ method_name }`)
                 const result_rpc = await this.rpc({
                     model: "pos.payment.method",
                     method: "is_card",
