@@ -1,19 +1,41 @@
-odoo.define("credit_card_pos.CreditCardModal", (require) => {
-    const PosComponent = require("point_of_sale.PosComponent");
-    const Registries = require("point_of_sale.Registries");
-    
-    class CreditCardModal extends PosComponent {
-        // Selecciona una tarjeta de crédito y cierra el modal
-        selectCard(card) {
-            this.trigger('close-popup', { card });
+odoo.define('credit_card_pos.SelectCreditCardPopup', function (require) {
+    const { Component } = require('owl');
+    const { useState } = require('owl.hooks');
+    const { _t } = require('web.core');
+    const Registries = require('point_of_sale.Registries');
+
+    class SelectCreditCardPopup extends Component {
+        constructor() {
+            super(...arguments);
+            this.state = useState({
+                selectedCard: null,
+            });
         }
 
-        // Método para cerrar el modal
-        closeModal() {
-            this.state.showModal = false;
+        // Método para manejar la selección de la tarjeta
+        selectCard(card) {
+            this.state.selectedCard = card;
+        }
+
+        // Cerrar el popup
+        close() {
+            this.trigger('close');
+        }
+
+        // Confirmar la selección
+        confirm() {
+            this.trigger('confirm', this.state.selectedCard);
+        }
+
+        get cardList() {
+            return this.props.list || [];
         }
     }
-    
-    CreditCardModal.template = "CreditCardModal";
-    Registries.Component.add(CreditCardModal);
+
+    SelectCreditCardPopup.template = 'credit_card_pos.SelectCreditCardPopup';
+
+    // Registrar el componente en el Registries
+    Registries.Component.add(SelectCreditCardPopup);
+
+    return SelectCreditCardPopup;
 });
