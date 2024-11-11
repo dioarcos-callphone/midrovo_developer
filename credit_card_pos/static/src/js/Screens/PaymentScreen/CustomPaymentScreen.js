@@ -46,7 +46,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
                             {
-                                title: this.env._t("Ingrese los datos"), // Título del popup
+                                title: this.env._t(selectedCreditCard), // Título del popup
                                 recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
                                 autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
                                 startingRecapValue: "",
