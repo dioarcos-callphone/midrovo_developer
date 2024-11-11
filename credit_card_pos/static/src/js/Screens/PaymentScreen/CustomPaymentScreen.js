@@ -73,6 +73,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             }
 
+            async _finalizeValidation() {
+                // Aquí agregamos la funcionalidad personalizada después de llamar al método original
+                console.log("El proceso de validación se ha completado y se ha personalizado.");
+                console.log(this.currentOrder)
+
+                // Llamamos al método original con `super()`
+                await super._finalizeValidation();
+
+            }
+
         };
 
     // Registramos la nueva clase heredada en los registros de Odoo
