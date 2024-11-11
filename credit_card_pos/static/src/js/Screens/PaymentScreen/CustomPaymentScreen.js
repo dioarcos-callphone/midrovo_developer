@@ -12,17 +12,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribimos el método addNewPaymentLine
             addNewPaymentLine({ detail: paymentMethod }) {
-                // Llamamos al método original de PaymentScreen utilizando super
-                const result = super.addNewPaymentLine({ detail: paymentMethod });
-                
-                // Aquí puedes agregar lógica adicional, si es necesario
-                if (result) {
-                    console.log("Pago agregado exitosamente");
-                    return true;
-                } else {
-                    console.log("Error al agregar el pago");
-                    return false;
-                }
+                console.log("MOSTRANDO PAYMENT METHOD")
+                console.log(paymentMethod)
+
+                // Retornamos el método original de PaymentScreen utilizando super
+                return super.addNewPaymentLine({ detail: paymentMethod });
             }
 
         };
