@@ -8,6 +8,7 @@ class PosPaymentMethodInherit(models.Model):
         default=False
     )
     
+    @api.model
     def is_card(self, name_method):
         pos_payment_method = self.search([('name', '=', name_method)], limit=1)
         
