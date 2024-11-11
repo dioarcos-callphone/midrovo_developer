@@ -58,12 +58,19 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             const { recap, autorizacion } = payload;
                             console.log("RECAP:", recap);
                             console.log("Autorización:", autorizacion);
+
+                            return super.addNewPaymentLine({ detail: paymentMethod });
                         }
+
+
                     }
                 }
 
-                // Retornamos el método original de PaymentScreen utilizando super
-                // return super.addNewPaymentLine({ detail: paymentMethod });
+                else {
+                    // Retornamos el método original de PaymentScreen utilizando super
+                    return super.addNewPaymentLine({ detail: paymentMethod });
+                }
+
             }
 
         };
