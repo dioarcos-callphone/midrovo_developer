@@ -1,7 +1,6 @@
 odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    // const { useState } = require("owl");
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -9,7 +8,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
-                // this.state = useState({ showModal: false }); // Estado para controlar el modal
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -25,10 +23,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 if(result_rpc) {
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
-                        "SelectCreditCardPopup",
+                        "SelectionPopup",  // Usamos el popup correcto para selección de lista
                         {
-                            title: this.env._t("Seleccione la Tarjeta de Credito"),
-                            list: ['Visa', 'MasterCard', 'Dinners Club'],
+                            title: this.env._t("Seleccione la Tarjeta de Crédito"),
+                            list: [
+                                { id: 1, label: "Visa", item: "Visa" },
+                                { id: 2, label: "MasterCard", item: "MasterCard" },
+                                { id: 3, label: "Diners Club", item: "Diners Club" },
+                            ],
                         }
                     );
 

@@ -1,5 +1,4 @@
-odoo.define('credit_card_pos.SelectCreditCardPopup', function (require) {
-    const { Component } = require('owl');
+odoo.define('credit_card_pos.SelectCreditCardPopup', (require) => {
     const { _lt } = require('web.core');
     const { AbstractAwaitablePopup } = require('point_of_sale.AbstractAwaitablePopup');
     const Registries = require('point_of_sale.Registries');
