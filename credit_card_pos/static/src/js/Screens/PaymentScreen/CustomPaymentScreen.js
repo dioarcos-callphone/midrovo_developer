@@ -56,8 +56,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         
                         if (confirmed) {
                             const { recap, autorizacion } = payload;
+                            console.log("Tarjeta:", selectedCreditCard)
                             console.log("RECAP:", recap);
                             console.log("Autorización:", autorizacion);
+
+                            credit_card = {
+                                card: selectedCreditCard,
+                                recap: recap,
+                                auth: autorizacion,
+                            }
+
+                            paymentMethod.credit_card = credit_card
 
                             return super.addNewPaymentLine({ detail: paymentMethod });
                         }
@@ -70,16 +79,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     // Retornamos el método original de PaymentScreen utilizando super
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
-
-            }
-
-            async _finalizeValidation() {
-                // Aquí agregamos la funcionalidad personalizada después de llamar al método original
-                console.log("El proceso de validación se ha completado y se ha personalizado.");
-                console.log(this.currentOrder)
-
-                // Llamamos al método original con `super()`
-                await super._finalizeValidation();
 
             }
 
