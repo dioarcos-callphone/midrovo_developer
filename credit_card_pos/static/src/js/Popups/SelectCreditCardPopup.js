@@ -1,30 +1,29 @@
 odoo.define('credit_card_pos.SelectCreditCardPopup', function (require) {
     const { Component } = require('owl');
-    const { useState } = require('owl.hooks');
-    const { _t } = require('web.core');
+    const { _lt } = require('web.core');
+    const { AbstractAwaitablePopup } = require('point_of_sale.AbstractAwaitablePopup');
     const Registries = require('point_of_sale.Registries');
 
-    class SelectCreditCardPopup extends Component {
-        constructor() {
-            super(...arguments);
-            this.state = useState({
-                selectedCard: null,
-            });
+    class SelectCreditCardPopup extends AbstractAwaitablePopup {
+        setup() {
+            super.setup();
+            this.selectedCard = null;
         }
 
         // Método para manejar la selección de la tarjeta
         selectCard(card) {
-            this.state.selectedCard = card;
+            this.selectedCard = card;
         }
 
-        // Cerrar el popup
+        // Método para confirmar la selección
+        confirm() {
+            this.trigger('confirm', this.selectedCard);
+            this.close();
+        }
+
+        // Método para cerrar el popup
         close() {
             this.trigger('close');
-        }
-
-        // Confirmar la selección
-        confirm() {
-            this.trigger('confirm', this.state.selectedCard);
         }
 
         get cardList() {
@@ -33,6 +32,13 @@ odoo.define('credit_card_pos.SelectCreditCardPopup', function (require) {
     }
 
     SelectCreditCardPopup.template = 'credit_card_pos.SelectCreditCardPopup';
+
+    SelectCreditCardPopup.defaultProps = {
+        confirmText: _lt('Confirmar'),
+        title: _lt('Seleccione la Tarjeta de Crédito'),
+        body: _lt('Por favor, elija una tarjeta de crédito'),
+        cancelKey: false,
+    };
 
     // Registrar el componente en el Registries
     Registries.Component.add(SelectCreditCardPopup);
