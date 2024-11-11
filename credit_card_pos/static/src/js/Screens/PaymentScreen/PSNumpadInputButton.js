@@ -12,6 +12,8 @@ odoo.define("credit_card_pos.PSNumpadInputButton", (require) => {
 
         // Sobrescribir el método de clic
         onClick() {
+            console.log("MOSTRANDO EL VALOR VVVVVVVV")
+            console.log(this.props.value);
             if (this.props.value === 'credit_card') {  // Verifica si el valor es "tarjeta de crédito"
                 // Usar datos quemados
                 const creditCards = [
