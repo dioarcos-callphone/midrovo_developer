@@ -1,55 +1,56 @@
-/** @odoo-module */
+odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
+    const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
+    const Registries = require("point_of_sale.Registries");
+    const { _lt } = require("@web/core/l10n/translation");
+    
+    const { onMounted, useRef, useState } = owl;
 
-import AbstractAwaitablePopup from "@point_of_sale/js/Popups/AbstractAwaitablePopup";
-import Registries from "@point_of_sale/js/Registries";
-import { _lt } from "@web/core/l10n/translation";
+    // Definir el popup extendiendo AbstractAwaitablePopup
+    const RecapAuthPopup = class extends AbstractAwaitablePopup {
+        setup() {
+            super.setup();
+            // Configurar el estado con ambos valores de entrada
+            this.state = useState({
+                recap: this.props.startingRecapValue,     // Valor inicial para RECAP
+                autorizacion: this.props.startingAutorizacionValue,  // Valor inicial para Autorización
+            });
 
-const { onMounted, useRef, useState } = owl;
+            // Referencias para los campos de entrada
+            this.inputRecapRef = useRef("inputRecap");
+            this.inputAutorizacionRef = useRef("inputAutorizacion");
 
-class RecapAuthPopup extends AbstractAwaitablePopup {  // Cambiar el nombre aquí
-    setup() {
-        super.setup();
-        // Configurar el estado con ambos valores de entrada
-        this.state = useState({
-            recap: this.props.startingRecapValue,     // Valor inicial para RECAP
-            autorizacion: this.props.startingAutorizacionValue,  // Valor inicial para Autorización
-        });
+            onMounted(this.onMounted);
+        }
 
-        // Referencias para los campos de entrada
-        this.inputRecapRef = useRef("inputRecap");
-        this.inputAutorizacionRef = useRef("inputAutorizacion");
+        onMounted() {
+            // Enfocar el campo RECAP por defecto al abrir el popup
+            this.inputRecapRef.el.focus();
+        }
 
-        onMounted(this.onMounted);
-    }
+        getPayload() {
+            // Retornar ambos valores de entrada (RECAP y Autorización)
+            return {
+                recap: this.state.recap,
+                autorizacion: this.state.autorizacion,
+            };
+        }
+    };
 
-    onMounted() {
-        // Enfocar el campo RECAP por defecto al abrir el popup
-        this.inputRecapRef.el.focus();
-    }
+    // Asignar el nombre de la plantilla al popup
+    RecapAuthPopup.template = "RecapAuthPopup";  // Asegúrate de que el nombre coincida con el del XML
 
-    getPayload() {
-        // Retornar ambos valores de entrada (RECAP y Autorización)
-        return {
-            recap: this.state.recap,
-            autorizacion: this.state.autorizacion,
-        };
-    }
-}
+    // Propiedades predeterminadas, incluyendo los nuevos campos
+    RecapAuthPopup.defaultProps = {
+        confirmText: _lt("Confirm"),
+        cancelText: _lt("Discard"),
+        title: "",
+        body: "",
+        startingRecapValue: "",   // Valor inicial para RECAP
+        startingAutorizacionValue: "", // Valor inicial para Autorización
+        recapPlaceholder: _lt("Enter RECAP"),  // Placeholder para RECAP
+        autorizacionPlaceholder: _lt("Enter Authorization"),  // Placeholder para Autorización
+    };
 
-RecapAuthPopup.template = "RecapAuthPopup";  // Cambiar el nombre aquí
-
-// Propiedades predeterminadas, incluyendo los nuevos campos
-RecapAuthPopup.defaultProps = {
-    confirmText: _lt("Confirm"),
-    cancelText: _lt("Discard"),
-    title: "",
-    body: "",
-    startingRecapValue: "",   // Valor inicial para RECAP
-    startingAutorizacionValue: "", // Valor inicial para Autorización
-    recapPlaceholder: _lt("Enter RECAP"),  // Placeholder para RECAP
-    autorizacionPlaceholder: _lt("Enter Authorization"),  // Placeholder para Autorización
-};
-
-Registries.Component.add(RecapAuthPopup);  // Cambiar el nombre aquí
-
-export default RecapAuthPopup;
+    // Registrar el componente en el registry
+    Registries.Component.add(RecapAuthPopup);
+});
