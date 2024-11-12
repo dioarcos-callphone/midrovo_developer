@@ -16,7 +16,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             if(creditCard) {
                 await rpc.query({
-                    model: 'pos.order',
+                    model: 'account.move',
                     method: 'update_invoice_payments_widget',
                     args: [ creditCard, result ]
                 })
