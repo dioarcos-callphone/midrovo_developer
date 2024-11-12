@@ -6,3 +6,7 @@
     margin-top: 10px; /* Espacio superior */
     margin-bottom: 10px; /* Espacio inferior */
 }
+
+.popup-text-recap-auth .footer-flex {
+    height: 61px;
+}
