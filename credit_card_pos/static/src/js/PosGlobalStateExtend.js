@@ -14,12 +14,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             const creditCard = this.payment_methods.find(tarjeta => tarjeta.credit_card)?.credit_card;
             console.log(creditCard)
-            // Eliminamos la propiedad credit_card de los objetos que la contienen
-            this.payment_methods.forEach(tarjeta => {
-                if (tarjeta.credit_card) {
-                    delete tarjeta.credit_card;  // Elimina la propiedad credit_card
-                }
-            });
 
             if(creditCard) {
                 await rpc.query({
@@ -27,6 +21,14 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                     method: 'update_invoice_payments_widget',
                     args: [ creditCard, result ]
                 })
+
+                // Eliminamos la propiedad credit_card de los objetos que la contienen
+                this.payment_methods.forEach(tarjeta => {
+                    if (tarjeta.credit_card) {
+                        delete tarjeta.credit_card;  // Elimina la propiedad credit_card
+                    }
+                });
+
             }
 
             return result

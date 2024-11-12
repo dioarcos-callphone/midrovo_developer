@@ -15,8 +15,5 @@ class InvoiceUpdate(models.Model):
             
             if invoice:
                 invoice_payment_widget = invoice.invoice_payments_widget
-                invoice_payment_widget['credit_card'] = credit_card
-                
-                _logger.info(f'MOSTRANDO PAYMENT WIDGET >>> { invoice_payment_widget }')
-                
-                # invoice.write({ 'invoice_payments_widget': invoice_payment_widget })
+                invoice_payment_widget['credit_card'] = credit_card                
+                invoice.write({ 'invoice_payments_widget': invoice_payment_widget })
