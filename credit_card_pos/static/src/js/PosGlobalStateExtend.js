@@ -22,11 +22,11 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 })
 
                 // Eliminamos la propiedad credit_card de los objetos que la contienen
-                this.payment_methods.forEach(tarjeta => {
-                    if (tarjeta.credit_card) {
-                        delete tarjeta.credit_card;  // Elimina la propiedad credit_card
-                    }
-                });
+                // this.payment_methods.forEach(tarjeta => {
+                //     if (tarjeta.credit_card) {
+                //         delete tarjeta.credit_card;  // Elimina la propiedad credit_card
+                //     }
+                // });
 
             }
 
