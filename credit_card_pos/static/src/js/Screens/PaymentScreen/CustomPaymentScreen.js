@@ -66,8 +66,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 ref: referencia,
                             }
 
-                            paymentMethod.credit_card = credit_card
+                            // Aquí actualizamos el estado global con la tarjeta seleccionada
+                            if (!this.env.pos.creditCards) {
+                                this.env.pos.creditCards = [];
+                            }
 
+                            this.env.pos.creditCards.push(credit_card)
+                            
                             return super.addNewPaymentLine({ detail: paymentMethod });
                         }
 
