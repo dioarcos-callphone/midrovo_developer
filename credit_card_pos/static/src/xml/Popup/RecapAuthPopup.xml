@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
 
     <t t-name="RecapAuthPopup" owl="1">  <!-- Cambiar el nombre aquí -->
-        <div class="popup popup-textinput">
+        <div class="popup popup-text-recap-auth">
             <header class="title">
                 <t t-esc="props.title" />
             </header>
