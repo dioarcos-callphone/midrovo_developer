@@ -1,12 +1,12 @@
 .popup-text-recap-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     height: 350px;
 }
 
 .input-recap, .input-autorizacion, .input-reference {
     margin-top: 10px; /* Espacio superior */
     margin-bottom: 10px; /* Espacio inferior */
-}
-
-.popup-text-recap-auth .footer-flex {
-    height: 61px;
 }
