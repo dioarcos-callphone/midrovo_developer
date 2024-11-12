@@ -1,7 +1,5 @@
 .popup-text-recap-auth {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 350px;
 }
 
 .popup-text-recap-auth .title {
