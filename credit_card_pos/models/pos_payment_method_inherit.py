@@ -16,4 +16,4 @@ class PosPaymentMethodInherit(models.Model):
             if pos_payment_method.apply_card:
                 return True
         
-        return False       
+        return False
