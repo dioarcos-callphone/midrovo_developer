@@ -6,7 +6,7 @@
             <header class="title">
                 <t t-esc="props.title" />
             </header>
-            <main>
+            <main class="fields">
                 <p t-esc="props.body" />
 
                 <!-- Campo para RECAP -->

@@ -1,4 +1,13 @@
-.input-recap, .input-autorizacion {
+.input-recap, .input-autorizacion, .input-reference {
     margin-top: 10px; /* Espacio superior */
     margin-bottom: 10px; /* Espacio inferior */
+    padding: 5px, 0;
+}
+
+.title {
+    background-color: #017e84;
+}
+
+.fields {
+    height: 180px;
 }
