@@ -2,15 +2,7 @@
     height: 350px;
 }
 
-.popup-text-recap-auth .title {
-    background-color: #017e84;
-}
-
 .input-recap, .input-autorizacion, .input-reference {
     margin-top: 10px; /* Espacio superior */
     margin-bottom: 10px; /* Espacio inferior */
-}
-
-.fields {
-    height: 180px;
 }
