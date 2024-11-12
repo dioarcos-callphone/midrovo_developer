@@ -17,12 +17,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             .map(tarjeta => tarjeta.credit_card);    // Mapea solo el diccionario 'credit_card'
 
             console.log(creditCard);
-            
-            for(const paymentMethod in paymentMethods) {
-                if(paymentMethod.credit_card) {
-
-                }
-            }
 
             await rpc.query({
                 model: 'pos.order',
