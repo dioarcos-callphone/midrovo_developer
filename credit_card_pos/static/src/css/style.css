@@ -7,6 +7,7 @@
 }
 
 .popup-text-recap-auth header {
+    flex: 1;
     background-color: #017e84 !important;
 }
 
