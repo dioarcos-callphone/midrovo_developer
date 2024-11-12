@@ -21,13 +21,13 @@ class InvoiceUpdate(models.Model):
             
             if invoice:
                 for card in credit_cards:
+                    credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
                     self.env['credit.card.info'].create({
                         'account_move_id': invoice.id,
-                        'card_number': card.get('card'),
+                        'credit_card_id': credit_card.id,
                         'recap': card.get('recap'),
                         'authorization': card.get('auth'),
                         'reference': card.get('ref'),
                     })
-                    
-                _logger.info(f'MOSTRANDO FACTURA { invoice.credit_card_info_ids }')
+
                 
