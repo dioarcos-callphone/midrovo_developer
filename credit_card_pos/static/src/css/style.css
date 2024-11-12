@@ -6,6 +6,10 @@
     height: 350px;
 }
 
+.popup-text-recap-auth header {
+    background-color: #017e84 !important;
+}
+
 .input-recap, .input-autorizacion, .input-reference {
     margin-top: 10px; /* Espacio superior */
     margin-bottom: 10px; /* Espacio inferior */
