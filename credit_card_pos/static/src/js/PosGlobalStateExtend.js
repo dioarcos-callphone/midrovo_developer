@@ -10,27 +10,20 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
         async _save_to_server(orders, options) {
             const creditCards = this.env.pos.creditCards || [];
 
-            console.log(creditCards)
-
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
-            // const creditCard = this.payment_methods.find(tarjeta => tarjeta.credit_card)?.credit_card;
 
-            // if(creditCard) {
-            //     await rpc.query({
-            //         model: 'account.move',
-            //         method: 'update_invoice_payments_widget',
-            //         args: [ creditCard, result ]
-            //     })
+            if(creditCards) {
+                await rpc.query({
+                    model: 'account.move',
+                    method: 'update_invoice_payments_widget',
+                    args: [ creditCards, result ]
+                })
 
-            //     // Eliminamos la propiedad credit_card de los objetos que la contienen
-            //     // this.payment_methods.forEach(tarjeta => {
-            //     //     if (tarjeta.credit_card) {
-            //     //         delete tarjeta.credit_card;  // Elimina la propiedad credit_card
-            //     //     }
-            //     // });
+                // Limpiamos la lista de tarjetas de crédito después de enviarlas
+                this.env.pos.creditCards = [];
 
-            // }
+            }
 
             return result
         }

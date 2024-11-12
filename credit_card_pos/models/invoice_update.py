@@ -7,11 +7,11 @@ class InvoiceUpdate(models.Model):
     credit_card_info = fields.Json(string="Informacion de Tarjeta de Crédito")
     
     @api.model
-    def update_invoice_payments_widget(self, credit_card, results):
+    def update_invoice_payments_widget(self, credit_cards, results):
         for result in results:
             account_move = result['account_move']
             invoice = self.search([('id', '=', account_move)])
             
-            if invoice:              
-                invoice.write({ 'credit_card_info': credit_card })
+            if invoice:            
+                invoice.write({ 'credit_card_info': credit_cards })
                 
