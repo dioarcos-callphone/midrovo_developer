@@ -16,6 +16,13 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             .filter(tarjeta => tarjeta.credit_card)  // Filtra objetos que tienen 'credit_card'
             .map(tarjeta => tarjeta.credit_card);    // Mapea solo el diccionario 'credit_card'
 
+            // Eliminamos la propiedad credit_card de los objetos que la contienen
+            this.payment_methods.forEach(tarjeta => {
+                if (tarjeta.credit_card) {
+                    delete tarjeta.credit_card;  // Elimina la propiedad credit_card
+                }
+            });
+
             console.log(creditCard);
 
             await rpc.query({
