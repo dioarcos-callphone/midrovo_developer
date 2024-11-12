@@ -1,8 +1,5 @@
 from odoo import models, fields, api
 
-import logging
-_logger = logging.getLogger(__name__)
-
 class CreditCard(models.Model):
     _name = 'credit.card'
     _description = 'CreditCard'
@@ -27,4 +24,3 @@ class CreditCard(models.Model):
         model_cards = self.search_read([],['id', 'name'], order='name asc')
 
         return model_cards
-
