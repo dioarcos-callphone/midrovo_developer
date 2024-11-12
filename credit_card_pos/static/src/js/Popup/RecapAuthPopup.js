@@ -34,7 +34,7 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
             return {
                 recap: this.state.recap,
                 autorizacion: this.state.autorizacion,
-                referencia: this.state.reference
+                referencia: this.state.referencia
             };
         }
     };
