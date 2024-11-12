@@ -11,8 +11,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
-            
-            console.log(options)
+            const pl = this.env.pos.get_paymentlines()
+            console.log(pl)
             //console.log(result)
 
             await rpc.query({
