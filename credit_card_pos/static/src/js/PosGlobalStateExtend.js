@@ -12,10 +12,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
 
-            const creditCard = this.payment_methods
-            .filter(tarjeta => tarjeta.credit_card)  // Filtra objetos que tienen 'credit_card'
-            .map(tarjeta => tarjeta.credit_card);    // Mapea solo el diccionario 'credit_card'
-
+            const creditCard = this.payment_methods.find(tarjeta => tarjeta.credit_card)?.credit_card;
+            console.log(creditCard)
             // Eliminamos la propiedad credit_card de los objetos que la contienen
             this.payment_methods.forEach(tarjeta => {
                 if (tarjeta.credit_card) {
