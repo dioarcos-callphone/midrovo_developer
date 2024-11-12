@@ -9,6 +9,7 @@
 .popup-text-recap-auth header {
     flex: 1;
     background-color: #017e84 !important;
+    color: #FFFFFF;
 }
 
 .input-recap, .input-autorizacion, .input-reference {
