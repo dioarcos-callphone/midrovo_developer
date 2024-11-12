@@ -3,8 +3,11 @@ from odoo import models, fields, api
 class InvoiceUpdate(models.Model):
     _inherit = "account.move"
     
-    # Campo JSON para almacenar los detalles de la tarjeta de crédito
-    credit_card_info = fields.Json(string="Informacion de Tarjeta de Crédito")
+    credit_card_info_ids = fields.One2many(
+        'credit.card.info',
+        'account_move_id',
+        string="Tarjetas de Crédito"
+    )
     
     @api.model
     def update_invoice_payments_widget(self, credit_cards, results):
@@ -12,6 +15,14 @@ class InvoiceUpdate(models.Model):
             account_move = result['account_move']
             invoice = self.search([('id', '=', account_move)])
             
-            if invoice:            
-                invoice.write({ 'credit_card_info': credit_cards })
+            if invoice:
+                for card in credit_cards:
+                    self.env['credit.card.info'].create({
+                        'account_move_id': invoice.id,
+                        'card_number': card.get('card'),
+                        'recap': card.get('recap'),
+                        'authorization': card.get('auth'),
+                        'reference': card.get('ref'),
+                    })        
+                # invoice.write({ 'credit_card_info': credit_cards })
                 
