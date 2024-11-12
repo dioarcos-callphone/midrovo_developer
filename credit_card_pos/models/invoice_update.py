@@ -1,5 +1,9 @@
 from odoo import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class InvoiceUpdate(models.Model):
     _inherit = "account.move"
     
@@ -23,6 +27,7 @@ class InvoiceUpdate(models.Model):
                         'recap': card.get('recap'),
                         'authorization': card.get('auth'),
                         'reference': card.get('ref'),
-                    })        
-                # invoice.write({ 'credit_card_info': credit_cards })
+                    })
+                    
+                _logger.info(f'MOSTRANDO FACTURA { invoice.credit_card_info_ids }')
                 
