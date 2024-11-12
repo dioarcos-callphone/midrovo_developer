@@ -49,8 +49,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 title: this.env._t(selectedCreditCard), // Título del popup
                                 recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
                                 autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
+                                referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
                                 startingRecapValue: "",
                                 startingAutorizacionValue: "",
+                                startingReferenciaValue: "",
                             }
                         );
                         
