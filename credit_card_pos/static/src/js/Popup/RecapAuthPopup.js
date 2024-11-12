@@ -13,11 +13,13 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
             this.state = useState({
                 recap: this.props.startingRecapValue,     // Valor inicial para RECAP
                 autorizacion: this.props.startingAutorizacionValue,  // Valor inicial para Autorización
+                referencia: this.props.startingReferenceValue,  // Valor inicial para Referencia
             });
 
             // Referencias para los campos de entrada
             this.inputRecapRef = useRef("inputRecap");
             this.inputAutorizacionRef = useRef("inputAutorizacion");
+            this.inputReferenciaRef = useRef("inputReferencia");
 
             onMounted(this.onMounted);
         }
@@ -28,10 +30,11 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
         }
 
         getPayload() {
-            // Retornar ambos valores de entrada (RECAP y Autorización)
+            // Retornar ambos valores de entrada (RECAP, Autorización y Referencia)
             return {
                 recap: this.state.recap,
                 autorizacion: this.state.autorizacion,
+                referencia: this.state.reference
             };
         }
     };
@@ -47,8 +50,10 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
         body: "",
         startingRecapValue: "",   // Valor inicial para RECAP
         startingAutorizacionValue: "", // Valor inicial para Autorización
+        startingReferenciaValue: "", // // Valor inicial para Referencia
         recapPlaceholder: _lt("Enter RECAP"),  // Placeholder para RECAP
         autorizacionPlaceholder: _lt("Enter Authorization"),  // Placeholder para Autorización
+        referenciaPlaceholder: _lt("Enter Reference"),
     };
 
     // Registrar el componente en el registry

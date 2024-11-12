@@ -55,15 +55,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         );
                         
                         if (confirmed) {
-                            const { recap, autorizacion } = payload;
-                            console.log("Tarjeta:", selectedCreditCard)
-                            console.log("RECAP:", recap);
-                            console.log("Autorización:", autorizacion);
+                            const { recap, autorizacion, referencia } = payload;
 
                             const credit_card = {
                                 card: selectedCreditCard,
                                 recap: recap,
                                 auth: autorizacion,
+                                ref: referencia,
                             }
 
                             paymentMethod.credit_card = credit_card

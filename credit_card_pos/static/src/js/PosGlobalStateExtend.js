@@ -27,7 +27,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                         delete tarjeta.credit_card;  // Elimina la propiedad credit_card
                     }
                 });
-
             }
 
             return result

@@ -14,6 +14,10 @@
 
                 <!-- Campo para Autorización -->
                 <input class="input-autorizacion" type="text" t-model="state.autorizacion" t-ref="inputAutorizacion" t-att-placeholder="props.autorizacionPlaceholder"/>
+
+                <!-- Campo para Referencia -->
+                <input class="input-reference" type="text" t-model="state.referencia" t-ref="inputReferencia" t-att-placeholder="props.referenciaPlaceholder"/>
+
             </main>
             <div class="footer footer-flex">
                 <div class="button confirm highlight" t-on-click="confirm">
