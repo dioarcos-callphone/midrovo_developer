@@ -12,6 +12,6 @@ class InvoiceUpdate(models.Model):
         for result in results:
             account_move = result['account_move']
             invoice = self.env['account.move'].search([('id', '=', account_move)])
-            _logger.info(f'MOSTRANDO FACTURA >>> { invoice }')
+            _logger.info(f'MOSTRANDO FACTURA >>> { invoice.invoice_payments_widget }')
             # if invoice:
             #     invoice.write({ 'narration': nota })
