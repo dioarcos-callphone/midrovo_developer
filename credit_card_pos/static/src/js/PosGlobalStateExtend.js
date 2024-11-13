@@ -13,6 +13,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const result = await super._save_to_server(orders, options);
             console.log(orders)
             console.log(result)
+            console.log(this.paymentLines)
             if(creditCards) {
                 await rpc.query({
                     model: 'pos.payment',
