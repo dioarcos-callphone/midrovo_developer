@@ -4,7 +4,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class InvoiceUpdate(models.Model):
+class PosPaymentUpdate(models.Model):
     _inherit = "pos.payment"
     
     credit_card_info_ids = fields.One2many('credit.card.info', 'pos_payment_id', string="Tarjetas de Crédito")
