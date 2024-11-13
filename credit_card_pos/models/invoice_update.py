@@ -14,7 +14,7 @@ class InvoiceUpdate(models.Model):
             pos_payment = self.search([('pos_order_id', '=', pos_order_id)])
             
             if pos_payment:
-                _logger.info(f'POS PAYMENT >>> { pos_payment.pos_order_id }')
+                _logger.info(f'POS PAYMENT >>> { pos_payment.payment_method_id }')
                 # for card in credit_cards:
                 #     credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
                 #     self.env['credit.card.info'].create({
