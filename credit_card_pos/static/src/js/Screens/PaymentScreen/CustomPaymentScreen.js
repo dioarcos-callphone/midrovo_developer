@@ -71,7 +71,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 this.env.pos.creditCards = [];
                             }
 
-                            // this.paymentLines[0].creditCard = credit_card
+                            this.paymentLines.export_as_JSON.creditCard = credit_card
 
                             this.env.pos.creditCards.push(credit_card)
 
