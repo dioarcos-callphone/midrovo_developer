@@ -80,7 +80,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     p.creditCard = credit_card
                                 }
                             }
-                            
+
+                            console.log(this.paymentLines)                            
 
                             return result;
                         }
