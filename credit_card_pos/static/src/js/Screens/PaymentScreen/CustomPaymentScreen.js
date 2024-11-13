@@ -76,6 +76,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             // console.log(`Esta variable es de tipo >>> ${ typeof(this.paymentLines) }`)
                             if(this.paymentLines.length > 0) {
                                 console.log(this.paymentLines[0])
+                                console.log(this.paymentLines[1])
                             }
 
                             else {
