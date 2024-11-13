@@ -12,7 +12,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
-                console.log(this.paymentLines)
                 const method_name = paymentMethod.name
 
                 const isCard = await this.rpc({
@@ -72,7 +71,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 this.env.pos.creditCards = [];
                             }
 
+                            this.paymentLines.creditCard = credit_card
+
                             this.env.pos.creditCards.push(credit_card)
+
+                            console.log(this.paymentLines)
                             
                             return super.addNewPaymentLine({ detail: paymentMethod });
                         }
