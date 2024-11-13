@@ -19,17 +19,15 @@ class PosPaymentUpdate(models.Model):
             card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)
             
             if card_payments:
-                for payment in card_payments:   
-                    _logger.info(f'MOSTRANDO RESULTADO >>> { payment }')
-                    _logger.info(f'MOSTRANDO RESULTADO >>> { payment.payment_method_id }')     
-                    # for card in credit_cards:
-                    #     credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
-                    #     self.env['credit.card.info'].create({
-                    #         'pos_payment_id': pos_payment.id,
-                    #         'credit_card_id': credit_card.id,
-                    #         'recap': card.get('recap'),
-                    #         'authorization': card.get('auth'),
-                    #         'reference': card.get('ref'),
-                    #     })
+                for payment in card_payments:      
+                    for card in credit_cards:
+                        credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
+                        self.env['credit.card.info'].create({
+                            'pos_payment_id': payment.id,
+                            'credit_card_id': credit_card.id,
+                            'recap': card.get('recap'),
+                            'authorization': card.get('auth'),
+                            'reference': card.get('ref'),
+                        })
 
                
