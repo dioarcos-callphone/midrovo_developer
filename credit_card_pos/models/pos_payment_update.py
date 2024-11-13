@@ -18,16 +18,16 @@ class PosPaymentUpdate(models.Model):
             # Filtrar los pagos cuyo método de pago tiene 'apply_card' en True
             card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)
             
-            if card_payments:
-                for payment in card_payments:      
-                    for card in credit_cards:
-                        credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
-                        self.env['credit.card.info'].create({
-                            'pos_payment_id': payment.id,
-                            'credit_card_id': credit_card.id,
-                            'recap': card.get('recap'),
-                            'authorization': card.get('auth'),
-                            'reference': card.get('ref'),
-                        })
+            # if card_payments:
+            #     for payment in card_payments:      
+            #         for card in credit_cards:
+            #             credit_card = self.env['credit.card'].search([('name', '=', card.get('card'))], limit=1)
+            #             self.env['credit.card.info'].create({
+            #                 'pos_payment_id': payment.id,
+            #                 'credit_card_id': credit_card.id,
+            #                 'recap': card.get('recap'),
+            #                 'authorization': card.get('auth'),
+            #                 'reference': card.get('ref'),
+            #             })
 
                
