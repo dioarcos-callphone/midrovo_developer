@@ -26,6 +26,7 @@
             "credit_card_pos/static/src/js/Popup/RecapAuthPopup.js",
             "credit_card_pos/static/src/xml/Popup/RecapAuthPopup.xml",
             "credit_card_pos/static/src/js/PosGlobalStateExtend.js",
+            "credit_card_pos/static/src/xml/PaymentScreen/PaymentScreenPaymenyLinesInherit.xml",
         ],
     },
     
