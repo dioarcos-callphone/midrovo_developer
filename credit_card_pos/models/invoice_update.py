@@ -7,12 +7,6 @@ _logger = logging.getLogger(__name__)
 class InvoiceUpdate(models.Model):
     _inherit = "pos.payment"
     
-    credit_card_info_ids = fields.One2many(
-        'credit.card.info',
-        'account_move_id',
-        string="Tarjetas de Crédito"
-    )
-    
     @api.model
     def update_invoice_payments_widget(self, credit_cards, results):
         for result in results:
