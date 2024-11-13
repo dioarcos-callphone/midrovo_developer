@@ -5,9 +5,11 @@
         <xpath expr="//div[@class='payment-name']" position="replace">
             <div class="payment-name">
                 <t t-esc="line.payment_method.name" />
-                <p>
-                    <t t-esc="line.creditCard.card"/>
-                </p>
+                <t t-if="line.creditCard">
+                    <p>
+                        <t t-esc="line.creditCard.card"/>
+                    </p>
+                </t>
             </div>
         </xpath>
     </t>
