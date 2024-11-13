@@ -78,7 +78,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
 
                             console.log(this.paymentLines)
-                            console.log(this.paymentLines[0])
+                            
+                            for(let p of this.paymentLines) {
+                                console.log(p)
+                            }
                             
 
                             return result;
