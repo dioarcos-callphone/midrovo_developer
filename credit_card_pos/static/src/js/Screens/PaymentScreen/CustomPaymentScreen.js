@@ -74,7 +74,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             this.env.pos.creditCards.push(credit_card)
 
                             // console.log(`Esta variable es de tipo >>> ${ typeof(this.paymentLines) }`)
-                            console.log(this.paymentLines[0])
+                            if(this.paymentLines.lenght > 0) {
+                                console.log(this.paymentLines[0])
+                            }
+
+                            else {
+                                console.log(this.paymentLines.name)
+                            }
+                            
 
                             return super.addNewPaymentLine({ detail: paymentMethod });
                         }
