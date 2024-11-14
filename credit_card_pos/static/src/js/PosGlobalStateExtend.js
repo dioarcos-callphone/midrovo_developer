@@ -18,8 +18,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 return statement.filter(item => item[2].creditCard !== undefined)
             });
 
-            console.log(statements)
-
             const statementCreditCards = statements.map(statement => {
                 return statement.map(item => {
                     const obj = item[2];
@@ -35,6 +33,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             for(const statementCreditCard of statementCreditCards) {
                 if(statementCreditCard) {
+                    console.log(statementCreditCard)
                     isContent = true
                     break;
                 }
