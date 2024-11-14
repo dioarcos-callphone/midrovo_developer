@@ -24,7 +24,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             });
 
             const statementCreditCard = statements.map(statement => {
-                console.log(statement);
+                console.log(statement[2]);
                 //const obj = statement[2];
                 // return {
                 //     amount: obj.amount,
