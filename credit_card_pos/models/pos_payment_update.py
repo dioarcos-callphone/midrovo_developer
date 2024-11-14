@@ -10,7 +10,9 @@ class PosPaymentUpdate(models.Model):
     credit_card_info_ids = fields.One2many('credit.card.info', 'pos_payment_id', string="Tarjetas de Crédito")
     
     @api.model
-    def update_invoice_payments_widget(self, credit_cards, results):
+    def update_invoice_payments_widget(self, statementCreditCards, results):
+        _logger.info(f'MOSTRANDO STATEMENT >>>> { statementCreditCards }')
+        
         for result in results:
             pos_order_id = result['id']
             pos_payments = self.search([('pos_order_id', '=', pos_order_id)])
