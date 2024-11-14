@@ -17,9 +17,17 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             const data = orders.map(order => order.data);
             const statement_ids = data.map(d => d.statement_ids);
-            console.log(statement_ids)
+            const filteredArray = statement_ids[0][0]
+                .filter(item => item.credit_card !== undefined) // Filtrar solo los elementos que tengan 'credit_card'
+                .map(item => ({
+                    amount: item.amount,
+                    payment_method: item.payment_method_id,
+                    credit_card: item.credit_card
+                }));
+                
+            console.log(filteredArray)
 
-            if(statement_ids) {
+            if(filteredArray) {
                 // console.log(statements)
 
                 // await rpc.query({
