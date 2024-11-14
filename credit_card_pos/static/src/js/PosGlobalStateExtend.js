@@ -1,7 +1,7 @@
 odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
     "use strict";
 
-    const { PosGlobalState } = require("point_of_sale.models");
+    const { PosGlobalState, Payment } = require("point_of_sale.models");
     const Registries = require('point_of_sale.Registries');
     const rpc = require('web.rpc');
 
@@ -11,9 +11,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const creditCards = this.env.pos.creditCards || [];
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
-            console.log(orders)
             console.log(result)
-            console.log(this.paymentLines)
+            
             if(creditCards) {
                 await rpc.query({
                     model: 'pos.payment',
@@ -30,6 +29,18 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
         }
     }
 
+    const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
+        export_as_JSON() {
+            const result = super.export_as_JSON();
+
+            console.log(result)
+
+            return result;
+        }
+    }
+
     Registries.Model.extend(PosGlobalState, PosGlobalStateExtend);
+
+
 
 });
