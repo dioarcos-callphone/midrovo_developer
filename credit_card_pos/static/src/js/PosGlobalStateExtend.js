@@ -16,6 +16,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             // const statements = this.getStatements(statement_ids);
 
             const data = orders.map(order => order.data);
+            console.log("MOSTRANDO DATA EN EL POS GLOBAL");
+            console.log(data);
             const statement_ids = data.map(d => d.statement_ids);
             const statements = statement_ids.map(statement => {
                 return statement.filter(item => item[2].creditCard !== undefined)
