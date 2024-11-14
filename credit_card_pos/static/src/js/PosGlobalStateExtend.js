@@ -39,10 +39,11 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             }
 
             if(isContent) {
+                const statementFlated = statementCreditCards.flat();
                 await rpc.query({
                     model: 'pos.payment',
                     method: 'update_invoice_payments_widget',
-                    args: [ statementCreditCards, result ]
+                    args: [ statementFlated, result ]
                 })
 
                 // Limpiamos la lista de tarjetas de crédito después de enviarlas
@@ -70,8 +71,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             });
 
             //const creditCards = extractedData.filter(item => item.creditCard);
-
-            // console.log(creditCards);
 
             return extractedData
         }
