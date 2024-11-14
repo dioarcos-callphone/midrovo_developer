@@ -13,26 +13,22 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const result = await super._save_to_server(orders, options);
 
             const statement_ids = orders.map(order => order.data.statement_ids);
-            const statements = statement_ids.map(statement => statement)
+            const statements = statement_ids.map(statement => statement);
 
             console.log(statements)
             // Extraer los valores de amount, creditCard, y payment_method_id, filtrando donde creditCard no sea undefined
-            const extractedData = statement_ids.map(statement => {
-                const st = statement
-                    .map(s => {
-                        const obj = s[2]; // El objeto está en el índice 2 de cada sub-array
-                        return {
-                            amount: obj.amount,
-                            creditCard: obj.creditCard,
-                            payment_method_id: obj.payment_method_id
-                        };
-                    })
-                    .filter(item => item.creditCard !== undefined); // Filtrar donde creditCard no es undefined
-                return st;
-            });
+            const extractedData = statements.map(statement => {
+                const obj = statement[2]; // El objeto está en el índice 2 de cada sub-array
+                return {
+                    amount: obj.amount,
+                    creditCard: obj.creditCard,
+                    payment_method_id: obj.payment_method_id
+                };
+            }).filter(item => item.creditCard !== undefined); // Filtrar donde creditCard no es undefined;
 
-            if(extractedData.length ) {
-                console.log(extractedData)
+            if(extractedData) {
+                console.log("ENTRA");
+                console.log(extractedData);
 
                 // await rpc.query({
                 //     model: 'pos.payment',
