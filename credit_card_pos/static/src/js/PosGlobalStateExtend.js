@@ -70,9 +70,9 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
     const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
         export_as_JSON() {
             const result = super.export_as_JSON();
-            result.creditCard = this.creditCard
-
-            console.log(result)
+            result.creditCard = this.creditCard;
+            this.creditCard = undefined;
+            //console.log(result)
             return result;
         }
     }
