@@ -11,6 +11,18 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const creditCards = this.env.pos.creditCards || [];
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
+
+            // let extractedData = orders.map(statement => {
+            //     let obj = statement[2]; // El objeto está en el índice 2 de cada sub-array
+            //     return {
+            //       amount: obj.amount,
+            //       creditCard: obj.creditCard,
+            //       payment_method_id: obj.payment_method_id
+            //     };
+            //   });
+            
+            
+
             console.log(orders)
 
             if(creditCards) {
@@ -29,14 +41,12 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
         }
     }
 
+    // Extendemos la clase Payment para obtener el creditCard que viene del paymentLines
     const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
         export_as_JSON() {
+
             const result = super.export_as_JSON();
             result.creditCard = this.creditCard
-
-            console.log("ENTRANDO A PAYMENT EXTEND");
-            console.log(result);
-
             return result;
         }
     }
