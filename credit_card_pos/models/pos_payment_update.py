@@ -20,6 +20,7 @@ class PosPaymentUpdate(models.Model):
             
             if card_payments:
                 for statement in statementFlated:
+                    _logger.info(f"MOSTRANTO STATEMENT >>> { statement }")
                     for payment in card_payments:      
                         credit_card = self.env['credit.card'].search([('name', '=', statement.get('card'))], limit=1)
                         
