@@ -16,7 +16,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             // Extraer los valores de amount, creditCard, y payment_method_id
             const extractedData = statement_ids.map(statement => {
                 console.log(statement)
-                const obj = statement[3]; // El objeto está en el índice 2 de cada sub-array
+                const obj = statement[2]; // El objeto está en el índice 2 de cada sub-array
                 console.log(obj)
                 return {
                     amount: obj.amount,
