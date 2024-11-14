@@ -59,7 +59,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
 
-                            const credit_card = {
+                            let credit_card = {
                                 card: selectedCreditCard,
                                 recap: recap,
                                 auth: autorizacion,
@@ -81,7 +81,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 if(!p.creditCard) {
                                     p.creditCard = credit_card
                                 }
-                            }                           
+                            }
+                            
+                            credit_card = undefined;
 
                             return result;
                         }
