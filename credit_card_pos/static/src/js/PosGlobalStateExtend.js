@@ -15,10 +15,11 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const statement_ids = orders.map(order => order.data.statement_ids);
             const statements = this.getStatements(statement_ids);
 
-            console.log(orders)
+            const data = orders.map(order => order.data);
+            console.log(data)
 
             if(statements) {
-                console.log(statements)
+                // console.log(statements)
 
                 // await rpc.query({
                 //     model: 'pos.payment',
