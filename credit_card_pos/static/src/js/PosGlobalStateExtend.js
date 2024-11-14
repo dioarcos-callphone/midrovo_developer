@@ -48,11 +48,11 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 return st;
             });
 
-            const creditCards = extractedData.filter(item => item.creditCard);
+            //const creditCards = extractedData.filter(item => item.creditCard);
 
-            console.log(creditCards);
+            // console.log(creditCards);
 
-            return creditCards
+            return extractedData
         }
     }
 
