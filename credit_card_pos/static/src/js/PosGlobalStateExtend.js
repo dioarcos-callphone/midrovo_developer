@@ -13,27 +13,29 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const result = await super._save_to_server(orders, options);
 
             const statement_ids = orders.map(order => order.data.statement_ids);
-            // Extraer los valores de amount, creditCard, y payment_method_id
+            // Extraer los valores de amount, creditCard, y payment_method_id, filtrando donde creditCard no sea undefined
             const extractedData = statement_ids.map(statement => {
-                const st = statement.map(s => {
-                    const obj = s[2]; // El objeto está en el índice 2 de cada sub-array
-                    return {
-                        amount: obj.amount,
-                        creditCard: obj.creditCard,
-                        payment_method_id: obj.payment_method_id
-                    }
-                });
+                const st = statement
+                    .map(s => {
+                        const obj = s[2]; // El objeto está en el índice 2 de cada sub-array
+                        return {
+                            amount: obj.amount,
+                            creditCard: obj.creditCard,
+                            payment_method_id: obj.payment_method_id
+                        };
+                    })
+                    .filter(item => item.creditCard !== undefined); // Filtrar donde creditCard no es undefined
                 return st;
             });
 
-            console.log(extractedData)
+            if(extractedData) {
+                console.log(extractedData)
 
-            if(creditCards) {
-                await rpc.query({
-                    model: 'pos.payment',
-                    method: 'update_invoice_payments_widget',
-                    args: [ creditCards, result ]
-                })
+                // await rpc.query({
+                //     model: 'pos.payment',
+                //     method: 'update_invoice_payments_widget',
+                //     args: [ creditCards, result ]
+                // })
 
                 // Limpiamos la lista de tarjetas de crédito después de enviarlas
                 this.env.pos.creditCards = [];
