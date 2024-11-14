@@ -67,7 +67,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
     // Extendemos la clase Payment para obtener el creditCard que viene del paymentLines
     const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
         export_as_JSON() {
-
+            console.log('CREDIT CARD EN EL PAYMENT');
+            console.log(this.creditCard);
             const result = super.export_as_JSON();
             result.creditCard = this.creditCard
             return result;
