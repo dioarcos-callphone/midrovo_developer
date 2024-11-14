@@ -23,6 +23,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 return statement.filter(item => item[2].creditCard !== undefined)
             });
 
+            console.log(statements)
+
             const statementCreditCard = statements.map(statement => {
                 return statement.map(item => {
                     const obj = item[2];
