@@ -32,7 +32,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             let isContent = false;
 
             for(const statementCreditCard of statementCreditCards) {
-                if(statementCreditCard) {
+                if(statementCreditCard.length > 0) {
                     console.log(statementCreditCard)
                     isContent = true
                     break;
