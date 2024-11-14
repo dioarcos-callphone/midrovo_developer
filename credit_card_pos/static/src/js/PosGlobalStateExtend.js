@@ -12,13 +12,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
 
-            const statement_ids = orders.map(order => {
-                return {
-                    statement_ids: order.statement_ids,
-                };
-              });
-            
-            
+            const statement_ids = orders.map(order => order.statement_ids);
 
             console.log(statement_ids)
 
