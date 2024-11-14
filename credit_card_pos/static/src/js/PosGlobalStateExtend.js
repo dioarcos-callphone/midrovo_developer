@@ -15,38 +15,32 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const data = orders.map(order => order.data);
             const statement_ids = data.map(d => d.statement_ids);
             const statements = statement_ids.map(statement => {
-                const statementCreditCards = statement.filter(item => item[2].creditCard !== undefined);
-                console.log(statementCreditCards);
-                // return {
-                //     amount: obj.amount,
-                //     creditCard: obj.creditCard,
-                //     payment_method_id: obj.payment_method_id,
-                // }
+                return statement.filter(item => item[2].creditCard !== undefined)
             });
 
-            // const statementCreditCards = statements.map(statement => {
-            //     return statement.map(item => {
-            //         const obj = item[2];
-            //         return {
-            //             amount: obj.amount,
-            //             creditCard: obj.creditCard,
-            //             payment_method_id: obj.payment_method_id,
-            //         }
-            //     });
-            // });
+            const statementCreditCards = statements.map(statement => {
+                return statement.map(item => {
+                    const obj = item[2];
+                    return {
+                        amount: obj.amount,
+                        creditCard: obj.creditCard,
+                        payment_method_id: obj.payment_method_id,
+                    }
+                });
+            });
 
             let isContent = false;
 
-            // for(const statementCreditCard of statementCreditCards) {
-            //     if(statementCreditCard.length > 0) {
-            //         console.log(statementCreditCard)
-            //         isContent = true
-            //         break;
-            //     }
-            // }
+            for(const statementCreditCard of statementCreditCards) {
+                if(statementCreditCard.length > 0) {
+                    console.log(statementCreditCard)
+                    isContent = true
+                    break;
+                }
+            }
 
             if(isContent) {
-                // console.log(statementCreditCards)
+                console.log(statementCreditCards)
                 // console.log(statements)
 
                 // await rpc.query({
