@@ -15,6 +15,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const statement_ids = orders.map(order => order.data.statement_ids);
             const statements = this.getStatements(statement_ids);
 
+            console.log(orders)
+
             if(statements) {
                 console.log(statements)
 
