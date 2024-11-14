@@ -34,7 +34,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const result = super.export_as_JSON();
 
             console.log("ENTRANDO A PAYMENT EXTEND");
-            console.log(result);
+            console.log(this);
 
             return result;
         }
