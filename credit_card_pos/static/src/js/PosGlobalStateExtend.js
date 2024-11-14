@@ -24,17 +24,18 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             });
 
             const statementCreditCard = statements.map(statement => {
-                const obj = statement[2];
-                return {
-                    amount: obj.amount,
-                    creditCard: obj.creditCard,
-                    payment_method_id: obj.payment_method_id,
-                }
+                console.log(statement);
+                //const obj = statement[2];
+                // return {
+                //     amount: obj.amount,
+                //     creditCard: obj.creditCard,
+                //     payment_method_id: obj.payment_method_id,
+                // }
             })
 
-            console.log(statementCreditCard)
+            // console.log(statements)
 
-            if(statementCreditCard) {
+            if(statements) {
                 // console.log(statements)
 
                 // await rpc.query({
