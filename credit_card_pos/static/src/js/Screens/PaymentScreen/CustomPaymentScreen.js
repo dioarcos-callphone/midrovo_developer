@@ -78,15 +78,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             // Aqui se añade en el diccionario la llave creditCard para almacenar los valores
                             // que se encuentran en la variable credit_card
                             for(let p of this.paymentLines) {
-                                console.log("MOSTRANDO PAYMENTLINES")
-                                console.log(paymentMethod.id)
-                                console.log(p)
-                                if(!p.creditCard) {
+                                if(!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card
                                 }
                             }
-                            
-                            credit_card = undefined;
 
                             return result;
                         }
