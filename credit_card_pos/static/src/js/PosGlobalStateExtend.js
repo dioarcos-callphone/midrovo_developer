@@ -21,11 +21,20 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             const statement_ids = data.map(d => d.statement_ids);
             const statements = statement_ids.map(statement => {
                 return statement.filter(item => item[2].creditCard !== undefined)
+            });
+
+            const statementCreditCard = statements.map(statement => {
+                const obj = statement[2];
+                return {
+                    amount: obj.amount,
+                    creditCard: obj.creditCard,
+                    payment_method_id: obj.payment_method_id,
+                }
             })
 
-            console.log(statements)
+            console.log(statementCreditCard)
 
-            if(statements) {
+            if(statementCreditCard) {
                 // console.log(statements)
 
                 // await rpc.query({
@@ -69,12 +78,9 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
     // Extendemos la clase Payment para obtener el creditCard que viene del paymentLines
     const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
         export_as_JSON() {
-            // console.log('CREDIT CARD EN EL PAYMENT');
-            // console.log(this.creditCard);
             const result = super.export_as_JSON();
             result.creditCard = this.creditCard
 
-            console.log(result)
             return result;
         }
     }
