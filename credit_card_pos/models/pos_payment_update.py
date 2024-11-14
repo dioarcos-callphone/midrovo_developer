@@ -1,9 +1,5 @@
 from odoo import models, fields, api
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 class PosPaymentUpdate(models.Model):
     _inherit = "pos.payment"
     
@@ -32,5 +28,4 @@ class PosPaymentUpdate(models.Model):
                                 'authorization': creditCard.get('auth'),
                                 'reference': creditCard.get('ref'),
                             })
-
                
