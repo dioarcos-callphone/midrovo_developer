@@ -12,9 +12,6 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
 
-            // const statement_ids = orders.map(order => order.data.statement_ids);
-            // const statements = this.getStatements(statement_ids);
-
             const data = orders.map(order => order.data);
             const statement_ids = data.map(d => d.statement_ids);
             const statements = statement_ids.map(statement => {
@@ -23,7 +20,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
             console.log(statements)
 
-            const statementCreditCard = statements.map(statement => {
+            const statementCreditCards = statements.map(statement => {
                 return statement.map(item => {
                     const obj = item[2];
                     return {
@@ -34,9 +31,17 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 });
             });
 
-            console.log(statementCreditCard)
+            let isContent = false;
 
-            if(statements) {
+            for(const statementCreditCard of statementCreditCards) {
+                if(statementCreditCard) {
+                    isContent = true
+                    break;
+                }
+            }
+
+            if(isContent) {
+                console.log(statementCreditCards)
                 // console.log(statements)
 
                 // await rpc.query({
