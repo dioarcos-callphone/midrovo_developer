@@ -33,6 +33,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
+                    // **Bloqueamos el teclado al mostrar el primer popup**
+                    document.addEventListener("keydown", this.blockKeyboard, true);
+
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",  // Usamos el popup correcto para selección de lista
@@ -43,6 +46,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
+                        // **Permitir interacción en el segundo popup**
+                        document.removeEventListener("keydown", this.blockKeyboard, true);
+
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
                             {
@@ -76,10 +82,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
+                            // **Restauramos el comportamiento normal del teclado**
+                            document.addEventListener("keydown", this.blockKeyboard, false);
+
                             return result;
                         }
 
                     }
+
+                    // **Restauramos el comportamiento normal si se cancela el primer popup**
+                    document.removeEventListener("keydown", this.blockKeyboard, true);
                 }
 
                 else {

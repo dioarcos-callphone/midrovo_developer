@@ -28,4 +28,4 @@ class PosPaymentUpdate(models.Model):
                                 'authorization': creditCard.get('auth'),
                                 'reference': creditCard.get('ref'),
                             })
-               
+                                                   
