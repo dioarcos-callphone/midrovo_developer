@@ -101,12 +101,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Función para deshabilitar el teclado
             disableKeyboard() {
-                document.addEventListener('keydown', preventKeydown);
+                document.addEventListener('keydown', this.preventKeydown);
             }
 
             // Función para habilitar nuevamente el teclado
             enableKeyboard() {
-                document.removeEventListener('keydown', preventKeydown);
+                document.removeEventListener('keydown', this.preventKeydown);
             }
 
             // Función que previene la acción del teclado
