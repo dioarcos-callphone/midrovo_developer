@@ -4,8 +4,7 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
 
     const { removeExternalListener } = owl;
 
-    const NumberBufferExtend = (NumberBuffer) =>
-        class extends NumberBuffer {
+    const NumberBufferExtend = (NumberBuffer) => class NumberBufferExtend extends NumberBuffer {
             deactivate() {
                 // Eliminar el listener de 'keyup'
                 removeExternalListener(window, "keyup", this._onKeyboardInput.bind(this));
@@ -14,6 +13,6 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
         };
 
     // Registramos la nueva clase heredada en los registros de Odoo
-    Registries.Component.extend(NumberBuffer, NumberBufferExtend);
+    Registries.Model.extend(NumberBuffer, NumberBufferExtend);
 
 });
