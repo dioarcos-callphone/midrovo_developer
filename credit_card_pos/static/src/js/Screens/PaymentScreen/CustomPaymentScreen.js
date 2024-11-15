@@ -4,6 +4,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
 
+    const { useListener } = require("@web/core/utils/hooks");
+
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
@@ -11,6 +13,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup();  // Llamar al método padre
                 this.popupActive = false;
+
+                // Agregamos el listener de keydown
+                useListener("keydown", this.onKeyDown, { capture: true });
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -100,8 +105,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             }
 
-            // Sobrescribimos el método para manejar las entradas de teclado
-            @useListener("keydown", { capture: true })
+            // Método para manejar el evento keydown
             onKeyDown(event) {
                 // Si un popup está activo, no se procesan las entradas de teclado
                 if (this.popupActive) {
