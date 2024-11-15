@@ -107,6 +107,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Método para manejar el evento keydown
             onKeyDown(event) {
+                console.log('ENTRA AL EVENTO')
                 // Si un popup está activo, no se procesan las entradas de teclado
                 if (this.popupActive) {
                     event.stopImmediatePropagation();  // Detiene la propagación del evento
