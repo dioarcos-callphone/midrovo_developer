@@ -5,6 +5,7 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
 
     // Usar una función tradicional para preservar el contexto de `this`
     NumberBuffer.deactivate = function () {
+        console.log(this);
         // Eliminar el listener de 'keyup'
         window.removeEventListener("keyup", this._onKeyboardInput);
     }
