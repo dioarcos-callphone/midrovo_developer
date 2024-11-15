@@ -9,5 +9,5 @@ odoo.define('credit_card_pos.NumberBufferExtend', function (require) {
         // Implementación adicional
     };
 
-    return NumberBuffer;
+    return new NumberBuffer();
 });
