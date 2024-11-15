@@ -3,12 +3,16 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
 
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    // Usar una función tradicional para preservar el contexto de `this`
-    NumberBuffer.deactivate = function () {
-        console.log(this);
-        // Eliminar el listener de 'keyup'
-        window.removeEventListener("keyup", this._onKeyboardInput);
-    }
+    // Sobrescribimos el método `deactivate`
+    NumberBuffer.include({
+        deactivate: function () {
+            // Eliminar el listener del teclado si está presente
+            if (this.listenerAttached) {
+                useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), true);
+                this.listenerAttached = false;
+            }
+        }
+    });
 
     return NumberBuffer;
 });
