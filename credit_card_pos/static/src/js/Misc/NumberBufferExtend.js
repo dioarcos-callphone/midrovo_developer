@@ -13,5 +13,15 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
         }
     }
 
+    NumberBuffer.activate = function () {
+        // Llamar al método original de NumberBuffer.activate()
+        if (!this.listenerAttached) {
+            // Llamamos a la implementación original de activate de NumberBuffer
+            this.activate.call(this); // Esto llama al método original
+
+            this.listenerAttached = true;
+        }
+    };
+
     return NumberBuffer;
 });
