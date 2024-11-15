@@ -1,16 +1,25 @@
-odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
+odoo.define('your_module_name.extended_number_buffer', function (require) {
     "use strict";
 
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useExternalListener } = owl;
+    // Importa el módulo o clase original que deseas extender
+    const NumberBuffer = require('your_module_name.NumberBuffer');  // Asegúrate de que la ruta sea correcta
 
-    // Sobrescribimos el método 'deactivate' de NumberBuffer
-    NumberBuffer.deactivate = function () {
-        // Elimina el listener de 'keyup' para que no escuche las teclas presionadas
-        useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), false);
-        
-        console.log("NumberBuffer deactivate ha sido llamado");
-    };
+    // Extiende la clase NumberBuffer
+    const NumberBufferExtend = NumberBuffer.extend({
+        // Agrega métodos o propiedades adicionales si es necesario
+        newMethod: function() {
+            console.log('Método extendido');
+            // Implementación adicional
+        },
 
-    return NumberBuffer;
+        // Sobrescribe un método existente si lo necesitas
+        reset: function() {
+            this._super();  // Llama al método original de la clase padre
+            console.log('Buffer ha sido reseteado');
+            // Puedes agregar lógica extra aquí
+        }
+    });
+
+    // Retorna la clase extendida para que pueda ser utilizada por otros módulos de Odoo
+    return NumberBufferExtend;
 });
