@@ -12,6 +12,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
+                console.log(this.NumberBuffer);
                 const method_name = paymentMethod.name
 
                 const isCard = await this.rpc({
@@ -32,9 +33,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         label: card.name,
                         item: card.name,
                     }));
-
-                    // Deshabilitamos el teclado antes de mostrar el primer popup
-                    this.disableKeyboard();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -80,16 +78,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // Habilitamos el teclado nuevamente después de que se hayan cerrado los popups
-                            this.enableKeyboard();
-
                             return result;
                         }
 
                     }
 
-                    // Si no se confirma, habilitamos el teclado
-                    this.enableKeyboard();
                 }
 
                 else {
@@ -97,21 +90,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
 
-            }
-
-            // Función para deshabilitar el teclado
-            disableKeyboard() {
-                document.addEventListener('keydown', this.preventKeydown);
-            }
-
-            // Función para habilitar nuevamente el teclado
-            enableKeyboard() {
-                document.removeEventListener('keydown', this.preventKeydown);
-            }
-
-            // Función que previene la acción del teclado
-            preventKeydown(event) {
-                event.preventDefault();
             }
 
         };
