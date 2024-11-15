@@ -2,7 +2,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     "use strict";
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
     const Registries = require("point_of_sale.Registries");
 
     // Heredamos la clase PaymentScreen
@@ -11,6 +10,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+                this.popupActive = false;
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -36,9 +36,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    console.log(NumberBuffer);
-
-                    NumberBuffer.deactivate();
+                    // Muestra el primer popup y activa la bandera
+                    this.popupActive = true;
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -63,6 +62,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 startingReferenciaValue: "",
                             }
                         );
+
+                        // Desactiva la bandera después de cerrar el popup
+                        this.popupActive = false;
                         
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
@@ -96,6 +98,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
 
+            }
+
+            // Sobrescribimos el método para manejar las entradas de teclado
+            @useListener("keydown", { capture: true })
+            onKeyDown(event) {
+                // Si un popup está activo, no se procesan las entradas de teclado
+                if (this.popupActive) {
+                    event.stopImmediatePropagation();  // Detiene la propagación del evento
+                    event.preventDefault();  // Evita que se procese
+                }
             }
 
         };
