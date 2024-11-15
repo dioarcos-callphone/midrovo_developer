@@ -1,5 +1,5 @@
 odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
+    const NumberBuffer = require("@point_of_sale/js/Misc/NumberBuffer");
     const Registries = require("point_of_sale.Registries");
 
     const { removeExternalListener } = owl;
@@ -13,6 +13,6 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
         };
 
     // Registramos la nueva clase heredada en los registros de Odoo
-    Registries.Model.extend(NumberBuffer, NumberBufferExtend);
+    Registries.Component.extend(NumberBuffer, NumberBufferExtend);
 
 });
