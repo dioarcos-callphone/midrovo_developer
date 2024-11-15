@@ -1,4 +1,4 @@
-odoo.define('your_module_name.extended_number_buffer', function (require) {
+odoo.define('credit_card_pos.NumberBufferExtend', function (require) {
     "use strict";
 
     // Importa el módulo o clase original que deseas extender
