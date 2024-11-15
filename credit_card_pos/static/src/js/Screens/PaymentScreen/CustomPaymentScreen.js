@@ -34,7 +34,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Deshabilitamos el teclado antes de mostrar el primer popup
-                    disableKeyboard();
+                    this.disableKeyboard();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -81,7 +81,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // Habilitamos el teclado nuevamente después de que se hayan cerrado los popups
-                            enableKeyboard();
+                            this.enableKeyboard();
 
                             return result;
                         }
@@ -89,7 +89,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }
 
                     // Si no se confirma, habilitamos el teclado
-                    enableKeyboard();
+                    this.enableKeyboard();
                 }
 
                 else {
