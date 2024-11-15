@@ -1,13 +1,12 @@
-odoo.define('credit_card_pos.NumberBufferExtend', function (require) {
+odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     "use strict";
 
-    const NumberBuffer = require('point_of_sale.NumberBuffer');  // Ruta correcta para importar NumberBuffer
+    const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    // Agrega métodos o propiedades adicionales a esta clase
-    NumberBuffer.newMethod = function () {
-        console.log('Método extendido');
-        // Implementación adicional
+    // Modificamos la función deactivate para eliminar el listener
+    NumberBuffer.deactivate = function () {
+        window.removeEventListener("keyup", this._onKeyboardInput.bind(this), false); // Elimina el listener del teclado
     };
 
-    return new NumberBuffer();
+    return NumberBuffer;
 });
