@@ -27,7 +27,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
-                    })
+                    });
 
                     // Formatear las tarjetas para el popup
                     const cardOptions = getCards.map(card => ({
@@ -36,7 +36,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    NumberBuffer.deactivate()
+                    console.log(NumberBuffer);
+
+                    NumberBuffer.deactivate();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
