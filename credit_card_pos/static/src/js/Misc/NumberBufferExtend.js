@@ -3,8 +3,15 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
 
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    NumberBuffer.deactivate = function () {
-        window.removeEventListener("keyup", this._onKeyboardInput); // Elimina el listener del teclado
+    // Sobrescribimos el método 'activate' de NumberBuffer
+    NumberBuffer.activate = function () {
+        // Llamamos al método original si es necesario
+        this._super();
+
+        // Aquí añades tu lógica personalizada
+        console.log("NumberBuffer activate ha sido llamado");
+        
+        // Puedes agregar más lógica o condiciones si es necesario
     };
 
     return NumberBuffer;

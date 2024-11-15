@@ -4,7 +4,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
 
-    const { useListener } = require("web.hooks");
+    const { useListener } = require("web/core/utils/hooks");
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
