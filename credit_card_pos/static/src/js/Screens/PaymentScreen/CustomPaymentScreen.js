@@ -33,8 +33,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    // **Bloqueamos el teclado al mostrar el primer popup**
-                    document.addEventListener("keydown", this.blockKeyboard, true);
+                    // Deshabilitamos el teclado antes de mostrar el primer popup
+                    disableKeyboard();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -46,8 +46,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
-                        // **Permitir interacción en el segundo popup**
-                        document.removeEventListener("keydown", this.blockKeyboard, true);
 
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
@@ -82,16 +80,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // **Restauramos el comportamiento normal del teclado**
-                            document.addEventListener("keydown", this.blockKeyboard, false);
+                            // Habilitamos el teclado nuevamente después de que se hayan cerrado los popups
+                            enableKeyboard();
 
                             return result;
                         }
 
                     }
 
-                    // **Restauramos el comportamiento normal si se cancela el primer popup**
-                    document.removeEventListener("keydown", this.blockKeyboard, true);
+                    // Si no se confirma, habilitamos el teclado
+                    enableKeyboard();
                 }
 
                 else {
@@ -99,6 +97,21 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
 
+            }
+
+            // Función para deshabilitar el teclado
+            disableKeyboard() {
+                document.addEventListener('keydown', preventKeydown);
+            }
+
+            // Función para habilitar nuevamente el teclado
+            enableKeyboard() {
+                document.removeEventListener('keydown', preventKeydown);
+            }
+
+            // Función que previene la acción del teclado
+            preventKeydown(event) {
+                event.preventDefault();
             }
 
         };
