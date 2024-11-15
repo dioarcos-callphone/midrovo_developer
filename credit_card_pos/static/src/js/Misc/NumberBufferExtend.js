@@ -4,22 +4,23 @@ odoo.define('credit_card_pos.NumberBufferExtend', function (require) {
     // Importa el módulo o clase original que deseas extender
     const NumberBuffer = require('point_of_sale.NumberBuffer');  // Ruta correcta para importar NumberBuffer
 
-    // Extiende la clase NumberBuffer
-    const NumberBufferExtend = NumberBuffer.extend({
-        // Agrega métodos o propiedades adicionales si es necesario
-        newMethod: function() {
-            console.log('Método extendido');
-            // Implementación adicional
-        },
+    // Crea una nueva clase que contenga una instancia de NumberBuffer
+    const NumberBufferExtend = function () {
+        this.numberBufferInstance = new NumberBuffer();
+    };
 
-        // Sobrescribe un método existente si lo necesitas
-        reset: function() {
-            this._super();  // Llama al método original de la clase padre
-            console.log('Buffer ha sido reseteado');
-            // Puedes agregar lógica extra aquí
-        }
-    });
+    // Agrega métodos o propiedades adicionales a esta clase
+    NumberBufferExtend.prototype.newMethod = function () {
+        console.log('Método extendido');
+        // Implementación adicional
+    };
 
-    // Retorna la clase extendida para que pueda ser utilizada por otros módulos de Odoo
+    // Sobrescribe un método existente si lo necesitas
+    NumberBufferExtend.prototype.reset = function () {
+        this.numberBufferInstance.reset();  // Llama al método original de NumberBuffer
+        console.log('Buffer ha sido reseteado');
+        // Puedes agregar lógica extra aquí
+    };
+
     return NumberBufferExtend;
 });
