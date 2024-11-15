@@ -2,7 +2,7 @@ odoo.define('credit_card_pos.NumberBufferExtend', function (require) {
     "use strict";
 
     // Importa el módulo o clase original que deseas extender
-    const NumberBuffer = require('your_module_name.NumberBuffer');  // Asegúrate de que la ruta sea correcta
+    const NumberBuffer = require('point_of_sale.NumberBuffer');  // Ruta correcta para importar NumberBuffer
 
     // Extiende la clase NumberBuffer
     const NumberBufferExtend = NumberBuffer.extend({
