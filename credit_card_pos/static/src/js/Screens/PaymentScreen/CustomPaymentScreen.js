@@ -3,6 +3,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
+    const NumberBuffer = require("point_of_sale.NumberBuffer");
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -35,8 +36,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    // Muestra el primer popup y activa la bandera
-                    this.popupActive = true;
+                    NumberBuffer.deactivate();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -61,9 +61,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 startingReferenciaValue: "",
                             }
                         );
-
-                        // Desactiva la bandera después de cerrar el popup
-                        this.popupActive = false;
                         
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
