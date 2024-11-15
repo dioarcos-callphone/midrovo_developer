@@ -15,7 +15,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
-                console.log(NumberBuffer);
                 const method_name = paymentMethod.name
 
                 const isCard = await this.rpc({
@@ -36,6 +35,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         label: card.name,
                         item: card.name,
                     }));
+
+                    NumberBuffer.deactivate()
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
