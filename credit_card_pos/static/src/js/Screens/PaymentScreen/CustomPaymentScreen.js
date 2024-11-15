@@ -2,7 +2,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     "use strict";
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
-    const NumberBuffer = require("credit_card_pos.NumberBufferExtend");
+    const NumberBuffer = require("point_of_sale.NumberBuffer");
     const Registries = require("point_of_sale.Registries");
 
     // Heredamos la clase PaymentScreen
