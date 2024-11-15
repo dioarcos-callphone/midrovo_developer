@@ -3,18 +3,10 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
 
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    // Guardamos una referencia al método original
-    const originalActivate = NumberBuffer.activate;
-
     // Sobrescribimos el método 'activate' de NumberBuffer
-    NumberBuffer.activate = function () {
-        // Llamamos al método original
-        if (originalActivate) {
-            originalActivate.call(this); // Ejecutamos el método original
-        }
-
-        // Añadimos lógica adicional
-        console.log("NumberBuffer activate ha sido llamado");
+    NumberBuffer.deactivate = function () {
+        useExternalListener(window, "keydown", this._onKeyboardInput.bind(this));
+        console.log("NumberBuffer deactivate ha sido llamado");
 
         // Puedes añadir más lógica si es necesario
     };
