@@ -4,7 +4,8 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     const NumberBuffer = require("point_of_sale.NumberBuffer");
     const { removeExternalListener } = owl;
 
-    NumberBuffer.deactivate = async () => {
+    // Usar una función tradicional para preservar el contexto de `this`
+    NumberBuffer.deactivate = function () {
         // Eliminar el listener de 'keyup'
         removeExternalListener(window, "keyup", this._onKeyboardInput.bind(this));
     }
