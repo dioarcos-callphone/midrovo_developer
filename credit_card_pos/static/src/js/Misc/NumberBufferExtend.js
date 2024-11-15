@@ -1,4 +1,6 @@
 odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
+    "use strict";
+    
     const NumberBuffer = require("point_of_sale.NumberBuffer");
     const Registries = require("point_of_sale.Registries");
     // const { removeExternalListener } = owl;

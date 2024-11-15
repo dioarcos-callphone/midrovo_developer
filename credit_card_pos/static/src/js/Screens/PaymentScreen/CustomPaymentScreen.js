@@ -1,4 +1,6 @@
 odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
+    "use strict";
+    
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
 
