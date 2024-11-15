@@ -36,7 +36,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    NumberBuffer.newMethod();
+                    console.log(NumberBuffer);
+
+                    NumberBuffer.prototype.newMethod();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
