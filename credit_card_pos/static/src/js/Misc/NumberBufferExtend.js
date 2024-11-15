@@ -4,25 +4,26 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     const NumberBuffer = require("point_of_sale.NumberBuffer");
     const { useExternalListener } = owl;
 
-    // Sobrescribir el método activate para agregar listenerAttached
-    NumberBuffer.prototype.activate = function () {
-        // Llamar al método original de NumberBuffer.activate()
-        if (!this.listenerAttached) {
-            // Llamamos a la implementación original de activate de NumberBuffer
-            NumberBuffer.prototype.activate.call(this); // Esto llama al método original
+    // Usar una función tradicional para preservar el contexto de `this`
+    NumberBuffer.deactivate = function () {
+        useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), true);
+        this.listenerAttached = false;
+        // if (this.listenerAttached) {
+        //     // Eliminar el listener de teclado si está presente
+        //     useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), true);
+        //     this.listenerAttached = false;
+        // }
+    }
 
-            this.listenerAttached = true;
-        }
-    };
+    // NumberBuffer.activate = function () {
+    //     // Llamar al método original de NumberBuffer.activate()
+    //     if (!this.listenerAttached) {
+    //         // Llamamos a la implementación original de activate de NumberBuffer
+    //         this.activate.call(this); // Esto llama al método original
 
-    // Añadir el método deactivate para eliminar el listener
-    NumberBuffer.prototype.deactivate = function () {
-        // Verificar si el listener está adjunto antes de intentar eliminarlo
-        if (this.listenerAttached) {
-            useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), true);
-            this.listenerAttached = false;
-        }
-    };
+    //         this.listenerAttached = true;
+    //     }
+    // };
 
     return NumberBuffer;
 });
