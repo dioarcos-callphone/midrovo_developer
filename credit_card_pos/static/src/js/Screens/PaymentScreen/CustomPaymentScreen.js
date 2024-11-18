@@ -6,7 +6,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
     const { removeEventListener } = owl;
-    const { useListener } = require("@web/core/utils/hooks")
 
     // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
@@ -19,7 +18,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
-                useListener("new-payment-line", this.addNewPaymentLine);
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
                 NumberBuffer.use(this.numberBufferDeactivate);
