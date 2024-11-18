@@ -6,9 +6,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
     // Se añade la función deactivate para eliminar el listener
-    // NumberBuffer.deactivate = function () {
-    //     useExternalListener(window, "keyup", null); // Elimina el listener del teclado
-    // };
+    NumberBuffer.deactivate = function () {
+        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
+    };
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -16,14 +16,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+                useListener("new-payment-line", this.addNewPaymentLine);
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
-                NumberBuffer.use(this.numberBufferDeactivate);
+                // NumberBuffer.use(this.numberBufferDeactivate);
             }
 
-            numberBufferDeactivate() {
-                NumberBuffer.deactivate();
-            }
+            // numberBufferDeactivate() {
+            //     NumberBuffer.deactivate();
+            // }
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -47,6 +48,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         label: card.name,
                         item: card.name,
                     }));
+
+                    NumberBuffer.deactivate();
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
