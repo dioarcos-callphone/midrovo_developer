@@ -5,7 +5,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    const { removeEventListener, onMounted } = owl;
+    const { removeEventListener } = owl;
 
     // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
@@ -20,17 +20,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup();  // Llamar al método padre
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
-                // Usamos onMounted para ejecutar lógica después de que el componente se monta
-                onMounted(() => {
-                    NumberBuffer.deactivate();
-                    console.log("CustomPaymentScreen montado y listo para usarse");
-                    // Aquí puedes agregar más lógica si lo necesitas
-                });
+                NumberBuffer.use(this.numberBufferDeactivate);
             }
 
-            // numberBufferDeactivate() {
-            //     NumberBuffer.deactivate();
-            // }
+            numberBufferDeactivate() {
+                NumberBuffer.deactivate();
+            }
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -99,7 +94,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     p.creditCard = credit_card
                                 }
                             }
-    
+
+                            NumberBuffer.activate()
                             return result;
                         }
 
@@ -109,6 +105,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 else {
                     // Retornamos el método original de PaymentScreen utilizando super
+                    NumberBuffer.activate()
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
 
