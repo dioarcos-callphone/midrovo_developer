@@ -14,7 +14,7 @@ class AccountMoveInherit(models.Model):
         
         # Agregar lógica personalizada
         for move in self:
-            _logger.info(f'MOSTRANDO MOVE >>> { move }')
+            _logger.info(f'MOSTRANDO MOVE >>> { move.invoice_payments_widget }')
             # if move.state == 'posted' and move.is_invoice(include_receipts=True):
             #     # Personaliza o añade campos adicionales a payments_widget_vals
             #     if move.invoice_payments_widget:
