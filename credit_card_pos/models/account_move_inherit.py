@@ -21,13 +21,9 @@ class AccountMoveInherit(models.Model):
                     
                     for payment in move.invoice_payments_widget['content']:
                         _logger.info(f'MOSTRANDO CONTENT >>> { payment }')
-                        pos_payment_name = payment['pos_payment_name']
-                        amount = payment['amount']
                         
-                        pos_payment = self.env['pos.payment'].search([
-                            ('name', '=', pos_payment_name),
-                            ('amount', '=', amount),
-                        ])
+                        pos_payment = move.pos_order_ids.pos_payment
+                        
                         
                         # Agregar más campos personalizados al diccionario reconciled_vals
                         _logger.info(f'MOSTRANDO POS PAYMENT >>> { pos_payment }')
