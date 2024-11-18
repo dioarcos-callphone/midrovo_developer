@@ -3,7 +3,7 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
     const Registries = require("point_of_sale.Registries");
     const { _lt } = require("@web/core/l10n/translation");
     
-    const { onMounted, useRef, useState } = owl;
+    const { onMounted, onWillUnmount, useRef, useState } = owl;
 
     // Definir el popup extendiendo AbstractAwaitablePopup
     const RecapAuthPopup = class extends AbstractAwaitablePopup {
@@ -22,11 +22,36 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
             this.inputReferenciaRef = useRef("inputReferencia");
 
             onMounted(this.onMounted);
+
+            // Inicializar referencia para el manejador del teclado
+            this.keydownListener = null;
         }
 
         onMounted() {
             // Enfocar el campo RECAP por defecto al abrir el popup
             this.inputRecapRef.el.focus();
+        }
+
+        onWillUnmount() {
+            // Restaurar el teclado al cerrar el popup
+            this.enableKeyboard();
+        }
+
+        disableKeyboard() {
+            // Desactiva los eventos del teclado
+            this.keydownListener = (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+            };
+            document.addEventListener("keydown", this.keydownListener);
+        }
+
+        enableKeyboard() {
+            // Restaura los eventos del teclado
+            if (this.keydownListener) {
+                document.removeEventListener("keydown", this.keydownListener);
+                this.keydownListener = null;
+            }
         }
 
         getPayload() {
