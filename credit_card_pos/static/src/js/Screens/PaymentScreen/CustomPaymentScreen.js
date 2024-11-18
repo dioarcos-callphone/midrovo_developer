@@ -9,16 +9,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     // Extender el AbstractPopup para manejar el estado del teclado
     const CustomAbstractPopup = (AbstractAwaitablePopup) =>
         class extends AbstractAwaitablePopup {
+            setup() {
+                super.setup();
+            }
+            
             willStart() {
                 // Antes de mostrar el popup, desactiva el teclado
-                isPopupOpen = true;
                 NumberBuffer.deactivate();
                 return super.willStart();
             }
 
             willUnmount() {
                 // Al cerrar el popup, reactiva el teclado
-                isPopupOpen = false;
                 NumberBuffer.activate();
                 return super.willUnmount();
             }
