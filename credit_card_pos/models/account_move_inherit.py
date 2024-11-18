@@ -22,9 +22,13 @@ class AccountMoveInherit(models.Model):
                     for payment in move.invoice_payments_widget['content']:
                         _logger.info(f'MOSTRANDO CONTENT >>> { payment }')
                         
-                        pos_payment = move.pos_order_ids
+                        pos_order = move.pos_order_ids
+                        
+                        if pos_order:
+                            for payment in pos_order.payment_ids:
+                                _logger.info(f'MOVE { move.id } - { payment.credit_card_id }')
                         
                         
                         # Agregar más campos personalizados al diccionario reconciled_vals
-                        _logger.info(f'MOSTRANDO POS PAYMENT >>> { pos_payment }')
+                        # _logger.info(f'MOSTRANDO POS PAYMENT >>> { pos_payment }')
                         ##_logger.info(f'OBTENIENDO PAYMENTS IDS >>> { move.pos_order_ids.payment_ids }')
