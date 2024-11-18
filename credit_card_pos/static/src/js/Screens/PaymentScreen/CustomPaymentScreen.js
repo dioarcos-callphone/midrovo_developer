@@ -13,14 +13,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup();  // Llamar al método padre
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
-                // NumberBuffer.use((control) => this.numberActivateToggle(control));
+                NumberBuffer.deactivate();
             }
 
-            numberActivateToggle(control) {
-                // if (typeof control === 'boolean') {
-                //     control ? NumberBuffer.deactivate() : NumberBuffer.activate();
-                // }
-            }
+            // numberBufferDeactivate() {
+            //     NumberBuffer.dea
+            // }
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -30,7 +28,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     model: "pos.payment.method",
                     method: "is_card",
                     args: [ method_name ]
-                })
+                });
 
                 if(isCard) {
                     const getCards = await this.rpc({

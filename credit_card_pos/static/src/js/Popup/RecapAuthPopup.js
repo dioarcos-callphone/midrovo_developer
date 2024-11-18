@@ -2,7 +2,6 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
     const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
     const Registries = require("point_of_sale.Registries");
     const { _lt } = require("@web/core/l10n/translation");
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
     
     const { onMounted, useRef, useState } = owl;
 
@@ -27,7 +26,6 @@ odoo.define("credit_card_pos.RecapAuthPopup", (require) => {
 
         onMounted() {
             // Enfocar el campo RECAP por defecto al abrir el popup
-            NumberBuffer.deactivate();
             this.inputRecapRef.el.focus();
         }
 
