@@ -23,7 +23,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             }
 
             onMounted() {
-                console.log("CustomPaymentScreen montado y listo para usarse");
+                onMounted(() => {
+                    console.log("CustomPaymentScreen montado y listo para usarse");
+                    // Aquí puedes agregar más lógica si lo necesitas
+                });
             };
 
             numberBufferDeactivate() {
