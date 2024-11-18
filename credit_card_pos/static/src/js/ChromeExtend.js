@@ -8,7 +8,6 @@ odoo.define("credit_card_pos.ChromeExtend", (require) => {
         class extends Chrome {
             setup() {
                 super.setup()
-                
             }
         }
 
