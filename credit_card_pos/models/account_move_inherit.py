@@ -27,8 +27,10 @@ class AccountMoveInherit(models.Model):
                         if pos_order:
                             for payment in pos_order.payment_ids:
                                 _logger.info(f'MOVE { move.id } - { payment.credit_card_info_id }')
+                                payment['credit_card'] = payment.credit_card_info_id.credit_card_id.name
+                                payment['recap'] = payment.credit_card_info_id.recap
+                                payment['auth'] = payment.credit_card_info_id.authorization
+                                payment['ref'] = payment.credit_card_info_id.reference
                         
                         
-                        # Agregar más campos personalizados al diccionario reconciled_vals
-                        # _logger.info(f'MOSTRANDO POS PAYMENT >>> { pos_payment }')
-                        ##_logger.info(f'OBTENIENDO PAYMENTS IDS >>> { move.pos_order_ids.payment_ids }')
+                        _logger.info(f'MOSTRANDO CONTENT >>> { payment }')
