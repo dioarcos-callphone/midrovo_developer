@@ -20,14 +20,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup();  // Llamar al método padre
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
-            }
-
-            onMounted() {
+                // Usamos onMounted para ejecutar lógica después de que el componente se monta
                 onMounted(() => {
                     console.log("CustomPaymentScreen montado y listo para usarse");
                     // Aquí puedes agregar más lógica si lo necesitas
                 });
-            };
+            }
 
             numberBufferDeactivate() {
                 NumberBuffer.deactivate();
