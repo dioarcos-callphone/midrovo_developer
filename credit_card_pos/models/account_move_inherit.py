@@ -20,7 +20,3 @@ class AccountMoveInherit(models.Model):
                     for payment in move.invoice_payments_widget['content']:
                         # Agregar más campos personalizados al diccionario reconciled_vals
                         _logger.info('OBTENIENDO PAYMENTS IDS >>> ',move.pos_order_ids.payment_ids)
-                        payment['credit_card'] = 'Valor adicional 1'  # Ejemplo estático
-                        payment['recap'] = self._compute_custom_value(move)  # Ejemplo dinámico
-                        payment['auth'] = payment.get('ref', 'Sin referencia')  # Basado en datos existentes
-                        payment['ref'] = payment.get('ref', 'Sin referencia')  # Basado en datos existentes
