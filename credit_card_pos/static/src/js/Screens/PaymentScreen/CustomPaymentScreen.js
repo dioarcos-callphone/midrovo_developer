@@ -14,12 +14,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Usamos el la función use para que desactive el evento del teclado
                 // cuando se habilite el popup para las tarjetas de credito
-                NumberBuffer.use(this.numberActivateToggle);
+                NumberBuffer.use((control) => this.numberActivateToggle(control));
+
             }
 
-            numberActivateToggle() {
-                NumberBuffer.deactivate();
-                
+            numberActivateToggle(control) {
+                if (typeof control === 'boolean') {
+                    control ? NumberBuffer.deactivate() : NumberBuffer.activate();
+                }
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -45,7 +47,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                
+                    this.numberActivateToggle(true);
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -90,12 +92,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     p.creditCard = credit_card
                                 }
                             }
-
-                            
+    
                             return result;
                         }
 
+                        this.numberActivateToggle(false);
                     }
+
+                    this.numberActivateToggle(false);
 
                 }
 
