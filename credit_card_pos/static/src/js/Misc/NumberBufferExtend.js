@@ -2,6 +2,7 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     "use strict";
 
     const NumberBuffer = require("point_of_sale.NumberBuffer");
+    const { useExternalListener } = owl;
 
     // Guardamos la función de evento fuera para reutilizarla
     NumberBuffer._onKeyboardInput = NumberBuffer._onKeyboardInput;
