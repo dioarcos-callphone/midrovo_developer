@@ -14,9 +14,13 @@ class AccountMoveInherit(models.Model):
         
         # Agregar lógica personalizada
         for move in self:
-            _logger.info(f'MOSTRANDO MOVE >>> { move.invoice_payments_widget }')
-            # if move.state == 'posted' and move.is_invoice(include_receipts=True):
-            #     # Personaliza o añade campos adicionales a payments_widget_vals
-            #     if move.invoice_payments_widget:
-            #         for payment in move.invoice_payments_widget.get('content', []):
-            #             payment['custom_field'] = 'Valor personalizado'  # Ejemplo
+            if move.state == 'posted' and move.is_invoice(include_receipts=True):
+                # Verificar si ya hay contenido en el widget
+                if move.invoice_payments_widget and move.invoice_payments_widget.get('content'):
+                    for payment in move.invoice_payments_widget['content']:
+                        # Agregar más campos personalizados al diccionario reconciled_vals
+                        _logger.info('OBTENIENDO PAYMENTS IDS >>> ',move.pos_order_ids.payment_ids)
+                        payment['credit_card'] = 'Valor adicional 1'  # Ejemplo estático
+                        payment['recap'] = self._compute_custom_value(move)  # Ejemplo dinámico
+                        payment['auth'] = payment.get('ref', 'Sin referencia')  # Basado en datos existentes
+                        payment['ref'] = payment.get('ref', 'Sin referencia')  # Basado en datos existentes
