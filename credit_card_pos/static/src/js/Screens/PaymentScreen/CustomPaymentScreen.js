@@ -95,7 +95,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            NumberBuffer.activate()
                             return result;
                         }
 
@@ -105,7 +104,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 else {
                     // Retornamos el método original de PaymentScreen utilizando super
-                    NumberBuffer.activate()
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
 
