@@ -11,7 +11,7 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     NumberBuffer.deactivate = function () {
         console.log('ENTRA EN LA FUNCION DEACTIVATE');
         this.defaultDecimalPoint = null; // Limpia el valor predeterminado
-        this.el.removeEventListener("keyup", null);
+        window.removeEventListener("keyup", null);
         // useExternalListener(window, "keyup", null); // Elimina el listener del teclado
     };
 

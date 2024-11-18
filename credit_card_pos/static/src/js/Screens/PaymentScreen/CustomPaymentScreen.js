@@ -11,6 +11,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+                NumberBuffer.use(this.numberDeactivate);
+            }
+
+            numberDeactivate() {
+                NumberBuffer.deactivate();
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -34,9 +39,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         id: card.id,
                         label: card.name,
                         item: card.name,
-                    }));
-
-                    NumberBuffer.deactivate();     
+                    })); 
 
                     // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
