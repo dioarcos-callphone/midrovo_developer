@@ -11,6 +11,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+
+                // Usamos el la función use para que desactive el evento del teclado cuando se habilite el popup
                 NumberBuffer.use(this.numberDeactivate);
             }
 
