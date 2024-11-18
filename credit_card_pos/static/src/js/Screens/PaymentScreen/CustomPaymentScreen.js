@@ -4,28 +4,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
-
-    // Extender el AbstractPopup para manejar el estado del teclado
-    const CustomAbstractPopup = (AbstractAwaitablePopup) =>
-        class extends AbstractAwaitablePopup {
-            setup() {
-                super.setup();
-            }
-            
-            willStart() {
-                // Antes de mostrar el popup, desactiva el teclado
-                NumberBuffer.deactivate();
-                return super.willStart();
-            }
-
-            willUnmount() {
-                // Al cerrar el popup, reactiva el teclado
-                NumberBuffer.activate();
-                return super.willUnmount();
-            }
-        };
-    Registries.Component.extend(AbstractAwaitablePopup, CustomAbstractPopup);
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -36,7 +14,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Desactivamos el evento del teclado cuando se habilite el popup para las tarjetas de credito
                 // NumberBuffer.use((control) => this.numberActivateToggle(control));
-
             }
 
             numberActivateToggle(control) {
