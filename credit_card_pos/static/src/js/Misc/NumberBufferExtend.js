@@ -7,9 +7,8 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     // Guardamos la función de evento fuera para reutilizarla
     NumberBuffer._onKeyboardInput = NumberBuffer._onKeyboardInput;
 
-    // Modificamos la función deactivate para eliminar el listener
+    // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
-        // window.removeEventListener("keyup", null);
         useExternalListener(window, "keyup", null); // Elimina el listener del teclado
     };
 
