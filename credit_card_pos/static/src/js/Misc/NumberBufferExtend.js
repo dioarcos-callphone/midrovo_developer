@@ -13,4 +13,5 @@ odoo.define("credit_card_pos.NumberBufferExtend", (require) => {
     };
 
     return NumberBuffer;
+    
 });
