@@ -3,6 +3,7 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
 
     // Importamos las dependencias necesarias
     const SelectionPopup = require("point_of_sale.SelectionPopup");
+    const Registries = require("point_of_sale.Registries");
     const { useListener } = require("@web/core/utils/hooks");
     const { removeEventListener, addEventListener } = owl;
 
@@ -34,7 +35,7 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
         };
 
     // Registramos el componente extendido
-    Registries.Component.add(CustomSelectionPopup);
+    Registries.Component.extend(SelectionPopup, CustomSelectionPopup);
 
     return CustomSelectionPopup;
 });
