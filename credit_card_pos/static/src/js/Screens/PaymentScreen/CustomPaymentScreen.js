@@ -18,13 +18,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup();
-                this.bus = useBus(); // Instancia del Bus
                 // Escuchar eventos del Bus
-                console.log("MOSTRANDO USE BUS");
-                console.log(this.env.bus);
-                console.log(useBus);
-                this.bus.on("modal:opened", this, this._onModalOpened);
-                this.bus.on("modal:closed", this, this._onModalClosed);
+                useBus(this.env.bus, "modal:opened", event => {
+                    console.log("EVENTO OPENED");
+                });
+
+                useBus(this.env.bus, "modal:closed", event => {
+                    console.log("EVENTO CLOSED");
+                });
+                // useBus("modal:opened", this, this._onModalOpened);
+                // useBus("modal:closed", this, this._onModalClosed);
             }
 
             _onModalOpened() {
@@ -59,7 +62,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Emitir el evento de apertura de modal
-                    this.bus.trigger("modal:opened");
+                    this.env.bus.trigger("modal:opened");
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",
                         {
@@ -98,13 +101,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // Emitir el evento de cierre de modal
-                            this.bus.trigger("modal:closed");
+                            this.env.bus.trigger("modal:closed");
                             return result;
                         }
                     }
 
                     // Emitir el evento de cierre de modal si se cancela
-                    this.bus.trigger("modal:closed");
+                    this.env.bus.trigger("modal:closed");
                 } else {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
