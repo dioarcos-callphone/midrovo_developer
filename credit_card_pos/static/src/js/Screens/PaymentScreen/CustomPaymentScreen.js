@@ -4,7 +4,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useBus } = require("@web/core");  // Asegúrate de usar la importación correcta
+    const { Bus } = require("web.core");  // Utilizamos el Bus de Odoo
+
     const { removeEventListener } = owl;
 
     // Se añade la función deactivate para eliminar el listener
@@ -18,26 +19,29 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup para añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
-                // Usamos el bus de eventos para escuchar cuando el popup se muestra y se cierra
                 this._onPopupShown();
             }
 
             _onPopupShown() {
                 // Escuchar el evento cuando se muestra el popup
-                useBus().on('popup:shown', (popupName) => {
-                    if (popupName === "RecapAuthPopup") {
-                        // Cuando se muestra el RecapAuthPopup, desactivar NumberBuffer
-                        NumberBuffer.use(this.numberBufferDeactivate);
-                    }
-                });
+                Bus.on('popup:shown', this._handlePopupShown.bind(this));
 
                 // Escuchar el evento cuando se cierra el popup
-                useBus().on('popup:closed', (popupName) => {
-                    if (popupName === "RecapAuthPopup") {
-                        // Cuando se cierra el RecapAuthPopup, activar NumberBuffer
-                        NumberBuffer.use(this.numberBufferActivate);
-                    }
-                });
+                Bus.on('popup:closed', this._handlePopupClosed.bind(this));
+            }
+
+            _handlePopupShown(popupName) {
+                if (popupName === "RecapAuthPopup") {
+                    // Cuando se muestra el RecapAuthPopup, desactivar NumberBuffer
+                    NumberBuffer.use(this.numberBufferDeactivate);
+                }
+            }
+
+            _handlePopupClosed(popupName) {
+                if (popupName === "RecapAuthPopup") {
+                    // Cuando se cierra el RecapAuthPopup, activar NumberBuffer
+                    NumberBuffer.use(this.numberBufferActivate);
+                }
             }
 
             numberBufferDeactivate() {
