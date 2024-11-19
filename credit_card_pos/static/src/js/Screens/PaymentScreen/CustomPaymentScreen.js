@@ -8,6 +8,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const { useBus } = require("@web/core/utils/hooks");
     const { removeEventListener } = owl;
 
+    const { bus, trigger } = useBus();
+
     // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
         removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
@@ -19,12 +21,20 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup();
                 // Escuchar eventos del Bus
-                useBus(this.env.bus, "modal:opened", event => {
-                    console.log("EVENTO OPENED");
+                // useBus(this.env.bus, "modal:opened", event => {
+                //     console.log("EVENTO OPENED");
+                // });
+
+                // useBus(this.env.bus, "modal:closed", event => {
+                //     console.log("EVENTO CLOSED");
+                // });
+
+                bus.on('modal:opened', (payload) => {
+                    console.log('EVENTO OPENED');
                 });
 
-                useBus(this.env.bus, "modal:closed", event => {
-                    console.log("EVENTO CLOSED");
+                bus.on('modal:closed', (payload) => {
+                    console.log('EVENTO CLOSED');
                 });
                 // useBus("modal:opened", this, this._onModalOpened);
                 // useBus("modal:closed", this, this._onModalClosed);
