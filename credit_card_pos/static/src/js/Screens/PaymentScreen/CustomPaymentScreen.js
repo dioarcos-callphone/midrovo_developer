@@ -4,31 +4,19 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-
     const { useBus } = require("@web/core/utils/hooks");
     const { removeEventListener } = owl;
-
-    const { bus, trigger } = useBus();
-
-    // Se añade la función deactivate para eliminar el listener
-    NumberBuffer.deactivate = function () {
-        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
-    };
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup();
+
+                // Inicializar useBus dentro de setup()
+                const { bus, trigger } = useBus();
+
                 // Escuchar eventos del Bus
-                // useBus(this.env.bus, "modal:opened", event => {
-                //     console.log("EVENTO OPENED");
-                // });
-
-                // useBus(this.env.bus, "modal:closed", event => {
-                //     console.log("EVENTO CLOSED");
-                // });
-
                 bus.on('modal:opened', (payload) => {
                     console.log('EVENTO OPENED');
                 });
@@ -36,18 +24,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 bus.on('modal:closed', (payload) => {
                     console.log('EVENTO CLOSED');
                 });
-                // useBus("modal:opened", this, this._onModalOpened);
-                // useBus("modal:closed", this, this._onModalClosed);
-            }
 
-            _onModalOpened() {
-                // Desactivar el teclado
-                NumberBuffer.deactivate();
-            }
-
-            _onModalClosed() {
-                // Activar el teclado
-                NumberBuffer.activate();
+                // Se añade la función deactivate para eliminar el listener
+                NumberBuffer.deactivate = function () {
+                    removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
+                };
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -72,8 +53,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Emitir el evento de apertura de modal
-                    // this.env.bus.trigger("modal:opened");
-                    trigger("modal:opened")
+                    trigger("modal:opened");
+
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",
                         {
@@ -112,15 +93,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // Emitir el evento de cierre de modal
-                            //this.env.bus.trigger("modal:closed");
-                            trigger("modal:closed")
+                            trigger("modal:closed");
                             return result;
                         }
                     }
 
                     // Emitir el evento de cierre de modal si se cancela
-                    //this.env.bus.trigger("modal:closed");
-                    trigger("modal:closed")
+                    trigger("modal:closed");
                 } else {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
