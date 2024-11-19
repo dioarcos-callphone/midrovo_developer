@@ -2,11 +2,11 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
     "use strict";
 
     const { Component } = owl;
-    const AbstractPopup = require("point_of_sale.AbstractPopup");
+    const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
     const Registries = require("point_of_sale.Registries");
 
-    const CustomPopup = (AbstractPopup) =>
-        class extends AbstractPopup {
+    const CustomPopup = (AbstractAwaitablePopup) =>
+        class extends AbstractAwaitablePopup {
             mounted() {
                 super.mounted();
                 // Emitimos el evento cuando el popup se muestra
@@ -20,5 +20,5 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
             }
         };
 
-    Registries.Component.extend(AbstractPopup, CustomPopup);
+    Registries.Component.extend(AbstractAwaitablePopup, CustomPopup);
 });
