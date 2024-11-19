@@ -33,10 +33,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
              * Activa los eventos de teclado en NumberBuffer
              */
             activateNumberBuffer() {
+                if (!this._onKeyboardInput) {
+                    console.error("Método _onKeyboardInput no está definido.");
+                    return;
+                }
                 if (this._keyboardListener) return; // Ya activado
                 this._keyboardListener = this._onKeyboardInput.bind(this);
                 window.addEventListener("keyup", this._keyboardListener);
             }
+            
 
             /**
              * Sobrescribe `addNewPaymentLine` para manejar lógica de popups
