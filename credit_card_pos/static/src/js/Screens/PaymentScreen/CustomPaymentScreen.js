@@ -4,17 +4,24 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-
-    const { removeEventListener, useExternalListener } = owl;
+    const { useExternalListener } = require('web.core'); // Asegúrate de importar useExternalListener
 
     // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
-        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
+        // Aquí no usamos removeEventListener directamente, sino que aprovechamos useExternalListener para limpiar el evento
+        if (this._onKeyboardInput) {
+            // Limpiar el listener cuando ya no lo necesitemos
+            this._externalListener && this._externalListener();
+            this._externalListener = null;
+        }
     };
 
     // Se añade la función activate para agregar el listener
     NumberBuffer.activate = function () {
-        useExternalListener(window, "keyup", this._onKeyboardInput.bind(this)); // Agrega el listener del teclado
+        // Utilizamos useExternalListener para escuchar el evento
+        if (!this._externalListener) {
+            this._externalListener = useExternalListener(window, "keyup", this._onKeyboardInput.bind(this));
+        }
     };
 
     // Heredamos la clase PaymentScreen
