@@ -4,7 +4,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useBus } = require("@web/core/utils/hooks");
     const { removeEventListener } = owl;
 
     // Heredamos la clase PaymentScreen
@@ -13,8 +12,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup();
 
-                // Inicializar useBus dentro de setup()
-                const { bus, trigger } = useBus();
+                // Usamos el bus directamente desde this.env
+                const bus = this.env.bus;
+                const trigger = bus.trigger.bind(bus);
 
                 // Escuchar eventos del Bus
                 bus.on('modal:opened', (payload) => {
