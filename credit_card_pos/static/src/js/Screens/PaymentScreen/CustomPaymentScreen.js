@@ -18,6 +18,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+                NumberBuffer.use(this.numberBufferDeactivate)
+                
+            }
+
+            numberBufferDeactivate() {
                 NumberBuffer.deactivate
             }
 
