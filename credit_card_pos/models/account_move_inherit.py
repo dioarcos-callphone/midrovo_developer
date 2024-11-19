@@ -26,9 +26,9 @@ class AccountMoveInherit(models.Model):
                         
                         if pos_order:
                             for p in pos_order.payment_ids:
-                                _logger.info(f'MOVE { move.id } - { payment.credit_card_info_id }')
+                                # _logger.info(f'MOVE { move.id } - { payment.credit_card_info_id }')
                                 
-                                if payment.credit_card_info_id:
+                                if p.credit_card_info_id:
                                     payment['credit_card'] = p.credit_card_info_id.credit_card_id.name
                                     payment['recap'] = p.credit_card_info_id.recap
                                     payment['auth'] = p.credit_card_info_id.authorization
