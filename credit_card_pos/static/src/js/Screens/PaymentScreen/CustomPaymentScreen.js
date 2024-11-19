@@ -4,7 +4,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useBus } = require("web.core");
+    const { useBus } = require("@web/core");  // Asegúrate de usar la importación correcta
     const { removeEventListener } = owl;
 
     // Se añade la función deactivate para eliminar el listener
