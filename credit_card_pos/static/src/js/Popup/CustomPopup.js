@@ -2,8 +2,8 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
     "use strict";
 
     // Importamos las dependencias necesarias
-    const SelectionPopup = require("@point_of_sale/js/Popups/SelectionPopup");
-    const { useListener } = require("web.custom_hooks");
+    const SelectionPopup = require("point_of_sale.SelectionPopup");
+    const { useListener } = require("@web/core/utils/hooks");
     const { removeEventListener, addEventListener } = owl;
 
     // Extiende la clase SelectionPopup
