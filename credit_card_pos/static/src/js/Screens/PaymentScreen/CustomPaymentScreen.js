@@ -4,7 +4,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useListener } = require("@web/core/utils/hooks");  // Importamos useListener
+    const { useListener } = require("@web/core/utils/hooks");
 
     const { removeEventListener, addEventListener } = owl;
 
@@ -30,25 +30,27 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Función para manejar el evento cuando el popup se abre
             _onPopupOpened() {
+                console.log("Popup abierto");
                 NumberBuffer.activate();  // Activamos el buffer de números
             }
 
             // Función para manejar el evento cuando el popup se cierra
             _onPopupClosed() {
+                console.log("Popup cerrado");
                 NumberBuffer.deactivate();  // Desactivamos el buffer de números
             }
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
-                const method_name = paymentMethod.name
+                const method_name = paymentMethod.name;
 
                 const isCard = await this.rpc({
                     model: "pos.payment.method",
                     method: "is_card",
-                    args: [ method_name ],
+                    args: [method_name],
                 });
 
-                if(isCard) {
+                if (isCard) {
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
@@ -71,6 +73,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
+                        // Disparar el evento cuando el popup se abra
+                        this.trigger("popup_opened");
 
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
@@ -84,7 +88,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 startingReferenciaValue: "",
                             }
                         );
-                        
+
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
 
@@ -93,26 +97,23 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 recap: recap,
                                 auth: autorizacion,
                                 ref: referencia,
-                            }
+                            };
 
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
-                            
+
                             // Aqui se añade en el diccionario la llave creditCard para almacenar los valores
                             // que se encuentran en la variable credit_card
-                            for(let p of this.paymentLines) {
-                                if(!p.creditCard && paymentMethod.id === p.payment_method.id) {
-                                    p.creditCard = credit_card
+                            for (let p of this.paymentLines) {
+                                if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
+                                    p.creditCard = credit_card;
                                 }
                             }
 
                             return result;
                         }
-
                     }
 
-                }
-
-                else {
+                } else {
                     // Retornamos el método original de PaymentScreen utilizando super
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
