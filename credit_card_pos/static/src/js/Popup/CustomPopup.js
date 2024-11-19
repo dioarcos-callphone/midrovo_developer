@@ -1,46 +1,40 @@
-odoo.define("credit_card_pos.CustomPopup", (require) => {
+odoo.define("credit_card_pos.CustomSelectionPopup", (require) => {
     "use strict";
 
-    const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
-    const { Registries } = require("point_of_sale.Registries");
+    // Importamos las dependencias necesarias
+    const SelectionPopup = require("@point_of_sale/js/Popups/SelectionPopup");
+    const { useListener } = require("web.custom_hooks");
+    const { removeEventListener, addEventListener } = owl;
 
-    // Verificamos que AbstractAwaitablePopup esté registrado
-    Registries.Component.add(AbstractAwaitablePopup);
-
-    // Extender el AbstractAwaitablePopup
-    const CustomPopup = AbstractAwaitablePopup =>
-        class extends AbstractAwaitablePopup {
-            mounted() {
-                super.mounted();
-                // Emitimos el evento cuando el popup se muestra
-                this.trigger("show-popup", { popupId: this.props.id });
+    // Extiende la clase SelectionPopup
+    const CustomSelectionPopup = (SelectionPopup) =>
+        class extends SelectionPopup {
+            constructor() {
+                super(...arguments); // Llamamos al constructor de la clase base
+                useListener("show-popup", this._onPopupShown);  // Escuchamos cuando el popup se muestra
+                useListener("close-popup", this._onPopupClosed); // Escuchamos cuando el popup se cierra
             }
 
-            willUnmount() {
-                // Emitimos el evento cuando el popup se cierra
-                this.trigger("close-popup", { popupId: this.props.id });
-                super.willUnmount();
+            setup() {
+                super.setup(); // Llamamos a la configuración original de SelectionPopup
+                // Agregamos nuestra lógica de setup personalizada si es necesario
             }
 
-            async confirm() {
-                // Confirmación personalizada antes de llamar a la lógica base
-                await super.confirm();
-                this.env.posbus.trigger("close-popup", {
-                    popupId: this.props.id,
-                    response: { confirmed: true },
-                });
+            _onPopupShown() {
+                console.log("Popup mostrado: desactivando teclado");
+                // Aquí desactivamos el NumberBuffer para el evento de teclado
+                NumberBuffer.deactivate();
             }
 
-            cancel() {
-                // Cancelación personalizada antes de llamar a la lógica base
-                super.cancel();
-                this.env.posbus.trigger("close-popup", {
-                    popupId: this.props.id,
-                    response: { confirmed: false },
-                });
+            _onPopupClosed() {
+                console.log("Popup cerrado: reactivando teclado");
+                // Reactivamos el NumberBuffer cuando se cierra el popup
+                NumberBuffer.activate();
             }
         };
 
-    // Registrar el componente extendido en el registro de Odoo
-    Registries.Component.extend(AbstractAwaitablePopup, CustomPopup);
+    // Registramos el componente extendido
+    Registries.Component.add(CustomSelectionPopup);
+
+    return CustomSelectionPopup;
 });
