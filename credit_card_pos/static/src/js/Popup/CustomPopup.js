@@ -1,4 +1,4 @@
-odoo.define("credit_card_pos.CustomSelectionPopup", (require) => {
+odoo.define("credit_card_pos.CustomPopup", (require) => {
     "use strict";
 
     // Importamos las dependencias necesarias
