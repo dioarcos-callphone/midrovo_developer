@@ -7,17 +7,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const { removeEventListener } = owl;
 
-    // Se añade la función deactivate para eliminar el listener
-    NumberBuffer.deactivate = function () {
-        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
-    };
-
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
+
+                // Se añade la función deactivate para eliminar el listener
+                NumberBuffer.deactivate = function () {
+                    removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
+                };
             }
 
             // Sobrescribimos el método addNewPaymentLine
