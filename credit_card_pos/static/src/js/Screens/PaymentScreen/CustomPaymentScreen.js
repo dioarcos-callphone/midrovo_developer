@@ -20,7 +20,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup();
                 // Escuchar eventos del Bus
                 console.log("MOSTRANDO USE BUS");
-                console.log(this.env.bus);
+                console.log(this.env.trigger);
                 console.log(useBus);
                 useBus(this.env.bus, "modal:opened", () => this._onModalOpened());
                 useBus(this.env.bus, "modal:closed", () => this._onModalClosed());
