@@ -4,35 +4,34 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useExternalListener } = owl; // Asegúrate de importar useExternalListener
 
-    // Se añade la función deactivate para eliminar el listener
-    NumberBuffer.deactivate = function () {
-        // Aquí no usamos removeEventListener directamente, sino que aprovechamos useExternalListener para limpiar el evento
-        if (this._onKeyboardInput) {
-            // Limpiar el listener cuando ya no lo necesitemos
-            this._externalListener && this._externalListener();
-            this._externalListener = null;
-        }
-    };
-
-    // Se añade la función activate para agregar el listener
-    NumberBuffer.activate = function () {
-        // Utilizamos useExternalListener para escuchar el evento
-        if (!this._externalListener) {
-            this._externalListener = useExternalListener(window, "keyup", this._onKeyboardInput.bind(this));
-        }
-    };
-
-    // Heredamos la clase PaymentScreen
+    // Extendemos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
-            // Extiende la función setup si quieres añadir lógica adicional
+            // Sobrescribimos la función setup si es necesario
             setup() {
-                super.setup();  // Llamar al método padre
+                super.setup();  // Llamamos al método original
+                // Usamos un evento del ciclo de vida para manejar el input del teclado
+                this._bindKeyboardEvents();
             }
 
-            // Sobrescribimos el método addNewPaymentLine
+            // Método para manejar los eventos del teclado
+            _bindKeyboardEvents() {
+                if (this._onKeyboardInput) {
+                    // Aseguramos que el evento se agrega correctamente
+                    window.addEventListener("keyup", this._onKeyboardInput.bind(this));
+                }
+            }
+
+            // Método para eliminar el listener cuando ya no se necesite
+            _unbindKeyboardEvents() {
+                if (this._onKeyboardInput) {
+                    // Eliminamos el listener
+                    window.removeEventListener("keyup", this._onKeyboardInput.bind(this));
+                }
+            }
+
+            // Sobrescribimos la función addNewPaymentLine para interactuar con tarjetas
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
 
@@ -48,19 +47,19 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         method: "get_cards",
                     });
 
-                    // Formatear las tarjetas para el popup
+                    // Formateamos las tarjetas para mostrarlas en un popup
                     const cardOptions = getCards.map(card => ({
                         id: card.id,
                         label: card.name,
                         item: card.name,
                     }));
 
-                    // Desactivamos el evento del teclado cuando se abre el primer popup
+                    // Desactivamos el input del teclado antes de mostrar el popup
                     NumberBuffer.deactivate();
 
-                    // Si el resultado del RPC es true, mostramos el modal
+                    // Si el usuario selecciona una tarjeta, procesamos el pago
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
-                        "SelectionPopup",  // Usamos el popup correcto para selección de lista
+                        "SelectionPopup",  // Usamos el popup adecuado
                         {
                             title: this.env._t("Seleccione la Tarjeta de Crédito"),
                             list: cardOptions,
@@ -71,17 +70,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
                             {
-                                title: this.env._t(selectedCreditCard), // Título del popup
-                                recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
-                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
-                                referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
+                                title: this.env._t(selectedCreditCard),
+                                recapPlaceholder: this.env._t("Ingrese RECAP"),
+                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"),
+                                referenciaPlaceholder: this.env._t("Ingrese Referencia"),
                                 startingRecapValue: "",
                                 startingAutorizacionValue: "",
                                 startingReferenciaValue: "",
                             }
                         );
-                        
-                        // Activamos el evento del teclado nuevamente después de interactuar con el popup
+
+                        // Reactivamos el input del teclado después de interactuar con el popup
                         NumberBuffer.activate();
 
                         if (confirmed) {
@@ -95,9 +94,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             };
 
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
-                            
-                            // Aqui se añade en el diccionario la llave creditCard para almacenar los valores
-                            // que se encuentran en la variable credit_card
+
+                            // Añadimos los datos de la tarjeta en la línea de pago
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card;
@@ -108,13 +106,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         }
                     }
                 } else {
-                    // Retornamos el método original de PaymentScreen utilizando super
+                    // Si no es una tarjeta, llamamos al método original de PaymentScreen
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
             }
         };
 
-    // Registramos la nueva clase heredada en los registros de Odoo
+    // Registramos el componente extendido
     Registries.Component.extend(PaymentScreen, CustomPaymentScreen);
 
 });
