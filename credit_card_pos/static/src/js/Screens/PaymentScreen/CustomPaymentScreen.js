@@ -4,14 +4,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { Bus } = require("web.core");  // Utilizamos el Bus de Odoo
-
-    const { removeEventListener } = owl;
-
-    // Se añade la función deactivate para eliminar el listener
-    NumberBuffer.deactivate = function () {
-        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
-    };
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -23,33 +15,23 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             }
 
             _onPopupShown() {
-                // Escuchar el evento cuando se muestra el popup
-                Bus.on('popup:shown', this._handlePopupShown.bind(this));
-
-                // Escuchar el evento cuando se cierra el popup
-                Bus.on('popup:closed', this._handlePopupClosed.bind(this));
+                // Usamos `this.env.bus` para escuchar eventos
+                this.env.bus.on('popup:shown', this._handlePopupShown, this);
+                this.env.bus.on('popup:closed', this._handlePopupClosed, this);
             }
 
             _handlePopupShown(popupName) {
                 if (popupName === "RecapAuthPopup") {
                     // Cuando se muestra el RecapAuthPopup, desactivar NumberBuffer
-                    NumberBuffer.use(this.numberBufferDeactivate);
+                    NumberBuffer.deactivate();
                 }
             }
 
             _handlePopupClosed(popupName) {
                 if (popupName === "RecapAuthPopup") {
                     // Cuando se cierra el RecapAuthPopup, activar NumberBuffer
-                    NumberBuffer.use(this.numberBufferActivate);
+                    NumberBuffer.activate();
                 }
-            }
-
-            numberBufferDeactivate() {
-                NumberBuffer.deactivate();
-            }
-
-            numberBufferActivate() {
-                NumberBuffer.activate();
             }
 
             // Sobrescribimos el método addNewPaymentLine
