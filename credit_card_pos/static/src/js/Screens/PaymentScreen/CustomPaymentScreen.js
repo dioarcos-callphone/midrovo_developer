@@ -55,7 +55,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Emitir el evento de apertura de modal
-                    this.bus.trigger("modal:opened");
+                    this.env.bus.trigger("modal:opened");
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",
                         {
@@ -94,13 +94,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // Emitir el evento de cierre de modal
-                            this.bus.trigger("modal:closed");
+                            this.env.bus.trigger("modal:closed");
                             return result;
                         }
                     }
 
                     // Emitir el evento de cierre de modal si se cancela
-                    this.bus.trigger("modal:closed");
+                    this.env.bus.trigger("modal:closed");
                 } else {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
