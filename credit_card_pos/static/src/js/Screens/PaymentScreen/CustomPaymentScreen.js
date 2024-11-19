@@ -24,22 +24,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
              * Desactiva los eventos de teclado en NumberBuffer
              */
             deactivateNumberBuffer() {
-                if (!this._keyboardListener) return; // Ya desactivado
                 window.removeEventListener("keyup", this._keyboardListener);
-                this._keyboardListener = null;
             }
 
             /**
              * Activa los eventos de teclado en NumberBuffer
              */
             activateNumberBuffer() {
-                if (!this._onKeyboardInput) {
-                    console.error("Método _onKeyboardInput no está definido.");
-                    return;
-                }
-                if (this._keyboardListener) return; // Ya activado
-                this._keyboardListener = this._onKeyboardInput.bind(this);
-                window.addEventListener("keyup", this._keyboardListener);
+                NumberBuffer.activate()
             }
             
 
