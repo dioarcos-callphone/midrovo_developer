@@ -3,7 +3,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const { useExternalListener } = require("web.core");
+    const { useExternalListener } = require("web.custom_hooks");
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -11,12 +11,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Extiende la función setup si quieres añadir lógica adicional
             setup() {
                 super.setup();  // Llamar al método padre
-                this._isPopupOpen = false;  // Estado para controlar si el popup está abierto
+                // Guardamos la referencia al evento global
+                this._keyboardListener = this._onKeyboardInput.bind(this);
             }
 
             // Sobrescribimos el método addNewPaymentLine
             async addNewPaymentLine({ detail: paymentMethod }) {
-                const method_name = paymentMethod.name
+                const method_name = paymentMethod.name;
 
                 const isCard = await this.rpc({
                     model: "pos.payment.method",
@@ -24,23 +25,25 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     args: [ method_name ],
                 });
 
-                if(isCard) {
+                if (isCard) {
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
                     });
 
+                    // Formatear las tarjetas para el popup
                     const cardOptions = getCards.map(card => ({
                         id: card.id,
                         label: card.name,
                         item: card.name,
                     }));
 
-                    // Deshabilitar la escucha del teclado cuando se muestra el popup
-                    this._disableKeyboardListener();
+                    // Desactivamos el evento de teclado mientras mostramos el popup
+                    useExternalListener(window, "keyup", this._keyboardListener, { active: false });
 
+                    // Si el resultado del RPC es true, mostramos el modal
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
-                        "SelectionPopup", 
+                        "SelectionPopup",  // Usamos el popup correcto para selección de lista
                         {
                             title: this.env._t("Seleccione la Tarjeta de Crédito"),
                             list: cardOptions,
@@ -51,15 +54,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
                             {
-                                title: this.env._t(selectedCreditCard), 
-                                recapPlaceholder: this.env._t("Ingrese RECAP"),
-                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"),
-                                referenciaPlaceholder: this.env._t("Ingrese Referencia"),
+                                title: this.env._t(selectedCreditCard), // Título del popup
+                                recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
+                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
+                                referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
                                 startingRecapValue: "",
                                 startingAutorizacionValue: "",
                                 startingReferenciaValue: "",
                             }
                         );
+
+                        // Activamos nuevamente el evento de teclado cuando el popup sea cerrado
+                        useExternalListener(window, "keyup", this._keyboardListener, { active: true });
 
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
@@ -69,41 +75,24 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 recap: recap,
                                 auth: autorizacion,
                                 ref: referencia,
-                            }
+                            };
 
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
 
-                            // Actualizamos el pago con la información de la tarjeta
-                            for(let p of this.paymentLines) {
-                                if(!p.creditCard && paymentMethod.id === p.payment_method.id) {
+                            // Aqui se añade en el diccionario la llave creditCard para almacenar los valores
+                            // que se encuentran en la variable credit_card
+                            for (let p of this.paymentLines) {
+                                if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card;
                                 }
                             }
 
                             return result;
                         }
-
                     }
-
                 } else {
                     // Retornamos el método original de PaymentScreen utilizando super
                     return super.addNewPaymentLine({ detail: paymentMethod });
-                }
-            }
-
-            // Deshabilita el evento global de teclado cuando un popup está abierto
-            _disableKeyboardListener() {
-                if (!this._isPopupOpen) {
-                    useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), false);
-                    this._isPopupOpen = true;
-                }
-            }
-
-            // Habilita el evento global de teclado después de que el popup se cierre
-            _enableKeyboardListener() {
-                if (this._isPopupOpen) {
-                    useExternalListener(window, "keyup", this._onKeyboardInput.bind(this), true);
-                    this._isPopupOpen = false;
                 }
             }
         };
