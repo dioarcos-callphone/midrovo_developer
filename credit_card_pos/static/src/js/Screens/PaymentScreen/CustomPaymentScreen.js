@@ -24,6 +24,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
              * Desactiva los eventos de teclado en NumberBuffer
              */
             deactivateNumberBuffer() {
+                console.log(this._keyboardListener)
                 if (!this._keyboardListener) return; // Ya desactivado
                 window.removeEventListener("keyup", this._keyboardListener);
                 this._keyboardListener = null;
