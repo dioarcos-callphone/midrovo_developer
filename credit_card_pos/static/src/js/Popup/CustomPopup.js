@@ -2,24 +2,28 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
     "use strict";
 
     const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
-    const Registries = require("point_of_sale.Registries");
+    const { Registries } = require("point_of_sale.Registries");
 
-    const CustomPopup = (AbstractAwaitablePopup) =>
+    // Verificamos que AbstractAwaitablePopup esté registrado
+    Registries.Component.add(AbstractAwaitablePopup);
+
+    // Extender el AbstractAwaitablePopup
+    const CustomPopup = AbstractAwaitablePopup =>
         class extends AbstractAwaitablePopup {
             mounted() {
                 super.mounted();
                 // Emitimos el evento cuando el popup se muestra
-                this.env.posbus.trigger("show-popup", { popupId: this.props.id });
+                this.trigger("show-popup", { popupId: this.props.id });
             }
 
             willUnmount() {
                 // Emitimos el evento cuando el popup se cierra
-                this.env.posbus.trigger("close-popup", { popupId: this.props.id });
+                this.trigger("close-popup", { popupId: this.props.id });
                 super.willUnmount();
             }
 
             async confirm() {
-                // Sobrescribimos confirm para emitir evento adicional
+                // Confirmación personalizada antes de llamar a la lógica base
                 await super.confirm();
                 this.env.posbus.trigger("close-popup", {
                     popupId: this.props.id,
@@ -28,7 +32,7 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
             }
 
             cancel() {
-                // Sobrescribimos cancel para emitir evento adicional
+                // Cancelación personalizada antes de llamar a la lógica base
                 super.cancel();
                 this.env.posbus.trigger("close-popup", {
                     popupId: this.props.id,
@@ -37,5 +41,6 @@ odoo.define("credit_card_pos.CustomPopup", (require) => {
             }
         };
 
+    // Registrar el componente extendido en el registro de Odoo
     Registries.Component.extend(AbstractAwaitablePopup, CustomPopup);
 });

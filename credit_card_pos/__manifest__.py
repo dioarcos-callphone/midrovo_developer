@@ -23,8 +23,8 @@
         "point_of_sale.assets": [
             "credit_card_pos/static/src/css/style.css",
             "credit_card_pos/static/src/js/Screens/PaymentScreen/CustomPaymentScreen.js",
-            "credit_card_pos/static/src/js/Popup/RecapAuthPopup.js",
             "credit_card_pos/static/src/js/Popup/CustomPopup.js",
+            "credit_card_pos/static/src/js/Popup/RecapAuthPopup.js",
             "credit_card_pos/static/src/xml/Popup/RecapAuthPopup.xml",
             "credit_card_pos/static/src/js/ChromeExtend.js",
             "credit_card_pos/static/src/js/PosGlobalStateExtend.js",
