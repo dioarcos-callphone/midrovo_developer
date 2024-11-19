@@ -57,9 +57,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
+                    // Ocultamos cualquier popup abierto antes de mostrar el nuevo
                     this.trigger("hide-popup");
 
-                    // Si el resultado del RPC es true, mostramos el modal
+                    // Mostramos el primer popup para selección de tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",  // Usamos el popup correcto para selección de lista
                         {
@@ -69,11 +70,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
-
+                        // Mostramos el segundo popup para los detalles de la tarjeta
                         const { confirmed, payload } = await this.showPopup(
                             "RecapAuthPopup",
                             {
-                                title: this.env._t(selectedCreditCard), // Título del popup
+                                title: this.env._t(selectedCreditCard.name), // Título del popup
                                 recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
                                 autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
                                 referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
@@ -82,7 +83,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 startingReferenciaValue: "",
                             }
                         );
-                        
+
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
 
@@ -91,11 +92,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 recap: recap,
                                 auth: autorizacion,
                                 ref: referencia,
-                            }
+                            };
 
+                            // Llamamos al método original de PaymentScreen para agregar la línea de pago
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
-                            
-                            // Aqui se añade en el diccionario la llave creditCard para almacenar los valores
+
+                            // Aquí se añade en el diccionario la llave creditCard para almacenar los valores
                             // que se encuentran en la variable credit_card
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
@@ -105,14 +107,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                             return result;
                         }
-
                     }
-
                 } else {
-                    // Retornamos el método original de PaymentScreen utilizando super
+                    // Si no es una tarjeta, simplemente llamamos al método original
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
-
             }
         };
 
