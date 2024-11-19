@@ -5,25 +5,35 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
 
-    // Creamos métodos específicos para desactivar y activar el evento del teclado
-    NumberBuffer.disableKeyboardInput = function () {
-        if (this._onKeyboardInput) {
-            window.removeEventListener("keyup", this._onKeyboardInput); // Eliminamos el evento del teclado
-            this._keyboardDisabled = true; // Flag para indicar que el teclado está deshabilitado
-        }
-    };
+    const { useBus } = require("web.core");
+    const { removeEventListener } = owl;
 
-    NumberBuffer.enableKeyboardInput = function () {
-        if (this._keyboardDisabled && this._onKeyboardInput) {
-            window.addEventListener("keyup", this._onKeyboardInput); // Rehabilitamos el evento del teclado
-            this._keyboardDisabled = false; // Reset de la bandera
-        }
+    // Se añade la función deactivate para eliminar el listener
+    NumberBuffer.deactivate = function () {
+        removeEventListener(window, "keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
     };
 
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
-            // Sobrescribimos el método addNewPaymentLine
+            setup() {
+                super.setup();
+                this.bus = useBus(); // Instancia del Bus
+                // Escuchar eventos del Bus
+                this.bus.on("modal:opened", this, this._onModalOpened);
+                this.bus.on("modal:closed", this, this._onModalClosed);
+            }
+
+            _onModalOpened() {
+                // Desactivar el teclado
+                NumberBuffer.deactivate();
+            }
+
+            _onModalClosed() {
+                // Activar el teclado
+                NumberBuffer.activate();
+            }
+
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
 
@@ -34,22 +44,19 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
 
                 if (isCard) {
-                    // Desactivar el teclado antes de mostrar el popup
-                    NumberBuffer.disableKeyboardInput();
-
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
                     });
 
-                    // Formatear las tarjetas para el popup
                     const cardOptions = getCards.map((card) => ({
                         id: card.id,
                         label: card.name,
                         item: card.name,
                     }));
 
-                    // Mostrar el primer popup
+                    // Emitir el evento de apertura de modal
+                    this.bus.trigger("modal:opened");
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",
                         {
@@ -59,19 +66,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
-                        // Mostrar el segundo popup
-                        const { confirmed, payload } = await this.showPopup(
-                            "RecapAuthPopup",
-                            {
-                                title: this.env._t(selectedCreditCard),
-                                recapPlaceholder: this.env._t("Ingrese RECAP"),
-                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"),
-                                referenciaPlaceholder: this.env._t("Ingrese Referencia"),
-                                startingRecapValue: "",
-                                startingAutorizacionValue: "",
-                                startingReferenciaValue: "",
-                            }
-                        );
+                        const { confirmed, payload } = await this.showPopup("RecapAuthPopup", {
+                            title: this.env._t(selectedCreditCard),
+                            recapPlaceholder: this.env._t("Ingrese RECAP"),
+                            autorizacionPlaceholder: this.env._t("Ingrese Autorización"),
+                            referenciaPlaceholder: this.env._t("Ingrese Referencia"),
+                            startingRecapValue: "",
+                            startingAutorizacionValue: "",
+                            startingReferenciaValue: "",
+                        });
 
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
@@ -85,29 +88,25 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
 
-                            // Añadir la información de la tarjeta a la línea de pago
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card;
                                 }
                             }
 
-                            // Reactivar el teclado después de cerrar el popup
-                            NumberBuffer.enableKeyboardInput();
-
+                            // Emitir el evento de cierre de modal
+                            this.bus.trigger("modal:closed");
                             return result;
                         }
                     }
 
-                    // Reactivar el teclado si el usuario cancela
-                    NumberBuffer.enableKeyboardInput();
+                    // Emitir el evento de cierre de modal si se cancela
+                    this.bus.trigger("modal:closed");
                 } else {
-                    // Retornar el método original de PaymentScreen utilizando super
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
             }
         };
 
-    // Registramos la nueva clase heredada en los registros de Odoo
     Registries.Component.extend(PaymentScreen, CustomPaymentScreen);
 });
