@@ -19,9 +19,7 @@ class AccountMoveInherit(models.Model):
                 # Verificar si ya hay contenido en el widget
                 if move.invoice_payments_widget and move.invoice_payments_widget.get('content'):
                     
-                    for payment in move.invoice_payments_widget['content']:
-                        _logger.info(f'MOSTRANDO CONTENT >>> { payment }')
-                        
+                    for payment in move.invoice_payments_widget['content']:                        
                         pos_order = move.pos_order_ids
                         
                         if pos_order:
