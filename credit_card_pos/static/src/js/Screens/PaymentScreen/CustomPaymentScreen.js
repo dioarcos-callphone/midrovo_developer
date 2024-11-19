@@ -16,14 +16,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
                 const trigger = bus.trigger.bind(bus);
 
-                // Escuchar eventos del Bus
-                bus.on('modal:opened', (payload) => {
+                // Asegurándonos de que los manejadores sean funciones
+                const onModalOpened = (payload) => {
                     console.log('EVENTO OPENED');
-                });
+                };
 
-                bus.on('modal:closed', (payload) => {
+                const onModalClosed = (payload) => {
                     console.log('EVENTO CLOSED');
-                });
+                };
+
+                // Registramos los eventos con funciones válidas
+                bus.on('modal:opened', onModalOpened);
+                bus.on('modal:closed', onModalClosed);
 
                 // Se añade la función deactivate para eliminar el listener
                 NumberBuffer.deactivate = function () {
