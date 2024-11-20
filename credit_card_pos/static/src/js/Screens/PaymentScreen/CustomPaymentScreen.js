@@ -12,13 +12,21 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.isPopupActive = false; // Inicializa la bandera para saber si un popup está activo
             }
 
-            _getNumberBufferConfig() {
+            // Sobrescribimos _getNumberBufferConfig para mantener la funcionalidad original y personalizarla
+            get _getNumberBufferConfig() {
                 const config = super._getNumberBufferConfig(); // Llamamos al método original para obtener la configuración predeterminada
 
-                // Agregar configuraciones adicionales si es necesario
-                config.nonKeyboardInputEvent = "input-from-numpad"; // Usamos un evento no relacionado con el teclado si es necesario
-                config.triggerAtInput = "update-selected-paymentline"; // Evento para actualizar la línea de pago
+                // Personalizamos el comportamiento si no hay un método de pago en efectivo
+                const hasCashPaymentMethod = this.payment_methods_from_config.some(
+                    (method) => method.type === "cash"
+                );
 
+                if (!hasCashPaymentMethod) {
+                    config["maxValue"] = this.currentOrder.get_due();
+                    config["maxValueReached"] = this.showMaxValueError.bind(this);
+                }
+
+                // Devolver la configuración modificada
                 return config;
             }
 
