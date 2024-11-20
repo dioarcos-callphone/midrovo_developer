@@ -26,7 +26,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             get _getNumberBufferConfig() {
                 const config = super._getNumberBufferConfig;
 
-                config.triggerAtInput = ""
+                config.nonKeyboardInputEvent = ""
 
                 console.log(config)
 
