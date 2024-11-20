@@ -24,23 +24,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribir el getter _getNumberBufferConfig
             get _getNumberBufferConfig() {
-                console.log("ENTRAMOS EN GET NUMBER CONFIG")
-                if(this.isPopupActive == true) {
-                    console.log(`Se establece el popup ${ this.isPopupActive } `)
-                    this.showPopup("ErrorPopup", {
-                        title: this.env._t("Error de Ingreso"),
-                        body: this.env._t(
-                            "Ingrese las opciones de la tarjeta de credito."
-                        ),
-                    });
-                }
+                const config = super._getNumberBufferConfig;
 
-                else {
-                    const config = super._getNumberBufferConfig;
-                    console.log(config)
+                config.triggerAtInput = ""
 
-                    return config;
-                }
+                console.log(config)
+
+                return config;
+                
             }
 
             // Método para manejar la apertura del popup
