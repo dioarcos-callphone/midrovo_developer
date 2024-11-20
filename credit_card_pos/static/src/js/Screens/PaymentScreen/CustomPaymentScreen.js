@@ -7,9 +7,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     // Modificar NumberBuffer para asegurar que los listeners se manejan dentro del ciclo de vida adecuado
     NumberBuffer.deactivate = function () {
-        if (this._onKeyboardInput) {
-            window.removeEventListener("keyup", null); // Elimina el listener del teclado
-        }
+        window.removeEventListener("keyup", null); // Elimina el listener del teclado
     };
 
     const CustomPaymentScreen = (PaymentScreen) =>
@@ -20,7 +18,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
 
                 // Registrar eventos globales
-                // bus.on("deactivate", this, this._deactivate);
+                bus.on("deactivate", this, this._deactivate);
                 // bus.on("activate", this, this._activate);
             }
     
@@ -59,22 +57,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                     // Desactivamos el teclado numérico antes de mostrar el popup
                     // this._deactivate();
-                    // this.env.bus.trigger("deactivate")
+                    this.env.bus.trigger("deactivate")
 
-                    // Escuchar el evento de 'keyup' en la ventana
-                    window.addEventListener('keyup', function(event) {
-                        // event.preventDefault();  // Prevenir el comportamiento predeterminado
-                        // event.stopPropagation(); // Detener la propagación del evento
-
-                        // Evitar que el texto se ingrese en cualquier campo de entrada
-                        // if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                        //     // Desactivar la entrada para estos campos
-                        //     event.target.blur();  // Eliminar el enfoque del campo de entrada
-                        // }
-
-                        console.log('Evento keyup detenido para todas las teclas');
-                        return;
-                    });
 
                     // Mostramos el popup para seleccionar la tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
