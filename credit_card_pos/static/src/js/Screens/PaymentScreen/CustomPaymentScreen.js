@@ -25,9 +25,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             async showPopup(popupName, options) {
                 // Establecer la bandera cuando un popup se abre
                 this.isPopupActive = true;
-                const result = await super.showPopup(popupName, options);
-                this.isPopupActive = false; // Restablecer la bandera cuando el popup se cierre
-                return result;
+                try {
+                    const result = await super.showPopup(popupName, options);
+                    return result;
+                } finally {
+                    // Restablecer la bandera después de que el popup se cierre
+                    this.isPopupActive = false;
+                }
             }
 
             // Método que se encarga de agregar una nueva línea de pago
