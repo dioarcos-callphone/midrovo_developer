@@ -19,26 +19,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 // Usa el bus global desde el entorno
                 const bus = this.env.bus;
 
-                // Usar NumberBuffer en el contexto de setup
-                // NumberBuffer.use(() => {
-                //     // Registrar eventos globales
-                //     bus.on("deactivate", this, () => {
-                //         this._deactivate();
-                //     });
-                //     bus.on("activate", this, () => {
-                //         this._activate();
-                //     });
-                // });
-
-                NumberBuffer.use(this.prueba)
-            }
-
-            prueba() {
-                console.log('PROBANDO FUNCION');
+                // Registrar eventos globales
+                bus.on("deactivate", this, () => {
+                    this._deactivate();
+                });
+                bus.on("activate", this, () => {
+                    this._activate();
+                });
             }
     
             _activate() {
-                console.log("ENTRA EN ACTIVATE");
+                console.log("ENTRA EN DEACTIVATE");
                 NumberBuffer.activate(); // Activar el teclado numérico
             }
     
@@ -115,15 +106,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("activate");
+                            // this.env.bus.trigger("activate");
 
                             return result;
                         }
 
-                        this.env.bus.trigger("activate");
+                        // this.env.bus.trigger("activate");
                     }
 
-                    this.env.bus.trigger("activate");
+                    // this.env.bus.trigger("activate");
 
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
