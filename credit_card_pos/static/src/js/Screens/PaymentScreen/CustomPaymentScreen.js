@@ -8,7 +8,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     // Modificar NumberBuffer para asegurar que los listeners se manejan dentro del ciclo de vida adecuado
     NumberBuffer.deactivate = function () {
         if (this._onKeyboardInput) {
-            window.removeEventListener("keyup", this._onKeyboardInput.bind(this)); // Elimina el listener del teclado
+            window.removeEventListener("keyup", null); // Elimina el listener del teclado
         }
     };
 
