@@ -23,7 +23,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 //     config.nonKeyboardInputEvent = "input-from-numpad"
                 // })
 
-                config.nonKeyboardInputEvent = ""
+                config.triggerAtInput = ""
 
                 return config;
                 
