@@ -16,7 +16,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-                this._popupActive = false; // Flag para saber si el popup está activo
 
                 // Usa el bus global desde el entorno
                 const bus = this.env.bus;
@@ -104,7 +103,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("activate");
+                            // this.env.bus.trigger("activate");
 
                             return result;
                         }
