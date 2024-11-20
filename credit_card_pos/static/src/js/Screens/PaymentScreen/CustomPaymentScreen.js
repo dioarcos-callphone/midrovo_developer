@@ -8,28 +8,36 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
+                this.isPopupActive = false;
             }
 
             // Sobrescribir el getter _getNumberBufferConfig
             get _getNumberBufferConfig() {
-                const config = super._getNumberBufferConfig; // Llamar al getter original
-
-                // Verificar si el POS tiene un método de pago en efectivo
-                const hasCashPaymentMethod = this.payment_methods_from_config.some(
-                    (method) => {
-                        console.log("METODO");
-                        console.log(method.type)
-                        method.type === "bank"
-                    }
-                );
-
-                if (!hasCashPaymentMethod) {
-                    // Modificar la configuración si no hay un método de pago en efectivo
-                    config.maxValue = this.currentOrder.get_due();
-                    config.maxValueReached = this.showMaxValueError.bind(this);
+                if(this.isPopupActive) {
+                    this.showPopup("ErrorPopup", {
+                        title: this.env._t("Error de Ingreso"),
+                        body: this.env._t(
+                            "Ingrese primero las opciones de la tarjeta de credito."
+                        ),
+                    });
                 }
 
-                return config;
+                else {
+                    return super._getNumberBufferConfig;
+                }
+            }
+
+            // Método para manejar la apertura del popup
+            async showPopup(popupName, options) {
+                // Establecer la bandera cuando un popup se abre
+                this.isPopupActive = true;
+                try {
+                    const result = await super.showPopup(popupName, options);
+                    return result;
+                } finally {
+                    // Restablecer la bandera después de que el popup se cierre
+                    this.isPopupActive = false;
+                }
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
