@@ -17,9 +17,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup(); // Llamar al método padre
 
-                // Llamamos a activate directamente en setup para asegurar que el componente está listo
-                this._activate(); // Asegura que el teclado se activa correctamente
-
                 const bus = this.env.bus;
 
                 // Registrar eventos globales
@@ -104,7 +101,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // Reactivar el teclado numérico
+                            // Reactivar el teclado numérico después de la operación
                             this._activate();
 
                             return result;
