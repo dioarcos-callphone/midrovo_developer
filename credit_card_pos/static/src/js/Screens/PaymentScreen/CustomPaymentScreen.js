@@ -61,17 +61,20 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     // this._deactivate();
                     // this.env.bus.trigger("deactivate")
 
+                    // Escuchar el evento de 'keyup' en la ventana
                     window.addEventListener('keyup', function(event) {
                         event.preventDefault();  // Prevenir el comportamiento predeterminado
-                        event.stopPropagation(); // Evitar la propagación
-                    
-                        // Comprobamos si estamos en un campo de entrada (input o textarea)
+                        event.stopPropagation(); // Detener la propagación del evento
+
+                        // Evitar que el texto se ingrese en cualquier campo de entrada
                         if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                            event.target.blur(); // Quitar el foco del campo de entrada
+                            // Desactivar la entrada para estos campos
+                            event.target.blur();  // Eliminar el enfoque del campo de entrada
                         }
-                    
-                        console.log('Tecla liberada pero no se muestra el texto');
+
+                        console.log('Evento keyup detenido para todas las teclas');
                     });
+
                     // Mostramos el popup para seleccionar la tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
                         "SelectionPopup",
