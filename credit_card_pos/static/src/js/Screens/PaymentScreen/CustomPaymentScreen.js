@@ -3,36 +3,33 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const NumberBuffer = require("point_of_sale.NumberBuffer"); // Importar NumberBuffer
-    const { useListener } = require("@web/core/utils/hooks");
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-                useListener("popup-opened", this._deactivateNumberBuffer); // Desactivar buffer al abrir el popup
-                useListener("popup-closed", this._reactivateNumberBuffer); // Reactivar buffer al cerrar el popup
             }
 
-            _deactivateNumberBuffer() {
-                if (this.isPopupActive || !NumberBuffer.use) return;
-                this.isPopupActive = true;
-                // Desactivar el buffer
-                NumberBuffer.use = () => {};
-                console.log("Número buffer desactivado temporalmente.");
-            }
-            
-            _reactivateNumberBuffer() {
-                if (!this.isPopupActive || !this._getNumberBufferConfig) return;
-                this.isPopupActive = false;
-                // Reactivar el buffer
-                NumberBuffer.use(this._getNumberBufferConfig);
-                console.log("Número buffer reactivado.");
+            // Sobrescribir el getter _getNumberBufferConfig
+            get _getNumberBufferConfig() {
+                const config = super._getNumberBufferConfig; // Llamar al getter original
+
+                // Verificar si el POS tiene un método de pago en efectivo
+                const hasCashPaymentMethod = this.payment_methods_from_config.some(
+                    (method) => method.type === "bank"
+                );
+
+                if (!hasCashPaymentMethod) {
+                    // Modificar la configuración si no hay un método de pago en efectivo
+                    config.maxValue = this.currentOrder.get_due();
+                    config.maxValueReached = this.showMaxValueError.bind(this);
+                }
+
+                return config;
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
-                console.log("Agregando nueva línea de pago para el método: " + method_name);
             
                 const isCard = await this.rpc({
                     model: "pos.payment.method",
@@ -41,8 +38,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-                    // Desactivar el número buffer mientras se muestran los popups
-                    this._deactivateNumberBuffer();
             
                     const getCards = await this.rpc({
                         model: "credit.card",
@@ -95,9 +90,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     p.creditCard = credit_card;
                                 }
                             }
-            
-                            // Reactivar el número buffer después de procesar los popups
-                            this._reactivateNumberBuffer();
             
                             return result;
                         }
