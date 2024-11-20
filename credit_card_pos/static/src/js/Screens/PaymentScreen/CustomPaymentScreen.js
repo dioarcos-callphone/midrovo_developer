@@ -13,7 +13,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             }
 
             // Redefinimos el método _getNumberBufferConfig
-            _getNumberBufferConfig() {
+            get _getNumberBufferConfig() {
                 // Si un popup está abierto, evitamos cambiar la configuración del buffer
                 if (this.isPopupActive) {
                     return {}; // Retornamos un objeto vacío o la configuración por defecto
