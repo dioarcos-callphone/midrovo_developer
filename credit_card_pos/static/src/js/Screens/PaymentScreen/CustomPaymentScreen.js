@@ -32,6 +32,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Desactiva el evento de teclado cuando el popup está cerrado
             _deactivate() {
+                console.log("ENTRA EN DEACTIVATE")
                 NumberBuffer.deactivate(); // Desactivar el teclado numérico
             }
 
