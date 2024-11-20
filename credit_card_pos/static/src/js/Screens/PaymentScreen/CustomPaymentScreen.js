@@ -19,20 +19,20 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 // Usa el bus global desde el entorno
                 const bus = this.env.bus;
 
-                // Usamos un hook `useEffect` para asegurarnos de que las operaciones se realicen cuando el componente esté completamente inicializado
-                this._registerEvents();
-            }
-
-            _registerEvents() {
-                // Usa el bus global desde el entorno
-                const bus = this.env.bus;
-                
-                // Registrar eventos globales
-                bus.on("deactivate", this, this._deactivate);
-                bus.on("activate", this, this._activate);
+                // Usar NumberBuffer en el contexto de setup
+                NumberBuffer.use(() => {
+                    // Registrar eventos globales
+                    bus.on("deactivate", this, () => {
+                        this._deactivate();
+                    });
+                    bus.on("activate", this, () => {
+                        this._activate();
+                    });
+                });
             }
     
             _activate() {
+                console.log("ENTRA EN ACTIVATE");
                 NumberBuffer.activate(); // Activar el teclado numérico
             }
     
