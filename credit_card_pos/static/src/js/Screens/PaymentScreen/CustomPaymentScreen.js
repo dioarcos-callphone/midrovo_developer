@@ -21,7 +21,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Registrar eventos globales
                 bus.on("deactivate", this, NumberBuffer.use(this._deactivate));
-                bus.on("activate", this, this._activate);
+                // bus.on("activate", this, this._activate);
             }
 
             // Activa el evento de teclado cuando el popup está activo
