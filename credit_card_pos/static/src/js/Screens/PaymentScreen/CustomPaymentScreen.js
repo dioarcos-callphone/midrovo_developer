@@ -9,26 +9,45 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
+
+                // Escuchar eventos de desactivación y activación
+                this.env.bus.on("desactivar", this, this._deactivateUpdateSelectedPaymentLine);
+                this.env.bus.on("activar", this, this._activateUpdateSelectedPaymentLine);
+
+                // Asegúrate de que el listener para el evento 'update-selected-paymentline' esté registrado
+                this.useListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
 
-            // Sobrescribir el getter _getNumberBufferConfig
-            get _getNumberBufferConfig() {
-                const config = super._getNumberBufferConfig;
+            _deactivateUpdateSelectedPaymentLine() {
+                // Desactiva el listener para 'update-selected-paymentline'
+                console.log("Desactivando el listener para update-selected-paymentline");
+                this.removeListener("update-selected-paymentline", this._updateSelectedPaymentline);
+            }
+        
+            _activateUpdateSelectedPaymentLine() {
+                // Reactiva el listener para 'update-selected-paymentline'
+                console.log("Activando el listener para update-selected-paymentline");
+                this.useListener("update-selected-paymentline", this._updateSelectedPaymentline);
+            }
 
-                this.env.bus.on("desactivar", this, () => {
-                    console.log("desactivamos triggerAtInput")
-                    console.log(config)
-                    config.triggerAtInput = "";
-                });
+            // // Sobrescribir el getter _getNumberBufferConfig
+            // get _getNumberBufferConfig() {
+            //     const config = super._getNumberBufferConfig;
 
-                this.env.bus.on("activar", this, () => {
-                    console.log("activamos triggerAtInput")
-                    config.triggerAtInput = "update-selected-paymentline";
-                });
+            //     this.env.bus.on("desactivar", this, () => {
+            //         console.log("desactivamos triggerAtInput")
+            //         console.log(config)
+            //         config.triggerAtInput = "";
+            //     });
 
-                return config;
+            //     this.env.bus.on("activar", this, () => {
+            //         console.log("activamos triggerAtInput")
+            //         config.triggerAtInput = "update-selected-paymentline";
+            //     });
+
+            //     return config;
                 
-            }
+            // }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
@@ -40,7 +59,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-                    this.env.bus.trigger("desactivar");
+                    // this.env.bus.trigger("desactivar");
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
@@ -93,7 +112,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("activar");
+                            // this.env.bus.trigger("activar");
                             return result;
                         }
                     }
