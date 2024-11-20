@@ -25,6 +25,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return;
                 }
 
+                console.log(`MOSTRANDO BUS ${ bus }`);
+
                 // Registrar eventos globales
                 bus.on("show-popup", this, this._onPopupShown);
                 bus.on("hide-popup", this, this._onPopupHidden);
@@ -66,7 +68,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Ocultamos cualquier popup abierto antes de mostrar el nuevo
-                    this.trigger("hide-popup");
+                    this.env.bus.trigger("hide-popup");
 
                     // Mostramos el primer popup para selección de tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -110,7 +112,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.trigger("show-popup");
+                            this.env.bus.trigger("show-popup");
 
                             return result;
                         }
