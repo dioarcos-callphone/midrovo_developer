@@ -3,35 +3,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
-
-    // Modificar NumberBuffer para asegurar que los listeners se manejan dentro del ciclo de vida adecuado
-    NumberBuffer.deactivate = function () {
-        window.removeEventListener("keyup", this._onKeyboardHandler); // Eliminar listener
-    };
+    const NumberBuffer = require("point_of_sale.models").NumberBuffer; // Importar NumberBuffer
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-
-                const bus = this.env.bus;
-
-                // Registrar eventos globales
-                bus.on("deactivate", this, this._deactivate);
-                // bus.on("activate", this, this._activate);
-            }
-    
-            // Método _activate llamado dentro de un contexto adecuado (setup)
-            _activate() {
-                console.log("Activando el teclado numérico...");
-                NumberBuffer.activate(); // Activar el teclado numérico
-            }
-    
-            // Método _deactivate llamado dentro de un contexto adecuado (setup)
-            _deactivate() {
-                console.log("Desactivando el teclado numérico...");
-                NumberBuffer.deactivate(); // Desactivar el teclado numérico
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -55,10 +32,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    // Desactivamos el teclado numérico antes de mostrar el popup
-                    // this._deactivate();
-                    this.env.bus.trigger("deactivate")
-
+                    // Desactivar el buffer temporalmente
+                    NumberBuffer.reset();
 
                     // Mostramos el popup para seleccionar la tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -101,28 +76,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // Reactivar el teclado numérico después de la operación
-                            // this._activate();
+                            // Reactivar el buffer después de que se haya cerrado el popup
+                            NumberBuffer.activate();
 
                             return result;
                         }
-
-                        // this._activate();
                     }
-
-                    // this._activate(); // Reactivar teclado después de mostrar el popup
-
+                    // Reactivar el buffer después de que se haya cerrado el popup
+                    NumberBuffer.activate();
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
-            }
-
-            _updateSelectedPaymentline() {
-                super._updateSelectedPaymentline();
-
-                this.selectedPaymentLine.set_amount(5);
-
             }
         };
 
