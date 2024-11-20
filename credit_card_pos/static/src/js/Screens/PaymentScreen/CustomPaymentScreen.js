@@ -105,6 +105,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
+                            this.trigger("show-popup")
+
                             return result;
                         }
                     }
