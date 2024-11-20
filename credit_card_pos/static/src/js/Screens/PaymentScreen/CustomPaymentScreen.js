@@ -20,17 +20,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Usa el bus global desde el entorno
                 const bus = this.env.bus;
-                if (!bus) {
-                    console.error("El bus no está disponible en this.env.bus.");
-                    return;
-                }
-
-                console.log("MOSTRANDO BUS");
-                console.log(bus);
 
                 // Registrar eventos globales
                 bus.on("deactivate", this, this._activate);
-                bus.on("activate", this, this._deactivate);
+                //bus.on("activate", this, this._deactivate);
             }
 
             // Activa el evento de teclado cuando el popup está activo
