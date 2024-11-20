@@ -17,13 +17,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 this.env.bus.on("desactivar", this, () => {
                     console.log("desactivamos triggerAtInput")
-                    config.triggerAtInput = ""
-                })
+                    console.log(config)
+                    config.triggerAtInput = "";
+                });
 
                 this.env.bus.on("activar", this, () => {
                     console.log("activamos triggerAtInput")
-                    config.triggerAtInput = "update-selected-paymentline"
-                })
+                    config.triggerAtInput = "update-selected-paymentline";
+                });
 
                 return config;
                 
