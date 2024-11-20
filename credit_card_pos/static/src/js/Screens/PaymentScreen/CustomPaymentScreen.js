@@ -13,7 +13,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribir el getter _getNumberBufferConfig
             get _getNumberBufferConfig() {
-                console("ENTRAMOS EN GET NUMBER CONFIG")
+                console.log("ENTRAMOS EN GET NUMBER CONFIG")
                 if(this.isPopupActive == true) {
                     console.log(`Se establece el popup ${ this.isPopupActive } `)
                     this.showPopup("ErrorPopup", {
