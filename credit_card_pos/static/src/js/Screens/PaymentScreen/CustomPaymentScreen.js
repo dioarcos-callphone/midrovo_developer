@@ -63,16 +63,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                     // Escuchar el evento de 'keyup' en la ventana
                     window.addEventListener('keyup', function(event) {
-                        event.preventDefault();  // Prevenir el comportamiento predeterminado
-                        event.stopPropagation(); // Detener la propagación del evento
+                        // event.preventDefault();  // Prevenir el comportamiento predeterminado
+                        // event.stopPropagation(); // Detener la propagación del evento
 
                         // Evitar que el texto se ingrese en cualquier campo de entrada
-                        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                            // Desactivar la entrada para estos campos
-                            event.target.blur();  // Eliminar el enfoque del campo de entrada
-                        }
+                        // if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                        //     // Desactivar la entrada para estos campos
+                        //     event.target.blur();  // Eliminar el enfoque del campo de entrada
+                        // }
 
                         console.log('Evento keyup detenido para todas las teclas');
+                        return;
                     });
 
                     // Mostramos el popup para seleccionar la tarjeta
