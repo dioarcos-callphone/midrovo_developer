@@ -36,7 +36,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 }
 
                 else {
-                    return super._getNumberBufferConfig;
+                    const config = super._getNumberBufferConfig;
+                    console.log(config)
+
+                    return config;
                 }
             }
 
