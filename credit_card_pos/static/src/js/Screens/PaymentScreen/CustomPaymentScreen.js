@@ -3,7 +3,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const { useListener } = require("@web/core/utils/hooks");
+    const { useListener, removeListener } = require("@web/core/utils/hooks");
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
@@ -15,13 +15,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.env.bus.on("activar", this, this._activateUpdateSelectedPaymentLine);
 
                 // Asegúrate de que el listener para el evento 'update-selected-paymentline' esté registrado
-                this.useListener("update-selected-paymentline", this._updateSelectedPaymentline);
+                useListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
 
             _deactivateUpdateSelectedPaymentLine() {
                 // Desactiva el listener para 'update-selected-paymentline'
                 console.log("Desactivando el listener para update-selected-paymentline");
-                this.removeListener("update-selected-paymentline", this._updateSelectedPaymentline);
+                removeListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
         
             _activateUpdateSelectedPaymentLine() {
