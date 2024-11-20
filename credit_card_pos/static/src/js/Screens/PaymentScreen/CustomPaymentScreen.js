@@ -3,38 +3,25 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const NumberBuffer = require("point_of_sale.NumberBuffer");
+    const NumberBuffer = require("point_of_sale.NumberBuffer"); // Importar NumberBuffer
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-                this.isPopupActive = false; // Bandera para verificar si un popup está abierto
+                this.isPopupActive = false; // Inicializa la bandera para saber si un popup está activo
             }
 
-            // Redefinimos el método _getNumberBufferConfig
-            get _getNumberBufferConfig() {
-                // Si un popup está abierto, evitamos cambiar la configuración del buffer
-                if (this.isPopupActive) {
-                    return {}; // Retornamos un objeto vacío o la configuración por defecto
-                }
-                return super._getNumberBufferConfig();
+            _getNumberBufferConfig() {
+                const config = super._getNumberBufferConfig(); // Llamamos al método original para obtener la configuración predeterminada
+
+                // Agregar configuraciones adicionales si es necesario
+                config.nonKeyboardInputEvent = "input-from-numpad"; // Usamos un evento no relacionado con el teclado si es necesario
+                config.triggerAtInput = "update-selected-paymentline"; // Evento para actualizar la línea de pago
+
+                return config;
             }
 
-            // Método para manejar la apertura del popup
-            async showPopup(popupName, options) {
-                // Establecer la bandera cuando un popup se abre
-                this.isPopupActive = true;
-                try {
-                    const result = await super.showPopup(popupName, options);
-                    return result;
-                } finally {
-                    // Restablecer la bandera después de que el popup se cierre
-                    this.isPopupActive = false;
-                }
-            }
-
-            // Método que se encarga de agregar una nueva línea de pago
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
 
@@ -66,6 +53,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
+                        this.isPopupActive = true; // El popup está activo, así que activamos la bandera
+
                         // Mostramos el segundo popup para los detalles de la tarjeta
                         const { confirmed, payload } = await this.showPopup("RecapAuthPopup", {
                             title: this.env._t(selectedCreditCard),
@@ -97,13 +86,25 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
+                            // Después de agregar la línea de pago, restablecemos el NumberBuffer
+                            this._resetNumberBuffer();
+
                             return result;
                         }
                     }
+
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
+            }
+
+            // Método para restablecer el NumberBuffer después de cerrar el popup
+            _resetNumberBuffer() {
+                this.isPopupActive = false; // Restablecer la bandera del popup
+
+                // Llamamos a NumberBuffer.use para restablecer la configuración del buffer
+                NumberBuffer.use(this._getNumberBufferConfig());
             }
         };
 
