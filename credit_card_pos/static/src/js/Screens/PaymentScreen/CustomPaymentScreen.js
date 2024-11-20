@@ -9,25 +9,21 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-                this.isPopupActive = false; // Inicializa la bandera para saber si un popup está activo
+                this.isPopupActive = false; // Flag para indicar si un popup está activo
             }
 
-            // Sobrescribimos _getNumberBufferConfig para mantener la funcionalidad original y personalizarla
-            _getNumberBufferConfig() {
-                const config = super._getNumberBufferConfig(); // Llamamos al método original para obtener la configuración predeterminada
+            // Método para desactivar temporalmente el buffer
+            _deactivateNumberBuffer() {
+                if (this.isPopupActive) return; // Si ya está desactivado, no hacemos nada
+                this.isPopupActive = true; // Establecer que el popup está activo
+                NumberBuffer.use = () => {}; // Deshabilitar temporalmente el uso del buffer
+            }
 
-                // Personalizamos el comportamiento si no hay un método de pago en efectivo
-                const hasCashPaymentMethod = this.payment_methods_from_config.some(
-                    (method) => method.type === "cash"
-                );
-
-                if (!hasCashPaymentMethod) {
-                    config["maxValue"] = this.currentOrder.get_due();
-                    config["maxValueReached"] = this.showMaxValueError.bind(this);
-                }
-
-                // Devolver la configuración modificada
-                return config;
+            // Método para reactivar el buffer
+            _reactivateNumberBuffer() {
+                if (!this.isPopupActive) return; // Si no está desactivado, no hacemos nada
+                this.isPopupActive = false; // Restablecer el estado del popup
+                NumberBuffer.use(this._getNumberBufferConfig); // Reactivar el buffer con la configuración original
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
@@ -40,6 +36,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
 
                 if (isCard) {
+                    // Desactivar el número buffer mientras se muestran los popups
+                    this._deactivateNumberBuffer();
+
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
@@ -61,8 +60,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     );
 
                     if (confirmed) {
-                        this.isPopupActive = true; // El popup está activo, así que activamos la bandera
-
                         // Mostramos el segundo popup para los detalles de la tarjeta
                         const { confirmed, payload } = await this.showPopup("RecapAuthPopup", {
                             title: this.env._t(selectedCreditCard),
@@ -94,8 +91,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // Después de agregar la línea de pago, restablecemos el NumberBuffer
-                            this._resetNumberBuffer();
+                            // Reactivar el número buffer después de procesar los popups
+                            this._reactivateNumberBuffer();
 
                             return result;
                         }
@@ -105,14 +102,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     // Si no es una tarjeta, simplemente llamamos al método original
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
-            }
-
-            // Método para restablecer el NumberBuffer después de cerrar el popup
-            _resetNumberBuffer() {
-                this.isPopupActive = false; // Restablecer la bandera del popup
-
-                // Llamamos a NumberBuffer.use para restablecer la configuración del buffer
-                NumberBuffer.use(this._getNumberBufferConfig);
             }
         };
 
