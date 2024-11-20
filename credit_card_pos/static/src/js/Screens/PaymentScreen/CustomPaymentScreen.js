@@ -3,12 +3,23 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
+    const { onMounted } = owl;
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
                 this.isPopupActive = false;
+                onMounted(() => {
+                    this.env.bus.on("desactivar", this, () => {
+                        this.showPopup("ErrorPopup", {
+                            title: this.env._t("Error de Ingreso"),
+                            body: this.env._t(
+                                "Ingrese las opciones de la tarjeta de credito."
+                            ),
+                        });
+                    });
+                });
             }
 
             // Sobrescribir el getter _getNumberBufferConfig
@@ -54,7 +65,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-            
+        
+                    this.env.bus.trigger("desactivar");
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
