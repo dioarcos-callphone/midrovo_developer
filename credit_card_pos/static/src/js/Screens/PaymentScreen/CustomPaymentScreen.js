@@ -19,7 +19,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup();  // Llamar al método padre
                 this._popupActive = false;  // Flag para saber si el popup está activo
                 useListener("show-popup", this._onPopupShown);
-                useListener("hide-popup", this._onPopupHidden);
+                useListener("keyup", this._onPopupHidden);
             }
 
             // Activa el evento de teclado cuando el popup está activo
