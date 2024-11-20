@@ -16,7 +16,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Verificar si el POS tiene un método de pago en efectivo
                 const hasCashPaymentMethod = this.payment_methods_from_config.some(
-                    (method) => method.type === "bank"
+                    (method) => {
+                        console.log("METODO");
+                        console.log(method.type)
+                        method.type === "bank"
+                    }
                 );
 
                 if (!hasCashPaymentMethod) {
