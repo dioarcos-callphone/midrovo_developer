@@ -112,7 +112,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.isPopupActive = false; // Restablecer la bandera del popup
 
                 // Llamamos a NumberBuffer.use para restablecer la configuración del buffer
-                NumberBuffer.use(this._getNumberBufferConfig());
+                NumberBuffer.use(this._getNumberBufferConfig);
             }
         };
 
