@@ -20,7 +20,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
 
                 // Registrar eventos globales
-                bus.on("deactivate", this, this._deactivate);
+                bus.on("deactivate", this, NumberBuffer.use(this._deactivate));
                 bus.on("activate", this, this._activate);
             }
 
@@ -103,15 +103,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("activate");
+                            // this.env.bus.trigger("activate");
 
                             return result;
                         }
 
-                        this.env.bus.trigger("activate");
+                        // this.env.bus.trigger("activate");
                     }
 
-                    this.env.bus.trigger("activate");
+                    // this.env.bus.trigger("activate");
 
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original

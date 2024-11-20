@@ -8,7 +8,7 @@ odoo.define("credit_card_pos.ChromeExtend", (require) => {
             setup() {
                 super.setup();
                 console.log('ENTRANDO EN CHROME');
-                console.log(this.env.pos.deactivate);
+                console.log(this.env.bus);
             }
         }
 
