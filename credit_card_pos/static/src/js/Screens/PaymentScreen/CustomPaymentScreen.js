@@ -15,13 +15,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             get _getNumberBufferConfig() {
                 const config = super._getNumberBufferConfig;
 
-                this.env.bus.on("desactivar", this, () => {
-                    config.nonKeyboardInputEvent = ""
-                })
+                // this.env.bus.on("desactivar", this, () => {
+                //     config.nonKeyboardInputEvent = ""
+                // })
 
-                this.env.bus.on("activar", this, () => {
-                    config.nonKeyboardInputEvent = "input-from-numpad"
-                })
+                // this.env.bus.on("activar", this, () => {
+                //     config.nonKeyboardInputEvent = "input-from-numpad"
+                // })
+
+                config.nonKeyboardInputEvent = ""
 
                 return config;
                 
