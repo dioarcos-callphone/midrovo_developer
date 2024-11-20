@@ -21,7 +21,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Registrar eventos globales
                 bus.on("deactivate", this, this._deactivate);
-                bus.on("activate", this, this._activate);
+                // bus.on("activate", this, this._activate);
             }
     
             // Método _activate llamado dentro de un contexto adecuado (setup)
@@ -102,15 +102,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // Reactivar el teclado numérico después de la operación
-                            this._activate();
+                            // this._activate();
 
                             return result;
                         }
 
-                        this._activate();
+                        // this._activate();
                     }
 
-                    this._activate(); // Reactivar teclado después de mostrar el popup
+                    // this._activate(); // Reactivar teclado después de mostrar el popup
 
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
