@@ -20,15 +20,21 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
 
                 // Usar NumberBuffer en el contexto de setup
-                NumberBuffer.use(() => {
-                    // Registrar eventos globales
-                    bus.on("deactivate", this, () => {
-                        this._deactivate();
-                    });
-                    bus.on("activate", this, () => {
-                        this._activate();
-                    });
-                });
+                // NumberBuffer.use(() => {
+                //     // Registrar eventos globales
+                //     bus.on("deactivate", this, () => {
+                //         this._deactivate();
+                //     });
+                //     bus.on("activate", this, () => {
+                //         this._activate();
+                //     });
+                // });
+
+                NumberBuffer.use(this.prueba)
+            }
+
+            prueba() {
+                console.log('PROBANDO FUNCION');
             }
     
             _activate() {
