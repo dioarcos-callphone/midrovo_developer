@@ -13,7 +13,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             }
 
             // Sobrescribimos _getNumberBufferConfig para mantener la funcionalidad original y personalizarla
-            get _getNumberBufferConfig() {
+            _getNumberBufferConfig() {
                 const config = super._getNumberBufferConfig(); // Llamamos al método original para obtener la configuración predeterminada
 
                 // Personalizamos el comportamiento si no hay un método de pago en efectivo
