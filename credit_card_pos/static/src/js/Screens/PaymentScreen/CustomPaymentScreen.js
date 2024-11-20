@@ -26,9 +26,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             }
 
             // Activa el evento de teclado cuando el popup está activo
-            _activate() {
-                NumberBuffer.activate(); // Activar el teclado numérico
-            }
+            // _activate() {
+            //     NumberBuffer.activate(); // Activar el teclado numérico
+            // }
 
             // Desactiva el evento de teclado cuando el popup está cerrado
             _deactivate() {
