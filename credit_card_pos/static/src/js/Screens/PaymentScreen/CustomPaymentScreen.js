@@ -109,15 +109,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // this.env.bus.trigger("activate");
+                            this.env.bus.trigger("activate");
 
                             return result;
                         }
 
-                        // this.env.bus.trigger("activate");
+                        this.env.bus.trigger("activate");
                     }
 
-                    // this.env.bus.trigger("activate");
+                    this.env.bus.trigger("activate");
 
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
