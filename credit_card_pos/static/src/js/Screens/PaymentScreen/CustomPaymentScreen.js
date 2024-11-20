@@ -10,43 +10,49 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup(); // Llamar al método padre
                 this.isPopupActive = false;
-                onMounted(() => {
-                    this.env.bus.on("desactivar", this, () => {
-                        this.showPopup("ErrorPopup", {
-                            title: this.env._t("Error de Ingreso"),
-                            body: this.env._t(
-                                "Ingrese las opciones de la tarjeta de credito."
-                            ),
-                        });
-                    });
-                });
-            }
-
-            // Sobrescribir el getter _getNumberBufferConfig
-            get _getNumberBufferConfig() {
-                const config = super._getNumberBufferConfig;
-
-                config.nonKeyboardInputEvent = ""
-
-                console.log(config)
-
-                return config;
-                
+                // Desactivar el listener al inicio
+                this._disableUpdateListener();
             }
 
             // Método para manejar la apertura del popup
             async showPopup(popupName, options) {
-                // Establecer la bandera cuando un popup se abre
-                console.log("SE ACTIVA EL POPUP")
                 this.isPopupActive = true;
+                
+                // Desactivar el listener de actualización cuando se abre un popup
+                this._disableUpdateListener();
+
+                console.log("SE ACTIVA EL POPUP");
                 try {
                     const result = await super.showPopup(popupName, options);
                     return result;
                 } finally {
                     // Restablecer la bandera después de que el popup se cierre
-                    console.log("SE DESACTIVA EL POPUP")
+                    console.log("SE DESACTIVA EL POPUP");
                     this.isPopupActive = false;
+                    
+                    // Rehabilitar el listener después de cerrar el popup
+                    this._enableUpdateListener();
                 }
+            }
+
+            // Método para desactivar temporalmente el listener de eventos
+            _disableUpdateListener() {
+                if (this.isPopupActive) {
+                    this._removeListener("update-selected-paymentline");
+                }
+            }
+
+            // Método para agregar el listener nuevamente después de cerrar el popup
+            _enableUpdateListener() {
+                if (!this.isPopupActive) {
+                    useListener("update-selected-paymentline", this._onUpdateSelectedPaymentLine);
+                }
+            }
+
+            // Método para manejar la lógica de actualización
+            _onUpdateSelectedPaymentLine(event) {
+                // Lógica de actualización
+                console.log("Actualizar payment line", event);
             }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
