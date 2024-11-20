@@ -117,6 +117,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
             }
+
+            _updateSelectedPaymentline() {
+                super._updateSelectedPaymentline();
+
+                this.selectedPaymentLine.set_amount(5);
+
+            }
         };
 
     // Registramos la clase modificada en los registros de Odoo
