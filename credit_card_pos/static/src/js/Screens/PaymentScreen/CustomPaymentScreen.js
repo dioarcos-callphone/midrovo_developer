@@ -20,12 +20,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
 
                 // Registrar eventos globales
-                bus.on("deactivate", this, () => {
-                    this._deactivate();
-                });
-                bus.on("activate", this, () => {
-                    this._activate();
-                });
+                bus.on("deactivate", this, this._deactivate);
+                bus.on("activate", this, this._activate);
             }
     
             _activate() {
@@ -62,7 +58,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }));
 
                     // Desactivamos el evento de teclado en el popup abierto
-                    this.env.bus.trigger("deactivate");
+                    // this.env.bus.trigger("deactivate");
+                    this._activate();
 
                     // Mostramos el primer popup para selección de tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -106,15 +103,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("activate");
+                            // this.env.bus.trigger("activate");
+                            this._activate();
 
                             return result;
                         }
 
-                        this.env.bus.trigger("activate");
+                        // this.env.bus.trigger("activate");
+                        this._activate();
                     }
 
-                    this.env.bus.trigger("activate");
+                    // this.env.bus.trigger("activate");
+                    this.activate();
 
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
