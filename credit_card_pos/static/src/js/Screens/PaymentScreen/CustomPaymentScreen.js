@@ -14,10 +14,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Método para desactivar temporalmente el buffer
             _deactivateNumberBuffer() {
-                if (this.isPopupActive) return; // Si ya está desactivado, no hacemos nada
+                if (this.isPopupActive || !NumberBuffer.use) return; // Asegurarse de que NumberBuffer.use esté definido
                 this.isPopupActive = true; // Establecer que el popup está activo
                 NumberBuffer.use = () => {}; // Deshabilitar temporalmente el uso del buffer
-            }
+            }            
 
             // Método para reactivar el buffer
             _reactivateNumberBuffer() {
