@@ -18,8 +18,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 super.setup(); // Llamar al método padre
                 this._popupActive = false; // Flag para saber si el popup está activo
 
-                // Conectarse al sistema global de eventos
+                // Configurar el bus global
                 const bus = useBus();
+                if (!bus) {
+                    console.error("El bus no está disponible. Verifica la configuración del entorno.");
+                    return;
+                }
 
                 // Registrar eventos globales
                 bus.on("show-popup", this, this._onPopupShown);
