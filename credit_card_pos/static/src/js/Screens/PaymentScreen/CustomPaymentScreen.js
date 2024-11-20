@@ -4,7 +4,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { useListener } = require("@web/core/utils/hooks");
+    const { useBus } = require("@web/core/utils/hooks");
 
     // Se añade la función deactivate para eliminar el listener
     NumberBuffer.deactivate = function () {
@@ -14,24 +14,28 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     // Heredamos la clase PaymentScreen
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
-            // Extiende la función setup si quieres añadir lógica adicional
             setup() {
-                super.setup();  // Llamar al método padre
-                this._popupActive = false;  // Flag para saber si el popup está activo
-                useListener("show-popup", this._onPopupShown);
-                useListener("keyup", this._onPopupHidden);
+                super.setup(); // Llamar al método padre
+                this._popupActive = false; // Flag para saber si el popup está activo
+
+                // Conectarse al sistema global de eventos
+                const bus = useBus();
+
+                // Registrar eventos globales
+                bus.on("show-popup", this, this._onPopupShown);
+                bus.on("hide-popup", this, this._onPopupHidden);
             }
 
             // Activa el evento de teclado cuando el popup está activo
             _onPopupShown() {
                 this._popupActive = true;
-                NumberBuffer.activate();  // Activar el teclado numérico
+                NumberBuffer.activate(); // Activar el teclado numérico
             }
 
             // Desactiva el evento de teclado cuando el popup está cerrado
             _onPopupHidden() {
                 this._popupActive = false;
-                NumberBuffer.deactivate();  // Desactivar el teclado numérico
+                NumberBuffer.deactivate(); // Desactivar el teclado numérico
             }
 
             // Sobrescribimos el método addNewPaymentLine
@@ -51,7 +55,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     });
 
                     // Formatear las tarjetas para el popup
-                    const cardOptions = getCards.map(card => ({
+                    const cardOptions = getCards.map((card) => ({
                         id: card.id,
                         label: card.name,
                         item: card.name,
@@ -62,7 +66,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                     // Mostramos el primer popup para selección de tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
-                        "SelectionPopup",  // Usamos el popup correcto para selección de lista
+                        "SelectionPopup", // Usamos el popup correcto para selección de lista
                         {
                             title: this.env._t("Seleccione la Tarjeta de Crédito"),
                             list: cardOptions,
@@ -71,18 +75,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                     if (confirmed) {
                         // Mostramos el segundo popup para los detalles de la tarjeta
-                        const { confirmed, payload } = await this.showPopup(
-                            "RecapAuthPopup",
-                            {
-                                title: this.env._t(selectedCreditCard.name), // Título del popup
-                                recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
-                                autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
-                                referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
-                                startingRecapValue: "",
-                                startingAutorizacionValue: "",
-                                startingReferenciaValue: "",
-                            }
-                        );
+                        const { confirmed, payload } = await this.showPopup("RecapAuthPopup", {
+                            title: this.env._t(selectedCreditCard.name), // Título del popup
+                            recapPlaceholder: this.env._t("Ingrese RECAP"), // Placeholder para el campo RECAP
+                            autorizacionPlaceholder: this.env._t("Ingrese Autorización"), // Placeholder para el campo Autorización
+                            referenciaPlaceholder: this.env._t("Ingrese Referencia"), // Placeholder para el campo Referencia
+                            startingRecapValue: "",
+                            startingAutorizacionValue: "",
+                            startingReferenciaValue: "",
+                        });
 
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
@@ -105,7 +106,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.trigger("show-popup")
+                            this.trigger("show-popup");
 
                             return result;
                         }
