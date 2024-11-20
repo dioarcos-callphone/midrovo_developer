@@ -25,7 +25,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return;
                 }
 
-                console.log(`MOSTRANDO BUS ${ bus }`);
+                console.log("MOSTRANDO BUS");
+                console.log(bus);
 
                 // Registrar eventos globales
                 bus.on("show-popup", this, this._onPopupShown);
