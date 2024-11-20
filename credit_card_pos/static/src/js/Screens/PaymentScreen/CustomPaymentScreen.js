@@ -29,19 +29,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 console.log(bus);
 
                 // Registrar eventos globales
-                bus.on("show-popup", this, this._onPopupShown);
-                bus.on("hide-popup", this, this._onPopupHidden);
+                bus.on("deactivate", this, this._activate);
+                bus.on("activate", this, this._deactivate);
             }
 
             // Activa el evento de teclado cuando el popup está activo
-            _onPopupShown() {
-                this._popupActive = true;
+            _activate() {
                 NumberBuffer.activate(); // Activar el teclado numérico
             }
 
             // Desactiva el evento de teclado cuando el popup está cerrado
-            _onPopupHidden() {
-                this._popupActive = false;
+            _deactivate() {
                 NumberBuffer.deactivate(); // Desactivar el teclado numérico
             }
 
@@ -68,8 +66,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                         item: card.name,
                     }));
 
-                    // Ocultamos cualquier popup abierto antes de mostrar el nuevo
-                    this.env.bus.trigger("hide-popup");
+                    // Desactivamos el evento de teclado en el popup abierto
+                    this.env.bus.trigger("deactivate");
 
                     // Mostramos el primer popup para selección de tarjeta
                     const { confirmed, payload: selectedCreditCard } = await this.showPopup(
@@ -113,7 +111,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            this.env.bus.trigger("show-popup");
+                            this.env.bus.trigger("activate");
 
                             return result;
                         }
