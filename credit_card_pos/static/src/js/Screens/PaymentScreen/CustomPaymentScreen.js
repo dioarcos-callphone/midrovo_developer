@@ -20,7 +20,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 const bus = this.env.bus;
 
                 // Registrar eventos globales
-                bus.on("deactivate", this, NumberBuffer.use(this._deactivate));
+                bus.on("deactivate", this, () => {
+                    NumberBuffer.use(this._deactivate);
+                });
                 // bus.on("activate", this, this._activate);
             }
 
