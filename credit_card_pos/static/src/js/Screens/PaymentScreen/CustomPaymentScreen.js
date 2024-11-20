@@ -17,7 +17,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     this.showPopup("ErrorPopup", {
                         title: this.env._t("Error de Ingreso"),
                         body: this.env._t(
-                            "Ingrese primero las opciones de la tarjeta de credito."
+                            "Ingrese las opciones de la tarjeta de credito."
                         ),
                     });
                 }
@@ -30,12 +30,14 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // Método para manejar la apertura del popup
             async showPopup(popupName, options) {
                 // Establecer la bandera cuando un popup se abre
+                console.log("SE ACTIVA EL POPUP")
                 this.isPopupActive = true;
                 try {
                     const result = await super.showPopup(popupName, options);
                     return result;
                 } finally {
                     // Restablecer la bandera después de que el popup se cierre
+                    console.log("SE DESACTIVA EL POPUP")
                     this.isPopupActive = false;
                 }
             }
