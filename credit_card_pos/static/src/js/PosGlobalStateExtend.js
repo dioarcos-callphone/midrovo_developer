@@ -38,7 +38,7 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 }
             }
 
-            console.log(statementFlated);
+            console.log(statementCreditCards.flat());
 
             if(isContent) {
                 const statementFlated = statementCreditCards.flat();
