@@ -14,12 +14,12 @@ class PosSessionInherit(models.Model):
                 result.append(credit_card_info)
         return result
     
-    def _loader_params_credit_card():
+    def _loader_params_credit_card(self):
         return {
             'search_params': { 'fields': ['name', 'tipo', 'banco'] },
         }
         
-    def _loader_params_credit_card_info():
+    def _loader_params_credit_card_info(self):
         return {
             'search_params': { 'fields': ['credit_card_id', 'recap', 'authorization', 'reference'] },
         }
