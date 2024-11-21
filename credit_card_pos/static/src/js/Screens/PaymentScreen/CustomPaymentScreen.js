@@ -9,22 +9,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-
-                // Escuchar eventos de desactivación y activación
-                this.env.bus.on("desactivar", this, this._deactivateUpdateSelectedPaymentLine);
-                this.env.bus.on("activar", this, this._activateUpdateSelectedPaymentLine);
-            }
-
-            _deactivateUpdateSelectedPaymentLine() {
-                // Desactiva el listener para 'update-selected-paymentline'
-                console.log("Desactivando el listener para update-selected-paymentline");
-                removeListener("update-selected-paymentline", this._updateSelectedPaymentline);
-            }
-        
-            _activateUpdateSelectedPaymentLine() {
-                // Reactiva el listener para 'update-selected-paymentline'
-                console.log("Activando el listener para update-selected-paymentline");
-                this.useListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
 
             // // Sobrescribir el getter _getNumberBufferConfig
@@ -45,6 +29,22 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             //     return config;
                 
             // }
+
+            _updateSelectedPaymentline() {
+
+                this.env.bus.on("desactivar", this, () => {
+                    console.log("desactivamos triggerAtInput")
+                    this.showPopup("ErrorPopup", {
+                        title: this.env._t("Validar Tarejeta de Credito"),
+                        body: this.env._t(
+                            "Falta completar campos."
+                        ),
+                    });
+                });
+
+                super._updateSelectedPaymentline();
+
+            }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
