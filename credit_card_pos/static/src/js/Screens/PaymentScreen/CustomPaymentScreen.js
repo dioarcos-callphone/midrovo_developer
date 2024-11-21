@@ -37,7 +37,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 if (paymentMethod.apply_card) {
-                    // Llamamos el método para desactivar momentáneamente _updateSelectedPaymentline
+                    // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
                     const creditCards = this.env.pos.credit_card;
             
@@ -78,9 +78,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 ref: referencia,
                             };
             
-                            // Guardamos la tarjeta de crédito en localStorage
-                            localStorage.setItem("credit_card", JSON.stringify(credit_card));
-            
                             // Llamamos al método original de PaymentScreen para agregar la línea de pago
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
             
@@ -95,14 +92,17 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             this.enableUpdateSelectedPaymentline();
                             return result;
                         }
+                        // Volvemos a activar manteniendo el proceso original
                         this.enableUpdateSelectedPaymentline();
                     }
+                    // Volvemos a activar manteniendo el proceso original
                     this.enableUpdateSelectedPaymentline();
+            
                 } else {
+                    // Si no es una tarjeta, simplemente llamamos al método original
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
             }
-            
             
         };
 

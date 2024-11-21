@@ -7,36 +7,72 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
     const PosGlobalStateExtend = (PosGlobalState) => class PosGlobalStateExtend extends PosGlobalState {
 
-        // Cargar datos persistidos de tarjetas de crédito al iniciar
         async _processData(loadedData) {
-            await super._processData(...arguments);
-            // Cargar tarjetas de crédito desde almacenamiento local si existen
-            const storedCreditCard = localStorage.getItem("credit_card");
-            if (storedCreditCard) {
-                this.credit_card = JSON.parse(storedCreditCard);
-            }
+            await super._processData(...arguments); //used to call the original _processData
+            this.credit_card = loadedData['credit.card'];
             this.credit_card_info = loadedData['credit.card.info'];
         }
         
-        // Guardar datos de tarjetas de crédito cuando se guardan en el servidor
         async _save_to_server(orders, options) {
+            // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
-            // Guardar las tarjetas de crédito en almacenamiento local
-            localStorage.setItem("credit_card", JSON.stringify(this.credit_card));
-            return result;
+            
+            console.log(this);
+            
+            const data = orders.map(order => order.data);
+            const statement_ids = data.map(d => d.statement_ids);
+            
+            const statements = statement_ids.map(statement => {
+                return statement.filter(item => item[2].creditCard !== undefined)
+            });
+
+            const statementCreditCards = statements.map(statement => {
+                return statement.map(item => {
+                    const obj = item[2];
+                    return {
+                        amount: obj.amount,
+                        creditCard: obj.creditCard,
+                        payment_method_id: obj.payment_method_id,
+                    }
+                });
+            });
+
+            let isContent = false;
+
+            for(const statementCreditCard of statementCreditCards) {
+                if(statementCreditCard.length > 0) {
+                    isContent = true
+                    break;
+                }
+            }
+
+            if(isContent) {
+                const statementFlated = statementCreditCards.flat();
+                await rpc.query({
+                    model: 'pos.payment',
+                    method: 'update_invoice_payments_widget',
+                    args: [ statementFlated, result ]
+                });
+
+            }
+
+            return result
         }
+
     }
 
-    // Extendemos la clase Payment para manejar la tarjeta de crédito
+    // Extendemos la clase Payment para obtener el creditCard que viene del paymentLines
     const PaymentExtend = (Payment) => class PaymentExtend extends Payment {
         export_as_JSON() {
+            console.log(this.creditCard)
             const result = super.export_as_JSON();
-            // Aseguramos que la tarjeta de crédito esté exportada en la transacción
-            result.creditCard = this.creditCard;
+            result.creditCard = this.creditCard
+
             return result;
         }
     }
 
     Registries.Model.extend(PosGlobalState, PosGlobalStateExtend);
     Registries.Model.extend(Payment, PaymentExtend);
+
 });
