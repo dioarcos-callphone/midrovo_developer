@@ -78,7 +78,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 if (isCard) {
                     // this.env.bus.trigger("desactivar");
 
-                    this.removeUpdateSelectedPaymentline();
+                    this.disableUpdateSelectedPaymentline();
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
