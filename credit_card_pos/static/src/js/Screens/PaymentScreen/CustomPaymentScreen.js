@@ -13,9 +13,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 // Escuchar eventos de desactivación y activación
                 this.env.bus.on("desactivar", this, this._deactivateUpdateSelectedPaymentLine);
                 this.env.bus.on("activar", this, this._activateUpdateSelectedPaymentLine);
-
-                // Asegúrate de que el listener para el evento 'update-selected-paymentline' esté registrado
-                useListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
 
             _deactivateUpdateSelectedPaymentLine() {
@@ -59,7 +56,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-                    // this.env.bus.trigger("desactivar");
+                    this.env.bus.trigger("desactivar");
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
