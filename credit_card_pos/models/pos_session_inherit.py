@@ -3,6 +3,7 @@ from odoo import models, fields, api
 class PosSessionInherit(models.Model):
     _inherit = 'pos.session'
     
+    @api.model
     def _pos_ui_models_to_load(self):
         result = super()._pos_ui_models_to_load()
         if self.config_id.module_pos_hr:
