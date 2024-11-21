@@ -25,7 +25,7 @@ class PosSessionInherit(models.Model):
         }
         
     def _get_pos_ui_credit_card(self, params):
-        return self.env['credit.card'].search_read(**params)
+        return self.env['credit.card'].search_read(**params['search_params'])
     
     def _get_pos_ui_credit_card_info(self, params):
-        return self.env['credit.card.info'].search_read(**params)
+        return self.env['credit.card.info'].search_read(**params['search_params'])
