@@ -27,8 +27,7 @@ class PosSessionInherit(models.Model):
     def _loader_params_pos_payment_method(self):
         result = super()._loader_params_pos_payment_method()
         
-        # result['fields'].append('apply_card')
-        _logger.info(result)
+        result['search_params']['fields'].append('apply_card')
         return result
         
     def _loader_params_credit_card_info(self):
