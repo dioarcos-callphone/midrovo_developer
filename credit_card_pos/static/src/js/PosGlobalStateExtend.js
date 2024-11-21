@@ -38,6 +38,8 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
                 }
             }
 
+            console.log(statementFlated);
+
             if(isContent) {
                 const statementFlated = statementCreditCards.flat();
                 await rpc.query({
