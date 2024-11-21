@@ -132,7 +132,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // this.env.bus.trigger("activar");
-                            this.restoreUpdateSelectedPaymentline();
+                            this.enableUpdateSelectedPaymentline();
                             return result;
                         }
                     }
