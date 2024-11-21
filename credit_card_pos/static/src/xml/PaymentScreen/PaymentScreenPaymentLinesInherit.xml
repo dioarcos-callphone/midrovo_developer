@@ -2,20 +2,7 @@
 <templates id="template" xml:space="preserve">
 
     <t t-name="PaymentScreenPaymentLinesInherit" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension" owl="1">
-        <!-- Reemplazo para la sección seleccionada -->
-        <xpath expr="//t[t-if='line.selected']/div[@class='payment-name']" position="replace">
-            <div class="payment-name">
-                <t t-esc="line.payment_method.name" />
-                <t t-if="line.creditCard">
-                    <p style="margin:0; padding:0; font-size: 11px; font-weight:bold;">
-                        <t t-esc="line.creditCard.card"/>
-                    </p>
-                </t>
-            </div>
-        </xpath>
-
-        <!-- Reemplazo para la sección no seleccionada -->
-        <xpath expr="//t[t-else]/div[@class='payment-name']" position="replace">
+        <xpath expr="//div[@class='paymentline selected']/div[@class='payment-name']" position="replace">
             <div class="payment-name">
                 <t t-esc="line.payment_method.name" />
                 <t t-if="line.creditCard">
