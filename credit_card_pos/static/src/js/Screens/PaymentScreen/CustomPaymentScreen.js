@@ -3,7 +3,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
-    const { useListener, removeListener } = require("@web/core/utils/hooks");
+    const NumberBuffer = require("point_of_sale.NumberBuffer");
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
@@ -14,6 +14,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             _updateSelectedPaymentline() {
                 if (!this.isUpdateSelectedPaymentlineActive) {
+                    NumberBuffer.reset();
                     return;
                 }
 
