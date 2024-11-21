@@ -7,6 +7,12 @@ odoo.define("credit_card_pos.PosGlobalStateExtend", (require) => {
 
     const PosGlobalStateExtend = (PosGlobalState) => class PosGlobalStateExtend extends PosGlobalState {
 
+        async _processData(loadedData) {
+            await super._processData(...arguments); //used to call the original _processData
+            this.credit_card = loadedData['credit.card'];
+            this.credit_card_info = loadedData['credit.card.info'];
+        }
+        
         async _save_to_server(orders, options) {
             // SE OBTIENE DICCIONARIO EJ. {id: 865, pos_reference: 'Pedido 00142-356-0001', account_move: 1951}
             const result = await super._save_to_server(orders, options);
