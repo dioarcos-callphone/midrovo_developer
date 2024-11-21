@@ -9,7 +9,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-
+                this.creditCards = this.env.pos.credit_card
+                this.env.pos.credit_card;
                 // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
             }
@@ -39,7 +40,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 if (paymentMethod.apply_card) {
                     // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
-                    const creditCards = this.env.pos.credit_card;
+                    const creditCards = this.creditCards;
             
                     const cardOptions = creditCards.map((card) => ({
                         id: card.id,
