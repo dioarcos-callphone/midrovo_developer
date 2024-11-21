@@ -20,6 +20,13 @@ class PosSessionInherit(models.Model):
             'search_params': { 'fields': ['name', 'tipo', 'banco'] },
         }
         
+    def _loader_params_pos_payment_method(self):
+        result = super()._loader_params_pos_payment_method()
+        
+        result['fields'].append('apply_card')
+        
+        return result
+        
     def _loader_params_credit_card_info(self):
         return {
             'search_params': { 'fields': ['credit_card_id', 'recap', 'authorization', 'reference'] },
