@@ -9,20 +9,24 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
+
+                // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
             }
 
+            // Sobrescribimos el metodo _updateSelectedPaymentline que se encarga de activar el buffer
             _updateSelectedPaymentline() {
                 if (!this.isUpdateSelectedPaymentlineActive) {
+                    // Reseteamos los valores ya que al salir del popup se muestran los valores ingresados
                     NumberBuffer.reset();
                     return;
                 }
 
+                // Llamamos el super para no perder ningun proceso original de este metodo 
                 super._updateSelectedPaymentline()
-                // Lógica original del método
             }
             
-            // Métodos para activar/desactivar
+            // Métodos para activar/desactivar el evento _updateSelectedPaymentline()
             disableUpdateSelectedPaymentline() {
                 this.isUpdateSelectedPaymentlineActive = false;
             }
@@ -41,8 +45,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-                    // this.env.bus.trigger("desactivar");
-
+                    // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
                     const getCards = await this.rpc({
                         model: "credit.card",
@@ -95,12 +98,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     p.creditCard = credit_card;
                                 }
                             }
-
+                            
+                            // Volvemos a activar manteniendo el proceso original
                             this.enableUpdateSelectedPaymentline();
                             return result;
                         }
+                        // Volvemos a activar manteniendo el proceso original
                         this.enableUpdateSelectedPaymentline();
                     }
+                    // Volvemos a activar manteniendo el proceso original
                     this.enableUpdateSelectedPaymentline();
             
                 } else {
