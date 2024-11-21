@@ -12,6 +12,17 @@
                 </t>
             </div>
         </xpath>
+
+        <xpath expr="//div[@class='paymentline']/div[@class='payment-name']" position="replace">
+            <div class="payment-name">
+                <t t-esc="line.payment_method.name" />
+                <t t-if="line.creditCard">
+                    <p style="margin:0; padding:0; font-size: 11px; font-weight:bold;">
+                        <t t-esc="line.creditCard.card"/>
+                    </p>
+                </t>
+            </div>
+        </xpath>
     </t>
 
 </templates>
