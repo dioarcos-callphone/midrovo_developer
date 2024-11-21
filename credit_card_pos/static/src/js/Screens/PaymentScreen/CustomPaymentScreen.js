@@ -47,14 +47,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 if (paymentMethod.apply_card) {
                     // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
-                    const getCards = await this.rpc({
-                        model: "credit.card",
-                        method: "get_cards",
-                    });
+                    // const getCards = await this.rpc({
+                    //     model: "credit.card",
+                    //     method: "get_cards",
+                    // });
+
+                    const creditCards = this.env.pos.credit_card
 
                     console.log(this.env.pos.credit_card)
             
-                    const cardOptions = getCards.map((card) => ({
+                    const cardOptions = creditCards.map((card) => ({
                         id: card.id,
                         label: card.name,
                         item: card.name,
