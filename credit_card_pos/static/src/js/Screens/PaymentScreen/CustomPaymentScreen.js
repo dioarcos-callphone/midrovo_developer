@@ -9,6 +9,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
+                this.isUpdateSelectedPaymentlineActive = true;
             }
 
             // // Sobrescribir el getter _getNumberBufferConfig
@@ -30,14 +31,22 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 
             // }
 
-            removeUpdateSelectedPaymentline() {
-                console.log('DESACTIVAMOS');
-                this.el.removeEventListener("update-selected-paymentline", this._updateSelectedPaymentline);
+            _updateSelectedPaymentline() {
+                if (!this.isUpdateSelectedPaymentlineActive) {
+                    return;
+                }
+
+                super._updateSelectedPaymentline()
+                // Lógica original del método
             }
             
-            restoreUpdateSelectedPaymentline() {
-                console.log('ACTIVAMOS');
-                this.el.addEventListener("update-selected-paymentline", this._updateSelectedPaymentline.bind(this));
+            // Métodos para activar/desactivar
+            disableUpdateSelectedPaymentline() {
+                this.isUpdateSelectedPaymentlineActive = false;
+            }
+            
+            enableUpdateSelectedPaymentline() {
+                this.isUpdateSelectedPaymentlineActive = true;
             }
             
 
