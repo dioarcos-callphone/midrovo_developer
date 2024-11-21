@@ -12,25 +12,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.isUpdateSelectedPaymentlineActive = true;
             }
 
-            // // Sobrescribir el getter _getNumberBufferConfig
-            // get _getNumberBufferConfig() {
-            //     const config = super._getNumberBufferConfig;
-
-            //     this.env.bus.on("desactivar", this, () => {
-            //         console.log("desactivamos triggerAtInput")
-            //         console.log(config)
-            //         config.triggerAtInput = "";
-            //     });
-
-            //     this.env.bus.on("activar", this, () => {
-            //         console.log("activamos triggerAtInput")
-            //         config.triggerAtInput = "update-selected-paymentline";
-            //     });
-
-            //     return config;
-                
-            // }
-
             _updateSelectedPaymentline() {
                 if (!this.isUpdateSelectedPaymentlineActive) {
                     return;
@@ -48,23 +29,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             enableUpdateSelectedPaymentline() {
                 this.isUpdateSelectedPaymentlineActive = true;
             }
-            
-
-            // _updateSelectedPaymentline() {
-
-            //     this.env.bus.on("desactivar", this, () => {
-            //         console.log("desactivamos triggerAtInput")
-            //         this.showPopup("ErrorPopup", {
-            //             title: this.env._t("Validar Tarejeta de Credito"),
-            //             body: this.env._t(
-            //                 "Falta completar campos."
-            //             ),
-            //         });
-            //     });
-
-            //     super._updateSelectedPaymentline();
-
-            // }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
@@ -131,11 +95,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            // this.env.bus.trigger("activar");
                             this.enableUpdateSelectedPaymentline();
                             return result;
                         }
+                        this.enableUpdateSelectedPaymentline();
                     }
+                    this.enableUpdateSelectedPaymentline();
             
                 } else {
                     // Si no es una tarjeta, simplemente llamamos al método original
