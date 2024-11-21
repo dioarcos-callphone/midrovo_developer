@@ -1,5 +1,9 @@
 from odoo import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class PosSessionInherit(models.Model):
     _inherit = 'pos.session'
     
@@ -23,8 +27,8 @@ class PosSessionInherit(models.Model):
     def _loader_params_pos_payment_method(self):
         result = super()._loader_params_pos_payment_method()
         
-        result['fields'].append('apply_card')
-        
+        # result['fields'].append('apply_card')
+        _logger.info(result)
         return result
         
     def _loader_params_credit_card_info(self):
