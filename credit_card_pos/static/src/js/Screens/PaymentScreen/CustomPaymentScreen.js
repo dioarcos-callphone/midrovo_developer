@@ -31,10 +31,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             // }
 
             removeUpdateSelectedPaymentline() {
+                console.log('DESACTIVAMOS');
                 this.el.removeEventListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
             
             restoreUpdateSelectedPaymentline() {
+                console.log('ACTIVAMOS');
                 this.el.addEventListener("update-selected-paymentline", this._updateSelectedPaymentline.bind(this));
             }
             
