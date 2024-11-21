@@ -30,21 +30,30 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 
             // }
 
-            _updateSelectedPaymentline() {
-
-                this.env.bus.on("desactivar", this, () => {
-                    console.log("desactivamos triggerAtInput")
-                    this.showPopup("ErrorPopup", {
-                        title: this.env._t("Validar Tarejeta de Credito"),
-                        body: this.env._t(
-                            "Falta completar campos."
-                        ),
-                    });
-                });
-
-                super._updateSelectedPaymentline();
-
+            removeUpdateSelectedPaymentline() {
+                this.el.removeEventListener("update-selected-paymentline", this._updateSelectedPaymentline);
             }
+            
+            restoreUpdateSelectedPaymentline() {
+                this.el.addEventListener("update-selected-paymentline", this._updateSelectedPaymentline.bind(this));
+            }
+            
+
+            // _updateSelectedPaymentline() {
+
+            //     this.env.bus.on("desactivar", this, () => {
+            //         console.log("desactivamos triggerAtInput")
+            //         this.showPopup("ErrorPopup", {
+            //             title: this.env._t("Validar Tarejeta de Credito"),
+            //             body: this.env._t(
+            //                 "Falta completar campos."
+            //             ),
+            //         });
+            //     });
+
+            //     super._updateSelectedPaymentline();
+
+            // }
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 const method_name = paymentMethod.name;
@@ -56,7 +65,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 });
             
                 if (isCard) {
-                    this.env.bus.trigger("desactivar");
+                    // this.env.bus.trigger("desactivar");
+
+                    this.removeUpdateSelectedPaymentline();
                     const getCards = await this.rpc({
                         model: "credit.card",
                         method: "get_cards",
@@ -110,6 +121,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             // this.env.bus.trigger("activar");
+                            this.restoreUpdateSelectedPaymentline();
                             return result;
                         }
                     }
