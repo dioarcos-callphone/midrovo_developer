@@ -17,8 +17,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 onMounted(() => {
                     if(this.paymentLines) {
-                        const paymentLines = document.querySelector('.paymentlines');
-                        console.log(paymentLines)
+                        const paymentlines = document.querySelector('.paymentlines');
+
+                        for(const paymentline in paymentlines) {
+                            if(paymentline.classList.contains('paymentline')) {
+                                console.log(paymentline);
+                            }
+                        }
 
                     }
                 })
