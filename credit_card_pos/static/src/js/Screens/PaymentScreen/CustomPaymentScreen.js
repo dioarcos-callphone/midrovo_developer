@@ -4,7 +4,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
-    const { onMounted } = owl;
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
@@ -14,26 +13,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 
                 // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
-
-                onMounted(() => {
-                    if(this.paymentLines) {
-                        const paymentlines = document.querySelectorAll('.paymentlines');
-
-                        paymentlines.forEach(element => {
-                            for(const e of element.children) {
-                                if(e.classList.contains("paymentline")) {
-                                    console.log('Hijos encontrados:', e);
-                                }
-                                
-                            }
-                            
-
-                            
-                            // Lógica adicional
-                        });
-
-                    }
-                })
 
             }
 
@@ -47,17 +26,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                 // Llamamos el super para no perder ningun proceso original de este metodo 
                 super._updateSelectedPaymentline()
-            }
-
-            selectPaymentLine(event) {
-                console.log(event);
-                console.log(this.paymentLines);
-                // const { cid } = event.detail;
-                // const line = this.paymentLines.find((line) => line.cid === cid);
-                // this.currentOrder.select_paymentline(line);
-                // NumberBuffer.reset();
-                // this.render(true);
-                super.selectPaymentLine(event)
             }
             
             // Métodos para activar/desactivar el evento _updateSelectedPaymentline()
