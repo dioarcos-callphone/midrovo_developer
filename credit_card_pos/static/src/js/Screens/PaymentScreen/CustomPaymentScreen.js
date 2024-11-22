@@ -10,7 +10,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             setup() {
                 super.setup(); // Llamar al método padre
                 this.creditCards = this.env.pos.credit_card
-                console.log(this)
+                console.log(this.props.paymentLines)
                 // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
             }
