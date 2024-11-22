@@ -5,7 +5,6 @@ odoo.define("credit_card_pos.CustomPaymentScreenPaymentLines", (require) => {
     const CustomPaymentScreenPaymentLines = (PaymentScreenPaymentLines) =>
         class extends PaymentScreenPaymentLines {
             selectedLineClass(line) {
-                console.log(line)
                 
                 return super.selectedLineClass(line);
             }
