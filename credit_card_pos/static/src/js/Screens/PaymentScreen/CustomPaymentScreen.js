@@ -108,4 +108,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
     // Registramos la clase modificada en los registros de Odoo
     Registries.Component.extend(PaymentScreen, CustomPaymentScreen);
+
+    return PaymentScreen
 });
