@@ -20,6 +20,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             // Sobrescribimos el metodo _updateSelectedPaymentline que se encarga de activar el buffer
             _updateSelectedPaymentline() {
+                console.log(this.selectedPaymentLine.get_payment_status())
                 if (!this.isUpdateSelectedPaymentlineActive) {
                     // Reseteamos los valores ya que al salir del popup se muestran los valores ingresados
                     NumberBuffer.reset();
