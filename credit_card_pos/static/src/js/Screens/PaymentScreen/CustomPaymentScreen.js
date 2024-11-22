@@ -21,11 +21,12 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                         paymentlines.forEach(element => {
                             for(const e of element.children) {
-                                console.log('Hijos encontrados:', e);
-                            }
-                            // if(element.classList.contains("paymentline")) {
+                                if(e.classList.contains("paymentline")) {
+                                    console.log('Hijos encontrados:', e);
+                                }
                                 
-                            // }
+                            }
+                            
 
                             
                             // Lógica adicional
