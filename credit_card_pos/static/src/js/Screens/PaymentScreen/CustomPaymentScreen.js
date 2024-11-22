@@ -9,7 +9,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
-                console.log(this);
                 this.creditCards = this.env.pos.credit_card
                 // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
@@ -82,15 +81,16 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             
                             // Llamamos al método original de PaymentScreen para agregar la línea de pago
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
-
-                            console.log("MOSTRANDO RESULTADO");
-                            console.log(result);
             
                             // Añadir credit_card en la línea de pago correspondiente
-                            for (let p of this.paymentLines) {
+                            for (const p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card;
+                                }
+                            }
 
+                            for(const p of this.paymentLines) {
+                                if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     const creditCardInfo = {
                                         creditCard: p.creditCard,
                                         amount: p.amount,
@@ -105,6 +105,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                                     this.env.pos.db.save('credit_card_info', creditCardsInfo);
                                 }
+
                             }
                             
                             // Volvemos a activar manteniendo el proceso original
