@@ -14,9 +14,10 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.isUpdateSelectedPaymentlineActive = true;
             }
 
-            selectPaymentLine(event) {
-                console.log(this.paymentLines)
-                super.selectPaymentLine(event);
+            get paymentLines() {
+                console.log(this.currentOrder.get_paymentlines());
+                
+                return super.paymentLines
             }
 
             // Sobrescribimos el metodo _updateSelectedPaymentline que se encarga de activar el buffer
