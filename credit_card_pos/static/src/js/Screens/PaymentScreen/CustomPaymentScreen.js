@@ -38,6 +38,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 if (paymentMethod.apply_card) {
+                    const creditCardsInfo = []
                     // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
                     const creditCards = this.creditCards;
@@ -83,7 +84,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
             
                             // Añadir credit_card en la línea de pago correspondiente
-                            const creditCardsInfo = []
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     // p.creditCard = credit_card;
