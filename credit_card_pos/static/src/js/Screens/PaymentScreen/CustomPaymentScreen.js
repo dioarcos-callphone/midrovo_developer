@@ -103,11 +103,11 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                     }
 
                                     creditCardsInfo.push(creditCardInfo);
-
-                                    this.env.pos.db.save('credit_card_info', creditCardsInfo);
                                 }
 
                             }
+
+                            this.env.pos.db.save('credit_card_info', creditCardsInfo);
                             
                             // Volvemos a activar manteniendo el proceso original
                             this.enableUpdateSelectedPaymentline();
