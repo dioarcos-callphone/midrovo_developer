@@ -6,6 +6,7 @@ odoo.define("credit_card_pos.CustomPaymentScreenPaymentLines", (require) => {
         class extends PaymentScreenPaymentLines {
             formatLineAmount(paymentline) {
                 console.log("ENTRAMOS EN EL PAYMENTLINES")
+                console.log(this)
                 console.log(paymentline);
                 return super.formatLineAmount(paymentline);
             }
