@@ -91,6 +91,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             }
 
                             for(const p of this.paymentLines) {
+                                console.log(`CREDIT CARD AMOUNT >>> ${p.creditCard.amount}`)
                                 if (p.creditCard.amount === p.amount && paymentMethod.id === p.payment_method.id) {
                                     const creditCardInfo = {
                                         creditCard: p.creditCard,
