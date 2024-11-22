@@ -14,9 +14,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 this.isUpdateSelectedPaymentlineActive = true;
             }
 
-            get paymentLines() {
-                console.log(this.currentOrder.get_paymentlines());
-                
+            get paymentLines() {               
                 return super.paymentLines
             }
 
