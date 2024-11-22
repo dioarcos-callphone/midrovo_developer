@@ -85,7 +85,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             // Añadir credit_card en la línea de pago correspondiente
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
-
+                                    console.log(p.payment_method.id)
                                     this.env.pos.db.save_payment_line_credit_card(p.payment_method.id, credit_card);
                                     p.creditCard = credit_card;
                                 }
