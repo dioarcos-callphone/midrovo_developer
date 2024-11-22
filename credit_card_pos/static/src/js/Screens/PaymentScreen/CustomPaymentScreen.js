@@ -4,15 +4,19 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
     const PaymentScreen = require("point_of_sale.PaymentScreen");
     const Registries = require("point_of_sale.Registries");
     const NumberBuffer = require("point_of_sale.NumberBuffer");
+    const { onMounted } = owl;
 
     const CustomPaymentScreen = (PaymentScreen) =>
         class extends PaymentScreen {
             setup() {
                 super.setup(); // Llamar al método padre
                 this.creditCards = this.env.pos.credit_card
-                console.log(this.paymentLines)
+                
                 // Utilizamos una bandera para que controle la activacion y desactivacion en el popup
                 this.isUpdateSelectedPaymentlineActive = true;
+                onMounted(() => {
+                    console.log(this.paymentLines)
+                });
             }
 
             // Sobrescribimos el metodo _updateSelectedPaymentline que se encarga de activar el buffer
