@@ -86,7 +86,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             for (let p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
                                     p.creditCard = credit_card;
-                                    this.env.pos.db.save('credit_card_info', p.creditCard);
+                                    this.env.pos.db.save('credit_card_info', p);
                                 }
                             }
                             
