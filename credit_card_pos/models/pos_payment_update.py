@@ -27,7 +27,7 @@ class PosPaymentUpdate(models.Model):
                         if (statement.get('amount') == payment.amount and 
                             statement.get('payment_method_id') == payment.payment_method_id.id):
                             
-                            credit_card_info = self.env['credit.card.info'].search([('pos_payment_id','=',payment)])
+                            credit_card_info = self.env['credit.card.info'].search([('pos_payment_id','=',payment.id)])
                             _logger.info(credit_card_info)
                             
                             
