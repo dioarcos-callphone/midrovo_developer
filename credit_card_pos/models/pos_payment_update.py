@@ -28,20 +28,19 @@ class PosPaymentUpdate(models.Model):
                             statement.get('payment_method_id') == payment.payment_method_id.id and
                             not payment.credit_card_info_id):
                             
-                            credit_card_info = self.env['credit.card.info'].search([
-                                ('recap', '=', creditCard.get('recap')),
-                                ('authorization', '=', creditCard.get('auth')),
-                                ('reference', '=', creditCard.get('ref')),
-                            ])                          
+                            # credit_card_info = self.env['credit.card.info'].search([
+                            #     ('recap', '=', creditCard.get('recap')),
+                            #     ('authorization', '=', creditCard.get('auth')),
+                            #     ('reference', '=', creditCard.get('ref')),
+                            # ])                          
                             
-                            if not credit_card_info.pos_payment_id:
-                                credit_card_new = self.env['credit.card.info'].create({
-                                    'credit_card_id': credit_card.id,
-                                    'recap': creditCard.get('recap'),
-                                    'authorization': creditCard.get('auth'),
-                                    'reference': creditCard.get('ref'),
-                                    'pos_payment_id': payment.id,
-                                })
+                            credit_card_new = self.env['credit.card.info'].create({
+                                'credit_card_id': credit_card.id,
+                                'recap': creditCard.get('recap'),
+                                'authorization': creditCard.get('auth'),
+                                'reference': creditCard.get('ref'),
+                                'pos_payment_id': payment.id,
+                            })
                             
-                                payment.write({'credit_card_info_id': credit_card_new.id})
+                            payment.write({'credit_card_info_id': credit_card_new.id})
                                 
