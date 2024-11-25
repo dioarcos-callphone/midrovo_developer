@@ -31,11 +31,11 @@ class PosPaymentUpdate(models.Model):
                 })             
                 
                 for pos_payment in pos_payments_filtered:
-                                        
-                    if pos_payment.amount == statement.get('amount') and not credit_card_info.pos_payment_id:
+                    if pos_payment.amount == statement.get('amount') and not credit_card_info.pos_payment_id and not pos_payment.credit_card_info_id:
+                        _logger.info(f"Asociando credit_card_info {credit_card_info.id} a pos_payment {pos_payment.id}")
                         
-                        credit_card_info.write({ 'pos_payment_id': pos_payment.id })
-                        pos_payment.write({ 'credit_card_info_id': credit_card_info.id })
+                        credit_card_info.write({'pos_payment_id': pos_payment.id})
+                        pos_payment.write({'credit_card_info_id': credit_card_info.id})
 
 
                         
