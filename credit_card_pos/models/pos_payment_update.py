@@ -34,4 +34,11 @@ class PosPaymentUpdate(models.Model):
                             })
                             
                             payment.write({ 'credit_card_info_id': credit_card_new.id })
+                            
+                # for payment in card_payments:
+                #     for statement in statementFlated:
+                #         creditCard = statement.get("creditCard")
+                #         credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
+                        
+                #         if statement.get("amount") == payment.amount 
                                                    
