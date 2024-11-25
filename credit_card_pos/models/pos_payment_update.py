@@ -19,12 +19,23 @@ class PosPaymentUpdate(models.Model):
             # Filtrar pagos con 'apply_card' en True
             pos_payments_filtered = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)
             
-            _logger.info(pos_payments_filtered)
-            
             for statement in statementFlated:
+                creditCard = statement.get("creditCard")
+                credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
+                
+                credit_card_info = self.env['credit.card.info'].create({
+                    'credit_card_id': credit_card.id,
+                    'recap': creditCard.get('recap'),
+                    'authorization': creditCard.get('auth'),
+                    'reference': creditCard.get('ref'),
+                })             
                 
                 for pos_payment in pos_payments_filtered:
-                    
-                    if pos_payment.amount == statement.get('amount'):
-                        _logger.info(pos_payment)
-                        _logger.info(statement)
+                                        
+                    if pos_payment.amount == statement.get('amount') and not credit_card_info.pos_payment_id:
+                        
+                        credit_card_info.write({ 'pos_payment_id': pos_payment.id })
+                        pos_payment.write({ 'credit_card_info_id': credit_card_info.id })
+
+
+                        
