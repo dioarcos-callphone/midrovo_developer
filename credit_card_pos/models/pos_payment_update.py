@@ -34,7 +34,7 @@ class PosPaymentUpdate(models.Model):
                                 ('reference', '=', creditCard.get('ref')),
                             ])                          
                             
-                            if payment.id != credit_card_info.pos_payment_id.id:
+                            if payment.id not in credit_card_info.pos_payment_id:
                                 credit_card_new = self.env['credit.card.info'].create({
                                     'credit_card_id': credit_card.id,
                                     'recap': creditCard.get('recap'),
