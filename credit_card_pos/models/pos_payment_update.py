@@ -25,8 +25,7 @@ class PosPaymentUpdate(models.Model):
                         
                         # Condición mejorada
                         if (statement.get('amount') == payment.amount and 
-                            statement.get('payment_method_id') == payment.payment_method_id.id and 
-                            not payment.credit_card_info_id):
+                            statement.get('payment_method_id') == payment.payment_method_id.id):
                             
                             credit_card_info = self.env['credit.card.info'].search([('pos_payment_id','=',payment)])
                             _logger.info(credit_card_info)
