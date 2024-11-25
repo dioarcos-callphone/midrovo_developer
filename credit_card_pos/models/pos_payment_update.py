@@ -29,9 +29,7 @@ class PosPaymentUpdate(models.Model):
                             not payment.credit_card_info_id):
                             
                             credit_card_info = self.env['credit.card.info'].search([
-                                ("recap","=",creditCard.get('recap')),
-                                ("authorization","=",creditCard.get('auth')),
-                                ("reference","=",creditCard.get('ref')),
+                                ("pos_payment_id","=",payment.id),
                             ])
                             
                             if not credit_card_info:
