@@ -34,13 +34,13 @@ class PosPaymentUpdate(models.Model):
                                 ('reference', '=', creditCard.get('ref')),
                             ])                          
                             
-                            if payment.id != credit_card_info.pos_payment_id:
+                            if payment.id != credit_card_info.pos_payment_id.id:
                                 credit_card_new = self.env['credit.card.info'].create({
                                     'credit_card_id': credit_card.id,
                                     'recap': creditCard.get('recap'),
                                     'authorization': creditCard.get('auth'),
                                     'reference': creditCard.get('ref'),
-                                    'pos_payment_id': payment.id
+                                    'pos_payment_id': payment.id,
                                 })
                             
                                 payment.write({'credit_card_info_id': credit_card_new.id})
