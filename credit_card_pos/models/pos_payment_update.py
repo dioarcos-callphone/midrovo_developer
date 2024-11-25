@@ -40,6 +40,7 @@ class PosPaymentUpdate(models.Model):
                                     'recap': creditCard.get('recap'),
                                     'authorization': creditCard.get('auth'),
                                     'reference': creditCard.get('ref'),
+                                    'pos_payment_id': payment.id
                                 })
                             
                                 payment.write({'credit_card_info_id': credit_card_new.id})
