@@ -17,30 +17,23 @@ class PosPaymentUpdate(models.Model):
             # Filtrar los pagos cuyo método de pago tiene 'apply_card' en True
             card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)               
             
-            _logger.info(f'MOSTRANDO TARJETAS DE CREDITO >>>> { statementFlated }')
+            _logger.info(f'MOSTRANDO TARJETAS DE CREDITO >>>> {statementFlated}')
             
             if card_payments:
-                # for statement in statementFlated:
-                #     creditCard = statement.get('creditCard')
-                #     for payment in card_payments:      
-                #         credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
-                        
-                #         if statement.get('amount') == payment.amount and statement.get('payment_method_id') == payment.payment_method_id.id:
-                #             credit_card_new = self.env['credit.card.info'].create({
-                #                 'credit_card_id': credit_card.id,
-                #                 'recap': creditCard.get('recap'),
-                #                 'authorization': creditCard.get('auth'),
-                #                 'reference': creditCard.get('ref'),
-                #             })
-                            
-                #             payment.write({ 'credit_card_info_id': credit_card_new.id })
-                            
+                processed_payment_ids = set()  # Almacenar IDs de pagos ya procesados
                 for payment in card_payments:
+                    if payment.id in processed_payment_ids:  # Saltar si el pago ya fue procesado
+                        continue
                     for statement in statementFlated:
                         creditCard = statement.get("creditCard")
                         credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
                         
-                        if statement.get('amount') == payment.amount and statement.get('payment_method_id') == payment.payment_method_id.id and not payment.credit_card_info_id:
+                        # Condición mejorada
+                        if (statement.get('amount') == payment.amount and 
+                            statement.get('payment_method_id') == payment.payment_method_id.id and 
+                            not payment.credit_card_info_id and 
+                            payment.id not in processed_payment_ids):
+                            
                             credit_card_new = self.env['credit.card.info'].create({
                                 'credit_card_id': credit_card.id,
                                 'recap': creditCard.get('recap'),
@@ -48,5 +41,5 @@ class PosPaymentUpdate(models.Model):
                                 'reference': creditCard.get('ref'),
                             })
                             
-                            payment.write({ 'credit_card_info_id': credit_card_new.id })
-                                                   
+                            payment.write({'credit_card_info_id': credit_card_new.id})
+                            processed_payment_ids.add(payment.id)  # Registrar el ID del pago como procesado
