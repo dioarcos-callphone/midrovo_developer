@@ -25,12 +25,7 @@ class PosPaymentUpdate(models.Model):
                     for payment in card_payments:      
                         credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
                         
-                        if (statement.get('amount') == payment.amount 
-                            and statement.get('payment_method_id') == payment.payment_method_id.id 
-                            and creditCard.get('ref') == payment.credit_card_info_id.reference
-                            and creditCard.get('auth') == payment.credit_card_info_id.authorization
-                            and creditCard.get('recap') == payment.credit_card_info_id.recap):
-                            
+                        if statement.get('amount') == payment.amount and statement.get('payment_method_id') == payment.payment_method_id.id:
                             credit_card_new = self.env['credit.card.info'].create({
                                 'credit_card_id': credit_card.id,
                                 'recap': creditCard.get('recap'),
