@@ -15,15 +15,10 @@ class PosPaymentUpdate(models.Model):
             pos_payments = self.search([('pos_order_id', '=', pos_order_id)])
             
             # Filtrar los pagos cuyo método de pago tiene 'apply_card' en True
-            card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)               
-            
-            _logger.info(f'MOSTRANDO TARJETAS DE CREDITO >>>> {statementFlated}')
+            card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)
             
             if card_payments:
-                # processed_payment_ids = set()  # Almacenar IDs de pagos ya procesados
                 for payment in card_payments:
-                    # if payment.id in processed_payment_ids:  # Saltar si el pago ya fue procesado
-                    #     continue
                     for statement in statementFlated:
                         creditCard = statement.get("creditCard")
                         credit_card = self.env['credit.card'].search([('name', '=', creditCard.get('card'))], limit=1)
@@ -48,4 +43,4 @@ class PosPaymentUpdate(models.Model):
                                 })
                             
                                 payment.write({'credit_card_info_id': credit_card_new.id})
-                            # processed_payment_ids.add(payment.id)  # Registrar el ID del pago como procesado
+                                
