@@ -39,7 +39,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             async addNewPaymentLine({ detail: paymentMethod }) {
                 if (paymentMethod.apply_card) {
-                    const creditCardsInfo = []
+                    // const creditCardsInfo = []
                     // LLamamos el metodo para desactivar momentaneamente _updateSelectedPaymentline
                     this.disableUpdateSelectedPaymentline();
                     const creditCards = this.creditCards;
@@ -84,7 +84,6 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                             // Llamamos al método original de PaymentScreen para agregar la línea de pago
                             const result = super.addNewPaymentLine({ detail: paymentMethod });
         
-                            // console.log(paymentMethod);
                             // Añadir credit_card en la línea de pago correspondiente
                             for(const p of this.paymentLines) {
                                 if (!p.creditCard && paymentMethod.id === p.payment_method.id) {
@@ -93,24 +92,24 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 }
                             }
 
-                            for(const p of this.paymentLines) {
-                                if (p.creditCard.amount === p.amount && paymentMethod.id === p.payment_method.id) {
-                                    const creditCardInfo = {
-                                        creditCard: p.creditCard,
-                                        amount: p.amount,
-                                        paymentMethod: {
-                                            id: p.payment_method.id,
-                                            name: p.payment_method.name,
-                                            applyCard: p.payment_method.apply_card,
-                                        }
-                                    }
+                            // for(const p of this.paymentLines) {
+                            //     if (p.creditCard.amount === p.amount && paymentMethod.id === p.payment_method.id) {
+                            //         const creditCardInfo = {
+                            //             creditCard: p.creditCard,
+                            //             amount: p.amount,
+                            //             paymentMethod: {
+                            //                 id: p.payment_method.id,
+                            //                 name: p.payment_method.name,
+                            //                 applyCard: p.payment_method.apply_card,
+                            //             }
+                            //         }
 
-                                    creditCardsInfo.push(creditCardInfo);
-                                }
+                            //         creditCardsInfo.push(creditCardInfo);
+                            //     }
 
-                            }
+                            // }
 
-                            this.env.pos.db.save('credit_card_info', creditCardsInfo);
+                            // this.env.pos.db.save('credit_card_info', creditCardsInfo);
                             
                             // Volvemos a activar manteniendo el proceso original
                             this.enableUpdateSelectedPaymentline();

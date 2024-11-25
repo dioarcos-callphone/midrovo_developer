@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class PosPaymentUpdate(models.Model):
     _inherit = "pos.payment"
     
@@ -13,6 +16,8 @@ class PosPaymentUpdate(models.Model):
             
             # Filtrar los pagos cuyo método de pago tiene 'apply_card' en True
             card_payments = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)               
+            
+            _logger.info(f'MOSTRANDO TARJETAS DE CREDITO >>>> { statementFlated }')
             
             if card_payments:
                 for statement in statementFlated:
