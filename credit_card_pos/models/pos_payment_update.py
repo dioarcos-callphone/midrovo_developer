@@ -22,4 +22,9 @@ class PosPaymentUpdate(models.Model):
             _logger.info(pos_payments_filtered)
             
             for statement in statementFlated:
-                _logger.info(statement)
+                
+                for pos_payment in pos_payments_filtered:
+                    
+                    if pos_payment.amount == statement.get('amount'):
+                        _logger.info(pos_payment)
+                        _logger.info(statement)
