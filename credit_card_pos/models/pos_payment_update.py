@@ -33,7 +33,7 @@ class PosPaymentUpdate(models.Model):
                             
                             
                             
-                            if payment.id not in credit_card_info:
+                            if not credit_card_info:
                                 credit_card_new = self.env['credit.card.info'].create({
                                     'credit_card_id': credit_card.id,
                                     'recap': creditCard.get('recap'),
