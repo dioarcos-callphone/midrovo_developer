@@ -19,5 +19,7 @@ class PosPaymentUpdate(models.Model):
             # Filtrar pagos con 'apply_card' en True
             pos_payments_filtered = pos_payments.filtered(lambda payment: payment.payment_method_id.apply_card)
             
+            _logger.info(pos_payments_filtered)
+            
             for statement in statementFlated:
                 _logger.info(statement)
