@@ -25,14 +25,16 @@ class PosPaymentUpdate(models.Model):
                         
                         # Condición mejorada
                         if (statement.get('amount') == payment.amount and 
-                            statement.get('payment_method_id') == payment.payment_method_id.id):
+                            statement.get('payment_method_id') == payment.payment_method_id.id and
+                            not payment.credit_card_info_id):
                             
-                            credit_card_info = self.env['credit.card.info'].search([('pos_payment_id','=',payment.id)])
-                            _logger.info(credit_card_info)
+                            credit_card_info = self.env['credit.card.info'].search([
+                                ('recap', '=', creditCard.get('recap')),
+                                ('authorization', '=', creditCard.get('auth')),
+                                ('reference', '=', creditCard.get('ref')),
+                            ])                          
                             
-                            
-                            
-                            if not credit_card_info:
+                            if payment.id != credit_card_info.pos_payment_id:
                                 credit_card_new = self.env['credit.card.info'].create({
                                     'credit_card_id': credit_card.id,
                                     'recap': creditCard.get('recap'),
