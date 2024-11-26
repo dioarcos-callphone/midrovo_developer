@@ -36,7 +36,9 @@ class PaymentValue(models.Model):
         sri_payments = self.l10n_ec_sri_payment_ids
         
         for sri_payment in sri_payments:
-            _logger.info(sri_payment.l10n_ec_sri_payment_id)
+            _logger.info(sri_payment.l10n_ec_sri_payment_id.code)
+            _logger.info(sri_payment.l10n_ec_sri_payment_id.name)
+            _logger.info(sri_payment.payment_valor)
             # _logger.info(sri_payment.name)
         
         for line in data:
