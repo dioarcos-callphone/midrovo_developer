@@ -34,7 +34,7 @@ class PaymentValue(models.Model):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        _logger.info(f'MOSTRANDO SELF >>> { self }')
+        _logger.info(f'MOSTRANDO SELF >>> { self.l10n_ec_sri_payment_ids }')
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
