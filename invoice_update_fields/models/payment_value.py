@@ -14,41 +14,28 @@ class PaymentValue(models.Model):
     def _get_default_forma_pago_sri(self):
         pass
     
-    # @api.model
-    # def update_account_move_sri_lines(self, invoice_name, sri_lines):        
-    #     try:
-    #         data.clear()
-    #         for line in sri_lines:
-    #             data.append(line)
-            
-    #         # Agrega las sri_lines al acount_move
-    #         lines_value = []
-    #         invoice_id = self.env['account.move'].search(
-    #         [('ref', '=', invoice_name)])
-    #         invoice = self.env['account.move'].browse(invoice_id.id)
-    #         if invoice :
-    #             for sri_line in sri_lines:
-    #                 invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
-    #                 lines_value.append( (0, 0, sri_line))
-    #             invoice.env.cr.commit()
-    #     except Exception as e:
-    #         # Captura la excepción y registra el error
-    #         _logger.error("Ocurrió un error: %s", str(e))
-    
     @api.model
-    def update_account_move_sri_lines(self, invoice_name, sri_lines):
+    def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            # Buscar la factura por nombre
-            invoice = self.env['account.move'].search([('ref', '=', invoice_name)], limit=1)
-            if invoice:
-                # Agregar las líneas en un solo paso
-                sri_line_updates = [(0, 0, sri_line) for sri_line in sri_lines]
-                invoice.write({'l10n_ec_sri_payment_ids': sri_line_updates})
-                _logger.info("Actualización exitosa para la factura %s con %d líneas.", invoice_name, len(sri_lines))
-            else:
-                _logger.warning("No se encontró la factura con nombre %s.", invoice_name)
+            _logger.info(f'MOSTRANDO INVOICE NAME >>> { invoice_name }')
+            _logger.info(f'MOSTRANDO SRI LINES >>> { sri_lines }')
+            data.clear()
+            for line in sri_lines:
+                data.append(line)
+            
+            # Agrega las sri_lines al acount_move
+            lines_value = []
+            invoice_id = self.env['account.move'].search(
+            [('ref', '=', invoice_name)])
+            invoice = self.env['account.move'].browse(invoice_id.id)
+            if invoice :
+                for sri_line in sri_lines:
+                    invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, sri_line)]})
+                    lines_value.append( (0, 0, sri_line))
+                invoice.env.cr.commit()
         except Exception as e:
-            _logger.error("Ocurrió un error al actualizar las líneas SRI: %s", str(e))
+            # Captura la excepción y registra el error
+            _logger.error("Ocurrió un error: %s", str(e))
     
     @api.model
     def _l10n_ec_get_payment_data(self):
