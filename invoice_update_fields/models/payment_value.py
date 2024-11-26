@@ -17,8 +17,8 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            _logger.info(f'MOSTRANDO INVOICE NAME >>> { invoice_name }')
-            _logger.info(f'MOSTRANDO SRI LINES >>> { sri_lines }')
+            # _logger.info(f'MOSTRANDO INVOICE NAME >>> { invoice_name }')
+            # _logger.info(f'MOSTRANDO SRI LINES >>> { sri_lines }')
             data.clear()
             for line in sri_lines:
                 data.append(line)
@@ -49,6 +49,16 @@ class PaymentValue(models.Model):
             
             cr.execute(query,(payment_id,))
             result = cr.fetchone()
+            
+            sri_payment = self.env['l10n_ec.sri.payment'].search([
+                ("id", "=", payment_id)
+            ])
+            
+            _logger.info('MOSTRANDO RESULTADOS')
+            
+            _logger.info(payment_id)
+            _logger.info(result)
+            _logger.info(sri_payment)
 
             payment_values = {
                 'payment_code': result[0],
@@ -60,7 +70,7 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
-        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        # _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
+        # _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
         
         return payment_data if payment_data else payment_contable
