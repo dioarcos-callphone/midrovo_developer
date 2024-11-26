@@ -21,6 +21,8 @@ class PaymentValue(models.Model):
             if invoice:
                 # Agregar las líneas SRI
                 invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, line) for line in sri_lines]})
+                
+                _logger.info(f'MOSTRANDO ACTUALIZACION >>> { invoice.l10n_ec_sri_payment_ids }')
 
         except Exception as e:
             # Capturar y registrar errores
