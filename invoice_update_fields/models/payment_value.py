@@ -34,17 +34,25 @@ class PaymentValue(models.Model):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        if self:
-            sri_payments = self.l10n_ec_sri_payment_ids
-            if sri_payments:
-                for sri_payment in sri_payments:
-                    payment_values = {
-                        'payment_code': sri_payment.l10n_ec_sri_payment_id.code,
-                        'payment_total': sri_payment.payment_valor,
-                        'payment_name': sri_payment.l10n_ec_sri_payment_id.name
-                    }
+        # if self:
+        #     sri_payments = self.l10n_ec_sri_payment_ids
+        #     if sri_payments:
+        #         for sri_payment in sri_payments:
+        #             payment_values = {
+        #                 'payment_code': sri_payment.l10n_ec_sri_payment_id.code,
+        #                 'payment_total': sri_payment.payment_valor,
+        #                 'payment_name': sri_payment.l10n_ec_sri_payment_id.name
+        #             }
             
-                    payment_data.append(payment_values)
+        #             payment_data.append(payment_values)
+        
+        payment_values = {
+            'payment_code': 1,
+            'payment_total': 5,
+            'payment_name': 'nombre'
+        }
+
+        payment_data.append(payment_values)
                     
         
           
