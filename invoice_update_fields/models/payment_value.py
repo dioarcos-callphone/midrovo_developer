@@ -33,7 +33,11 @@ class PaymentValue(models.Model):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        _logger.info(f'MOSTRANDO SELF { self }')
+        account_move = self.search([('id', '=', self.id)])
+        
+        if account_move:
+            _logger.info(f'MOSTRANDO SELF { account_move }') 
+            _logger.info(f'MOSTRANDO PAYMENT SRI { account_move.l10n_ec_sri_payment_ids }')  
         
         sri_payments = self.l10n_ec_sri_payment_ids
         if self:
