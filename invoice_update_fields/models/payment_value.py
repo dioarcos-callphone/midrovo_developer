@@ -58,7 +58,7 @@ class PaymentValue(models.Model):
             
             _logger.info(payment_id)
             _logger.info(result)
-            _logger.info(sri_payment)
+            _logger.info(sri_payment.code + ' - ' + sri_payment.name)
 
             payment_values = {
                 'payment_code': result[0],
