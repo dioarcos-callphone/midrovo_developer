@@ -60,7 +60,7 @@ class PaymentValue(models.Model):
         
         data.clear()
         
-        # _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
-        # _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
+        _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
+        _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
         
         return payment_data if payment_data else payment_contable
