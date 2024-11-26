@@ -35,6 +35,7 @@ class PaymentValue(models.Model):
         payment_data = []
         
         if self:
+            _logger.info(f'MOSTRANDO SELF { self }')
             sri_payments = self.l10n_ec_sri_payment_ids
             if sri_payments:
                 for sri_payment in sri_payments:
@@ -48,6 +49,7 @@ class PaymentValue(models.Model):
             
                     payment_data.append(payment_values)
                     
+        # _logger.info('NO ENTRA')            
         
           
         # if sri_lines:
