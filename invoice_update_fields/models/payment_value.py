@@ -10,6 +10,10 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):
         try:
+            _logger.info('ENTRA AQUIIIIIIIIIII')
+            _logger.info(f'INVOICE NAME >>> { invoice_name }')
+            _logger.info(f'SRI LINES >>> { sri_lines }')
+            _logger.info(f'ACCOUNT MOVE >>> { self }')
             # Buscar la factura por referencia
             invoice = self.env['account.move'].search([('ref', '=', invoice_name)], limit=1)
             
