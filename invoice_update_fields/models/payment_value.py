@@ -51,7 +51,7 @@ class PaymentValue(models.Model):
             
             query = """
                 SELECT l.id, l.move_id, s.code, s.name, l.payment_valor
-                FROM account_move_sri_line l INNER JOIN l10n_ec_sri_payment s
+                FROM account_move_sri_lines l INNER JOIN l10n_ec_sri_payment s
                 ON l.l10n_ec_sri_payment_id = s.id
                 WHERE move_id = %s
             """
