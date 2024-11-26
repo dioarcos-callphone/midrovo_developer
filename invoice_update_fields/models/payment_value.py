@@ -10,9 +10,9 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            data.clear()
-            for line in sri_lines:
-                data.append(line)
+            # data.clear()
+            # for line in sri_lines:
+            #     data.append(line)
             
             # Agrega las sri_lines al acount_move
             lines_value = []
@@ -34,29 +34,16 @@ class PaymentValue(models.Model):
         payment_data = []
         
         sri_payments = self.l10n_ec_sri_payment_ids
-        
-        _logger.info('MOSTRANDO VALORES')
-        for sri_payment in sri_payments:
-            _logger.info('ENTRA EN EL BUCLE')
-            _logger.info(sri_payment.l10n_ec_sri_payment_id.code)
-            _logger.info(sri_payment.l10n_ec_sri_payment_id.name)
-            _logger.info(sri_payment.payment_valor)
-            # _logger.info(sri_payment.name)
-        
-        for line in data:
-            payment_id = line['l10n_ec_sri_payment_id']
+        if self:
+            sri_payments = self.l10n_ec_sri_payment_ids
+            if sri_payments:        
+                for sri_payment in sri_payments:
+                    payment_values = {
+                        'payment_code': sri_payment.l10n_ec_sri_payment_id.code,
+                        'payment_total': sri_payment.payment_valor,
+                        'payment_name': sri_payment.l10n_ec_sri_payment_id.name
+                    }
             
-            sri_payment = self.env['l10n_ec.sri.payment'].search([
-                ("id", "=", payment_id)
-            ])
-
-            payment_values = {
-                'payment_code': sri_payment.code,
-                'payment_total': line['payment_valor'],
-                'payment_name': sri_payment.name
-            }
-            
-            payment_data.append(payment_values)  
+                    payment_data.append(payment_values)  
         
-        data.clear()        
         return payment_data if payment_data else payment_contable
