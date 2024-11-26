@@ -1,24 +1,21 @@
-from odoo import models, fields, api
+from odoo import models, api
 import logging
 _logger = logging.getLogger(__name__)
 
 data = []
-query = 'SELECT code, name FROM l10n_ec_sri_payment WHERE id = %s'
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
-    def _get_default_forma_pago(self):
-        pass
+    # def _get_default_forma_pago(self):
+    #     pass
     
-    def _get_default_forma_pago_sri(self):
-        pass
+    # def _get_default_forma_pago_sri(self):
+    #     pass
     
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            # _logger.info(f'MOSTRANDO INVOICE NAME >>> { invoice_name }')
-            # _logger.info(f'MOSTRANDO SRI LINES >>> { sri_lines }')
             data.clear()
             for line in sri_lines:
                 data.append(line)
@@ -40,25 +37,14 @@ class PaymentValue(models.Model):
     @api.model
     def _l10n_ec_get_payment_data(self):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
-
-        cr = self.env.cr
         payment_data = []
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
             
-            # cr.execute(query,(payment_id,))
-            # result = cr.fetchone()
-            
             sri_payment = self.env['l10n_ec.sri.payment'].search([
                 ("id", "=", payment_id)
             ])
-            
-            # _logger.info('MOSTRANDO RESULTADOS')
-            
-            # _logger.info(payment_id)
-            # _logger.info(result)
-            # _logger.info(sri_payment.code + ' - ' + sri_payment.name)
 
             payment_values = {
                 'payment_code': sri_payment.code,
@@ -68,9 +54,5 @@ class PaymentValue(models.Model):
             
             payment_data.append(payment_values)  
         
-        data.clear()
-        
-        # _logger.info(f'SE OBTIENE EL PAYMENT DATA >>> { payment_data }')        
-        # _logger.info(f'SE OBTIENE EL PAYMENT CONTABLE >>> { payment_contable }')
-        
+        data.clear()        
         return payment_data if payment_data else payment_contable
