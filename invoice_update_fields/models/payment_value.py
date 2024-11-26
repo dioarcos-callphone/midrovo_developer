@@ -7,12 +7,6 @@ data = []
 class PaymentValue(models.Model):
     _inherit = 'account.move'
     
-    # def _get_default_forma_pago(self):
-    #     pass
-    
-    # def _get_default_forma_pago_sri(self):
-    #     pass
-    
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
@@ -38,6 +32,8 @@ class PaymentValue(models.Model):
     def _l10n_ec_get_payment_data(self):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
+        
+        _logger.info(f'MOSTRANDO SELF >>> { self }')
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
