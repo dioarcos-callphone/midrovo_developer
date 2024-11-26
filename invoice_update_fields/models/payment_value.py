@@ -35,7 +35,9 @@ class PaymentValue(models.Model):
         
         sri_payments = self.l10n_ec_sri_payment_ids
         
+        _logger.info('MOSTRANDO VALORES')
         for sri_payment in sri_payments:
+            _logger.info('ENTRA EN EL BUCLE')
             _logger.info(sri_payment.l10n_ec_sri_payment_id.code)
             _logger.info(sri_payment.l10n_ec_sri_payment_id.name)
             _logger.info(sri_payment.payment_valor)
