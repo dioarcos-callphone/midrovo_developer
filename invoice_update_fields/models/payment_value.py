@@ -19,8 +19,18 @@ class PaymentValue(models.Model):
             _logger.info(invoice)
             
             if invoice:
+                for line in sri_lines:
+                    sri_payment = self.env['l10n_ec.sri.payment'].search([('id', '=', line['l10n_ec_sri_payment_id'])])
+                    sri_lines_new = self.env['account.move.sri.lines'].create({
+                        'l10n_ec_sri_payment_id': sri_payment.id,
+                        'move_id': invoice.id,
+                        'payment_valor': line['payment_valor']
+                    })
+                    
+                    _logger.info(f'REGISTRO CREADO >>> {sri_lines_new}')
+                
                 # Agregar las líneas SRI
-                invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, line) for line in sri_lines]})
+                # invoice.write({'l10n_ec_sri_payment_ids': [(0, 0, line) for line in sri_lines]})
                 
                 _logger.info(f'MOSTRANDO ACTUALIZACION >>> { invoice.l10n_ec_sri_payment_ids }')
 
