@@ -50,8 +50,9 @@ class PaymentValue(models.Model):
             _logger.info(f'MOSTRANDO SELF { self }')
             
             query = """
-                SELECT id, move_id, other_column_1, other_column_2
-                FROM account_move_sri_line
+                SELECT l.id, l.move_id, s.code, s.name, l.payment_valor
+                FROM account_move_sri_line l INNER JOIN l10n_ec_sri_payment s
+                ON l.l10n_ec_sri_payment_id = s.id
                 WHERE move_id = %s
             """
             # Ejecutar la consulta SQL con el parámetro 'move_id'
