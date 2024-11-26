@@ -49,6 +49,17 @@ class PaymentValue(models.Model):
         if self:
             _logger.info(f'MOSTRANDO SELF { self }')
             
+            query = """
+                SELECT id, move_id, other_column_1, other_column_2
+                FROM account_move_sri_line
+                WHERE move_id = %s
+            """
+            # Ejecutar la consulta SQL con el parámetro 'move_id'
+            self.env.cr.execute(query, (self.id,))
+            results = self.env.cr.fetchall()  # Obtiene los resultados de la consulta
+            
+            _logger.info(f'MOSTRANDO RESULT >>>> { results }')
+                
             sri_lines = self.env['account.move.sri.lines'].sudo().search([('move_id','=', self.id)])
             
             _logger.info(f'MOSTRANDO SRI LINEESSS >>> { sri_lines }')
