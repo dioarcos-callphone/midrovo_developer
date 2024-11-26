@@ -13,9 +13,10 @@ class PaymentValue(models.Model):
             _logger.info('ENTRA AQUIIIIIIIIIII')
             _logger.info(f'INVOICE NAME >>> { invoice_name }')
             _logger.info(f'SRI LINES >>> { sri_lines }')
-            _logger.info(f'ACCOUNT MOVE >>> { self }')
             # Buscar la factura por referencia
             invoice = self.env['account.move'].search([('ref', '=', invoice_name)], limit=1)
+            
+            _logger.info(invoice)
             
             if invoice:
                 # Agregar las líneas SRI
