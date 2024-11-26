@@ -10,7 +10,6 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
-            _logger.info(f'SRI LINES { sri_lines }')
             data.clear()
             for line in sri_lines:
                 data.append(line)
@@ -34,7 +33,11 @@ class PaymentValue(models.Model):
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        _logger.info(f'MOSTRANDO SELF >>> { self.l10n_ec_sri_payment_ids }')
+        sri_payments = self.l10n_ec_sri_payment_ids
+        
+        for sri_payment in sri_payments:
+            _logger.info(sri_payment.l10n_ec_sri_payment_id)
+            # _logger.info(sri_payment.name)
         
         for line in data:
             payment_id = line['l10n_ec_sri_payment_id']
