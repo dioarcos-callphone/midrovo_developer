@@ -49,7 +49,7 @@ class PaymentValue(models.Model):
         if self:
             _logger.info(f'MOSTRANDO SELF { self }')
             
-            sri_lines = self.env['account.move.sri.lines'].search([('move_id','=', self.id)])
+            sri_lines = self.env['account.move.sri.lines'].sudo().search([('move_id','=', self.id)])
             
             _logger.info(f'MOSTRANDO SRI LINEESSS >>> { sri_lines }')
             
