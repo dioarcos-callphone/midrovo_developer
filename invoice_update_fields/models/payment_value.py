@@ -10,6 +10,7 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):        
         try:
+            _logger.info(f'SRI LINES { sri_lines }')
             data.clear()
             for line in sri_lines:
                 data.append(line)
