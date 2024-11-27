@@ -44,42 +44,53 @@ class PaymentValue(models.Model):
     @api.model
     def _l10n_ec_get_payment_data(self):
         _logger.info('ENTRA EN L10N EC GET PAYMENT')
-        payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
+        contable_payments = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        _logger.info(f'SRI LINES >>> { payment_contable }')
+        _logger.info(f'SRI LINES >>> { contable_payments }')
         
-        if self:
-            _logger.info(f'MOSTRANDO SELF { self }')
-            
-            query = """
-                SELECT l.id, l.move_id, s.code, s.name, l.payment_valor
-                FROM account_move_sri_lines l INNER JOIN l10n_ec_sri_payment s
-                ON l.l10n_ec_sri_payment_id = s.id
-                WHERE move_id = %s
-            """
-            # Ejecutar la consulta SQL con el parámetro 'move_id'
-            self.env.cr.execute(query, (self.id,))
-            results = self.env.cr.fetchall()  # Obtiene los resultados de la consulta
-            
-            _logger.info(f'MOSTRANDO RESULT >>>> { results }')
+        if contable_payments:
+            for contable_payment in contable_payments:
+                payment_values = {
+                    'payment_code': contable_payment.get('payment_code'),
+                    'payment_total': contable_payment.get('payment_total'),
+                    'payment_name': contable_payment.get('payment_name'),
+                }
+        
+                payment_data.append(payment_values)
                 
-            sri_lines = self.env['account.move.sri.lines'].sudo().search([('move_id','=', self.id)])
+        
+        # if self:
+        #     _logger.info(f'MOSTRANDO SELF { self }')
             
-            _logger.info(f'MOSTRANDO SRI LINEESSS >>> { sri_lines }')
+        #     query = """
+        #         SELECT l.id, l.move_id, s.code, s.name, l.payment_valor
+        #         FROM account_move_sri_lines l INNER JOIN l10n_ec_sri_payment s
+        #         ON l.l10n_ec_sri_payment_id = s.id
+        #         WHERE move_id = %s
+        #     """
+        #     # Ejecutar la consulta SQL con el parámetro 'move_id'
+        #     self.env.cr.execute(query, (self.id,))
+        #     results = self.env.cr.fetchall()  # Obtiene los resultados de la consulta
             
-            sri_payments = self.l10n_ec_sri_payment_ids
-            if sri_payments:
-                for sri_payment in sri_payments:
-                    _logger.info(f'MOSTRANDO SRI PAYMENT { sri_payment }')
-                    _logger.info(f'MOSTRANDO L10N SRI PAYMENT ID { sri_payment.l10n_ec_sri_payment_id }')
-                    payment_values = {
-                        'payment_code': sri_payment.l10n_ec_sri_payment_id.code,
-                        'payment_total': sri_payment.payment_valor,
-                        'payment_name': sri_payment.l10n_ec_sri_payment_id.name
-                    }
+        #     _logger.info(f'MOSTRANDO RESULT >>>> { results }')
+                
+        #     sri_lines = self.env['account.move.sri.lines'].sudo().search([('move_id','=', self.id)])
             
-                    payment_data.append(payment_values)
+        #     _logger.info(f'MOSTRANDO SRI LINEESSS >>> { sri_lines }')
+            
+        #     sri_payments = self.l10n_ec_sri_payment_ids
+        #     if sri_payments:
+        #         for sri_payment in sri_payments:
+        #             _logger.info(f'MOSTRANDO SRI PAYMENT { sri_payment }')
+        #             _logger.info(f'MOSTRANDO L10N SRI PAYMENT ID { sri_payment.l10n_ec_sri_payment_id }')
+        #             payment_values = {
+        #                 'payment_code': sri_payment.l10n_ec_sri_payment_id.code,
+        #                 'payment_total': sri_payment.payment_valor,
+        #                 'payment_name': sri_payment.l10n_ec_sri_payment_id.name
+        #             }
+            
+        #             payment_data.append(payment_values)
                     
         # _logger.info('NO ENTRA')            
         
@@ -97,4 +108,4 @@ class PaymentValue(models.Model):
             
         #             payment_data.append(payment_values)
         
-        return payment_data if payment_data else payment_contable
+        return payment_data if payment_data else contable_payments
