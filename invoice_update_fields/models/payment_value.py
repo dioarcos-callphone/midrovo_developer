@@ -14,10 +14,12 @@ class PaymentValue(models.Model):
             # Buscar la factura por referencia
             invoice = self.env['account.move'].search([('ref', '=', invoice_name)], limit=1)
             
+            # Agregar las sri lines en la variable global
             if sri_lines:
                 for sri_line in sri_lines:
                     sri_payment_lines.append(sri_line)                
             
+            # Si la factura existe crear los sri lines para que se relacione con la factura 
             if invoice:
                 for line in sri_lines:
                     sri_payment = self.env['l10n_ec.sri.payment'].search([('id', '=', line['l10n_ec_sri_payment_id'])])
