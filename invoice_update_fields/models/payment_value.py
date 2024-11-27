@@ -43,7 +43,7 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
-        _logger.info('ENTRA EN UPDATE ACCOUNT MOVE')
+        _logger.info('ENTRA EN L10N EC GET PAYMENT')
         payment_contable = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
