@@ -48,15 +48,33 @@ class PaymentValue(models.Model):
         
         _logger.info(f'MOSTRANDO VARIABLE GLOBAL >>> { sri_payment_lines }')
         
-        if contable_payments:
-            for contable_payment in contable_payments:
-                payment_values = {
-                    'payment_code': contable_payment.get('payment_code'),
-                    'payment_total': contable_payment.get('payment_total'),
-                    'payment_name': contable_payment.get('payment_name'),
-                }
+        if sri_payment_lines:
+            for sri_payment_line in sri_payment_lines:
+                sri_payment = self.env['l10n_ec.sri.payment'].search([
+                    ('id','=', sri_payment_line.get('l10n_ec_sri_payment_id'))
+                ])
+                
+                if sri_payment:
+                    payment_values = {
+                        'payment_code': sri_payment.code,
+                        'payment_total': sri_payment_line.get('payment_valor'),
+                        'payment_name': sri_payment.name
+                    }
+            
+                    payment_data.append(payment_values)
+                    
+                
+                
         
-                payment_data.append(payment_values)
+        # if contable_payments:
+        #     for contable_payment in contable_payments:
+        #         payment_values = {
+        #             'payment_code': contable_payment.get('payment_code'),
+        #             'payment_total': contable_payment.get('payment_total'),
+        #             'payment_name': contable_payment.get('payment_name'),
+        #         }
+        
+        #         payment_data.append(payment_values)
                 
         
         # if self:
