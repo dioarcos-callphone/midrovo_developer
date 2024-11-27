@@ -2,7 +2,7 @@ from odoo import models, api
 import logging
 _logger = logging.getLogger(__name__)
 
-sri_lines = []
+sri_payment_lines = []
 
 class PaymentValue(models.Model):
     _inherit = 'account.move'
@@ -10,13 +10,13 @@ class PaymentValue(models.Model):
     @api.model
     def update_account_move_sri_lines(self, invoice_name, sri_lines):
         try:
-            _logger.info('ENTRA EN UPDATE ACCOUNT MOVE')
-            _logger.info(f'INVOICE NAME >>> { invoice_name }')
-            _logger.info(f'SRI LINES >>> { sri_lines }')
+            sri_payment_lines.clear()
             # Buscar la factura por referencia
             invoice = self.env['account.move'].search([('ref', '=', invoice_name)], limit=1)
             
-            _logger.info(invoice)
+            if sri_lines:
+                for sri_line in sri_lines:
+                    sri_payment_lines.append(sri_line)                
             
             if invoice:
                 for line in sri_lines:
@@ -43,11 +43,10 @@ class PaymentValue(models.Model):
     
     @api.model
     def _l10n_ec_get_payment_data(self):
-        _logger.info('ENTRA EN L10N EC GET PAYMENT')
         contable_payments = super(PaymentValue, self)._l10n_ec_get_payment_data()
         payment_data = []
         
-        _logger.info(f'SRI LINES >>> { contable_payments }')
+        _logger.info(f'MOSTRANDO VARIABLE GLOBAL >>> { sri_payment_lines }')
         
         if contable_payments:
             for contable_payment in contable_payments:
