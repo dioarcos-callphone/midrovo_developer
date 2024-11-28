@@ -134,6 +134,13 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     return super.addNewPaymentLine({ detail: paymentMethod });
                 }
             }
+
+            async validateOrder(isForceValidate) {
+                console.log(this)
+
+                super.validateOrder(isForceValidate)
+            }
+
             
         };
 
