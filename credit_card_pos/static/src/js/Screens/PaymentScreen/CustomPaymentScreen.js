@@ -144,7 +144,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                 "El método de pago contiene tarjetas de crédito pero no se han establecido."
                             ),
                         });
-                        return
+                        return;
                     }
                 }
 
