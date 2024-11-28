@@ -138,18 +138,18 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             async validateOrder(isForceValidate) {
                 for(const line of this.paymentLines) {
                     if(line.payment_method.apply_card === true && !line.creditCard) {
-                        this.showPopup("ErrorPopup", {
+                        return this.showPopup("ErrorPopup", {
                             title: this.env._t("Error"),
                             body: this.env._t(
                                 "El método de pago contiene tarjetas de crédito pero no se han establecido."
                             ),
                         });
-                        return;
+                        
 
                     }
                 }
 
-                return await super.validateOrder(...arguments);
+                return await super.validateOrder(isForceValidate);
             }
 
             
