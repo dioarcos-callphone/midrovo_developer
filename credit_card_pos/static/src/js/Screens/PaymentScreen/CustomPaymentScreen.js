@@ -76,7 +76,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
                             if(!recap || !autorizacion || !referencia) {
                                 await this.showPopup("ErrorPopup", {
-                                    title: this.env._t("Error"),
+                                    title: this.env._t("Validación de la Tarjeta"),
                                     body: this.env._t(
                                         "Los campos RECAP, Autorización y Referencia no deben estar vacíos."
                                     ),
@@ -141,9 +141,9 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                 for(const line of this.paymentLines) {
                     if(line.payment_method.apply_card === true && !line.creditCard) {
                         this.showPopup("ErrorPopup", {
-                            title: this.env._t("Error"),
+                            title: this.env._t("Validación de la Tarjeta"),
                             body: this.env._t(
-                                "El método de pago contiene tarjetas de crédito pero no se han establecido."
+                                "El método de pago contiene tarjetas de crédito pero falta información."
                             ),
                         });
                         return false;
