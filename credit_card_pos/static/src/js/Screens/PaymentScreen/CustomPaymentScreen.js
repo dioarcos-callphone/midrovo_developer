@@ -138,7 +138,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             async validateOrder(isForceValidate) {
                 console.log(this)
 
-                super.validateOrder(isForceValidate)
+                await super.validateOrder(isForceValidate)
             }
 
             
