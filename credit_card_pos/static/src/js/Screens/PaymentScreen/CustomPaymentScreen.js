@@ -81,6 +81,8 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                                         "Los campos RECAP, Autorización y Referencia no deben estar vacíos."
                                     ),
                                 });
+                                this.enableUpdateSelectedPaymentline();
+                                return;
                             }
             
                             const credit_card = {
