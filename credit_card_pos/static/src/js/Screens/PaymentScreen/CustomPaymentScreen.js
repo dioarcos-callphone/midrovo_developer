@@ -149,7 +149,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
                     }
                 }
 
-                return await super.validateOrder(isForceValidate);
+                return await super.validateOrder(...arguments);
             }
 
             
