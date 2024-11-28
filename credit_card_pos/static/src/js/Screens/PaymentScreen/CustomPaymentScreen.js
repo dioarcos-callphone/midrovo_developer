@@ -137,7 +137,7 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
 
             async validateOrder(isForceValidate) {
                 for(const line of this.paymentLines) {
-                    if(line.payment_method.apply_card === True && !line.creditCard) {
+                    if(line.payment_method.apply_card === true && !line.creditCard) {
                         await this.showPopup("ErrorPopup", {
                             title: this.env._t("Error"),
                             body: this.env._t(
