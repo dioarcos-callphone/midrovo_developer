@@ -73,6 +73,15 @@ odoo.define("credit_card_pos.CustomPaymentScreen", (require) => {
             
                         if (confirmed) {
                             const { recap, autorizacion, referencia } = payload;
+
+                            if(!recap || !autorizacion || !referencia) {
+                                await this.showPopup("ErrorPopup", {
+                                    title: this.env._t("Error"),
+                                    body: this.env._t(
+                                        "Los campos RECAP, Autorización y Referencia no deben estar vacíos."
+                                    ),
+                                });
+                            }
             
                             const credit_card = {
                                 card: selectedCreditCard,
