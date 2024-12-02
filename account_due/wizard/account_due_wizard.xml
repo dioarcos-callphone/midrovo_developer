@@ -17,7 +17,7 @@
                     </group>
                     <group>
                         <group string="Filtros">
-                            <field name="client_id" widget="many2many_tags"/>
+                            <field name="client_id"/>
                         </group>
                     </group>
                 </sheet>
