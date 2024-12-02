@@ -11,13 +11,12 @@
                         <group string="Fecha de Corte">
                             <field name="court_date"/>
                         </group>
-                        <!-- <group string="Tipo de Costo">
-                            <field name="cost_options" widget="radio" options="{'horizontal': true}"/>
-                        </group> -->
                     </group>
                     <group>
                         <group string="Filtros">
                             <field name="client_id"/>
+                            <field name="journal_id" />
+                            <field name="comercial_id" />
                         </group>
                     </group>
                 </sheet>

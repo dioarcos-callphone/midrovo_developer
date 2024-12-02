@@ -14,8 +14,8 @@
     'data': [
         'security/ir.model.access.csv',
         'wizard/account_due_wizard.xml',
-        # 'report/invoice_details_report.xml',
-        # 'report/invoice_details_template.xml',
+        'report/account_due_report.xml',
+        'report/account_due_template.xml',
     ],
     
     'assets': {

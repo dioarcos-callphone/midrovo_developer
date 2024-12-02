@@ -29,8 +29,30 @@ class AccountDueWizard(models.TransientModel):
         ] 
     )
     
+    journal_id = fields.Many2one(
+        string = 'Diario',
+        comodel_name='account.journal',
+        domain=[('type','=','sale')] 
+    )
+    
+    comercial_ids = fields.Many2one(
+        string = 'Comercial',
+        comodel_name='res.users'
+    )
+    
     def action_pdf(self):
-        pass
+        data = {
+            'model_id': self.id,
+            'court_date': self.court_date,
+            'client_id': self.client_id.id,
+        }
+        
+        return (
+            self.env.ref(
+                'invoice_details_view.report_invoice_details_action'
+            )
+            .report_action(None, data=data)
+        )
     
     def action_excel(self):
         pass    
