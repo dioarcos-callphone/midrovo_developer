@@ -1,0 +1,22 @@
+.btn-excel {
+    background-color: #00843D; /* Verde típico de Excel */
+    color: white; /* Asegúrate de que el texto sea legible */
+    border: none; /* Elimina el borde si es necesario */
+}
+
+.btn-excel:hover {
+    background-color: #006D31; /* Un verde más oscuro al pasar el mouse */
+    color: white;
+}
+
+.btn-pdf {
+    background-color: #C02A24; /* Rojo típico de PDF */
+    color: white; /* Texto en blanco para contraste */
+    border: none; /* Opcional: elimina el borde */
+}
+
+.btn-pdf:hover {
+    background-color: #A0201D; /* Un rojo más oscuro al pasar el mouse */
+    color: white;
+}
+
