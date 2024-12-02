@@ -29,3 +29,8 @@ class AccountDueWizard(models.TransientModel):
         ] 
     )
     
+    def action_pdf(self):
+        pass
+    
+    def action_excel(self):
+        pass    
