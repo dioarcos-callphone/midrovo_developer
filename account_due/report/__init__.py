@@ -1,1 +1,1 @@
-from . import invoice_details
+from . import account_due
