@@ -35,7 +35,7 @@ class AccountDueWizard(models.TransientModel):
         domain=[('type','=','sale')] 
     )
     
-    comercial_ids = fields.Many2one(
+    comercial_id = fields.Many2one(
         string = 'Comercial',
         comodel_name='res.users'
     )
