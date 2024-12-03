@@ -34,9 +34,7 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        if invoice_details:
-            _logger.info(f'MOSTRANDO INVOICE DETAILS >>> { invoice_details }')
-            
+        if invoice_details:            
             for detail in invoice_details:
                 data_detail = {}
                 
@@ -51,6 +49,8 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['amount_residual'] = detail.amount_residual
   
                 data_invoice_details.append(data_detail)
+                
+            _logger.info(f'MOSTRANDO RESULTADOS >>> { data_invoice_details }')
             
             return {
                 'doc_ids': docids,
