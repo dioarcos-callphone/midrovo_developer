@@ -6,23 +6,23 @@
             <t t-call="web.external_layout">
                 <div class="page" style="margin: 0; padding: 0;">
                     <div class="text-center">
-                        <h3>Cuentas Vencidas por Cobrar</h3>    
+                        <h4>Cuentas Vencidas por Cobrar</h4>    
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
                     <thead>
                         <tr>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Vencido por Cobrar</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Fecha de Vencimiento</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Importe en Moneda</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Fecha Prevista</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">En Fecha</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;" width="100">1 - 30</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;" width="100">31 - 60</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;" width="100">61 - 90</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;" width="100">91 - 120</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Más Antiguos</th>
-                            <th align="center" style="vertical-align: middle; font-size: 14px;">Total</th>                            
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Vencido por Cobrar</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Fecha de Vencimiento</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Importe en Moneda</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Fecha Prevista</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">En Fecha</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">1 - 30</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">31 - 60</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">61 - 90</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">91 - 120</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Más Antiguos</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Total</th>                            
                         </tr>
                     </thead>
                     <tbody>
