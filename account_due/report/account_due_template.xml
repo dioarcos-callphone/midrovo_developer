@@ -36,12 +36,12 @@
                             <td>
                                 <t t-esc="result.get('amount_residual')"/>
                             </td>
-                            <td>
-                                <!-- <t t-esc="result['comercial']"/> -->
+                            <!-- <td>
+                                <t t-esc="result['comercial']"/>
                             </td>
                             <td>
-                                <!-- <t t-esc="result['client']"/> -->
-                            </td>
+                                <t t-esc="result['client']"/>
+                            </td> -->
                             <td>
                                 <t t-esc="result.get('1 - 30', '')"/>
                             </td>
