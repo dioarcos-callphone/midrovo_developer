@@ -25,8 +25,8 @@ class InvoiceDetails(models.AbstractModel):
             ('move_id.payment_state', 'in', ['not_paid', 'partial'])
         ]
         
-        if journal_id:
-            domain.append(('journal_id', '=', journal_id))
+        # if journal_id:
+        #     domain.append(('journal_id', '=', journal_id))
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
