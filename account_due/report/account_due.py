@@ -22,7 +22,7 @@ class InvoiceDetails(models.AbstractModel):
         domain = [
             ('product_id', '!=', False),
             ('display_type', '=', 'product'),
-            ('date', '<=', court_date),
+            ('move_id.invoice_date_due', '<=', court_date),
             ('partner_id', '=', client_id),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund']),
         ]
@@ -44,6 +44,7 @@ class InvoiceDetails(models.AbstractModel):
         invoice_details = self.env['account.move.line'].search(domain)
         
         if invoice_details:
+            _logger.info(f'MOSTRANDO INVOICE DETAILS >>> { invoice_details }')
             # filtramos las lineas de factura cuyo codigo de cuenta comienza con 5
             details_account_five = details_account_five.filtered(
                 lambda d : d.account_id.code.startswith('5')
