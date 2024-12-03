@@ -203,27 +203,20 @@ class AccountDueWizard(models.TransientModel):
                 
             header_length = len(header)  # Longitud del encabezado
             sheet.set_column(col, col, header_length + 5)
-            
-            # if header == 'Fecha' or header == 'Cajero':
-            #     sheet.set_column(col, col, header_length + 6) 
-                
-            # if header == 'Número' or header == 'Diario contable' or header == 'Producto':
-            #     sheet.set_column(col, col, header_length + 18)
-                
-            # if header == 'Comercial' or header == 'Cajero' or header == 'Cliente':
-            #     sheet.set_column(col, col, header_length + 10)
         
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
-            sheet.write(row, 0, val['date_due'], text_format)
-            sheet.write(row, 1, val['invoice'], text_format)
+            sheet.write(row, 0, val['invoice'], text_format)
+            sheet.write(row, 1, val['date_due'], text_format)
             sheet.write(row, 2, val['amount_residual'], text_format)
-            sheet.write(row, 3, val.get('1 - 30', ''), text_format)
-            sheet.write(row, 4, val.get('31 - 60', ''), text_format)
-            sheet.write(row, 5, val.get('61 - 90', ''), text_format)
-            sheet.write(row, 6, val.get('91 - 120', ''), text_format)
-            sheet.write(row, 6, val.get('antiguo', ''), text_format)
+            sheet.write(row, 3, val.get('actual', ''), text_format)
+            sheet.write(row, 4, val.get('1 - 30', ''), text_format)
+            sheet.write(row, 5, val.get('31 - 60', ''), text_format)
+            sheet.write(row, 6, val.get('61 - 90', ''), text_format)
+            sheet.write(row, 7, val.get('91 - 120', ''), text_format)
+            sheet.write(row, 8, val.get('antiguo', ''), text_format)
+            sheet.write(row, 9, 0, text_format)
             
             row += 1
 
