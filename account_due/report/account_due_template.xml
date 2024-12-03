@@ -28,19 +28,19 @@
                     <tbody>
                         <tr t-foreach="options" t-as="result">
                             <td>
-                                <t t-esc="result['date_due']"/>
-                            </td>
-                            <td>
                                 <t t-esc="result['invoice']"/>
                             </td>
                             <td>
-                                <t t-esc="result['journal']"/>
+                                <t t-esc="result['date_due']"/>
                             </td>
                             <td>
-                                <t t-esc="result['comercial']"/>
+                                <t t-esc="result['amount_residual']"/>
                             </td>
                             <td>
-                                <t t-esc="result['client']"/>
+                                <!-- <t t-esc="result['comercial']"/> -->
+                            </td>
+                            <td>
+                                <!-- <t t-esc="result['client']"/> -->
                             </td>
                             <td>
                                 <t t-esc="result['amount_residual']"/>

@@ -48,6 +48,10 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code
+                data_detail['1 - 30'] = False
+                data_detail['31 - 60'] = False
+                data_detail['91 - 120'] = False
+                data_detail['antiguo'] = False
   
                 data_invoice_details.append(data_detail)
                 
