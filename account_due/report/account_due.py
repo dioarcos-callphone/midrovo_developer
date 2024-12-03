@@ -20,12 +20,11 @@ class InvoiceDetails(models.AbstractModel):
         _logger.info(f'MOSTRANDO DATA >>> { data }')
         
         domain = [
-            ('product_id', '!=', False),
-            ('display_type', '=', 'product'),
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '>', 0),
             ('partner_id', '=', client_id),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund']),
+            ('payment_state', 'in', ['not_paid', 'partial'])
         ]
         
         domain_cogs = [
