@@ -42,7 +42,7 @@ class InvoiceDetails(models.AbstractModel):
                 
                 # añadimos los valores a los campos del diccionario
                 data_detail['date_due'] = date_formated
-                data_detail['numero'] = detail.move_name
+                data_detail['invoice'] = detail.move_name
                 data_detail['journal'] = detail.journal_id.name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['client'] = detail.partner_id.name or ""
@@ -51,7 +51,7 @@ class InvoiceDetails(models.AbstractModel):
   
                 data_invoice_details.append(data_detail)
                 
-            _logger.info(f'MOSTRANDO RESULTADOS >>> { data_invoice_details }')
+            # _logger.info(f'MOSTRANDO RESULTADOS >>> { data_invoice_details }')
             
             return {
                 'doc_ids': docids,
