@@ -21,13 +21,13 @@ class InvoiceDetails(models.AbstractModel):
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '>', 0),
             ('partner_id', '=', client_id),
-            # ('move_id.move_type', 'in', ['out_invoice', 'out_refund']),
+            ('move_id.move_type', '=', 'out_invoice'),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-            ('account_id.code', '=', '1102050101'),
+            ('account_id.type', '=', 'asset_receivable'),
         ]
         
-        # if journal_id:
-        #     domain.append(('journal_id', '=', journal_id))
+        if journal_id:
+            domain.append(('journal_id', '=', journal_id))
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
