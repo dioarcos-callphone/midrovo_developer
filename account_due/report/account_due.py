@@ -47,7 +47,8 @@ class InvoiceDetails(models.AbstractModel):
             _logger.info(f'MOSTRANDO INVOICE DETAILS >>> { invoice_details }')
             
             for invoice_detail in invoice_details:
-                _logger.info(invoice_detail.read())
+                _logger.info(f'FACTURA #: { invoice_detail.move_name }')
+                _logger.info(f'MONTO RESIDUAL: { invoice_detail.amount_residual }')
             
             # filtramos las lineas de factura cuyo codigo de cuenta comienza con 5
             details_account_five = details_account_five.filtered(
