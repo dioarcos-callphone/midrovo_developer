@@ -50,8 +50,27 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['account'] = detail.account_id.code
                 data_detail['1 - 30'] = False
                 data_detail['31 - 60'] = False
+                data_detail['61 - 90'] = False
                 data_detail['91 - 120'] = False
                 data_detail['antiguo'] = False
+                
+                
+                fecha_vencida = detail.move_id.invoice_date_due
+                fecha_actual = datetime.now()
+                
+                dias_transcurridos = (fecha_actual - fecha_vencida).days
+                
+                # Determinar el rango
+                if dias_transcurridos <= 30:
+                    data_detail['1 - 30'] = data_detail['amount_residual']
+                elif dias_transcurridos <= 60:
+                    data_detail['31 - 60'] = data_detail['amount_residual']
+                elif dias_transcurridos <= 90:
+                    data_detail['61 - 90'] = data_detail['amount_residual']
+                elif dias_transcurridos <= 120:
+                    data_detail['91 - 120'] = data_detail['amount_residual']
+                else:
+                    data_detail['antiguo'] = data_detail['amount_residual']
   
                 data_invoice_details.append(data_detail)
                 

@@ -15,8 +15,8 @@
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Vencido por Cobrar</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha de Vencimiento</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Importe en Moneda</th>
-                            <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha Prevista</th>
-                            <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th>
+                            <!-- <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha Prevista</th>
+                            <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th> -->
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">1 - 30</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">31 - 60</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">61 - 90</th>
@@ -28,13 +28,13 @@
                     <tbody>
                         <tr t-foreach="options" t-as="result">
                             <td>
-                                <t t-esc="result['invoice']"/>
+                                <t t-esc="result.get('invoice')"/>
                             </td>
                             <td>
-                                <t t-esc="result['date_due']"/>
+                                <t t-esc="result.get('date_due')"/>
                             </td>
                             <td>
-                                <t t-esc="result['amount_residual']"/>
+                                <t t-esc="result.get('amount_residual')"/>
                             </td>
                             <td>
                                 <!-- <t t-esc="result['comercial']"/> -->
@@ -43,19 +43,19 @@
                                 <!-- <t t-esc="result['client']"/> -->
                             </td>
                             <td>
-                                <t t-esc="result['amount_residual']"/>
+                                <t t-esc="result.get('1 - 30', '')"/>
                             </td>
                             <td>
-                                <t t-esc="result['account']"/>
+                                <t t-esc="resultget('31 - 60', '')"/>
                             </td>
                             <td>
-                                0
+                                <t t-esc="resultget('61 - 90', '')"/>
                             </td>
                             <td>
-                                0
+                                <t t-esc="resultget('91 - 120', '')"/>
                             </td>
                             <td>
-                                0
+                                <t t-esc="resultget('antiguo', '')"/>
                             </td>
                             <td>
                                 0
