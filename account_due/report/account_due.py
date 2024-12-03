@@ -23,7 +23,7 @@ class InvoiceDetails(models.AbstractModel):
             ('product_id', '!=', False),
             ('display_type', '=', 'product'),
             ('date', '<=', court_date),
-            ('partner_id', '=', client_id)
+            ('partner_id.id', '=', client_id)
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund']),
         ]
         
@@ -37,9 +37,9 @@ class InvoiceDetails(models.AbstractModel):
         details_account_five = self.env['account.move.line'].search(domain_cogs)
         
         if journal_id:
-            domain.append(('journal_id', '=', journal_id))
+            domain.append(('journal_id.id', '=', journal_id))
         if comercial_id:
-            domain.append(('move_id.invoice_user_id', '=', comercial_id))
+            domain.append(('move_id.invoice_user_id.id', '=', comercial_id))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
