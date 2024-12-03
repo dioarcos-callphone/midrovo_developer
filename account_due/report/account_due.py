@@ -17,8 +17,6 @@ class InvoiceDetails(models.AbstractModel):
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
         
-        _logger.info(f'MOSTRANDO DATA >>> { data }')
-        
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '>', 0),
@@ -58,7 +56,7 @@ class InvoiceDetails(models.AbstractModel):
                 fecha_vencida = detail.move_id.invoice_date_due
                 fecha_actual = datetime.now()
                 
-                dias_transcurridos = (fecha_actual - fecha_vencida).days
+                dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                 
                 # Determinar el rango
                 if dias_transcurridos <= 30:
