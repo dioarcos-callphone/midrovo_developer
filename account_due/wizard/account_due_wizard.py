@@ -53,7 +53,7 @@ class AccountDueWizard(models.TransientModel):
             ('partner_id', '=', client_id),
             ('move_id.move_type', 'in', ['out_invoice']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-            ('account_id.type', '=', 'asset_receivable'),
+            ('account_id.account_type', '=', 'asset_receivable'),
         ]
         
         if journal_id:
