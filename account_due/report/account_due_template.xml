@@ -6,53 +6,27 @@
             <t t-call="web.external_layout">
                 <div class="page" style="margin: 0; padding: 0;">
                     <div class="text-center">
-                        <t t-if="is_resumen == 'r'">
-                            <h3>Informe de Facturas y Notas de Crédito</h3>    
-                        </t>
-                        <t t-if="is_resumen == 'd'">
-                            <h3>Informe de Detalles Facturas y Notas de Crédito</h3>    
-                        </t>
+                        <h3>Cuentas Vencidas por Cobrar</h3>    
                     </div>
                 </div>
                 <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
                     <thead>
                         <tr>
-                            <th align="center" style="vertical-align: middle">Fecha</th>
-                            <th align="center" style="vertical-align: middle">Número</th>
-                            <th align="center" style="vertical-align: middle">Diario contable</th>
-                            <th align="center" style="vertical-align: middle">Tipo</th>
-                            <th align="center" style="vertical-align: middle">Comercial</th>
-                            <th align="center" style="vertical-align: middle">Cajero</th>
-                            <th align="center" style="vertical-align: middle">Cliente</th>
-                            
-                            <t t-if="is_resumen == 'r'">
-                                <th align="center" style="vertical-align: middle">Subtotal</th>
-                                <th align="center" style="vertical-align: middle">Iva</th>
-                                <th align="center" style="vertical-align: middle">Total</th>
-                                <th align="center" style="vertical-align: middle">Efectivo</th>
-                                <th align="center" style="vertical-align: middle">Banco</th>
-                                <th align="center" style="vertical-align: middle">Cuenta por cobrar</th>
-                                
-                            </t>
-
-                            <t t-if="is_resumen == 'd'">
-                                <th align="center" style="vertical-align: middle">Producto</th>
-                                <th align="center" style="vertical-align: middle">Cantidad</th>
-                                <th align="center" style="vertical-align: middle">Precio</th>
-                                <th align="center" style="vertical-align: middle">Descuento</th>
-                                <th align="center" style="vertical-align: middle">Subtotal</th>
-                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
-                                    <th align="center" style="vertical-align: middle">Costo</th>
-                                    <th align="center" style="vertical-align: middle">Total costo</th>
-                                    <th align="center" style="vertical-align: middle">Rentabilidad</th>
-                                </t>
-                                <th align="center" style="vertical-align: middle">Métodos de pago</th>
-                            </t>
-                            
+                            <th align="center" style="vertical-align: middle">Vencido por Cobrar</th>
+                            <th align="center" style="vertical-align: middle">Fecha de Vencimiento</th>
+                            <th align="center" style="vertical-align: middle">Importe en Moneda</th>
+                            <th align="center" style="vertical-align: middle">Fecha Prevista</th>
+                            <th align="center" style="vertical-align: middle">En Fecha</th>
+                            <th align="center" style="vertical-align: middle">1 - 30</th>
+                            <th align="center" style="vertical-align: middle">31 - 60</th>
+                            <th align="center" style="vertical-align: middle">61 - 90</th>
+                            <th align="center" style="vertical-align: middle">91 - 120</th>
+                            <th align="center" style="vertical-align: middle">Más Antiguos</th>
+                            <th align="center" style="vertical-align: middle">Total</th>                            
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="options" t-as="result">
+                        <!-- <tr t-foreach="options" t-as="result">
                             <td>
                                 <t t-esc="result['fecha']"/>
                             </td>
@@ -137,7 +111,7 @@
                                 </td>
                             </t>
                             
-                        </tr>
+                        </tr> -->
                     </tbody>              
                 </table>
             </t>

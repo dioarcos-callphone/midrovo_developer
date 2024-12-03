@@ -45,11 +45,13 @@ class AccountDueWizard(models.TransientModel):
             'model_id': self.id,
             'court_date': self.court_date,
             'client_id': self.client_id.id,
+            'journal_id': self.journal_id.id,
+            'comercial_id': self.comercial_id.id,
         }
         
         return (
             self.env.ref(
-                'invoice_details_view.report_invoice_details_action'
+                'account_due.report_account_due_action'
             )
             .report_action(None, data=data)
         )
