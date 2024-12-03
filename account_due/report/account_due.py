@@ -46,6 +46,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code
+                data_detail['actual'] = False
                 data_detail['1 - 30'] = False
                 data_detail['31 - 60'] = False
                 data_detail['61 - 90'] = False
@@ -59,7 +60,9 @@ class InvoiceDetails(models.AbstractModel):
                 dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                 
                 # Determinar el rango
-                if dias_transcurridos <= 30:
+                if dias_transcurridos == 0:
+                    data_detail['actual'] = data_detail['amount_residual']
+                elif dias_transcurridos <= 30 and dias_transcurridos > 0:
                     data_detail['1 - 30'] = data_detail['amount_residual']
                 elif dias_transcurridos <= 60:
                     data_detail['31 - 60'] = data_detail['amount_residual']

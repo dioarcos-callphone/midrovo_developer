@@ -15,8 +15,8 @@
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Vencido por Cobrar</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha de Vencimiento</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Importe en Moneda</th>
-                            <!-- <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha Prevista</th>
-                            <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th> -->
+                            <!-- <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha Prevista</th> -->
+                            <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">1 - 30</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">31 - 60</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">61 - 90</th>
@@ -38,10 +38,10 @@
                             </td>
                             <!-- <td>
                                 <t t-esc="result['comercial']"/>
-                            </td>
-                            <td>
-                                <t t-esc="result['client']"/>
                             </td> -->
+                            <td>
+                                <t t-esc="result.get('actual', '')"/>
+                            </td>
                             <td>
                                 <t t-esc="result.get('1 - 30', '')"/>
                             </td>
