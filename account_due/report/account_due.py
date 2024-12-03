@@ -2,6 +2,9 @@ from odoo import models, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.account_due.report_account_due'
     _description = 'Reporte de Detalles de Facturas'
@@ -13,6 +16,8 @@ class InvoiceDetails(models.AbstractModel):
         client_id = data['client_id']
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
+        
+        _logger.info(f'MOSTRANDO DATA >>> { data }')
         
         domain = [
             ('product_id', '!=', False),
