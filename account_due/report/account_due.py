@@ -110,5 +110,11 @@ class InvoiceDetails(models.AbstractModel):
                 'options': data_invoice_details,
             }
         else:
-            raise ValidationError("¡No se encontraron registros para los criterios dados!")
+            return {
+                'doc_ids': docids,
+                'doc_model': 'report.account_due.report_account_due',
+                'data': data,
+                'options': data_invoice_details,
+            }
+            # raise ValidationError("¡No se encontraron registros para los criterios dados!")
         
