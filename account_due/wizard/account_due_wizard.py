@@ -210,12 +210,12 @@ class AccountDueWizard(models.TransientModel):
             sheet.write(row, 0, val['invoice'], text_format)
             sheet.write(row, 1, val['date_due'], text_format)
             sheet.write(row, 2, val['amount_residual'], text_format)
-            sheet.write(row, 3, val.get('actual', ''), text_format)
-            sheet.write(row, 4, val.get('1 - 30', ''), text_format)
-            sheet.write(row, 5, val.get('31 - 60', ''), text_format)
-            sheet.write(row, 6, val.get('61 - 90', ''), text_format)
-            sheet.write(row, 7, val.get('91 - 120', ''), text_format)
-            sheet.write(row, 8, val.get('antiguo', ''), text_format)
+            sheet.write(row, 3, val.get('actual', ' '), text_format)
+            sheet.write(row, 4, val.get('1 - 30', ' '), text_format)
+            sheet.write(row, 5, val.get('31 - 60', ' '), text_format)
+            sheet.write(row, 6, val.get('61 - 90', ' '), text_format)
+            sheet.write(row, 7, val.get('91 - 120', ' '), text_format)
+            sheet.write(row, 8, val.get('antiguo', ' '), text_format)
             sheet.write(row, 9, 0, text_format)
             
             row += 1
