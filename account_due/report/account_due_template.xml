@@ -26,92 +26,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr t-foreach="options" t-as="result">
+                        <tr t-foreach="options" t-as="result">
                             <td>
-                                <t t-esc="result['fecha']"/>
+                                <t t-esc="result['date_due']"/>
                             </td>
                             <td>
-                                <t t-esc="result['numero']"/>
+                                <t t-esc="result['invoice']"/>
                             </td>
                             <td>
-                                <t t-esc="result['diario_contable']"/>
-                            </td>
-                            <td>
-                                <t t-esc="result['tipo']"/>
+                                <t t-esc="result['journal']"/>
                             </td>
                             <td>
                                 <t t-esc="result['comercial']"/>
                             </td>
                             <td>
-                                <t t-esc="result['pos']"/>
+                                <t t-esc="result['client']"/>
                             </td>
                             <td>
-                                <t t-esc="result['cliente']"/>
+                                <t t-esc="result['amount_residual']"/>
                             </td>
-
-                            <t t-if="is_resumen == 'r'">
-                                <td align="center" width="100">
-                                    <t t-esc="result['subtotal']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['iva']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['total']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['cash']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['bank']"/>
-                                </td>
-                                <td>
-                                    <t t-esc="result['receivable']"/>
-                                </td>
-                            </t>
-
-                            <t t-if="is_resumen == 'd'">
-                                <td>
-                                    <t t-esc="result['producto']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['cantidad']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['precio']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['descuento']"/>
-                                </td>
-                                <td align="center" width="100">
-                                    <t t-esc="result['subtotal']"/>
-                                </td>
-                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
-                                    <td align="center" width="100">
-                                        <t t-if="is_cost_or_debit == 'master'">
-                                            <t t-esc="result['costo']"/>
-                                        </t>
-                                        <t t-else="">
-                                            <t t-esc="result['debito']"/>
-                                        </t>
-                                        
-                                    </td>
-                                    <td align="center" width="100">
-                                        <t t-esc="result['total_costo']"/>
-                                    </td>
-                                    <td align="center" width="100">
-                                        <t t-esc="result['rentabilidad']"/>
-                                    </td>
-                                </t>
-                                <td>
-                                    <t t-foreach="result['metodos']" t-as="metodo">
-                                        <t t-esc="'- {}'.format(metodo)"></t>
-                                        <br/>
-                                    </t>
-                                </td>
-                            </t>
-                            
-                        </tr> -->
+                            <td>
+                                <t t-esc="result['account']"/>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>                          
+                        </tr>
                     </tbody>              
                 </table>
             </t>
