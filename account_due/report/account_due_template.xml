@@ -46,16 +46,16 @@
                                 <t t-esc="result.get('1 - 30', '')"/>
                             </td>
                             <td>
-                                <t t-esc="resultget('31 - 60', '')"/>
+                                <t t-esc="result.get('31 - 60', '')"/>
                             </td>
                             <td>
-                                <t t-esc="resultget('61 - 90', '')"/>
+                                <t t-esc="result.get('61 - 90', '')"/>
                             </td>
                             <td>
-                                <t t-esc="resultget('91 - 120', '')"/>
+                                <t t-esc="result.get('91 - 120', '')"/>
                             </td>
                             <td>
-                                <t t-esc="resultget('antiguo', '')"/>
+                                <t t-esc="result.get('antiguo', '')"/>
                             </td>
                             <td>
                                 0
