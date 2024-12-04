@@ -11,7 +11,7 @@ class InvoiceDetails(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
-        data_invoice_details = []
+        account_move_lines = []
         court_date = data['court_date']
         client_id = data['client_id']
         journal_id = data['journal_id']
@@ -31,7 +31,8 @@ class InvoiceDetails(models.AbstractModel):
             domain.append(('journal_id', '=', journal_id))
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id))
-            
+        
+        # Establecemos operador logico OR
         domain.append('|')
         domain.append(('amount_residual', '>', 0))
         domain.append(('amount_residual', '<', 0))
@@ -40,10 +41,10 @@ class InvoiceDetails(models.AbstractModel):
         
         if invoice_details:
             actual = 0
-            mes_1 = 0
-            mes_2 = 0
-            mes_3 = 0
-            mes_4 = 0
+            periodo_1 = 0
+            periodo_2 = 0
+            periodo_3 = 0
+            periodo_4 = 0
             antiguo = 0
             for detail in invoice_details:
                 data_detail = {}
@@ -59,10 +60,10 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code
                 data_detail['actual'] = False
-                data_detail['1 - 30'] = False
-                data_detail['31 - 60'] = False
-                data_detail['61 - 90'] = False
-                data_detail['91 - 120'] = False
+                data_detail['periodo1'] = False
+                data_detail['periodo2'] = False
+                data_detail['periodo3'] = False
+                data_detail['periodo4'] = False
                 data_detail['antiguo'] = False
                 
                 fecha_vencida = detail.move_id.invoice_date_due
@@ -75,28 +76,41 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['actual'] = data_detail['amount_residual']
                     actual += data_detail['actual']
                 elif dias_transcurridos <= 30:
-                    data_detail['1 - 30'] = data_detail['amount_residual']
-                    mes_1 += data_detail['1 - 30']
+                    data_detail['periodo1'] = data_detail['amount_residual']
+                    periodo_1 += data_detail['periodo1']
                 elif dias_transcurridos <= 60:
-                    data_detail['31 - 60'] = data_detail['amount_residual']
-                    mes_2 += data_detail['31 - 60']
+                    data_detail['periodo2'] = data_detail['amount_residual']
+                    periodo_2 += data_detail['periodo2']
                 elif dias_transcurridos <= 90:
-                    data_detail['61 - 90'] = data_detail['amount_residual']
-                    mes_3 += data_detail['61 - 90']
+                    data_detail['periodo3'] = data_detail['amount_residual']
+                    periodo_3 += data_detail['periodo3']
                 elif dias_transcurridos <= 120:
-                    data_detail['91 - 120'] = data_detail['amount_residual']
-                    mes_4 += data_detail['91 - 120']
+                    data_detail['periodo4'] = data_detail['amount_residual']
+                    periodo_4 += data_detail['periodo4']
                 else:
                     data_detail['antiguo'] = data_detail['amount_residual']
                     antiguo += data_detail['antiguo']
   
-                data_invoice_details.append(data_detail)
+                account_move_lines.append(data_detail)
+                
+            client = self.env['res.partner'].search([('id', '=', client_id)], limit=1)
+            
+            accounts_receivable_data = {
+                'client': client.name,
+                'actual': actual,
+                'periodo1': periodo_1,
+                'periodo2': periodo_2,
+                'periodo3': periodo_3,
+                'periodo4': periodo_4,
+                'antiguo': antiguo,
+                'lines': account_move_lines
+            }
             
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.account_due.report_account_due',
                 'data': data,
-                'options': data_invoice_details,
+                'options': accounts_receivable_data,
             }
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")

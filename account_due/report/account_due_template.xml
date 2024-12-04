@@ -26,7 +26,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="options" t-as="result">
+                        <tr>
+                            <td>
+                                <t t-esc="options.get('client')"/>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <t t-esc="options.get('actual')"/>
+                            </td>
+                            <td>
+                                <t t-esc="options.get('periodo1')"/>
+                            </td>
+                            <td>
+                                <t t-esc="options.get('periodo2')"/>
+                            </td>
+                            <td>
+                                <t t-esc="options.get('periodo3')"/>
+                            </td>
+                            <td>
+                                <t t-esc="options.get('periodo4')"/>
+                            </td>
+                            <td>
+                                <t t-esc="options.get('antiguo')"/>
+                            </td>
+                        </tr>
+                        <tr t-foreach="options.get('lines')" t-as="result">
                             <td>
                                 <t t-esc="result.get('invoice')"/>
                             </td>
@@ -42,17 +67,17 @@
                             <td t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('actual', '')"/>
                             </td>
-                            <td t-att-class="result.get('1 - 30', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('1 - 30', '')"/>
+                            <td t-att-class="result.get('periodo1', 0) &lt; 0 and 'text-danger'">
+                                <t t-esc="result.get('periodo1', '')"/>
                             </td>
-                            <td t-att-class="result.get('31 - 60', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('31 - 60', '')"/>
+                            <td t-att-class="result.get('periodo2', 0) &lt; 0 and 'text-danger'">
+                                <t t-esc="result.get('periodo2', '')"/>
                             </td>
-                            <td t-att-class="result.get('61 - 90', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('61 - 90', '')"/>
+                            <td t-att-class="result.get('periodo3', 0) &lt; 0 and 'text-danger'">
+                                <t t-esc="result.get('periodo3', '')"/>
                             </td>
-                            <td t-att-class="result.get('91 - 120', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('91 - 120', '')"/>
+                            <td t-att-class="result.get('periodo4', 0) &lt; 0 and 'text-danger'">
+                                <t t-esc="result.get('periodo4', '')"/>
                             </td>
                             <td t-att-class="result.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('antiguo', '')"/>
