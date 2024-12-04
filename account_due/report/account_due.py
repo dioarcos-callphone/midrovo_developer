@@ -143,17 +143,17 @@ class InvoiceDetails(models.AbstractModel):
         # Agrupación y suma usando read_group
         results = move_lines.read_group(
             domain=[],
-            fields=['partner_id', 'amount_residual:sum'],
+            fields=['partner_id.name', 'amount_residual:sum'],
             groupby=['partner_id']
         )
 
         # Formatear el resultado
-        formatted_results = [
-            {
-                'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
-                'total_amount_residual': res['amount_residual']
-            }
-            for res in results
-        ]
+        # formatted_results = [
+        #     {
+        #         'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
+        #         'total_amount_residual': res['amount_residual']
+        #     }
+        #     for res in results
+        # ]
 
-        return formatted_results     
+        return results     
