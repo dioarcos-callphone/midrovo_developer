@@ -142,7 +142,15 @@ class InvoiceDetails(models.AbstractModel):
 
         # Agrupación y suma usando read_group
         results = move_lines.read_group(
-            domain=[],
+            domain=[
+                ('move_id.invoice_date_due', '<=', date_due),
+                ('amount_residual', '!=', 0),
+                ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+                ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+                ('account_id.account_type', '=', 'asset_receivable'),
+                ('parent_state', '=', 'posted'),
+            
+            ],
             fields=['partner_id.name', 'amount_residual:sum'],
             groupby=['partner_id']
         )
