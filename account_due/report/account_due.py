@@ -131,14 +131,7 @@ class InvoiceDetails(models.AbstractModel):
     
     def get_residual_totals(self, date_due):
         # Filtrar líneas contables
-        move_lines = self.env['account.move.line'].search([
-            ('move_id.invoice_date_due', '<=', date_due),
-            ('amount_residual', '!=', 0),
-            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-            ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-            ('account_id.account_type', '=', 'asset_receivable'),
-            ('parent_state', '=', 'posted'),
-        ])
+        move_lines = self.env['account.move.line']
 
         # Agrupación y suma usando read_group
         results = move_lines.read_group(
@@ -156,12 +149,12 @@ class InvoiceDetails(models.AbstractModel):
         )
 
         # Formatear el resultado
-        # formatted_results = [
-        #     {
-        #         'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
-        #         'total_amount_residual': res['amount_residual']
-        #     }
-        #     for res in results
-        # ]
+        formatted_results = [
+            {
+                'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
+                'total_amount_residual': res['amount_residual']
+            }
+            for res in results
+        ]
 
-        return results     
+        return formatted_results     
