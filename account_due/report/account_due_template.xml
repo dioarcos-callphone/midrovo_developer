@@ -50,6 +50,9 @@
                             <td t-att-class="options.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('antiguo')"/>
                             </td>
+                            <td>
+                                <t t-esc="options.get('total)"/>
+                            </td>
                         </tr>
                         <tr t-foreach="options.get('lines')" t-as="result">
                             <td>
@@ -82,9 +85,7 @@
                             <td t-att-class="result.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('antiguo', '')"/>
                             </td>
-                            <td>
-                                0
-                            </td>                          
+                            <td></td>                          
                         </tr>
                     </tbody>              
                 </table>
