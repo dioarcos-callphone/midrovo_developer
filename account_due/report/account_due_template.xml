@@ -31,22 +31,22 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td style="font-weight:bold;" t-att-class="options.get('actual') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('actual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('actual')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo1') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo1', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo1')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo2') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo2', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo2')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo3') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo3', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo3')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo4') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo4', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo4')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('antiguo') &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('antiguo')"/>
                             </td>
                             <td style="font-weight:bold;">
