@@ -51,7 +51,7 @@
                                 <t t-esc="options.get('antiguo')"/>
                             </td>
                             <td>
-                                <t t-esc="options.get('total)"/>
+                                <t t-esc="options.get('total')"/>
                             </td>
                         </tr>
                         <tr t-foreach="options.get('lines')" t-as="result">
