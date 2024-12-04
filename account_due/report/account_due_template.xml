@@ -15,7 +15,6 @@
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Vencido por Cobrar</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha de Vencimiento</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Importe en Moneda</th>
-                            <!-- <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha Prevista</th> -->
                             <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">1 - 30</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">31 - 60</th>
@@ -32,22 +31,22 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td style="font-weight:bold;" t-att-class="options.get('actual', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('actual') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('actual')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo1', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo1') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo1')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo2', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo2') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo2')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo3', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo3') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo3')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo4', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('periodo4') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo4')"/>
                             </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('antiguo', 0) &lt; 0 and 'text-danger'">
+                            <td style="font-weight:bold;" t-att-class="options.get('antiguo') &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('antiguo')"/>
                             </td>
                             <td style="font-weight:bold;">
@@ -64,9 +63,6 @@
                             <td t-att-class="result.get('amount_residual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('amount_residual')"/>
                             </td>
-                            <!-- <td>
-                                <t t-esc="result['comercial']"/>
-                            </td> -->
                             <td t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('actual', '')"/>
                             </td>

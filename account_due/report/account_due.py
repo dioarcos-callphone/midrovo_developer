@@ -96,6 +96,7 @@ class InvoiceDetails(models.AbstractModel):
             client = self.env['res.partner'].search([('id', '=', client_id)], limit=1)
             
             actual = round(actual, 2)
+            
             periodo_1 = round(periodo_1, 2)
             periodo_2 = round(periodo_2, 2)
             periodo_3 = round(periodo_3, 2)
@@ -108,12 +109,12 @@ class InvoiceDetails(models.AbstractModel):
             
             accounts_receivable_data = {
                 'client': client.name,
-                'actual': actual,
-                'periodo1': periodo_1,
-                'periodo2': periodo_2,
-                'periodo3': periodo_3,
-                'periodo4': periodo_4,
-                'antiguo': antiguo,
+                'actual': actual if not actual == 0 else '',
+                'periodo1': periodo_1 if not periodo_1 == 0 else '',
+                'periodo2': periodo_2 if not periodo_2 == 0 else '',
+                'periodo3': periodo_3 if not periodo_3 == 0 else '',
+                'periodo4': periodo_4 if not periodo_4 == 0 else '',
+                'antiguo': antiguo if not antiguo == 0 else '',
                 'total': total,
                 'lines': account_move_lines
             }
