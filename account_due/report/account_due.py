@@ -130,25 +130,14 @@ class InvoiceDetails(models.AbstractModel):
 
     
     def get_residual_totals(self, date_due):
-        account_move = self.env['account.move']
-        account_account = self.env['account.account']
-
-        # Subconsulta de cuentas del tipo 'asset_receivable'
-        receivable_accounts = account_account.search([('account_type', '=', 'asset_receivable')]).ids
-
-        # Subconsulta de facturas con condiciones específicas
-        moves = account_move.search([
-            ('invoice_date_due', '<=', date_due),
-            ('move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-            ('payment_state', 'in', ['not_paid', 'partial'])
-        ]).ids
-
         # Filtrar líneas contables
         move_lines = self.env['account.move.line'].search([
-            ('move_id', 'in', moves),
+            ('move_id.invoice_date_due', '<=', date_due),
             ('amount_residual', '!=', 0),
+            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+            ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
-            ('account_id', 'in', receivable_accounts)
         ])
 
         # Agrupación y suma usando read_group
