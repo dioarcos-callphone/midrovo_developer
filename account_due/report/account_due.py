@@ -20,8 +20,9 @@ class InvoiceDetails(models.AbstractModel):
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '>', 0),
+            ('amount_residual', '<', 0),
             ('partner_id', '=', client_id),
-            ('move_id.move_type', '=', 'out_invoice'),
+            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
