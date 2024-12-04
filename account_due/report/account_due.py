@@ -19,13 +19,12 @@ class InvoiceDetails(models.AbstractModel):
         
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
-            ('amount_residual', '>', 0),
-            '|',
-            ('amount_residual', '<', 0),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
+            '|',
+            
         ]
         
         if client_id:
@@ -34,6 +33,10 @@ class InvoiceDetails(models.AbstractModel):
             domain.append(('journal_id', '=', journal_id))
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id))
+            
+        domain.append('|')
+        domain.append(('amount_residual', '>', 0))
+        domain.append(('amount_residual', '<', 0))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
