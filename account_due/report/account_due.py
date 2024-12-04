@@ -22,7 +22,7 @@ class InvoiceDetails(models.AbstractModel):
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
-            ('parent_state', '=', 'posted'),            
+            ('parent_state', '=', 'posted'),
         ]
         
         if client_id:

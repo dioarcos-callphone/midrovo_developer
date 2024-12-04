@@ -34,28 +34,28 @@
                                 <t t-esc="result.get('date_due')"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('amount_residual')"/>
+                                <t t-esc="result.get('amount_residual')" t-att-class="result.get('amount_residual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <!-- <td>
                                 <t t-esc="result['comercial']"/>
                             </td> -->
                             <td>
-                                <t t-esc="result.get('actual', '')"/>
+                                <t t-esc="result.get('actual', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('1 - 30', '')"/>
+                                <t t-esc="result.get('1 - 30', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('31 - 60', '')"/>
+                                <t t-esc="result.get('31 - 60', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('61 - 90', '')"/>
+                                <t t-esc="result.get('61 - 90', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('91 - 120', '')"/>
+                                <t t-esc="result.get('91 - 120', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('antiguo', '')"/>
+                                <t t-esc="result.get('antiguo', '')" t-att-class="result.get('actual', 0) < 0 and 'text-danger' or ''"/>
                             </td>
                             <td>
                                 0
