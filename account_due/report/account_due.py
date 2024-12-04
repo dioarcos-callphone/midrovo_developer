@@ -151,7 +151,7 @@ class InvoiceDetails(models.AbstractModel):
         # Formatear el resultado
         formatted_results = [
             {
-                'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
+                'partner_name': res['partner_id'][1] if isinstance(res['partner_id'], list) else 'Unknown',
                 'total_amount_residual': res['amount_residual']
             }
             for res in results
