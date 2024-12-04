@@ -33,28 +33,28 @@
                             <td>
                                 <t t-esc="result.get('date_due')"/>
                             </td>
-                            <td t-att-class="result.get('amount_residual', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('amount_residual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('amount_residual')"/>
                             </td>
                             <!-- <td>
                                 <t t-esc="result['comercial']"/>
                             </td> -->
-                            <td t-att-class="result.get('actual', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('actual', '')"/>
                             </td>
-                            <td t-att-class="result.get('1 - 30', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('1 - 30', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('1 - 30', '')"/>
                             </td>
-                            <td t-att-class="result.get('31 - 60', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('31 - 60', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('31 - 60', '')"/>
                             </td>
-                            <td t-att-class="result.get('61 - 90', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('61 - 90', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('61 - 90', '')"/>
                             </td>
-                            <td t-att-class="result.get('91 - 120', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('91 - 120', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('91 - 120', '')"/>
                             </td>
-                            <td t-att-class="result.get('antiguo', 0) < 0 and 'text-danger'">
+                            <td t-att-class="result.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="result.get('antiguo', '')"/>
                             </td>
                             <td>
