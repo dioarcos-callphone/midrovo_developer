@@ -144,7 +144,7 @@ class InvoiceDetails(models.AbstractModel):
                 ('parent_state', '=', 'posted'),
             
             ],
-            fields=['partner_id.name', 'amount_residual:sum'],
+            fields=['partner_id', 'amount_residual:sum'],
             groupby=['partner_id']
         )
 
