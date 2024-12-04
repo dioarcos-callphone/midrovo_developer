@@ -17,6 +17,10 @@ class InvoiceDetails(models.AbstractModel):
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
         
+        results = self.get_residual_totals(court_date)
+        
+        _logger.info(f'MOSTRANDO RESULTS >>>> { results }')
+        
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '!=', 0),
@@ -123,4 +127,44 @@ class InvoiceDetails(models.AbstractModel):
             }
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")
-        
+
+    
+    def get_residual_totals(self, date_due):
+        account_move = self.env['account.move']
+        account_account = self.env['account.account']
+
+        # Subconsulta de cuentas del tipo 'asset_receivable'
+        receivable_accounts = account_account.search([('account_type', '=', 'asset_receivable')]).ids
+
+        # Subconsulta de facturas con condiciones específicas
+        moves = account_move.search([
+            ('invoice_date_due', '<=', date_due),
+            ('move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('payment_state', 'in', ['not_paid', 'partial'])
+        ]).ids
+
+        # Filtrar líneas contables
+        move_lines = self.env['account.move.line'].search([
+            ('move_id', 'in', moves),
+            ('amount_residual', '!=', 0),
+            ('parent_state', '=', 'posted'),
+            ('account_id', 'in', receivable_accounts)
+        ])
+
+        # Agrupación y suma usando read_group
+        results = move_lines.read_group(
+            domain=[],
+            fields=['partner_id', 'amount_residual:sum'],
+            groupby=['partner_id']
+        )
+
+        # Formatear el resultado
+        formatted_results = [
+            {
+                'partner_name': res['partner_id'][1] if res['partner_id'] else 'Unknown',
+                'total_amount_residual': res['amount_residual']
+            }
+            for res in results
+        ]
+
+        return formatted_results     
