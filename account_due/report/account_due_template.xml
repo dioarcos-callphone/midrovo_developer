@@ -32,22 +32,22 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td>
+                            <td t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('actual')"/>
                             </td>
-                            <td>
+                            <td t-att-class="result.get('periodo1', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo1')"/>
                             </td>
-                            <td>
+                            <td t-att-class="result.get('periodo2', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo2')"/>
                             </td>
-                            <td>
+                            <td t-att-class="result.get('periodo3', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo3')"/>
                             </td>
-                            <td>
+                            <td t-att-class="result.get('periodo4', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('periodo4')"/>
                             </td>
-                            <td>
+                            <td t-att-class="result.get('antiguo', 0) &lt; 0 and 'text-danger'">
                                 <t t-esc="options.get('antiguo')"/>
                             </td>
                         </tr>

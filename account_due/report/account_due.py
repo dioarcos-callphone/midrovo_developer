@@ -97,12 +97,12 @@ class InvoiceDetails(models.AbstractModel):
             
             accounts_receivable_data = {
                 'client': client.name,
-                'actual': actual,
-                'periodo1': periodo_1,
-                'periodo2': periodo_2,
-                'periodo3': periodo_3,
-                'periodo4': periodo_4,
-                'antiguo': antiguo,
+                'actual': round(actual, 2),
+                'periodo1': round(periodo_1, 2),
+                'periodo2': round(periodo_2, 2),
+                'periodo3': round(periodo_3, 2),
+                'periodo4': round(periodo_4, 2),
+                'antiguo': round(antiguo, 2),
                 'lines': account_move_lines
             }
             
