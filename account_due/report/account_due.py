@@ -24,6 +24,7 @@ class InvoiceDetails(models.AbstractModel):
             ('move_id.move_type', '=', 'out_invoice'),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
+            ('parent_state', '=', 'posted'),
         ]
         
         if journal_id:
@@ -33,7 +34,13 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        if invoice_details:            
+        if invoice_details:
+            actual = 0
+            mes_1 = 0
+            mes_2 = 0
+            mes_3 = 0
+            mes_4 = 0
+            antiguo = 0
             for detail in invoice_details:
                 data_detail = {}
                 
@@ -54,7 +61,6 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['91 - 120'] = False
                 data_detail['antiguo'] = False
                 
-                
                 fecha_vencida = detail.move_id.invoice_date_due
                 fecha_actual = datetime.now()
                 
@@ -63,20 +69,24 @@ class InvoiceDetails(models.AbstractModel):
                 # Determinar el rango
                 if dias_transcurridos == 0:
                     data_detail['actual'] = data_detail['amount_residual']
-                elif dias_transcurridos <= 30 and dias_transcurridos > 0:
+                    actual += data_detail['actual']
+                elif dias_transcurridos <= 30:
                     data_detail['1 - 30'] = data_detail['amount_residual']
+                    mes_1 += data_detail['1 - 30']
                 elif dias_transcurridos <= 60:
                     data_detail['31 - 60'] = data_detail['amount_residual']
+                    mes_2 += data_detail['31 - 60']
                 elif dias_transcurridos <= 90:
                     data_detail['61 - 90'] = data_detail['amount_residual']
+                    mes_3 += data_detail['61 - 90']
                 elif dias_transcurridos <= 120:
                     data_detail['91 - 120'] = data_detail['amount_residual']
+                    mes_4 += data_detail['91 - 120']
                 else:
                     data_detail['antiguo'] = data_detail['amount_residual']
+                    antiguo += data_detail['antiguo']
   
                 data_invoice_details.append(data_detail)
-                
-            # _logger.info(f'MOSTRANDO RESULTADOS >>> { data_invoice_details }')
             
             return {
                 'doc_ids': docids,
