@@ -35,8 +35,8 @@ class InvoiceDetails(models.AbstractModel):
         
         if client_id:
             domain.append(('partner_id', '=', client_id))        
-        if journal_id:
-            domain.append(('journal_id', '=', journal_id))
+        # if journal_id:
+        #     domain.append(('journal_id', '=', journal_id))
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
@@ -57,11 +57,11 @@ class InvoiceDetails(models.AbstractModel):
                 # añadimos los valores a los campos del diccionario
                 data_detail['date_due'] = date_formated
                 data_detail['invoice'] = detail.move_name
-                data_detail['journal'] = detail.journal_id.name
+                data_detail['journal'] = detail.journal_id.id
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
-                data_detail['account'] = detail.account_id.code
+                data_detail['account'] = detail.account_id.code   
                 data_detail['actual'] = False
                 data_detail['periodo1'] = False
                 data_detail['periodo2'] = False
@@ -110,6 +110,11 @@ class InvoiceDetails(models.AbstractModel):
             
             total = round(sum(numbers), 2)
             
+            account_move_lines_filtered = [] 
+            
+            if journal_id:
+                account_move_lines_filtered = list(filter(lambda x: x.get('journal') == journal_id, account_move_lines))
+            
             accounts_receivable_data = {
                 'client': client.name,
                 'actual': actual,
@@ -119,7 +124,7 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines
+                'lines': account_move_lines_filtered
             }
             
             return {
