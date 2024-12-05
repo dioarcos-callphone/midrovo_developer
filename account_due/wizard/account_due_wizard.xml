@@ -11,6 +11,9 @@
                         <group string="Fecha de Corte">
                             <field name="court_date"/>
                         </group>
+                        <group string="Tipo de Informe">
+                            <field name="report_type" widget="radio" options="{'horizontal': true}" />
+                        </group>
                     </group>
                     <group>
                         <group string="Filtros">
@@ -18,9 +21,6 @@
                             <field name="journal_id" />
                             <field name="comercial_id" />
                         </group>
-                    </group>
-                    <group string="Tipo de Informe">
-                        <field name="report_type" />
                     </group>
                 </sheet>
                 <footer>
