@@ -168,7 +168,7 @@ class InvoiceDetails(models.AbstractModel):
                 ('account_id.account_type', '=', 'asset_receivable'),
                 ('parent_state', '=', 'posted'),
                 ('partner_id', '=', partner_id),
-            ], ['move_id.invoice_date_due', 'amount_residual'])
+            ], ['move_id', 'amount_residual'])
             
             _logger.info(f'MOSTRANDO LINES >>> { lines }')
             
