@@ -142,26 +142,38 @@ class InvoiceDetails(models.AbstractModel):
                 ('move_id.payment_state', 'in', ['not_paid', 'partial']),
                 ('account_id.account_type', '=', 'asset_receivable'),
                 ('parent_state', '=', 'posted'),
-                ('partner_id', '!=', False)
-            
             ],
             fields=['partner_id', 'amount_residual:sum'],
             groupby=['partner_id'],
         )
-        
-        partners = self.env['res.partner']
+    
         processed_results = []
 
         for group in results:
             partner_id = group['partner_id'][0]  # ID del cliente
-            partner_name = partners.browse(partner_id).name  # Nombre del cliente
             processed_results.append({
-                'partner_name': partner_name,
+                'partner_id': partner_id,
                 'amount_residual': group['amount_residual'],
                 'partner_id_count': group['partner_id_count'],
             })
+            
+        for result in processed_results:
+            partner_id = result.get('partner_id')
+            
+            lines = move_lines.search_read([
+                ('move_id.invoice_date_due', '<=', date_due),
+                ('amount_residual', '!=', 0),
+                ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+                ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+                ('account_id.account_type', '=', 'asset_receivable'),
+                ('parent_state', '=', 'posted'),
+                ('partner_id', '=', partner_id),
+            ], ['move_id.invoice_date_due', 'amount_residual'])
+            
+            _logger.info(f'MOSTRANDO LINES >>> { lines }')
+            
 
-        _logger.info(f'Procesados: { processed_results }')
+        # _logger.info(f'Procesados: { processed_results }')
 
 
         return processed_results
