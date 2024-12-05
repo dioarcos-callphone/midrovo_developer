@@ -2,6 +2,9 @@ from odoo import models, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.account_due.report_account_due'
     _description = 'Reporte de Detalles de Facturas'
@@ -37,10 +40,12 @@ class InvoiceDetails(models.AbstractModel):
             domain.append(('partner_id', '=', client_id))        
         # if journal_id:
         #     domain.append(('journal_id', '=', journal_id))
-        # if comercial_id:
-        #     domain.append(('move_id.invoice_user_id', '=', comercial_id))
+        if comercial_id:
+            domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
         invoice_details = self.env['account.move.line'].search(domain)
+        
+        _logger.info(f'MOSTRANDO ACCOUNT MOVE LINES >>> { invoice_details }')
         
         if invoice_details:
             actual = 0
