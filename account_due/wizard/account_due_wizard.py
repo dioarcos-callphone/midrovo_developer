@@ -122,7 +122,7 @@ class AccountDueWizard(models.TransientModel):
                 if dias_transcurridos == 0:
                     data_detail['actual'] = data_detail['amount_residual']
                     actual += data_detail['actual']
-                elif dias_transcurridos <= 30 and dias_transcurridos > 0:
+                elif dias_transcurridos <= 30:
                     data_detail['periodo1'] = data_detail['amount_residual']
                     periodo_1 += data_detail['periodo1']
                 elif dias_transcurridos <= 60:
