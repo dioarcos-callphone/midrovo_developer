@@ -112,26 +112,34 @@ class InvoiceDetails(models.AbstractModel):
             
             account_move_lines_filtered = []
             
-            if journal_id and comercial_id:
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
-                        account_move_lines
-                    )
-                )
+            # if journal_id and comercial_id:
+            #     account_move_lines_filtered = list(
+            #         filter(
+            #             lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
+            #             account_move_lines
+            #         )
+            #     )
             
-            elif journal_id:
+            # elif journal_id:
+            #     account_move_lines_filtered = list(
+            #         filter(
+            #             lambda x: x.get('journal') == journal_id,
+            #             account_move_lines
+            #         )
+            #     )
+                
+            # elif comercial_id:
+            #     account_move_lines_filtered = list(
+            #         filter(
+            #             lambda x: x.get('comercial') == comercial_id,
+            #             account_move_lines
+            #         )
+            #     )
+            
+            if journal_id:
                 account_move_lines_filtered = list(
                     filter(
                         lambda x: x.get('journal') == journal_id,
-                        account_move_lines
-                    )
-                )
-                
-            elif comercial_id:
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('comercial') == comercial_id,
                         account_move_lines
                     )
                 )
@@ -146,7 +154,7 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines if not journal_id or not comercial_id else account_move_lines_filtered
+                'lines': account_move_lines if not journal_id else account_move_lines_filtered
             }
             
             return {
