@@ -46,7 +46,7 @@ class AccountDueWizard(models.TransientModel):
     report_type = fields.Selection(
         [
             ('r', 'Resumido'),
-            ('d', 'Detallado')
+            ('d', 'Detallado'),
         ],
         string = 'Informe',
         default = 'r',
@@ -314,11 +314,10 @@ class AccountDueWizard(models.TransientModel):
         }
         
     def get_xlsx_report(self, data, response):
-        datas = data['result_data']
-        
-        _logger.info(f'MOSTRANDO DATAS >>> { datas }')
-        
+        datas = data['result_data']        
         is_summary = data['is_summary']
+        
+        _logger.info(f'MOSTRANDO DATAS >>> { is_summary }')
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -411,7 +410,7 @@ class AccountDueWizard(models.TransientModel):
                 row += 1
                 
         elif is_summary == 'r':
-            _logger.info('ENTRA SI SUMMARY')
+            _logger.info('ENTRA SI SUMMARY >>> is_summary')
             row = 4  # Comenzar desde la fila 4 después de los encabezados
             for line in datas:
                 _logger.info('>>>> 1')
