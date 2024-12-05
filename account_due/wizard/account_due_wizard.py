@@ -317,10 +317,6 @@ class AccountDueWizard(models.TransientModel):
         
         is_summary = data['is_summary']
         
-        _logger.info(f'MOSTRANDO DATA EN GET XLSX >>> { datas }')
-        
-        _logger.info(f'MOSTRANDO SUMMARY EN GET XLSX >>> { is_summary }')
-        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
@@ -387,7 +383,7 @@ class AccountDueWizard(models.TransientModel):
             sheet.write(row, 2, '', text_format)
             sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
             sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-            sheet.write(row, 5,  val.get('periodo2') if val.get('periodo2') else '', text_format)
+            sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
             sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
             sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
             sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
@@ -395,7 +391,12 @@ class AccountDueWizard(models.TransientModel):
 
             # Escribir datos
             row = 5  # Comenzar desde la fila 4 después de los encabezados
-            for val in datas.get('lines'):
+            
+            lines = datas.get('lines')
+            
+            _logger.info(f'MOSTRANDO LINES >>> { lines }')
+            
+            for val in lines:
                 sheet.write(row, 0, val.get('invoice'), text_format)
                 sheet.write(row, 1, val.get('date_due'), text_format)
                 sheet.write(row, 2, val.get('amount_residual'), text_format)
