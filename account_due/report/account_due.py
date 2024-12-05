@@ -112,6 +112,40 @@ class InvoiceDetails(models.AbstractModel):
             
             account_move_lines_filtered = []
             
+            filters = []
+            if journal_id:
+                filters.append(lambda x: x.get('journal') == journal_id)
+            if comercial_id:
+                filters.append(lambda x: x.get('comercial') == comercial_id)
+
+            # Aplica los filtros si hay alguno
+            if filters:
+                account_move_lines_filtered = [
+                    line for line in account_move_lines if all(f(line) for f in filters)
+                ]
+            else:
+                account_move_lines_filtered = account_move_lines
+
+            accounts_receivable_data = {
+                'client': client.name,
+                'actual': actual,
+                'periodo1': periodo_1,
+                'periodo2': periodo_2,
+                'periodo3': periodo_3,
+                'periodo4': periodo_4,
+                'antiguo': antiguo,
+                'total': total,
+                'lines': account_move_lines_filtered
+            }
+            
+            # if journal_id:
+            #     account_move_lines_filtered = list(
+            #         filter(
+            #             lambda x: x.get('journal') == journal_id,
+            #             account_move_lines
+            #         )
+            #     )
+            
             # if journal_id and comercial_id:
             #     account_move_lines_filtered = list(
             #         filter(
@@ -134,28 +168,19 @@ class InvoiceDetails(models.AbstractModel):
             #             lambda x: x.get('comercial') == comercial_id,
             #             account_move_lines
             #         )
-            #     )
+            #     )                
             
-            if journal_id:
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('journal') == journal_id,
-                        account_move_lines
-                    )
-                )
-                
-            
-            accounts_receivable_data = {
-                'client': client.name,
-                'actual': actual,
-                'periodo1': periodo_1,
-                'periodo2': periodo_2,
-                'periodo3': periodo_3,
-                'periodo4': periodo_4,
-                'antiguo': antiguo,
-                'total': total,
-                'lines': account_move_lines if not journal_id else account_move_lines_filtered
-            }
+            # accounts_receivable_data = {
+            #     'client': client.name,
+            #     'actual': actual,
+            #     'periodo1': periodo_1,
+            #     'periodo2': periodo_2,
+            #     'periodo3': periodo_3,
+            #     'periodo4': periodo_4,
+            #     'antiguo': antiguo,
+            #     'total': total,
+            #     'lines': account_move_lines if not journal_id or not comercial_id else account_move_lines_filtered
+            # }
             
             return {
                 'doc_ids': docids,
