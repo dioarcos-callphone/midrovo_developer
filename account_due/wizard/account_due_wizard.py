@@ -63,6 +63,7 @@ class AccountDueWizard(models.TransientModel):
         if self.report_type == 'r':
             data = {
                 'result_data': self.get_residual_totals(court_date),
+                'is_summary': self.report_type,
             }
             
             return data
@@ -167,6 +168,7 @@ class AccountDueWizard(models.TransientModel):
             
             data = {
                 'result_data': accounts_receivable_data,
+                'is_summary': self.report_type,
             }
             
             return data
@@ -313,7 +315,7 @@ class AccountDueWizard(models.TransientModel):
     def get_xlsx_report(self, data, response):
         datas = data['result_data']
         
-        is_summary = self.report_type
+        is_summary = data['is_summary']
         
         _logger.info(f'MOSTRANDO DATA EN GET XLSX >>> { datas }')
         
@@ -355,7 +357,7 @@ class AccountDueWizard(models.TransientModel):
         if is_summary == 'r':
             sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
             
-        else:    
+        elif is_summary == 'd':    
             sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Detallado)', title_format)
             
         # Encabezados
