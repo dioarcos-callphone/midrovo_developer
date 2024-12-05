@@ -146,7 +146,7 @@ class InvoiceDetails(models.AbstractModel):
             ],
             fields=['partner_id', 'amount_residual:sum'],
             groupby=['partner_id'],
-            lazy=False,
+            lazy=True,
         )
 
         # Formatear el resultado
