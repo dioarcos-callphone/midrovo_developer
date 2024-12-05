@@ -169,7 +169,7 @@ class InvoiceDetails(models.AbstractModel):
         for result in processed_results:
             partner_id = result.get('partner_id')
             
-            partner = self.env['res.partner'].search_read([('id', '=', partner_id)], ['name'], limit=1)
+            partner = self.env['res.partner'].browse(partner_id).name
             
             lines = move_lines.search([
                 ('move_id.invoice_date_due', '<=', date_due),
@@ -223,7 +223,7 @@ class InvoiceDetails(models.AbstractModel):
                 total = round(sum(numbers), 2)
                         
                 summary_account_move_lines.append({
-                    'cliente': partner.get('name'),
+                    'cliente': partner,
                     'actual': actual,
                     'periodo1': periodo_1,
                     'periodo2': periodo_2,
