@@ -58,7 +58,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['date_due'] = date_formated
                 data_detail['invoice'] = detail.move_name
                 data_detail['journal'] = detail.journal_id.id
-                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
+                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.id
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code   
@@ -110,10 +110,32 @@ class InvoiceDetails(models.AbstractModel):
             
             total = round(sum(numbers), 2)
             
-            account_move_lines_filtered = [] 
+            account_move_lines_filtered = []
             
-            if journal_id:
-                account_move_lines_filtered = list(filter(lambda x: x.get('journal') == journal_id, account_move_lines))
+            if journal_id and comercial_id:
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+            
+            elif journal_id:
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id,
+                        account_move_lines
+                    )
+                )
+                
+            elif comercial_id:
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+                
             
             accounts_receivable_data = {
                 'client': client.name,
@@ -124,7 +146,7 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines if not journal_id else account_move_lines_filtered
+                'lines': account_move_lines if not journal_id or not comercial_id else account_move_lines_filtered
             }
             
             return {
