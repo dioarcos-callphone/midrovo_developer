@@ -412,27 +412,27 @@ class AccountDueWizard(models.TransientModel):
                 
         elif is_summary == 'r':
             row = 4  # Comenzar desde la fila 4 después de los encabezados
-            for val in datas:
+            for line in datas:
                 _logger.info('>>>> 1')
-                sheet.write(row, 0, val.get('cliente'), text_format)
+                sheet.write(row, 0, line.get('cliente'), text_format)
                 _logger.info('>>>> 2')
                 sheet.write(row, 1, '', text_format)
                 _logger.info('>>>> 3')
                 sheet.write(row, 2, '', text_format)
                 _logger.info('>>>> 4')
-                sheet.write(row, 3, val.get('actual') if val.get('actual') != 0 else '', text_format)
+                sheet.write(row, 3, line.get('actual') if line.get('actual') != 0 else '', text_format)
                 _logger.info('>>>> 5')
-                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') != 0 else '', text_format)
+                sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') != 0 else '', text_format)
                 _logger.info('>>>> 6')
-                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') != 0 else '', text_format)
+                sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') != 0 else '', text_format)
                 _logger.info('>>>> 7')
-                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') != 0 else '', text_format)
+                sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') != 0 else '', text_format)
                 _logger.info('>>>> 8')
-                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') != 0 else '', text_format)
+                sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') != 0 else '', text_format)
                 _logger.info('>>>> 9')
-                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') != 0 else '', text_format)
+                sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') != 0 else '', text_format)
                 _logger.info('>>>> 10')
-                sheet.write(row, 9, val.get('total'), text_format)
+                sheet.write(row, 9, line.get('total'), text_format)
                 
                 row += 1
 
