@@ -25,63 +25,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="background-color: #e5d2c4;">
-                            <td style="font-weight:bold;">
-                                <t t-esc="options.get('client')"/>
+                        <tr t-foreach="options" t-as="line">
+                            <td>
+                                <t t-esc="line.get('cliente')"/>
                             </td>
                             <td></td>
                             <td></td>
-                            <td style="font-weight:bold;" t-att-class="options.get('actual', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('actual')"/>
-                            </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo1', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('periodo1')"/>
-                            </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo2', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('periodo2')"/>
-                            </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo3', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('periodo3')"/>
-                            </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('periodo4', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('periodo4')"/>
-                            </td>
-                            <td style="font-weight:bold;" t-att-class="options.get('antiguo', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="options.get('antiguo')"/>
-                            </td>
-                            <td style="font-weight:bold;">
-                                <t t-esc="options.get('total')"/>
-                            </td>
-                        </tr>
-                        <tr t-foreach="options.get('lines')" t-as="result">
+                            <td></td>
                             <td>
-                                <t t-esc="result.get('invoice')"/>
+                                <t t-esc="line.get('actual')"/>
                             </td>
                             <td>
-                                <t t-esc="result.get('date_due')"/>
+                                <t t-esc="line.get('periodo1')"/>
                             </td>
-                            <td t-att-class="result.get('amount_residual', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('amount_residual')"/>
+                            <td>
+                                <t t-esc="line.get('periodo2')"/>
                             </td>
-                            <td t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('actual', '')"/>
+                            <td>
+                                <t t-esc="line.get('periodo3')"/>
                             </td>
-                            <td t-att-class="result.get('periodo1', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('periodo1', '')"/>
+                            <td>
+                                <t t-esc="line.get('periodo4')"/>
                             </td>
-                            <td t-att-class="result.get('periodo2', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('periodo2', '')"/>
+                            <td>
+                                <t t-esc="line.get('antiguo')"/>
                             </td>
-                            <td t-att-class="result.get('periodo3', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('periodo3', '')"/>
+                            <td>
+                                <t t-esc="line.get('total')"/>
                             </td>
-                            <td t-att-class="result.get('periodo4', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('periodo4', '')"/>
-                            </td>
-                            <td t-att-class="result.get('antiguo', 0) &lt; 0 and 'text-danger'">
-                                <t t-esc="result.get('antiguo', '')"/>
-                            </td>
-                            <td></td>                          
                         </tr>
                     </tbody>              
                 </table>
