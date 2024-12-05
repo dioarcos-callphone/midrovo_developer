@@ -149,15 +149,20 @@ class InvoiceDetails(models.AbstractModel):
             groupby=['partner_id'],
         )
         
-        _logger.info(f'MOSTRANDO RESULTADOS >>> { results }')
+        partners = self.env['res.partner']
+        processed_results = []
 
-        # Formatear el resultado
-        formatted_results = [
-            {
-                'partner_name': res['partner_id'][1],
-                'total_amount_residual': res['amount_residual']
-            }
-            for res in results
-        ]
+        for group in results:
+            partner_id = group['partner_id'][0]  # ID del cliente
+            partner_name = partners.browse(partner_id).name  # Nombre del cliente
+            processed_results.append({
+                'partner_name': partner_name,
+                'amount_residual': group['amount_residual'],
+                'partner_id_count': group['partner_id_count'],
+                '__domain': group['__domain'],
+            })
 
-        return formatted_results
+        _logger.info(f'Procesados: { processed_results }')
+
+
+        return processed_results
