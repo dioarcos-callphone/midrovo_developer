@@ -313,177 +313,122 @@ class AccountDueWizard(models.TransientModel):
             'report_type': 'xlsx',
         }
         
-    # def get_xlsx_report(self, data, response):
-    #     datas = data['result_data']
-        
-    #     _logger.info(f'MOSTRANDO DATAS >>> { datas }')
-        
-    #     is_summary = data['is_summary']
-        
-    #     output = io.BytesIO()
-    #     workbook = xlsxwriter.Workbook(output, {'in_memory': True})
-    #     sheet = workbook.add_worksheet()
-        
-    #     # Configurar márgenes
-    #     sheet.set_margins(0.5, 0.5, 0.5, 0.5)
-        
-    #     # Definición de estilos
-    #     header_format = workbook.add_format({
-    #         'font_name': 'Times New Roman',
-    #         'bold': True,
-    #         'bg_color': '#f2f2f2',  # Color de fondo gris claro para los encabezados
-    #         'border': 1,
-    #         'align': 'center',
-    #         'valign': 'vcenter'
-    #     })
-        
-    #     text_format = workbook.add_format({
-    #         'font_name': 'Times New Roman',
-    #         'border': 1,
-    #         'align': 'left',
-    #         'valign': 'vcenter'
-    #     })
-        
-    #     title_format = workbook.add_format({
-    #         'font_name': 'Times New Roman',
-    #         'bold': True,
-    #         'font_size': 16,
-    #         'align': 'center',
-    #         'valign': 'vcenter'
-    #     })
-
-    #     # Título del informe
-    #     if is_summary == 'r':
-    #         sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
-            
-    #     elif is_summary == 'd':    
-    #         sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Detallado)', title_format)
-            
-    #     # Encabezados
-    #     headers = [
-    #         'Vencido por cobrar',
-    #         'Fecha vencimiento',
-    #         'Importe en moneda',
-    #         'En fecha',
-    #         '1 - 30',
-    #         '31 - 60',
-    #         '61 - 90',
-    #         '91 - 120',
-    #         'Más antiguos',
-    #         'Total',
-    #     ]
-        
-    #     for col, header in enumerate(headers):
-    #         sheet.merge_range(2, col, 3, col, header, header_format)
-                
-    #         header_length = len(header)  # Longitud del encabezado
-    #         sheet.set_column(col, col, header_length + 5)
-        
-    #     lines = datas.get('lines')
-            
-    #     _logger.info(f'MOSTRANDO LINES >>> { lines }')
-        
-    #     if is_summary == 'd':
-    #         row = 4
-    #         sheet.write(row, 0, val.get('client'), text_format)
-    #         sheet.write(row, 1, '', text_format)
-    #         sheet.write(row, 2, '', text_format)
-    #         sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-    #         sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-    #         sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-    #         sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-    #         sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-    #         sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
-    #         sheet.write(row, 9, val.get('total'), text_format)
-
-    #         # Escribir datos
-    #         row = 5  # Comenzar desde la fila 4 después de los encabezados
-            
-    #         for val in lines:
-    #             sheet.write(row, 0, val.get('invoice'), text_format)
-    #             sheet.write(row, 1, val.get('date_due'), text_format)
-    #             sheet.write(row, 2, val.get('amount_residual'), text_format)
-    #             sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-    #             sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-    #             sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-    #             sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-    #             sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-    #             sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
-    #             sheet.write(row, 9, '', text_format)
-                
-    #             row += 1
-                
-    #     elif is_summary == 'r':
-    #         row = 4  # Comenzar desde la fila 4 después de los encabezados
-    #         for val in datas:
-    #             sheet.write(row, 0, val.get('cliente'), text_format)
-    #             sheet.write(row, 1, ' ', text_format)
-    #             sheet.write(row, 2, ' ', text_format)
-    #             sheet.write(row, 3, val.get('actual') if val.get('actual') else ' ', text_format)
-    #             sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else ' ', text_format)
-    #             sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else ' ', text_format)
-    #             sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else ' ', text_format)
-    #             sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else ' ', text_format)
-    #             sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else ' ', text_format)
-    #             sheet.write(row, 9, val.get('total'), text_format)
-                
-    #             row += 1
-
-    #     # Cerrar el libro
-    #     workbook.close()
-    #     output.seek(0)
-    #     response.stream.write(output.read())
-    #     output.close()
-    
     def get_xlsx_report(self, data, response):
-        datas = data.get('result_data', {})
-        if not datas or not isinstance(datas, dict):
-            raise ValueError("El formato de 'datas' no es válido")
-
-        _logger.info(f'MOSTRANDO DATAS >>> {datas}')
-
-        is_summary = data.get('is_summary')
-        if is_summary not in ['r', 'd']:
-            raise ValueError("El valor de 'is_summary' no es válido")
-
+        datas = data['result_data']
+        
+        _logger.info(f'MOSTRANDO DATAS >>> { datas }')
+        
+        is_summary = data['is_summary']
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
+        
+        # Configurar márgenes
+        sheet.set_margins(0.5, 0.5, 0.5, 0.5)
+        
+        # Definición de estilos
+        header_format = workbook.add_format({
+            'font_name': 'Times New Roman',
+            'bold': True,
+            'bg_color': '#f2f2f2',  # Color de fondo gris claro para los encabezados
+            'border': 1,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
+        
+        text_format = workbook.add_format({
+            'font_name': 'Times New Roman',
+            'border': 1,
+            'align': 'left',
+            'valign': 'vcenter'
+        })
+        
+        title_format = workbook.add_format({
+            'font_name': 'Times New Roman',
+            'bold': True,
+            'font_size': 16,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
 
-        # Configuración de estilos
-        header_format = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'bg_color': '#f2f2f2', 'border': 1, 'align': 'center'})
-        text_format = workbook.add_format({'font_name': 'Times New Roman', 'border': 1, 'align': 'left'})
-        title_format = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'font_size': 16, 'align': 'center'})
-
-        # Título
-        title = 'Cuentas Vencidas por Cobrar (Resumido)' if is_summary == 'r' else 'Cuentas Vencidas por Cobrar (Detallado)'
-        sheet.merge_range('A1:J1', title, title_format)
-
+        # Título del informe
+        if is_summary == 'r':
+            sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
+            
+        elif is_summary == 'd':    
+            sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Detallado)', title_format)
+            
         # Encabezados
-        headers = ['Vencido por cobrar', 'Fecha vencimiento', 'Importe en moneda', 'En fecha', '1 - 30', '31 - 60', '61 - 90', '91 - 120', 'Más antiguos', 'Total']
+        headers = [
+            'Vencido por cobrar',
+            'Fecha vencimiento',
+            'Importe en moneda',
+            'En fecha',
+            '1 - 30',
+            '31 - 60',
+            '61 - 90',
+            '91 - 120',
+            'Más antiguos',
+            'Total',
+        ]
+        
         for col, header in enumerate(headers):
             sheet.merge_range(2, col, 3, col, header, header_format)
-            sheet.set_column(col, col, len(header) + 5)
-
-        # Cuerpo del reporte
-        lines = datas.get('lines', [])
-        if not isinstance(lines, list):
-            lines = []
-
-        _logger.info(f'MOSTRANDO LINES >>> {lines}')
-        row = 4
-        for val in lines:
-            if is_summary == 'd':
-                values = [val.get(key, '') for key in ['client', '', '', 'actual', 'periodo1', 'periodo2', 'periodo3', 'periodo4', 'antiguo', 'total']]
-            else:
-                values = [val.get(key, ' ') for key in ['cliente', '', '', 'actual', 'periodo1', 'periodo2', 'periodo3', 'periodo4', 'antiguo', 'total']]
+                
+            header_length = len(header)  # Longitud del encabezado
+            sheet.set_column(col, col, header_length + 5)
+        
+        lines = datas.get('lines')
             
-            for col, value in enumerate(values):
-                sheet.write(row, col, value, text_format)
-            row += 1
+        _logger.info(f'MOSTRANDO LINES >>> { lines }')
+        
+        if is_summary == 'd':
+            row = 4
+            # sheet.write(row, 0, val.get('client'), text_format)
+            # sheet.write(row, 1, '', text_format)
+            # sheet.write(row, 2, '', text_format)
+            # sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
+            # sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
+            # sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
+            # sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
+            # sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
+            # sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
+            # sheet.write(row, 9, val.get('total'), text_format)
+            
+            for val in lines:
+                sheet.write(row, 0, val.get('invoice'), text_format)
+                sheet.write(row, 1, val.get('date_due'), text_format)
+                sheet.write(row, 2, val.get('amount_residual'), text_format)
+                sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
+                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
+                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
+                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
+                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
+                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
+                sheet.write(row, 9, '', text_format)
+                
+                row += 1
+                
+        elif is_summary == 'r':
+            row = 4  # Comenzar desde la fila 4 después de los encabezados
+            for val in datas:
+                sheet.write(row, 0, val.get('cliente'), text_format)
+                sheet.write(row, 1, '', text_format)
+                sheet.write(row, 2, '', text_format)
+                sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
+                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
+                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
+                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
+                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
+                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
+                sheet.write(row, 9, val.get('total'), text_format)
+                
+                row += 1
 
-        # Finalizar
+        # Cerrar el libro
         workbook.close()
         output.seek(0)
         response.stream.write(output.read())
         output.close()
+   
