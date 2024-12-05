@@ -163,7 +163,7 @@ class AccountDueWizard(models.TransientModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines
+                'lines': account_move_lines,
             }
             
             data = {
@@ -314,6 +314,8 @@ class AccountDueWizard(models.TransientModel):
         
     def get_xlsx_report(self, data, response):
         datas = data['result_data']
+        
+        _logger.info(f'MOSTRANDO DATAS >>> { datas }')
         
         is_summary = data['is_summary']
         
