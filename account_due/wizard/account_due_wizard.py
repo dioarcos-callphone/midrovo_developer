@@ -384,7 +384,7 @@ class AccountDueWizard(models.TransientModel):
         _logger.info(f'MOSTRANDO LINES >>> { lines }')
         
         if is_summary == 'd':
-            row = 5
+            row = 4
             sheet.write(row, 0, datas.get('client'), text_format)
             sheet.write(row, 1, '', text_format)
             sheet.write(row, 2, '', text_format)
@@ -395,6 +395,8 @@ class AccountDueWizard(models.TransientModel):
             sheet.write(row, 7, datas.get('periodo4') if datas.get('periodo4') == 0 else '', text_format)
             sheet.write(row, 8, datas.get('antiguo') if datas.get('antiguo') == 0 else '', text_format)
             sheet.write(row, 9, datas.get('total'), text_format)
+            
+            row = 5
             
             for val in lines:
                 sheet.write(row, 0, val.get('invoice'), text_format)
