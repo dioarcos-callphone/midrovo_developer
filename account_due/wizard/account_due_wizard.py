@@ -417,14 +417,14 @@ class AccountDueWizard(models.TransientModel):
             row = 4  # Comenzar desde la fila 4 después de los encabezados
             for val in datas:
                 sheet.write(row, 0, val.get('cliente'), text_format)
-                sheet.write(row, 1, '', text_format)
-                sheet.write(row, 2, '', text_format)
-                sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
+                sheet.write(row, 1, ' ', text_format)
+                sheet.write(row, 2, ' ', text_format)
+                sheet.write(row, 3, val.get('actual') if val.get('actual') else ' ', text_format)
+                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else ' ', text_format)
+                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else ' ', text_format)
+                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else ' ', text_format)
+                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else ' ', text_format)
+                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else ' ', text_format)
                 sheet.write(row, 9, val.get('total'), text_format)
                 
                 row += 1
