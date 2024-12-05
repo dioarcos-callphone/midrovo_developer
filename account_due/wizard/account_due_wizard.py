@@ -411,6 +411,7 @@ class AccountDueWizard(models.TransientModel):
                 row += 1
                 
         elif is_summary == 'r':
+            _logger.info('ENTRA SI SUMMARY')
             row = 4  # Comenzar desde la fila 4 después de los encabezados
             for line in datas:
                 _logger.info('>>>> 1')
