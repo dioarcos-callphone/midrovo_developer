@@ -19,7 +19,7 @@ class InvoiceDetails(models.AbstractModel):
         
         results = self.get_residual_totals(court_date)
         
-        _logger.info(f'MOSTRANDO RESULTS >>>> { results }')
+        # _logger.info(f'MOSTRANDO RESULTS >>>> { results }')
         
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
@@ -142,12 +142,14 @@ class InvoiceDetails(models.AbstractModel):
                 ('move_id.payment_state', 'in', ['not_paid', 'partial']),
                 ('account_id.account_type', '=', 'asset_receivable'),
                 ('parent_state', '=', 'posted'),
+                ('partner_id', '!=', False)
             
             ],
             fields=['partner_id', 'amount_residual:sum'],
             groupby=['partner_id'],
-            lazy=True,
         )
+        
+        _logger(f'MOSTRANDO RESULTADOS >>> { results }')
 
         # Formatear el resultado
         formatted_results = [
