@@ -385,16 +385,16 @@ class AccountDueWizard(models.TransientModel):
         
         if is_summary == 'd':
             row = 5
-            # sheet.write(row, 0, val.get('client'), text_format)
-            # sheet.write(row, 1, '', text_format)
-            # sheet.write(row, 2, '', text_format)
-            # sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-            # sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-            # sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-            # sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-            # sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-            # sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
-            # sheet.write(row, 9, val.get('total'), text_format)
+            sheet.write(row, 0, datas.get('client'), text_format)
+            sheet.write(row, 1, '', text_format)
+            sheet.write(row, 2, '', text_format)
+            sheet.write(row, 3, datas.get('actual') if datas.get('actual') == 0 else '', text_format)
+            sheet.write(row, 4, datas.get('periodo1') if datas.get('periodo1') == 0 else '', text_format)
+            sheet.write(row, 5, datas.get('periodo2') if datas.get('periodo2') == 0 else '', text_format)
+            sheet.write(row, 6, datas.get('periodo3') if datas.get('periodo3') == 0 else '', text_format)
+            sheet.write(row, 7, datas.get('periodo4') if datas.get('periodo4') == 0 else '', text_format)
+            sheet.write(row, 8, datas.get('antiguo') if datas.get('antiguo') == 0 else '', text_format)
+            sheet.write(row, 9, datas.get('total'), text_format)
             
             for val in lines:
                 sheet.write(row, 0, val.get('invoice'), text_format)
@@ -416,12 +416,12 @@ class AccountDueWizard(models.TransientModel):
                 sheet.write(row, 0, val.get('cliente'), text_format)
                 sheet.write(row, 1, '', text_format)
                 sheet.write(row, 2, '', text_format)
-                sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
+                sheet.write(row, 3, val.get('actual') if val.get('actual') == 0 else '', text_format)
+                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') == 0 else '', text_format)
+                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') == 0 else '', text_format)
+                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') == 0 else '', text_format)
+                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') == 0 else '', text_format)
+                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') == 0 else '', text_format)
                 sheet.write(row, 9, val.get('total'), text_format)
                 
                 row += 1
