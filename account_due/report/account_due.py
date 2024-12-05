@@ -159,7 +159,6 @@ class InvoiceDetails(models.AbstractModel):
                 'partner_name': partner_name,
                 'amount_residual': group['amount_residual'],
                 'partner_id_count': group['partner_id_count'],
-                '__domain': group['__domain'],
             })
 
         _logger.info(f'Procesados: { processed_results }')
