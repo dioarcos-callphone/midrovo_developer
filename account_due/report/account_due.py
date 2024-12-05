@@ -193,7 +193,7 @@ class InvoiceDetails(models.AbstractModel):
                 
                 for line in lines:
                     fecha_vencida = account_move.search_read([
-                        ('id', '=', line.get('move_id')),
+                        ('id', '=', line.get('move_id')[0]),
                     ], ['invoice_date_due'], limit=1)
                     
                     fecha_actual = datetime.now()
