@@ -154,6 +154,11 @@ class AccountDueWizard(models.TransientModel):
             numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
             
             total = round(sum(numbers), 2)
+            
+            account_move_lines_filtered = [] 
+            
+            if journal_id:
+                account_move_lines_filtered = list(filter(lambda x: x.get('journal') == journal_id, account_move_lines))
                 
             accounts_receivable_data = {
                 'client': client.name,
@@ -164,7 +169,7 @@ class AccountDueWizard(models.TransientModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines,
+                'lines': account_move_lines if not journal_id else account_move_lines_filtered,
             }
             
             data = {
