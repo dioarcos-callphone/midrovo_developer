@@ -149,7 +149,7 @@ class InvoiceDetails(models.AbstractModel):
             groupby=['partner_id'],
         )
         
-        _logger(f'MOSTRANDO RESULTADOS >>> { results }')
+        _logger.info(f'MOSTRANDO RESULTADOS >>> { results }')
 
         # Formatear el resultado
         formatted_results = [
