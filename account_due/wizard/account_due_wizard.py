@@ -379,6 +379,10 @@ class AccountDueWizard(models.TransientModel):
             header_length = len(header)  # Longitud del encabezado
             sheet.set_column(col, col, header_length + 5)
         
+        lines = datas.get('lines')
+            
+        _logger.info(f'MOSTRANDO LINES >>> { lines }')
+        
         if is_summary == 'd':
             row = 4
             sheet.write(row, 0, val.get('client'), text_format)
@@ -394,10 +398,6 @@ class AccountDueWizard(models.TransientModel):
 
             # Escribir datos
             row = 5  # Comenzar desde la fila 4 después de los encabezados
-            
-            lines = datas.get('lines')
-            
-            _logger.info(f'MOSTRANDO LINES >>> { lines }')
             
             for val in lines:
                 sheet.write(row, 0, val.get('invoice'), text_format)
