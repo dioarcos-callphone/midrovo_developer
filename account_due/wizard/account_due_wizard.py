@@ -353,7 +353,6 @@ class AccountDueWizard(models.TransientModel):
 
         # Título del informe
         if is_summary == 'r':
-            _logger.info(f'>>> ENTRA AQUI')
             sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
             
         elif is_summary == 'd':    
@@ -379,8 +378,6 @@ class AccountDueWizard(models.TransientModel):
             header_length = len(header)  # Longitud del encabezado
             sheet.set_column(col, col, header_length + 5)
         
-        lines = datas.get('lines')
-        
         if is_summary == 'd':
             row = 4
             sheet.write(row, 0, datas.get('client'), text_format)
@@ -395,6 +392,8 @@ class AccountDueWizard(models.TransientModel):
             sheet.write(row, 9, datas.get('total'), text_format)
             
             row = 5
+            
+            lines = datas.get('lines')
             
             for val in lines:
                 sheet.write(row, 0, val.get('invoice'), text_format)
@@ -411,28 +410,18 @@ class AccountDueWizard(models.TransientModel):
                 row += 1
                 
         elif is_summary == 'r':
-            _logger.info('ENTRA SI SUMMARY >>> is_summary')
             row = 4  # Comenzar desde la fila 4 después de los encabezados
             for line in datas:
-                _logger.info('>>>> 1')
                 sheet.write(row, 0, line.get('cliente'), text_format)
-                _logger.info('>>>> 2')
                 sheet.write(row, 1, '', text_format)
-                _logger.info('>>>> 3')
                 sheet.write(row, 2, '', text_format)
-                _logger.info('>>>> 4')
                 sheet.write(row, 3, line.get('actual') if line.get('actual') != 0 else '', text_format)
-                _logger.info('>>>> 5')
                 sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') != 0 else '', text_format)
-                _logger.info('>>>> 6')
                 sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') != 0 else '', text_format)
-                _logger.info('>>>> 7')
                 sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') != 0 else '', text_format)
-                _logger.info('>>>> 8')
                 sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') != 0 else '', text_format)
-                _logger.info('>>>> 9')
                 sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') != 0 else '', text_format)
-                _logger.info('>>>> 10')
+
                 sheet.write(row, 9, line.get('total'), text_format)
                 
                 row += 1
