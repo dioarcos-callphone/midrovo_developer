@@ -31,7 +31,6 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td></td>
                             <td>
                                 <t t-esc="line.get('actual')"/>
                             </td>
