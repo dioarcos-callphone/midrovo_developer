@@ -353,6 +353,7 @@ class AccountDueWizard(models.TransientModel):
 
         # Título del informe
         if is_summary == 'r':
+            _logger.info(f'>>> ENTRA AQUI')
             sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
             
         elif is_summary == 'd':    
