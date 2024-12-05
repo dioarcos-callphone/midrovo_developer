@@ -70,14 +70,15 @@ class AccountDueWizard(models.TransientModel):
         
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
-            ('amount_residual', '>', 0),
-            ('partner_id', '=', client_id),
-            ('move_id.move_type', 'in', ['out_invoice']),
+            ('amount_residual', '!=', 0),
+            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
         ]
         
+        if client_id:
+            domain.append(('partner_id', '=', client_id)) 
         if journal_id:
             domain.append(('journal_id', '=', journal_id))
         if comercial_id:
@@ -380,7 +381,7 @@ class AccountDueWizard(models.TransientModel):
         
         if is_summary == 'd':
             row = 4
-            sheet.write(row, 0, val.get('client'), text_format)
+            sheet.write(row, 0, val.get('cliente'), text_format)
             sheet.write(row, 1, '', text_format)
             sheet.write(row, 2, '', text_format)
             sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
