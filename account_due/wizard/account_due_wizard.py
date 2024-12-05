@@ -134,6 +134,7 @@ class AccountDueWizard(models.TransientModel):
             'client_id': self.client_id.id,
             'journal_id': self.journal_id.id,
             'comercial_id': self.comercial_id.id,
+            'is_summary': self.report_type
         }
         
         return (

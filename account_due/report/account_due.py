@@ -2,9 +2,6 @@ from odoo import models, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-import logging
-_logger = logging.getLogger(__name__)
-
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.account_due.report_account_due'
     _description = 'Reporte de Detalles de Facturas'
@@ -16,18 +13,17 @@ class InvoiceDetails(models.AbstractModel):
         client_id = data['client_id']
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
+        is_summary = data['is_summary']
         
-        if True:
+        if is_summary == 'r':
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.account_due.report_account_due',
                 'data': data,
-                'is_summary': True,
+                'is_summary': is_summary,
                 'options': self.get_residual_totals(court_date),
             }
-        
-        # _logger.info(f'MOSTRANDO RESULTS >>>> { results }')
-        
+
         domain = [
             ('move_id.invoice_date_due', '<=', court_date),
             ('amount_residual', '!=', 0),
@@ -130,6 +126,7 @@ class InvoiceDetails(models.AbstractModel):
                 'doc_ids': docids,
                 'doc_model': 'report.account_due.report_account_due',
                 'data': data,
+                'is_summary': is_summary,
                 'options': accounts_receivable_data,
             }
         else:
@@ -153,85 +150,89 @@ class InvoiceDetails(models.AbstractModel):
             fields=['partner_id', 'amount_residual:sum'],
             groupby=['partner_id'],
         )
-    
-        processed_results = []
+        
+        if results:
+            processed_results = []
 
-        for group in results:
-            partner_id = group['partner_id'][0]  # ID del cliente
-            processed_results.append({
-                'partner_id': partner_id,
-                'amount_residual': group['amount_residual'],
-                'partner_id_count': group['partner_id_count'],
-            })
-            
-        summary_account_move_lines = []
-            
-        for result in processed_results:
-            partner_id = result.get('partner_id')
-            
-            partner = self.env['res.partner'].browse(partner_id).name
-            
-            lines = move_lines.search([
-                ('move_id.invoice_date_due', '<=', date_due),
-                ('amount_residual', '!=', 0),
-                ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-                ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-                ('account_id.account_type', '=', 'asset_receivable'),
-                ('parent_state', '=', 'posted'),
-                ('partner_id', '=', partner_id),
-            ])
-            
-            if lines:
-                actual = 0
-                periodo_1 = 0
-                periodo_2 = 0
-                periodo_3 = 0
-                periodo_4 = 0
-                antiguo = 0
-                
-                for line in lines:
-                    fecha_vencida = line.move_id.invoice_date_due
-                    
-                    fecha_actual = datetime.now()
-                    
-                    dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
-                    
-                    # Determinar el rango
-                    if dias_transcurridos == 0:
-                        actual += line.amount_residual
-                    elif dias_transcurridos <= 30:
-                        periodo_1 += line.amount_residual
-                    elif dias_transcurridos <= 60:
-                        periodo_2 += line.amount_residual
-                    elif dias_transcurridos <= 90:
-                        periodo_3 += line.amount_residual
-                    elif dias_transcurridos <= 120:
-                        periodo_4 += line.amount_residual
-                    else:
-                        antiguo += line.amount_residual
-                        
-                actual = round(actual, 2)
-            
-                periodo_1 = round(periodo_1, 2)
-                periodo_2 = round(periodo_2, 2)
-                periodo_3 = round(periodo_3, 2)
-                periodo_4 = round(periodo_4, 2)
-                antiguo = round(antiguo, 2)
-                
-                numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-                
-                total = round(sum(numbers), 2)
-                        
-                summary_account_move_lines.append({
-                    'cliente': partner,
-                    'actual': actual,
-                    'periodo1': periodo_1,
-                    'periodo2': periodo_2,
-                    'periodo3': periodo_3,
-                    'periodo4': periodo_4,
-                    'antiguo': antiguo,
-                    'total': total,
+            for group in results:
+                partner_id = group['partner_id'][0]  # ID del cliente
+                processed_results.append({
+                    'partner_id': partner_id,
+                    'amount_residual': group['amount_residual'],
+                    'partner_id_count': group['partner_id_count'],
                 })
+                
+            summary_account_move_lines = []
+                
+            for result in processed_results:
+                partner_id = result.get('partner_id')
+                
+                partner = self.env['res.partner'].browse(partner_id).name
+                
+                lines = move_lines.search([
+                    ('move_id.invoice_date_due', '<=', date_due),
+                    ('amount_residual', '!=', 0),
+                    ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+                    ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+                    ('account_id.account_type', '=', 'asset_receivable'),
+                    ('parent_state', '=', 'posted'),
+                    ('partner_id', '=', partner_id),
+                ])
+                
+                if lines:
+                    actual = 0
+                    periodo_1 = 0
+                    periodo_2 = 0
+                    periodo_3 = 0
+                    periodo_4 = 0
+                    antiguo = 0
+                    
+                    for line in lines:
+                        fecha_vencida = line.move_id.invoice_date_due
+                        
+                        fecha_actual = datetime.now()
+                        
+                        dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
+                        
+                        # Determinar el rango
+                        if dias_transcurridos == 0:
+                            actual += line.amount_residual
+                        elif dias_transcurridos <= 30:
+                            periodo_1 += line.amount_residual
+                        elif dias_transcurridos <= 60:
+                            periodo_2 += line.amount_residual
+                        elif dias_transcurridos <= 90:
+                            periodo_3 += line.amount_residual
+                        elif dias_transcurridos <= 120:
+                            periodo_4 += line.amount_residual
+                        else:
+                            antiguo += line.amount_residual
+                            
+                    actual = round(actual, 2)
+                
+                    periodo_1 = round(periodo_1, 2)
+                    periodo_2 = round(periodo_2, 2)
+                    periodo_3 = round(periodo_3, 2)
+                    periodo_4 = round(periodo_4, 2)
+                    antiguo = round(antiguo, 2)
+                    
+                    numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+                    
+                    total = round(sum(numbers), 2)
+                            
+                    summary_account_move_lines.append({
+                        'cliente': partner,
+                        'actual': actual,
+                        'periodo1': periodo_1,
+                        'periodo2': periodo_2,
+                        'periodo3': periodo_3,
+                        'periodo4': periodo_4,
+                        'antiguo': antiguo,
+                        'total': total,
+                    })
 
-        return summary_account_move_lines
+            return summary_account_move_lines
+        
+        else:
+            raise ValidationError("¡No se encontraron registros para los criterios dados!")
     
