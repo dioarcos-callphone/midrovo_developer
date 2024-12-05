@@ -40,6 +40,16 @@ class AccountDueWizard(models.TransientModel):
         comodel_name='res.users'
     )
     
+    report_type = fields.Selection(
+        [
+            ('r', 'Resumido'),
+            ('d', 'Detallado')
+        ],
+        string = 'Informe',
+        default = 'r',
+        help = "Seleccione el tipo de informe a visualizar"
+    )
+    
     def get_report_data(self):
         data_invoice_details = []
         court_date = self.court_date

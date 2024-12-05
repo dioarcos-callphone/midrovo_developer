@@ -19,6 +19,9 @@
                             <field name="comercial_id" />
                         </group>
                     </group>
+                    <group string="Tipo de Informe">
+                        <field name="report_type" />
+                    </group>
                 </sheet>
                 <footer>
                     <button name="action_pdf" string="PDF" type="object"
