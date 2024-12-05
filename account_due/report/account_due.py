@@ -171,7 +171,7 @@ class InvoiceDetails(models.AbstractModel):
             
             partner = self.env['res.partner'].search_read([('id', '=', partner_id)], ['name'], limit=1)
             
-            lines = move_lines.search_read([
+            lines = move_lines.search([
                 ('move_id.invoice_date_due', '<=', date_due),
                 ('amount_residual', '!=', 0),
                 ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
@@ -179,7 +179,7 @@ class InvoiceDetails(models.AbstractModel):
                 ('account_id.account_type', '=', 'asset_receivable'),
                 ('parent_state', '=', 'posted'),
                 ('partner_id', '=', partner_id),
-            ], ['move_id', 'amount_residual'])
+            ])
             
             if lines:
                 actual = 0
@@ -189,12 +189,8 @@ class InvoiceDetails(models.AbstractModel):
                 periodo_4 = 0
                 antiguo = 0
                 
-                account_move = self.env['account.move']
-                
                 for line in lines:
-                    fecha_vencida = account_move.search_read([
-                        ('id', '=', line.get('move_id')[0]),
-                    ], ['invoice_date_due'], limit=1)
+                    fecha_vencida = line.move_id.invoice_date_due
                     
                     fecha_actual = datetime.now()
                     
