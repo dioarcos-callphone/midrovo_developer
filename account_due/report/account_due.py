@@ -124,7 +124,7 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines if journal_id else account_move_lines_filtered
+                'lines': account_move_lines if not journal_id else account_move_lines_filtered
             }
             
             return {
