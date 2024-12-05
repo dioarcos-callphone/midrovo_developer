@@ -9,6 +9,9 @@ try:
 except ImportError:
     import xlsxwriter
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class AccountDueWizard(models.TransientModel):
     _name = "account.due.wizard"
     _description = "Cuentas por Cobrar Vencidas"
@@ -312,6 +315,10 @@ class AccountDueWizard(models.TransientModel):
         
         is_summary = self.report_type
         
+        _logger.info(f'MOSTRANDO DATA EN GET XLSX >>> { datas }')
+        
+        _logger.info(f'MOSTRANDO SUMMARY EN GET XLSX >>> { is_summary }')
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
@@ -346,10 +353,10 @@ class AccountDueWizard(models.TransientModel):
 
         # Título del informe
         if is_summary == 'r':
-            sheet.merge_range('A1:M1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
+            sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Resumido)', title_format)
             
         else:    
-            sheet.merge_range('A1:M1', 'Cuentas Vencidas por Cobrar (Detallado)', title_format)
+            sheet.merge_range('A1:J1', 'Cuentas Vencidas por Cobrar (Detallado)', title_format)
             
         # Encabezados
         headers = [
