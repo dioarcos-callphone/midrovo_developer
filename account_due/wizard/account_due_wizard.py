@@ -384,7 +384,7 @@ class AccountDueWizard(models.TransientModel):
         _logger.info(f'MOSTRANDO LINES >>> { lines }')
         
         if is_summary == 'd':
-            row = 4
+            row = 5
             # sheet.write(row, 0, val.get('client'), text_format)
             # sheet.write(row, 1, '', text_format)
             # sheet.write(row, 2, '', text_format)
