@@ -102,7 +102,7 @@ class AccountDueWizard(models.TransientModel):
                 # añadimos los valores a los campos del diccionario
                 data_detail['date_due'] = date_formated
                 data_detail['invoice'] = detail.move_name
-                data_detail['journal'] = detail.journal_id.name
+                data_detail['journal'] = detail.journal_id.id
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
