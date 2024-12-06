@@ -64,7 +64,7 @@
                                 </td>
                                 <td></td>
                                 <td style="font-weight:bold;">
-                                    <t t-esc="line.get('total_adeudado')"/>
+                                    <t t-esc="options.get('total_adeudado')"/>
                                 </td>
                                 <td style="font-weight:bold;" t-att-class="options.get('actual', 0) &lt; 0 and 'text-danger'">
                                     <t t-esc="options.get('actual')"/>
