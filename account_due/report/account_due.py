@@ -115,39 +115,32 @@ class InvoiceDetails(models.AbstractModel):
             
             total = round(sum(numbers), 2)
             
-            account_move_lines_filtered = []
-            
-            if journal_id:
+            account_move_lines_filtered = account_move_lines
+
+            if journal_id and comercial_id:
+                # Filtrar por ambos campos
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+            elif journal_id:
+                # Filtrar solo por journal_id
                 account_move_lines_filtered = list(
                     filter(
                         lambda x: x.get('journal') == journal_id,
                         account_move_lines
                     )
                 )
-            
-            # if journal_id and comercial_id:
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
-            #             account_move_lines
-            #         )
-            #     )
-            
-            # elif journal_id:
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('journal') == journal_id,
-            #             account_move_lines
-            #         )
-            #     )
-                
-            # elif comercial_id:
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('comercial') == comercial_id,
-            #             account_move_lines
-            #         )
-            #     )                
+            elif comercial_id:
+                # Filtrar solo por comercial_id
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )             
             
             accounts_receivable_data = {
                 'client': client.name,
@@ -158,7 +151,7 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines if not journal_id else account_move_lines_filtered
+                'lines': account_move_lines_filtered
             }
             
             return {
