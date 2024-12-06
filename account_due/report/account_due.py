@@ -38,8 +38,8 @@ class InvoiceDetails(models.AbstractModel):
         
         if client_id:
             domain.append(('partner_id', '=', client_id))
-        if journal_id:
-            domain.append(('journal_id', '=', journal_id))      
+        # if journal_id:
+        #     domain.append(('journal_id', '=', journal_id))      
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
@@ -61,6 +61,7 @@ class InvoiceDetails(models.AbstractModel):
                 amount_residual = detail.amount_residual
                 
                 if detail.move_id.move_type == 'entry':
+                    _logger.info('ENTRAAAA')
                     entry += amount_residual
                 
                 if invoice_id in grouped_invoices:
@@ -148,6 +149,7 @@ class InvoiceDetails(models.AbstractModel):
                     )
                 )
             elif journal_id:
+                
                 total = total - entry
                 # Filtrar solo por journal_id
                 account_move_lines_filtered = list(
