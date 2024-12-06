@@ -62,9 +62,9 @@ class InvoiceDetails(models.AbstractModel):
                 fecha_vencida = detail.move_id.invoice_date_due
                 amount_residual = detail.amount_residual
                 
-                if detail.move_id.move_type == 'entry':
-                    _logger.info('ENTRAAAA')
-                    entry += amount_residual
+                # if detail.move_id.move_type == 'entry':
+                #     _logger.info('ENTRAAAA')
+                #     entry += amount_residual
                 
                 if invoice_id in grouped_invoices:
                     # Actualizar la fecha de vencimiento a la más reciente
