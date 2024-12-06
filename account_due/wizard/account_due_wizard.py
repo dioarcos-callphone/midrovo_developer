@@ -123,6 +123,10 @@ class AccountDueWizard(models.TransientModel):
                         'antiguo': False
                     }
                     
+                fecha_vencida_formateada = datetime.strftime(grouped_invoices[invoice_id]['date_due'], "%d/%m/%Y")
+                
+                grouped_invoices[invoice_id]['date_due'] = fecha_vencida_formateada
+                    
             # Procesar los datos agrupados
             for invoice_data in grouped_invoices.values():
                 date_due = invoice_data['date_due']
