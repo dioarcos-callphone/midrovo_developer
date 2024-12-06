@@ -108,6 +108,9 @@ class InvoiceDetails(models.AbstractModel):
                 else:
                     invoice_data['antiguo'] = amount_residual
                     antiguo += amount_residual
+                    
+                date_formated = datetime.strftime(date_due, "%d/%m/%Y")
+                invoice_data['date_due'] = date_formated
 
                 # Añadir al resultado final
                 account_move_lines.append(invoice_data)

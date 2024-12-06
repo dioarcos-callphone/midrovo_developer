@@ -155,53 +155,6 @@ class AccountDueWizard(models.TransientModel):
 
                 # Añadir al resultado final
                 account_move_lines.append(invoice_data)
-                 
-            # for detail in invoice_details:
-            #     data_detail = {}
-                
-            #     date_formated = datetime.strftime(detail.move_id.invoice_date_due, "%d/%m/%Y")
-                
-            #     # añadimos los valores a los campos del diccionario
-            #     data_detail['date_due'] = date_formated
-            #     data_detail['invoice'] = detail.move_name
-            #     data_detail['journal'] = detail.journal_id.id
-            #     data_detail['comercial'] = detail.move_id.invoice_user_id.id
-            #     data_detail['client'] = detail.partner_id.name or ""
-            #     data_detail['amount_residual'] = detail.amount_residual
-            #     data_detail['account'] = detail.account_id.code
-            #     data_detail['actual'] = False
-            #     data_detail['periodo1'] = False
-            #     data_detail['periodo2'] = False
-            #     data_detail['periodo3'] = False
-            #     data_detail['periodo4'] = False
-            #     data_detail['antiguo'] = False
-                
-            #     fecha_vencida = detail.move_id.invoice_date_due
-            #     fecha_actual = datetime.now()
-                
-            #     dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
-                
-            #     # Determinar el rango
-            #     if dias_transcurridos <= 0:
-            #         data_detail['actual'] = data_detail['amount_residual']
-            #         actual += data_detail['actual']
-            #     elif dias_transcurridos <= 30:
-            #         data_detail['periodo1'] = data_detail['amount_residual']
-            #         periodo_1 += data_detail['periodo1']
-            #     elif dias_transcurridos <= 60:
-            #         data_detail['periodo2'] = data_detail['amount_residual']
-            #         periodo_2 += data_detail['periodo2']
-            #     elif dias_transcurridos <= 90:
-            #         data_detail['periodo3'] = data_detail['amount_residual']
-            #         periodo_3 += data_detail['periodo3']
-            #     elif dias_transcurridos <= 120:
-            #         data_detail['periodo4'] = data_detail['amount_residual']
-            #         periodo_4 += data_detail['periodo4']
-            #     else:
-            #         data_detail['antiguo'] = data_detail['amount_residual']
-            #         antiguo += data_detail['antiguo']
-  
-            #     account_move_lines.append(data_detail)
             
             client = self.env['res.partner'].search([('id', '=', client_id)], limit=1)
             
