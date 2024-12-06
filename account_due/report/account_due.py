@@ -69,6 +69,7 @@ class InvoiceDetails(models.AbstractModel):
                     # Crear una nueva entrada para la factura
                     grouped_invoices[invoice_id] = {
                         'date_due': fecha_vencida,
+                        'invoice': detail.move_name,
                         'amount_residual': amount_residual,
                         'journal': detail.journal_id.id,
                         'comercial': detail.move_id.invoice_user_id.id,
