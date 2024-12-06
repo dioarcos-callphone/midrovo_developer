@@ -37,9 +37,7 @@ class InvoiceDetails(models.AbstractModel):
         ]
         
         if client_id:
-            domain.append(('partner_id', '=', client_id)) 
-        if journal_id:
-            domain.append(('journal_id', '=', journal_id))       
+            domain.append(('partner_id', '=', client_id))       
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
@@ -83,7 +81,9 @@ class InvoiceDetails(models.AbstractModel):
                         'periodo4': False,
                         'antiguo': False
                     }
-                
+            
+            _logger.info(f'MOSTRANDO FACTURAS >>>> { grouped_invoices }')
+               
             # Procesar los datos agrupados
             for invoice_data in grouped_invoices.values():
                 date_due = invoice_data['date_due']
