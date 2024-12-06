@@ -150,6 +150,7 @@ class InvoiceDetails(models.AbstractModel):
                 )
             elif journal_id:
                 _logger.info(f'ENTRY >>>> { entry } ')
+                _logger.info(f'ENTRY >>>> { total } ')
                 total = total - entry
                 # Filtrar solo por journal_id
                 account_move_lines_filtered = list(
