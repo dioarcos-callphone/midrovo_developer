@@ -37,7 +37,9 @@ class InvoiceDetails(models.AbstractModel):
         ]
         
         if client_id:
-            domain.append(('partner_id', '=', client_id))        
+            domain.append(('partner_id', '=', client_id)) 
+        if journal_id:
+            domain.append(('journal_id', '=', journal_id))       
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
