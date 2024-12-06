@@ -38,10 +38,10 @@ class InvoiceDetails(models.AbstractModel):
         
         if client_id:
             domain.append(('partner_id', '=', client_id))        
-        if journal_id:
-            domain.append(('journal_id', '=', journal_id))
-        if comercial_id:
-            domain.append(('move_id.invoice_user_id', '=', comercial_id))
+        # if journal_id:
+        #     domain.append(('journal_id', '=', journal_id))
+        # if comercial_id:
+        #     domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
@@ -63,7 +63,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['date_due'] = date_formated
                 data_detail['invoice'] = detail.move_name
                 data_detail['journal'] = detail.journal_id.id
-                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.id
+                data_detail['comercial'] = detail.move_id.invoice_user_id.id
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code   
