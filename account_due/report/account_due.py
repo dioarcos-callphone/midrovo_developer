@@ -126,8 +126,10 @@ class InvoiceDetails(models.AbstractModel):
             antiguo = round(antiguo, 2)
             
             numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
             
             total = round(sum(numbers), 2)
+            total_vencido = round(sum(numbers_vencido), 2)
             
             account_move_lines_filtered = account_move_lines
 
@@ -167,7 +169,8 @@ class InvoiceDetails(models.AbstractModel):
                 'periodo3': periodo_3,
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
-                'total': total,
+                'total_adeudado': total,
+                'total_vencido': total_vencido,
                 'lines': account_move_lines_filtered
             }
             
@@ -266,8 +269,10 @@ class InvoiceDetails(models.AbstractModel):
                     antiguo = round(antiguo, 2)
                     
                     numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+                    numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
                     
                     total = round(sum(numbers), 2)
+                    total_vencido = round(sum(numbers_vencido), 2)
                             
                     summary_account_move_lines.append({
                         'cliente': partner,
@@ -277,7 +282,8 @@ class InvoiceDetails(models.AbstractModel):
                         'periodo3': periodo_3,
                         'periodo4': periodo_4,
                         'antiguo': antiguo,
-                        'total': total,
+                        'total_adeudado': total,
+                        'total_vencido': total_vencido
                     })
 
             return summary_account_move_lines

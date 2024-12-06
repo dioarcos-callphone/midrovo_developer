@@ -14,14 +14,14 @@
                         <tr>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Vencido por Cobrar</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Fecha de Vencimiento</th>
-                            <th align="center" style="vertical-align: middle; font-size: 13px;">Importe en Moneda</th>
+                            <th align="center" style="vertical-align: middle; font-size: 13px;">Total Adeudado</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">En Fecha</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">1 - 30</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">31 - 60</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">61 - 90</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;" width="100">91 - 120</th>
                             <th align="center" style="vertical-align: middle; font-size: 13px;">Más Antiguos</th>
-                            <th align="center" style="vertical-align: middle; font-size: 13px;">Total</th>                            
+                            <th align="center" style="vertical-align: middle; font-size: 13px;">Total Vencido</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,9 @@
                                     <t t-esc="line.get('cliente')"/>
                                 </td>
                                 <td></td>
-                                <td></td>
+                                <td style="font-weight:bold;">
+                                    <t t-esc="line.get('total_adeudado')"/>
+                                </td>
                                 <td style="font-weight:bold;" t-att-class="line.get('actual', 0) &lt; 0 and 'text-danger'">
                                     <t t-esc="line.get('actual')"/>
                                 </td>
@@ -51,7 +53,7 @@
                                     <t t-esc="line.get('antiguo')"/>
                                 </td>
                                 <td style="font-weight:bold;">
-                                    <t t-esc="line.get('total')"/>
+                                    <t t-esc="line.get('total_vencido')"/>
                                 </td>
                             </tr>
                         </t>
@@ -61,7 +63,9 @@
                                     <t t-esc="options.get('client')"/>
                                 </td>
                                 <td></td>
-                                <td></td>
+                                <td style="font-weight:bold;">
+                                    <t t-esc="line.get('total_adeudado')"/>
+                                </td>
                                 <td style="font-weight:bold;" t-att-class="options.get('actual', 0) &lt; 0 and 'text-danger'">
                                     <t t-esc="options.get('actual')"/>
                                 </td>
@@ -81,7 +85,7 @@
                                     <t t-esc="options.get('antiguo')"/>
                                 </td>
                                 <td style="font-weight:bold;">
-                                    <t t-esc="options.get('total')"/>
+                                    <t t-esc="options.get('total_vencido')"/>
                                 </td>
                             </tr>
                             <tr t-foreach="options.get('lines')" t-as="result">
