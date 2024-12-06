@@ -123,10 +123,6 @@ class AccountDueWizard(models.TransientModel):
                         'antiguo': False
                     }
                     
-                fecha_vencida_formateada = datetime.strftime(grouped_invoices[invoice_id]['date_due'], "%d/%m/%Y")
-                
-                grouped_invoices[invoice_id]['date_due'] = fecha_vencida_formateada
-                    
             # Procesar los datos agrupados
             for invoice_data in grouped_invoices.values():
                 date_due = invoice_data['date_due']
@@ -153,6 +149,9 @@ class AccountDueWizard(models.TransientModel):
                 else:
                     invoice_data['antiguo'] = amount_residual
                     antiguo += amount_residual
+                    
+                date_formated = datetime.strftime(date_due, "%d/%m/%Y")
+                invoice_data['date_due'] = date_formated
 
                 # Añadir al resultado final
                 account_move_lines.append(invoice_data)
