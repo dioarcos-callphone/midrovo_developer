@@ -37,7 +37,9 @@ class InvoiceDetails(models.AbstractModel):
         ]
         
         if client_id:
-            domain.append(('partner_id', '=', client_id))       
+            domain.append(('partner_id', '=', client_id))
+        if journal_id:
+            domain.append(('journal_id', '=', journal_id))      
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
@@ -92,167 +94,30 @@ class InvoiceDetails(models.AbstractModel):
                 # Determinar el rango
                 if dias_transcurridos <= 0:
                     invoice_data['actual'] = amount_residual
-                    # actual += amount_residual
+                    actual += amount_residual
                 elif dias_transcurridos <= 30:
                     invoice_data['periodo1'] = amount_residual
-                    # periodo_1 += amount_residual
+                    periodo_1 += amount_residual
                 elif dias_transcurridos <= 60:
                     invoice_data['periodo2'] = amount_residual
-                    # periodo_2 += amount_residual
+                    periodo_2 += amount_residual
                 elif dias_transcurridos <= 90:
                     invoice_data['periodo3'] = amount_residual
-                    # periodo_3 += amount_residual
+                    periodo_3 += amount_residual
                 elif dias_transcurridos <= 120:
                     invoice_data['periodo4'] = amount_residual
-                    # periodo_4 += amount_residual
+                    periodo_4 += amount_residual
                 else:
                     invoice_data['antiguo'] = amount_residual
-                    # antiguo += amount_residual
+                    antiguo += amount_residual
                     
-                # date_formated = datetime.strftime(date_due, "%d/%m/%Y")
-                # invoice_data['date_due'] = date_formated
+                date_formated = datetime.strftime(date_due, "%d/%m/%Y")
+                invoice_data['date_due'] = date_formated
 
                 # Añadir al resultado final
                 account_move_lines.append(invoice_data)
                 
             client = self.env['res.partner'].search([('id', '=', client_id)], limit=1)
-            
-            # actual = round(actual, 2)
-            
-            # periodo_1 = round(periodo_1, 2)
-            # periodo_2 = round(periodo_2, 2)
-            # periodo_3 = round(periodo_3, 2)
-            # periodo_4 = round(periodo_4, 2)
-            # antiguo = round(antiguo, 2)
-            
-            # numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-            # numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
-            
-            # total = round(sum(numbers), 2)
-            # total_vencido = round(sum(numbers_vencido), 2)
-            
-            account_move_lines_filtered = account_move_lines
-
-            if journal_id and comercial_id:
-                # Filtrar por ambos campos
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
-                        account_move_lines
-                    )
-                )
-                
-                for line in account_move_lines_filtered:
-                    date_due = line['date_due']
-                    amount_residual = line['amount_residual']
-                    
-                    dias_transcurridos = (datetime.now().date() - date_due).days
-
-                    # Determinar el rango
-                    if dias_transcurridos <= 0:
-                        # line['actual'] = amount_residual
-                        actual += amount_residual
-                    elif dias_transcurridos <= 30:
-                        # line['periodo1'] = amount_residual
-                        periodo_1 += amount_residual
-                    elif dias_transcurridos <= 60:
-                        # line['periodo2'] = amount_residual
-                        periodo_2 += amount_residual
-                    elif dias_transcurridos <= 90:
-                        # line['periodo3'] = amount_residual
-                        periodo_3 += amount_residual
-                    elif dias_transcurridos <= 120:
-                        # line['periodo4'] = amount_residual
-                        periodo_4 += amount_residual
-                    else:
-                        # line['antiguo'] = amount_residual
-                        antiguo += amount_residual
-                        
-                    date_formated = datetime.strftime(date_due, "%d/%m/%Y")
-                    line['date_due'] = date_formated
-                    
-            elif journal_id:
-                # Filtrar solo por journal_id
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('journal') == journal_id,
-                        account_move_lines
-                    )
-                )
-                
-                for line in account_move_lines_filtered:
-                    date_due = line['date_due']
-                    amount_residual = line['amount_residual']
-                    
-                    dias_transcurridos = (datetime.now().date() - date_due).days
-
-                    # Determinar el rango
-                    if dias_transcurridos <= 0:
-                        # line['actual'] = amount_residual
-                        actual += amount_residual
-                    elif dias_transcurridos <= 30:
-                        # line['periodo1'] = amount_residual
-                        periodo_1 += amount_residual
-                    elif dias_transcurridos <= 60:
-                        # line['periodo2'] = amount_residual
-                        periodo_2 += amount_residual
-                    elif dias_transcurridos <= 90:
-                        # line['periodo3'] = amount_residual
-                        periodo_3 += amount_residual
-                    elif dias_transcurridos <= 120:
-                        # line['periodo4'] = amount_residual
-                        periodo_4 += amount_residual
-                    else:
-                        # line['antiguo'] = amount_residual
-                        antiguo += amount_residual
-                        
-                    date_formated = datetime.strftime(date_due, "%d/%m/%Y")
-                    line['date_due'] = date_formated
-                    
-                
-            elif comercial_id:
-                # Filtrar solo por comercial_id
-                account_move_lines_filtered = list(
-                    filter(
-                        lambda x: x.get('comercial') == comercial_id,
-                        account_move_lines
-                    )
-                )
-                
-                for line in account_move_lines_filtered:
-                    date_due = line['date_due']
-                    amount_residual = line['amount_residual']
-                    
-                    dias_transcurridos = (datetime.now().date() - date_due).days
-
-                    # Determinar el rango
-                    if dias_transcurridos <= 0:
-                        # line['actual'] = amount_residual
-                        actual += amount_residual
-                    elif dias_transcurridos <= 30:
-                        # line['periodo1'] = amount_residual
-                        periodo_1 += amount_residual
-                    elif dias_transcurridos <= 60:
-                        # line['periodo2'] = amount_residual
-                        periodo_2 += amount_residual
-                    elif dias_transcurridos <= 90:
-                        # line['periodo3'] = amount_residual
-                        periodo_3 += amount_residual
-                    elif dias_transcurridos <= 120:
-                        # line['periodo4'] = amount_residual
-                        periodo_4 += amount_residual
-                    else:
-                        # line['antiguo'] = amount_residual
-                        antiguo += amount_residual
-                        
-                    date_formated = datetime.strftime(date_due, "%d/%m/%Y")
-                    line['date_due'] = date_formated
-                
-            if not account_move_lines_filtered:
-                raise ValidationError("¡No se encontraron registros para los criterios dados!")  
-            
-            
-            
             
             actual = round(actual, 2)
             
@@ -267,6 +132,36 @@ class InvoiceDetails(models.AbstractModel):
             
             total = round(sum(numbers), 2)
             total_vencido = round(sum(numbers_vencido), 2)
+            
+            account_move_lines_filtered = account_move_lines
+
+            if journal_id and comercial_id:
+                # Filtrar por ambos campos
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+            elif journal_id:
+                # Filtrar solo por journal_id
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id,
+                        account_move_lines
+                    )
+                )
+            elif comercial_id:
+                # Filtrar solo por comercial_id
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+                
+            if not account_move_lines_filtered:
+                raise ValidationError("¡No se encontraron registros para los criterios dados!")  
             
             accounts_receivable_data = {
                 'client': client.name,
