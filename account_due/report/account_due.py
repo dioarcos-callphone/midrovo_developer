@@ -84,8 +84,8 @@ class InvoiceDetails(models.AbstractModel):
                
             # Procesar los datos agrupados
             for invoice_data in grouped_invoices.values():
-                # date_due = invoice_data['date_due']
-                # amount_residual = invoice_data['amount_residual']
+                date_due = invoice_data['date_due']
+                amount_residual = invoice_data['amount_residual']
                 
                 dias_transcurridos = (datetime.now().date() - date_due).days
 
