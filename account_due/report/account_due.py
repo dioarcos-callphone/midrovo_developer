@@ -149,9 +149,6 @@ class InvoiceDetails(models.AbstractModel):
                     )
                 )
             elif journal_id:
-                _logger.info(f'ENTRY >>>> { entry } ')
-                _logger.info(f'ENTRY >>>> { total } ')
-                total = total - entry
                 # Filtrar solo por journal_id
                 account_move_lines_filtered = list(
                     filter(
@@ -159,6 +156,7 @@ class InvoiceDetails(models.AbstractModel):
                         account_move_lines
                     )
                 )
+                total = total - entry
             elif comercial_id:
                 # Filtrar solo por comercial_id
                 account_move_lines_filtered = list(
