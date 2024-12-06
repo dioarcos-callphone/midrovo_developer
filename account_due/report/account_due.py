@@ -41,8 +41,6 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain)
         
-        _logger.info(f'MOSTRANDO ACCOUNT MOVE LINES >>> { invoice_details }')
-        
         if invoice_details:
             actual = 0
             periodo_1 = 0

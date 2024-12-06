@@ -79,10 +79,6 @@ class AccountDueWizard(models.TransientModel):
         
         if client_id:
             domain.append(('partner_id', '=', client_id)) 
-        # if journal_id:
-        #     domain.append(('journal_id', '=', journal_id))
-        if comercial_id:
-            domain.append(('move_id.invoice_user_id', '=', comercial_id))
         
         invoice_details = self.env['account.move.line'].search(domain)
         
@@ -103,7 +99,7 @@ class AccountDueWizard(models.TransientModel):
                 data_detail['date_due'] = date_formated
                 data_detail['invoice'] = detail.move_name
                 data_detail['journal'] = detail.journal_id.id
-                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
+                data_detail['comercial'] = detail.move_id.invoice_user_id.id
                 data_detail['client'] = detail.partner_id.name or ""
                 data_detail['amount_residual'] = detail.amount_residual
                 data_detail['account'] = detail.account_id.code
@@ -155,10 +151,35 @@ class AccountDueWizard(models.TransientModel):
             
             total = round(sum(numbers), 2)
             
-            account_move_lines_filtered = [] 
-            
-            if journal_id:
-                account_move_lines_filtered = list(filter(lambda x: x.get('journal') == journal_id, account_move_lines))
+            account_move_lines_filtered = account_move_lines
+
+            if journal_id and comercial_id:
+                # Filtrar por ambos campos
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+            elif journal_id:
+                # Filtrar solo por journal_id
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('journal') == journal_id,
+                        account_move_lines
+                    )
+                )
+            elif comercial_id:
+                # Filtrar solo por comercial_id
+                account_move_lines_filtered = list(
+                    filter(
+                        lambda x: x.get('comercial') == comercial_id,
+                        account_move_lines
+                    )
+                )
+                
+            if not account_move_lines_filtered:
+                raise ValidationError("¡No se encontraron registros para los criterios dados!")  
                 
             accounts_receivable_data = {
                 'client': client.name,
@@ -169,7 +190,7 @@ class AccountDueWizard(models.TransientModel):
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
                 'total': total,
-                'lines': account_move_lines if not journal_id else account_move_lines_filtered,
+                'lines': account_move_lines_filtered,
             }
             
             data = {
@@ -321,8 +342,6 @@ class AccountDueWizard(models.TransientModel):
     def get_xlsx_report(self, data, response):
         datas = data['result_data']        
         is_summary = data['is_summary']
-        
-        _logger.info(f'MOSTRANDO DATAS >>> { is_summary }')
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
