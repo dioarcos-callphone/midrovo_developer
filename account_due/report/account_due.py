@@ -24,7 +24,7 @@ class InvoiceDetails(models.AbstractModel):
                 'doc_model': 'report.account_due.report_account_due',
                 'data': data,
                 'is_summary': is_summary,
-                'options': self.get_residual_totals(court_date),
+                'options': self.get_residual_totals(data),
             }
 
         domain = [
