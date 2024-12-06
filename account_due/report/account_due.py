@@ -140,7 +140,9 @@ class InvoiceDetails(models.AbstractModel):
                         lambda x: x.get('comercial') == comercial_id,
                         account_move_lines
                     )
-                )             
+                )
+                
+            _logger.info(f'MOSTRANDO ACCOUNT MOVE >>> { account_move_lines_filtered }')       
             
             accounts_receivable_data = {
                 'client': client.name,
