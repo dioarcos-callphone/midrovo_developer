@@ -39,7 +39,7 @@ class InvoiceDetails(models.AbstractModel):
         if client_id:
             domain.append(('partner_id', '=', client_id))        
         
-        invoice_details = self.env['account.move.line'].search(domain)
+        invoice_details = self.env['account.move.line'].search(domain, order_by='move_name')
         
         if invoice_details:
             actual = 0
