@@ -50,6 +50,7 @@ class InvoiceDetails(models.AbstractModel):
             periodo_3 = 0
             periodo_4 = 0
             antiguo = 0
+            entry = 0
             
             # Crear un diccionario para agrupar facturas por su id
             grouped_invoices = {}
@@ -58,6 +59,9 @@ class InvoiceDetails(models.AbstractModel):
                 invoice_id = detail.move_id.id
                 fecha_vencida = detail.move_id.invoice_date_due
                 amount_residual = detail.amount_residual
+                
+                if detail.move_id.move_type == 'entry':
+                    entry += amount_residual
                 
                 if invoice_id in grouped_invoices:
                     # Actualizar la fecha de vencimiento a la más reciente
@@ -144,6 +148,7 @@ class InvoiceDetails(models.AbstractModel):
                     )
                 )
             elif journal_id:
+                total = total - entry
                 # Filtrar solo por journal_id
                 account_move_lines_filtered = list(
                     filter(
