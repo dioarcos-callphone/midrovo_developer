@@ -247,7 +247,7 @@ class InvoiceDetails(models.AbstractModel):
                         dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                         
                         # Determinar el rango
-                        if dias_transcurridos == 0:
+                        if dias_transcurridos <= 0:
                             actual += line.amount_residual
                         elif dias_transcurridos <= 30:
                             periodo_1 += line.amount_residual
