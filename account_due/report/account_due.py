@@ -28,7 +28,7 @@ class InvoiceDetails(models.AbstractModel):
             }
 
         domain = [
-            ('move_id.invoice_date_due', '<=', court_date),
+            ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
@@ -48,52 +48,115 @@ class InvoiceDetails(models.AbstractModel):
             periodo_3 = 0
             periodo_4 = 0
             antiguo = 0
+            
+            # Crear un diccionario para agrupar facturas por su número
+            grouped_invoices = {}
+            
             for detail in invoice_details:
+                invoice_id = detail.move_id.id
+                fecha_vencida = detail.move_id.invoice_date_due
+                amount_residual = detail.amount_residual
                 data_detail = {}
                 
-                date_formated = datetime.strftime(detail.move_id.invoice_date_due, "%d/%m/%Y")
-                
-                # añadimos los valores a los campos del diccionario
-                data_detail['date_due'] = date_formated
-                data_detail['invoice'] = detail.move_name
-                data_detail['journal'] = detail.journal_id.id
-                data_detail['comercial'] = detail.move_id.invoice_user_id.id
-                data_detail['client'] = detail.partner_id.name or ""
-                data_detail['amount_residual'] = detail.amount_residual
-                data_detail['account'] = detail.account_id.code   
-                data_detail['actual'] = False
-                data_detail['periodo1'] = False
-                data_detail['periodo2'] = False
-                data_detail['periodo3'] = False
-                data_detail['periodo4'] = False
-                data_detail['antiguo'] = False
-                
-                fecha_vencida = detail.move_id.invoice_date_due
-                fecha_actual = datetime.now()
-                
-                dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
-                
-                # Determinar el rango
-                if dias_transcurridos == 0:
-                    data_detail['actual'] = data_detail['amount_residual']
-                    actual += data_detail['actual']
-                elif dias_transcurridos <= 30:
-                    data_detail['periodo1'] = data_detail['amount_residual']
-                    periodo_1 += data_detail['periodo1']
-                elif dias_transcurridos <= 60:
-                    data_detail['periodo2'] = data_detail['amount_residual']
-                    periodo_2 += data_detail['periodo2']
-                elif dias_transcurridos <= 90:
-                    data_detail['periodo3'] = data_detail['amount_residual']
-                    periodo_3 += data_detail['periodo3']
-                elif dias_transcurridos <= 120:
-                    data_detail['periodo4'] = data_detail['amount_residual']
-                    periodo_4 += data_detail['periodo4']
+                if invoice_id in grouped_invoices:
+                    # Actualizar la fecha de vencimiento a la más reciente
+                    if fecha_vencida > grouped_invoices[invoice_id]['date_due']:
+                        grouped_invoices[invoice_id]['date_due'] = fecha_vencida
+                    # Sumar el monto residual
+                    grouped_invoices[invoice_id]['amount_residual'] += amount_residual
+                    
                 else:
-                    data_detail['antiguo'] = data_detail['amount_residual']
-                    antiguo += data_detail['antiguo']
+                    # Crear una nueva entrada para la factura
+                    grouped_invoices[invoice_id] = {
+                        'date_due': fecha_vencida,
+                        'amount_residual': amount_residual,
+                        'journal': detail.journal_id.id,
+                        'comercial': detail.move_id.invoice_user_id.id,
+                        'client': detail.partner_id.name or "",
+                        'account': detail.account_id.code,
+                        'actual': False,
+                        'periodo1': False,
+                        'periodo2': False,
+                        'periodo3': False,
+                        'periodo4': False,
+                        'antiguo': False
+                    }
+                
+                # date_formated = datetime.strftime(fecha_vencida, "%d/%m/%Y")
+                
+                # # añadimos los valores a los campos del diccionario
+                # data_detail['move_id'] = detail.move_id.id
+                # data_detail['date_due'] = date_formated
+                # data_detail['invoice'] = detail.move_name
+                # data_detail['journal'] = detail.journal_id.id
+                # data_detail['comercial'] = detail.move_id.invoice_user_id.id
+                # data_detail['client'] = detail.partner_id.name or ""
+                # data_detail['amount_residual'] = detail.amount_residual
+                # data_detail['account'] = detail.account_id.code   
+                # data_detail['actual'] = False
+                # data_detail['periodo1'] = False
+                # data_detail['periodo2'] = False
+                # data_detail['periodo3'] = False
+                # data_detail['periodo4'] = False
+                # data_detail['antiguo'] = False
+                
+                # Procesar los datos agrupados
+            for invoice_data in grouped_invoices.values():
+                date_due = invoice_data['date_due']
+                amount_residual = invoice_data['amount_residual']
+                
+                dias_transcurridos = (datetime.now().date() - date_due).days
+
+                # Determinar el rango
+                if dias_transcurridos <= 0:
+                    invoice_data['actual'] = amount_residual
+                    actual += amount_residual
+                elif dias_transcurridos <= 30:
+                    invoice_data['periodo1'] = amount_residual
+                    periodo_1 += amount_residual
+                elif dias_transcurridos <= 60:
+                    invoice_data['periodo2'] = amount_residual
+                    periodo_2 += amount_residual
+                elif dias_transcurridos <= 90:
+                    invoice_data['periodo3'] = amount_residual
+                    periodo_3 += amount_residual
+                elif dias_transcurridos <= 120:
+                    invoice_data['periodo4'] = amount_residual
+                    periodo_4 += amount_residual
+                else:
+                    invoice_data['antiguo'] = amount_residual
+                    antiguo += amount_residual
+
+                # Añadir al resultado final
+                account_move_lines.append(invoice_data)
+                
+                # fecha_actual = datetime.now()
+                
+                # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
+                
+                # # Determinar el rango
+                # if dias_transcurridos <= 0:
+                #     data_detail['actual'] = data_detail['amount_residual']
+                #     actual += data_detail['actual']
+                # elif dias_transcurridos <= 30:
+                #     data_detail['periodo1'] = data_detail['amount_residual']
+                #     periodo_1 += data_detail['periodo1']
+                # elif dias_transcurridos <= 60:
+                #     data_detail['periodo2'] = data_detail['amount_residual']
+                #     periodo_2 += data_detail['periodo2']
+                # elif dias_transcurridos <= 90:
+                #     data_detail['periodo3'] = data_detail['amount_residual']
+                #     periodo_3 += data_detail['periodo3']
+                # elif dias_transcurridos <= 120:
+                #     data_detail['periodo4'] = data_detail['amount_residual']
+                #     periodo_4 += data_detail['periodo4']
+                # else:
+                #     data_detail['antiguo'] = data_detail['amount_residual']
+                #     antiguo += data_detail['antiguo']
   
-                account_move_lines.append(data_detail)
+                # account_move_lines.append(data_detail)
+            
+            _logger.info(f'MOSTRANDO ACCOUNT MOVE LINES >>> { account_move_lines }')
                 
             client = self.env['res.partner'].search([('id', '=', client_id)], limit=1)
             
@@ -137,7 +200,7 @@ class InvoiceDetails(models.AbstractModel):
                 )
                 
             if not account_move_lines_filtered:
-                raise ValidationError("¡No se encontraron registros para los criterios dados!")     
+                raise ValidationError("¡No se encontraron registros para los criterios dados!")  
             
             accounts_receivable_data = {
                 'client': client.name,

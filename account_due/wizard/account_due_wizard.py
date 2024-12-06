@@ -116,7 +116,7 @@ class AccountDueWizard(models.TransientModel):
                 dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                 
                 # Determinar el rango
-                if dias_transcurridos == 0:
+                if dias_transcurridos <= 0:
                     data_detail['actual'] = data_detail['amount_residual']
                     actual += data_detail['actual']
                 elif dias_transcurridos <= 30:
