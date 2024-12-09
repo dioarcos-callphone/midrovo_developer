@@ -55,7 +55,7 @@ class AccountDueWizard(models.TransientModel):
     )
     
     payment_not_apply = fields.Boolean(
-        string = "Mostrar pagos no aplicados ?",
+        string = "Mostrar pagos no aplicados ",
         default = False
     )
     
@@ -95,7 +95,7 @@ class AccountDueWizard(models.TransientModel):
         if comercial_id:
             domain.append(('move_id.invoice_user_id', '=', comercial_id)) 
         
-        invoice_details = self.env['account.move.line'].search(domain)
+        invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
         if invoice_details:
             actual = 0
