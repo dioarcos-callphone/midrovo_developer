@@ -30,7 +30,6 @@ class AccountDueWizard(models.TransientModel):
             ('type','!=','private'),
             ('company_id','=',False),
         ],
-        required=True
     )
     
     journal_id = fields.Many2one(
