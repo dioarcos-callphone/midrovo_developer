@@ -296,9 +296,9 @@ class AccountDueWizard(models.TransientModel):
             for line in move_lines:
                 fecha_vencida = line.move_id.invoice_date_due
                 
-                court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
+                # court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                 
-                dias_transcurridos = (court_date_date.date() - fecha_vencida).days
+                dias_transcurridos = (court_date - fecha_vencida).days
                 
                 # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                 
