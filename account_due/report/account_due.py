@@ -257,6 +257,8 @@ class InvoiceDetails(models.AbstractModel):
                         'partner_id_count': group['partner_id_count'],
                     })
                     
+                _logger.info(processed_results)
+                    
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
                     
