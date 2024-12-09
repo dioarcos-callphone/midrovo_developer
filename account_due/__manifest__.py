@@ -1,8 +1,10 @@
 {
-    'name': '',
-    'summary': '',
+    'name': 'Informe de Cuentas por Cobrar',
+    'summary': 'Generacion de informe resumido y detallado de cuentas por cobrar',
     'description': """
-
+        - Wizard para consutar informes en el modulo de contabilidad > informes > cuentas por cobrar
+        - Filtra por diario contable, cliente, fecha de corte y comercial
+        - Permite generar reportes resumidos y detallados
     """,
     
     "category": "Account Move",
