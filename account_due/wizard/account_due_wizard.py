@@ -29,7 +29,8 @@ class AccountDueWizard(models.TransientModel):
         domain=[
             ('type','!=','private'),
             ('company_id','=',False),
-        ]
+        ],
+        required=True
     )
     
     journal_id = fields.Many2one(
@@ -132,7 +133,7 @@ class AccountDueWizard(models.TransientModel):
                 date_due = invoice_data['date_due']
                 amount_residual = invoice_data['amount_residual']
                 
-                dias_transcurridos = (datetime.now().date() - date_due).days
+                dias_transcurridos = (court_date.date() - date_due).days
 
                 # Determinar el rango
                 if dias_transcurridos <= 0:
