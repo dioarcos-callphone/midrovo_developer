@@ -98,6 +98,9 @@ class InvoiceDetails(models.AbstractModel):
                 court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                 
                 dias_transcurridos = (court_date_date.date() - date_due).days
+                
+                _logger.info(f'DIAS TRANSCURRIDOS >>> { dias_transcurridos }')
+                _logger.info(f'MONTO RESIDUAL >>> { amount_residual }')
 
                 # Determinar el rango
                 if dias_transcurridos <= 0:
