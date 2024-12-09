@@ -418,14 +418,14 @@ class AccountDueWizard(models.TransientModel):
         headers = [
             'Vencido por cobrar',
             'Fecha vencimiento',
-            'Importe en moneda',
+            'Total adeudado',
             'En fecha',
             '1 - 30',
             '31 - 60',
             '61 - 90',
             '91 - 120',
             'Más antiguos',
-            'Total',
+            'Total vencido',
         ]
         
         for col, header in enumerate(headers):
