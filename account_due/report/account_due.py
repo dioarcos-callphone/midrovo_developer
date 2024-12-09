@@ -262,7 +262,7 @@ class InvoiceDetails(models.AbstractModel):
                     
                     partner = self.env['res.partner'].browse(client_id).name
                     
-                    move_lines = move_lines.search(move_lines)
+                    move_lines = move_lines.search(domain)
                     
                     if move_lines:
                         actual = 0
