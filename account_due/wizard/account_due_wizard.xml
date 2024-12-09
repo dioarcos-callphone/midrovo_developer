@@ -21,6 +21,9 @@
                             <field name="journal_id" />
                             <field name="comercial_id" />
                         </group>
+                        <group string="Pagos no aplicados">
+                            <field name="payment_not_apply"/>
+                        </group>
                     </group>
                 </sheet>
                 <footer>

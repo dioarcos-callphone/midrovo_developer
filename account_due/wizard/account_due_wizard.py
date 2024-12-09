@@ -54,6 +54,11 @@ class AccountDueWizard(models.TransientModel):
         help = "Seleccione el tipo de informe a visualizar"
     )
     
+    payment_not_apply = fields.Boolean(
+        string = "Mostrar pagos no aplicados ?",
+        default = False
+    )
+    
     def get_report_data(self):
         account_move_lines = []
         court_date = self.court_date
