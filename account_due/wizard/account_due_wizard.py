@@ -233,9 +233,9 @@ class AccountDueWizard(models.TransientModel):
     
     def get_residual_totals(self):
         court_date = self.court_date
-        client_id = self.client_id
-        journal_id = self.journal_id
-        comercial_id = self.comercial_id
+        client_id = self.client_id.id
+        journal_id = self.journal_id.id
+        comercial_id = self.comercial_id.id
         
         domain= [
             ('move_id.invoice_date_due', '<=', court_date),
