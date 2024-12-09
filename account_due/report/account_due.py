@@ -262,7 +262,7 @@ class InvoiceDetails(models.AbstractModel):
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
                     
-                    partner = self.env['res.partner'].browse(client_id).name
+                    partner = self.env['res.partner'].browse(result.get('partner_id')).name
                     
                     move_lines = move_lines.search(domain)
                     
