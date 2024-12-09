@@ -264,11 +264,11 @@ class InvoiceDetails(models.AbstractModel):
                     
                     partner = self.env['res.partner'].browse(result.get('partner_id')).name
                     
-                    move_lines = move_lines.search(domain)
+                    account_move_line = self.env['account.move.line'].search(domain)
                     
-                    _logger.info(move_lines)
+                    _logger.info(account_move_line)
                     
-                    if move_lines:
+                    if account_move_line:
                         actual = 0
                         periodo_1 = 0
                         periodo_2 = 0
@@ -276,7 +276,7 @@ class InvoiceDetails(models.AbstractModel):
                         periodo_4 = 0
                         antiguo = 0
                         
-                        for line in move_lines:
+                        for line in account_move_line:
                             fecha_vencida = line.move_id.invoice_date_due
                 
                             court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
