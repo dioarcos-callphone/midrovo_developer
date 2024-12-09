@@ -17,6 +17,7 @@ class InvoiceDetails(models.AbstractModel):
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
         is_summary = data['is_summary']
+        is_entry = data['is_entry']
         
         if is_summary == 'r':
             return {
@@ -26,11 +27,16 @@ class InvoiceDetails(models.AbstractModel):
                 'is_summary': is_summary,
                 'options': self.get_residual_totals(data),
             }
+            
+        move_types = ['out_invoice', 'out_refund']
+        
+        if is_entry:
+            move_types.append('entry')
 
         domain = [
             ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
-            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.move_type', 'in', move_types),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
@@ -204,11 +210,17 @@ class InvoiceDetails(models.AbstractModel):
         client_id = data['client_id']
         journal_id = data['journal_id']
         comercial_id = data['comercial_id']
+        is_entry = data['is_entry']
+        
+        move_types = ['out_invoice', 'out_refund']
+        
+        if is_entry:
+            move_types.append('entry')
         
         domain= [
             ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
-            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.move_type', 'in', move_types),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),

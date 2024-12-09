@@ -66,6 +66,11 @@ class AccountDueWizard(models.TransientModel):
         journal_id = self.journal_id.id
         comercial_id = self.comercial_id.id
         
+        move_types = ['out_invoice', 'out_refund']
+        
+        if self.payment_not_apply:
+            move_types.append('entry')
+        
         if self.report_type == 'r':
             data = {
                 'result_data': self.get_residual_totals(),
@@ -77,7 +82,7 @@ class AccountDueWizard(models.TransientModel):
         domain = [
             ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
-            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.move_type', 'in', move_types),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
@@ -242,10 +247,15 @@ class AccountDueWizard(models.TransientModel):
         journal_id = self.journal_id.id
         comercial_id = self.comercial_id.id
         
+        move_types = ['out_invoice', 'out_refund']
+        
+        if self.payment_not_apply:
+            move_types.append('entry')
+        
         domain= [
             ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
-            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.move_type', 'in', move_types),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
             ('account_id.account_type', '=', 'asset_receivable'),
             ('parent_state', '=', 'posted'),
@@ -360,7 +370,8 @@ class AccountDueWizard(models.TransientModel):
             'client_id': self.client_id.id,
             'journal_id': self.journal_id.id,
             'comercial_id': self.comercial_id.id,
-            'is_summary': self.report_type
+            'is_summary': self.report_type,
+            'is_entry': self.payment_not_apply,
         }
         
         return (
