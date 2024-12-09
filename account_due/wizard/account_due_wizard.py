@@ -438,7 +438,7 @@ class AccountDueWizard(models.TransientModel):
             row = 4
             sheet.write(row, 0, datas.get('client'), text_format)
             sheet.write(row, 1, '', text_format)
-            sheet.write(row, 2, 'total_adeudado', text_format)
+            sheet.write(row, 2, datas.get('total_adeudado'), text_format)
             sheet.write(row, 3, datas.get('actual') if datas.get('actual') != 0 else '', text_format)
             sheet.write(row, 4, datas.get('periodo1') if datas.get('periodo1') != 0 else '', text_format)
             sheet.write(row, 5, datas.get('periodo2') if datas.get('periodo2') != 0 else '', text_format)
