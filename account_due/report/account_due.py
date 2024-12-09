@@ -266,6 +266,8 @@ class InvoiceDetails(models.AbstractModel):
                     
                     move_lines = move_lines.search(domain)
                     
+                    _logger.info(move_lines)
+                    
                     if move_lines:
                         actual = 0
                         periodo_1 = 0
