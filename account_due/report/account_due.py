@@ -323,7 +323,7 @@ class InvoiceDetails(models.AbstractModel):
                             'total_vencido': total_vencido
                         })
 
-                        return summary_account_move_lines               
+                return summary_account_move_lines               
                                   
                 
         # summary_account_move_lines = []
