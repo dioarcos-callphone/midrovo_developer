@@ -324,6 +324,8 @@ class InvoiceDetails(models.AbstractModel):
                             'total_adeudado': total,
                             'total_vencido': total_vencido
                         })
+                        
+                    domain.remove(('partner_id', '=', result.get('partner_id')))
 
                 return summary_account_move_lines               
                                   
