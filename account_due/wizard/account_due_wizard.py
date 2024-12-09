@@ -63,7 +63,7 @@ class AccountDueWizard(models.TransientModel):
         
         if self.report_type == 'r':
             data = {
-                'result_data': self.get_residual_totals(court_date),
+                'result_data': self.get_residual_totals(),
                 'is_summary': self.report_type,
             }
             
