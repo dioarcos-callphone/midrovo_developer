@@ -133,9 +133,9 @@ class AccountDueWizard(models.TransientModel):
                 date_due = invoice_data['date_due']
                 amount_residual = invoice_data['amount_residual']
                 
-                court_date_date = datetime.strptime(court_date, '%Y-%m-%d') 
+                # court_date_date = datetime.strptime(court_date, '%Y-%m-%d') 
                 
-                dias_transcurridos = (court_date_date.date() - date_due).days
+                dias_transcurridos = (court_date.date() - date_due).days
 
                 # Determinar el rango
                 if dias_transcurridos <= 0:
