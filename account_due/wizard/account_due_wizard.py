@@ -172,8 +172,10 @@ class AccountDueWizard(models.TransientModel):
             antiguo = round(antiguo, 2)
             
             numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
             
             total = round(sum(numbers), 2)
+            total_vencido = round(sum(numbers_vencido), 2)
             
             account_move_lines_filtered = account_move_lines
 
@@ -213,7 +215,8 @@ class AccountDueWizard(models.TransientModel):
                 'periodo3': periodo_3,
                 'periodo4': periodo_4,
                 'antiguo': antiguo,
-                'total': total,
+                'total_adeudado': total,
+                'total_vencido': total_vencido,
                 'lines': account_move_lines_filtered,
             }
             
@@ -312,6 +315,10 @@ class AccountDueWizard(models.TransientModel):
                     antiguo = round(antiguo, 2)
                     
                     numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+                    numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
+                    
+                    total = round(sum(numbers), 2)
+                    total_vencido = round(sum(numbers_vencido), 2)
                     
                     total = round(sum(numbers), 2)
                             
@@ -323,7 +330,8 @@ class AccountDueWizard(models.TransientModel):
                         'periodo3': periodo_3,
                         'periodo4': periodo_4,
                         'antiguo': antiguo,
-                        'total': total,
+                        'total_adeudado': total,
+                        'total_vencido': total_vencido
                     })
 
             return summary_account_move_lines
@@ -430,14 +438,14 @@ class AccountDueWizard(models.TransientModel):
             row = 4
             sheet.write(row, 0, datas.get('client'), text_format)
             sheet.write(row, 1, '', text_format)
-            sheet.write(row, 2, '', text_format)
+            sheet.write(row, 2, 'total_adeudado', text_format)
             sheet.write(row, 3, datas.get('actual') if datas.get('actual') != 0 else '', text_format)
             sheet.write(row, 4, datas.get('periodo1') if datas.get('periodo1') != 0 else '', text_format)
             sheet.write(row, 5, datas.get('periodo2') if datas.get('periodo2') != 0 else '', text_format)
             sheet.write(row, 6, datas.get('periodo3') if datas.get('periodo3') != 0 else '', text_format)
             sheet.write(row, 7, datas.get('periodo4') if datas.get('periodo4') != 0 else '', text_format)
             sheet.write(row, 8, datas.get('antiguo') if datas.get('antiguo') != 0 else '', text_format)
-            sheet.write(row, 9, datas.get('total'), text_format)
+            sheet.write(row, 9, datas.get('total_vencido'), text_format)
             
             row = 5
             
