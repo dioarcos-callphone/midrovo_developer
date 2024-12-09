@@ -70,7 +70,7 @@ class AccountDueWizard(models.TransientModel):
             return data
         
         domain = [
-            ('move_id.invoice_date_due', '<=', court_date),
+            ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
@@ -238,7 +238,7 @@ class AccountDueWizard(models.TransientModel):
         comercial_id = self.comercial_id.id
         
         domain= [
-            ('move_id.invoice_date_due', '<=', court_date),
+            ('move_id.date', '<=', court_date),
             ('amount_residual', '!=', 0),
             ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
             ('move_id.payment_state', 'in', ['not_paid', 'partial']),
