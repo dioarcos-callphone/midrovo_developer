@@ -231,108 +231,116 @@ class AccountDueWizard(models.TransientModel):
             raise ValidationError("¡No se encontraron registros para los criterios dados!")   
     
     
-    def get_residual_totals(self, date_due):
+    def get_residual_totals(self):
+        court_date = self.court_date
+        client_id = self.client_id
+        journal_id = self.journal_id
+        comercial_id = self.comercial_id
+        
+        domain= [
+            ('move_id.invoice_date_due', '<=', court_date),
+            ('amount_residual', '!=', 0),
+            ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+            ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+            ('account_id.account_type', '=', 'asset_receivable'),
+            ('parent_state', '=', 'posted'),
+        ]
+        
+        if client_id:
+            domain.append(('partner_id', '=', client_id))
+        if journal_id:
+            domain.append(('journal_id', '=', journal_id))
+        if comercial_id:
+            domain.append(('move_id.invoice_user_id', '=', comercial_id))  
+        
         # Filtrar líneas contables
-        move_lines = self.env['account.move.line']
+        move_lines = self.env['account.move.line'].search(domain)
 
         # Agrupación y suma usando read_group
-        results = move_lines.read_group(
-            domain=[
-                ('move_id.invoice_date_due', '<=', date_due),
-                ('amount_residual', '!=', 0),
-                ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-                ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-                ('account_id.account_type', '=', 'asset_receivable'),
-                ('parent_state', '=', 'posted'),
-            ],
-            fields=['partner_id', 'amount_residual:sum'],
-            groupby=['partner_id'],
-        )
+        # results = move_lines.read_group(
+        #     domain=[
+        #         ('move_id.invoice_date_due', '<=', court_date),
+        #         ('amount_residual', '!=', 0),
+        #         ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
+        #         ('move_id.payment_state', 'in', ['not_paid', 'partial']),
+        #         ('account_id.account_type', '=', 'asset_receivable'),
+        #         ('parent_state', '=', 'posted'),
+        #     ],
+        #     fields=['partner_id', 'amount_residual:sum'],
+        #     groupby=['partner_id'],
+        # )
         
-        if results:
-            processed_results = []
+        # if results:
+        #     processed_results = []
 
-            for group in results:
-                partner_id = group['partner_id'][0]  # ID del cliente
-                processed_results.append({
-                    'partner_id': partner_id,
-                    'amount_residual': group['amount_residual'],
-                    'partner_id_count': group['partner_id_count'],
-                })
+        #     for group in results:
+        #         partner_id = group['partner_id'][0]  # ID del cliente
+        #         processed_results.append({
+        #             'partner_id': partner_id,
+        #             'amount_residual': group['amount_residual'],
+        #             'partner_id_count': group['partner_id_count'],
+        #         })
                 
-            summary_account_move_lines = []
+        summary_account_move_lines = []
                 
-            for result in processed_results:
-                partner_id = result.get('partner_id')
+        if move_lines:
+            actual = 0
+            periodo_1 = 0
+            periodo_2 = 0
+            periodo_3 = 0
+            periodo_4 = 0
+            antiguo = 0
+            
+            partner = self.env['res.partner'].browse(client_id).name
+            
+            for line in move_lines:
+                fecha_vencida = line.move_id.invoice_date_due
                 
-                partner = self.env['res.partner'].browse(partner_id).name
+                court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                 
-                lines = move_lines.search([
-                    ('move_id.invoice_date_due', '<=', date_due),
-                    ('amount_residual', '!=', 0),
-                    ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-                    ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-                    ('account_id.account_type', '=', 'asset_receivable'),
-                    ('parent_state', '=', 'posted'),
-                    ('partner_id', '=', partner_id),
-                ])
+                dias_transcurridos = (court_date_date.date() - fecha_vencida).days
                 
-                if lines:
-                    actual = 0
-                    periodo_1 = 0
-                    periodo_2 = 0
-                    periodo_3 = 0
-                    periodo_4 = 0
-                    antiguo = 0
+                # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
+                
+                # Determinar el rango
+                if dias_transcurridos <= 0:
+                    actual += line.amount_residual
+                elif dias_transcurridos <= 30:
+                    periodo_1 += line.amount_residual
+                elif dias_transcurridos <= 60:
+                    periodo_2 += line.amount_residual
+                elif dias_transcurridos <= 90:
+                    periodo_3 += line.amount_residual
+                elif dias_transcurridos <= 120:
+                    periodo_4 += line.amount_residual
+                else:
+                    antiguo += line.amount_residual
                     
-                    for line in lines:
-                        fecha_vencida = line.move_id.invoice_date_due
-                        
-                        fecha_actual = datetime.now()
-                        
-                        dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
-                        
-                        # Determinar el rango
-                        if dias_transcurridos <= 0:
-                            actual += line.amount_residual
-                        elif dias_transcurridos <= 30:
-                            periodo_1 += line.amount_residual
-                        elif dias_transcurridos <= 60:
-                            periodo_2 += line.amount_residual
-                        elif dias_transcurridos <= 90:
-                            periodo_3 += line.amount_residual
-                        elif dias_transcurridos <= 120:
-                            periodo_4 += line.amount_residual
-                        else:
-                            antiguo += line.amount_residual
-                            
-                    actual = round(actual, 2)
-                
-                    periodo_1 = round(periodo_1, 2)
-                    periodo_2 = round(periodo_2, 2)
-                    periodo_3 = round(periodo_3, 2)
-                    periodo_4 = round(periodo_4, 2)
-                    antiguo = round(antiguo, 2)
+            actual = round(actual, 2)
+        
+            periodo_1 = round(periodo_1, 2)
+            periodo_2 = round(periodo_2, 2)
+            periodo_3 = round(periodo_3, 2)
+            periodo_4 = round(periodo_4, 2)
+            antiguo = round(antiguo, 2)
+            
+            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
+            
+            total = round(sum(numbers), 2)
+            total_vencido = round(sum(numbers_vencido), 2)
                     
-                    numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-                    numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
-                    
-                    total = round(sum(numbers), 2)
-                    total_vencido = round(sum(numbers_vencido), 2)
-                    
-                    total = round(sum(numbers), 2)
-                            
-                    summary_account_move_lines.append({
-                        'cliente': partner,
-                        'actual': actual,
-                        'periodo1': periodo_1,
-                        'periodo2': periodo_2,
-                        'periodo3': periodo_3,
-                        'periodo4': periodo_4,
-                        'antiguo': antiguo,
-                        'total_adeudado': total,
-                        'total_vencido': total_vencido
-                    })
+            summary_account_move_lines.append({
+                'cliente': partner,
+                'actual': actual,
+                'periodo1': periodo_1,
+                'periodo2': periodo_2,
+                'periodo3': periodo_3,
+                'periodo4': periodo_4,
+                'antiguo': antiguo,
+                'total_adeudado': total,
+                'total_vencido': total_vencido
+            })
 
             return summary_account_move_lines
         

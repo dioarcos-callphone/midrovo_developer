@@ -261,9 +261,11 @@ class InvoiceDetails(models.AbstractModel):
             for line in move_lines:
                 fecha_vencida = line.move_id.invoice_date_due
                 
-                fecha_actual = datetime.now()
+                court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                 
-                dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
+                dias_transcurridos = (court_date_date.date() - fecha_vencida).days
+                
+                # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                 
                 # Determinar el rango
                 if dias_transcurridos <= 0:
