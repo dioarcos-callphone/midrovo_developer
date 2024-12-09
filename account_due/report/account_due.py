@@ -144,8 +144,8 @@ class InvoiceDetails(models.AbstractModel):
             periodo_4 = round(periodo_4, 2)
             antiguo = round(antiguo, 2)
             
-            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
             
             total = round(sum(numbers), 2)
             total_vencido = round(sum(numbers_vencido), 2)
@@ -304,8 +304,8 @@ class InvoiceDetails(models.AbstractModel):
             periodo_4 = round(periodo_4, 2)
             antiguo = round(antiguo, 2)
             
-            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
             
             total = round(sum(numbers), 2)
             total_vencido = round(sum(numbers_vencido), 2)
