@@ -205,19 +205,16 @@ class InvoiceDetails(models.AbstractModel):
                         #     'lines': account_move_lines_filtered
                         # }
                         
-                        _logger.info(f'RESULTADO FINAL >>>> { result_final }')
-                        
-                        return {
-                            'doc_ids': docids,
-                            'doc_model': 'report.account_due.report_account_due',
-                            'data': data,
-                            'is_summary': is_summary,
-                            'options': result_final,
-                        }
-                        
                     domain.remove(('partner_id', '=', result.get('partner_id')))
-
-                return summary_account_move_lines   
+                _logger.info(f'RESULTADO FINAL >>>> { result_final }')
+                        
+                return {
+                    'doc_ids': docids,
+                    'doc_model': 'report.account_due.report_account_due',
+                    'data': data,
+                    'is_summary': is_summary,
+                    'options': result_final,
+                }
         
         
         if invoice_details:
