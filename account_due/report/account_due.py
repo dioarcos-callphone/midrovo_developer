@@ -73,7 +73,7 @@ class InvoiceDetails(models.AbstractModel):
                         'partner_id_count': group['partner_id_count'],
                     })
                     
-                # _logger.info(processed_results)
+                _logger.info(processed_results)
                 
                 result_final = []
                     
