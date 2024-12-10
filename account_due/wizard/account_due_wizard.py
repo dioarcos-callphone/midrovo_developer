@@ -695,20 +695,20 @@ class AccountDueWizard(models.TransientModel):
                 
             header_length = len(header)  # Longitud del encabezado
             sheet.set_column(col, col, header_length + 5)
+            
+        # Define el formato con un color de fondo
+        highlight_format = workbook.add_format({
+            'bg_color': '#e5d2c4',  # Color amarillo claro
+            'font_color': '#000000',  # Color del texto (negro)
+            'border': 1 ,            # Bordes para las celdas
+            'font_name': 'Times New Roman',
+            'align': 'left',
+            'valign': 'vcenter',
+            'bold': True,
+        })
         
         if is_summary == 'd':
             row = 4
-            
-            # Define el formato con un color de fondo
-            highlight_format = workbook.add_format({
-                'bg_color': '#e5d2c4',  # Color amarillo claro
-                'font_color': '#000000',  # Color del texto (negro)
-                'border': 1 ,            # Bordes para las celdas
-                'font_name': 'Times New Roman',
-                'align': 'left',
-                'valign': 'vcenter',
-                'bold': True,
-            })
             
             for data in datas:
             
@@ -744,17 +744,17 @@ class AccountDueWizard(models.TransientModel):
         elif is_summary == 'r':
             row = 4  # Comenzar desde la fila 4 después de los encabezados
             for line in datas:
-                sheet.write(row, 0, line.get('cliente'), text_format)
-                sheet.write(row, 1, '', text_format)
-                sheet.write(row, 2, line.get('total_adeudado'), text_format)
-                sheet.write(row, 3, line.get('actual') if line.get('actual') != 0 else '', text_format)
-                sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') != 0 else '', text_format)
-                sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') != 0 else '', text_format)
-                sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') != 0 else '', text_format)
-                sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') != 0 else '', text_format)
-                sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') != 0 else '', text_format)
+                sheet.write(row, 0, line.get('cliente'), highlight_format)
+                sheet.write(row, 1, '', highlight_format)
+                sheet.write(row, 2, line.get('total_adeudado'), highlight_format)
+                sheet.write(row, 3, line.get('actual') if line.get('actual') != 0 else '', highlight_format)
+                sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') != 0 else '', highlight_format)
+                sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') != 0 else '', highlight_format)
+                sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') != 0 else '', highlight_format)
+                sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') != 0 else '', highlight_format)
+                sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') != 0 else '', highlight_format)
 
-                sheet.write(row, 9, line.get('total_vencido'), text_format)
+                sheet.write(row, 9, line.get('total_vencido'), highlight_format)
                 
                 row += 1
 
