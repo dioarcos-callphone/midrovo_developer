@@ -202,14 +202,14 @@ class InvoiceDetails(models.AbstractModel):
                 
                 result_final.append({
                     'client': 'Total vencido por cobrar',
-                    'actual': total_actual,
-                    'periodo1': total_periodo_1,
-                    'periodo2': total_periodo_2,
-                    'periodo3': total_periodo_3,
-                    'periodo4': total_periodo_4,
-                    'antiguo': total_antiguo,
-                    'total_adeudado': valor_total_adeudado,
-                    'total_vencido': valor_total_vencido,
+                    'actual': round(total_actual, 2),
+                    'periodo1': round(total_periodo_1, 2),
+                    'periodo2': round(total_periodo_2, 2),
+                    'periodo3': round(total_periodo_3, 2),
+                    'periodo4': round(total_periodo_4, 2),
+                    'antiguo': round(total_antiguo, 2),
+                    'total_adeudado': round(valor_total_adeudado, 2),
+                    'total_vencido': round(valor_total_vencido, 2),
                     'lines': []
                 })
                 
