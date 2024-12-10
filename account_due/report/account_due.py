@@ -395,6 +395,15 @@ class InvoiceDetails(models.AbstractModel):
                         'partner_id_count': group['partner_id_count'],
                     })
                     
+                total_actual = 0
+                total_periodo_1 = 0
+                total_periodo_2 = 0
+                total_periodo_3 = 0
+                total_periodo_4 = 0
+                total_antiguo = 0
+                valor_total_adeudado = 0
+                valor_total_vencido = 0
+                    
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
                     
@@ -446,6 +455,15 @@ class InvoiceDetails(models.AbstractModel):
                         
                         total = round(sum(numbers), 2)
                         total_vencido = round(sum(numbers_vencido), 2)
+                        
+                        total_actual += actual
+                        total_periodo_1 += periodo_1
+                        total_periodo_2 += periodo_2
+                        total_periodo_3 += periodo_3
+                        total_periodo_4 += periodo_4
+                        total_antiguo += antiguo
+                        valor_total_adeudado += total
+                        valor_total_vencido += total_vencido
                                 
                         summary_account_move_lines.append({
                             'cliente': partner,
@@ -460,6 +478,18 @@ class InvoiceDetails(models.AbstractModel):
                         })
                         
                     domain.remove(('partner_id', '=', result.get('partner_id')))
+                    
+                summary_account_move_lines.append({
+                    'cliente': 'Total vencido por cobrar',
+                    'actual': round(total_actual, 2),
+                    'periodo1': round(total_periodo_1, 2),
+                    'periodo2': round(total_periodo_2, 2),
+                    'periodo3': round(total_periodo_3, 2),
+                    'periodo4': round(total_periodo_4, 2),
+                    'antiguo': round(total_antiguo, 2),
+                    'total_adeudado': round(valor_total_adeudado, 2),
+                    'total_vencido': round(valor_total_vencido, 2),
+                })
 
                 return summary_account_move_lines
                 
