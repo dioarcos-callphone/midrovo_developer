@@ -650,8 +650,8 @@ class AccountDueWizard(models.TransientModel):
                 sheet.write(row, 7, data.get('periodo4') if data.get('periodo4') != 0 else '', text_format)
                 sheet.write(row, 8, data.get('antiguo') if data.get('antiguo') != 0 else '', text_format)
                 sheet.write(row, 9, data.get('total_vencido'), text_format)
-            
-            # row = 5
+                
+                row += 1
             
                 lines = data.get('lines')
             
