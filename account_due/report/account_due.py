@@ -69,10 +69,17 @@ class InvoiceDetails(models.AbstractModel):
                         'amount_residual': group['amount_residual'],
                         'partner_id_count': group['partner_id_count'],
                     })
-                    
-                _logger.info(processed_results)
                 
                 result_final = []
+                
+                total_actual = 0
+                total_periodo_1 = 0
+                total_periodo_2 = 0
+                total_periodo_3 = 0
+                total_periodo_4 = 0
+                total_antiguo = 0
+                valor_total_adeudado = 0
+                valor_total_vencido = 0
                     
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
@@ -169,6 +176,15 @@ class InvoiceDetails(models.AbstractModel):
                         
                         account_move_lines_filtered = data_lines
                         
+                        total_actual += actual
+                        total_periodo_1 += periodo_1
+                        total_periodo_2 += periodo_2
+                        total_periodo_3 += periodo_3
+                        total_periodo_4 += periodo_4
+                        total_antiguo += antiguo
+                        valor_total_adeudado += total
+                        valor_total_vencido += total_vencido
+                        
                         result_final.append({
                             'client': partner,
                             'actual': actual,
@@ -183,6 +199,20 @@ class InvoiceDetails(models.AbstractModel):
                         })
                         
                     domain.remove(('partner_id', '=', result.get('partner_id')))
+                
+                result_final.append({
+                    'client': 'Total vencido por cobrar',
+                    'actual': total_actual,
+                    'periodo1': total_periodo_1,
+                    'periodo2': total_periodo_2,
+                    'periodo3': total_periodo_3,
+                    'periodo4': total_periodo_4,
+                    'antiguo': total_antiguo,
+                    'total_adeudado': valor_total_adeudado,
+                    'total_vencido': valor_total_vencido,
+                    'lines': []
+                })
+                
                         
                 return {
                     'doc_ids': docids,
@@ -210,10 +240,6 @@ class InvoiceDetails(models.AbstractModel):
                 invoice_id = detail.move_id.id
                 fecha_vencida = detail.move_id.invoice_date_due
                 amount_residual = detail.amount_residual
-                
-                # if detail.move_id.move_type == 'entry':
-                #     _logger.info('ENTRAAAA')
-                #     entry += amount_residual
                 
                 if invoice_id in grouped_invoices:
                     # Actualizar la fecha de vencimiento a la más reciente
@@ -248,9 +274,6 @@ class InvoiceDetails(models.AbstractModel):
                 court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                 
                 dias_transcurridos = (court_date_date.date() - date_due).days
-                
-                # _logger.info(f'DIAS TRANSCURRIDOS >>> { dias_transcurridos }')
-                # _logger.info(f'MONTO RESIDUAL >>> { amount_residual }')
 
                 # Determinar el rango
                 if dias_transcurridos <= 0:
@@ -372,16 +395,12 @@ class InvoiceDetails(models.AbstractModel):
                         'partner_id_count': group['partner_id_count'],
                     })
                     
-                _logger.info(processed_results)
-                    
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
                     
                     partner = self.env['res.partner'].browse(result.get('partner_id')).name
                     
                     account_move_line = self.env['account.move.line'].search(domain)
-                    
-                    _logger.info(account_move_line)
                     
                     if account_move_line:
                         actual = 0
@@ -442,10 +461,7 @@ class InvoiceDetails(models.AbstractModel):
                         
                     domain.remove(('partner_id', '=', result.get('partner_id')))
 
-                return summary_account_move_lines               
-                                  
-                
-        # summary_account_move_lines = []
+                return summary_account_move_lines
                 
         if move_lines:
             actual = 0

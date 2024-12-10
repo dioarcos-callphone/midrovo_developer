@@ -1,7 +1,7 @@
 import io
 import json
 from datetime import datetime
-from odoo import models, fields, api
+from odoo import models, fields
 from odoo.exceptions import ValidationError
 
 try:
@@ -114,8 +114,6 @@ class AccountDueWizard(models.TransientModel):
                         'amount_residual': group['amount_residual'],
                         'partner_id_count': group['partner_id_count'],
                     })
-                    
-                _logger.info(processed_results)
                 
                 result_final = []
                     
