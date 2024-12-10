@@ -168,9 +168,9 @@ class AccountDueWizard(models.TransientModel):
                             date_due = invoice_data['date_due']
                             amount_residual = invoice_data['amount_residual']
                             
-                            court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
+                            # court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                             
-                            dias_transcurridos = (court_date_date.date() - date_due).days
+                            dias_transcurridos = (court_date - date_due).days
 
                             # Determinar el rango
                             if dias_transcurridos <= 0:
@@ -405,16 +405,12 @@ class AccountDueWizard(models.TransientModel):
                         'partner_id_count': group['partner_id_count'],
                     })
                     
-                _logger.info(processed_results)
-                    
                 for result in processed_results:
                     domain.append(('partner_id', '=', result.get('partner_id')))
                     
                     partner = self.env['res.partner'].browse(result.get('partner_id')).name
                     
                     account_move_line = self.env['account.move.line'].search(domain)
-                    
-                    _logger.info(account_move_line)
                     
                     if account_move_line:
                         actual = 0
@@ -427,9 +423,9 @@ class AccountDueWizard(models.TransientModel):
                         for line in account_move_line:
                             fecha_vencida = line.move_id.invoice_date_due
                 
-                            court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
+                            # court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                             
-                            dias_transcurridos = (court_date_date.date() - fecha_vencida).days
+                            dias_transcurridos = (court_date - fecha_vencida).days
                             
                             # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
                             
