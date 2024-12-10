@@ -95,7 +95,7 @@ class InvoiceDetails(models.AbstractModel):
                         
                         grouped_invoices = {}
                         
-                        for detail in invoice_details:
+                        for detail in account_move_line:
                             invoice_id = detail.move_id.id
                             fecha_vencida = detail.move_id.invoice_date_due
                             amount_residual = detail.amount_residual
@@ -178,7 +178,6 @@ class InvoiceDetails(models.AbstractModel):
                         total_vencido = round(sum(numbers_vencido), 2)
                         
                         account_move_lines_filtered = data_lines
-                        
                         
                         result_final.append({
                             'client': partner,
