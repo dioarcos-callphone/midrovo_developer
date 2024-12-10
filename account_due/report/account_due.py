@@ -51,9 +51,6 @@ class InvoiceDetails(models.AbstractModel):
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
-        
-        summary_account_move_lines = []
-        
         if not client_id:
             # Agrupación y suma usando read_group
             results = invoice_details.read_group(
@@ -113,10 +110,6 @@ class InvoiceDetails(models.AbstractModel):
                                     'date_due': fecha_vencida,
                                     'invoice': detail.move_name,
                                     'amount_residual': amount_residual,
-                                    # 'journal': detail.journal_id.id,
-                                    # 'comercial': detail.move_id.invoice_user_id.id,
-                                    # 'client': detail.partner_id.name or "",
-                                    # 'account': detail.account_id.code,
                                     'actual': False,
                                     'periodo1': False,
                                     'periodo2': False,
@@ -133,9 +126,6 @@ class InvoiceDetails(models.AbstractModel):
                             court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                             
                             dias_transcurridos = (court_date_date.date() - date_due).days
-                            
-                            # _logger.info(f'DIAS TRANSCURRIDOS >>> { dias_transcurridos }')
-                            # _logger.info(f'MONTO RESIDUAL >>> { amount_residual }')
 
                             # Determinar el rango
                             if dias_transcurridos <= 0:
@@ -192,21 +182,7 @@ class InvoiceDetails(models.AbstractModel):
                             'lines': account_move_lines_filtered
                         })
                         
-                        # accounts_receivable_data = {
-                        #     'client': partner,
-                        #     'actual': actual,
-                        #     'periodo1': periodo_1,
-                        #     'periodo2': periodo_2,
-                        #     'periodo3': periodo_3,
-                        #     'periodo4': periodo_4,
-                        #     'antiguo': antiguo,
-                        #     'total_adeudado': total,
-                        #     'total_vencido': total_vencido,
-                        #     'lines': account_move_lines_filtered
-                        # }
-                        
                     domain.remove(('partner_id', '=', result.get('partner_id')))
-                _logger.info(f'RESULTADO FINAL >>>> { result_final }')
                         
                 return {
                     'doc_ids': docids,
@@ -227,6 +203,8 @@ class InvoiceDetails(models.AbstractModel):
             
             # Crear un diccionario para agrupar facturas por su id
             grouped_invoices = {}
+            
+            result_final_detail = []
             
             for detail in invoice_details:
                 invoice_id = detail.move_id.id
@@ -318,7 +296,7 @@ class InvoiceDetails(models.AbstractModel):
             
             account_move_lines_filtered = account_move_lines
             
-            accounts_receivable_data = {
+            result_final_detail.append({
                 'client': client.name,
                 'actual': actual,
                 'periodo1': periodo_1,
@@ -329,14 +307,14 @@ class InvoiceDetails(models.AbstractModel):
                 'total_adeudado': total,
                 'total_vencido': total_vencido,
                 'lines': account_move_lines_filtered
-            }
+            })
             
             return {
                 'doc_ids': docids,
                 'doc_model': 'report.account_due.report_account_due',
                 'data': data,
                 'is_summary': is_summary,
-                'options': accounts_receivable_data,
+                'options': result_final_detail,
             }
         else:
             raise ValidationError("¡No se encontraron registros para los criterios dados!")
