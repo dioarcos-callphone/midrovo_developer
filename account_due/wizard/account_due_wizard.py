@@ -233,6 +233,8 @@ class AccountDueWizard(models.TransientModel):
                     'result_data': result_final,
                     'is_summary': self.report_type,
                 }
+                
+                return data
         
         
         if invoice_details:
