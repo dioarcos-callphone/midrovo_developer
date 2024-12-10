@@ -11,7 +11,6 @@ class InvoiceDetails(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
-        account_move_lines = []
         court_date = data['court_date']
         client_id = data['client_id']
         journal_id = data['journal_id']
@@ -85,6 +84,7 @@ class InvoiceDetails(models.AbstractModel):
                     account_move_line = self.env['account.move.line'].search(domain, order='move_name')
                     
                     if account_move_line:
+                        account_move_lines = []
                         actual = 0
                         periodo_1 = 0
                         periodo_2 = 0
