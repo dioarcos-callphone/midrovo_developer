@@ -640,18 +640,29 @@ class AccountDueWizard(models.TransientModel):
         if is_summary == 'd':
             row = 4
             
+            # Define el formato con un color de fondo
+            highlight_format = workbook.add_format({
+                'bg_color': '#e5d2c4',  # Color amarillo claro
+                'font_color': '#000000',  # Color del texto (negro)
+                'border': 1 ,            # Bordes para las celdas
+                'font_name': 'Times New Roman',
+                'align': 'left',
+                'valign': 'vcenter',
+                'bold': True,
+            })
+            
             for data in datas:
             
-                sheet.write(row, 0, data.get('client'), text_format)
-                sheet.write(row, 1, '', text_format)
-                sheet.write(row, 2, data.get('total_adeudado'), text_format)
-                sheet.write(row, 3, data.get('actual') if data.get('actual') != 0 else '', text_format)
-                sheet.write(row, 4, data.get('periodo1') if data.get('periodo1') != 0 else '', text_format)
-                sheet.write(row, 5, data.get('periodo2') if data.get('periodo2') != 0 else '', text_format)
-                sheet.write(row, 6, data.get('periodo3') if data.get('periodo3') != 0 else '', text_format)
-                sheet.write(row, 7, data.get('periodo4') if data.get('periodo4') != 0 else '', text_format)
-                sheet.write(row, 8, data.get('antiguo') if data.get('antiguo') != 0 else '', text_format)
-                sheet.write(row, 9, data.get('total_vencido'), text_format)
+                sheet.write(row, 0, data.get('client'), highlight_format)
+                sheet.write(row, 1, '', highlight_format)
+                sheet.write(row, 2, data.get('total_adeudado'), highlight_format)
+                sheet.write(row, 3, data.get('actual') if data.get('actual') != 0 else '', highlight_format)
+                sheet.write(row, 4, data.get('periodo1') if data.get('periodo1') != 0 else '', highlight_format)
+                sheet.write(row, 5, data.get('periodo2') if data.get('periodo2') != 0 else '', highlight_format)
+                sheet.write(row, 6, data.get('periodo3') if data.get('periodo3') != 0 else '', highlight_format)
+                sheet.write(row, 7, data.get('periodo4') if data.get('periodo4') != 0 else '', highlight_format)
+                sheet.write(row, 8, data.get('antiguo') if data.get('antiguo') != 0 else '', highlight_format)
+                sheet.write(row, 9, data.get('total_vencido'), highlight_format)
                 
                 row += 1
             
