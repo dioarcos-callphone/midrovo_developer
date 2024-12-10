@@ -271,31 +271,100 @@ class AccountDueWizard(models.TransientModel):
         move_lines = self.env['account.move.line'].search(domain)
 
         # Agrupación y suma usando read_group
-        # results = move_lines.read_group(
-        #     domain=[
-        #         ('move_id.invoice_date_due', '<=', court_date),
-        #         ('amount_residual', '!=', 0),
-        #         ('move_id.move_type', 'in', ['out_invoice', 'out_refund', 'entry']),
-        #         ('move_id.payment_state', 'in', ['not_paid', 'partial']),
-        #         ('account_id.account_type', '=', 'asset_receivable'),
-        #         ('parent_state', '=', 'posted'),
-        #     ],
-        #     fields=['partner_id', 'amount_residual:sum'],
-        #     groupby=['partner_id'],
-        # )
-        
-        # if results:
-        #     processed_results = []
-
-        #     for group in results:
-        #         partner_id = group['partner_id'][0]  # ID del cliente
-        #         processed_results.append({
-        #             'partner_id': partner_id,
-        #             'amount_residual': group['amount_residual'],
-        #             'partner_id_count': group['partner_id_count'],
-        #         })
-                
         summary_account_move_lines = []
+        
+        if not client_id:
+            # Agrupación y suma usando read_group
+            results = move_lines.read_group(
+                domain=domain,
+                fields=['partner_id', 'amount_residual:sum'],
+                groupby=['partner_id'],
+            )
+            
+            if results:
+                processed_results = []
+
+                for group in results:
+                    partner_id = group['partner_id'][0]  # ID del cliente
+                    processed_results.append({
+                        'partner_id': partner_id,
+                        'amount_residual': group['amount_residual'],
+                        'partner_id_count': group['partner_id_count'],
+                    })
+                    
+                _logger.info(processed_results)
+                    
+                for result in processed_results:
+                    domain.append(('partner_id', '=', result.get('partner_id')))
+                    
+                    partner = self.env['res.partner'].browse(result.get('partner_id')).name
+                    
+                    account_move_line = self.env['account.move.line'].search(domain)
+                    
+                    _logger.info(account_move_line)
+                    
+                    if account_move_line:
+                        actual = 0
+                        periodo_1 = 0
+                        periodo_2 = 0
+                        periodo_3 = 0
+                        periodo_4 = 0
+                        antiguo = 0
+                        
+                        for line in account_move_line:
+                            fecha_vencida = line.move_id.invoice_date_due
+                
+                            court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
+                            
+                            dias_transcurridos = (court_date_date.date() - fecha_vencida).days
+                            
+                            # dias_transcurridos = (fecha_actual.date() - fecha_vencida).days
+                            
+                            # Determinar el rango
+                            if dias_transcurridos <= 0:
+                                actual += line.amount_residual
+                            elif dias_transcurridos <= 30:
+                                periodo_1 += line.amount_residual
+                            elif dias_transcurridos <= 60:
+                                periodo_2 += line.amount_residual
+                            elif dias_transcurridos <= 90:
+                                periodo_3 += line.amount_residual
+                            elif dias_transcurridos <= 120:
+                                periodo_4 += line.amount_residual
+                            else:
+                                antiguo += line.amount_residual
+                                
+                        actual = round(actual, 2)
+                    
+                        periodo_1 = round(periodo_1, 2)
+                        periodo_2 = round(periodo_2, 2)
+                        periodo_3 = round(periodo_3, 2)
+                        periodo_4 = round(periodo_4, 2)
+                        antiguo = round(antiguo, 2)
+                        
+                        numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+                        numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+                        
+                        total = round(sum(numbers), 2)
+                        total_vencido = round(sum(numbers_vencido), 2)
+                                
+                        summary_account_move_lines.append({
+                            'cliente': partner,
+                            'actual': actual,
+                            'periodo1': periodo_1,
+                            'periodo2': periodo_2,
+                            'periodo3': periodo_3,
+                            'periodo4': periodo_4,
+                            'antiguo': antiguo,
+                            'total_adeudado': total,
+                            'total_vencido': total_vencido
+                        })
+                        
+                    domain.remove(('partner_id', '=', result.get('partner_id')))
+
+                return summary_account_move_lines   
+                
+        # summary_account_move_lines = []
                 
         if move_lines:
             actual = 0
