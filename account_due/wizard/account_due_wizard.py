@@ -96,6 +96,145 @@ class AccountDueWizard(models.TransientModel):
         
         invoice_details = self.env['account.move.line'].search(domain, order='move_name')
         
+        if not client_id:
+            # Agrupación y suma usando read_group
+            results = invoice_details.read_group(
+                domain=domain,
+                fields=['partner_id', 'amount_residual:sum'],
+                groupby=['partner_id'],
+            )
+            
+            if results:
+                processed_results = []
+
+                for group in results:
+                    partner_id = group['partner_id'][0]  # ID del cliente
+                    processed_results.append({
+                        'partner_id': partner_id,
+                        'amount_residual': group['amount_residual'],
+                        'partner_id_count': group['partner_id_count'],
+                    })
+                    
+                _logger.info(processed_results)
+                
+                result_final = []
+                    
+                for result in processed_results:
+                    domain.append(('partner_id', '=', result.get('partner_id')))
+                    
+                    partner = self.env['res.partner'].browse(result.get('partner_id')).name
+                    
+                    account_move_line = self.env['account.move.line'].search(domain, order='move_name')
+                    
+                    if account_move_line:
+                        data_lines = []
+                        actual = 0
+                        periodo_1 = 0
+                        periodo_2 = 0
+                        periodo_3 = 0
+                        periodo_4 = 0
+                        antiguo = 0
+                        
+                        grouped_invoices = {}
+                        
+                        for detail in account_move_line:
+                            invoice_id = detail.move_id.id
+                            fecha_vencida = detail.move_id.invoice_date_due
+                            amount_residual = detail.amount_residual
+                            
+                            if invoice_id in grouped_invoices:
+                                # Actualizar la fecha de vencimiento a la más reciente
+                                if fecha_vencida > grouped_invoices[invoice_id]['date_due']:
+                                    grouped_invoices[invoice_id]['date_due'] = fecha_vencida
+                                # Sumar el monto residual
+                                grouped_invoices[invoice_id]['amount_residual'] += amount_residual
+                                
+                            else:
+                                # Crear una nueva entrada para la factura
+                                grouped_invoices[invoice_id] = {
+                                    'date_due': fecha_vencida,
+                                    'invoice': detail.move_name,
+                                    'amount_residual': amount_residual,
+                                    'actual': False,
+                                    'periodo1': False,
+                                    'periodo2': False,
+                                    'periodo3': False,
+                                    'periodo4': False,
+                                    'antiguo': False
+                                }
+                        
+                        # Procesar los datos agrupados
+                        for invoice_data in grouped_invoices.values():
+                            date_due = invoice_data['date_due']
+                            amount_residual = invoice_data['amount_residual']
+                            
+                            court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
+                            
+                            dias_transcurridos = (court_date_date.date() - date_due).days
+
+                            # Determinar el rango
+                            if dias_transcurridos <= 0:
+                                invoice_data['actual'] = amount_residual
+                                actual += amount_residual
+                            elif dias_transcurridos <= 30:
+                                invoice_data['periodo1'] = amount_residual
+                                periodo_1 += amount_residual
+                            elif dias_transcurridos <= 60:
+                                invoice_data['periodo2'] = amount_residual
+                                periodo_2 += amount_residual
+                            elif dias_transcurridos <= 90:
+                                invoice_data['periodo3'] = amount_residual
+                                periodo_3 += amount_residual
+                            elif dias_transcurridos <= 120:
+                                invoice_data['periodo4'] = amount_residual
+                                periodo_4 += amount_residual
+                            else:
+                                invoice_data['antiguo'] = amount_residual
+                                antiguo += amount_residual
+                                
+                            date_formated = datetime.strftime(date_due, "%d/%m/%Y")
+                            invoice_data['date_due'] = date_formated
+
+                            # Añadir al resultado final
+                            data_lines.append(invoice_data)
+                        
+                        actual = round(actual, 2)
+                        
+                        periodo_1 = round(periodo_1, 2)
+                        periodo_2 = round(periodo_2, 2)
+                        periodo_3 = round(periodo_3, 2)
+                        periodo_4 = round(periodo_4, 2)
+                        antiguo = round(antiguo, 2)
+                        
+                        numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+                        numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+                        
+                        total = round(sum(numbers), 2)
+                        total_vencido = round(sum(numbers_vencido), 2)
+                        
+                        account_move_lines_filtered = data_lines
+                        
+                        result_final.append({
+                            'client': partner,
+                            'actual': actual,
+                            'periodo1': periodo_1,
+                            'periodo2': periodo_2,
+                            'periodo3': periodo_3,
+                            'periodo4': periodo_4,
+                            'antiguo': antiguo,
+                            'total_adeudado': total,
+                            'total_vencido': total_vencido,
+                            'lines': account_move_lines_filtered
+                        })
+                        
+                    domain.remove(('partner_id', '=', result.get('partner_id')))
+                
+                data = {
+                    'result_data': result_final,
+                    'is_summary': self.report_type,
+                }
+        
+        
         if invoice_details:
             actual = 0
             periodo_1 = 0
@@ -106,6 +245,8 @@ class AccountDueWizard(models.TransientModel):
             
             # Crear un diccionario para agrupar facturas por su id
             grouped_invoices = {}
+            
+            result_final_detail = []
             
             for detail in invoice_details:
                 invoice_id = detail.move_id.id
@@ -187,36 +328,8 @@ class AccountDueWizard(models.TransientModel):
             total_vencido = round(sum(numbers_vencido), 2)
             
             account_move_lines_filtered = account_move_lines
-
-            # if journal_id and comercial_id:
-            #     # Filtrar por ambos campos
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('journal') == journal_id and x.get('comercial') == comercial_id,
-            #             account_move_lines
-            #         )
-            #     )
-            # elif journal_id:
-            #     # Filtrar solo por journal_id
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('journal') == journal_id,
-            #             account_move_lines
-            #         )
-            #     )
-            # elif comercial_id:
-            #     # Filtrar solo por comercial_id
-            #     account_move_lines_filtered = list(
-            #         filter(
-            #             lambda x: x.get('comercial') == comercial_id,
-            #             account_move_lines
-            #         )
-            #     )
                 
-            # if not account_move_lines_filtered:
-            #     raise ValidationError("¡No se encontraron registros para los criterios dados!")  
-                
-            accounts_receivable_data = {
+            result_final_detail.append({
                 'client': client.name,
                 'actual': actual,
                 'periodo1': periodo_1,
@@ -227,10 +340,10 @@ class AccountDueWizard(models.TransientModel):
                 'total_adeudado': total,
                 'total_vencido': total_vencido,
                 'lines': account_move_lines_filtered,
-            }
+            })
             
             data = {
-                'result_data': accounts_receivable_data,
+                'result_data': result_final_detail,
                 'is_summary': self.report_type,
             }
             
@@ -528,34 +641,37 @@ class AccountDueWizard(models.TransientModel):
         
         if is_summary == 'd':
             row = 4
-            sheet.write(row, 0, datas.get('client'), text_format)
-            sheet.write(row, 1, '', text_format)
-            sheet.write(row, 2, datas.get('total_adeudado'), text_format)
-            sheet.write(row, 3, datas.get('actual') if datas.get('actual') != 0 else '', text_format)
-            sheet.write(row, 4, datas.get('periodo1') if datas.get('periodo1') != 0 else '', text_format)
-            sheet.write(row, 5, datas.get('periodo2') if datas.get('periodo2') != 0 else '', text_format)
-            sheet.write(row, 6, datas.get('periodo3') if datas.get('periodo3') != 0 else '', text_format)
-            sheet.write(row, 7, datas.get('periodo4') if datas.get('periodo4') != 0 else '', text_format)
-            sheet.write(row, 8, datas.get('antiguo') if datas.get('antiguo') != 0 else '', text_format)
-            sheet.write(row, 9, datas.get('total_vencido'), text_format)
             
-            row = 5
+            for data in datas:
             
-            lines = datas.get('lines')
+                sheet.write(row, 0, data.get('client'), text_format)
+                sheet.write(row, 1, '', text_format)
+                sheet.write(row, 2, data.get('total_adeudado'), text_format)
+                sheet.write(row, 3, data.get('actual') if data.get('actual') != 0 else '', text_format)
+                sheet.write(row, 4, data.get('periodo1') if data.get('periodo1') != 0 else '', text_format)
+                sheet.write(row, 5, data.get('periodo2') if data.get('periodo2') != 0 else '', text_format)
+                sheet.write(row, 6, data.get('periodo3') if data.get('periodo3') != 0 else '', text_format)
+                sheet.write(row, 7, data.get('periodo4') if data.get('periodo4') != 0 else '', text_format)
+                sheet.write(row, 8, data.get('antiguo') if data.get('antiguo') != 0 else '', text_format)
+                sheet.write(row, 9, data.get('total_vencido'), text_format)
             
-            for val in lines:
-                sheet.write(row, 0, val.get('invoice'), text_format)
-                sheet.write(row, 1, val.get('date_due'), text_format)
-                sheet.write(row, 2, val.get('amount_residual'), text_format)
-                sheet.write(row, 3, val.get('actual') if val.get('actual') else '', text_format)
-                sheet.write(row, 4, val.get('periodo1') if val.get('periodo1') else '', text_format)
-                sheet.write(row, 5, val.get('periodo2') if val.get('periodo2') else '', text_format)
-                sheet.write(row, 6, val.get('periodo3') if val.get('periodo3') else '', text_format)
-                sheet.write(row, 7, val.get('periodo4') if val.get('periodo4') else '', text_format)
-                sheet.write(row, 8, val.get('antiguo') if val.get('antiguo') else '', text_format)
-                sheet.write(row, 9, '', text_format)
-                
-                row += 1
+            # row = 5
+            
+                lines = data.get('lines')
+            
+                for line in lines:
+                    sheet.write(row, 0, line.get('invoice'), text_format)
+                    sheet.write(row, 1, line.get('date_due'), text_format)
+                    sheet.write(row, 2, line.get('amount_residual'), text_format)
+                    sheet.write(row, 3, line.get('actual') if line.get('actual') else '', text_format)
+                    sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') else '', text_format)
+                    sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') else '', text_format)
+                    sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') else '', text_format)
+                    sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') else '', text_format)
+                    sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') else '', text_format)
+                    sheet.write(row, 9, '', text_format)
+                    
+                    row += 1
                 
         elif is_summary == 'r':
             row = 4  # Comenzar desde la fila 4 después de los encabezados
