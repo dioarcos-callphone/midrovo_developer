@@ -108,7 +108,10 @@ class AccountDueWizard(models.TransientModel):
                 processed_results = []
 
                 for group in results:
-                    partner_id = group['partner_id'][0]  # ID del cliente
+                    partner_id = None  # O define un valor predeterminado
+                    if isinstance(group.get('partner_id'), (list, tuple)) and group['partner_id']:
+                        partner_id = group['partner_id'][0]  # ID del cliente   
+
                     processed_results.append({
                         'partner_id': partner_id,
                         'amount_residual': group['amount_residual'],
@@ -127,9 +130,12 @@ class AccountDueWizard(models.TransientModel):
                 valor_total_vencido = 0
                     
                 for result in processed_results:
-                    domain.append(('partner_id', '=', result.get('partner_id')))
+                    domain.append(('partner_id', '=', result.get('partner_id', None)))
                     
-                    partner = self.env['res.partner'].browse(result.get('partner_id')).name
+                    partner = self.env['res.partner'].browse(result.get('partner_id', None)).name
+                    
+                    if not partner:
+                        partner = 'Desconocido'
                     
                     account_move_line = self.env['account.move.line'].search(domain, order='move_name')
                     
@@ -147,7 +153,7 @@ class AccountDueWizard(models.TransientModel):
                         for detail in account_move_line:
                             invoice_id = detail.move_id.id
                             fecha_vencida = detail.move_id.invoice_date_due
-                            amount_residual = detail.amount_residual
+                            amount_residual = round(detail.amount_residual, 2)
                             
                             if invoice_id in grouped_invoices:
                                 # Actualizar la fecha de vencimiento a la más reciente
@@ -161,7 +167,7 @@ class AccountDueWizard(models.TransientModel):
                                 grouped_invoices[invoice_id] = {
                                     'date_due': fecha_vencida,
                                     'invoice': detail.move_name,
-                                    'amount_residual': amount_residual,
+                                    'amount_residual': round(amount_residual, 2),
                                     'actual': False,
                                     'periodo1': False,
                                     'periodo2': False,
@@ -173,7 +179,7 @@ class AccountDueWizard(models.TransientModel):
                         # Procesar los datos agrupados
                         for invoice_data in grouped_invoices.values():
                             date_due = invoice_data['date_due']
-                            amount_residual = invoice_data['amount_residual']
+                            amount_residual = round(invoice_data['amount_residual'], 2)
                             
                             # court_date_date = datetime.strptime(court_date, '%Y-%m-%d')
                             
@@ -232,18 +238,18 @@ class AccountDueWizard(models.TransientModel):
                         
                         result_final.append({
                             'client': partner,
-                            'actual': actual,
-                            'periodo1': periodo_1,
-                            'periodo2': periodo_2,
-                            'periodo3': periodo_3,
-                            'periodo4': periodo_4,
-                            'antiguo': antiguo,
-                            'total_adeudado': total,
-                            'total_vencido': total_vencido,
+                            'actual': round(actual, 2),
+                            'periodo1': round(periodo_1, 2),
+                            'periodo2': round(periodo_2, 2),
+                            'periodo3': round(periodo_3, 2),
+                            'periodo4': round(periodo_4, 2),
+                            'antiguo': round(antiguo, 2),
+                            'total_adeudado': round(total, 2),
+                            'total_vencido': round(total_vencido, 2),
                             'lines': account_move_lines_filtered
                         })
                         
-                    domain.remove(('partner_id', '=', result.get('partner_id')))
+                    domain.remove(('partner_id', '=', result.get('partner_id', None)))
                     
                 result_final.append({
                     'client': 'Total vencido por cobrar',
@@ -282,7 +288,7 @@ class AccountDueWizard(models.TransientModel):
             for detail in invoice_details:
                 invoice_id = detail.move_id.id
                 fecha_vencida = detail.move_id.invoice_date_due
-                amount_residual = detail.amount_residual
+                amount_residual = round(detail.amount_residual, 2)
                 
                 if invoice_id in grouped_invoices:
                     # Actualizar la fecha de vencimiento a la más reciente
@@ -296,7 +302,7 @@ class AccountDueWizard(models.TransientModel):
                     grouped_invoices[invoice_id] = {
                         'date_due': fecha_vencida,
                         'invoice': detail.move_name,
-                        'amount_residual': amount_residual,
+                        'amount_residual': round(amount_residual, 2),
                         'journal': detail.journal_id.id,
                         'comercial': detail.move_id.invoice_user_id.id,
                         'client': detail.partner_id.name or "",
@@ -312,7 +318,7 @@ class AccountDueWizard(models.TransientModel):
             # Procesar los datos agrupados
             for invoice_data in grouped_invoices.values():
                 date_due = invoice_data['date_due']
-                amount_residual = invoice_data['amount_residual']
+                amount_residual = round(invoice_data['amount_residual'], 2)
                 
                 dias_transcurridos = (court_date - date_due).days
 
@@ -362,14 +368,14 @@ class AccountDueWizard(models.TransientModel):
                 
             result_final_detail.append({
                 'client': client.name,
-                'actual': actual,
-                'periodo1': periodo_1,
-                'periodo2': periodo_2,
-                'periodo3': periodo_3,
-                'periodo4': periodo_4,
-                'antiguo': antiguo,
-                'total_adeudado': total,
-                'total_vencido': total_vencido,
+                'actual': round(actual, 2),
+                'periodo1': round(periodo_1, 2),
+                'periodo2': round(periodo_2, 2),
+                'periodo3': round(periodo_3, 2),
+                'periodo4': round(periodo_4, 2),
+                'antiguo': round(antiguo, 2),
+                'total_adeudado': round(total, 2),
+                'total_vencido': round(total_vencido, 2),
                 'lines': account_move_lines_filtered,
             })
             
@@ -429,7 +435,10 @@ class AccountDueWizard(models.TransientModel):
                 processed_results = []
 
                 for group in results:
-                    partner_id = group['partner_id'][0]  # ID del cliente
+                    partner_id = None  # O define un valor predeterminado
+                    if isinstance(group.get('partner_id'), (list, tuple)) and group['partner_id']:
+                        partner_id = group['partner_id'][0]  # ID del cliente   
+
                     processed_results.append({
                         'partner_id': partner_id,
                         'amount_residual': group['amount_residual'],
@@ -446,9 +455,12 @@ class AccountDueWizard(models.TransientModel):
                 valor_total_vencido = 0
                     
                 for result in processed_results:
-                    domain.append(('partner_id', '=', result.get('partner_id')))
+                    domain.append(('partner_id', '=', result.get('partner_id', None)))
                     
-                    partner = self.env['res.partner'].browse(result.get('partner_id')).name
+                    partner = self.env['res.partner'].browse(result.get('partner_id', None)).name
+                    
+                    if not partner:
+                        partner = 'Desconocido'
                     
                     account_move_line = self.env['account.move.line'].search(domain)
                     
@@ -508,17 +520,17 @@ class AccountDueWizard(models.TransientModel):
                                 
                         summary_account_move_lines.append({
                             'cliente': partner,
-                            'actual': actual,
-                            'periodo1': periodo_1,
-                            'periodo2': periodo_2,
-                            'periodo3': periodo_3,
-                            'periodo4': periodo_4,
-                            'antiguo': antiguo,
-                            'total_adeudado': total,
-                            'total_vencido': total_vencido
+                            'actual': round(actual, 2),
+                            'periodo1': round(periodo_1, 2),
+                            'periodo2': round(periodo_2, 2),
+                            'periodo3': round(periodo_3, 2),
+                            'periodo4': round(periodo_4, 2),
+                            'antiguo': round(antiguo, 2),
+                            'total_adeudado': round(total, 2),
+                            'total_vencido': round(total_vencido, 2),
                         })
                         
-                    domain.remove(('partner_id', '=', result.get('partner_id')))
+                    domain.remove(('partner_id', '=', result.get('partner_id', None)))
                     
                 summary_account_move_lines.append({
                     'cliente': 'Total vencido por cobrar',
@@ -577,22 +589,22 @@ class AccountDueWizard(models.TransientModel):
             periodo_4 = round(periodo_4, 2)
             antiguo = round(antiguo, 2)
             
-            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4]
-            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4]
+            numbers = [actual, periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
+            numbers_vencido = [periodo_1, periodo_2, periodo_3, periodo_4, antiguo]
             
             total = round(sum(numbers), 2)
             total_vencido = round(sum(numbers_vencido), 2)
                     
             summary_account_move_lines.append({
                 'cliente': partner,
-                'actual': actual,
-                'periodo1': periodo_1,
-                'periodo2': periodo_2,
-                'periodo3': periodo_3,
-                'periodo4': periodo_4,
-                'antiguo': antiguo,
-                'total_adeudado': total,
-                'total_vencido': total_vencido
+                'actual': round(actual, 2),
+                'periodo1': round(periodo_1, 2),
+                'periodo2': round(periodo_2, 2),
+                'periodo3': round(periodo_3, 2),
+                'periodo4': round(periodo_4, 2),
+                'antiguo': round(antiguo, 2),
+                'total_adeudado': round(total, 2),
+                'total_vencido': round(total_vencido, 2),
             })
 
             return summary_account_move_lines

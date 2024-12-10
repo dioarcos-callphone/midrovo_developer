@@ -97,7 +97,7 @@
                                         <t t-esc="result.get('date_due')"/>
                                     </td>
                                     <td align="right" t-att-class="result.get('amount_residual', 0) &lt; 0 and 'text-danger'">
-                                        <t t-esc="result.get('amount_residual')"/>
+                                        <t t-esc="result.get('amount_residual')" t-options='{"widget": "float", "precision": 2}'/>
                                     </td>
                                     <td width="100" align="right" t-att-class="result.get('actual', 0) &lt; 0 and 'text-danger'">
                                         <t t-esc="result.get('actual', '')"/>
