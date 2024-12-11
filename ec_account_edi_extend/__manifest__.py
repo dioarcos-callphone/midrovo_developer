@@ -32,6 +32,11 @@
     'data': [
         'views/account_portal_template_inh.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'ec_account_edi_extend/static/src/scss/style.scss'
+        ]
+    },
     
     'installable': True,
     'license': 'LGPL-3',
