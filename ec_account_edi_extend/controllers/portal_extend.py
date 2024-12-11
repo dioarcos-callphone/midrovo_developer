@@ -18,7 +18,7 @@ class CustomPortalEcAccountEdi(CustomerPortal):
             values['refund_count'] = refund_count
         return values
     
-    def _get_invoices_domain(self):
+    def _get_out_refund_domain(self):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', 'in', ('out_refund'))]
     
     @http.route(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
