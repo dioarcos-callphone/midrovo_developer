@@ -61,6 +61,6 @@ class SriXmlDataExtend(models.Model):
                 date_document
             )
         
-        _logger.info(f'CLAVE DE ACCESO >>> { clave_acceso }')
+        # _logger.info(f'CLAVE DE ACCESO >>> { clave_acceso }')
         
         return result

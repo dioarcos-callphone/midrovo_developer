@@ -29,6 +29,6 @@ class SriKeyExtend(models.Model):
             date_document
         )
         
-        _logger.info(f'MOSTRANDO TYPE VOUCHER >>>> { type_voucher }')
+        # _logger.info(f'MOSTRANDO TYPE VOUCHER >>>> { type_voucher }')
         
         return result
