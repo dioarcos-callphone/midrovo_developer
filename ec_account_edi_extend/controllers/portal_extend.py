@@ -16,7 +16,7 @@ class CustomPortalAccount(CustomerPortal):
             # Verifica el acceso al documento
             invoice_sudo = self._document_check_access('account.move', invoice_id, access_token)
             
-            _logger.info(f'MOSTRANDO INVOICE_SUDO >>> { invoice_sudo.xml_authorized }')
+            _logger.info(f'MOSTRANDO INVOICE_SUDO >>> { invoice_sudo }')
         except (AccessError, MissingError):
             return request.redirect('/my')
 
