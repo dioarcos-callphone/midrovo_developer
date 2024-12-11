@@ -31,7 +31,7 @@ class CustomPortalAccount(CustomerPortal):
             
         if report_type == 'xml':
             xml_name = invoice_sudo.xml_name
-            xml_bytes = invoice_sudo.xml_authorized
+            xml_bytes = invoice_sudo.xml_report
             
             # Si el XML está en base64, lo decodificamos
             xml_decode = base64.b64decode(xml_bytes)
