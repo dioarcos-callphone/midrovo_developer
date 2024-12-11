@@ -10,20 +10,20 @@ _logger = logging.getLogger(__name__)
 
 class CustomPortalEcAccountEdi(CustomerPortal):
     
-    # def _prepare_home_portal_values(self, counters):
-    #     values = super()._prepare_home_portal_values(counters)
-    #     if 'refund_count' in counters:
-    #         refund_count = request.env['account.move'].search_count(self._get_out_refund_domain()) \
-    #             if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
-    #         values['refund_count'] = refund_count
-    #     return values
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        if 'refund_count' in counters:
+            refund_count = request.env['account.move'].search_count(self._get_out_refund_domain()) \
+                if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
+            values['refund_count'] = refund_count
+        return values
     
-    # def _get_invoices_domain(self):
-    #     return [('state', 'not in', ('cancel', 'draft')), ('move_type', 'in', ('out_refund'))]
+    def _get_invoices_domain(self):
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', 'in', ('out_refund'))]
     
-    # @http.rout(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
-    # def portal_my_credit_notes(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-    #     pass
+    @http.route(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_credit_notes(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+        pass
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
