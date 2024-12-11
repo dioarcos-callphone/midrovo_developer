@@ -19,7 +19,7 @@ class CustomPortalEcAccountEdi(CustomerPortal):
         return values
     
     def _get_out_refund_domain(self):
-        return [('state', 'not in', ('cancel', 'draft')), ('move_type', 'in', ('out_refund'))]
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
     
     @http.route(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_credit_notes(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
