@@ -68,10 +68,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         # Genera los valores para la vista y renderiza la página
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
         #return request.render("ec_account_edi_extend.portal_invoice_form")
-        
-        # Usar sudo para permitir acceso al backend
-        invoice_sudo = invoice_sudo.sudo()
     
         # Redirigir al backend: vista formulario de account.move
-        backend_url = f'/web#model=account.move&id={invoice_sudo.id}&action={invoice_sudo.env.ref("account.action_move_out_invoice_type").id}&view_type=form'
+        backend_url = f'/web#model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % (invoice_sudo._name, invoice.id, invoice.env.ref('account.action_move_out_invoice_type').id)
         return redirect(backend_url)
