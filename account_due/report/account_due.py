@@ -122,7 +122,7 @@ class InvoiceDetails(models.AbstractModel):
                                 grouped_invoices[invoice_id] = {
                                     'date_due': fecha_vencida,
                                     'invoice': detail.move_name,
-                                    'date': detail.move_id.date,
+                                    'date': datetime.strftime(detail.move_id.date, "%d/%m/%Y"),
                                     'count_days': (fecha_vencida - detail.move_id.date).days,
                                     'amount_residual': round(amount_residual, 2),
                                     'actual': False,
