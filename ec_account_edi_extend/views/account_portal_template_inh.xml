@@ -5,7 +5,7 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Notas de Credito</t>
                 <t t-set="url" t-value="'/my/credit-notes'"/>
-                <t t-set="placeholder_count" t-value="'refund_count' or 1"/>
+                <t t-set="placeholder_count" t-value="1"/>
             </t>
         </xpath>
     </template>
