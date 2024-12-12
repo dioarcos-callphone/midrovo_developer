@@ -5,6 +5,9 @@
         - Wizard para consutar informes en el modulo de contabilidad > informes > cuentas por cobrar
         - Filtra por diario contable, cliente, fecha de corte y comercial
         - Permite generar reportes resumidos y detallados
+        - Se actualiza el tamaño de las letras
+        - Se añade la fecha de emisión de la factura
+        - Se añade los días transcurridos desde la fecha de emisión hasta la fecha de vencimiento
     """,
     
     "category": "Account Move",
