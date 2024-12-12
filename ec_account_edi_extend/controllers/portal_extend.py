@@ -70,5 +70,5 @@ class CustomPortalEcAccountEdi(PortalAccount):
         #return request.render("ec_account_edi_extend.portal_invoice_form")
     
         # Redirigir al backend: vista formulario de account.move
-        backend_url = f'/web#model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % (invoice_sudo._name, invoice.id, invoice.env.ref('account.action_move_out_invoice_type').id)
+        backend_url = f'/web#model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % (invoice_sudo._name, invoice_sudo.id, invoice_sudo.env.ref('account.action_move_out_invoice_type').id)
         return redirect(backend_url)
