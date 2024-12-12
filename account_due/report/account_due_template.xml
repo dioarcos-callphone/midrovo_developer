@@ -17,7 +17,7 @@
                             <th align="center" style="vertical-align: middle; font-size: 12px;">Vencimiento</th>
                             <th align="center" style="vertical-align: middle; font-size: 12px;">Transcurrido</th>
                             <th align="center" style="vertical-align: middle; font-size: 12px;">Total Adeudado</th>
-                            <th align="center" style="vertical-align: middle; font-size: 12px;">En Fecha</th>
+                            <th align="center" style="vertical-align: middle; font-size: 12px;">Por vencer</th>
                             <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">1 - 30</th>
                             <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">31 - 60</th>
                             <th align="center" style="vertical-align: middle; font-size: 12px;" width="100">61 - 90</th>
@@ -107,6 +107,12 @@
                                     </td>
                                     <td align="right" style="font-size: 11px;">
                                         <t t-esc="result.get('count_days')"/>
+                                        <t t-if="result.get('count_days') == 0">
+                                            día
+                                        </t>
+                                        <t t-else="">
+                                            días
+                                        </t>
                                     </td>
                                     <td align="right" style="font-size: 11px;" t-att-class="result.get('amount_residual', 0) &lt; 0 and 'text-danger'">
                                         <t t-esc="result.get('amount_residual')" t-options='{"widget": "float", "precision": 2}'/>
