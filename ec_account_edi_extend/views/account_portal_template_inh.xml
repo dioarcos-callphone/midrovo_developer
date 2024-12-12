@@ -43,11 +43,19 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
+        <xpath expr="//a[@t-att-href]" position="replace">
+            <a t-att-title="invoice.name">
+                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
+                <em t-else="">Draft Invoice</em>
+            </a>
+        </xpath>
+        
         <xpath expr="//th[@class='text-end']" position="after">
             <th class="text-center">
                 Reporte
             </th>
         </xpath>
+        
         <xpath expr="//td[@class='text-end']" position="after">
             <td class="text-center">
                 <span class="pdf-icon" style="margin: 5px;">
