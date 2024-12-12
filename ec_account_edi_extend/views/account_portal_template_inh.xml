@@ -27,4 +27,10 @@
             </td>
         </xpath>
     </template>
+
+    <template id="template_id" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//i[@class='fa fa-home']" position="attributes">
+            <attribute name="style">color: #71639e;</attribute>
+        </xpath>
+    </template>
 </odoo>
