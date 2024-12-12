@@ -66,4 +66,10 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         # Genera los valores para la vista y renderiza la página
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
-        return request.render("ec_account_edi_extend.portal_invoice_form")
+        #return request.render("ec_account_edi_extend.portal_invoice_form")
+    
+        # Construye la URL para redirigir al formulario
+        base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        form_url = f"{base_url}/web?#id={invoice_sudo.id}&model=account.move&view_type=form"
+
+        return request.redirect(form_url)
