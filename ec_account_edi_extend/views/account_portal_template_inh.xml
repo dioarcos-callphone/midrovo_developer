@@ -17,12 +17,6 @@
         </xpath>
     </template>
 
-    <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
-        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-        </xpath>
-    </template>
-
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//th[@class='text-end']" position="after">
