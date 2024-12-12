@@ -10,6 +10,12 @@
         </xpath>
     </template>
 
+    <template id="portal_docs_entry_refund" inherit_id="portal.portal_docs_entry">
+        <xpath expr="//a[contains(@class, 'd-none')]" position="attributes">
+            <attribute name="class">list-group-item list-group-item-action d-flex align-items-center justify-content-between</attribute>
+        </xpath>
+    </template>
+
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//th[@class='text-end']" position="after">
             <th class="text-center">
