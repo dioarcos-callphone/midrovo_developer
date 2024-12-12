@@ -4,6 +4,7 @@ from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
 import base64
 import json
+from werkzeug.utils import redirect
 
 
 import logging
@@ -68,11 +69,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
         #return request.render("ec_account_edi_extend.portal_invoice_form")
     
-        # Devuelve la acción para abrir la vista formulario
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'account.move',
-            'view_mode': 'form',
-            'res_id': invoice_sudo.id,  # ID de la factura
-            'target': 'current',
-        }
+        # Redirigir al backend: vista formulario de account.move
+        backend_url = f'/web#model=account.move&id={invoice_sudo.id}&action={invoice_sudo.env.ref("account.action_move_out_invoice_type").id}&view_type=form'
+        return redirect(backend_url)
