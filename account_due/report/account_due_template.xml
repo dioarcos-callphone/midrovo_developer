@@ -107,10 +107,10 @@
                                     </td>
                                     <td align="right" style="font-size: 11px;">
                                         <t t-esc="result.get('count_days')"/>
-                                        <t t-if="result.get('count_days') == 0">
+                                        <t t-if="result.get('count_days') == 1">
                                             día
                                         </t>
-                                        <t t-else="">
+                                        <t t-else="result.get('count_days') > 1">
                                             días
                                         </t>
                                     </td>
