@@ -14,9 +14,9 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if 'refund_count' in counters:
-            refund_count = request.env['account.move'].search_count(self._get_out_refund_domain()) \
+            values['refund_count'] = request.env['account.move'].search_count(self._get_out_refund_domain()) \
                 if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
-            values['refund_count'] = refund_count
+
         return values
     
     def _get_out_refund_domain(self):

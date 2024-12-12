@@ -34,8 +34,8 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'ec_account_edi_extend/static/src/scss/style.scss'
-        ]
+            'ec_account_edi_extend/static/src/js/ec_account_portal.js',
+        ],
     },
     
     'installable': True,
