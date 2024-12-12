@@ -3,6 +3,7 @@ from odoo.exceptions import AccessError, MissingError
 from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
 import base64
+import json
 
 
 import logging
@@ -23,7 +24,12 @@ class CustomPortalEcAccountEdi(PortalAccount):
     
     @http.route(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_credit_notes(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-        pass
+        data = {
+            'status': 'success',
+            'message': 'Este es un mensaje en JSON',
+            'page': page,
+        }
+        return request.make_response(json.dumps(data), headers={'Content-Type': 'application/json'})
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
