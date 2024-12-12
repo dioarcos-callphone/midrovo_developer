@@ -1,6 +1,6 @@
 from odoo import http
 from odoo.exceptions import AccessError, MissingError
-from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
 import base64
 
@@ -8,7 +8,7 @@ import base64
 import logging
 _logger = logging.getLogger(__name__)
 
-class CustomPortalEcAccountEdi(CustomerPortal):
+class CustomPortalEcAccountEdi(PortalAccount):
     
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
