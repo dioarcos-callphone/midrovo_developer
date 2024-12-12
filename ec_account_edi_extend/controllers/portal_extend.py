@@ -66,4 +66,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         # Genera los valores para la vista y renderiza la página
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
+        
+        _logger.info(f'MOSTRANDO VALUES >>> { values }')
+        
         return request.render("ec_account_edi_extend.portal_invoice_form")
