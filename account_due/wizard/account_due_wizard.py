@@ -697,7 +697,7 @@ class AccountDueWizard(models.TransientModel):
             'Vencido por cobrar',
             'Emisión',
             'Vencimiento',
-            'Transcurso'
+            'Transcurso',
             'Total adeudado',
             'En fecha',
             '1 - 30',
