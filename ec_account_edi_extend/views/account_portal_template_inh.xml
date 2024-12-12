@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+    <!-- TEMPLATES QUE HEREDAN DEL MODULO PORTAL -->
     <template id="portal_my_home_refund" name="Mostrar Notas de Credito" inherit_id="portal.portal_my_home" customize_show="True" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
@@ -10,6 +11,19 @@
         </xpath>
     </template>
 
+    <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//i[@class='fa fa-home']" position="attributes">
+            <attribute name="style">color: #71639e;</attribute>
+        </xpath>
+    </template>
+
+    <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
+        </xpath>
+    </template>
+
+    <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//th[@class='text-end']" position="after">
             <th class="text-center">
@@ -28,9 +42,5 @@
         </xpath>
     </template>
 
-    <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
-        <xpath expr="//i[@class='fa fa-home']" position="attributes">
-            <attribute name="style">color: #71639e;</attribute>
-        </xpath>
-    </template>
+    
 </odoo>
