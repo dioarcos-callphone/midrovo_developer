@@ -10,8 +10,15 @@
         </xpath>
     </template>
 
-    <template id="portal_docs_entry_refund" inherit_id="portal.portal_docs_entry">
+    <!-- <template id="portal_docs_entry_refund" inherit_id="portal.portal_docs_entry">
         <xpath expr="//a[contains(@class, 'd-none')]" position="attributes">
+            <attribute name="class">list-group-item list-group-item-action d-flex align-items-center justify-content-between</attribute>
+        </xpath>
+    </template> -->
+
+    <template id="custom_portal_my_home_refund" inherit_id="portal.portal_docs_entry">
+        <xpath expr="//a[@href='/my/credit-notes']" position="attributes">
+            <!-- Modifica o añade atributos aquí -->
             <attribute name="class">list-group-item list-group-item-action d-flex align-items-center justify-content-between</attribute>
         </xpath>
     </template>
