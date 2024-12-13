@@ -30,6 +30,23 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'page': page,
         }
         return request.make_response(json.dumps(data), headers={'Content-Type': 'application/json'})
+    
+    # @http.route(['/my/invoices', '/my/invoices/page/<int:page>'], type='http', auth="user", website=True)
+    # def portal_my_invoices(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    #     values = self._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby)
+
+    #     # pager
+    #     pager = portal_pager(**values['pager'])
+
+    #     # content according to pager and archive selected
+    #     invoices = values['invoices'](pager['offset'])
+    #     request.session['my_invoices_history'] = invoices.ids[:100]
+
+    #     values.update({
+    #         'invoices': invoices,
+    #         'pager': pager,
+    #     })
+    #     return request.render("account.portal_my_invoices", values)
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
