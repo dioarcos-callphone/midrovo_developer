@@ -2,6 +2,7 @@
     'name': 'Personalización de Cuentas Analíticas',
     'summary': 'Relación establecida de cuantas analíticas con el punto de emisión',
     'description': """
+        - Modulo creado para Odoo Community
         Este modulo permite trabajar con las cuentas analiticas al crear facturas.
     """,
     
