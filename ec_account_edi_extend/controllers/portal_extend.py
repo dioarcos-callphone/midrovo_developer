@@ -42,6 +42,9 @@ class CustomPortalEcAccountEdi(PortalAccount):
     
     def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/refunds"):
         values = self._prepare_portal_layout_values()
+        
+        _logger.info(f'MOSTRANDO VALUES 1 >>>> { values }')
+        
         AccountRefund = request.env['account.move']
 
         domain = expression.AND([
@@ -87,6 +90,9 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
         })
+        
+        _logger.info(f'MOSTRANDO VALUES 2 >>>> { values }')
+        
         return values
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
