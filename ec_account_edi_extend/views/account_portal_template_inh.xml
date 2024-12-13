@@ -57,7 +57,6 @@
     </template>
 
     <!-- TEMPLATES PROPIOS -->
-
     <template id="portal_my_refunds" name="My Refunds and Payments">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
@@ -66,7 +65,7 @@
             <t t-set="title">Notas de crédito</t>
         </t>
         <t t-if="not refunds">
-            <p>Actualmente no hay notas de crédito para su cuenta.</p>
+            <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p>
         </t>
         <t t-if="refunds" t-call="portal.portal_table">
             <thead>

@@ -39,13 +39,9 @@ class SriXmlDataExtend(models.Model):
         
         if not xml_data.key_id:
             key_id = key_model.get_next_key(environment, emission)
-            
-            _logger.info(f'MOSTRANDO KEY ID 1 >>> { key_id }')
 
         else:
             key_id = xml_data.key_id.id
-            
-            _logger.info(f'MOSTRANDO KEY ID 2 >>> { key_id }')
             
         clave_acceso = xml_data.xml_key
         
@@ -60,7 +56,5 @@ class SriXmlDataExtend(models.Model):
                 xml_data.xml_type,
                 date_document
             )
-        
-        _logger.info(f'CLAVE DE ACCESO >>> { clave_acceso }')
         
         return result
