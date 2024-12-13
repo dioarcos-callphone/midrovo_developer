@@ -31,6 +31,7 @@
         # 'account_invoice_fixed_discount',
         'ec_account_edi',
         'account',
+        'account_payment',
         'portal',
     ],
     'data': [
