@@ -11,11 +11,11 @@
         </xpath>
     </template>
 
-    <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
+    <!-- <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
         <xpath expr="//i[@class='fa fa-home']" position="attributes">
             <attribute name="style">color: #71639e;</attribute>
         </xpath>
-    </template>
+    </template> -->
 
     <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
         <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
