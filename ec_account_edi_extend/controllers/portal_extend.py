@@ -20,8 +20,14 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         return values
     
+    # domain para documentos de reembolso
     def _get_out_refund_domain(self):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
+    
+    # domain para documentos de factura
+    def _get_invoices_domain(self):
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
+
     
     @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
