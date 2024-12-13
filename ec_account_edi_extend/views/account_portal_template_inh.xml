@@ -57,12 +57,9 @@
     </template>
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT_PAYMENT -->
-    <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account.portal_my_invoices">
-        <xpath expr="//t[@t-call='portal.portal_table']/thead/tr/th[last()]" position="before">
-            <!-- Quitar el th heredado -->
-            <th class="xpath anadido" position="replace"></th>
-        </xpath>
-    </template>
+
+    
+    
 
     <!-- TEMPLATES PERSONALIZADOS -->
     <template id="portal_my_refunds" name="My Refunds and Payments">
