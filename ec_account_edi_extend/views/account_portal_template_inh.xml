@@ -65,7 +65,13 @@
             <t t-set="title">Notas de crédito</t>
         </t>
         <t t-if="not refunds">
-            <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p>
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay notas de crédito disponibles</h4>
+                <p>Parece que no tienes notas de crédito asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
         <t t-if="refunds" t-call="portal.portal_table">
             <thead>
@@ -109,6 +115,5 @@
         </t>
       </t>
     </template>
-
     
 </odoo>
