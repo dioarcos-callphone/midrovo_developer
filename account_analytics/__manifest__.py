@@ -2,7 +2,8 @@
     'name': 'Personalización de Cuentas Analíticas',
     'summary': 'Relación establecida de cuantas analíticas con el diario contable',
     'description': """
-        Este modulo permite trabajar con las cuentas analiticas al crear facturas.
+        - Módulo diseñado para Odoo 16 Eterprise
+        - Este modulo permite trabajar con las cuentas analiticas al crear facturas.
     """,
     
     "category": "Account",

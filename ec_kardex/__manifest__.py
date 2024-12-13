@@ -4,15 +4,13 @@
     "name" : "KARDEX",
     "summary": "Reportes Kardex - Inventario",
     "description": """
-    Modulo Ec_Kardex depende de Ec_tools
-    Genera reportes kardex
-
-    - Individual por producto
-    - General
-    - Stock en almacén
-    Dirijase al modulo de inventario - informes - reportes kardex
-
-    Los costos no son visibles para el grupo Reportes - Ocultar valores de costo y total costo
+        - Modulo Ec_Kardex depende de Ec_tools
+        - Genera reportes kardex
+        - Individual por producto
+        - General
+        - Stock en almacén
+        - Dirijase al modulo de inventario - informes - reportes kardex
+        - Los costos no son visibles para el grupo Reportes - Ocultar valores de costo y total costo
     """,
     "version" : "1.0",
     "author" : "Mauricio Idrovo",

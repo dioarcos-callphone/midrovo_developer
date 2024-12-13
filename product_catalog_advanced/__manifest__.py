@@ -3,6 +3,7 @@
     
     "summary": "Optimizacion y Personalizacion Nueva del Catalogo de Productos.",
     "description": """
+        - Módulo diseñado para Odoo 16 Eterprise
         Quita los espacios en blanco
     """,
     

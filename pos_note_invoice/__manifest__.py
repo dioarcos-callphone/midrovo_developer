@@ -3,6 +3,7 @@
     
     "summary": "Visualización general del comentario o nota de la factura",
     "description": """
+        - Módulo diseñado para Odoo 16 Eterprise
         - Se añade nota general para que pueda ser visualizada en la factura
         - Actualización del narration en el POS
         - La nota que se ingresa debe tener un mínimo de 500 caracteres.
