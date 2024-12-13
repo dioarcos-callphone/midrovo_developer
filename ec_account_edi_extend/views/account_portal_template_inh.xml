@@ -61,13 +61,25 @@
     </template>
 
     <!-- TEMPLATES PERSONALIZADOS -->
+    <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Notas de crédito</a>
+                <t t-else="">Notas de crédito</t>
+            </li>
+            <li t-if="invoice" class="breadcrumb-item active">
+                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
+                <t t-else=""><em>Draft Invoice</em></t>
+            </li>
+        </xpath>
+    </template>
+
     <template id="portal_my_refunds" name="My Refunds and Payments">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
-        <t t-set="title">Notas de crédito</t>
         <t t-call="portal.portal_searchbar">
-            <!-- <t t-set="title">Notas de crédito</t> -->
+            <t t-set="title">Notas de crédito</t>
         </t>
         <t t-if="not refunds">
              <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
