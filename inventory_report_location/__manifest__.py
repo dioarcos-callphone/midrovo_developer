@@ -3,6 +3,7 @@
     
     "summary": "Reporte de inventario por Ubicación y Categoria.",
     "description": """
+        - Modulo creado para Odoo 16 Community
         Muestra el inventario PDF de acuerdo a la categoria de producto y la localidad ademas los valores totales de la cantidad, costo y valor de stock.
         "
     """,

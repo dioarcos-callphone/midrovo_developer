@@ -3,6 +3,10 @@
     'version' : '16.0',
     'summary': 'Facturacion Electronica',
     'description': """
+        - Modulo creado para Odoo 16 Community
+        - Actualizacion del portal de usuario
+        - Muestra iconos para descargar facturas pdf y xml
+        - Se agrega lista para documentos de notas de credito.
     """,
     'category': 'Accounting',
     'author': 'Mauricio Idrovo',

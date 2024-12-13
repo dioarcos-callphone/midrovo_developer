@@ -3,6 +3,7 @@
     
     "summary": "Restriccion de modificacion para el sale order line y res partner",
     "description": """
+        - Modulo creado para Odoo 16 Community
         - No permite actualizar precios unitarios de la orden de venta
         - Restringe confirmacion de factura y despacho, no permite eliminar el stock picking
         - Restringe actualizacion en el modulo de contactos (res_partner)

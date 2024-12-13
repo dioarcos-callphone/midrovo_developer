@@ -2,7 +2,8 @@
     'name': 'Invoice Details View',
     'summary': 'Modulo que filtra desde un wizard y genera informe de los detalles de facturas',
     'description': """
-        Este modulo realiza los siguientes detalles:
+        - Modulo creado para Odoo 16 Community
+        - Este modulo realiza los siguientes detalles:
         - El wizard filtra por rango de fecha, diario contable, comercial, sales person
         - Contiene opciones para traer el informe segun el costo
         - Cuando genere el informe seleccione los registros y de click en PDF o EXCEL

@@ -3,6 +3,7 @@
     
     "summary": "Optimizacion y Personalizacion Nueva del Catalogo de Productos.",
     "description": """
+        - Modulo creado para Odoo 16 Community
         Quita los espacios en blanco
     """,
     
