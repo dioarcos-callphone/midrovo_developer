@@ -1,10 +1,11 @@
 from odoo import http
+from odoo.osv import expression
 from odoo.exceptions import AccessError, MissingError
+from odoo.addons.portal.controllers.portal import pager as portal_pager
 from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
+from collections import OrderedDict
 import base64
-import json
-
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -22,31 +23,71 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _get_out_refund_domain(self):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
     
-    @http.route(['/my/credit-notes', '/my/credit-notes/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_credit_notes(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-        data = {
-            'status': 'success',
-            'message': 'Este es un mensaje en JSON',
-            'page': page,
-        }
-        return request.make_response(json.dumps(data), headers={'Content-Type': 'application/json'})
+    @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+        values = self._prepare_my_refunds_values(page, date_begin, date_end, sortby, filterby)
+
+        # pager
+        pager = portal_pager(**values['pager'])
+
+        # content according to pager and archive selected
+        refunds = values['refunds'](pager['offset'])
+        request.session['my_refunds_history'] = refunds.ids[:100]
+
+        values.update({
+            'refunds': refunds,
+            'pager': pager,
+        })
+        return request.render("account.portal_my_invoices", values)
     
-    # @http.route(['/my/invoices', '/my/invoices/page/<int:page>'], type='http', auth="user", website=True)
-    # def portal_my_invoices(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-    #     values = self._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby)
+    def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/refunds"):
+        values = self._prepare_portal_layout_values()
+        AccountRefund = request.env['account.move']
 
-    #     # pager
-    #     pager = portal_pager(**values['pager'])
+        domain = expression.AND([
+            domain or [],
+            self._get_out_refund_domain(),
+        ])
 
-    #     # content according to pager and archive selected
-    #     invoices = values['invoices'](pager['offset'])
-    #     request.session['my_invoices_history'] = invoices.ids[:100]
+        searchbar_sortings = self._get_account_searchbar_sortings()
+        # default sort by order
+        if not sortby:
+            sortby = 'date'
+        order = searchbar_sortings[sortby]['order']
 
-    #     values.update({
-    #         'invoices': invoices,
-    #         'pager': pager,
-    #     })
-    #     return request.render("account.portal_my_invoices", values)
+        searchbar_filters = self._get_account_searchbar_filters()
+        # default filter by value
+        if not filterby:
+            filterby = 'all'
+        domain += searchbar_filters[filterby]['domain']
+
+        if date_begin and date_end:
+            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+
+        values.update({
+            'date': date_begin,
+            # content according to pager and archive selected
+            # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
+            'refunds': lambda pager_offset: (
+                AccountRefund.search(domain, order=order, limit=self._items_per_page, offset=pager_offset)
+                if AccountRefund.check_access_rights('read', raise_exception=False) else
+                AccountRefund
+            ),
+            'page_name': 'refund',
+            'pager': {  # vals to define the pager.
+                "url": url,
+                "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
+                "total": AccountRefund.search_count(domain) if AccountRefund.check_access_rights('read', raise_exception=False) else 0,
+                "page": page,
+                "step": self._items_per_page,
+            },
+            'default_url': url,
+            'searchbar_sortings': searchbar_sortings,
+            'sortby': sortby,
+            'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
+            'filterby': filterby,
+        })
+        return values
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
@@ -83,7 +124,5 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         # Genera los valores para la vista y renderiza la página
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
-        
-        _logger.info(f'MOSTRANDO VALUES >>> { values }')
         
         return request.render("ec_account_edi_extend.portal_invoice_form")
