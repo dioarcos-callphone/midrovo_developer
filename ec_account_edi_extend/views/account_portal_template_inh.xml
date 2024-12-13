@@ -17,7 +17,7 @@
         </xpath>
     </template> -->
 
-    <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
+    <!-- <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
         <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
@@ -26,28 +26,16 @@
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
         </xpath>
-    </template>
+    </template> -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//a[@t-att-href]" position="replace">
-            <a t-att-title="invoice.name">
+            <p t-att-title="invoice.name">
                 <t t-out="invoice.name" t-if="invoice.name != '/'"/>
                 <em t-else="">Borrador de factura</em>
-            </a>
+            </p>
         </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
@@ -70,58 +58,58 @@
 
     <!-- TEMPLATES PROPIOS -->
 
-    <!-- <template id="portal_my_invoices" name="My Invoices and Payments">
+    <template id="portal_my_refunds" name="My Refunds and Payments">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
         <t t-call="portal.portal_searchbar">
-            <t t-set="title">Invoices</t>
+            <t t-set="title">Notas de crédito</t>
         </t>
-        <t t-if="not invoices">
-            <p>There are currently no invoices and payments for your account.</p>
+        <t t-if="not refunds">
+            <p>Actualmente no hay notas de crédito para su cuenta.</p>
         </t>
-        <t t-if="invoices" t-call="portal.portal_table">
+        <t t-if="refunds" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
-                    <th>Invoice #</th>
-                    <th>Invoice Date</th>
-                    <th class='d-none d-md-table-cell'>Due Date</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-end">Amount Due</th>
+                    <th>Nota de crédito #</th>
+                    <th>Fecha de nota de crédito</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Importe adeudado</th>
                 </tr>
             </thead>
             <tbody>
-                <t t-foreach="invoices" t-as="invoice">
+                <t t-foreach="refunds" t-as="refund">
                     <tr>
                         <td>
-                            <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
-                                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
-                                <em t-else="">Draft Invoice</em>
-                            </a>
+                            <p t-att-title="refund.name">
+                                <t t-out="refund.name" t-if="refund.name != '/'"/>
+                                <em t-else="">Borrador de nota de crédito</em>
+                            </p>
                         </td>
-                        <td><span t-field="invoice.invoice_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
+                        <td><span t-field="refund.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="invoice.state == 'posted' and invoice.payment_state not in ('in_payment', 'paid', 'reversed')">
-                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Waiting for Payment</span></span>
+                            <t t-if="refund.state == 'posted' and refund.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
                             </t>
-                            <t t-if="invoice.state == 'posted' and invoice.payment_state in ('paid', 'in_payment')">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Paid</span></span>
+                            <t t-if="refund.state == 'posted' and refund.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
                             </t>
-                            <t t-if="invoice.state == 'posted' and invoice.payment_state == 'reversed'">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Reversed</span></span>
+                            <t t-if="refund.state == 'posted' and refund.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
                             </t>
-                            <t t-if="invoice.state == 'cancel'">
-                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelled</span></span>
+                            <t t-if="refund.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
                             </t>
                         </td>
-                        <td class="text-end"><span t-out="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                        <td class="text-end"><span t-out="-refund.amount_residual if refund.move_type == 'out_refund' else refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
                     </tr>
                 </t>
             </tbody>
         </t>
       </t>
-    </template> -->
+    </template>
 
     
 </odoo>

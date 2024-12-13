@@ -38,7 +38,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'refunds': refunds,
             'pager': pager,
         })
-        return request.render("account.portal_my_invoices", values)
+        return request.render("account.portal_my_refunds", values)
     
     def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/refunds"):
         values = self._prepare_portal_layout_values()

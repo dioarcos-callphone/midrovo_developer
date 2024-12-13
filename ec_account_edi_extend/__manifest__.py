@@ -1,7 +1,7 @@
 {
     'name' : 'Ec Extend Account Edi',
     'version' : '16.0',
-    'summary': 'Facturacion ELectronica',
+    'summary': 'Facturacion Electronica',
     'description': """
     """,
     'category': 'Accounting',
