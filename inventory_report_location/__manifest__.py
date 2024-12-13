@@ -3,6 +3,7 @@
     
     "summary": "Reporte de inventario por Ubicación y Categoria.",
     "description": """
+        - Módulo diseñado para Odoo 16 Eterprise
         Muestra el inventario PDF de acuerdo a la categoria de producto y la localidad ademas los valores totales de la cantidad, costo y valor de stock.
         Los usuarios que pertenecen al grupo group_inventory_report_location_user no tienen permitido ver el costo y total costo.
         "

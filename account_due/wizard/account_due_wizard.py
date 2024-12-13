@@ -166,6 +166,8 @@ class AccountDueWizard(models.TransientModel):
                                 # Crear una nueva entrada para la factura
                                 grouped_invoices[invoice_id] = {
                                     'date_due': fecha_vencida,
+                                    'date': datetime.strftime(detail.move_id.date, "%d/%m/%Y"),
+                                    'count_days': (datetime.now().date() - detail.move_id.date).days,
                                     'invoice': detail.move_name,
                                     'amount_residual': round(amount_residual, 2),
                                     'actual': False,
@@ -301,6 +303,8 @@ class AccountDueWizard(models.TransientModel):
                     # Crear una nueva entrada para la factura
                     grouped_invoices[invoice_id] = {
                         'date_due': fecha_vencida,
+                        'date': datetime.strftime(detail.move_id.date, "%d/%m/%Y"),
+                        'count_days': (datetime.now().date() - detail.move_id.date).days,
                         'invoice': detail.move_name,
                         'amount_residual': round(amount_residual, 2),
                         'journal': detail.journal_id.id,
@@ -691,9 +695,11 @@ class AccountDueWizard(models.TransientModel):
         # Encabezados
         headers = [
             'Vencido por cobrar',
-            'Fecha vencimiento',
+            'Emisión',
+            'Vencimiento',
+            'Transcurrido',
             'Total adeudado',
-            'En fecha',
+            'Por vencer',
             '1 - 30',
             '31 - 60',
             '61 - 90',
@@ -726,14 +732,16 @@ class AccountDueWizard(models.TransientModel):
             
                 sheet.write(row, 0, data.get('client'), highlight_format)
                 sheet.write(row, 1, '', highlight_format)
-                sheet.write(row, 2, data.get('total_adeudado'), highlight_format)
-                sheet.write(row, 3, data.get('actual') if data.get('actual') != 0 else '', highlight_format)
-                sheet.write(row, 4, data.get('periodo1') if data.get('periodo1') != 0 else '', highlight_format)
-                sheet.write(row, 5, data.get('periodo2') if data.get('periodo2') != 0 else '', highlight_format)
-                sheet.write(row, 6, data.get('periodo3') if data.get('periodo3') != 0 else '', highlight_format)
-                sheet.write(row, 7, data.get('periodo4') if data.get('periodo4') != 0 else '', highlight_format)
-                sheet.write(row, 8, data.get('antiguo') if data.get('antiguo') != 0 else '', highlight_format)
-                sheet.write(row, 9, data.get('total_vencido'), highlight_format)
+                sheet.write(row, 2, '', highlight_format)
+                sheet.write(row, 3, '', highlight_format)
+                sheet.write(row, 4, data.get('total_adeudado'), highlight_format)
+                sheet.write(row, 5, data.get('actual') if data.get('actual') != 0 else '', highlight_format)
+                sheet.write(row, 6, data.get('periodo1') if data.get('periodo1') != 0 else '', highlight_format)
+                sheet.write(row, 7, data.get('periodo2') if data.get('periodo2') != 0 else '', highlight_format)
+                sheet.write(row, 8, data.get('periodo3') if data.get('periodo3') != 0 else '', highlight_format)
+                sheet.write(row, 9, data.get('periodo4') if data.get('periodo4') != 0 else '', highlight_format)
+                sheet.write(row, 10, data.get('antiguo') if data.get('antiguo') != 0 else '', highlight_format)
+                sheet.write(row, 11, data.get('total_vencido'), highlight_format)
                 
                 row += 1
             
@@ -741,15 +749,17 @@ class AccountDueWizard(models.TransientModel):
             
                 for line in lines:
                     sheet.write(row, 0, line.get('invoice'), text_format)
-                    sheet.write(row, 1, line.get('date_due'), text_format)
-                    sheet.write(row, 2, line.get('amount_residual'), text_format)
-                    sheet.write(row, 3, line.get('actual') if line.get('actual') else '', text_format)
-                    sheet.write(row, 4, line.get('periodo1') if line.get('periodo1') else '', text_format)
-                    sheet.write(row, 5, line.get('periodo2') if line.get('periodo2') else '', text_format)
-                    sheet.write(row, 6, line.get('periodo3') if line.get('periodo3') else '', text_format)
-                    sheet.write(row, 7, line.get('periodo4') if line.get('periodo4') else '', text_format)
-                    sheet.write(row, 8, line.get('antiguo') if line.get('antiguo') else '', text_format)
-                    sheet.write(row, 9, '', text_format)
+                    sheet.write(row, 1, line.get('date'), text_format)
+                    sheet.write(row, 2, line.get('date_due'), text_format)
+                    sheet.write(row, 3, line.get('count_days'), text_format)
+                    sheet.write(row, 4, line.get('amount_residual'), text_format)
+                    sheet.write(row, 5, line.get('actual') if line.get('actual') else '', text_format)
+                    sheet.write(row, 6, line.get('periodo1') if line.get('periodo1') else '', text_format)
+                    sheet.write(row, 7, line.get('periodo2') if line.get('periodo2') else '', text_format)
+                    sheet.write(row, 8, line.get('periodo3') if line.get('periodo3') else '', text_format)
+                    sheet.write(row, 9, line.get('periodo4') if line.get('periodo4') else '', text_format)
+                    sheet.write(row, 10, line.get('antiguo') if line.get('antiguo') else '', text_format)
+                    sheet.write(row, 11, '', text_format)
                     
                     row += 1
                 

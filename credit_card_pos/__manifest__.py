@@ -3,6 +3,7 @@
     
     "summary": "Tarjetas de Crédito para el Punto de Venta",
     "description": """
+        - Módulo diseñado para Odoo 16 Eterprise
         - Mantenedor de tarjetas de crédito
         - Check que activa las tarjetas de crédito en los métodos de pago
         - Si el método de pago tiene activo el check se muestra la lista de las tarjetas de crédito disponibles
