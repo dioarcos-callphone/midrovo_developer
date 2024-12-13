@@ -20,12 +20,6 @@
     <!-- <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
         <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
             <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
         </xpath>
     </template> -->
 
@@ -57,8 +51,6 @@
     </template>
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT_PAYMENT -->
-
-    
     <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account_payment.portal_my_invoices_payment">
         <xpath expr="//th[not(text()) and not(*)]" position="replace">
 
@@ -73,8 +65,9 @@
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
+        <t t-set="title">Notas de crédito</t>
         <t t-call="portal.portal_searchbar">
-            <t t-set="title">Notas de crédito</t>
+            <!-- <t t-set="title">Notas de crédito</t> -->
         </t>
         <t t-if="not refunds">
              <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
