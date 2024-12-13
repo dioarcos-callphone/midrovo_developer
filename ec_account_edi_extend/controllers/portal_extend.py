@@ -25,8 +25,8 @@ class CustomPortalEcAccountEdi(PortalAccount):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
     
     # domain para documentos de factura
-    # def _get_invoices_domain(self):
-    #     return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
+    def _get_invoices_domain(self):
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
 
     
     @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
