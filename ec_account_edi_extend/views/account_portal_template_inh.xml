@@ -32,10 +32,10 @@
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//a[@t-att-href]" position="replace">
-            <p t-att-title="invoice.name">
+            <span t-att-title="invoice.name">
                 <t t-out="invoice.name" t-if="invoice.name != '/'"/>
                 <em t-else="">Borrador de factura</em>
-            </p>
+            </span>
         </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
