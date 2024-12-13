@@ -1,4 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_model_ecua_utils_group_user","access_model_ecua_utils_group_user","model_ecua_utils","base.group_user",1,1,1,1
-"access_model_util_notification_group_user","access_model_util_notification_group_user","model_util_notification","base.group_user",1,1,1,1
-"access_model_util_notification_task_group_user","access_model_util_notification_task_group_user","model_util_notification_task","base.group_user",1,1,1,1
