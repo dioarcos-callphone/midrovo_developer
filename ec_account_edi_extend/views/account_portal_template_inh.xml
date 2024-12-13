@@ -60,7 +60,7 @@
 
     
     <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account_payment.portal_my_invoices_payment">
-        <xpath expr="//th[text()='Status']" position="after">
+        <xpath expr="//th[text()='Estado']" position="after">
             <!-- <th position="replace"></th> -->
         </xpath>
     </template>
