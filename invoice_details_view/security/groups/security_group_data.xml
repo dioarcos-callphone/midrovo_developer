@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="invoice_details_view_subcategory" model="ir.module.category">
+            <field name="name">Detalles de factura</field>
+            <field name="parent_id" ref="inventory_report_location.report_category" />
+        </record>
+
+        <record id="group_invoice_details_view_user" model="res.groups">
+            <field name="name">Ocultar valores de costo, total costo y rentabilidad</field>
+            <field name="comment">Oculta las columnas del costo, total costo y rentabilidad del reporte de detalle de facturas.</field>
+            <field name="category_id" ref="invoice_details_view.invoice_details_view_subcategory"/>
+        </record>
+    
+    </data>
+    
+</odoo>

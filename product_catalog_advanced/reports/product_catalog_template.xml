@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="product_catalog_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <header style="margin: 0 !important; padding-bottom: 5px !important; text-align: center;">
+                        <div>
+                            <h3>
+                                Catálogo de Productos
+                            </h3>
+                        </div>
+                    </header>
+                </div>
+                <t t-name="product_catalog_advanced.product_catalog_template">
+                    <t t-foreach="options" t-as="producto">
+                        <div class="product" style="margin-top: 10px;">
+                            <!-- Colores -->
+                            <t t-foreach="producto['colores']" t-as="color">
+                                <!-- Tabla principal sin bordes que contiene la imagen y la tabla de tallas -->
+                                <table style="width: 100%; border-collapse: collapse; border: transparent !important; margin: 15px 0;">
+                                    <tr>
+                                        <!-- Columna de la imagen -->
+                                        <td style="vertical-align: top; border: none !important;">
+                                            <t t-if="color['image']">
+                                                <img t-att-src="'data:image/png;base64,' + color['image']" 
+                                                    alt="Imagen del producto" 
+                                                    style="width: 300px !important; height: 300px !important;"/>
+                                            </t>
+                                            <t t-else="">
+                                                <img src="/product_catalog_advanced/static/src/img/placeholder.png" 
+                                                    alt="Imagen no disponible" 
+                                                    style="width: 300px !important; height: 300px !important;"/>
+                                            </t>
+                                        </td>
+                                        
+                                        <!-- Columna de la tabla de tallas -->
+                                        <td style="vertical-align: top; border: none !important; width: 60%;">
+                                            <p>Nombre: <t t-esc="color['name']"/></p>
+                                            <p>Color: <t t-esc="color['color']"/></p>
+                                            <table style="border-collapse: collapse; width: 100%;">
+                                                <thead style="border: 1px solid #2196f3 !important;">
+                                                    <tr>
+                                                        <t t-foreach="color['tallas']" t-as="talla">
+                                                            <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
+                                                                <t t-esc="talla['talla']"/>
+                                                            </th>
+                                                        </t>
+                                                        <th style="border: 1px solid #2196f3; padding: 5px; text-align: center;">Pares</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <t t-foreach="color['tallas']" t-as="talla">
+                                                            <td style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
+                                                                <t t-esc="talla['cantidad']"/>
+                                                            </td>
+                                                        </t>
+                                                        <td style="border: 1px solid #2196f3; padding: 5px; text-align: center;">
+                                                            <t t-esc="sum([talla['cantidad'] for talla in color['tallas']])"/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

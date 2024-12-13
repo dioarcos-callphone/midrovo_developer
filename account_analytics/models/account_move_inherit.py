@@ -1,0 +1,54 @@
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
+
+class AccountMoveInherit(models.Model):
+    _inherit = 'account.move'
+    
+    @api.onchange('printer_id')
+    def onchange_journal(self):
+        if self:
+            for line in self.line_ids:
+                if self.printer_id.analytic_id:
+                    if line.account_id.account_type == 'income' or line.account_id.account_type == 'expense':
+                        line.analytic_distribution = { str(self.printer_id.analytic_id.id): 100 }
+
+   
+class AccountMoveLineInherit(models.Model):
+    _inherit = "account.move.line"
+    
+    analytic_distribution = fields.Json(
+        compute='_compute_analytic_distribution',  # Función que calculará el valor
+        inverse='_inverse_analytic_distribution',  # Función para manejar el cambio de valor
+        store=True,  # Indicamos que el campo se guarda en la base de datos
+    )
+
+    # Función que calcula el valor del campo computado
+    @api.depends('move_id.printer_id')
+    def _compute_analytic_distribution(self):
+        for record in self:            
+            # Buscamos la cuenta analítica relacionada con el journal_id
+            analytic_account = record.move_id.printer_id.analytic_id if record.move_id.printer_id else None
+
+            # Si se encuentra una cuenta analítica, asignamos el valor correspondiente
+            if analytic_account:
+                
+                if record.account_id.account_type == 'income' or record.account_id.account_type == 'expense':
+                    record.analytic_distribution = {str(analytic_account.id): 100}
+            else:
+                # Si no se encuentra ninguna cuenta, se asigna un valor predeterminado o vacío
+                record.analytic_distribution = {}
+                
+    # @api.constrains('product_id')
+    # def _check_product_id(self):
+    #     for record in self:
+    #         if not record.product_id:
+    #             raise ValidationError('La factura contiene una o más líneas sin un producto asignado.')
+
+
+class SriPrinterPointInherit(models.Model):
+    _inherit = 'sri.printer.point'
+    
+    analytic_id = fields.Many2one(
+        string='Cuenta Analítica',
+        comodel_name='account.analytic.account'
+    )

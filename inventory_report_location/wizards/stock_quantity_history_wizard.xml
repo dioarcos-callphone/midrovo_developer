@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_quantity_history_inherit" model="ir.ui.view">
+        <field name="name">Inventory Report at Date</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock.view_stock_quantity_history"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="replace">
+                <form string="Choose your date">
+                    <group>
+                        <field name="location_ids" widget="many2many_tags"/>
+                        <field name="inventory_datetime"/>
+                        <field name="category_ids" widget="many2many_tags"/>
+                    </group>
+                    <footer>
+                        <button name="open_at_date" string="Confirm" type="object" class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </xpath>
+        </field>
+    </record>
+</odoo>

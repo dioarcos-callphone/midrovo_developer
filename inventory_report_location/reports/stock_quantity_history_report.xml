@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_normal" model="report.paperformat">
+        <field name="name">Portrait Paper</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">30</field>
+        <field name="header_spacing">20</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+    </record>
+
+    <record id="report_stock_quantity_history"
+            model="ir.actions.report">
+        <field name="name">Informe de Inventario</field>
+        <field name="model">report.inventory_report_location.report_stock_quantity</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">inventory_report_location.report_stock_quantity</field>
+        <field name="report_file">inventory_report_location.report_stock_quantity</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_normal"/>
+    </record>
+
+</odoo>

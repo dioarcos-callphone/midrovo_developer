@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="report_category" model="ir.module.category">
+            <field name="name">Reportes</field>
+        </record>
+
+        <record id="inventory_report_location_subcategory" model="ir.module.category">
+            <field name="name">Inventario por localidad</field>
+            <field name="parent_id" ref="inventory_report_location.report_category" />
+        </record>
+
+        <record id="group_inventory_report_location_user" model="res.groups">
+            <field name="name">Ocultar valores de costo y total costo</field>
+            <field name="comment">Oculta las columnas del costo y total costo del reporte de inventario por localidad.</field>
+            <field name="category_id" ref="inventory_report_location.inventory_report_location_subcategory"/>
+        </record>
+    
+    </data>
+    
+</odoo>

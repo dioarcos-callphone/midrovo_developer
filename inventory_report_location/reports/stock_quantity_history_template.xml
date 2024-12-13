@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_stock_quantity">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin: 0; padding: 0;">
+                    <div>
+                        <h5><t t-esc="localidad_fecha"/></h5>
+                    </div>
+                    <div class="text-center" style="margin-bottom: 20px;">
+                        <h2>Informe de Desglose del Inventario</h2>
+                    </div>
+                </div>
+                <table class="table table-condensed table-bordered table-striped" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                            <th align="center" style="vertical-align: middle">PRODUCTOS</th>
+                            <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <th align="center" style="vertical-align: middle">COSTO</th>
+                                <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="options" t-as="new">
+                            <t t-log="new"/>
+                            <td style="width: 500px; word-wrap: break-word;">
+                                <t t-esc="new['nombre']"/>
+                                <t t-if="new.get('atributos')">
+                                 - 
+                                    <t t-foreach="new['atributos']" t-as="atributo">
+                                        <t t-set="last_item" t-value="False"/>
+                                        <t t-foreach="atributo.items()" t-as="variable">
+                                            <t t-esc="'%s: %s' % (variable[0].capitalize(), variable[1])"/>
+                                            <t t-if="not last_item"> </t> <!-- Agregar un espacio entre atributos, pero no al final -->
+                                            <t t-set="last_item" t-value="True"/>
+                                        </t>
+                                    </t>
+                                </t>
+                            </td>
+                            <td align="center" width="120">
+                                <t t-esc="new['cantidad']"/>
+                            </td>
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <td align="center" width="120">
+                                    $ <t t-esc="new['costo']"/>
+                                </td>
+                                <td align="center" width="120">
+                                    $ <t t-esc="new['valor_stock']"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed table-bordered table-striped">
+                    <tfoot>
+                        <tr>
+                            <th align="center" style="width: 500px; word-wrap: break-word; font-weight: bold;">TOTAL</th>
+                            <th align="center" width="120">
+                                <t t-esc="total_cantidad"/>
+                            </th>
+                            <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
+                                <th align="center" width="120">
+                                        
+                                </th>
+                                <th align="center" width="120">
+                                    $ <t t-esc="total_valor_stock"/>
+                                </th>
+                            </t>
+                        </tr>
+                    </tfoot>
+                </table>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <template id="report_invoice_details">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin: 0; padding: 0;">
+                    <div class="text-center">
+                        <t t-if="is_resumen == 'r'">
+                            <h3>Informe de Facturas y Notas de Crédito</h3>    
+                        </t>
+                        <t t-if="is_resumen == 'd'">
+                            <h3>Informe de Detalles Facturas y Notas de Crédito</h3>    
+                        </t>
+                    </div>
+                </div>
+                <table class="table table-condensed table-bordered table-striped" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th align="center" style="vertical-align: middle">Fecha</th>
+                            <th align="center" style="vertical-align: middle">Número</th>
+                            <th align="center" style="vertical-align: middle">Punto de emisión</th>
+                            <th align="center" style="vertical-align: middle">Tipo</th>
+                            <th align="center" style="vertical-align: middle">Comercial</th>
+                            <th align="center" style="vertical-align: middle">Cajero</th>
+                            <th align="center" style="vertical-align: middle">Cliente</th>
+                            
+                            <t t-if="is_resumen == 'r'">
+                                <th align="center" style="vertical-align: middle">Subtotal</th>
+                                <th align="center" style="vertical-align: middle">Iva</th>
+                                <th align="center" style="vertical-align: middle">Total</th>
+                                <th align="center" style="vertical-align: middle">Efectivo</th>
+                                <th align="center" style="vertical-align: middle">Banco</th>
+                                <th align="center" style="vertical-align: middle">Cuenta por cobrar</th>
+                                
+                            </t>
+
+                            <t t-if="is_resumen == 'd'">
+                                <th align="center" style="vertical-align: middle">Producto</th>
+                                <th align="center" style="vertical-align: middle">Cantidad</th>
+                                <th align="center" style="vertical-align: middle">Precio</th>
+                                <th align="center" style="vertical-align: middle">Descuento</th>
+                                <th align="center" style="vertical-align: middle">Subtotal</th>
+                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                    <th align="center" style="vertical-align: middle">Costo</th>
+                                    <th align="center" style="vertical-align: middle">Total costo</th>
+                                    <th align="center" style="vertical-align: middle">Rentabilidad</th>
+                                </t>
+                                <th align="center" style="vertical-align: middle">Métodos de pago</th>
+                            </t>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="options" t-as="result">
+                            <td>
+                                <t t-esc="result['fecha']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['numero']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['diario_contable']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['tipo']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['comercial']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['pos']"/>
+                            </td>
+                            <td>
+                                <t t-esc="result['cliente']"/>
+                            </td>
+
+                            <t t-if="is_resumen == 'r'">
+                                <td align="center" width="100">
+                                    <t t-esc="result['subtotal']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['iva']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['total']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['cash']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['bank']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="result['receivable']"/>
+                                </td>
+                            </t>
+
+                            <t t-if="is_resumen == 'd'">
+                                <td>
+                                    <t t-esc="result['producto']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['cantidad']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['precio']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['descuento']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['subtotal']"/>
+                                </td>
+                                <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
+                                    <td align="center" width="100">
+                                        <t t-if="is_cost_or_debit == 'master'">
+                                            <t t-esc="result['costo']"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="result['debito']"/>
+                                        </t>
+                                        
+                                    </td>
+                                    <td align="center" width="100">
+                                        <t t-esc="result['total_costo']"/>
+                                    </td>
+                                    <td align="center" width="100">
+                                        <t t-esc="result['rentabilidad']"/>
+                                    </td>
+                                </t>
+                                <td>
+                                    <t t-foreach="result['metodos']" t-as="metodo">
+                                        <t t-esc="'- {}'.format(metodo)"></t>
+                                        <br/>
+                                    </t>
+                                </td>
+                            </t>
+                            
+                        </tr>
+                    </tbody>              
+                </table>
+            </t>
+        </t>
+    </template>
+
+</odoo>
