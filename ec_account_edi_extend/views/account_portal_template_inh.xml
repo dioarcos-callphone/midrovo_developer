@@ -174,6 +174,7 @@
                     <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
                     <th class="text-end">Importe adeudado</th>
+                    <th class="text-center">Reporte</th>
                 </tr>
             </thead>
             <tbody>
@@ -202,6 +203,12 @@
                             </t>
                         </td>
                         <td class="text-end"><span t-out="-refund.amount_residual if refund.move_type == 'out_refund' else refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
+                        <span class="pdf-icon" style="margin: 5px;">
+                            <a class="fa fa-file-pdf-o fa-lg" t-att-href="refund.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                        </span>
+                        <span class="xml-icon" style="margin: 5px;">
+                            <a class="fa fa-file-code-o fa-lg" t-att-href="refund.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                        </span>
                     </tr>
                 </t>
             </tbody>
