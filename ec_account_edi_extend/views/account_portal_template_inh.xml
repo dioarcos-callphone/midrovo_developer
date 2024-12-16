@@ -225,7 +225,7 @@
 
     <!-- RETENCIONES -->
 
-    <template id="portal_my_home_menu_withholdingd" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+    <template id="portal_my_home_menu_withholding" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
                 <a t-if="withholding" t-attf-href="/my/withholding?{{ keep_query() }}">Retención</a>

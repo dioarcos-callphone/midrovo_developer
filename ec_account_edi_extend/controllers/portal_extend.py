@@ -25,9 +25,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         return values
     
-    # domain para documentos de retencion
-    def _get_withholdings_domain(self):
-        pass
 
     #### REEMBOLSOS ####
         
@@ -168,7 +165,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         })
         return request.render("ec_account_edi_extend.portal_my_withholdings", values)
     
-    def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+    def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/withholdings"):
         values = self._prepare_portal_layout_values()
         
         AccountRefund = request.env['account.move']
@@ -196,7 +193,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
                 if AccountRefund.check_access_rights('read', raise_exception=False) else
                 AccountRefund
             ),
-            'page_name': 'withholdin',
+            'page_name': 'withholding',
             'pager': {  # vals to define the pager.
                 "url": url,
                 "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
