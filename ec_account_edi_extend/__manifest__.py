@@ -32,6 +32,7 @@
         'ec_account_edi',
         'account',
         'sale',
+        'purchase',
         'account_payment',
         'portal',
         

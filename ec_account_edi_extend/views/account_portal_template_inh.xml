@@ -11,17 +11,58 @@
         </xpath>
     </template>
 
+    <!-- ...................... -->
+
     <!-- TEMPLATES QUE HEREDAN DEL MODULO SALE -->
     <template id="portal_my_quotations_inh" name="Mis Cotizaciones" inherit_id="sale.portal_my_quotations">
         <xpath expr="//p[@t-else]" position="replace">
             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
                 <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay presupuestos disponibles</h4>
-                <p>Parece que no tienes presupuestos asociados a tu cuenta en este momento.</p>
+                <h4>No hay cotizaciones disponibles</h4>
+                <p>Parece que no tienes cotizaciones asociadas a tu cuenta en este momento.</p>
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
         </xpath>
     </template>
+
+    <template id="portal_my_orders_inh" name="Mis Ordenes" inherit_id="sale.portal_my_orders">
+        <xpath expr="//p[@t-else]" position="replace">
+            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay pedidos disponibles</h4>
+                <p>Parece que no tienes pedidos asociados a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+        </xpath>
+    </template>
+
+
+    <!-- ...................... -->
+
+    <!-- TEMPLATES QUE HEREDAN DEL MODULO PURCHASE -->
+    <template id="portal_my_purchase_rfqs_inh" name="Mis Solicitudes de Cotizacion" inherit_id="purchase.portal_my_purchase_rfqs">
+        <xpath expr="//p[@t-else]" position="replace">
+            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay solicitudes de cotización disponibles</h4>
+                <p>Parece que no tienes solicitudes de cotización asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_my_purchase_orders_inh" name="Mis Pedidos de Compra" inherit_id="purchase.portal_my_purchase_orders">
+        <xpath expr="//p[@t-else]" position="replace">
+            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay pedidos de compra disponibles</h4>
+                <p>Parece que no tienes pedidos de compra asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- ...................... -->
 
     <!-- <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
         <xpath expr="//i[@class='fa fa-home']" position="attributes">
@@ -37,6 +78,15 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
+        <xpath expr="//p[@t-else]" position="replace">
+            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay facturas disponibles</h4>
+                <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+        </xpath>
+        
         <xpath expr="//a[@t-att-href]" position="replace">
             <span t-att-title="invoice.name">
                 <t t-out="invoice.name" t-if="invoice.name != '/'"/>
@@ -62,6 +112,8 @@
         </xpath>
     </template>
 
+    <!-- ...................... -->
+
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT_PAYMENT -->
     <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account_payment.portal_my_invoices_payment">
         <xpath expr="//th[not(text()) and not(*)]" position="replace">
@@ -71,6 +123,8 @@
         
         </xpath>
     </template>
+
+    <!-- ...................... -->
 
     <!-- TEMPLATES PERSONALIZADOS -->
     <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
@@ -144,5 +198,7 @@
         </t>
       </t>
     </template>
+
+    <!-- ...................... -->
     
 </odoo>
