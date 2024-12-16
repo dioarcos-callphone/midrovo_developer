@@ -188,11 +188,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'date': date_begin,
             # content according to pager and archive selected
             # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
-            'withholdings': lambda pager_offset: (
-                AccountRefund.search(domain, order=order, limit=self._items_per_page, offset=pager_offset)
-                if AccountRefund.check_access_rights('read', raise_exception=False) else
-                AccountRefund
-            ),
+            'withholdings': None,
             'page_name': 'withholding',
             'pager': {  # vals to define the pager.
                 "url": url,
