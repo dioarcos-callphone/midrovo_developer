@@ -168,7 +168,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         })
         return request.render("ec_account_edi_extend.portal_my_withholdings", values)
     
-    def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/withholdings"):
+    def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
         values = self._prepare_portal_layout_values()
         
         AccountRefund = request.env['account.move']
