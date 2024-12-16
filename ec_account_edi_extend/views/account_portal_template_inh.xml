@@ -13,7 +13,7 @@
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Retenciones</t>
-                <t t-set="url" t-value="'/my/withholdings'"/>
+                <t t-set="url" t-value="'/my/withholding'"/>
                 <t t-set="placeholder_count" t-value="'withholdings_count'"/>
             </t>
         </xpath>
@@ -225,15 +225,15 @@
 
     <!-- RETENCIONES -->
 
-    <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+    <template id="portal_my_home_menu_withholdingd" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
-                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Notas de crédito</a>
-                <t t-else="">Notas de crédito</t>
+            <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
+                <a t-if="withholding" t-attf-href="/my/withholding?{{ keep_query() }}">Retención</a>
+                <t t-else="">Retenciones</t>
             </li>
-            <li t-if="refund" class="breadcrumb-item active">
-                <t t-out="refund.name" t-if="refund.name != '/'"/>
-                <t t-else=""><em>Borrador de reembolso</em></t>
+            <li t-if="withholding" class="breadcrumb-item active">
+                <t t-out="withholding.name" t-if="withholding.name != '/'"/>
+                <t t-else=""><em>Borrador de retención</em></t>
             </li>
         </xpath>
     </template>
