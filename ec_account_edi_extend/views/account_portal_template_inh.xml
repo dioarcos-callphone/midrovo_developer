@@ -105,9 +105,7 @@
         </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
-            <th class="text-center">
-                Reporte
-            </th>
+            <th class="text-center">Documentos</th>
         </xpath>
 
         <xpath expr="//td[@class='text-end']" position="after">
@@ -174,7 +172,7 @@
                     <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
                     <th class="text-end">Importe adeudado</th>
-                    <th class="text-center">Reporte</th>
+                    <th class="text-center">Documentos</th>
                 </tr>
             </thead>
             <tbody>
