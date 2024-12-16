@@ -12,23 +12,22 @@ _logger = logging.getLogger(__name__)
 
 class CustomPortalEcAccountEdi(PortalAccount):
     
+    # extendemos el metodo prepare home portal values para mostrar la cantidad de documentos
+    # de las notas de credito y retenciones
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if 'refund_count' in counters:
             values['refund_count'] = request.env['account.move'].search_count(self._get_out_refund_domain()) \
                 if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
+                
+        elif 'withholdings_count' in counters:
+            values['withholdings_count'] = 0
 
         return values
-    
-    # domain para documentos de reembolso
-    def _get_out_refund_domain(self):
-        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
-    
-    # domain para documentos de factura
-    def _get_invoices_domain(self):
-        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
 
-    
+    #### REEMBOLSOS ####
+        
+    # metodo que genera el contenido de notas de credito
     @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
         values = self._prepare_my_refunds_values(page, date_begin, date_end, sortby, filterby)
@@ -62,12 +61,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
 
-        # searchbar_filters = self._get_account_searchbar_filters()
-        # default filter by value
-        # if not filterby:
-        #     filterby = 'all'
-        # domain += searchbar_filters[filterby]['domain']
-
         if date_begin and date_end:
             domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
 
@@ -95,17 +88,12 @@ class CustomPortalEcAccountEdi(PortalAccount):
         
         return values
     
-    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
-        # Llamamos al método original con super
-        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
-        
-        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
-        values.pop('searchbar_filters', None)  # Elimina si existe
-        values.pop('filterby', None)  # Elimina si existe
-        
-        # Retornamos los valores modificados
-        return values
+    # domain para documentos de reembolso
+    def _get_out_refund_domain(self):
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
 
+    #### FACTURAS ####
+    
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
         try:
@@ -138,8 +126,21 @@ class CustomPortalEcAccountEdi(PortalAccount):
             ]
             
             return request.make_response(xml_decode, headers=headers)
-
-        # Genera los valores para la vista y renderiza la página
-        # values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
+    
+    # extendemos este metodo para ocultar el filtro del search menu
+    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+        # Llamamos al método original con super
+        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
         
-        # return request.render("ec_account_edi_extend.portal_invoice_form")
+        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
+        values.pop('searchbar_filters', None)  # Elimina si existe
+        values.pop('filterby', None)  # Elimina si existe
+        
+        # Retornamos los valores modificados
+        return values
+
+    # domain para documentos de factura
+    def _get_invoices_domain(self):
+        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
+    
+    #### RETENCIONES ####
