@@ -16,23 +16,27 @@
     <!-- TEMPLATES QUE HEREDAN DEL MODULO SALE -->
     <template id="portal_my_quotations_inh" name="Mis Cotizaciones" inherit_id="sale.portal_my_quotations">
         <xpath expr="//p[@t-else]" position="replace">
-            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay cotizaciones disponibles</h4>
-                <p>Parece que no tienes cotizaciones asociadas a tu cuenta en este momento.</p>
-                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-            </div>
+            <t t-else="">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay cotizaciones disponibles</h4>
+                    <p>Parece que no tienes cotizaciones asociadas a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
         </xpath>
     </template>
 
     <template id="portal_my_orders_inh" name="Mis Ordenes" inherit_id="sale.portal_my_orders">
         <xpath expr="//p[@t-else]" position="replace">
-            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay pedidos disponibles</h4>
-                <p>Parece que no tienes pedidos asociados a tu cuenta en este momento.</p>
-                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-            </div>
+            <t t-else="">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay pedidos disponibles</h4>
+                    <p>Parece que no tienes pedidos asociados a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
         </xpath>
     </template>
 
