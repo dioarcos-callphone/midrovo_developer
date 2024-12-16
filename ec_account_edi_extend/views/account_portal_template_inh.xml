@@ -105,7 +105,7 @@
         </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
-            <th class="text-center">Documentos</th>
+            <th class="text-center">Archivos <span class="fa fa-download"></span></th>
         </xpath>
 
         <xpath expr="//td[@class='text-end']" position="after">
@@ -124,12 +124,8 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT_PAYMENT -->
     <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account_payment.portal_my_invoices_payment">
-        <xpath expr="//th[not(text()) and not(*)]" position="replace">
-
-        </xpath>
-        <xpath expr="//td[@class='text-center']" position="replace">
-        
-        </xpath>
+        <xpath expr="//th[not(text()) and not(*)]" position="replace"></xpath>
+        <xpath expr="//td[@class='text-center']" position="replace"></xpath>
     </template>
 
     <!-- ...................... -->
@@ -172,7 +168,7 @@
                     <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
                     <th class="text-end">Importe adeudado</th>
-                    <th class="text-center">Documentos</th>
+                    <th class="text-center">Archivos <span class="fa fa-download"></span></th>
                 </tr>
             </thead>
             <tbody>
