@@ -62,11 +62,11 @@ class CustomPortalEcAccountEdi(PortalAccount):
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
 
-        searchbar_filters = self._get_account_searchbar_filters()
+        # searchbar_filters = self._get_account_searchbar_filters()
         # default filter by value
-        if not filterby:
-            filterby = 'all'
-        domain += searchbar_filters[filterby]['domain']
+        # if not filterby:
+        #     filterby = 'all'
+        # domain += searchbar_filters[filterby]['domain']
 
         if date_begin and date_end:
             domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
@@ -91,8 +91,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'default_url': url,
             'searchbar_sortings': searchbar_sortings,
             'sortby': sortby,
-            'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
-            'filterby': filterby,
         })
         
         return values
