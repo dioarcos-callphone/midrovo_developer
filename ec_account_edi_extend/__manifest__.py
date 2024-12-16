@@ -31,8 +31,10 @@
         # 'account_invoice_fixed_discount',
         'ec_account_edi',
         'account',
+        'sale',
         'account_payment',
         'portal',
+        
     ],
     'data': [
         'views/account_portal_template_inh.xml',
