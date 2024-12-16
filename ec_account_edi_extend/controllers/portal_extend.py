@@ -94,6 +94,17 @@ class CustomPortalEcAccountEdi(PortalAccount):
         })
         
         return values
+    
+    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+        # Llamamos al método original con super
+        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
+        
+        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
+        values.pop('searchbar_filters', None)  # Elimina si existe
+        values.pop('filterby', None)  # Elimina si existe
+        
+        # Retornamos los valores modificados
+        return values
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
@@ -129,6 +140,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
             return request.make_response(xml_decode, headers=headers)
 
         # Genera los valores para la vista y renderiza la página
-        values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
+        # values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
         
-        return request.render("ec_account_edi_extend.portal_invoice_form")
+        # return request.render("ec_account_edi_extend.portal_invoice_form")
