@@ -42,23 +42,27 @@
     <!-- TEMPLATES QUE HEREDAN DEL MODULO PURCHASE -->
     <template id="portal_my_purchase_rfqs_inh" name="Mis Solicitudes de Cotizacion" inherit_id="purchase.portal_my_purchase_rfqs">
         <xpath expr="//t[@t-if='not rfqs']" position="replace">
-            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay solicitudes de cotización disponibles</h4>
-                <p>Parece que no tienes solicitudes de cotización asociadas a tu cuenta en este momento.</p>
-                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-            </div>
+            <t t-if="not rfqs">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay solicitudes de cotización disponibles</h4>
+                    <p>Parece que no tienes solicitudes de cotización asociadas a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
         </xpath>
     </template>
 
     <template id="portal_my_purchase_orders_inh" name="Mis Pedidos de Compra" inherit_id="purchase.portal_my_purchase_orders">
         <xpath expr="//t[@t-if='not orders']" position="replace">
-            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay pedidos de compra disponibles</h4>
-                <p>Parece que no tienes pedidos de compra asociadas a tu cuenta en este momento.</p>
-                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-            </div>
+            <t t-if="not orders">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay pedidos de compra disponibles</h4>
+                    <p>Parece que no tienes pedidos de compra asociadas a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
         </xpath>
     </template>
 
@@ -79,12 +83,14 @@
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inherit" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
         <xpath expr="//t[@t-if='not invoices']" position="replace">
-            <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h4>No hay facturas disponibles</h4>
-                <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
-                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-            </div>
+            <t t-if="not invoices">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay facturas disponibles</h4>
+                    <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
         </xpath>
         
         <xpath expr="//a[@t-att-href]" position="replace">
