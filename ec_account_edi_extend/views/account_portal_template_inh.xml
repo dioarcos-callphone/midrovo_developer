@@ -105,7 +105,7 @@
         </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
-            <th class="text-center"><span class="fa fa-download fa-2x"></span></th>
+            <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
         </xpath>
 
         <xpath expr="//td[@class='text-end']" position="after">
@@ -168,7 +168,7 @@
                     <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
                     <th class="text-end">Importe adeudado</th>
-                    <th class="text-center"><span class="fa fa-download fa-2x"></span></th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
