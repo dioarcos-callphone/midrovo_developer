@@ -149,7 +149,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
     
     # metodo que genera el contenido de retenciones
     @http.route(['/my/withholding', '/my/withholding/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    def portal_my_withholding(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
         values = self._prepare_my_withholding_values(page, date_begin, date_end, sortby, filterby)
 
         # pager
