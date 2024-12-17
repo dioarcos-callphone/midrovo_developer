@@ -20,7 +20,6 @@
         'purchase',
         'account_payment',
         'portal',
-        
     ],
     'data': [
         'views/account_portal_template_inh.xml',
