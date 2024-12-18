@@ -14,9 +14,21 @@ class PortalWithholding(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if 'withholding_count' in counters:
-            values['withholding_count'] = 0
+            values['withholding_count'] = request.env['account.withhold'].search_count(self._get_withholdings_domain()) \
+                if request.env['account.withhold'].check_access_rights('read', raise_exception=False) else 0
 
         return values
+    
+    # domain para documentos de retencion
+    def _get_withholdings_domain(self):
+        return [('state', 'not in', ('canceled', 'draft'))]
+    
+    def _withholding_get_page_view_values(self, withholding, access_token, **kwargs):
+        values = {
+            'page_name': 'invoice',
+            'invoice': withholding,
+        }
+        return self._get_page_view_values(withholding, access_token, values, 'my_withholdings_history', False, **kwargs)
     
     # metodo que genera el contenido de retenciones
     @http.route(['/my/withholding', '/my/withholding/page/<int:page>'], type='http', auth="user", website=True)
@@ -78,7 +90,3 @@ class PortalWithholding(CustomerPortal):
         })
         
         return values
-    
-    # domain para documentos de retencion
-    def _get_withholdings_domain(self):
-        pass
