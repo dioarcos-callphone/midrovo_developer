@@ -70,7 +70,7 @@ class PortalWithholding(CustomerPortal):
             return self._show_report(
                 model=withhold_sudo,
                 report_type=report_type,
-                report_ref='ec_account_edi.e_invoice_qweb',  # Nuevo valor para report_ref
+                report_ref='ec_account_edi.e_retention_qweb',  # Nuevo valor para report_ref
                 download=download
             )
             
