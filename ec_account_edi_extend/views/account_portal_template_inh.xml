@@ -48,6 +48,12 @@
         </xpath>
     </template>
 
+    <template id="portal_my_home_menu_sale_inh" name="Portal Home Sale Extend" inherit_id="sale.portal_my_home_menu_sale">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="replace">
+            <!-- Se deja vacio para eliminar el contenido -->
+        </xpath>
+    </template>
+
 
     <!-- ...................... -->
 
@@ -224,7 +230,6 @@
 
 
     <!-- RETENCIONES -->
-
     <template id="portal_my_home_menu_withholding" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
