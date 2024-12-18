@@ -10,6 +10,10 @@ from collections import OrderedDict
 from odoo.http import request
 import base64
 
+
+import logging
+_logger = logging.getLogger(__name__)
+
 class PortalWithholding(CustomerPortal):
     
     def _prepare_home_portal_values(self, counters):
@@ -31,7 +35,8 @@ class PortalWithholding(CustomerPortal):
         }
         return self._get_page_view_values(withholding, access_token, values, 'my_withholdings_history', False, **kwargs)
     
-    def _get_withhold_searchbar_sortings(self):
+    def _get_account_searchbar_sortings(self):
+        _logger.info(f'MOSTRANDO SELF >>>> { self }')
         return {
             'date': {'label': _('Date'), 'order': 'creation_date desc'},
             'name': {'label': _('Reference'), 'order': 'l10n_latam_document_number desc'},
@@ -99,7 +104,7 @@ class PortalWithholding(CustomerPortal):
             self._get_withholdings_domain(),
         ])
 
-        searchbar_sortings = self._get_withhold_searchbar_sortings()
+        searchbar_sortings = self._get_account_searchbar_sortings()
         # default sort by order
         if not sortby:
             sortby = 'date'
