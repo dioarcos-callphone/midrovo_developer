@@ -49,11 +49,14 @@
     </template>
 
     <template id="portal_my_home_sale_inh" name="Portal Home Sale Extend" inherit_id="sale.portal_my_home_sale">
-        <xpath expr="//t" position="replace">
-            
+        <!-- Eliminar el bloque que contiene las 'Quotations' -->
+        <xpath expr="//t[t-set='title' and text()='Quotations']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
         </xpath>
-        <xpath expr="//t" position="replace">
-            
+        
+        <!-- Eliminar el bloque que contiene las 'Sales Orders' -->
+        <xpath expr="//t[t-set='title' and text()='Sales Orders']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
         </xpath>
     </template>
 
