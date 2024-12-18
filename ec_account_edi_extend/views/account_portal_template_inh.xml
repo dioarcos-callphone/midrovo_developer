@@ -49,9 +49,9 @@
     </template>
 
     <template id="portal_my_home_menu_sale_inh" name="Portal Home Sale Extend" inherit_id="sale.portal_my_home_menu_sale">
-        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="replace">
-            <!-- Se deja vacio para eliminar el contenido -->
-        </xpath>
+        <!-- <xpath expr="//ol[hasclass('o_portal_submenu')]" position="replace">
+            
+        </xpath> -->
     </template>
 
 
