@@ -27,7 +27,7 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Retenciones</t>
                 <t t-set="url" t-value="'/my/withholding'"/>
-                <t t-set="placeholder_count" t-value="'withholdings_count'"/>
+                <t t-set="placeholder_count" t-value="'withholding_count'"/>
             </t>
         </xpath>
 
