@@ -50,7 +50,17 @@
     <!-- ...................... -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO PURCHASE -->
-    
+    <template id="portal_my_home_purchase_inh" name="Portal Home Purchase Extend" inherit_id="purchase.portal_my_home_purchase">
+        <!-- Eliminar el bloque que contiene las 'Quotations' -->
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
+        </xpath>
+        
+        <!-- Eliminar el bloque que contiene las 'Sales Orders' -->
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
+        </xpath>
+    </template>
 
     <!-- ...................... -->
 
