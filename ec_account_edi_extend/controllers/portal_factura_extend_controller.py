@@ -19,14 +19,13 @@ class CustomPortalEcAccountEdi(PortalAccount):
         if 'refund_count' in counters:
             values['refund_count'] = request.env['account.move'].search_count(self._get_out_refund_domain()) \
                 if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
-                
-        elif 'withholdings_count' in counters:
-            values['withholdings_count'] = 0
 
         return values
     
 
-    #### REEMBOLSOS ####
+    ################################################################################################
+    ## R E E M B O L S O S #########################################################################
+    ################################################################################################
         
     # metodo que genera el contenido de notas de credito
     @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
@@ -93,7 +92,10 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _get_out_refund_domain(self):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
 
-    #### FACTURAS ####
+    
+    ################################################################################################
+    ## F A C T U R A S #############################################################################
+    ################################################################################################
     
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth="public", website=True)
     def portal_my_invoice_detail(self, invoice_id, access_token=None, report_type=None, download=False, **kw):
@@ -145,69 +147,68 @@ class CustomPortalEcAccountEdi(PortalAccount):
         return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
     
     
-    #### RETENCIONES ####
     
-    # metodo que genera el contenido de retenciones
-    @http.route(['/my/withholding', '/my/withholding/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_withholding(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-        values = self._prepare_my_withholding_values(page, date_begin, date_end, sortby, filterby)
+    # # metodo que genera el contenido de retenciones
+    # @http.route(['/my/withholding', '/my/withholding/page/<int:page>'], type='http', auth="user", website=True)
+    # def portal_my_withholding(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    #     values = self._prepare_my_withholding_values(page, date_begin, date_end, sortby, filterby)
 
-        # pager
-        pager = portal_pager(**values['pager'])
+    #     # pager
+    #     pager = portal_pager(**values['pager'])
 
-        # content according to pager and archive selected
-        withholdings = values['withholdings'](pager['offset'])
-        request.session['my_withholdings_history'] = withholdings.ids[:100]
+    #     # content according to pager and archive selected
+    #     withholdings = values['withholdings'](pager['offset'])
+    #     request.session['my_withholdings_history'] = withholdings.ids[:100]
 
-        values.update({
-            'withholdings': withholdings,
-            'pager': pager,
-        })
-        return request.render("ec_account_edi_extend.portal_my_withholdings", values)
+    #     values.update({
+    #         'withholdings': withholdings,
+    #         'pager': pager,
+    #     })
+    #     return request.render("ec_account_edi_extend.portal_my_withholdings", values)
     
-    def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/withholdings"):
-        values = self._prepare_portal_layout_values()
+    # def _prepare_my_withholding_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/withholdings"):
+    #     values = self._prepare_portal_layout_values()
         
-        AccountRefund = request.env['account.move']
+    #     AccountRefund = request.env['account.move']
 
-        domain = expression.AND([
-            domain or [],
-            self._get_withholdings_domain(),
-        ])
+    #     domain = expression.AND([
+    #         domain or [],
+    #         self._get_withholdings_domain(),
+    #     ])
 
-        searchbar_sortings = self._get_account_searchbar_sortings()
-        # default sort by order
-        if not sortby:
-            sortby = 'date'
-        order = searchbar_sortings[sortby]['order']
+    #     searchbar_sortings = self._get_account_searchbar_sortings()
+    #     # default sort by order
+    #     if not sortby:
+    #         sortby = 'date'
+    #     order = searchbar_sortings[sortby]['order']
 
-        if date_begin and date_end:
-            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+    #     if date_begin and date_end:
+    #         domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
 
-        values.update({
-            'date': date_begin,
-            # content according to pager and archive selected
-            # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
-            'withholdings': lambda pager_offset: (
-                AccountRefund
-                if AccountRefund.check_access_rights('read', raise_exception=False) else
-                AccountRefund
-            ),
-            'page_name': 'withholding',
-            'pager': {  # vals to define the pager.
-                "url": url,
-                "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
-                "total": AccountRefund.search_count(domain) if AccountRefund.check_access_rights('read', raise_exception=False) else 0,
-                "page": page,
-                "step": self._items_per_page,
-            },
-            'default_url': url,
-            'searchbar_sortings': searchbar_sortings,
-            'sortby': sortby,
-        })
+    #     values.update({
+    #         'date': date_begin,
+    #         # content according to pager and archive selected
+    #         # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
+    #         'withholdings': lambda pager_offset: (
+    #             AccountRefund
+    #             if AccountRefund.check_access_rights('read', raise_exception=False) else
+    #             AccountRefund
+    #         ),
+    #         'page_name': 'withholding',
+    #         'pager': {  # vals to define the pager.
+    #             "url": url,
+    #             "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
+    #             "total": AccountRefund.search_count(domain) if AccountRefund.check_access_rights('read', raise_exception=False) else 0,
+    #             "page": page,
+    #             "step": self._items_per_page,
+    #         },
+    #         'default_url': url,
+    #         'searchbar_sortings': searchbar_sortings,
+    #         'sortby': sortby,
+    #     })
         
-        return values
+    #     return values
     
-    # domain para documentos de retencion
-    def _get_withholdings_domain(self):
-        pass
+    # # domain para documentos de retencion
+    # def _get_withholdings_domain(self):
+    #     pass

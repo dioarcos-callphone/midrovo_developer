@@ -6,7 +6,7 @@
     <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
-                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Notas de crédito</a>
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
                 <t t-else="">Notas de crédito</t>
             </li>
             <li t-if="refund" class="breadcrumb-item active">
@@ -166,6 +166,173 @@
         </t>
       </t>
     </template>
+
+    <!-- GUIAS DE REMISION -->
+    <template id="portal_my_home_menu_shipping_guides" name="Portal layout : shipping guides menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'shipping_guide'" t-attf-class="breadcrumb-item #{'active ' if not shipping_guide else ''}">
+                <a t-if="shipping_guide" t-attf-href="/my/shipping_guide?{{ keep_query() }}">Guía de remisión</a>
+                <t t-else="">Guías de Remisión</t>
+            </li>
+            <li t-if="shipping_guide" class="breadcrumb-item active">
+                <t t-out="shipping_guide.name" t-if="shipping_guide.name != '/'"/>
+                <t t-else=""><em>Borrador de guía de remisión</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_shipping_guides" name="My Shipping guides">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Guías de remisión</t>
+        </t>
+        <t t-if="not shipping_guides">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay guías de remisión disponibles</h4>
+                <p>Parece que no tienes guías de remisión asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="shipping_guides" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Guía de remisión #</th>
+                    <th>Fecha de guía de remisión</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="shipping_guides" t-as="shipping_guide">
+                    <tr>
+                        <td>
+                            <span t-att-title="shipping_guide.name">
+                                <t t-out="shipping_guide.name" t-if="shipping_guide.name != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="shipping_guide.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="shipping_guide.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="shipping_guide.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="-shipping_guide.amount_residual if shipping_guide.move_type == 'out_refund' else shipping_guide.amount_residual" t-options='{"widget": "monetary", "display_currency": shipping_guide.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+
+
+    <!-- LIQUIDACIONES DE COMPRA -->
+    <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
+                <a t-if="purchase_settlement" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidación de compras</a>
+                <t t-else="">Liquidaciones de compras</t>
+            </li>
+            <li t-if="purchase_settlement" class="breadcrumb-item active">
+                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                <t t-else=""><em>Borrador de liquidación de compras</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_purchase_settlements" name="My Purchase Settlements">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Liquidaciones de compra</t>
+        </t>
+        <t t-if="not purchase_settlements">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay liquidaciones de compra disponibles</h4>
+                <p>Parece que no tienes liquidaciones de compra asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="purchase_settlements" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Liquidación de compra #</th>
+                    <th>Fecha de liquidación de compra</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="purchase_settlements" t-as="purchase_settlement">
+                    <tr>
+                        <td>
+                            <span t-att-title="purchase_settlement.name">
+                                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="purchase_settlement.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="purchase_settlement.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="-purchase_settlement.amount_residual if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_residual" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
 
     
 </odoo>

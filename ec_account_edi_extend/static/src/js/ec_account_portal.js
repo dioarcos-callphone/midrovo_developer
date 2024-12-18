@@ -8,6 +8,11 @@ publicWidget.registry.PortalHomeCounters.include({
      * @override
      */
     _getCountersAlwaysDisplayed() {
-        return this._super(...arguments).concat(['refund_count', 'withholdings_count']);
+        return this._super(...arguments).concat([
+            'refund_count',
+            'withholding_count',
+            'shipping_guide_count',
+            'purchase_settlement_count',
+        ]);
     },
 });
