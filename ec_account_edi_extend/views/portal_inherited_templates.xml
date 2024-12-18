@@ -108,5 +108,4 @@
         <xpath expr="//td[@class='text-center']" position="replace"></xpath>
     </template>
 
-    
 </odoo>
