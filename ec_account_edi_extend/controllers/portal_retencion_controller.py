@@ -25,8 +25,8 @@ class PortalWithholding(CustomerPortal):
     
     def _withholding_get_page_view_values(self, withholding, access_token, **kwargs):
         values = {
-            'page_name': 'invoice',
-            'invoice': withholding,
+            'page_name': 'withholding',
+            'withholding': withholding,
         }
         return self._get_page_view_values(withholding, access_token, values, 'my_withholdings_history', False, **kwargs)
     
