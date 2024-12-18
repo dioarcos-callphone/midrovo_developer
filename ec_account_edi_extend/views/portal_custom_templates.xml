@@ -118,40 +118,43 @@
         <t t-if="withholdings" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
-                    <th>Nota de crédito #</th>
-                    <th>Fecha de nota de crédito</th>
-                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th>Retención #</th>
+                    <th>Fecha de emisión</th>
+                    <th>Factura asociada</th>
                     <th class="text-center">Estado</th>
-                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center">Total retenido IVA</th>
+                    <th class="text-center">Total retenido renta</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                    <th class="text-center"><span class="fa fa-file-code-o fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
                 <t t-foreach="withholdings" t-as="withholding">
                     <tr>
                         <td>
-                            <span t-att-title="withholding.name">
-                                <t t-out="withholding.name" t-if="withholding.name != '/'"/>
+                            <span t-att-title="withholding.l10n_latam_document_number">
+                                <t t-out="withholding.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
                                 <em t-else="">Borrador de retenciones</em>
                             </span>
                         </td>
-                        <td><span t-field="withholding.invoice_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="withholding.invoice_date_due"/></td>
+                        <td><span t-field="withholding.creation_date"/></td>
+                        <td><span t-field="withholding.invoice_id.name"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="withholding.state == 'posted' and withholding.payment_state not in ('in_payment', 'paid', 'reversed')">
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
                                 <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
                             </t>
-                            <t t-if="withholding.state == 'posted' and withholding.payment_state in ('paid', 'in_payment')">
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state in ('paid', 'in_payment')">
                                 <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
                             </t>
-                            <t t-if="withholding.state == 'posted' and withholding.payment_state == 'reversed'">
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state == 'reversed'">
                                 <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
                             </t>
-                            <t t-if="withholding.state == 'cancel'">
+                            <t t-if="withholding.state == 'canceled'">
                                 <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
                             </t>
                         </td>
-                        <td class="text-end"><span t-out="-withholding.amount_residual if withholding.move_type == 'out_refund' else withholding.amount_residual" t-options='{"widget": "monetary", "display_currency": withholding.currency_id}'/></td>
+                        <td class="text-end"><span t-out="withholding.total_iva" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
+                        <td class="text-end"><span t-out="withholding.total_renta" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="withholding.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
