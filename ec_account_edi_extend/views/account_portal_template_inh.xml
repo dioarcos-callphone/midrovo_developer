@@ -1,6 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <!-- TEMPLATES QUE HEREDAN DEL MODULO PORTAL -->
+
+    <!-- <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//i[@class='fa fa-home']" position="attributes">
+            <attribute name="style">color: #71639e;</attribute>
+        </xpath>
+    </template> -->
+
+    <!-- <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
+        </xpath>
+    </template> -->
+
     <template id="portal_my_home_refund" name="Mostrar Notas de Credito" inherit_id="portal.portal_my_home" customize_show="True" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
@@ -22,32 +35,6 @@
     <!-- ...................... -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO SALE -->
-    <template id="portal_my_quotations_inh" name="Mis Cotizaciones" inherit_id="sale.portal_my_quotations">
-        <xpath expr="//p[@t-else]" position="replace">
-            <t t-else="">
-                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <h4>No hay cotizaciones disponibles</h4>
-                    <p>Parece que no tienes cotizaciones asociadas a tu cuenta en este momento.</p>
-                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-                </div>
-            </t>
-        </xpath>
-    </template>
-
-    <template id="portal_my_orders_inh" name="Mis Ordenes" inherit_id="sale.portal_my_orders">
-        <xpath expr="//p[@t-else]" position="replace">
-            <t t-else="">
-                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <h4>No hay pedidos disponibles</h4>
-                    <p>Parece que no tienes pedidos asociados a tu cuenta en este momento.</p>
-                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-                </div>
-            </t>
-        </xpath>
-    </template>
-
     <template id="portal_my_home_sale_inh" name="Portal Home Sale Extend" inherit_id="sale.portal_my_home_sale">
         <!-- Eliminar el bloque que contiene las 'Quotations' -->
         <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace">
@@ -60,49 +47,22 @@
         </xpath>
     </template>
 
-
     <!-- ...................... -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO PURCHASE -->
-    <template id="portal_my_purchase_rfqs_inh" name="Mis Solicitudes de Cotizacion" inherit_id="purchase.portal_my_purchase_rfqs">
-        <xpath expr="//t[@t-if='not rfqs']" position="replace">
-            <t t-if="not rfqs">
-                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <h4>No hay solicitudes de cotización disponibles</h4>
-                    <p>Parece que no tienes solicitudes de cotización asociadas a tu cuenta en este momento.</p>
-                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-                </div>
-            </t>
+    <template id="portal_my_home_purchase" name="Portal Home Purchase Extend" inherit_id="purchase.portal_my_home_purchase">
+        <!-- Eliminar el bloque que contiene las 'Quotations' -->
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
         </xpath>
-    </template>
-
-    <template id="portal_my_purchase_orders_inh" name="Mis Pedidos de Compra" inherit_id="purchase.portal_my_purchase_orders">
-        <xpath expr="//t[@t-if='not orders']" position="replace">
-            <t t-if="not orders">
-                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <h4>No hay pedidos de compra disponibles</h4>
-                    <p>Parece que no tienes pedidos de compra asociadas a tu cuenta en este momento.</p>
-                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-                </div>
-            </t>
+        
+        <!-- Eliminar el bloque que contiene las 'Sales Orders' -->
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace">
+            <!-- No colocamos nada, esto reemplaza el nodo con contenido vacío -->
         </xpath>
     </template>
 
     <!-- ...................... -->
-
-    <!-- <template id="portal_breadcrumbs_extend" name="Custom Home Icon" inherit_id="portal.portal_breadcrumbs">
-        <xpath expr="//i[@class='fa fa-home']" position="attributes">
-            <attribute name="style">color: #71639e;</attribute>
-        </xpath>
-    </template> -->
-
-    <!-- <template id="portal_invoice_form" name="Vista Form de la Factura" inherit_id="portal.portal_sidebar" primary="True">
-        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
-            <h1>HOLA VISTA FORM DE LA FACTURA</h1>
-        </xpath>
-    </template> -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inh" name="My Invoices and Payments Inherit" inherit_id="account.portal_my_invoices">
