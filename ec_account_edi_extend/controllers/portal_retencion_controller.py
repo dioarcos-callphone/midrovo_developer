@@ -16,7 +16,7 @@ class PortalWithholding(CustomerPortal):
         if 'withholding_count' in counters:
             values['withholding_count'] = request.env['account.withhold'].search_count(self._get_withholdings_domain()) \
                 if request.env['account.withhold'].check_access_rights('read', raise_exception=False) else 0
-
+                
         return values
     
     # domain para documentos de retencion
