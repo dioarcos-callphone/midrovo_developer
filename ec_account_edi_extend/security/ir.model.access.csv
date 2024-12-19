@@ -1,5 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_withhold_portal,account.withhold.portal,ec_account_edi_extend.model_account_withhold,base.group_portal,1,0,0,0
 acces_account_withhold_line_portal,account.withhold.line.portal,ec_account_edi.model_account_withhold_line,base.group_portal,1,0,0,0
-access_account_invoice_portal,account.move.portal,account.model_account_move,base.group_portal,1,0,0,0
-access_account_invoice_line_portal,account.move.line.portal,account.model_account_move_line,base.group_portal,1,0,0,0

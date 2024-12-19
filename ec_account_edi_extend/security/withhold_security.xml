@@ -4,14 +4,16 @@
     <record id="account_withhold_rule_portal" model="ir.rule">
         <field name="name">Portal Personal Account Withholds</field>
         <field name="model_id" ref="ec_account_edi_extend.model_account_withhold"/>
-        <field name="domain_force">[('state', 'not in', ('canceled', 'draft')), ('message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <!-- <field name="domain_force">[('state', 'not in', ('canceled', 'draft')), ('message_partner_ids','child_of',[user.commercial_partner_id.id])]</field> -->
+        <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
     </record>
 
     <record id="account_withhold_line_rule_portal" model="ir.rule">
         <field name="name">Portal Withhold Lines</field>
         <field name="model_id" ref="ec_account_edi_extend.model_account_withhold_line"/>
-        <field name="domain_force">[('retention_id.state', 'not in', ('canceled', 'draft')), ('retention_id.message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <!-- <field name="domain_force">[('retention_id.state', 'not in', ('canceled', 'draft')), ('retention_id.message_partner_ids','child_of',[user.commercial_partner_id.id])]</field> -->
+        <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
     </record>
 
