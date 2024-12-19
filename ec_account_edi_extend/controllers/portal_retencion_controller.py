@@ -38,9 +38,9 @@ class PortalWithholding(CustomerPortal):
     def _get_withholding_searchbar_sortings(self):
         _logger.info(f'MOSTRANDO SELF >>>> { self }')
         return {
-            'date': {'label': _('Date'), 'order': 'creation_date desc'},
-            'name': {'label': _('Reference'), 'order': 'l10n_latam_document_number desc'},
-            'state': {'label': _('Status'), 'order': 'state'},
+            'date': {'label': _('Fecha'), 'order': 'creation_date desc'},
+            'name': {'label': _('Referencia'), 'order': 'l10n_latam_document_number desc'},
+            'state': {'label': _('Estado'), 'order': 'state'},
         }
     
     # metodo que genera el contenido de retenciones
