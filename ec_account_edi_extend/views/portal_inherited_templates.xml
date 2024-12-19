@@ -84,7 +84,7 @@
     <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
         <!-- Cambiar el título de la página -->
         <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
-            <t t-set="page_title">Mis Facturas</t>
+            <t t-set="title">Mis Facturas</t>
         </xpath>
         <xpath expr="//t[@t-if='not invoices']" position="replace">
             <t t-if="not invoices">
