@@ -81,7 +81,8 @@
     <!-- ...................... -->
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
-    <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
+    <template id="portal_my_invoices_inh" inherit_id="account.portal_my_invoices">
+        <attribute name="name">Mis Facturas</attribute>
         <xpath expr="//title" position="replace">
             <title>Mis Facturas</title>
         </xpath>
