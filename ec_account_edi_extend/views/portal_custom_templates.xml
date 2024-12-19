@@ -16,7 +16,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_refunds" name="My Refunds and Payments">
+    <template id="portal_my_refunds" name="Mis Notas de Créditos">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
@@ -99,7 +99,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_withholdings" name="My Withholdings">
+    <template id="portal_my_withholdings" name="Mis Retenciones">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
@@ -183,7 +183,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_shipping_guides" name="My Shipping guides">
+    <template id="portal_my_shipping_guides" name="Mis Guias de Remisión">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
@@ -267,7 +267,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_purchase_settlements" name="My Purchase Settlements">
+    <template id="portal_my_purchase_settlements" name="Mis Liquidaciones de Compra">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
