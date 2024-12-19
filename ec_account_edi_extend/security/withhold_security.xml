@@ -1,5 +1,9 @@
 <data noupdate="1">
 
+    <record id="base.group_portal" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('account.group_show_line_subtotals_tax_excluded'))]"/>
+    </record>
+
     <!-- Portal for withholds -->
     <record id="account_withhold_rule_portal" model="ir.rule">
         <field name="name">Portal Personal Account Withholds</field>
