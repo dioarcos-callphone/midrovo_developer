@@ -82,7 +82,7 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
-        <!-- Cambiar el título de la página -->
+        <!-- Cambia el título de la página anteriormente estaba como My Invoices and Payments -->
         <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
             <t t-set="title">Mis Facturas</t>
         </xpath>
