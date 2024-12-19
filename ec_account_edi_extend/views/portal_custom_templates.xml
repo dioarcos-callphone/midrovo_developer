@@ -16,7 +16,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_refunds" name="Mis Notas de Créditos">
+    <template id="portal_my_refunds" name="Mis Notas de Crédito">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
