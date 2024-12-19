@@ -82,9 +82,6 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
-        <xpath expr="." position="attributes">
-            <attribute name="title">Mis Facturas</attribute>
-        </xpath>
         <xpath expr="//t[@t-if='not invoices']" position="replace">
             <t t-if="not invoices">
                 <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
