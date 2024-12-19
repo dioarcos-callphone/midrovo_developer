@@ -46,8 +46,6 @@ class PortalWithholding(CustomerPortal):
     @http.route(['/my/withholding', '/my/withholding/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_withholding(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
         values = self._prepare_my_withholding_values(page, date_begin, date_end, sortby, filterby)
-        
-        _logger.info(f'MOSTRANDO VALORES >>> { values }')
 
         # pager
         pager = portal_pager(**values['pager'])
@@ -55,6 +53,8 @@ class PortalWithholding(CustomerPortal):
         # content according to pager and archive selected
         withholdings = values['withholdings'](pager['offset'])
         request.session['my_withholdings_history'] = withholdings.ids[:100]
+        
+        _logger.info(f'MOSTRANDO WITHHOLDING >>> { withholdings }')
 
         values.update({
             'withholdings': withholdings,
