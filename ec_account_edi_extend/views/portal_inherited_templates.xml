@@ -82,39 +82,74 @@
 
     <!-- TEMPLATES QUE HEREDAN DEL MODULO ACCOUNT -->
     <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
-        <xpath expr="//t[@t-if='not invoices']" position="replace">
-            <t t-call="web.layout"/>
-            <t t-if="not invoices">
-                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
-                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <h4>No hay facturas disponibles</h4>
-                    <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
-                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
-                </div>
-            </t>
-        </xpath>
-        
-        <xpath expr="//a[@t-att-href]" position="replace">
-            <span t-att-title="invoice.name">
-                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
-                <em t-else="">Borrador de factura</em>
-            </span>
-        </xpath>
-        
-        <xpath expr="//th[@class='text-end']" position="after">
-            <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
-        </xpath>
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="replace">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
-        <xpath expr="//td[@class='text-end']" position="after">
-            <td class="text-center">
-                <span class="pdf-icon" style="margin: 5px;">
-                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
-                </span>
-                <span class="xml-icon" style="margin: 5px;">
-                    <a class="fa fa-file-code-o fa-lg" t-att-href="invoice.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
-                </span>
-            </td>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Facturas</t>
+                </t>
+                <t t-if="not invoices">
+                    <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                        <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <h4>No hay facturas disponibles</h4>
+                        <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
+                        <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                    </div>
+                </t>
+                <t t-if="invoices" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Factura #</th>
+                            <th>Fecha de Factura</th>
+                            <th class='d-none d-md-table-cell'>Fecha de Vencimiento</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-end">Importe Adeudado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="invoices" t-as="invoice">
+                            <tr>
+                                <td>
+                                    <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
+                                        <t t-out="invoice.name" t-if="invoice.name != '/'"/>
+                                        <em t-else="">Borrador de factura</em>
+                                    </a>
+                                </td>
+                                <td><span t-field="invoice.invoice_date"/></td>
+                                <td class='d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
+                                <td class="tx_status text-center">
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                        <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando el pago</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state in ('paid', 'in_payment')">
+                                        <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state == 'reversed'">
+                                        <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'cancel'">
+                                        <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                                    </t>
+                                </td>
+                                <td class="text-end"><span t-out="invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                                <td class="text-center">
+                                    <span class="pdf-icon" style="margin: 5px;">
+                                        <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                    </span>
+                                    <span class="xml-icon" style="margin: 5px;">
+                                        <a class="fa fa-file-code-o fa-lg" t-att-href="invoice.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            
+            </t>
+            
         </xpath>
+        
     </template>
 
     <!-- ...................... -->
