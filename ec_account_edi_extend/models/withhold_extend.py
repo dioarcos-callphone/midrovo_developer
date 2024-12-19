@@ -13,3 +13,6 @@ class WithholdExtend(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         return 'Retencion-%s' % (self.l10n_latam_document_number)
+    
+class WithholdLineExtend(models.Model):
+    _inherit = 'account.withhold.line'
