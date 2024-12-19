@@ -20,7 +20,7 @@
     </record>
 
 
-    <record id="account_withhold_rule_group_readonly" model="ir.rule">
+    <!-- <record id="account_withhold_rule_group_readonly" model="ir.rule">
         <field name="name">Readonly Withhold</field>
         <field name="model_id" ref="ec_account_edi_extend.model_account_withhold"/>
         <field name="domain_force">[(1, '=', 1)]</field>
@@ -38,6 +38,6 @@
         <field name="perm_write" eval="False"/>
         <field name="perm_create" eval="False"/>
         <field name="perm_unlink" eval="False"/>
-    </record>
+    </record> -->
 
 </data>
