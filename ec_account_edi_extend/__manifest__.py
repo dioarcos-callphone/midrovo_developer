@@ -22,6 +22,8 @@
         'portal',
     ],
     'data': [
+        'security/withhold_security.xml',
+        'security/ir.model.access.csv',
         'views/portal_inherited_templates.xml',
         'views/portal_custom_templates.xml',
     ],

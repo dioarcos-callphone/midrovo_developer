@@ -2,7 +2,7 @@
 <odoo>
     <!-- TEMPLATES PERSONALIZADOS -->
 
-    <!-- REEMBOLSOS -->
+    <!-- R E E M B O L S O S -->
     <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
@@ -85,7 +85,7 @@
     </template>
 
 
-    <!-- RETENCIONES -->
+    <!-- R E T E N C I O N E S -->
     <template id="portal_my_home_menu_withholding" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
@@ -169,7 +169,7 @@
       </t>
     </template>
 
-    <!-- GUIAS DE REMISION -->
+    <!-- G U IA S  D E  R E M I S I O N -->
     <template id="portal_my_home_menu_shipping_guides" name="Portal layout : shipping guides menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'shipping_guide'" t-attf-class="breadcrumb-item #{'active ' if not shipping_guide else ''}">
@@ -253,7 +253,7 @@
 
 
 
-    <!-- LIQUIDACIONES DE COMPRA -->
+    <!-- L I Q U I D A C I O N E S  D E  C O M P R A -->
     <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
