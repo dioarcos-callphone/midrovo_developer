@@ -125,7 +125,6 @@
                     <th class="text-center">Total retenido IVA</th>
                     <th class="text-center">Total retenido renta</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
-                    <th class="text-center"><span class="fa fa-file-code-o fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
