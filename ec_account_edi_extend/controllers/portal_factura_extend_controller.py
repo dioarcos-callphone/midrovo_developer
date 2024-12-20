@@ -143,7 +143,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         }
         
     def _get_puntos_emision(self):
-        printerPoint = self.env['sri.printer.point']
+        printerPoint = request.env['sri.printer.point']
         
         return printerPoint.search([])
     
