@@ -131,37 +131,37 @@ class CustomPortalEcAccountEdi(PortalAccount):
             return request.make_response(xml_decode, headers=headers)
         
         
-    def _get_account_searchbar_filters(self):
-        puntos_emision = self._get_puntos_emision()
+    # def _get_account_searchbar_filters(self):
+    #     puntos_emision = self._get_puntos_emision()
         
-        filtros = {
-            'all': { 'label': _('Todos'), 'domain': [] }
-        }
+    #     filtros = {
+    #         'all': { 'label': _('Todos'), 'domain': [] }
+    #     }
         
-        for punto_emision in puntos_emision:
-            filtros[punto_emision.name_get()[0][1]] = {
-                'label': _(punto_emision.name_get()[0][1]),
-                'domain': [('printer_id', '=', punto_emision.name_get()[0][0])]
-            }
+    #     for punto_emision in puntos_emision:
+    #         filtros[punto_emision.name_get()[0][1]] = {
+    #             'label': _(punto_emision.name_get()[0][1]),
+    #             'domain': [('printer_id', '=', punto_emision.name_get()[0][0])]
+    #         }
         
-        return filtros
+    #     return filtros
         
-    def _get_puntos_emision(self):
-        printerPoint = request.env['sri.printer.point']
+    # def _get_puntos_emision(self):
+    #     printerPoint = request.env['sri.printer.point']
         
-        return printerPoint.search([])
+    #     return printerPoint.search([])
     
     # extendemos este metodo para ocultar el filtro del search menu
-    # def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
-    #     # Llamamos al método original con super
-    #     values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
+    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+        # Llamamos al método original con super
+        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
         
-    #     # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
-    #     values.pop('searchbar_filters', None)  # Elimina si existe
-    #     values.pop('filterby', None)  # Elimina si existe
+        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
+        values.pop('searchbar_filters', None)  # Elimina si existe
+        values.pop('filterby', None)  # Elimina si existe
         
-    #     # Retornamos los valores modificados
-    #     return values
+        # Retornamos los valores modificados
+        return values
 
     # domain para documentos de factura
     def _get_invoices_domain(self):
