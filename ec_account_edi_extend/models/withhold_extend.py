@@ -16,3 +16,4 @@ class WithholdExtend(models.Model):
     
 class WithholdLineExtend(models.Model):
     _inherit = 'account.withhold.line'
+    
