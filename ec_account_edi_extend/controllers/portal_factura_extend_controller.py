@@ -129,18 +129,35 @@ class CustomPortalEcAccountEdi(PortalAccount):
             ]
             
             return request.make_response(xml_decode, headers=headers)
+        
+        
+    def _get_account_searchbar_filters(self):
+        puntos_emision = self._get_puntos_emision()
+        
+        _logger.info(f'MOSTRANDO PUNTOS DE EMISION >>>> { puntos_emision }')
+        
+        return {
+            'all': {'label': _('All'), 'domain': []},
+            'invoices': {'label': _('Invoices'), 'domain': [('move_type', 'in', ('out_invoice', 'out_refund'))]},
+            'bills': {'label': _('Bills'), 'domain': [('move_type', 'in', ('in_invoice', 'in_refund'))]},
+        }
+        
+    def _get_puntos_emision(self):
+        printerPoint = self.env['sri.printer.point']
+        
+        return printerPoint.search([])
     
     # extendemos este metodo para ocultar el filtro del search menu
-    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
-        # Llamamos al método original con super
-        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
+    # def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+    #     # Llamamos al método original con super
+    #     values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
         
-        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
-        values.pop('searchbar_filters', None)  # Elimina si existe
-        values.pop('filterby', None)  # Elimina si existe
+    #     # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
+    #     values.pop('searchbar_filters', None)  # Elimina si existe
+    #     values.pop('filterby', None)  # Elimina si existe
         
-        # Retornamos los valores modificados
-        return values
+    #     # Retornamos los valores modificados
+    #     return values
 
     # domain para documentos de factura
     def _get_invoices_domain(self):
