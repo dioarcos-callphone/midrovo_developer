@@ -139,7 +139,7 @@
                         <td><span t-field="withholding.creation_date"/></td>
                         <td><span t-field="withholding.invoice_id.name"/></td>
                         <td class="tx_status text-center">
-                            <!-- <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
                                 <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
                             </t>
                             <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state in ('paid', 'in_payment')">
@@ -147,7 +147,7 @@
                             </t>
                             <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state == 'reversed'">
                                 <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
-                            </t> -->
+                            </t>
                             <t t-if="withholding.state == 'canceled'">
                                 <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
                             </t>
