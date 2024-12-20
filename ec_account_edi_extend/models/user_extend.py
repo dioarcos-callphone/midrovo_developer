@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class UserExtend(models.Model):
     _inherit = 'res.users'
     
@@ -20,6 +23,8 @@ class UserExtend(models.Model):
                 if shop_id.printer_point_ids:
                     for printer_point_id in shop_id.printer_point_ids:
                         printer_point_ids.append(printer_point_id.id)
+                        
+        _logger.info(f'MOSTRANDO LISTA >>> { printer_point_ids }')
                         
         return [('id', 'in', printer_point_ids)]
     
