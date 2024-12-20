@@ -69,13 +69,13 @@ class PortalShippingGuide(CustomerPortal):
             return self._show_report(
                 model=shipping_guide_sudo,
                 report_type=report_type,
-                report_ref='ec_account_edi.e_retention_qweb',  # Nuevo valor para report_ref
+                report_ref='ec_account_edi.e_delivery_note_qweb',  # Nuevo valor para report_ref
                 download=download
             )
             
         if report_type == 'xml':
-            xml_name = shipping_guide_sudo.xml_name
-            xml_bytes = shipping_guide_sudo.xml_report
+            xml_name = shipping_guide_sudo.xml_data_id.xml_name
+            xml_bytes = shipping_guide_sudo.xml_data_id.xml_report
             
             # Si el XML está en base64, lo decodificamos
             xml_decode = base64.b64decode(xml_bytes)
