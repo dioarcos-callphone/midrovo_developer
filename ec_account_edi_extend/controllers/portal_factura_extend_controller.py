@@ -134,7 +134,8 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _get_account_searchbar_filters(self):
         puntos_emision = self._get_puntos_emision()
         
-        _logger.info(f'MOSTRANDO PUNTOS DE EMISION >>>> { puntos_emision }')
+        for punto_emision in puntos_emision:
+            _logger.info(f'MOSTRANDO PUNTO DE EMISION >>>> { punto_emision.get_name() }')
         
         return {
             'all': {'label': _('All'), 'domain': []},
