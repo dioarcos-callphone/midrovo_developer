@@ -1,4 +1,4 @@
-from odoo import http
+from odoo import http, _
 from odoo.osv import expression
 from odoo.exceptions import AccessError, MissingError
 from odoo.addons.portal.controllers.portal import pager as portal_pager
