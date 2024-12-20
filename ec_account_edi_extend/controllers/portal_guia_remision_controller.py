@@ -14,7 +14,8 @@ class PortalShippingGuide(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if 'shipping_guide_count' in counters:
-            values['shipping_guide_count'] = 0
+            values['shipping_guide_count'] = request.env['account.remision'].search_count(self._get_shipping_guide_domain()) \
+                if request.env['account.remision'].check_access_rights('read', raise_exception=False) else 0
 
         return values
     
@@ -31,8 +32,8 @@ class PortalShippingGuide(CustomerPortal):
     
     def _get_shipping_guide_searchbar_sortings(self):
         return {
-            'date': {'label': _('Fecha'), 'order': 'creation_date desc'},
-            'name': {'label': _('Referencia'), 'order': 'l10n_latam_document_number desc'},
+            'date': {'label': _('Fecha'), 'order': 'delivery_date desc'},
+            'name': {'label': _('Referencia'), 'order': 'document_number desc'},
             'state': {'label': _('Estado'), 'order': 'state'},
         }
     
@@ -58,7 +59,7 @@ class PortalShippingGuide(CustomerPortal):
     def portal_my_shipping_guide_detail(self, shipping_guide_id, access_token=None, report_type=None, download=False, **kw):
         try:
             # Verifica el acceso al documento
-            shipping_guide_sudo = self._document_check_access('account.withhold', shipping_guide_id, access_token)
+            shipping_guide_sudo = self._document_check_access('account.remision', shipping_guide_id, access_token)
             
         except (AccessError, MissingError):
             return request.redirect('/my')
@@ -90,7 +91,7 @@ class PortalShippingGuide(CustomerPortal):
     def _prepare_my_shipping_guide_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/shipping_guides"):
         values = self._prepare_portal_layout_values()
         
-        AccountShippingGuide = request.env['account.withhold']
+        AccountShippingGuide = request.env['account.remision']
 
         domain = expression.AND([
             domain or [],
