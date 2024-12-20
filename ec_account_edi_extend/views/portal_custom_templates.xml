@@ -153,7 +153,7 @@
                             </t>
                         </td>
                         <td class="text-end"><span t-out="withholding.total_iva" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
-                        <td class="text-end"><span t-out="5" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
+                        <td class="text-end"><span t-out="withholding.total_renta" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="withholding.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
@@ -169,7 +169,7 @@
       </t>
     </template>
 
-    <!-- G U IA S  D E  R E M I S I O N -->
+    <!-- G U I A S  D E  R E M I S I O N -->
     <template id="portal_my_home_menu_shipping_guides" name="Portal layout : shipping guides menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'shipping_guide'" t-attf-class="breadcrumb-item #{'active ' if not shipping_guide else ''}">
