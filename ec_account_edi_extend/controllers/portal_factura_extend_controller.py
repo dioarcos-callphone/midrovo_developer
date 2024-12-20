@@ -134,14 +134,17 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _get_account_searchbar_filters(self):
         puntos_emision = self._get_puntos_emision()
         
-        for punto_emision in puntos_emision:
-            _logger.info(f'MOSTRANDO PUNTO DE EMISION >>>> { punto_emision.name_get()[0][1] }')
-        
-        return {
-            'all': {'label': _('All'), 'domain': []},
-            'invoices': {'label': _('Invoices'), 'domain': [('move_type', 'in', ('out_invoice', 'out_refund'))]},
-            'bills': {'label': _('Bills'), 'domain': [('move_type', 'in', ('in_invoice', 'in_refund'))]},
+        filtros = {
+            'all': { 'label': _('Todos'), 'domain': [] }
         }
+        
+        for punto_emision in puntos_emision:
+            filtros[punto_emision.name_get()[0][1]] = {
+                'label': _(punto_emision.name_get()[0][1]),
+                'domain': [('printer_id', '=', punto_emision.name_get()[0][0])]
+            }
+        
+        return filtros
         
     def _get_puntos_emision(self):
         printerPoint = request.env['sri.printer.point']
