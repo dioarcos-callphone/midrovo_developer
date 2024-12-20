@@ -135,7 +135,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         puntos_emision = self._get_puntos_emision()
         
         for punto_emision in puntos_emision:
-            _logger.info(f'MOSTRANDO PUNTO DE EMISION >>>> { punto_emision.name_get() }')
+            _logger.info(f'MOSTRANDO PUNTO DE EMISION >>>> { punto_emision.name_get()[0] }')
         
         return {
             'all': {'label': _('All'), 'domain': []},
