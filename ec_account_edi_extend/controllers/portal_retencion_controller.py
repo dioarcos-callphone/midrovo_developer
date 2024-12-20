@@ -6,13 +6,11 @@ from odoo import http, _
 from odoo.osv import expression
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 from odoo.exceptions import AccessError, MissingError
-from collections import OrderedDict
 from odoo.http import request
 import base64
 
-
-import logging
-_logger = logging.getLogger(__name__)
+# import logging
+# _logger = logging.getLogger(__name__)
 
 class PortalWithholding(CustomerPortal):
     
@@ -53,8 +51,6 @@ class PortalWithholding(CustomerPortal):
         # content according to pager and archive selected
         withholdings = values['withholdings'](pager['offset'])
         request.session['my_withholdings_history'] = withholdings.ids[:100]
-        
-        _logger.info(f'MOSTRANDO WITHHOLDING >>> { withholdings }')
 
         values.update({
             'withholdings': withholdings,

@@ -177,7 +177,7 @@
                 <t t-else="">Guías de Remisión</t>
             </li>
             <li t-if="shipping_guide" class="breadcrumb-item active">
-                <t t-out="shipping_guide.name" t-if="shipping_guide.name != '/'"/>
+                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                 <t t-else=""><em>Borrador de guía de remisión</em></t>
             </li>
         </xpath>
@@ -203,10 +203,12 @@
             <thead>
                 <tr class="active">
                     <th>Guía de remisión #</th>
-                    <th>Fecha de guía de remisión</th>
-                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th>Fecha inicio de traslado</th>
+                    <th class='d-none d-md-table-cell'>Fecha fin de traslado</th>
+                    <th class="text-center">Dirección</th>
+                    <th class="text-center">Transportista</th>
+                    <th class="text-center">Tipo de traslado</th>
                     <th class="text-center">Estado</th>
-                    <th class="text-end">Importe adeudado</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -214,28 +216,17 @@
                 <t t-foreach="shipping_guides" t-as="shipping_guide">
                     <tr>
                         <td>
-                            <span t-att-title="shipping_guide.name">
-                                <t t-out="shipping_guide.name" t-if="shipping_guide.name != '/'"/>
+                            <span t-att-title="shipping_guide.document_number">
+                                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                                 <em t-else="">Borrador de guías de remisión</em>
                             </span>
                         </td>
-                        <td><span t-field="shipping_guide.invoice_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="shipping_guide.invoice_date_due"/></td>
-                        <td class="tx_status text-center">
-                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state not in ('in_payment', 'paid', 'reversed')">
-                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
-                            </t>
-                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state in ('paid', 'in_payment')">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
-                            </t>
-                            <t t-if="shipping_guide.state == 'posted' and shipping_guide.payment_state == 'reversed'">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
-                            </t>
-                            <t t-if="shipping_guide.state == 'cancel'">
-                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
-                            </t>
-                        </td>
-                        <td class="text-end"><span t-out="-shipping_guide.amount_residual if shipping_guide.move_type == 'out_refund' else shipping_guide.amount_residual" t-options='{"widget": "monetary", "display_currency": shipping_guide.currency_id}'/></td>
+                        <td><span t-field="shipping_guide.delivery_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="shipping_guide.transfer_date"/></td>
+                        <td class="text-center"><span t-field="delivery_address"/></td>
+                        <td class="text-center"><span t-field="delivery_carrier"/></td>
+                        <td class="text-center"><span t-field="remision_type"/></td>
+                        <td class="text-center"><span t-field="state"/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
