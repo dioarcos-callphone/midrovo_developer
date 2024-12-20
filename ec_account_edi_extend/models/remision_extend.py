@@ -13,3 +13,7 @@ class RemisionExtend(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         return 'Guia de remision-%s' % (self.l10n_latam_document_number)
+    
+class RemisionLineExtend(models.Model):
+    _inherit = 'account.remision.line'
+    
