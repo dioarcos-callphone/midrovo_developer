@@ -223,10 +223,10 @@
                         </td>
                         <td><span t-field="shipping_guide.delivery_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="shipping_guide.transfer_date"/></td>
-                        <td class="text-center"><span t-field="delivery_address"/></td>
-                        <td class="text-center"><span t-field="delivery_carrier"/></td>
-                        <td class="text-center"><span t-field="remision_type"/></td>
-                        <td class="text-center"><span t-field="state"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_address"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_carrier"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.remision_type"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.state"/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
