@@ -14,8 +14,6 @@ class UserExtend(models.Model):
         domain= lambda self: self._domain_printer_point_ids()
     )
     
-    
-    @api.depends('shop_ids')
     def _domain_printer_point_ids(self):
         printer_point_ids = []
         for record in self:
