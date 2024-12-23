@@ -27,7 +27,7 @@ class UserExtend(models.Model):
     )
     
     
-    @api.onchange('shop_ids')
+    @api.onchange('shop_ids', 'printer_default_ids')
     def on_change_shop_ids(self):
         if self.shop_ids:
             # Verificar si hay puntos de emisión que no están asociados a los establecimientos restantes
