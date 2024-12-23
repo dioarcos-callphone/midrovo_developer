@@ -11,7 +11,7 @@ class UserExtend(models.Model):
         'rel_user_shop',
         'user_id',
         'shop_id',
-        u'Estalecimientos Permitidos', 
+        u'Establecimientos Permitidos', 
     )
     
     printer_default_id = fields.Many2one(
