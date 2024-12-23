@@ -27,6 +27,11 @@ class UserExtend(models.Model):
     )
     
     
+    @api.onchange('shop_ids')
+    def on_change_shop_ids(self):
+        if not self.shop_ids:
+            self.printer_default_ids = False
+    
     
     @api.model
     def get_printer_point(self, user_id=False, get_all=True, raise_exception=True):
