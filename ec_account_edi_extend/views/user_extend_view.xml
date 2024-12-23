@@ -19,7 +19,7 @@
                         options="{'no_create': True}"
                         domain="[('shop_id', 'in', shop_ids)]"
                         attrs="{ 'readonly': [('shop_ids', '=', [])] }"
-                        on_change="on_change_shop_ids(shop_ids, printer_default_ids)"
+                        on_change="on_change_shop_ids(shop_ids)"
                         />
                 </xpath>
             </field>
