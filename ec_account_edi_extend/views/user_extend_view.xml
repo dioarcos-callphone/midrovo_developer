@@ -18,6 +18,8 @@
                         widget="many2many_tags"
                         options="{'no_create': True}"
                         domain="[('shop_id', 'in', shop_ids)]"
+                        attrs="{ 'readonly': [('shop_ids', '=', [])] }"
+                        
                         />
                 </xpath>
             </field>
