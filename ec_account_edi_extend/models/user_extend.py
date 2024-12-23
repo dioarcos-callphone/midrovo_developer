@@ -42,7 +42,7 @@ class UserExtend(models.Model):
 
         else:
             # Si no hay establecimientos, restablecer los puntos de emisión
-            self.printer_default_ids = False
+            self.printer_default_ids = []
     
     
     @api.model
