@@ -8,7 +8,7 @@ class UserExtend(models.Model):
     
     printer_default_id = fields.Many2one(
         'sri.printer.point',
-        u'Punto de Emisión',
+        u'Emisión por Defecto',
         required=False,
         index=True,
         auto_join=True,
