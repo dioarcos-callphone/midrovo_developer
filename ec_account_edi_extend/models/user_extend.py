@@ -26,20 +26,5 @@ class UserExtend(models.Model):
         u'Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
     )
-    
-    
-    @api.onchange('shop_ids')
-    def _onchange_shop_ids(self):
-        if self.shop_ids:
-            return {
-                'domain': {
-                    'printer_default_id': [('shop_id', 'in', self.shop_ids.ids)]
-                }
-            }
-        else:
-            return {
-                'domain': {
-                    'printer_default_id': []
-                }
-            }
+
     
