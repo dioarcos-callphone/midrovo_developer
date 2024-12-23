@@ -10,10 +10,13 @@ class UserExtend(models.Model):
         'sri.printer.point',
         u'Punto de Emisión',
         required=False,
-        index=True, auto_join=True,
-        domain= lambda self: self._domain_printer_point_ids()
+        index=True,
+        auto_join=True,
     )
     
-    filter_orders = fields.Boolean(u'Mostrar Solo pedidos de su Establecimiento?', readonly=False, )
+    filter_orders = fields.Boolean(
+        u'Mostrar Solo pedidos de su Establecimiento?',
+        readonly=False, 
+    )
     
     
