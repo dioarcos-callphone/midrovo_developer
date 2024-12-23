@@ -26,7 +26,7 @@
         'security/ir.model.access.csv',
         'views/portal_inherited_templates.xml',
         'views/portal_custom_templates.xml',
-        'views/usr_extend_view.xml',
+        'views/user_extend_view.xml',
     ],
     'assets': {
         'web.assets_frontend': [
