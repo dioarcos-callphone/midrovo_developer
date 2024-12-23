@@ -20,7 +20,6 @@ class UserExtend(models.Model):
         required=False,
         index=True,
         auto_join=True,
-        domain=[('shop_id','in', shop_ids)],  
     )
     
     filter_orders = fields.Boolean(
@@ -28,4 +27,19 @@ class UserExtend(models.Model):
         readonly=False, 
     )
     
+    
+    @api.onchange('shop_ids')
+    def _onchange_shop_ids(self):
+        if self.shop_ids:
+            return {
+                'domain': {
+                    'printer_default_id': [('shop_id', 'in', self.shop_ids.ids)]
+                }
+            }
+        else:
+            return {
+                'domain': {
+                    'printer_default_id': []
+                }
+            }
     
