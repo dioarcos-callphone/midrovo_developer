@@ -28,9 +28,21 @@ class UserExtend(models.Model):
     
     
     @api.onchange('shop_ids')
-    def on_change_shop_ids(self):                   
-        # Retirar elementos específicos de printer_default_ids sin eliminarlos
-        self.printer_default_ids = [(3, printer.id) for printer in self.printer_default_ids if printer.shop_id not in self.shop_ids ]
+    def on_change_shop_ids(self):
+        if self.shop_ids:
+            # Verificar si hay puntos de emisión que no están asociados a los establecimientos restantes
+            shop_ids_set = set(self.shop_ids.ids)
+            printer_default_ids_set = set(self.printer_default_ids.mapped('shop_id.id'))
+
+            # Si un punto de emisión está asociado con un establecimiento eliminado
+            for printer in self.printer_default_ids:
+                if printer.shop_id.id not in shop_ids_set:
+                    # Eliminar el punto de emisión de printer_default_ids
+                    self.printer_default_ids = [(3, printer.id)]  # Eliminar de Many2many
+
+        else:
+            # Si no hay establecimientos, restablecer los puntos de emisión
+            self.printer_default_ids = False
     
     
     @api.model
