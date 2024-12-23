@@ -24,12 +24,7 @@ class UserExtend(models.Model):
     filter_orders = fields.Boolean(
         string='Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
-    )
-    
-    color = fields.Integer(
-        string='color',
-    )
-    
+    )    
     
     
     # @api.onchange('shop_ids')
