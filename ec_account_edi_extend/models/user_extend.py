@@ -12,7 +12,7 @@ class UserExtend(models.Model):
         u'Establecimientos Permitidos', 
     )
     
-    printer_default_ids = fields.Many2Many(
+    printer_default_ids = fields.Many2many(
         'sri.printer.point',
         u'Puntos de emisión',
         required=False,
