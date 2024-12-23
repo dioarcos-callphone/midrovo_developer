@@ -37,7 +37,7 @@
     <record id="account_move_rule_by_printer_point" model="ir.rule">
         <field name="name">Regla de acceso por punto de emisión en facturas</field>
         <field name="model_id" ref="account.model_account_move"/>
-        <field name="domain_force">[('printer_id', '=', user.printer_default_id)]</field>
+        <field name="domain_force">[('printer_id', '=', user.printer_default_id.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/> <!-- Aquí asignas el grupo de usuarios internos que quieres que tenga la regla -->
     </record>
     
