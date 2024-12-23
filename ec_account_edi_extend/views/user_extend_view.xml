@@ -17,7 +17,7 @@
                         colspan="4"
                         options="{'no_create': True}"
                         domain="[('shop_id', 'in', shop_ids)]"
-                        attrs="{ 'invisible': [('shop_ids', '=', [])] }"
+                        attrs="{ 'readonly': [('shop_ids', '=', [])] }"
                         />
                 </xpath>
             </field>
