@@ -24,7 +24,16 @@ class PortalWithholding(CustomerPortal):
     
     # domain para documentos de retencion
     def _get_withholdings_domain(self):
-        return [('state', 'not in', ('canceled', 'draft'))]
+        # Se obtiene el punto de emisión del usuario interno actual
+        user = request.env.user
+        printer_default_ids = user.printer_default_ids
+        
+        domain = [('state', 'not in', ('canceled', 'draft'))]
+        
+        if printer_default_ids:
+            domain.append(('printer_id', '=', printer_default_ids.ids))
+        
+        return domain
     
     def _withholding_get_page_view_values(self, withholding, access_token, **kwargs):
         values = {

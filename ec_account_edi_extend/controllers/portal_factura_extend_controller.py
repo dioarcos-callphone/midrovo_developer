@@ -90,7 +90,16 @@ class CustomPortalEcAccountEdi(PortalAccount):
     
     # domain para documentos de reembolso
     def _get_out_refund_domain(self):
-        return [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
+        # Se obtiene el punto de emisión del usuario interno actual
+        user = request.env.user
+        printer_default_ids = user.printer_default_ids
+        
+        domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
+        
+        if printer_default_ids:
+            domain.append(('printer_id', '=', printer_default_ids.ids))
+        
+        return domain
 
     
     ################################################################################################

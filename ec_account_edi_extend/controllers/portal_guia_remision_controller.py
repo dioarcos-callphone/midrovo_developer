@@ -21,7 +21,16 @@ class PortalShippingGuide(CustomerPortal):
     
     # domain para documentos de guias de remision
     def _get_shipping_guide_domain(self):
-        return [('state', 'not in', ('canceled', 'draft'))]
+        # Se obtiene el punto de emisión del usuario interno actual
+        user = request.env.user
+        printer_default_ids = user.printer_default_ids
+        
+        domain = [('state', 'not in', ('canceled', 'draft'))]
+        
+        if printer_default_ids:
+            domain.append(('printer_id', '=', printer_default_ids.ids))
+        
+        return domain
     
     def _shipping_guide_get_page_view_values(self, shipping_guide, access_token, **kwargs):
         values = {
