@@ -9,12 +9,12 @@ class UserExtend(models.Model):
         'rel_user_shop',
         'user_id',
         'shop_id',
-        u'Establecimientos Permitidos', 
+        string='Establecimientos Permitidos', 
     )
     
     printer_default_ids = fields.Many2many(
         'sri.printer.point',
-        u'Puntos de emisión',
+        string='Puntos de emisión',
         required=False,
         index=True,
         auto_join=True,
@@ -22,7 +22,7 @@ class UserExtend(models.Model):
     )
     
     filter_orders = fields.Boolean(
-        u'Mostrar Solo pedidos de su Establecimiento?',
+        string='Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
     )
     
