@@ -15,7 +15,7 @@
                     <field
                         name="printer_default_ids"
                         colspan="4"
-                        widget="many2many"
+                        widget="many2many_tags"
                         options="{'no_create': True}"
                         domain="[('shop_id', 'in', shop_ids)]"
                         attrs="{ 'readonly': [('shop_ids', '=', [])] }"
