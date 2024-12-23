@@ -17,6 +17,7 @@ class UserExtend(models.Model):
         required=False,
         index=True,
         auto_join=True,
+        help= """Para seleccionar el punto de emision primero debe pertenecer a un establecimiento."""
     )
     
     filter_orders = fields.Boolean(
