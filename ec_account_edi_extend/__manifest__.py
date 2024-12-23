@@ -4,9 +4,11 @@
     'summary': 'Facturacion Electronica',
     'description': """
         - Modulo creado para Odoo 16 Community
-        - Actualizacion del portal de usuario
-        - Muestra iconos para descargar facturas pdf y xml
-        - Se agrega lista para documentos de notas de credito.
+        - Lista los documentos del cliente en el portal
+        - Documentos disponibles: facturas, notas de crédito, retenciones, guías de remisión y liquidación de compras.
+        - Opción para descargar facturas en formato PDF y XML.
+        - Se mejora el diseño del mensaje de aviso cuando no hay documentos disponibles.
+        - Filtrar por punto de emisión para los usuarios internos. (requerimiento del 20/12/2024)
     """,
     'category': 'Accounting',
     'author': 'Mauricio Idrovo',
