@@ -12,8 +12,6 @@ class UserExtend(models.Model):
         string='Establecimientos Permitidos', 
     )
     
-    color = fields.Integer(string='Color')
-    
     printer_default_ids = fields.Many2many(
         'sri.printer.point',
         string='Puntos de emisión',
@@ -27,6 +25,11 @@ class UserExtend(models.Model):
         string='Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
     )
+    
+    color = fields.Integer(
+        string='color',
+    )
+    
     
     
     # @api.onchange('shop_ids')
