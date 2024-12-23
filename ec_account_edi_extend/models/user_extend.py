@@ -32,7 +32,6 @@ class UserExtend(models.Model):
         if self.shop_ids:
             # Verificar si hay puntos de emisión que no están asociados a los establecimientos restantes
             shop_ids_set = set(self.shop_ids.ids)
-            printer_default_ids_set = set(self.printer_default_ids.mapped('shop_id.id'))
 
             # Si un punto de emisión está asociado con un establecimiento eliminado
             for printer in self.printer_default_ids:
@@ -42,7 +41,7 @@ class UserExtend(models.Model):
 
         else:
             # Si no hay establecimientos, restablecer los puntos de emisión
-            self.printer_default_ids = [()]
+            self.printer_default_ids = False
     
     
     @api.model
