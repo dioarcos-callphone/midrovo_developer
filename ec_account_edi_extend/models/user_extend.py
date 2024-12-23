@@ -28,9 +28,9 @@ class UserExtend(models.Model):
     
     
     @api.onchange('shop_ids')
-    def on_change_shop_ids(self):
-        if not self.shop_ids:
-            self.printer_default_ids = False
+    def on_change_shop_ids(self):                   
+        # Retirar elementos específicos de printer_default_ids sin eliminarlos
+        self.printer_default_ids = [(3, printer.id) for printer in self.printer_default_ids if printer.shop_id not in self.shop_ids ]
     
     
     @api.model
