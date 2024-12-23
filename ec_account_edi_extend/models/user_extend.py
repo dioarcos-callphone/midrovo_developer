@@ -12,7 +12,7 @@ class UserExtend(models.Model):
         string='Establecimientos Permitidos', 
     )
     
-    color = fields.Integer(string='Color')
+    # color = fields.Integer(string='Color')
     
     printer_default_ids = fields.Many2many(
         'sri.printer.point',
