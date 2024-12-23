@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 class UserExtend(models.Model):
     _inherit = 'res.users'
@@ -11,18 +12,69 @@ class UserExtend(models.Model):
         u'Establecimientos Permitidos', 
     )
     
-    printer_default_id = fields.Many2one(
+    printer_default_ids = fields.Many2Many(
         'sri.printer.point',
-        u'Emisión por Defecto',
+        u'Puntos de emisión',
         required=False,
         index=True,
         auto_join=True,
-        help= """Para seleccionar el punto de emision primero debe pertenecer a un establecimiento."""
+        help= """Para seleccionar el punto de emision primero debe pertenecer a uno o varios establecimientos."""
     )
     
     filter_orders = fields.Boolean(
         u'Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
     )
-
     
+    
+    
+    @api.model
+    def get_printer_point(self, user_id=False, get_all=True, raise_exception=True):
+        """
+        Valida que el usuario tenga configurado establecimiento y punto de emisión.
+        @param user_id: int, ID del usuario del que obtener los datos, en caso de no pasar, se tomará el usuario actual (uid)
+        @return: list(tuple(printer_id, shop_id), ......)
+        """
+        if not user_id:
+            user_id = self.env.uid
+        user = self.browse(user_id)
+        res = []
+        company_id = False
+
+        # Verificamos la existencia de empresas en el entorno
+        if len(self.env.companies) >= 1:
+            company_id = self.env.companies[0]
+
+        if company_id:
+            # Ahora se trabaja con un Many2many, por lo que se debe iterar sobre todos los registros relacionados
+            for printer in user.printer_default_ids:  # Iteramos sobre los registros de la relación Many2many
+                if printer.shop_id.company_id == company_id:
+                    temp = (printer.id, printer.shop_id.id)
+                    if temp not in res:
+                        res.append(temp)
+
+            if not res or get_all:
+                # Aquí se sigue buscando impresoras asociadas a los puntos de venta del usuario
+                for shop in user.shop_ids:
+                    if shop.company_id != company_id:
+                        continue
+                    for printer in shop.printer_point_ids:
+                        temp = (printer.id, shop.id)
+                        if temp not in res:
+                            res.append(temp)
+
+            # Si no se han encontrado resultados y se requiere una excepción
+            if not res and raise_exception:
+                raise UserError(_(u'Su usuario no tiene configurado correctamente los permisos(Establecimiento, Punto de Emisión), por favor verifique con el administrador'))
+        else:
+            # Si no hay una sola compañía configurada, se lanza un error
+            raise UserError(_(u'Para poder facturar debe seleccionar una sola compañía, por favor verifique con el administrador'))
+
+        # Si no se han encontrado resultados y se requiere una excepción
+        if not res and raise_exception:
+            raise UserError(_(u'Su usuario no tiene configurado correctamente los permisos(Establecimiento, Punto de Emisión), por favor verifique con el administrador'))
+
+        return res
+
+
+        

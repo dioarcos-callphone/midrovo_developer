@@ -165,13 +165,13 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
     # domain para documentos de factura
     def _get_invoices_domain(self):
-        # Obtén el punto de emisión del usuario actual
+        # Se obtiene el punto de emisión del usuario interno actual
         user = request.env.user
-        printer_default_id = user.printer_default_id
+        printer_default_ids = user.printer_default_ids
         
         domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
         
-        if printer_default_id:
-            domain.append(('printer_id', '=', printer_default_id.id))
+        if printer_default_ids:
+            domain.append(('printer_id', '=', printer_default_ids.ids))
         
         return domain
