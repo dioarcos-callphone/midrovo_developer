@@ -13,7 +13,7 @@
                         name="printer_default_ids"
                         colspan="4"
                         widget="many2many_tags"
-                        options="{'no_create': True, 'color_field': '1'}"                      
+                        options="{'no_create': True, 'color_field': 'color'}"                      
                         />
                 </xpath>
             </field>
