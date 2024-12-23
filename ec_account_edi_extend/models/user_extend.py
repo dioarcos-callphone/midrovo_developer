@@ -14,18 +14,6 @@ class UserExtend(models.Model):
         domain= lambda self: self._domain_printer_point_ids()
     )
     
-    def _domain_printer_point_ids(self):
-        printer_point_ids = []
-        for record in self:
-            for shop_id in record.shop_ids:
-                _logger.info(f'MOSTRANDO SHOP >>> { shop_id }')
-                if shop_id.printer_point_ids:
-                    
-                    for printer_point_id in shop_id.printer_point_ids:
-                        _logger.info(f'MOSTRANDO POINT >>> { printer_point_id }')
-                        printer_point_ids.append(printer_point_id.id)
-                        
-        # _logger.info(f'MOSTRANDO LISTA >>> { printer_point_ids }')
-                        
-        return [('id', 'in', printer_point_ids)]
+    filter_orders = fields.Boolean(u'Mostrar Solo pedidos de su Establecimiento?', readonly=False, )
+    
     
