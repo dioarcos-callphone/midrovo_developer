@@ -2,9 +2,6 @@
 <odoo>
     <data>
 
-        <!-- SE ESTABLECE UN DOMAIN EN EMISION POR DEFECTO, SI EL USUARIO TIENE UNO O VARIOS ESTABLECIMIENTOS
-        ENTONCES SE MUESTRAN LOS PUNTOS DE EMISION DE CADA ESTABLECIMIENTO Y SOLO PERMITE SELECCIONAR UNO -->
-
         <record id="res_user_multi_form_extend_view" model="ir.ui.view">
             <field name="name">res.user.multi.form.extend.view</field>
             <field name="model">res.users</field>
@@ -17,8 +14,7 @@
                         colspan="4"
                         widget="many2many_tags"
                         options="{'no_create': True}"
-                        
-                        
+                        color="1"                      
                         />
                 </xpath>
             </field>
