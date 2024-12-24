@@ -3,8 +3,9 @@
     <data>
         <template id="report_invoice_document_extend" name="Invoice Document" inherit_id="ec_account_edi.report_invoice_document">
             <xpath expr="//t[@t-if='document.move_type == 'liquidacion'']" position="replace">
-                <t t-if="document.liqudation == True"
-                    t-set="document_string" t-value="'LIQUIDACION DE COMPRA'" />
+                <t t-if="document.liquidation == True"
+                   t-set="document_string" 
+                   t-value="'LIQUIDACION DE COMPRA'" />
             </xpath>
         </template>
     </data>
