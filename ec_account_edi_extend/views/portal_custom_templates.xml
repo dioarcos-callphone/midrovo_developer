@@ -278,10 +278,12 @@
             <thead>
                 <tr class="active">
                     <th>Liquidación de compra #</th>
-                    <th>Fecha de liquidación de compra</th>
+                    <th>Fecha de la factura</th>
                     <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
-                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center">Impuestos no incluidos</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-end">Total en moneda</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -310,7 +312,9 @@
                                 <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
                             </t>
                         </td>
-                        <td class="text-end"><span t-out="-purchase_settlement.amount_residual if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_residual" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_untaxed_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_total_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-end"><span t-out="-purchase_settlement.amount_total_in_currency_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
