@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+from random import randint
 
 class UserExtend(models.Model):
     _inherit = 'res.users'
@@ -24,8 +25,15 @@ class UserExtend(models.Model):
     filter_orders = fields.Boolean(
         string='Mostrar Solo pedidos de su Establecimiento?',
         readonly=False, 
-    )    
+    )
     
+    color = fields.Integer(
+        string='Color',
+        default='_get_default_color'
+    )
+    
+    def _get_default_color(self):
+        return randint(1, 11)
     
     # @api.onchange('shop_ids')
     # def on_change_shop_ids(self):
