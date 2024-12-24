@@ -25,7 +25,7 @@ class PortalPurchaseSettlement(CustomerPortal):
         user = request.env.user
         printer_default_ids = user.printer_default_ids
         
-        domain = [('state', 'not in', ('canceled', 'draft'),('liquidation','=',True))]
+        domain = [('state', 'not in', ('canceled', 'draft'),('liquidation','=','t'))]
         
         if printer_default_ids:
             domain.append(('journal_id.printer_id', 'in', printer_default_ids.ids))
