@@ -29,6 +29,7 @@
         'views/portal_inherited_templates.xml',
         'views/portal_custom_templates.xml',
         'views/user_extend_view.xml',
+        'reports/report_invoice_document_extend.xml',
     ],
     'assets': {
         'web.assets_frontend': [
