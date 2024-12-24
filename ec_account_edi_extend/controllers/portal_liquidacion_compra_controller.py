@@ -14,7 +14,8 @@ class PortalPurchaseSettlement(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if 'purchase_settlement_count' in counters:
-            values['purchase_settlement_count'] = 0
+            values['purchase_settlement_count'] = request.env['account.move'].search_count(self._get_purchase_settlement_domain()) \
+                if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
 
         return values
     
@@ -24,10 +25,10 @@ class PortalPurchaseSettlement(CustomerPortal):
         user = request.env.user
         printer_default_ids = user.printer_default_ids
         
-        domain = [('state', 'not in', ('canceled', 'draft'))]
+        domain = [('state', 'not in', ('canceled', 'draft'),('liquidation','=',True))]
         
         if printer_default_ids:
-            domain.append(('printer_id', '=', printer_default_ids.ids))
+            domain.append(('journal_id.printer_id', 'in', printer_default_ids.ids))
         
         return domain
     
@@ -40,8 +41,8 @@ class PortalPurchaseSettlement(CustomerPortal):
     
     def _get_purchase_settlement_searchbar_sortings(self):
         return {
-            'date': {'label': _('Fecha'), 'order': 'creation_date desc'},
-            'name': {'label': _('Referencia'), 'order': 'l10n_latam_document_number desc'},
+            'date': {'label': _('Fecha'), 'order': 'invoice_date desc'},
+            'name': {'label': _('Referencia'), 'order': 'name desc'},
             'state': {'label': _('Estado'), 'order': 'state'},
         }
     
@@ -67,7 +68,7 @@ class PortalPurchaseSettlement(CustomerPortal):
     def portal_my_purchase_settlement_detail(self, purchase_settlement_id, access_token=None, report_type=None, download=False, **kw):
         try:
             # Verifica el acceso al documento
-            purchase_settlement_sudo = self._document_check_access('account.withhold', purchase_settlement_id, access_token)
+            purchase_settlement_sudo = self._document_check_access('account.move', purchase_settlement_id, access_token)
             
         except (AccessError, MissingError):
             return request.redirect('/my')
@@ -99,7 +100,7 @@ class PortalPurchaseSettlement(CustomerPortal):
     def _prepare_my_purchase_settlement_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/purchase_settlements"):
         values = self._prepare_portal_layout_values()
         
-        AccountPurchaseSettlement = request.env['account.withhold']
+        AccountPurchaseSettlement = request.env['account.move']
 
         domain = expression.AND([
             domain or [],

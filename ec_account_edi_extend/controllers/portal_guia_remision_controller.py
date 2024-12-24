@@ -28,7 +28,7 @@ class PortalShippingGuide(CustomerPortal):
         domain = [('state', 'not in', ('canceled', 'draft'))]
         
         if printer_default_ids:
-            domain.append(('printer_id', '=', printer_default_ids.ids))
+            domain.append(('printer_id', 'in', printer_default_ids.ids))
         
         return domain
     

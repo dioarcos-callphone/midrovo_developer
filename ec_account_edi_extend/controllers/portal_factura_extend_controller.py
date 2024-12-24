@@ -97,7 +97,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_refund')]
         
         if printer_default_ids:
-            domain.append(('printer_id', '=', printer_default_ids.ids))
+            domain.append(('printer_id', 'in', printer_default_ids.ids))
         
         return domain
 
@@ -181,6 +181,6 @@ class CustomPortalEcAccountEdi(PortalAccount):
         domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice')]
         
         if printer_default_ids:
-            domain.append(('printer_id', '=', printer_default_ids.ids))
+            domain.append(('printer_id', 'in', printer_default_ids.ids))
         
         return domain
