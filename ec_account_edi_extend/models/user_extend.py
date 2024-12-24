@@ -29,7 +29,8 @@ class UserExtend(models.Model):
     
     color = fields.Integer(
         string='Color',
-        default='_get_default_color'
+        default='_get_default_color',
+        store=False
     )
     
     def _get_default_color(self):
