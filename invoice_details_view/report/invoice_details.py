@@ -274,32 +274,33 @@ class InvoiceDetails(models.AbstractModel):
                             _logger.info(f'CONTIENE POS_ORDER PRIMER ELSE >>>> { pos_order }')
                     
                             # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                            if pos_order:
-                                for payment in pos_order.payment_ids:
-                                    if not payment.payment_method_id.journal_id:
-                                        data_detail['receivable'] = payment.amount
+                            # if pos_order:
+                            #     for payment in pos_order.payment_ids:
+                            #         if not payment.payment_method_id.journal_id:
+                            #             data_detail['receivable'] = payment.amount
                             
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
                             
-                            if journal.type in data_detail:
+                            if journal.type == 'cash':
                                 # Sumar el monto si el método ya existe
-                                data_detail[journal.type] += content.get('amount', 0)
-                            else:
+                                data_detail['cash'] += content.get('amount', 0)
+                                
+                            elif journal.type == 'bank':
                                 # Inicializar con el monto
-                                data_detail[journal.type] = content.get('amount', 0)
+                                data_detail['bank'] += content.get('amount', 0)
                                 
                             # data_detail[ journal.type ] = content['amount']
                 
-                else:
-                    pos_order = invoice.pos_order_ids
+                # else:
+                #     pos_order = invoice.pos_order_ids
                     
-                    _logger.info(f'CONTIENE POS_ORDER SEGUNDO ELSE >>>> { pos_order }')
+                #     _logger.info(f'CONTIENE POS_ORDER SEGUNDO ELSE >>>> { pos_order }')
                     
-                    # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                    if pos_order:
-                        for payment in pos_order.payment_ids:
-                            data_detail['receivable'] = payment.amount
+                #     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
+                #     if pos_order:
+                #         for payment in pos_order.payment_ids:
+                #             data_detail['receivable'] = payment.amount
               
                 monto_cuenta_por_cobrar = round((data_detail['cash'] + data_detail['bank']),2)                
                 data_detail['receivable'] = round((data_detail['total'] - monto_cuenta_por_cobrar),2)
