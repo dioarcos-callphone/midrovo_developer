@@ -267,7 +267,7 @@ class InvoiceDetails(models.AbstractModel):
                                 
                                 pos_orders = move_id.pos_order_ids
                                 
-                                _logger.info(f'MOSTRANDO POS ORDERS >>> { pos_orders }')
+                                _logger.info(f'MOSTRANDO POS ORDERS >>> { pos_orders } DEL ACCOUNT MOVE { id }')
                             
                             # else:
                             #     # Inicializar con el monto
