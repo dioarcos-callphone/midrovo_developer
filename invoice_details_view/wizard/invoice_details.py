@@ -109,14 +109,17 @@ class InvoiceDetails(models.TransientModel):
                     data_detail['iva'] = - data_detail['iva']
                     data_detail['total'] = - data_detail['total']
                 
+                
                 payment_widget = invoice.invoice_payments_widget
+                
+                _logger.info(f'MOSTRANDO PAYMENT WIDGET >>>> { payment_widget }')
                 
                 if payment_widget:
                     contents = payment_widget['content']
                     
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
-                        _logger.info(f'MOSTRANDO POS PAYMENT >>>> { pos_payment_name }')
+
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             
