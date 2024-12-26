@@ -112,7 +112,7 @@ class InvoiceDetails(models.TransientModel):
                     contents = payment_widget['content']
                     
                     for content in contents:
-                        pos_payment_name = content['pos_payment_name']
+                        pos_payment_name = content.get('pos_payment_name', None)
                         
                         if not pos_payment_name:
                             journal_name = content['journal_name']
@@ -360,7 +360,7 @@ class InvoiceDetails(models.TransientModel):
                     contents = payment_widget['content']
                     
                     for content in contents:
-                        pos_payment_name = content['pos_payment_name']
+                        pos_payment_name = content.get('pos_payment_name', None)
                         
                         if not pos_payment_name:
                             journal_name = content['journal_name']
