@@ -13,6 +13,7 @@ publicWidget.registry.PortalHomeCounters.include({
             'withholding_count',
             'shipping_guide_count',
             'purchase_settlement_count',
+            'debit_note_count',
         ]);
     },
 });
