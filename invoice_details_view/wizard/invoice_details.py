@@ -4,6 +4,9 @@ from datetime import datetime
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -113,7 +116,7 @@ class InvoiceDetails(models.TransientModel):
                     
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
-                        
+                        _logger.info(f'MOSTRANDO POS PAYMENT >>>> { pos_payment_name }')
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             
