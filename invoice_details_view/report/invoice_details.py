@@ -263,7 +263,7 @@ class InvoiceDetails(models.AbstractModel):
                                 data_detail['bank'] += content.get('amount', 0)
                             else:
                                 id = content.get('move_id', None)
-                                move_id = self.env['account.move'].search([('move_id', '=', id)])
+                                move_id = self.env['account.move'].search([('id', '=', id)])
                                 
                                 pos_orders = move_id.pos_order_ids
                                 
