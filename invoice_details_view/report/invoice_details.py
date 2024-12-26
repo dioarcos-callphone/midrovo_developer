@@ -2,6 +2,11 @@ from odoo import models, api
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
+
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class InvoiceDetails(models.AbstractModel):
     _name = 'report.invoice_details_view.report_invoice_details'
     _description = 'Reporte de Detalles de Facturas'
@@ -296,7 +301,9 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['receivable'] = round((data_detail['total'] - monto_cuenta_por_cobrar),2)
                 
                 data_invoice_details.append(data_detail)
-                
+            
+                _logger.info(f'MOSTRANDO DATA INVOICE DETAIL >>> { data_detail }')
+               
             return data_invoice_details
         
         else:
