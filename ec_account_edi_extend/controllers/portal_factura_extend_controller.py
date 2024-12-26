@@ -26,7 +26,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
                 
         if 'debit_note_count' in counters:
             values['debit_note_count'] = request.env['account.move'].search_count(self._get_debit_note_domain()) \
-                if request.env['debit_note_count'].check_access_rights('read', raise_exception=False) else 0
+                if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
 
         return values
     
