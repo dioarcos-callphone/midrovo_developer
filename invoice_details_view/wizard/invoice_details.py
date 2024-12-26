@@ -112,8 +112,6 @@ class InvoiceDetails(models.TransientModel):
                 
                 payment_widget = invoice.invoice_payments_widget
                 
-                _logger.info(f'MOSTRANDO PAYMENT WIDGET >>>> { payment_widget }')
-                
                 if payment_widget:
                     contents = payment_widget['content']
                     
@@ -123,49 +121,38 @@ class InvoiceDetails(models.TransientModel):
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             
-                            if journal_name == 'Point of Sale':
-                                data_detail['receivable'] = content.get('amount', 0)
+                            # if journal_name == 'Point of Sale':
+                            #     data_detail['receivable'] = content.get('amount', 0)
                             
                             journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)
                             
-                            if journal.type in data_detail:
+                            if journal.type == 'cash':
                                 # Sumar el monto si el método ya existe
-                                data_detail[journal.type] += content.get('amount', 0)
-                            else:
-                                # Inicializar con el monto
-                                data_detail[journal.type] = content.get('amount', 0)
+                                data_detail['cash'] += content.get('amount', 0)
+                            elif journal.type == 'bank':
+                                data_detail['bank'] += content.get('amount', 0)
                             
                             # data_detail[ journal.type ] = content['amount']
                                 
                         else:
-                            pos_order = invoice.pos_order_ids
-                    
-                            # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                            if pos_order:
-                                for payment in pos_order.payment_ids:
-                                    if not payment.payment_method_id.journal_id:
-                                        data_detail['receivable'] = payment.amount
-                            
-                            
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
                             
-                            if journal.type in data_detail:
+                            if journal.type == 'cash':
                                 # Sumar el monto si el método ya existe
-                                data_detail[journal.type] += content.get('amount', 0)
-                            else:
-                                # Inicializar con el monto
-                                data_detail[journal.type] = content.get('amount', 0)
-                            
+                                data_detail['cash'] += content.get('amount', 0)
+                            elif journal.type == 'bank':
+                                data_detail['bank'] += content.get('amount', 0)
+
                             # data_detail[ journal.type ] = content['amount']
                 
-                else:
-                    pos_order = invoice.pos_order_ids
+                # else:
+                #     pos_order = invoice.pos_order_ids
                     
-                    # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                    if pos_order:
-                        for payment in pos_order.payment_ids:
-                            data_detail['receivable'] = payment.amount          
+                #     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
+                #     if pos_order:
+                #         for payment in pos_order.payment_ids:
+                #             data_detail['receivable'] = payment.amount          
                 
                 monto_cuenta_por_cobrar = round((data_detail['cash'] + data_detail['bank']),2)                
                 data_detail['receivable'] = round((data_detail['total'] - monto_cuenta_por_cobrar),2)

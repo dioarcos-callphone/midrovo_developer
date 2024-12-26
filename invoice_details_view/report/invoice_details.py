@@ -268,17 +268,7 @@ class InvoiceDetails(models.AbstractModel):
                                 
                             # data_detail[ journal.type ] = content['amount']             
                                                       
-                        else:
-                            pos_order = invoice.pos_order_ids
-                            
-                            _logger.info(f'CONTIENE POS_ORDER PRIMER ELSE >>>> { pos_order }')
-                    
-                            # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                            # if pos_order:
-                            #     for payment in pos_order.payment_ids:
-                            #         if not payment.payment_method_id.journal_id:
-                            #             data_detail['receivable'] = payment.amount
-                            
+                        else:                            
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
                             journal = pos_payment.journal_id
                             
