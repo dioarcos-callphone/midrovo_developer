@@ -261,6 +261,13 @@ class InvoiceDetails(models.AbstractModel):
                                 
                             elif journal.type == 'bank':
                                 data_detail['bank'] += content.get('amount', 0)
+                            else:
+                                id = content.get('move_id', None)
+                                move_id = self.env['account.move'].search([('move_id', '=', id)])
+                                
+                                pos_orders = move_id.pos_order_ids
+                                
+                                _logger.info(f'MOSTRANDO POS ORDERS >>> { pos_orders }')
                             
                             # else:
                             #     # Inicializar con el monto
