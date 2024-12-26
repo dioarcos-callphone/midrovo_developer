@@ -270,6 +270,8 @@ class InvoiceDetails(models.AbstractModel):
                                                       
                         else:
                             pos_order = invoice.pos_order_ids
+                            
+                            _logger.info(f'CONTIENE POS_ORDER PRIMER ELSE >>>> { pos_order }')
                     
                             # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                             if pos_order:
@@ -292,6 +294,8 @@ class InvoiceDetails(models.AbstractModel):
                 else:
                     pos_order = invoice.pos_order_ids
                     
+                    _logger.info(f'CONTIENE POS_ORDER SEGUNDO ELSE >>>> { pos_order }')
+                    
                     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
                         for payment in pos_order.payment_ids:
@@ -302,7 +306,7 @@ class InvoiceDetails(models.AbstractModel):
                 
                 data_invoice_details.append(data_detail)
             
-                _logger.info(f'MOSTRANDO DATA INVOICE DETAIL >>> { data_detail }')
+                # _logger.info(f'MOSTRANDO DATA INVOICE DETAIL >>> { data_detail }')
                
             return data_invoice_details
         
