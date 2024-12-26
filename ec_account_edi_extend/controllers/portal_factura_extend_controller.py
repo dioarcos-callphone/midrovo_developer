@@ -222,7 +222,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         domain = expression.AND([
             domain or [],
-            self._get_out_debit_note_domain(),
+            self._get_debit_note_domain(),
         ])
 
         searchbar_sortings = self._get_account_searchbar_sortings()
@@ -259,7 +259,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         return values
     
     # domain para documentos de reembolso
-    def _get_out_debit_note_domain(self):
+    def _get_debit_note_domain(self):
         # Se obtiene el punto de emisión del usuario interno actual
         user = request.env.user
         printer_default_ids = user.printer_default_ids
