@@ -282,6 +282,7 @@ class InvoiceDetails(models.AbstractModel):
                                     if lines:
                                         for line in lines:
                                             name = line.name
+                                            _logger.info(f'MOSTRANDO NAME >>> { name }')
                                             payment_name = name.split("-")[1].strip()
                                 
                                             pos_payment = self.env['pos.payment.method'].search([('name', '=', payment_name)])
