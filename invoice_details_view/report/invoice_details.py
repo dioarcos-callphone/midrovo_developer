@@ -205,7 +205,9 @@ class InvoiceDetails(models.AbstractModel):
         
         orders = factura.pos_order_ids
         payments = factura.pos_payment_ids
+        widgets = factura.invoice_payments_widget
         
+        _logger.info(f'MOSTRANDO WIDGET >>> { widgets }')
         _logger.info(f'MOSTRANDO POS ORDER >>> { orders }')
         _logger.info(f'MOSTRANDO POS PAPYMENT >>> { payments }')
         
