@@ -265,7 +265,7 @@ class InvoiceDetails(models.AbstractModel):
                                 move_id = self.env['account.move'].search([('id', '=', id)])
                                 
                                 if move_id:
-                                    lines = move_id.line_ids.filtered(lambda line : line.debit == content_amount)
+                                    lines = move_id.line_ids.filtered(lambda line : line.debit > 0)
                                     
                                     if lines:
                                         for line in lines:
