@@ -199,7 +199,7 @@ class InvoiceDetails(models.AbstractModel):
     
     def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):
         
-        factura = self.env['account.move'].search([('id', '=', 2801)])
+        factura = self.env['account.move'].search([('id', '=', 3059)])
         
         _logger.info(f'MOSTRANDO FACTURA >>> { factura }')
         
