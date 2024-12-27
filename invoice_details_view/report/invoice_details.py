@@ -260,6 +260,7 @@ class InvoiceDetails(models.AbstractModel):
                     contents = payment_widget['content']
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
+                        content_amount = content.get('amount', 0)
                         if not pos_payment_name:
                             journal_name = content['journal_name']
 
@@ -267,17 +268,17 @@ class InvoiceDetails(models.AbstractModel):
                             
                             if journal.type == 'cash':
                                 # Sumar el monto si el método ya existe
-                                data_detail['cash'] += content.get('amount', 0)
+                                data_detail['cash'] += content_amount
                                 
                             elif journal.type == 'bank':
-                                data_detail['bank'] += content.get('amount', 0)
+                                data_detail['bank'] += content_amount
                                 
                             else:
                                 id = content.get('move_id', None)
                                 move_id = self.env['account.move'].search([('id', '=', id)])
                                 
                                 if move_id:
-                                    lines = move_id.line_ids.filtered(lambda line : line.debit > 0)
+                                    lines = move_id.line_ids.filtered(lambda line : line.debit == content_amount)
                                     
                                     if lines:
                                         for line in lines:
@@ -290,10 +291,10 @@ class InvoiceDetails(models.AbstractModel):
                                         
                                             if journal.type == 'cash':
                                                 # Sumar el monto si el método ya existe
-                                                data_detail['cash'] += content.get('amount', 0)
+                                                data_detail['cash'] += content_amount
                                                 
                                             elif journal.type == 'bank':
-                                                data_detail['bank'] += content.get('amount', 0)
+                                                data_detail['bank'] += content_amount
     
                                                       
                         else:                            
@@ -302,10 +303,10 @@ class InvoiceDetails(models.AbstractModel):
                             
                             if journal.type == 'cash':
                                 # Sumar el monto si el método ya existe
-                                data_detail['cash'] += content.get('amount', 0)
+                                data_detail['cash'] += content_amount
                                 
                             elif journal.type == 'bank':
-                                data_detail['bank'] += content.get('amount', 0)
+                                data_detail['bank'] += content_amount
                                 
                             # data_detail[ journal.type ] = content['amount']
                 
