@@ -272,7 +272,7 @@ class InvoiceDetails(models.AbstractModel):
                                             _logger.info(f'MOSTRANDO PAGOS >>> { line.matched_credit_ids  }')
                                             name = line.name
                                             _logger.info(f'MOSTRANDO NAME >>> { name }')
-                                            payment_name = name.split("-")[1].strip()
+                                            payment_name = name
                                 
                                             pos_payment = self.env['pos.payment.method'].search([('name', '=', payment_name)])
                                             journal = pos_payment.journal_id
