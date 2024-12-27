@@ -265,6 +265,7 @@ class InvoiceDetails(models.AbstractModel):
                                 move_id = self.env['account.move'].search([('id', '=', id)])
                                 
                                 if move_id:
+                                    _logger.info(f'MOSTRANDO CREDIT DEBIT >>> { move_id.invoice_outstanding_credits_debits_widget }')
                                     lines = move_id.line_ids.filtered(lambda line : line.debit > 0)
                                     
                                     if lines:
