@@ -265,7 +265,7 @@ class InvoiceDetails(models.AbstractModel):
                                 reconcile_id = self.env['account.partial.reconcile'].search([('id', '=', partial_id)])
                                 
                                 if reconcile_id:
-                                    debit_move = reconcile_id.debit_move_id
+                                    debit_move = reconcile_id.credit_move_id
                                     
                                     _logger.info(f"""
                                                  
@@ -279,8 +279,7 @@ class InvoiceDetails(models.AbstractModel):
                                                  ORDER ID   :   { debit_move.move_id.pos_order_ids }    |
                                                  PAYMENT ID :   { debit_move.move_id.pos_payment_ids }  |
                                                  
-                                                 """)
-                                
+                                                 """)                                
                                 
                                 id = content.get('move_id', None)
                                 move_id = self.env['account.move'].search([('id', '=', id)])
@@ -302,9 +301,11 @@ class InvoiceDetails(models.AbstractModel):
                                             if journal.type == 'cash':
                                                 # Sumar el monto si el método ya existe
                                                 data_detail['cash'] += content_amount
+                                                break
                                                 
                                             elif journal.type == 'bank':
                                                 data_detail['bank'] += content_amount
+                                                break
     
                                                       
                         else:                            
