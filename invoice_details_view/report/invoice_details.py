@@ -281,8 +281,8 @@ class InvoiceDetails(models.AbstractModel):
                                     
                                     if lines:
                                         for line in lines:
-                                            debit = line.debit
-                                            payment_name = debit.split("-")[1].strip()
+                                            name = line.name
+                                            payment_name = name.split("-")[1].strip()
                                 
                                             pos_payment = self.env['pos.payment.method'].search([('name', '=', payment_name)])
                                             journal = pos_payment.journal_id
