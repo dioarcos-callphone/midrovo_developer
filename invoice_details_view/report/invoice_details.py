@@ -269,7 +269,7 @@ class InvoiceDetails(models.AbstractModel):
                                     
                                     if lines:
                                         for line in lines:
-                                            _logger.info(f'MOSTRANDO PAGOS >>> { line.matched_debit_ids }')
+                                            _logger.info(f'MOSTRANDO PAGOS >>> { line.matched_credit_ids  }')
                                             name = line.name
                                             _logger.info(f'MOSTRANDO NAME >>> { name }')
                                             payment_name = name.split("-")[1].strip()
