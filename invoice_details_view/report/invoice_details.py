@@ -248,6 +248,7 @@ class InvoiceDetails(models.AbstractModel):
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
                         content_amount = content.get('amount', 0)
+                        partial_id = content.get('partial_id', 0)
                         if not pos_payment_name:
                             journal_name = content['journal_name']
 
@@ -261,6 +262,20 @@ class InvoiceDetails(models.AbstractModel):
                                 data_detail['bank'] += content_amount
                                 
                             else:
+                                reconcile_id = self.env['account.partial.reconcile'].search([('id', '=', partial_id)])
+                                
+                                if reconcile_id:
+                                    debit_move = reconcile_id.debit_move_id
+                                    
+                                    _logger.info(f"""
+                                                 
+                                                 MOVE ID    :   { debit_move.move_id }      |
+                                                 JOURNAL ID :   { debit_move.journal_id }   |
+                                                 LINE ID    :   { debit_move.id }           |
+                                                 
+                                                 """)
+                                
+                                
                                 id = content.get('move_id', None)
                                 move_id = self.env['account.move'].search([('id', '=', id)])
                                 
