@@ -203,9 +203,11 @@ class InvoiceDetails(models.AbstractModel):
         
         _logger.info(f'MOSTRANDO FACTURA >>> { factura }')
         
-        factura = factura.invoice_payments_widget
+        orders = factura.pos_order_ids
+        payments = factura.pos_payment_ids
         
-        _logger.info(f'MOSTRANDO PAYMENT WIDGET >>> { factura }')
+        _logger.info(f'MOSTRANDO POS ORDER >>> { orders }')
+        _logger.info(f'MOSTRANDO POS PAPYMENT >>> { payments }')
         
         data_invoice_details = []
         domain = [
