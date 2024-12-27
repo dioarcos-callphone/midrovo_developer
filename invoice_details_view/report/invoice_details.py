@@ -262,10 +262,7 @@ class InvoiceDetails(models.AbstractModel):
                         pos_payment_name = content.get('pos_payment_name', None)
                         if not pos_payment_name:
                             journal_name = content['journal_name']
-                            
-                            # if journal_name == 'Point of Sale':
-                            #     data_detail['receivable'] = content.get('amount', 0)
-                            
+
                             journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)                           
                             
                             if journal.type == 'cash':
@@ -274,21 +271,29 @@ class InvoiceDetails(models.AbstractModel):
                                 
                             elif journal.type == 'bank':
                                 data_detail['bank'] += content.get('amount', 0)
+                                
                             else:
                                 id = content.get('move_id', None)
                                 move_id = self.env['account.move'].search([('id', '=', id)])
                                 
-                                pos_orders = move_id.pos_order_ids
+                                if move_id:
+                                    lines = move_id.line_ids.filtered(lambda line : line.debit > 0)
+                                    
+                                    if lines:
+                                        for line in lines:
+                                            debit = line.debit
+                                            payment_name = debit.split("-")[1].strip()
                                 
-                                if pos_orders:
-                                    for payment in pos_orders.payment_ids:
-                                        _logger.info(f'MOSTRANDO POS PAYMENT >>> { payment } DEL ACCOUNT MOVE { id }')
-                            
-                            # else:
-                            #     # Inicializar con el monto
-                            #     data_detail[journal.type] = content.get('amount', 0)
-                                
-                            # data_detail[ journal.type ] = content['amount']             
+                                            pos_payment = self.env['pos.payment.method'].search([('name', '=', payment_name)])
+                                            journal = pos_payment.journal_id
+                                        
+                                            if journal.type == 'cash':
+                                                # Sumar el monto si el método ya existe
+                                                data_detail['cash'] += content.get('amount', 0)
+                                                
+                                            elif journal.type == 'bank':
+                                                data_detail['bank'] += content.get('amount', 0)
+    
                                                       
                         else:                            
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
@@ -299,7 +304,6 @@ class InvoiceDetails(models.AbstractModel):
                                 data_detail['cash'] += content.get('amount', 0)
                                 
                             elif journal.type == 'bank':
-                                # Inicializar con el monto
                                 data_detail['bank'] += content.get('amount', 0)
                                 
                             # data_detail[ journal.type ] = content['amount']
