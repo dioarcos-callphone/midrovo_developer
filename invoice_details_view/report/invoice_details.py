@@ -198,6 +198,15 @@ class InvoiceDetails(models.AbstractModel):
         
     
     def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):
+        
+        factura = self.env['account.move'].search([('id', '=', 2801)])
+        
+        _logger.info(f'MOSTRANDO FACTURA >>> { factura }')
+        
+        factura = factura.invoice_payments_widget
+        
+        _logger.info(f'MOSTRANDO PAYMENT WIDGET >>> { factura }')
+        
         data_invoice_details = []
         domain = [
             ('date', '>=', fecha_inicio),
