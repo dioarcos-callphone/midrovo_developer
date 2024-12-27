@@ -273,6 +273,12 @@ class InvoiceDetails(models.AbstractModel):
                                                  JOURNAL ID :   { debit_move.journal_id }   |
                                                  LINE ID    :   { debit_move.id }           |
                                                  
+                                                 MOVE       ---------------------------------
+                                                 
+                                                 PAYMENT ID :   { debit_move.move_id.payment_id }       |
+                                                 ORDER ID   :   { debit_move.move_id.pos_order_ids }    |
+                                                 PAYMENT ID :   { debit_move.move_id.pos_payment_ids }  |
+                                                 
                                                  """)
                                 
                                 
