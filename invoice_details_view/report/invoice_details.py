@@ -197,20 +197,7 @@ class InvoiceDetails(models.AbstractModel):
             raise ValidationError("¡No se encontraron registros para los criterios dados!")
         
     
-    def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):
-        
-        factura = self.env['account.move'].search([('id', '=', 3059)])
-        
-        _logger.info(f'MOSTRANDO FACTURA >>> { factura }')
-        
-        orders = factura.pos_order_ids
-        payments = factura.pos_payment_ids
-        widgets = factura.invoice_payments_widget
-        
-        _logger.info(f'MOSTRANDO WIDGET >>> { widgets }')
-        _logger.info(f'MOSTRANDO POS ORDER >>> { orders }')
-        _logger.info(f'MOSTRANDO POS PAPYMENT >>> { payments }')
-        
+    def get_report_facturas(self, fecha_inicio, fecha_fin, comercial, cashier, diario):        
         data_invoice_details = []
         domain = [
             ('date', '>=', fecha_inicio),
