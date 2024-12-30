@@ -375,7 +375,7 @@ class InvoiceDetails(models.TransientModel):
                     
                 metodos = []
                 
-                payment_widget = detail.move_id.invoice_payments_widget
+                payment_widget = detail.move_id.invoice_payments_widget                
                 
                 if payment_widget:
                     contents = payment_widget['content']
@@ -426,10 +426,14 @@ class InvoiceDetails(models.TransientModel):
                 else:
                     pos_order = detail.move_id.pos_order_ids
                     
+                    _logger.info('ENTRA AQUI')
+                    
                     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
+                        _logger.info('ENTRA EN IF')
                         for payment in pos_order.payment_ids:
                             metodos.append(payment.payment_method_id.name)
+                            _logger.info(f'ENTRA EN EL BUCLE >>> { payment.payment_method_id.name }')
                 
                 metodos_set = set(metodos)
                 metodos_list = list(metodos_set)
@@ -539,7 +543,7 @@ class InvoiceDetails(models.TransientModel):
         headers = [
             'Diario contable',
             'Comercial',
-            'Tipo de documento (fa/de)',
+            'Tipo Doc. (fa/de)',
             'Número',
             'Fecha',
             'Hora',
