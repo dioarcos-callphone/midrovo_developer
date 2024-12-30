@@ -318,6 +318,8 @@ class InvoiceDetails(models.TransientModel):
                     
                 rentabilidad = detail.price_subtotal - total_costo
                 
+                _logger.info(f'MOSTRANDO LA FECHA >>>> { detail.date }')
+                
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
                 provincia = detail.partner_id.state_id.name
