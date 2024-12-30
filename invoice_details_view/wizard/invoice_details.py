@@ -426,21 +426,15 @@ class InvoiceDetails(models.TransientModel):
                 else:
                     pos_order = detail.move_id.pos_order_ids
                     
-                    _logger.info('ENTRA AQUI')
-                    
                     # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
                     if pos_order:
-                        _logger.info('ENTRA EN IF')
                         for payment in pos_order.payment_ids:
                             metodos.append(payment.payment_method_id.name)
-                            _logger.info(f'ENTRA EN EL BUCLE >>> { payment.payment_method_id.name }')
                 
                 metodos_set = set(metodos)
                 metodos_list = list(metodos_set)
                                  
                 data_detail['metodos'] = metodos_list
-                
-                _logger.info(data_detail)
                 
                 data_invoice_details.append(data_detail)
             

@@ -152,24 +152,23 @@ class InvoiceDetails(models.AbstractModel):
                         if not pos_payment_name:
                             journal_name = content['journal_name']
                             
-                            if journal_name == 'Point of Sale':
-                                pos_order = detail.move_id.pos_order_ids
-                                if pos_order:
-                                    for payment in pos_order.payment_ids:
-                                        metodos.append(payment.payment_method_id.name)
-                            else:              
+                            journal = self.env['account.journal'].search([('name', '=', journal_name)], limit=1)
+                            
+                            if journal.type == 'cash':
+                                metodos.append(journal_name)
+                                
+                            elif journal.type == 'bank':
                                 metodos.append(journal_name)
                                 
                         else:
-                            pos_order = detail.move_id.pos_order_ids
-                    
-                            # Se evalua el metodo de pago (cuenta por cobrar) no contiene journal_type
-                            if pos_order:
-                                for payment in pos_order.payment_ids:
-                                    if not payment.payment_method_id.journal_id:
-                                        metodos.append(payment.payment_method_id.name)
+                            pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
+                            journal = pos_payment.journal_id
                             
-                            metodos.append(pos_payment_name)
+                            if journal.type == 'cash':
+                                metodos.append(pos_payment_name)
+                                
+                            elif journal.type == 'bank':
+                                metodos.append(pos_payment_name)
                 
                 else:
                     pos_order = detail.move_id.pos_order_ids
