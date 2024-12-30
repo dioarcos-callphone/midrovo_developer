@@ -591,6 +591,15 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Material')
             headers.append('Material capellada')
             headers.append('Tipo de calzado')
+            
+            # Crear un formato con ajuste de texto habilitado
+            text_wrap = workbook.add_format({
+                'text_wrap': True,
+                'font_name': 'Times New Roman',
+                'border': 1,
+                'align': 'left',
+                'valign': 'vcenter'
+            })
         
         for col, header in enumerate(headers):
             #sheet.write(2, col, header, header_format)
@@ -616,6 +625,9 @@ class InvoiceDetails(models.TransientModel):
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
+            metodos = val['metodos']                            
+            metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
+            
             sheet.write(row, 0, val['diario_contable'], text_format)
             sheet.write(row, 1, val['comercial'], text_format)
             sheet.write(row, 2, val['tipo'], text_format)
@@ -647,41 +659,44 @@ class InvoiceDetails(models.TransientModel):
                     elif is_cost_or_debit == 'movement':
                         sheet.write(row, 13, val['debito'], text_format)
                     
-                    sheet.write(row, 14, val['total_costo'], text_format)
+                    sheet.write(row, 14, val['total_costo'], text_format)    
                     
-                sheet.write(row, 15, val['subtotal'], text_format)
-                sheet.write(row, 16, val['porcentaje'], text_format)
-                sheet.write(row, 17, val['descuento'], text_format)
-                sheet.write(row, 18, val['neto'], text_format)
-                
-                if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     sheet.write(row, 19, val['rentabilidad'], text_format)
                     
-                # Crear un formato con ajuste de texto habilitado
-                text_wrap = workbook.add_format({
-                    'text_wrap': True,
-                    'font_name': 'Times New Roman',
-                    'border': 1,
-                    'align': 'left',
-                    'valign': 'vcenter'
-                })
+                    sheet.write(row, 20, metodos_str, text_wrap)
+                    
+                    sheet.write(row, 21, val['ciudad'], text_format)
+                    sheet.write(row, 22, val['provincia'], text_format)
+                    sheet.write(row, 23, val['direccion'], text_format)
+                    sheet.write(row, 24, val['hora'], text_format)
+                    
+                    sheet.write(row, 25, val['marca'], text_format)
+                    sheet.write(row, 26, val['talla'], text_format)
+                    sheet.write(row, 27, val['color'], text_format)
+                    sheet.write(row, 28, val['material'], text_format)
+                    sheet.write(row, 29, val['material_capellada'], text_format)
+                    sheet.write(row, 30, val['tipo_calzado'], text_format)
+                    
+                else:
+                    sheet.write(row, 13, val['subtotal'], text_format)
+                    sheet.write(row, 14, val['porcentaje'], text_format)
+                    sheet.write(row, 15, val['descuento'], text_format)
+                    sheet.write(row, 16, val['neto'], text_format)
+                    
+                    sheet.write(row, 17, metodos_str, text_wrap)
+                    
+                    sheet.write(row, 18, val['ciudad'], text_format)
+                    sheet.write(row, 19, val['provincia'], text_format)
+                    sheet.write(row, 20, val['direccion'], text_format)
+                    sheet.write(row, 21, val['hora'], text_format)
+                    
+                    sheet.write(row, 22, val['marca'], text_format)
+                    sheet.write(row, 23, val['talla'], text_format)
+                    sheet.write(row, 24, val['color'], text_format)
+                    sheet.write(row, 25, val['material'], text_format)
+                    sheet.write(row, 26, val['material_capellada'], text_format)
+                    sheet.write(row, 27, val['tipo_calzado'], text_format)
                 
-                metodos = val['metodos']                            
-                metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
-                
-                sheet.write(row, 20, metodos_str, text_wrap)
-                
-                sheet.write(row, 21, val['ciudad'], text_format)
-                sheet.write(row, 22, val['provincia'], text_format)
-                sheet.write(row, 23, val['direccion'], text_format)
-                sheet.write(row, 24, val['hora'], text_format)
-                
-                sheet.write(row, 25, val['marca'], text_format)
-                sheet.write(row, 26, val['talla'], text_format)
-                sheet.write(row, 27, val['color'], text_format)
-                sheet.write(row, 28, val['material'], text_format)
-                sheet.write(row, 29, val['material_capellada'], text_format)
-                sheet.write(row, 30, val['tipo_calzado'], text_format)
                 
             row += 1
 
