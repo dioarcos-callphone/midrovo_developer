@@ -107,10 +107,10 @@
                                     <t t-esc="result['descuento']"/>
                                 </td>
                                 <td align="center" width="100">
-                                    <t t-esc="result['subtotal']"/>
+                                    <t t-esc="result['subtotal']" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                                 <td align="center" width="100">
-                                    <t t-esc="result['neto']"/>
+                                    <t t-esc="result['neto']" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                                 <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
                                     <td align="center" width="100">
