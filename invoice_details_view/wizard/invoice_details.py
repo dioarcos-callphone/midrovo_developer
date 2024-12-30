@@ -266,6 +266,7 @@ class InvoiceDetails(models.TransientModel):
                 material_capellada = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['material capellada']), "N/A")
                 pais = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['país de origen']), "N/A")
                 tipo_calzado = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['tipo de calzado']), "N/A")
+                estilo = next((v.name for v in product.product_template_variant_value_ids if v.attribute_id.name.lower() in ['estilo', 'estilos']), "N/A")
 
                 # Buscar en attribute_line_ids solo si no se encontraron los valores
                 if (
@@ -300,6 +301,9 @@ class InvoiceDetails(models.TransientModel):
                             if tipo_calzado == "N/A" and attribute_line.attribute_id.name.lower() in ['tipo de calzado']:
                                 tipo_calzado = value.name
                                 
+                            if estilo == "N/A" and attribute_line.attribute_id.name.lower() in ['estilo', 'estilos']:
+                                estilo = value.name
+                                
                 descuento = round(0.00, 2)
                 subtotal = detail.price_unit * detail.quantity
                 
@@ -323,6 +327,9 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
+                data_detail['categoria'] = detail.product_id.categ_id.name
+                data_detail['estilo'] = estilo
+                data_detail['sku'] = detail.product_id.default_code or ""
                 data_detail['producto'] = detail.product_id.name
                 data_detail['marca'] = marca
                 data_detail['talla'] = talla
@@ -513,6 +520,9 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Cuenta por cobrar')
             
         if is_resumen == None:
+            headers.append('Categoria')
+            headers.append('Estilo')
+            headers.append('SKU')
             headers.append('Producto')
             headers.append('Marca')
             headers.append('Talla')
@@ -573,18 +583,21 @@ class InvoiceDetails(models.TransientModel):
                 sheet.write(row, 12, val['receivable'], text_format)
             
             if is_resumen == None:
-                sheet.write(row, 7, val['producto'], text_format)
-                sheet.write(row, 8, val['marca'], text_format)
-                sheet.write(row, 9, val['talla'], text_format)
-                sheet.write(row, 10, val['color'], text_format)
-                sheet.write(row, 11, val['material'], text_format)
-                sheet.write(row, 12, val['material_capellada'], text_format)
-                sheet.write(row, 13, val['tipo_calzado'], text_format)
-                sheet.write(row, 14, val['pais'], text_format)
-                sheet.write(row, 15, val['cantidad'], text_format)
-                sheet.write(row, 16, val['precio'], text_format)
-                sheet.write(row, 17, val['descuento'], text_format)
-                sheet.write(row, 18, val['subtotal'], text_format)
+                sheet.write(row, 7, val['categoria'], text_format)
+                sheet.write(row, 8, val['estilo'], text_format)
+                sheet.write(row, 9, val['sku'], text_format)
+                sheet.write(row, 10, val['producto'], text_format)
+                sheet.write(row, 11, val['marca'], text_format)
+                sheet.write(row, 12, val['talla'], text_format)
+                sheet.write(row, 13, val['color'], text_format)
+                sheet.write(row, 14, val['material'], text_format)
+                sheet.write(row, 15, val['material_capellada'], text_format)
+                sheet.write(row, 16, val['tipo_calzado'], text_format)
+                sheet.write(row, 17, val['pais'], text_format)
+                sheet.write(row, 18, val['cantidad'], text_format)
+                sheet.write(row, 19, val['precio'], text_format)
+                sheet.write(row, 20, val['descuento'], text_format)
+                sheet.write(row, 21, val['subtotal'], text_format)
                 
                 # Crear un formato con ajuste de texto habilitado
                 text_wrap = workbook.add_format({
@@ -598,16 +611,16 @@ class InvoiceDetails(models.TransientModel):
                 metodos = val['metodos']                            
                 metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
-                sheet.write(row, 19, metodos_str, text_wrap)
+                sheet.write(row, 22, metodos_str, text_wrap)
             
                 if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     if is_cost_or_debit == 'master':
-                        sheet.write(row, 20, val['costo'], text_format)
+                        sheet.write(row, 23, val['costo'], text_format)
                     elif is_cost_or_debit == 'movement':
-                        sheet.write(row, 20, val['debito'], text_format)
+                        sheet.write(row, 23, val['debito'], text_format)
                     
-                    sheet.write(row, 21, val['total_costo'], text_format)
-                    sheet.write(row, 22, val['rentabilidad'], text_format)
+                    sheet.write(row, 24, val['total_costo'], text_format)
+                    sheet.write(row, 25, val['rentabilidad'], text_format)
             
             row += 1
 
