@@ -93,8 +93,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['hora'] = hora_creacion
                 data_detail['numero'] = invoice.name
                 data_detail['diario_contable'] = invoice.journal_id.name
-                data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
-                data_detail['pos'] = invoice.pos_order_ids.employee_id.name or ""
+                data_detail['comercial'] = invoice.pos_order_ids.employee_id.name or invoice.invoice_user_id.partner_id.name
                 data_detail['cliente'] = invoice.partner_id.name or ""
                 data_detail['subtotal'] = abs(invoice.amount_untaxed_signed)
                 data_detail['iva'] = abs(invoice.amount_tax)
@@ -331,8 +330,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['hora'] = hora_creacion
                 data_detail['numero'] = detail.move_name
                 data_detail['diario_contable'] = detail.journal_id.name
-                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
-                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['comercial'] = detail.move_id.pos_order_ids.employee_id.name or detail.move_id.invoice_user_id.partner_id.name
                 data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['ciudad'] = ciudad
                 data_detail['provincia'] = provincia
@@ -352,22 +350,27 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['precio'] = abs(detail.price_unit)
                 data_detail['porcentaje'] = f'{ detail.discount } %'
                 data_detail['descuento'] = abs(descuento)
+                
+                total_neto = (abs(detail.quantity) * abs(detail.price_unit)) - abs(descuento)
+                
+                data_detail['neto'] = total_neto
                 data_detail['subtotal'] = abs(detail.price_subtotal)
                 data_detail['costo'] = abs(round(detail.product_id.standard_price, 2))
                 data_detail['total_costo'] = abs(total_costo)
                 data_detail['rentabilidad'] = abs(round(rentabilidad, 2))
                 
                 if detail.move_id.move_type == 'out_invoice':
-                    data_detail['tipo'] = 'Factura'
+                    data_detail['tipo'] = 'fa'
                     
                 elif detail.move_id.move_type == 'out_refund':
-                    data_detail['tipo'] = 'Nota de crédito'
+                    data_detail['tipo'] = 'de'
                     data_detail['rentabilidad'] = - data_detail['rentabilidad']
                     data_detail['total_costo'] = - data_detail['total_costo']
                     data_detail['costo'] = - data_detail['costo']
                     data_detail['cantidad'] = - data_detail['cantidad']
                     data_detail['precio'] = - data_detail['precio']
                     data_detail['descuento'] = - data_detail['descuento']
+                    data_detail['neto'] = - data_detail['neto']
                     data_detail['subtotal'] = - data_detail['subtotal']
                     
                 metodos = []
@@ -516,14 +519,13 @@ class InvoiceDetails(models.TransientModel):
             
         # Encabezados
         headers = [
+            'Diario contable',
+            'Comercial',
+            'Tipo de documento (fa/de)',
+            'Número',
             'Fecha',
             'Hora',
-            'Número',
-            'Diario contable',
-            'Tipo de documento',
-            'Comercial',
-            'Cajero',
-            'Cliente',
+            'Cliente',            
         ]
         
         if is_resumen == 'r':
@@ -535,13 +537,16 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Cuenta por cobrar')
             
         if is_resumen == None:
+            # DATOS DEL CLIENTE
             headers.append('Ciudad')
             headers.append('Provincia')
             headers.append('Dirección')
+            
+            # DATOS DEL PRODUCTO
+            headers.append('Producto')
             headers.append('Categoria')
             headers.append('Estilo')
             headers.append('SKU')
-            headers.append('Producto')
             headers.append('Marca')
             headers.append('Talla')
             headers.append('Color')
@@ -549,11 +554,14 @@ class InvoiceDetails(models.TransientModel):
             headers.append('Material capellada')
             headers.append('Tipo de calzado')
             headers.append('País de origen')
+            
+            # DATOS DEL INVOICE LINE
             headers.append('Cantidad')
             headers.append('Precio')
             headers.append('% Desc.')
             headers.append('Descuento')
             headers.append('Subtotal')
+            headers.append('Total neto')
             headers.append('Métodos de pago')
 
             if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
@@ -573,55 +581,55 @@ class InvoiceDetails(models.TransientModel):
             header_length = len(header)  # Longitud del encabezado
             sheet.set_column(col, col, header_length + 5)
             
-            if header == 'Fecha' or header == 'Cajero':
+            if header == 'Fecha':
                 sheet.set_column(col, col, header_length + 6) 
                 
             if header == 'Número' or header == 'Diario contable' or header == 'Producto':
                 sheet.set_column(col, col, header_length + 18)
                 
-            if header == 'Comercial' or header == 'Cajero' or header == 'Cliente':
+            if header == 'Comercial' or header == 'Cliente':
                 sheet.set_column(col, col, header_length + 10)
         
         # Escribir datos
         row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
-            sheet.write(row, 0, val['fecha'], text_format)
-            sheet.write(row, 1, val['hora'], text_format)
-            sheet.write(row, 2, val['numero'], text_format)
-            sheet.write(row, 3, val['diario_contable'], text_format)
-            sheet.write(row, 4, val['tipo'], text_format)
-            sheet.write(row, 5, val['comercial'], text_format)
-            sheet.write(row, 6, val['pos'], text_format)
-            sheet.write(row, 7, val['cliente'], text_format)
+            sheet.write(row, 0, val['diario_contable'], text_format)
+            sheet.write(row, 1, val['comercial'], text_format)
+            sheet.write(row, 2, val['tipo'], text_format)
+            sheet.write(row, 3, val['numero'], text_format)
+            sheet.write(row, 4, val['fecha'], text_format)
+            sheet.write(row, 5, val['hora'], text_format)
+            sheet.write(row, 6, val['cliente'], text_format)
             
             if is_resumen == 'r':
-                sheet.write(row, 8, val['subtotal'], text_format)
-                sheet.write(row, 9, val['iva'], text_format)
-                sheet.write(row, 10, val['total'], text_format)
-                sheet.write(row, 11, val['cash'], text_format)
-                sheet.write(row, 12, val['bank'], text_format)
-                sheet.write(row, 13, val['receivable'], text_format)
+                sheet.write(row, 7, val['subtotal'], text_format)
+                sheet.write(row, 8, val['iva'], text_format)
+                sheet.write(row, 9, val['total'], text_format)
+                sheet.write(row, 10, val['cash'], text_format)
+                sheet.write(row, 11, val['bank'], text_format)
+                sheet.write(row, 12, val['receivable'], text_format)
             
             if is_resumen == None:
-                sheet.write(row, 8, val['ciudad'], text_format)
-                sheet.write(row, 9, val['provincia'], text_format)
-                sheet.write(row, 10, val['direccion'], text_format)
+                sheet.write(row, 7, val['ciudad'], text_format)
+                sheet.write(row, 8, val['provincia'], text_format)
+                sheet.write(row, 9, val['direccion'], text_format)
+                sheet.write(row, 10, val['producto'], text_format)
                 sheet.write(row, 11, val['categoria'], text_format)
                 sheet.write(row, 12, val['estilo'], text_format)
                 sheet.write(row, 13, val['sku'], text_format)
-                sheet.write(row, 14, val['producto'], text_format)
-                sheet.write(row, 15, val['marca'], text_format)
-                sheet.write(row, 16, val['talla'], text_format)
-                sheet.write(row, 17, val['color'], text_format)
-                sheet.write(row, 18, val['material'], text_format)
-                sheet.write(row, 19, val['material_capellada'], text_format)
-                sheet.write(row, 20, val['tipo_calzado'], text_format)
-                sheet.write(row, 21, val['pais'], text_format)
-                sheet.write(row, 22, val['cantidad'], text_format)
-                sheet.write(row, 23, val['precio'], text_format)
-                sheet.write(row, 24, val['porcentaje'], text_format)
-                sheet.write(row, 25, val['descuento'], text_format)
-                sheet.write(row, 26, val['subtotal'], text_format)
+                sheet.write(row, 14, val['marca'], text_format)
+                sheet.write(row, 15, val['talla'], text_format)
+                sheet.write(row, 16, val['color'], text_format)
+                sheet.write(row, 17, val['material'], text_format)
+                sheet.write(row, 18, val['material_capellada'], text_format)
+                sheet.write(row, 19, val['tipo_calzado'], text_format)
+                sheet.write(row, 20, val['pais'], text_format)
+                sheet.write(row, 21, val['cantidad'], text_format)
+                sheet.write(row, 22, val['precio'], text_format)
+                sheet.write(row, 23, val['porcentaje'], text_format)
+                sheet.write(row, 24, val['descuento'], text_format)
+                sheet.write(row, 25, val['subtotal'], text_format)
+                sheet.write(row, 26, val['neto'], text_format)
                 
                 # Crear un formato con ajuste de texto habilitado
                 text_wrap = workbook.add_format({

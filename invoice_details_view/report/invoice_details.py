@@ -115,8 +115,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
                 data_detail['diario_contable'] = detail.journal_id.name
-                data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
-                data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
+                data_detail['comercial'] = detail.move_id.pos_order_ids.employee_id.name or detail.move_id.invoice_user_id.partner_id.name
                 data_detail['cliente'] = detail.partner_id.name or ""
                 data_detail['producto'] = detail.product_id.name
                 data_detail['cantidad'] = abs(detail.quantity)
@@ -222,8 +221,7 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['fecha'] = date_formated
                 data_detail['numero'] = invoice.name
                 data_detail['diario_contable'] = invoice.journal_id.name
-                data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
-                data_detail['pos'] = invoice.pos_order_ids.employee_id.name or ""
+                data_detail['comercial'] = invoice.pos_order_ids.employee_id.name or invoice.invoice_user_id.partner_id.name
                 data_detail['cliente'] = invoice.partner_id.name or ""
                 data_detail['subtotal'] = abs(invoice.amount_untaxed_signed)
                 data_detail['iva'] = abs(invoice.amount_tax)

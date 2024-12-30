@@ -22,7 +22,6 @@
                             <th align="center" style="vertical-align: middle">Diario contable</th>
                             <th align="center" style="vertical-align: middle">Tipo</th>
                             <th align="center" style="vertical-align: middle">Comercial</th>
-                            <th align="center" style="vertical-align: middle">Cajero</th>
                             <th align="center" style="vertical-align: middle">Cliente</th>
                             
                             <t t-if="is_resumen == 'r'">
@@ -67,9 +66,6 @@
                             </td>
                             <td>
                                 <t t-esc="result['comercial']"/>
-                            </td>
-                            <td>
-                                <t t-esc="result['pos']"/>
                             </td>
                             <td>
                                 <t t-esc="result['cliente']"/>
