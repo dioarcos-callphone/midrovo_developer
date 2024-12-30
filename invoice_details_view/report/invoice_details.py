@@ -248,7 +248,7 @@ class InvoiceDetails(models.AbstractModel):
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
                         content_amount = content.get('amount', 0)
-                        partial_id = content.get('partial_id', 0)
+                        # partial_id = content.get('partial_id', 0)
                         if not pos_payment_name:
                             journal_name = content['journal_name']
 
@@ -260,52 +260,6 @@ class InvoiceDetails(models.AbstractModel):
                                 
                             elif journal.type == 'bank':
                                 data_detail['bank'] += content_amount
-                                
-                            else:
-                                reconcile_id = self.env['account.partial.reconcile'].search([('id', '=', partial_id)])
-                                
-                                if reconcile_id:
-                                    debit_move = reconcile_id.credit_move_id
-                                    
-                                    _logger.info(f"""
-                                                 
-                                                 MOVE ID    :   { debit_move.move_id }      |
-                                                 JOURNAL ID :   { debit_move.journal_id }   |
-                                                 LINE ID    :   { debit_move.id }           |
-                                                 
-                                                 MOVE       ---------------------------------
-                                                 
-                                                 PAYMENT ID :   { debit_move.move_id.payment_id }       |
-                                                 ORDER ID   :   { debit_move.move_id.pos_order_ids }    |
-                                                 PAYMENT ID :   { debit_move.move_id.pos_payment_ids }  |
-                                                 
-                                                 """)                                
-                                
-                                id = content.get('move_id', None)
-                                move_id = self.env['account.move'].search([('id', '=', id)])
-                                
-                                if move_id:
-                                    _logger.info(f'MOSTRANDO CREDIT DEBIT >>> { move_id.invoice_outstanding_credits_debits_widget }')
-                                    lines = move_id.line_ids.filtered(lambda line : line.debit > 0)
-                                    
-                                    if lines:
-                                        for line in lines:
-                                            _logger.info(f'MOSTRANDO PAGOS >>> { line.matched_credit_ids  }')
-                                            name = line.name
-                                            _logger.info(f'MOSTRANDO NAME >>> { name }')
-                                            payment_name = name
-                                
-                                            pos_payment = self.env['pos.payment.method'].search([('name', '=', payment_name)])
-                                            journal = pos_payment.journal_id
-                                        
-                                            if journal.type == 'cash':
-                                                # Sumar el monto si el método ya existe
-                                                data_detail['cash'] += content_amount
-                                                break
-                                                
-                                            elif journal.type == 'bank':
-                                                data_detail['bank'] += content_amount
-                                                break
     
                                                       
                         else:                            
