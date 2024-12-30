@@ -551,6 +551,7 @@ class InvoiceDetails(models.TransientModel):
             headers.append('País de origen')
             headers.append('Cantidad')
             headers.append('Precio')
+            headers.append('% Desc.')
             headers.append('Descuento')
             headers.append('Subtotal')
             headers.append('Métodos de pago')
