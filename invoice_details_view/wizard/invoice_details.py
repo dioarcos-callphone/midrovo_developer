@@ -319,6 +319,14 @@ class InvoiceDetails(models.TransientModel):
                 rentabilidad = detail.price_subtotal - total_costo
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
+                
+                provincia = detail.partner_id.state_id.name
+                
+                ciudad = detail.partner_id.city
+                street1 = detail.partner_id.street
+                street2 = detail.partner_id.street2
+                
+                direccion = f'{ street1 }, { street2 }'
 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
@@ -327,9 +335,12 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
                 data_detail['pos'] = detail.move_id.pos_order_ids.employee_id.name or ""
                 data_detail['cliente'] = detail.partner_id.name or ""
+                data_detail['ciudad'] = ciudad
+                data_detail['provincia'] = provincia
+                data_detail['direccion'] = direccion
                 data_detail['categoria'] = detail.product_id.categ_id.name
                 data_detail['estilo'] = estilo
-                data_detail['sku'] = detail.product_id.default_code or ""
+                data_detail['sku'] = detail.product_id.default_code or "N/A"
                 data_detail['producto'] = detail.product_id.name
                 data_detail['marca'] = marca
                 data_detail['talla'] = talla
