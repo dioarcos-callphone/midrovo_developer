@@ -659,7 +659,12 @@ class InvoiceDetails(models.TransientModel):
                     elif is_cost_or_debit == 'movement':
                         sheet.write(row, 13, val['debito'], text_format)
                     
-                    sheet.write(row, 14, val['total_costo'], text_format)    
+                    sheet.write(row, 14, val['total_costo'], text_format)
+                    
+                    sheet.write(row, 15, val['subtotal'], text_format)
+                    sheet.write(row, 16, val['porcentaje'], text_format)
+                    sheet.write(row, 17, val['descuento'], text_format)
+                    sheet.write(row, 18, val['neto'], text_format)    
                     
                     sheet.write(row, 19, val['rentabilidad'], text_format)
                     
