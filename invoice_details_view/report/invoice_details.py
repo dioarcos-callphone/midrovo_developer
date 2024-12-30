@@ -218,16 +218,7 @@ class InvoiceDetails(models.AbstractModel):
         invoices = self.env['account.move'].search(domain)
         
         if invoices:
-            for invoice in invoices:
-                pagos = invoice.payment_ids
-                
-                _logger.info(f"""
-                
-                FACTURA >>> { invoice.name }
-                PAGOS >>>>> { pagos }
-                
-                             """)
-                                
+            for invoice in invoices:                               
                 data_detail = {}
                 date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
 

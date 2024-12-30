@@ -335,7 +335,7 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['ciudad'] = ciudad
                 data_detail['provincia'] = provincia
                 data_detail['direccion'] = direccion
-                data_detail['categoria'] = detail.product_id.categ_id.name
+                data_detail['categoria'] = detail.product_id.categ_id.display_name
                 data_detail['estilo'] = estilo
                 data_detail['sku'] = detail.product_id.default_code or "N/A"
                 data_detail['producto'] = detail.product_id.name
@@ -360,10 +360,10 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['rentabilidad'] = abs(round(rentabilidad, 2))
                 
                 if detail.move_id.move_type == 'out_invoice':
-                    data_detail['tipo'] = 'fa'
+                    data_detail['tipo'] = 'FA'
                     
                 elif detail.move_id.move_type == 'out_refund':
-                    data_detail['tipo'] = 'de'
+                    data_detail['tipo'] = 'DE'
                     data_detail['rentabilidad'] = - data_detail['rentabilidad']
                     data_detail['total_costo'] = - data_detail['total_costo']
                     data_detail['costo'] = - data_detail['costo']
@@ -535,9 +535,9 @@ class InvoiceDetails(models.TransientModel):
             
         # Encabezados
         headers = [
-            'Diario contable',
+            'Localidad',
             'Comercial',
-            'Tipo Doc. (fa/de)',
+            'Tipo Doc. (FA / DE)',
             'Número',
             'Fecha',
             'Cliente',            
