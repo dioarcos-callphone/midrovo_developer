@@ -322,13 +322,13 @@ class InvoiceDetails(models.TransientModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
-                provincia = detail.partner_id.state_id.name
+                provincia = detail.partner_id.state_id.name or "N/A"
                 
-                ciudad = detail.partner_id.city
-                street1 = detail.partner_id.street
-                street2 = detail.partner_id.street2
+                ciudad = detail.partner_id.city or "N/A"
+                street1 = detail.partner_id.street or "N/A"
+                street2 = detail.partner_id.street2 or "N/A"
                 
-                direccion = f'{ street1 or "" }, { street2 or "" }'
+                direccion = f'{ street1 }, { street2 }'
 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha y hora'] = date_formated
