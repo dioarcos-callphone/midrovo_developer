@@ -219,6 +219,15 @@ class InvoiceDetails(models.AbstractModel):
         
         if invoices:
             for invoice in invoices:
+                pagos = invoice.payment_ids
+                
+                _logger.info(f"""
+                
+                FACTURA >>> { invoice.name }
+                PAGOS >>>>> { pagos }
+                
+                             """)
+                                
                 data_detail = {}
                 date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
 
