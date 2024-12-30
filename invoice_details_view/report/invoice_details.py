@@ -230,10 +230,10 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['receivable'] = 0
                 
                 if invoice.move_type == 'out_invoice':
-                    data_detail['tipo'] = 'Factura'
+                    data_detail['tipo'] = 'fa'
                     
                 elif invoice.move_type == 'out_refund':
-                    data_detail['tipo'] = 'Nota de crédito'
+                    data_detail['tipo'] = 'de'
                     data_detail['subtotal'] = - data_detail['subtotal']
                     data_detail['iva'] = - data_detail['iva']
                     data_detail['total'] = - data_detail['total']
