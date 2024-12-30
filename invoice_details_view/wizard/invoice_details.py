@@ -329,7 +329,7 @@ class InvoiceDetails(models.TransientModel):
                 direccion = f'{ street1 }, { street2 }'
 
                 # añadimos los valores a los campos del diccionario
-                data_detail['fecha y hora'] = date_formated
+                data_detail['fecha'] = date_formated
                 data_detail['numero'] = detail.move_name
                 data_detail['diario_contable'] = detail.journal_id.name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
