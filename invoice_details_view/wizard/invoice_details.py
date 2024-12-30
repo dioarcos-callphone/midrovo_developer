@@ -328,7 +328,7 @@ class InvoiceDetails(models.TransientModel):
                 street1 = detail.partner_id.street
                 street2 = detail.partner_id.street2
                 
-                direccion = f'{ street1 }, { street2 }'
+                direccion = f'{ street1 or "" }, { street2 or "" }'
 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha y hora'] = date_formated
