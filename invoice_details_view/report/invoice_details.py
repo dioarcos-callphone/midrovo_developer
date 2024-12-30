@@ -127,10 +127,10 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
                 
                 if detail.move_id.move_type == 'out_invoice':
-                    data_detail['tipo'] = 'Factura'
+                    data_detail['tipo'] = 'fa'
                     
                 elif detail.move_id.move_type == 'out_refund':
-                    data_detail['tipo'] = 'Nota de crédito'
+                    data_detail['tipo'] = 'de'
                     data_detail['rentabilidad'] = - data_detail['rentabilidad']
                     data_detail['total_costo'] = - data_detail['total_costo']
                     data_detail['costo'] = - data_detail['costo']
