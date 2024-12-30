@@ -86,8 +86,11 @@ class InvoiceDetails(models.TransientModel):
             for invoice in invoices:
                 data_detail = {}
                 date_formated = datetime.strftime(invoice.date, "%d/%m/%Y") 
+                
+                hora_creacion = invoice.create_date.strftime("%H:%M")
 
                 data_detail['fecha'] = date_formated
+                data_detail['hora'] = hora_creacion
                 data_detail['numero'] = invoice.name
                 data_detail['diario_contable'] = invoice.journal_id.name
                 data_detail['comercial'] = invoice.invoice_user_id.partner_id.name
@@ -320,6 +323,8 @@ class InvoiceDetails(models.TransientModel):
                 
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
+                hora_creacion = detail.create_date.strftime("%H:%M")
+                
                 provincia = detail.partner_id.state_id.name or "N/A"
                 
                 ciudad = detail.partner_id.city or "N/A"
@@ -330,6 +335,7 @@ class InvoiceDetails(models.TransientModel):
 
                 # añadimos los valores a los campos del diccionario
                 data_detail['fecha'] = date_formated
+                data_detail['hora'] = hora_creacion
                 data_detail['numero'] = detail.move_name
                 data_detail['diario_contable'] = detail.journal_id.name
                 data_detail['comercial'] = detail.move_id.invoice_user_id.partner_id.name
@@ -517,6 +523,7 @@ class InvoiceDetails(models.TransientModel):
         # Encabezados
         headers = [
             'Fecha',
+            'Hora',
             'Número',
             'Diario contable',
             'Tipo de documento',
@@ -584,40 +591,41 @@ class InvoiceDetails(models.TransientModel):
         row = 4  # Comenzar desde la fila 3 después de los encabezados
         for val in datas:
             sheet.write(row, 0, val['fecha'], text_format)
-            sheet.write(row, 1, val['numero'], text_format)
-            sheet.write(row, 2, val['diario_contable'], text_format)
-            sheet.write(row, 3, val['tipo'], text_format)
-            sheet.write(row, 4, val['comercial'], text_format)
-            sheet.write(row, 5, val['pos'], text_format)
-            sheet.write(row, 6, val['cliente'], text_format)
+            sheet.write(row, 1, val['hora'], text_format)
+            sheet.write(row, 2, val['numero'], text_format)
+            sheet.write(row, 3, val['diario_contable'], text_format)
+            sheet.write(row, 4, val['tipo'], text_format)
+            sheet.write(row, 5, val['comercial'], text_format)
+            sheet.write(row, 6, val['pos'], text_format)
+            sheet.write(row, 7, val['cliente'], text_format)
             
             if is_resumen == 'r':
-                sheet.write(row, 7, val['subtotal'], text_format)
-                sheet.write(row, 8, val['iva'], text_format)
-                sheet.write(row, 9, val['total'], text_format)
-                sheet.write(row, 10, val['cash'], text_format)
-                sheet.write(row, 11, val['bank'], text_format)
-                sheet.write(row, 12, val['receivable'], text_format)
+                sheet.write(row, 8, val['subtotal'], text_format)
+                sheet.write(row, 9, val['iva'], text_format)
+                sheet.write(row, 10, val['total'], text_format)
+                sheet.write(row, 11, val['cash'], text_format)
+                sheet.write(row, 12, val['bank'], text_format)
+                sheet.write(row, 13, val['receivable'], text_format)
             
             if is_resumen == None:
-                sheet.write(row, 7, val['ciudad'], text_format)
-                sheet.write(row, 8, val['provincia'], text_format)
-                sheet.write(row, 9, val['direccion'], text_format)
-                sheet.write(row, 10, val['categoria'], text_format)
-                sheet.write(row, 11, val['estilo'], text_format)
-                sheet.write(row, 12, val['sku'], text_format)
-                sheet.write(row, 13, val['producto'], text_format)
-                sheet.write(row, 14, val['marca'], text_format)
-                sheet.write(row, 15, val['talla'], text_format)
-                sheet.write(row, 16, val['color'], text_format)
-                sheet.write(row, 17, val['material'], text_format)
-                sheet.write(row, 18, val['material_capellada'], text_format)
-                sheet.write(row, 19, val['tipo_calzado'], text_format)
-                sheet.write(row, 20, val['pais'], text_format)
-                sheet.write(row, 21, val['cantidad'], text_format)
-                sheet.write(row, 22, val['precio'], text_format)
-                sheet.write(row, 23, val['descuento'], text_format)
-                sheet.write(row, 24, val['subtotal'], text_format)
+                sheet.write(row, 8, val['ciudad'], text_format)
+                sheet.write(row, 9, val['provincia'], text_format)
+                sheet.write(row, 10, val['direccion'], text_format)
+                sheet.write(row, 11, val['categoria'], text_format)
+                sheet.write(row, 12, val['estilo'], text_format)
+                sheet.write(row, 13, val['sku'], text_format)
+                sheet.write(row, 14, val['producto'], text_format)
+                sheet.write(row, 15, val['marca'], text_format)
+                sheet.write(row, 16, val['talla'], text_format)
+                sheet.write(row, 17, val['color'], text_format)
+                sheet.write(row, 18, val['material'], text_format)
+                sheet.write(row, 19, val['material_capellada'], text_format)
+                sheet.write(row, 20, val['tipo_calzado'], text_format)
+                sheet.write(row, 21, val['pais'], text_format)
+                sheet.write(row, 22, val['cantidad'], text_format)
+                sheet.write(row, 23, val['precio'], text_format)
+                sheet.write(row, 24, val['descuento'], text_format)
+                sheet.write(row, 25, val['subtotal'], text_format)
                 
                 # Crear un formato con ajuste de texto habilitado
                 text_wrap = workbook.add_format({
@@ -631,16 +639,16 @@ class InvoiceDetails(models.TransientModel):
                 metodos = val['metodos']                            
                 metodos_str = "\n".join(metodos)  # Unir elementos con salto de línea
                 
-                sheet.write(row, 25, metodos_str, text_wrap)
+                sheet.write(row, 26, metodos_str, text_wrap)
             
                 if not self.env.user.has_group('invoice_details_view.group_invoice_details_view_user'):
                     if is_cost_or_debit == 'master':
-                        sheet.write(row, 26, val['costo'], text_format)
+                        sheet.write(row, 27, val['costo'], text_format)
                     elif is_cost_or_debit == 'movement':
-                        sheet.write(row, 26, val['debito'], text_format)
+                        sheet.write(row, 27, val['debito'], text_format)
                     
-                    sheet.write(row, 27, val['total_costo'], text_format)
-                    sheet.write(row, 28, val['rentabilidad'], text_format)
+                    sheet.write(row, 28, val['total_costo'], text_format)
+                    sheet.write(row, 29, val['rentabilidad'], text_format)
             
             row += 1
 
