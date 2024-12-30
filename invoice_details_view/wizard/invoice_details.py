@@ -351,10 +351,10 @@ class InvoiceDetails(models.TransientModel):
                 data_detail['porcentaje'] = f'{ detail.discount } %'
                 data_detail['descuento'] = abs(descuento)
                 
-                total_neto = (abs(detail.quantity) * abs(detail.price_unit)) - abs(descuento)
+                total_neto = (abs(detail.quantity * detail.price_unit)) - abs(descuento)
                 
                 data_detail['neto'] = total_neto
-                data_detail['subtotal'] = abs(detail.price_subtotal)
+                data_detail['subtotal'] = abs(detail.quantity * detail.price_unit) ## abs(detail.price_subtotal)
                 data_detail['costo'] = abs(round(detail.product_id.standard_price, 2))
                 data_detail['total_costo'] = abs(total_costo)
                 data_detail['rentabilidad'] = abs(round(rentabilidad, 2))
