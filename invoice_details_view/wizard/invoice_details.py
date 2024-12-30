@@ -318,8 +318,6 @@ class InvoiceDetails(models.TransientModel):
                     
                 rentabilidad = detail.price_subtotal - total_costo
                 
-                _logger.info(f'MOSTRANDO LA FECHA >>>> { detail.date }')
-                
                 date_formated = datetime.strftime(detail.date, "%d/%m/%Y")
                 
                 provincia = detail.partner_id.state_id.name or "N/A"
@@ -416,6 +414,9 @@ class InvoiceDetails(models.TransientModel):
                 metodos_list = list(metodos_set)
                                  
                 data_detail['metodos'] = metodos_list
+                
+                _logger.info(data_detail)
+                
                 data_invoice_details.append(data_detail)
             
             data = {
