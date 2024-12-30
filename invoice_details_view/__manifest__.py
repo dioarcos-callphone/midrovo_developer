@@ -11,7 +11,7 @@
         - Los usuarios que pertenecen al grupo group_invoice_details_view_user no tienen permitido ver el costo, total costo y rentabilidad.
         - Genera informe de facturas y notas de credito resumido y detallado
         - Muestra metodos de pago
-        - Se añade hora y total neto
+        - Se actualiza el modulo, ahora los reportes de detalle de factura generados en excel muestran la hora de la factura, categoria, estilo, SKU del producto, porcentaje de descuento, total neto y datos del cliente.
     """,
     
     "category": "Account Move",
