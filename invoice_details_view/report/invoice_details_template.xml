@@ -40,6 +40,7 @@
                                 <th align="center" style="vertical-align: middle">Precio</th>
                                 <th align="center" style="vertical-align: middle">Descuento</th>
                                 <th align="center" style="vertical-align: middle">Subtotal</th>
+                                <th align="center" style="vertical-align: middle">Total neto</th>
                                 <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
                                     <th align="center" style="vertical-align: middle">Costo</th>
                                     <th align="center" style="vertical-align: middle">Total costo</th>
@@ -107,6 +108,9 @@
                                 </td>
                                 <td align="center" width="100">
                                     <t t-esc="result['subtotal']"/>
+                                </td>
+                                <td align="center" width="100">
+                                    <t t-esc="result['neto']"/>
                                 </td>
                                 <t t-if="not env.user.has_group('invoice_details_view.group_invoice_details_view_user')">
                                     <td align="center" width="100">

@@ -121,7 +121,11 @@ class InvoiceDetails(models.AbstractModel):
                 data_detail['cantidad'] = abs(detail.quantity)
                 data_detail['precio'] = abs(detail.price_unit)
                 data_detail['descuento'] = abs(descuento)
-                data_detail['subtotal'] = abs(detail.price_subtotal)
+                data_detail['subtotal'] = abs(detail.quantity * detail.price_unit) # abs(detail.price_subtotal)
+                
+                total_neto = (abs(detail.quantity * detail.price_unit)) - abs(descuento)
+                
+                data_detail['neto'] = total_neto
                 data_detail['costo'] = abs(round(detail.product_id.standard_price, 2))
                 data_detail['total_costo'] = abs(total_costo)
                 data_detail['rentabilidad'] = round(rentabilidad, 2)
@@ -138,6 +142,7 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['precio'] = - data_detail['precio']
                     data_detail['descuento'] = - data_detail['descuento']
                     data_detail['subtotal'] = - data_detail['subtotal']
+                    data_detail['neto'] = - data_detail['neto']
   
                 metodos = []
                 
