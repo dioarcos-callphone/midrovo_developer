@@ -244,6 +244,7 @@ class InvoiceDetails(models.AbstractModel):
                     data_detail['total'] = - data_detail['total']
                 
                 payment_widget = invoice.invoice_payments_widget
+                partner = invoice.partner_id
                 
                 if payment_widget:
                     contents = payment_widget['content']
@@ -265,9 +266,26 @@ class InvoiceDetails(models.AbstractModel):
                                 data_detail['bank'] += content_amount
                                 
                             elif journal.type not in ['bank', 'cash'] and move_id:
-                                _logger.info('ENTRA CUANDO ES ABONO')
-
-    
+                                session = self.env['pos.session'].search([
+                                    ('move_id', '=', move_id)
+                                ])
+                                
+                                _logger.info(f'MOSTRANDO SESION >>>> { session }')
+                                
+                                order_sesion = self.env['pos.order'].search([
+                                    ('session_id', '=', session.id)
+                                ])
+                                
+                                _logger.info(f'MOSTRANDO ORDER SESION >>>> { order_sesion }')
+                                
+                                if partner:
+                                    orders = partner.pos_order_ids
+                                    
+                                    if orders:
+                                        for order in orders:
+                                            if order.name == '':
+                                                _logger.info('ENTRA CUANDO ES ABONO')
+                                        
                                                       
                         else:                            
                             pos_payment = self.env['pos.payment.method'].search([('name', '=', pos_payment_name)])
