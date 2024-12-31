@@ -266,7 +266,7 @@ class InvoiceDetails(models.AbstractModel):
                             elif journal.type == 'bank':
                                 data_detail['bank'] += content_amount
                                 
-                            elif journal.type not in ['bank', 'cash']:
+                            else:
                                 session = self.env['pos.session'].search([
                                     ('move_id', '=', move_id)
                                 ])
