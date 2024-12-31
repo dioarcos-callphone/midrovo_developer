@@ -250,6 +250,7 @@ class InvoiceDetails(models.AbstractModel):
                     for content in contents:
                         pos_payment_name = content.get('pos_payment_name', None)
                         content_amount = content.get('amount', 0)
+                        move_id = content.get('move_id', None)
                         # partial_id = content.get('partial_id', 0)
                         if not pos_payment_name:
                             journal_name = content['journal_name']
@@ -262,6 +263,10 @@ class InvoiceDetails(models.AbstractModel):
                                 
                             elif journal.type == 'bank':
                                 data_detail['bank'] += content_amount
+                                
+                            elif journal.type not in ['bank', 'cash'] and move_id:
+                                _logger.info('ENTRA CUANDO ES ABONO')
+
     
                                                       
                         else:                            
