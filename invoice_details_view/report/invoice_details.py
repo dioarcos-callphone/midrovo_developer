@@ -247,9 +247,9 @@ class InvoiceDetails(models.AbstractModel):
                 partner = invoice.partner_id
                 
                 if payment_widget:
-                    _logger.info(f'MOSTRANDO PAYMENT WIDGET >>> { payment_widget }')
                     contents = payment_widget['content']
                     for content in contents:
+                        _logger.info(f'MOSTRANDO CONTENT >>>> { content }')
                         pos_payment_name = content.get('pos_payment_name', None)
                         content_amount = content.get('amount', 0)
                         move_id = content.get('move_id', None)
