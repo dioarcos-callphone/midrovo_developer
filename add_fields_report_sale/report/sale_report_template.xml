@@ -11,7 +11,7 @@
         </xpath>
 
         <xpath expr="//td[@name='td_name']" position="before">
-            <td name="td_img" class="text-center" vertical-align="middle">
+            <td name="td_img" class="text-center" style="vertical-align: middle;">
                 <span
                     t-field="line.product_id.image_128"
                     t-options="{'widget': 'image'}"
@@ -20,10 +20,35 @@
         </xpath>
 
         <xpath expr="//td[@name='td_quantity']" position="replace">
-            <td name="td_quantity" class="text-end">
+            <td name="td_quantity" class="text-end" style="vertical-align: middle;">
                 <span t-field="line.product_uom_qty"/>
             </td>
         </xpath>
+
+        <xpath expr="//td[@name='td_priceunit']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@t-if='display_discount']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@name='td_taxes']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@name='td_subtotal']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@name='td_section_line']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@name='td_note_line']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+        
     </template>
 
 </odoo>
