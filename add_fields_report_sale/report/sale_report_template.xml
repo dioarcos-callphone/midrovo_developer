@@ -1,7 +1,10 @@
-<template id="report_sale_order_inh" name="Add Field Img" inherit_id="sale.report_saleorder_document">
-    <xpath expr="//td[@name='td_name']" position="before">
-        <td name="td_img">
-            <span t-field="line.image_1920"/>
-        </td>
-    </xpath>
-</template>
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="report_sale_order_inh" name="Add Field Img" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//td[@name='td_name']" position="before">
+            <td name="td_img">
+                <span t-field="line.image_1920"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
