@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+
     <template id="report_sale_order_inh" name="Add Field Img" inherit_id="sale.report_saleorder_document">
         <xpath expr="//th[@name='th_description']" position="replace">
             <th name="th_description" class="text-center">Descripción</th>
@@ -24,4 +25,5 @@
             </td>
         </xpath>
     </template>
+    
 </odoo>
