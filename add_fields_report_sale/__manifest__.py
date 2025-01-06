@@ -15,7 +15,7 @@
     "company": "Callphone S.A.",
     "website": "https://www.callphoneecuador.com",
     
-    "depends": [ "sale", "base", 'sale_product_matrix', ],
+    "depends": [ "sale", "base", ],
     "data": [
         "report/sale_report_template.xml",
     ],
