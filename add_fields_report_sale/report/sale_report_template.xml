@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <template id="report_sale_order_inh" name="Add Field Img" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_description']" position="replace">
+            <th name="th_description" class="text-center">Descripción</th>
+        </xpath>
+        
         <xpath expr="//th[@name='th_description']" position="before">
             <th name="th_img" class="text-center">Foto</th>
         </xpath>
@@ -11,6 +15,12 @@
                     t-field="line.product_id.image_1920"
                     t-options="{'widget': 'image'}"
                     style="display: block; margin: auto; max-width: 50px; max-height: 50px; width: auto; height: auto;"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//td[@name='td_quantity']" position="replace">
+            <td name="td_quantity" class="text-end">
+                <span t-field="line.product_uom_qty"/>
             </td>
         </xpath>
     </template>
