@@ -11,11 +11,11 @@
         </xpath>
 
         <xpath expr="//td[@name='td_name']" position="before">
-            <td name="td_img" class="text-center">
+            <td name="td_img" class="text-center" vertical-align="middle">
                 <span
                     t-field="line.product_id.image_1920"
                     t-options="{'widget': 'image'}"
-                    style="display: block; margin: auto; max-width: 50px; max-height: 50px; width: auto; height: auto;"/>
+                    style="display: block; margin: auto; max-width: 40px; max-height: 40px; width: auto; height: auto;"/>
             </td>
         </xpath>
 
@@ -25,5 +25,5 @@
             </td>
         </xpath>
     </template>
-    
+
 </odoo>
