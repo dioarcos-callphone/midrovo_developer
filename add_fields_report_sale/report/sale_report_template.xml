@@ -25,6 +25,10 @@
             </td>
         </xpath>
 
+        <xpath expr="//td[@name='td_name']" position="attributes">
+            <attribute name="style">vertical-align: middle;</attribute>
+        </xpath>
+
         <xpath expr="//td[@name='td_priceunit']" position="attributes">
             <attribute name="style">vertical-align: middle;</attribute>
         </xpath>
