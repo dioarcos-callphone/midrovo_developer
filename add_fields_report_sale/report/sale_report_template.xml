@@ -15,7 +15,7 @@
                 <span
                     t-field="line.product_id.image_512"
                     t-options="{'widget': 'image'}"
-                    style="display: block; margin: auto; max-width: 30px; max-height: 30px; width: auto; height: auto;"/>
+                    style="display: block; margin: auto; max-width: 40px; max-height: 40px; width: auto; height: auto;"/>
             </td>
         </xpath>
 
@@ -26,7 +26,7 @@
         </xpath>
 
         <xpath expr="//td[@name='td_name']" position="attributes">
-            <attribute name="style">vertical-align: middle; font-size: 14px;</attribute>
+            <attribute name="style">vertical-align: middle; font-size: 13px;</attribute>
         </xpath>
 
         <xpath expr="//td[@name='td_priceunit']" position="attributes">
