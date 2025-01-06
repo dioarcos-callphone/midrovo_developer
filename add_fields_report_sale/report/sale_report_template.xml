@@ -7,7 +7,10 @@
 
         <xpath expr="//td[@name='td_name']" position="before">
             <td name="td_img" class="text-center">
-                <span t-field="line.product_id.image_1920"/>
+                <span
+                    t-field="line.product_id.image_1920"
+                    t-options="{'widget': 'image', 'class': 'img-thumbnail'}"
+                    style="max-width: 50px; max-height: 50px;"/>
             </td>
         </xpath>
     </template>
