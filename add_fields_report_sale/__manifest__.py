@@ -6,6 +6,7 @@
 
         (Odoo 16 Enterprise)
         Este modulo personaliza el reporte de cotizaciones, añadiendo una columna de las imágenes del producto.
+        - Incluye depencencias: base - sale - sale_product_matrix
     
     """,
     
