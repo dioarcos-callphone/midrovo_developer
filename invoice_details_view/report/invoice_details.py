@@ -277,6 +277,7 @@ class InvoiceDetails(models.AbstractModel):
                                     ('session_id', '=', session.id)
                                 ])
                                 
+                                
                                 _logger.info(f'MOSTRANDO ORDER SESION >>>> { order_sesion }')
                                 
                                 if partner:
