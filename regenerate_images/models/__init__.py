@@ -1,1 +1,0 @@
-from . import regenerate_images
