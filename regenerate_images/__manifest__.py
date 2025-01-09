@@ -17,7 +17,7 @@
         'base',  # Dependencia mínima necesaria para los modelos base.
     ],
     'data': [
-        'views/regenerate_images_view.xml',  # Asegúrate de que el nombre del archivo sea correcto.
+        'views/regenerate_image_view.xml',  # Asegúrate de que el nombre del archivo sea correcto.
     ],
     'installable': True,
     'application': False,  # Cambia a True si este módulo es una aplicación principal.
