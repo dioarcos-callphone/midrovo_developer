@@ -15,6 +15,7 @@
     'images': [],  # Puedes añadir la ruta de una imagen si tienes un logotipo o una captura de pantalla.
     'depends': [
         'base',  # Dependencia mínima necesaria para los modelos base.
+        'product'
     ],
     'data': [
         'views/regenerate_image_view.xml',  # Asegúrate de que el nombre del archivo sea correcto.

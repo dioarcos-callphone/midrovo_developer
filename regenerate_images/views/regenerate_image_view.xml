@@ -1,30 +1,15 @@
 <odoo>
-    <record id="action_regenerate_images" model="ir.actions.act_window">
-        <field name="name">Regenerar Imágenes</field>
-        <field name="res_model">regenerate.images</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
-    <record id="view_regenerate_images_form" model="ir.ui.view">
-        <field name="name">regenerate.images.form</field>
-        <field name="model">regenerate.images</field>
+    <record id="view_product_template_form_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <form string="Regenerar Caché de Imágenes">
-                <group>
-                    <field name="models_to_update"/>
-                </group>
-                <footer>
-                    <button string="Regenerar" type="object" name="regenerate_images" class="btn-primary"/>
-                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
-                </footer>
-            </form>
+            <button name="action_open_quants" position="after">
+                <button string="Regenerar Imágenes"
+                        type="action"
+                        class="btn-primary"
+                        name="%(action_regenerate_images)d"/>
+            </button>
         </field>
     </record>
-
-    <menuitem id="menu_regenerate_images"
-              name="Regenerar Imágenes"
-              parent="base.menu_custom"
-              action="action_regenerate_images"
-              sequence="10"/>
 </odoo>
