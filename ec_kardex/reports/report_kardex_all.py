@@ -25,8 +25,8 @@ class ReportEcKardexAll(models.AbstractModel):
         #     _logger.info(f'--------------------------------------')
         
         return {
-            'formatLang': partial(formatLang, self.env),
-            'format_date': partial(format_date, self.env),
+            # 'formatLang': partial(formatLang, self.env),
+            # 'format_date': partial(format_date, self.env),
             "products": data
         }
         
