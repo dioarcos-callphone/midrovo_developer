@@ -29,11 +29,11 @@
         'views/stock_valuation_layer_view.xml',
         'views/product_template_views.xml',
         'views/kardex_report_reg_views.xml',
-        # 'reports/report_kardex_all.xml', # KARDEX GENERAL
+        'reports/report_kardex_all.xml', # KARDEX GENERAL
         'reports/report_kardex_individual.xml',
         'reports/stock_reports.xml',
         # 'reports/report_kardex_all_stock.xml',
-        # 'wizard/wizard_kardex_all_view.xml', # KARDEX GENERAL
+        'wizard/wizard_kardex_all_view.xml', # KARDEX GENERAL
         'wizard/wizard_kardex_individual_view.xml',
         # 'wizard/wizard_kardex_all_stock_view.xml', # KARDEX STOCK POR ALMACEN
     ],
