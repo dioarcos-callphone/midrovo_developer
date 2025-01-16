@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="paperformat_account_invoice" model="report.paperformat" >
+            <field name="name">Formato para las facturas</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="default" eval="False" />
+            <field name="margin_top" eval="20" />
+            <field name="margin_right" eval="7" />
+            <field name="margin_bottom" eval="20" />
+            <field name="margin_left" eval="7" />
+            <field name="header_line" eval="False" />
+            <field name="header_spacing" eval="20" />
+            <field name="report_ids" eval="[(4, ref('account.account_invoices'))]" />
+        </record>
+    </data>
+</odoo>
