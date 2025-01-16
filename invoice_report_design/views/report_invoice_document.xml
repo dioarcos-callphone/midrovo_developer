@@ -3,29 +3,29 @@
     <data>
         <template id="report_invoice_document_extend" name="Encabezados en Español" inherit_id="account.report_invoice_document">
             <xpath expr="//th[@name='th_description']" position="replace">
-                <th name="th_description" class="text-start"><span>Descripción</span></th>
+                <th name="th_description" style="font-size: 12px;" class="text-center"><span>Descripción</span></th>
             </xpath>
 
             <xpath expr="//th[@name='th_quantity']" position="replace">
-                <th name="th_quantity" class="text-end"><span>Cantidad</span></th>
+                <th name="th_quantity" style="font-size: 12px;" class="text-center"><span>Cantidad</span></th>
             </xpath>
 
             <xpath expr="//th[@name='th_priceunit']" position="replace">
-                <th name="th_priceunit" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Precio Unitario</span></th>
+                <th name="th_priceunit" style="font-size: 12px;" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Precio Unitario</span></th>
             </xpath>
 
             <xpath expr="//th[@name='th_price_unit']" position="replace">
-                <th name="th_price_unit" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                <th name="th_price_unit" style="font-size: 12px;" t-if="display_discount" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                     <span>Dscto.%</span>
                 </th>
             </xpath>
 
             <xpath expr="//th[@name='th_taxes']" position="replace">
-                <th name="th_taxes" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Impuestos</span></th>
+                <th name="th_taxes" style="font-size: 12px;" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Impuestos</span></th>
             </xpath>
 
             <xpath expr="//th[@name='th_subtotal']" position="replace">
-                <th name="th_subtotal" class="text-end">
+                <th name="th_subtotal" style="font-size: 12px;" class="text-center">
                     <span groups="account.group_show_line_subtotals_tax_excluded">Importe</span>
                     <span groups="account.group_show_line_subtotals_tax_included">Precio Total</span>
                 </th>
@@ -35,7 +35,7 @@
 
         <template id="l10n_ec_edi_report_invoice_document" name="template_name" inherit_id="l10n_ec_edi.report_invoice_document">
             <xpath expr="//th[@name='th_description']" position="replace">
-                <th name="th_code" class="text-start">
+                <th name="th_code" style="font-size: 12px;" class="text-center">
                     <span>Código</span>
                 </th>
             </xpath>
