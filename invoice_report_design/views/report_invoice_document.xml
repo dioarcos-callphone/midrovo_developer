@@ -47,7 +47,7 @@
         </template>
 
         <template id="document_tax_totals_extend" name="Document Tax Totals" inherit_id="account.document_tax_totals">
-            <xpath expr="//strong[@t-out='subtotal[name]']" position="replace">
+            <xpath expr="//strong[@t-out='subtotal[\'name\']']" position="replace">
                 <strong>MOSTRANDO AQUI</strong>
                 <strong t-out="subtotal['name']"/>
             </xpath>
