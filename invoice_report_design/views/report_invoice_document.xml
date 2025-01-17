@@ -47,24 +47,9 @@
         </template>
 
         <template id="document_tax_totals_extend" name="Document Tax Totals" inherit_id="account.document_tax_totals">
-            <xpath expr="//t[@t-foreach]" position="replace">
-                <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
-                    <tr class="border-black o_subtotal">
-                        <td>
-                            <strong t-out="subtotal['name']"/>
-                        </td>
-
-                        <td class="text-end">
-                            <span
-                                t-att-class="oe_subtotal_footer_separator"
-                                t-out="subtotal['formatted_amount']"
-                            />
-                        </td>
-                    </tr>
-
-                    <!-- <t t-set="subtotal_to_show" t-value="subtotal['name']"/> -->
-                    <t t-call="account.tax_groups_totals"/>
-                </t>
+            <xpath expr="//t[@t-set='subtotal_to_show']" position="replace">
+                <strong>ENTRA AQUI</strong>
+                <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
             </xpath>
         </template>
 
