@@ -55,7 +55,7 @@
                 </th>
             </xpath>
 
-            <xpath expr="//div[@id='total']" position="after">
+            <xpath expr="//div[@t-attf-class]" position="replace">
                 <!-- Tu código modificado aquí -->
             </xpath>
         </template>
