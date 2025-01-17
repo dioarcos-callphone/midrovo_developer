@@ -35,9 +35,9 @@
                 </th>
             </xpath>
 
-            <!-- <xpath expr="//tbody[@class='invoice_tbody']" position="attributes">
-                <attribute name="style">font-size: 13px;</attribute>
-            </xpath> -->
+            <xpath expr="//span[@t-field='line.price_unit']" position="replace">
+                <span class="text-nowrap" t-field="line.price_unit"/>
+            </xpath>
 
             <xpath expr="//i[@class='oe_form_field text-end oe_payment_label']" position="replace">
                 <i class="oe_form_field text-end oe_payment_label">Pagado en <t t-out="payment_vals['date']" t-options='{"widget": "date"}'/></i>
