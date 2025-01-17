@@ -1,5 +1,5 @@
 {
-    "name": "Plantilla de Reportes de Facturas",
+    "name": "Formato de Facturas PDF",
     "summary": "Diseño mejorado de los reportes de factura",
     "description": """
         - Modulo desarrollado para Odoo 16 Enterprise
