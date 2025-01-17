@@ -35,11 +35,6 @@
                 </th>
             </xpath>
 
-            <xpath expr="//span[@t-field='line.price_unit']" position="replace">
-                <!-- <span class="text-nowrap" t-field="line.price_unit"/> -->
-                <span class="text-nowrap" t-field="line.price_unit" options="{'precision_digits': 2}"/>
-            </xpath>
-
             <xpath expr="//i[@class='oe_form_field text-end oe_payment_label']" position="replace">
                 <i class="oe_form_field text-end oe_payment_label">Pagado en <t t-out="payment_vals['date']" t-options='{"widget": "date"}'/></i>
             </xpath>
