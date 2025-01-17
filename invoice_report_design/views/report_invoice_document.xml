@@ -55,7 +55,6 @@
                                 <span t-out="amount_by_group['tax_group_name']"/>
                                 <span class="text-nowrap"> on
                                     <t t-out="amount_by_group['formatted_tax_group_base_amount']"/>
-                                    <strong>MOSTRANDO 1</strong>
                                 </span>
                             </td>
                             <td class="text-end o_price_total">
@@ -63,10 +62,12 @@
                             </td>
                         </t>
                         <t t-else="">
-                            <td><span class="text-nowrap" t-out="amount_by_group['tax_group_name']"/></td>
+                            <td>
+                                <span class="text-nowrap" t-out="amount_by_group['tax_group_name']"/>
+                                <strong>MOSTRANDO 2</strong>
+                            </td>
                             <td class="text-end o_price_total">
                                 <span class="text-nowrap" t-out="amount_by_group['formatted_tax_group_amount']" />
-                                <strong>MOSTRANDO 2</strong>
                             </td>
                         </t>
                     </tr>
