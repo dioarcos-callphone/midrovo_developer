@@ -55,7 +55,7 @@
                 </th>
             </xpath>
 
-            <xpath expr="//div[table/thead/tr/th[text()='Payment Methods']]" position="replace">
+            <xpath expr="//div[table/thead/tr/th[text()='Métodos de pago']]" position="replace">
                 <!-- Tu código modificado aquí -->
             </xpath>
         </template>
