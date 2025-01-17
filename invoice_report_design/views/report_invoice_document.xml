@@ -34,7 +34,6 @@
             <xpath expr="//t[@t-set='tax_totals']" position="replace">
                 <span>MODIFICANDO TAX TOTALS</span>
                 <t t-set="tax_totals" t-value="o.tax_totals"/>
-                <t t-log="tax_totals"/>
             </xpath>
 
             <xpath expr="//i[@class='oe_form_field text-end oe_payment_label']" position="replace">
