@@ -57,6 +57,7 @@
 
             <xpath expr="//div[@t-attf-class]" position="replace">
                 <!-- Tu código modificado aquí -->
+                <strong>MOSTRANDO TEXTO</strong>
             </xpath>
         </template>
 
