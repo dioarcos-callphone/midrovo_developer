@@ -57,7 +57,7 @@
         <template id="iuf_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_note">
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
-                    <table class="table-val" style="width: 100%; border: none !important;">
+                    <table class="table-val" style="width: 100%; border: transparent !important;">
                         <tr>
                             <td class="payment-additional" style="border: none !important;">
                                 CELDA 1
