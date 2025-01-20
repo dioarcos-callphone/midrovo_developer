@@ -197,6 +197,46 @@
                     <t>RUC/Cédula</t>:
                 </strong>
             </xpath>
+
+            <xpath expr="//div[@style='font-size: 12px;']" position="replace">
+                <div id="header" class="font-size: 12px;">
+                    <strong>
+                        <t t-if="o.company_id.partner_id.l10n_latam_identification_type_id" t-esc="o.company_id.partner_id.l10n_latam_identification_type_id.name" id="inv_tax_id_label"/>
+                        <t t-else="">RUC/Cédula</t>:
+                    </strong>
+                    <span t-field="o.company_id.partner_id.vat"/>
+                    <br/>
+                    <t t-if="o.journal_id.l10n_ec_emission">
+                        <strong>Dirección Sucursal: </strong>
+                        <span t-esc="o.journal_id.l10n_ec_emission_address_id._display_address()"/>
+                        <br/>
+                    </t>
+                    <t t-if="o.company_id.l10n_ec_special_taxpayer_number">
+                        <strong>Número de Contribuyente Especial: </strong>
+                        <span t-field="o.company_id.l10n_ec_special_taxpayer_number"/>
+                        <br/>
+                    </t>
+                    <strong>Ambiente: </strong>
+                    <t t-if="o.company_id.l10n_ec_production_env">Producción</t>
+                    <t t-else="">Prueba</t>
+                    <br/>
+                    <strong>Emisión: </strong>Normal
+                    <br/>
+                    <strong>Obligado a llevar contabilidad: </strong>
+                    <t t-if="o.company_id.l10n_ec_forced_accounting">Si</t>
+                    <t t-else="">No</t>
+                    <br/>
+                    <t t-if="o.company_id.l10n_ec_withhold_agent_number">
+                        <strong>Retener la Resolución del Agente No.: </strong>
+                        <span t-field="o.company_id.l10n_ec_withhold_agent_number"/>
+                        <br/>
+                    </t>
+                    <t t-if="o.company_id.l10n_ec_regime == 'rimpe'">
+                        Tipo de Contribuyente RIMPE
+                        <br/>
+                    </t>
+                </div> 
+            </xpath>
         </template>
 
     </data>
