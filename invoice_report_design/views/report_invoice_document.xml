@@ -69,9 +69,9 @@
                 </th>
             </xpath>
 
-            <!-- <xpath expr="//div[@id='total']" position="after">
+            <xpath expr="//div[@id='total']" position="replace">
 
-            </xpath> -->
+            </xpath>
 
         </template>
 
