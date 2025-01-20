@@ -191,12 +191,12 @@
         </template>
 
         <template id="report_invoice_header_extend" name="Formato Report Invoice Header" inherit_id="l10n_ec_edi.report_invoice_header">
-            <xpath expr="//div[@style='font-size: 12px;']/strong" position="replace">
+            <!-- <xpath expr="//div[@style='font-size: 12px;']/strong" position="replace">
                 <strong>
                     <t t-if="False" t-esc="o.company_id.partner_id.l10n_latam_identification_type_id.name" id="inv_tax_id_label"/>
                     <t>RUC/Cédula</t>:
                 </strong>
-            </xpath>
+            </xpath> -->
 
             <xpath expr="//div[@style='font-size: 12px;']" position="replace">
                 <div id="header" class="font-size: 12px;">
