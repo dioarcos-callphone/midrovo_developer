@@ -59,7 +59,7 @@
                 <div class="clearfix mb-4">
                     <table class="table-val" style="width: 100%; border: transparent !important;">
                         <tr>
-                            <td class="payment-additional me-3" style="border: none !important; width: 40%;">
+                            <td class="payment-additional" style="border: none !important; width: 30%; margin-right: 10px">
                                 <div class="payment-method row">
                                     <table class="table table-sm table-borderless" style="page-break-inside: avoid">
                                         <thead>
