@@ -59,7 +59,7 @@
 
         </template>
 
-        <template id="iuf_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_document">
+        <template id="iuf_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_note">
             <xpath expr="//div[@class='clearfix mb-4']/div[2]" position="replace">
                 
             </xpath>
