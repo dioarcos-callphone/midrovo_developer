@@ -39,7 +39,7 @@
                 <i class="oe_form_field text-end oe_payment_label">Pagado en <t t-out="payment_vals['date']" t-options='{"widget": "date"}'/></i>
             </xpath>
 
-            <xpath expr="//div[@class='clearfix mb-4']" position="after">
+            <xpath expr="//div[@class='clearfix mb-4']" position="replace">
             <!-- Eliminar el contenido añadido previamente -->
             </xpath>
 
