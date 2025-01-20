@@ -58,7 +58,7 @@
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
                     <table class="table-val" style="width: 100%;">
-                        <tr>
+                        <tr style="border: none !important;">
                             <td class="payment-additional" style="border: none !important;">
                                 CELDA 1
                             </td>
