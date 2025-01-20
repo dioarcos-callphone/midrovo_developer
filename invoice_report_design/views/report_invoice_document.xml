@@ -40,7 +40,7 @@
             </xpath>
 
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
-            <!-- Eliminar el contenido añadido previamente -->
+                <div id="total"></div>
             </xpath>
 
         </template>
