@@ -83,6 +83,9 @@
                                     </table>
                                 </div>
 
+                                <t t-set="additional_info" t-value="o._l10n_ec_get_invoice_additional_info()"/>
+                                <t t-call="l10n_ec_edi.report_invoice_additional_info"/>
+
                             </td>
                             <td style="border: none !important; width: 20px;"></td>
                             <td class="total" style="border: none !important; width: 380px;">
