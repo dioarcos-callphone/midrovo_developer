@@ -52,6 +52,23 @@
                     <span>Código</span>
                 </th>
             </xpath>
+
+            <xpath expr="//div[@name='partner_name']" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" name="partner_name">
+                    <strong>Razón Social/Nombres y Apellidos:</strong>
+                    <p class="m-0">
+                        <t t-esc="o.partner_id.name"/>
+                        <div t-if="o.partner_id.vat">
+                            RUC/Cédula: <span t-field="o.partner_id.vat"/>
+                        </div>
+                    </p>
+                </div>
+            </xpath>
+
+            <xpath expr="//strong[text()='Reason for Modification:']" position="replace">
+                <strong>Razón de la Modificación:</strong>
+            </xpath>
+
         </template>
 
         <template id="l10n_ec_edi_report_invoice_additional_info" name="Formato additional info" inherit_id="l10n_ec_edi.report_invoice_additional_info">
@@ -240,7 +257,7 @@
             <xpath expr="//t[@t-if='o.l10n_ec_authorization_number']" position="replace">
                 <t t-if="o.l10n_ec_authorization_number">
                     <div class="text-center" style="font-size: 12px">
-                        <strong>Número de Autorización.. No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
+                        <strong>Número de Autorización No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
                     </div>
                     <div class="text-justify">
                         <img style="width:100%; height:15.5mm;"
@@ -249,7 +266,7 @@
                         />
                     </div>
                     <div class="text-center" style="font-size: 12px">
-                        <strong>Clave de.. Acceso: <span t-field="o.l10n_ec_authorization_number"/></strong>
+                        <strong>Clave de Acceso: <span t-field="o.l10n_ec_authorization_number"/></strong>
                     </div>
                 </t>
             </xpath>
