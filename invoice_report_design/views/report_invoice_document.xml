@@ -45,13 +45,20 @@
                 <i class="oe_form_field text-end oe_payment_label">Pagado en <t t-out="payment_vals['date']" t-options='{"widget": "date"}'/></i>
             </xpath>
 
-            <!-- <xpath expr="//div[@class='clearfix mb-4']" position="replace">
+            <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
-                    <div id="total">
-                        <div>MOSTRANDO DIV</div>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                CELDA 1
+                            </td>
+                            <td>
+                                CELDA 2
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            </xpath> -->
+            </xpath>
 
         </template>
 
@@ -72,21 +79,6 @@
             <!-- <xpath expr="//div[@id='total']" position="replace">
 
             </xpath> -->
-
-            <xpath expr="//div[@class='clearfix mb-4']" position="replace">
-                <div class="clearfix mb-4">
-                    <table>
-                        <tr>
-                            <td>
-                                CELDA 1
-                            </td>
-                            <td>
-                                CELDA 2
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </xpath>
 
         </template>
 
