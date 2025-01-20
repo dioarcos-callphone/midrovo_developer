@@ -65,12 +65,47 @@
                         </thead>
                         <tbody>
                             <t t-foreach="additional_info.items()" t-as="item">
-                                <tr t-if="item[1]">
+                                <tr>
                                     <td>
-                                        <span t-esc="str(item[0])"/>
+                                        <t t-if="item[0] != 'E-mail'">
+                                            <span t-esc="str(item[0])"/>
+                                        </t>
+                                        <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
+                                            <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                            <t t-if="partner">
+                                                <t t-if="partner.email_normalized">
+                                                    <span>E-mail del cliente</span>
+                                                </t>
+                                            </t>
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="str(item[1])"/>
+                                        <t t-if="item[0] == 'Vendedor'">
+                                            <span>
+                                                <t t-if="o.invoice_origin">
+                                                    <t t-set="order" t-value="env['pos.order'].search([('name', '=', o.invoice_origin)], limit=1)"/>
+                                                    <t t-if="order">
+                                                        <t t-esc="order.cashier"/>
+                                                    </t>
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-esc="str(item[1])"></t>
+                                                </t>
+                                            </span>
+                                        </t>
+                                        <t t-if="item[0] != 'Vendedor' and item[0] != 'Referencia' and o.commercial_partner_id">
+                                            <span>
+                                                <t t-set="partner" t-value="env['res.partner'].search([('id', '=', o.commercial_partner_id.id)], limit=1)"/>
+                                                <t t-if="partner">
+                                                    <t t-if="partner.email_normalized">
+                                                        <t t-esc="partner.email_normalized"/>
+                                                    </t>
+                                                </t>
+                                            </span>
+                                        </t>                            
+                                        <t t-if="item[0] != 'Vendedor' and item[0] != 'E-mail'">
+                                            <span t-esc="str(item[1])"/>
+                                        </t>
                                     </td>
                                 </tr>
                             </t>
