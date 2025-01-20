@@ -59,9 +59,9 @@
                 <div class="clearfix mb-4">
                     <table class="table-val" style="width: 100%; border: transparent !important;">
                         <tr>
-                            <td class="payment-additional" style="border: none !important; width: 40%; margin-right: 10px;">
+                            <td class="payment-additional" style="border: none !important; width: 40%;">
                                 <div class="payment-method row">
-                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid">
+                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid; margin-right: 10px;">
                                         <thead>
                                             <tr>
                                                 <th class="text-center" colspan="2">Métodos de Pago</th>
@@ -84,9 +84,9 @@
                                 </div>
 
                             </td>
-                            <td class="total" style="border: none !important; width: 30%; margin-left: 10px;">
+                            <td class="total" style="border: none !important; width: 30%;">
                                 <div id="total" class="row">
-                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid;">
+                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid; margin-left: 10px;">
 
                                         <!--Tax totals-->
                                         <t t-set="tax_totals" t-value="o.tax_totals"/>
