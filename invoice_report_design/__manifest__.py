@@ -5,7 +5,7 @@
         - Modulo desarrollado para Odoo 16 Enterprise
         - Actualización del template de los reportes de factura
         - Mejorar la vista del archivo PDF
-        - Dependencias requeridas: account, point_of_sale, l10n_ec_edi
+        - Dependencias requeridas: account, point_of_sale, l10n_ec_edi, invoice_update_fields
     """,
     
     "category": "Invoice Report",
