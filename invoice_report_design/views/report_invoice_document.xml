@@ -46,7 +46,7 @@
             </xpath>
         </template>
 
-        <template id="l10n_ec_edi_report_invoice_document" name="template_name" inherit_id="l10n_ec_edi.report_invoice_document">
+        <template id="l10n_ec_edi_report_invoice_document" name="Formato Codigo" inherit_id="l10n_ec_edi.report_invoice_document">
             <xpath expr="//th[@name='th_description']" position="replace">
                 <th name="th_code" class="text-center">
                     <span>Código</span>
@@ -115,7 +115,7 @@
             </xpath>
         </template>
 
-        <template id="iuf_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_note">
+        <template id="iuf_report_invoice_document" name="Formato Report Invoice Note" inherit_id="invoice_update_fields.report_invoice_note">
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
                     <table class="table-val" style="width: 100%; border: transparent !important;">
@@ -190,7 +190,7 @@
             </xpath>
         </template>
 
-        <template id="report_invoice_header_extend" name="template_name" inherit_id="l10n_ec_edi.report_invoice_header">
+        <template id="report_invoice_header_extend" name="Formato Report Invoice Header" inherit_id="l10n_ec_edi.report_invoice_header">
             <xpath expr="//div[@style='font-size: 12px;']/strong" position="replace">
                 <strong>
                     <t t-if="False" t-esc="o.company_id.partner_id.l10n_latam_identification_type_id.name" id="inv_tax_id_label"/>
