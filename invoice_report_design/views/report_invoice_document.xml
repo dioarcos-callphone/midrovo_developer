@@ -57,7 +57,16 @@
         <template id="iuf_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_note">
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
-                
+                    <table>
+                        <tr>
+                            <td>
+                                CELDA 1
+                            </td>
+                            <td>
+                                CELDA 2
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </xpath>
         </template>
