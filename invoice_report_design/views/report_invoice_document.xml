@@ -237,11 +237,11 @@
                 </div> 
             </xpath>
 
-            <xpath expr="//strong[text()='Authorization No.: ']" position="replace">
+            <xpath expr="//strong[text()=Authorization No.: ]" position="replace">
                 <strong>Número de Autorización.. No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
             </xpath>
 
-            <xpath expr="//strong[text()='Access Key: ']" position="replace">
+            <xpath expr="//strong[text()=Access Key: ]" position="replace">
                 <strong>Clave de.. Acceso: <span t-field="o.l10n_ec_authorization_number"/></strong>
             </xpath>
         </template>
