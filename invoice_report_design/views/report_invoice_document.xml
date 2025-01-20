@@ -237,13 +237,23 @@
                 </div> 
             </xpath>
 
-            <xpath expr="//strong[text()=Authorization No.: ]" position="replace">
-                <strong>Número de Autorización.. No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
+            <xpath expr="//t[t-if='o.l10n_ec_authorization_number']" position="replace">
+                <t t-if="o.l10n_ec_authorization_number">
+                    <div class="text-center" style="font-size: 12px">
+                        <strong>Número de Autorización.. No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
+                    </div>
+                    <div class="text-justify">
+                        <img style="width:100%; height:15.5mm;"
+                            t-att-src="'/report/barcode/Code128/' + o.l10n_ec_authorization_number"
+                            alt="Missing barcode for authorization number"
+                        />
+                    </div>
+                    <div class="text-center" style="font-size: 12px">
+                        <strong>Clave de.. Acceso: <span t-field="o.l10n_ec_authorization_number"/></strong>
+                    </div>
+                </t>
             </xpath>
 
-            <xpath expr="//strong[text()=Access Key: ]" position="replace">
-                <strong>Clave de.. Acceso: <span t-field="o.l10n_ec_authorization_number"/></strong>
-            </xpath>
         </template>
 
     </data>
