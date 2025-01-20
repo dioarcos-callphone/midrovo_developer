@@ -53,6 +53,10 @@
                 </th>
             </xpath>
 
+            <xpath expr="//t[@t-set='additional_info']" position="replace">
+                
+            </xpath>
+
             <xpath expr="//t[@t-call='l10n_ec_edi.report_invoice_additional_info']" position="replace">
                 <!-- Contenido vacío para sobrescribir -->
             </xpath>
