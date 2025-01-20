@@ -40,7 +40,9 @@
             </xpath>
 
             <xpath expr="//div[@class='clearfix mb-4']" position="replace">
-                <div id="total"></div>
+                <div class="clearfix mb-4">
+                    <div id="total"></div>
+                </div>
             </xpath>
 
         </template>
