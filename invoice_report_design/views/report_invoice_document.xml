@@ -84,7 +84,7 @@
                                 </div>
 
                             </td>
-                            <td></td>
+                            <td style="border: none !important; width: 20px;"></td>
                             <td class="total" style="border: none !important;">
                                 <div id="total" class="row">
                                     <table class="table table-sm table-borderless" style="page-break-inside: avoid;">
