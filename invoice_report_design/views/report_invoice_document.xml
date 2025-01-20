@@ -237,7 +237,7 @@
                 </div> 
             </xpath>
 
-            <xpath expr="//t[t-if='o.l10n_ec_authorization_number']" position="replace">
+            <xpath expr="//t[@t-if='o.l10n_ec_authorization_number']" position="replace">
                 <t t-if="o.l10n_ec_authorization_number">
                     <div class="text-center" style="font-size: 12px">
                         <strong>Número de Autorización.. No.: <span t-field="o.l10n_ec_authorization_number"/></strong>
