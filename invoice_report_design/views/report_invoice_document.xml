@@ -73,8 +73,9 @@
 
             </xpath> -->
 
-            <xpath expr="//div[@class='clearfix mb-4']/div[2]" position="after">
-                
+            <xpath expr="//div[@class='clearfix mb-4']" position="replace">
+                <div class="clearfix mb-4">
+                </div>
             </xpath>
 
         </template>
