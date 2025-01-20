@@ -61,7 +61,7 @@
                         <tr>
                             <td class="payment-additional" style="border: none !important;">
                                 <div class="payment-method row">
-                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid; margin-right: 12px;">
+                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid; margin-right: 25px;">
                                         <thead>
                                             <tr>
                                                 <th class="text-center" colspan="2">Métodos de Pago</th>
@@ -86,7 +86,7 @@
                             </td>
                             <td class="total" style="border: none !important;">
                                 <div id="total" class="row">
-                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid; margin-left: 12px;">
+                                    <table class="table table-sm table-borderless" style="page-break-inside: avoid;">
 
                                         <!--Tax totals-->
                                         <t t-set="tax_totals" t-value="o.tax_totals"/>
