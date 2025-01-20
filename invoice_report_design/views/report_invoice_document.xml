@@ -201,8 +201,7 @@
             <xpath expr="//div[@style='font-size: 12px;']" position="replace">
                 <div id="header" class="font-size: 12px;">
                     <strong>
-                        <t t-if="o.company_id.partner_id.l10n_latam_identification_type_id" t-esc="o.company_id.partner_id.l10n_latam_identification_type_id.name" id="inv_tax_id_label"/>
-                        <t t-else="">RUC/Cédula</t>:
+                        RUC/Cédula: 
                     </strong>
                     <span t-field="o.company_id.partner_id.vat"/>
                     <br/>
