@@ -39,13 +39,13 @@
                 <i class="oe_form_field text-end oe_payment_label">Pagado en <t t-out="payment_vals['date']" t-options='{"widget": "date"}'/></i>
             </xpath>
 
-            <xpath expr="//div[@class='clearfix mb-4']" position="replace">
+            <!-- <xpath expr="//div[@class='clearfix mb-4']" position="replace">
                 <div class="clearfix mb-4">
                     <div id="total">
                         <div>MOSTRANDO DIV</div>
                     </div>
                 </div>
-            </xpath>
+            </xpath> -->
 
         </template>
 
@@ -63,6 +63,10 @@
                 </th>
             </xpath>
 
+            <xpath expr="//div[@id='total']" position="after">
+                
+            </xpath>
+
         </template>
 
         <template id="report_invoice_header_extend" name="template_name" inherit_id="l10n_ec_edi.report_invoice_header">
@@ -71,6 +75,12 @@
                     <t t-if="False" t-esc="o.company_id.partner_id.l10n_latam_identification_type_id.name" id="inv_tax_id_label"/>
                     <t>RUC/Cédula</t>:
                 </strong>
+            </xpath>
+        </template>
+
+        <template id="invoice_update_fields_report_invoice_document" name="template_name" inherit_id="invoice_update_fields.report_invoice_note">
+            <xpath expr="//div[@class='clearfix mb-4']/div[2]" position="replace">
+                
             </xpath>
         </template>
 
