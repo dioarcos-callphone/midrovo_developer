@@ -41,7 +41,7 @@
 
             <xpath expr="//div[@id='total']" position="replace">
                 <!-- Tu código modificado aquí -->
-                <strong>MOSTRANDO TEXTO</strong>
+                <div id="total">MOSTRANDO TEXTO</div>
             </xpath>
 
         </template>
