@@ -54,11 +54,15 @@
             </xpath>
 
             <xpath expr="//t[@t-set='additional_info']" position="replace">
-                <div>CAMBIADO</div>
+                <t t-if="Fase">
+                    
+                </t>
             </xpath>
 
             <xpath expr="//t[@t-call='l10n_ec_edi.report_invoice_additional_info']" position="replace">
-                <div>CAMBIADO 2</div>
+                <t t-if="Fase">
+                    
+                </t>
             </xpath>
 
         </template>
