@@ -41,7 +41,6 @@
 
             <xpath expr="//div[@class='clearfix mb-4']" position="after">
             <!-- Eliminar el contenido añadido previamente -->
-                <div/>
             </xpath>
 
         </template>
