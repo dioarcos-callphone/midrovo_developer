@@ -56,7 +56,7 @@
             <xpath expr="//div[@id='total']/following-sibling::div" position="replace">
                 <!-- Contenido vacío para sobrescribir -->
             </xpath>
-            <xpath expr="//t[t-call='l10n_ec_edi.report_invoice_additional_info']" position="replace">
+            <xpath expr="//t[@t-call='l10n_ec_edi.report_invoice_additional_info']" position="replace">
                 <!-- Contenido vacío para sobrescribir -->
             </xpath>
 
