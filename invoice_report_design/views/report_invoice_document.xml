@@ -65,7 +65,8 @@
                 </div>
             </xpath>
 
-            <xpath expr="//strong[@text()='Reason for Modification:']" position="replace">
+            <xpath t-if="o.move_type in ('out_refund', 'in_refund') or o.l10n_latam_document_type_id.internal_type == 'debit_note'"
+                expr="//div[@id='informations']/div[@name='reference']/strong" position="replace">
                 <strong>Razón de la Modificación:</strong>
             </xpath>
 
