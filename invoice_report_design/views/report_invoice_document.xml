@@ -65,10 +65,9 @@
                 </div>
             </xpath>
 
-            <xpath expr="//*[contains(text(), 'Reason for Modification:')]" position="replace">
+            <xpath expr="//strong[@text()='Reason for Modification:']" position="replace">
                 <strong>Razón de la Modificación:</strong>
             </xpath>
-
 
         </template>
 
