@@ -3,7 +3,7 @@
     <data>
         <template id="report_invoice_document_extend" name="Encabezados en Español" inherit_id="account.report_invoice_document">
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">font-size:13px;</attribute>
+                <attribute name="style">font-size:12px;</attribute>
             </xpath>
             
             <xpath expr="//th[@name='th_description']" position="replace">
@@ -20,7 +20,7 @@
 
             <xpath expr="//th[@name='th_price_unit']" position="replace">
                 <th name="th_price_unit" t-if="display_discount" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                    <span>Dscto.%</span>
+                    <span>Desc.%</span>
                 </th>
             </xpath>
 
