@@ -403,23 +403,15 @@
                         <td class="text-end"><span t-out="debit_note.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
-                                <a class="fa fa-file-pdf-o fa-lg download-link" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
                             <span class="xml-icon" style="margin: 5px;">
-                                <a class="fa fa-file-code-o fa-lg download-link" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
                             </span>
                         </td>
                     </tr>
                 </t>
             </tbody>
-            <!-- Spinner -->
-            <t t-name="DownloadSpinner">
-                <div id="download-spinner" class="o_spinner_container" style="display: none;">
-                    <div class="o_spinner">
-                        <i class="fa fa-circle-o-notch fa-spin"></i>
-                    </div>
-                </div>
-            </t>
         </t>
       </t>
     </template>
