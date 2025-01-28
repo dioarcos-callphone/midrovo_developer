@@ -198,80 +198,80 @@ class CustomPortalEcAccountEdi(PortalAccount):
     ################################################################################################
     
     # metodo que genera el contenido de notas de credito
-    @http.route(['/my/debit_note', '/my/debit_note/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_debit_note(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-        values = self._prepare_my_debit_notes_values(page, date_begin, date_end, sortby, filterby)
+    # @http.route(['/my/debit_note', '/my/debit_note/page/<int:page>'], type='http', auth="user", website=True)
+    # def portal_my_debit_note(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    #     values = self._prepare_my_debit_notes_values(page, date_begin, date_end, sortby, filterby)
 
-        # pager
-        pager = portal_pager(**values['pager'])
+    #     # pager
+    #     pager = portal_pager(**values['pager'])
 
-        # content according to pager and archive selected
-        debit_notes = values['debit_notes'](pager['offset'])
-        request.session['my_debit_notes_history'] = debit_notes.ids[:100]
+    #     # content according to pager and archive selected
+    #     debit_notes = values['debit_notes'](pager['offset'])
+    #     request.session['my_debit_notes_history'] = debit_notes.ids[:100]
 
-        values.update({
-            'debit_notes': debit_notes,
-            'pager': pager,
-        })
-        return request.render("ec_account_edi_extend.portal_my_debit_notes", values)
+    #     values.update({
+    #         'debit_notes': debit_notes,
+    #         'pager': pager,
+    #     })
+    #     return request.render("ec_account_edi_extend.portal_my_debit_notes", values)
     
-    def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/debit_notes"):
-        values = self._prepare_portal_layout_values()
+    # def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/debit_notes"):
+    #     values = self._prepare_portal_layout_values()
         
-        AccountDebitNote = request.env['account.move']
+    #     AccountDebitNote = request.env['account.move']
 
-        domain = expression.AND([
-            domain or [],
-            self._get_debit_note_domain(),
-        ])
+    #     domain = expression.AND([
+    #         domain or [],
+    #         self._get_debit_note_domain(),
+    #     ])
 
-        searchbar_sortings = self._get_account_searchbar_sortings()
-        # default sort by order
-        if not sortby:
-            sortby = 'date'
-        order = searchbar_sortings[sortby]['order']
+    #     searchbar_sortings = self._get_account_searchbar_sortings()
+    #     # default sort by order
+    #     if not sortby:
+    #         sortby = 'date'
+    #     order = searchbar_sortings[sortby]['order']
 
-        if date_begin and date_end:
-            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+    #     if date_begin and date_end:
+    #         domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
 
-        values.update({
-            'date': date_begin,
-            # content according to pager and archive selected
-            # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
-            'debit_notes': lambda pager_offset: (
-                AccountDebitNote.search(domain, order=order, limit=self._items_per_page, offset=pager_offset)
-                if AccountDebitNote.check_access_rights('read', raise_exception=False) else
-                AccountDebitNote
-            ),
-            'page_name': 'debit_note',
-            'pager': {  # vals to define the pager.
-                "url": url,
-                "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
-                "total": AccountDebitNote.search_count(domain) if AccountDebitNote.check_access_rights('read', raise_exception=False) else 0,
-                "page": page,
-                "step": self._items_per_page,
-            },
-            'default_url': url,
-            'searchbar_sortings': searchbar_sortings,
-            'sortby': sortby,
-        })
+    #     values.update({
+    #         'date': date_begin,
+    #         # content according to pager and archive selected
+    #         # lambda function to get the invoices recordset when the pager will be defined in the main method of a route
+    #         'debit_notes': lambda pager_offset: (
+    #             AccountDebitNote.search(domain, order=order, limit=self._items_per_page, offset=pager_offset)
+    #             if AccountDebitNote.check_access_rights('read', raise_exception=False) else
+    #             AccountDebitNote
+    #         ),
+    #         'page_name': 'debit_note',
+    #         'pager': {  # vals to define the pager.
+    #             "url": url,
+    #             "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
+    #             "total": AccountDebitNote.search_count(domain) if AccountDebitNote.check_access_rights('read', raise_exception=False) else 0,
+    #             "page": page,
+    #             "step": self._items_per_page,
+    #         },
+    #         'default_url': url,
+    #         'searchbar_sortings': searchbar_sortings,
+    #         'sortby': sortby,
+    #     })
         
-        return values
+    #     return values
     
-    # domain para documentos de reembolso
-    def _get_debit_note_domain(self):
-        # Se obtiene el punto de emisión del usuario interno actual
-        user = request.env.user
-        printer_default_ids = user.printer_default_ids
+    # # domain para documentos de reembolso
+    # def _get_debit_note_domain(self):
+    #     # Se obtiene el punto de emisión del usuario interno actual
+    #     user = request.env.user
+    #     printer_default_ids = user.printer_default_ids
         
-        domain = [
-            ('state', 'not in', ('cancel', 'draft')),
-            ('move_type', '=', 'out_invoice'),
-            ('debit_origin_id', '!=', False),
-        ]
+    #     domain = [
+    #         ('state', 'not in', ('cancel', 'draft')),
+    #         ('move_type', '=', 'out_invoice'),
+    #         ('debit_origin_id', '!=', False),
+    #     ]
         
-        if printer_default_ids:
-            domain.append(('printer_id', 'in', printer_default_ids.ids))
+    #     if printer_default_ids:
+    #         domain.append(('printer_id', 'in', printer_default_ids.ids))
         
-        return domain
+    #     return domain
 
