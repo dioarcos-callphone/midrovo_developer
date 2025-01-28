@@ -403,15 +403,22 @@
                         <td class="text-end"><span t-out="debit_note.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
-                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                <a class="fa fa-file-pdf-o fa-lg download-link" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
                             <span class="xml-icon" style="margin: 5px;">
-                                <a class="fa fa-file-code-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                <a class="fa fa-file-code-o fa-lg download-link" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
                             </span>
                         </td>
                     </tr>
                 </t>
             </tbody>
+            <!-- Spinner de carga -->
+            <div id="spinner-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999; justify-content: center; align-items: center;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
         </t>
       </t>
     </template>
