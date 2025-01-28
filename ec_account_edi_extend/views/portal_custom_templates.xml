@@ -371,7 +371,7 @@
                     <th class='text-center'>Impuestos no incluidos</th>
                     <th class="text-end">Total</th>
                     <th class="text-end">Total en moneda</th>                    
-                    <th class="text-end"><span class="fa fa-download fa-lg"></span></th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
