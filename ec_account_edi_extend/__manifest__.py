@@ -34,7 +34,7 @@
     'assets': {
         'web.assets_frontend': [
             'ec_account_edi_extend/static/src/js/ec_account_portal.js',
-            # 'ec_account_edi_extend/static/src/js/download_with_spinner.js',
+            'ec_account_edi_extend/static/src/js/download_with_spinner.js',
         ],
     },
     
