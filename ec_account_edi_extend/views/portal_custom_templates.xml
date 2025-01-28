@@ -333,7 +333,7 @@
 
 
     <!-- N O T A S  D E  D E B I T O  -->
-    <template id="portal_my_home_menu_debit_notes" name="Portal layout : debit notes menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+    <!-- <template id="portal_my_home_menu_debit_notes" name="Portal layout : debit notes menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'debit_note'" t-attf-class="breadcrumb-item #{'active ' if not debit_note else ''}">
                 <a t-if="debit_note" t-attf-href="/my/debit_note?{{ keep_query() }}">Nota de débito</a>
@@ -360,7 +360,6 @@
                 <p>Parece que no tienes notas de débito asociadas a tu cuenta en este momento.</p>
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
-            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
         <t t-if="debit_notes" t-call="portal.portal_table">
             <thead>
@@ -414,7 +413,7 @@
             </tbody>
         </t>
       </t>
-    </template>
+    </template> -->
 
 
     
