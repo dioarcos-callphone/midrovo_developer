@@ -339,7 +339,7 @@
                 <a t-if="debit_note" t-attf-href="/my/debit_note?{{ keep_query() }}">Nota de débito</a>
                 <t t-else="">Notas de débito</t>
             </li>
-            <li t-if="debit_note.name" class="breadcrumb-item active">
+            <li t-if="debit_note" class="breadcrumb-item active">
                 <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
                 <t t-else=""><em>Borrador de nota de débito</em></t>
             </li>
