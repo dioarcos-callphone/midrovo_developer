@@ -131,8 +131,8 @@
                 <t t-foreach="withholdings" t-as="withholding">
                     <tr>
                         <td>
-                            <span t-att-title="withholding.l10n_latam_document_number">
-                                <t t-out="withholding.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
+                            <span t-att-title="withholding.name">
+                                <t t-out="withholding.name" t-if="withholding.name != '/'"/>
                                 <em t-else="">Borrador de retenciones</em>
                             </span>
                         </td>
