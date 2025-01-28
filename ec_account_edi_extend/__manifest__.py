@@ -34,11 +34,12 @@
     'assets': {
         'web.assets_frontend': [
             'ec_account_edi_extend/static/src/js/ec_account_portal.js',
-        ],
-        
-        'web.assets_backend': [
             'ec_account_edi_extend/static/src/css/style.css',
         ],
+        
+        # 'web.assets_backend': [
+        #     'ec_account_edi_extend/static/src/css/style.css',
+        # ],
     },
     
     'installable': True,
