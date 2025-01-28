@@ -37,8 +37,7 @@
         ],
         
         'web.assets_backend': [
-            'ec_account_edi_extend/static/src/css/spinner.css',
-            'ec_account_edi_extend/static/src/js/download_with_spinner.js',
+            'ec_account_edi_extend/static/src/css/style.css',
         ],
     },
     
