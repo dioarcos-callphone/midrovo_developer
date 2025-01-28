@@ -24,9 +24,9 @@ class CustomPortalEcAccountEdi(PortalAccount):
             values['refund_count'] = request.env['account.move'].search_count(self._get_out_refund_domain()) \
                 if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
                 
-        if 'debit_note_count' in counters:
-            values['debit_note_count'] = request.env['account.move'].search_count(self._get_debit_note_domain()) \
-                if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
+        # if 'debit_note_count' in counters:
+        #     values['debit_note_count'] = request.env['account.move'].search_count(self._get_debit_note_domain()) \
+        #         if request.env['account.move'].check_access_rights('read', raise_exception=False) else 0
 
         return values
     
