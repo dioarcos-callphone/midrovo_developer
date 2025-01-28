@@ -1,23 +1,24 @@
 odoo.define('ec_account_edi_extend.download_with_spinner', function (require) {
     'use strict';
 
-    var $ = require('jquery');
+    const core = require('web.core');
+    const QWeb = core.qweb;
 
     $(document).ready(function () {
-        // Evento cuando se hace clic en los íconos de descarga
-        $('.download-link').on('click', function (e) {
-            // Mostrar el spinner de carga
-            $('#spinner-container').show();
-            
-            // Guardar el href del enlace para que la descarga se inicie después de mostrar el spinner
-            var downloadLink = $(this).attr('href');
+        // Renderiza el spinner en el DOM
+        if (!$('#download-spinner').length) {
+            $('body').append(QWeb.render('DownloadSpinner'));
+        }
 
-            // Temporizador para ocultar el spinner después de un tiempo estimado (ajustable)
-            setTimeout(function () {
-                // Redirigir a la URL de descarga y ocultar el spinner
-                window.location.href = downloadLink;
-                $('#spinner-container').hide();
-            }, 500); // Ajusta el tiempo según sea necesario
+        // Maneja el clic en los enlaces de descarga
+        $('.download-link').on('click', function () {
+            const spinner = $('#download-spinner');
+            spinner.show(); // Muestra el spinner
+
+            // Oculta el spinner después de 5 segundos (o según sea necesario)
+            setTimeout(() => {
+                spinner.hide();
+            }, 5000);
         });
     });
 });
