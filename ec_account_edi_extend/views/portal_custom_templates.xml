@@ -177,7 +177,7 @@
                 <t t-else="">Guías de Remisión</t>
             </li>
             <li t-if="shipping_guide" class="breadcrumb-item active">
-                <span t-if="shipping_guide.document_number != '/'">GuíaRem.</span> <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                 <t t-else=""><em>Borrador de guía de remisión</em></t>
             </li>
         </xpath>
@@ -217,7 +217,7 @@
                     <tr>
                         <td>
                             <span t-att-title="shipping_guide.document_number">
-                                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                                <span t-if="shipping_guide.document_number != '/'">GuíaRem.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                                 <em t-else="">Borrador de guías de remisión</em>
                             </span>
                         </td>
