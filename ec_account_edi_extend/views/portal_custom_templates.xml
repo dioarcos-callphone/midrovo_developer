@@ -217,7 +217,7 @@
                     <tr>
                         <td>
                             <span t-att-title="shipping_guide.document_number">
-                                <span t-if="shipping_guide.document_number != '/'">GuíaRem.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                                <span t-if="shipping_guide.document_number != '/'">Guía.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                                 <em t-else="">Borrador de guías de remisión</em>
                             </span>
                         </td>
