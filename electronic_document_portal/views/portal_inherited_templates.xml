@@ -111,6 +111,12 @@
                 <em t-else="">Borrador de factura</em>
             </span>
         </xpath>
+
+        <xpath expr="//td[@class='tx_status text-center']" position="replace">
+            <td class="tx_status text-center">
+                <span t-esc="invoice.state_sri"></span>
+            </td>
+        </xpath>
         
         <xpath expr="//th[@class='text-end']" position="after">
             <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
