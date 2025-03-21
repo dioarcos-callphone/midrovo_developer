@@ -189,7 +189,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
         user = request.env.user
         printer_default_ids = user.printer_default_ids
         
-        domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice'), ('debit_origin_id', '=', False)]
+        domain = [('state', 'not in', ('cancel', 'draft')), ('move_type', '=', 'out_invoice'), ('debit_origin_id', '=', False), ('debit_note', '=', False)]
         
         if printer_default_ids:
             domain.append(('printer_id', 'in', printer_default_ids.ids))
