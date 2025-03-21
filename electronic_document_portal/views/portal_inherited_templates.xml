@@ -114,7 +114,7 @@
 
         <xpath expr="//td[@class='tx_status text-center']" position="replace">
             <td class="tx_status text-center">
-                <span t-esc="invoice.state_sri"></span>
+                <span t-esc="invoice.state_sri[1]"></span>
             </td>
         </xpath>
         
