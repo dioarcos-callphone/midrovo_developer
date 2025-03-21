@@ -14,6 +14,12 @@
         </xpath>
     </template> -->
 
+    <template id="portal_invoice_page_inherit_payment" name="template_name" inherit_id="account_payment.portal_invoice_page_inherit_payment">
+        <xpath expr="//div[@class='d-grid']" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
     <template id="portal_my_home_refund" name="Mostrar Notas de Credito" inherit_id="portal.portal_my_home" customize_show="True" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
