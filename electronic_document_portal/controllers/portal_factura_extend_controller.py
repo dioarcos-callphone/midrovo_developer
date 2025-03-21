@@ -147,6 +147,9 @@ class CustomPortalEcAccountEdi(PortalAccount):
             
             return request.make_response(xml_decode, headers=headers)
         
+        values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
+        return request.render("account.portal_invoice_page", values)
+        
         
     # def _get_account_searchbar_filters(self):
     #     puntos_emision = self._get_puntos_emision()
