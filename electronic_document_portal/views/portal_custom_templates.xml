@@ -137,6 +137,12 @@
                             </span>
                         </td>
                         <td><span t-field="withholding.creation_date"/></td>
+                        <t t-if="withholding.invoice_id">
+                            <td><span t-field="withholding.invoice_id.name"/></td>
+                        </t>
+                        <t t-else="">
+                            <td><span t-field="withholding.factura_origen_api"/></td>
+                        </t>
                         <td><span t-field="withholding.invoice_id.name"/></td>
                         <td class="tx_status text-center">
                             <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
