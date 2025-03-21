@@ -105,12 +105,12 @@
             </t>
         </xpath>
         
-        <xpath expr="//a[@t-att-href]" position="replace">
+        <!-- <xpath expr="//a[@t-att-href]" position="replace">
             <span t-att-title="invoice.name">
                 <t t-out="invoice.name" t-if="invoice.name != '/'"/>
                 <em t-else="">Borrador de factura</em>
             </span>
-        </xpath>
+        </xpath> -->
 
         <xpath expr="//td[@class='tx_status text-center']" position="replace">
             <td class="tx_status text-center">
