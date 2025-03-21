@@ -34,7 +34,11 @@
                 </div>
             </div>
         </xpath>
-        
+
+        <xpath expr="//div[@class='small']" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+
         <xpath expr="//li[@t-if='invoice.invoice_user_id']" position="attributes">
             <attribute name="class">d-none</attribute>
         </xpath>
