@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- TEMPLATES PERSONALIZADOS -->
+
+    <!-- R E E M B O L S O S -->
+    <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
+                <t t-else="">Notas de crédito</t>
+            </li>
+            <li t-if="refund" class="breadcrumb-item active">
+                <t t-out="refund.name" t-if="refund.name != '/'"/>
+                <t t-else=""><em>Borrador de reembolso</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_refunds" name="Mis Notas de Crédito">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Notas de crédito</t>
+        </t>
+        <t t-if="not refunds">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay notas de crédito disponibles</h4>
+                <p>Parece que no tienes notas de crédito asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="refunds" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Nota de crédito #</th>
+                    <th>Fecha de nota de crédito</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="refunds" t-as="refund">
+                    <tr>
+                        <td>
+                            <span t-att-title="refund.name">
+                                <t t-out="refund.name" t-if="refund.name != '/'"/>
+                                <em t-else="">Borrador de nota de crédito</em>
+                            </span>
+                        </td>
+                        <td><span t-field="refund.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="refund.state == 'posted' and refund.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="refund.state == 'posted' and refund.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="refund.state == 'posted' and refund.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="refund.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="-refund.amount_residual if refund.move_type == 'out_refund' else refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="refund.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="refund.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+
+    <!-- R E T E N C I O N E S -->
+    <template id="portal_my_home_menu_withholding" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
+                <a t-if="withholding" t-attf-href="/my/withholding?{{ keep_query() }}">Retención</a>
+                <t t-else="">Retenciones</t>
+            </li>
+            <li t-if="withholding" class="breadcrumb-item active">
+                <t t-out="withholding.name" t-if="withholding.name != '/'"/>
+                <t t-else=""><em>Borrador de retención</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_withholdings" name="Mis Retenciones">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Retenciones</t>
+        </t>
+        <t t-if="not withholdings">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay retenciones disponibles</h4>
+                <p>Parece que no tienes retenciones asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="withholdings" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Retención #</th>
+                    <th>Fecha de emisión</th>
+                    <th>Factura asociada</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Total retenido IVA</th>
+                    <th class="text-center">Total retenido renta</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="withholdings" t-as="withholding">
+                    <tr>
+                        <td>
+                            <span t-att-title="withholding.l10n_latam_document_number">
+                                <span t-if="withholding.l10n_latam_document_number != '/'">Ret.</span> <t t-out="withholding.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
+                                <em t-else="">Borrador de retenciones</em>
+                            </span>
+                        </td>
+                        <td><span t-field="withholding.creation_date"/></td>
+                        <td><span t-field="withholding.invoice_id.name"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="withholding.state == 'canceled'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="withholding.total_iva" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
+                        <td class="text-end"><span t-out="withholding.total_renta" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="withholding.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="withholding.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+    <!-- G U I A S  D E  R E M I S I O N -->
+    <template id="portal_my_home_menu_shipping_guides" name="Portal layout : shipping guides menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'shipping_guide'" t-attf-class="breadcrumb-item #{'active ' if not shipping_guide else ''}">
+                <a t-if="shipping_guide" t-attf-href="/my/shipping_guide?{{ keep_query() }}">Guía de remisión</a>
+                <t t-else="">Guías de Remisión</t>
+            </li>
+            <li t-if="shipping_guide" class="breadcrumb-item active">
+                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                <t t-else=""><em>Borrador de guía de remisión</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_shipping_guides" name="Mis Guias de Remisión">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Guías de remisión</t>
+        </t>
+        <t t-if="not shipping_guides">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay guías de remisión disponibles</h4>
+                <p>Parece que no tienes guías de remisión asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="shipping_guides" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Guía de remisión #</th>
+                    <th>Fecha inicio de traslado</th>
+                    <th class='d-none d-md-table-cell'>Fecha fin de traslado</th>
+                    <th class="text-center">Dirección</th>
+                    <th class="text-center">Transportista</th>
+                    <th class="text-center">Tipo de traslado</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="shipping_guides" t-as="shipping_guide">
+                    <tr>
+                        <td>
+                            <span t-att-title="shipping_guide.document_number">
+                                <span t-if="shipping_guide.document_number != '/'">Guía.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="shipping_guide.delivery_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="shipping_guide.transfer_date"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_address"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_carrier"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.remision_type"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.state"/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+
+
+    <!-- L I Q U I D A C I O N E S  D E  C O M P R A -->
+    <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
+                <a t-if="purchase_settlement" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidación de compras</a>
+                <t t-else="">Liquidaciones de compras</t>
+            </li>
+            <li t-if="purchase_settlement" class="breadcrumb-item active">
+                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                <t t-else=""><em>Borrador de liquidación de compras</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_purchase_settlements" name="Mis Liquidaciones de Compra">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Liquidaciones de compra</t>
+        </t>
+        <t t-if="not purchase_settlements">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay liquidaciones de compra disponibles</h4>
+                <p>Parece que no tienes liquidaciones de compra asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="purchase_settlements" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Liquidación de compra #</th>
+                    <th>Fecha de la factura</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Impuestos no incluidos</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-end">Total en moneda</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="purchase_settlements" t-as="purchase_settlement">
+                    <tr>
+                        <td>
+                            <span t-att-title="purchase_settlement.name">
+                                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="purchase_settlement.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="purchase_settlement.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_untaxed_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_total_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-end"><span t-out="-purchase_settlement.amount_total_in_currency_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+
+
+    <!-- N O T A S  D E  D E B I T O  -->
+    <template id="portal_my_home_menu_debit_notes" name="Portal layout : debit notes menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'debit_note'" t-attf-class="breadcrumb-item #{'active ' if not debit_note else ''}">
+                <a t-if="debit_note" t-attf-href="/my/debit_note?{{ keep_query() }}">Nota de débito</a>
+                <t t-else="">Notas de débito</t>
+            </li>
+            <li t-if="debit_note" class="breadcrumb-item active">
+                <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
+                <t t-else=""><em>Borrador de nota de débito</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_debit_notes" name="Mis Notas de Débito">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Notas de Débito</t>
+        </t>
+        <t t-if="not debit_notes">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay notas de débito disponibles</h4>
+                <p>Parece que no tienes notas de débito asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="debit_notes" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Nota de débito #</th>
+                    <th>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class='text-center'>Impuestos no incluidos</th>
+                    <th class="text-end">Total</th>
+                    <th class="text-end">Total en moneda</th>                    
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="debit_notes" t-as="debit_note">
+                    <tr>
+                        <td>
+                            <span t-att-title="debit_note.name">
+                                <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
+                                <em t-else="">Borrador de notas de débito</em>
+                            </span>
+                        </td>
+                        <td><span t-field="debit_note.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="debit_note.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="debit_note.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
+                        <td class="text-end"><span t-out="debit_note.amount_total_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
+                        <td class="text-end"><span t-out="debit_note.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+
+    
+</odoo>

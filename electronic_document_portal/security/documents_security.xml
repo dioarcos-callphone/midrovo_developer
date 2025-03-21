@@ -1,0 +1,37 @@
+<data noupdate="1">
+
+    <record id="base.group_portal" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('account.group_show_line_subtotals_tax_excluded'))]"/>
+    </record>
+
+    <!-- Portal for withholds -->
+    <record id="account_withhold_rule_portal" model="ir.rule">
+        <field name="name">Portal Personal Account Withholds</field>
+        <field name="model_id" ref="ec_account_edi_extend.model_account_withhold"/>
+        <field name="domain_force">[('state', 'not in', ('canceled', 'draft')), ('message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <record id="account_withhold_line_rule_portal" model="ir.rule">
+        <field name="name">Portal Withhold Lines</field>
+        <field name="model_id" ref="ec_account_edi_extend.model_account_withhold_line"/>
+        <field name="domain_force">[('retention_id.state', 'not in', ('canceled', 'draft')), ('retention_id.message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <!-- Portal for remisions -->
+    <record id="account_remision_rule_portal" model="ir.rule">
+        <field name="name">Portal Personal Account Remisions</field>
+        <field name="model_id" ref="ec_account_edi_extend.model_account_remision"/>
+        <field name="domain_force">[('state', 'not in', ('canceled', 'draft')), ('message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <record id="account_remision_line_rule_portal" model="ir.rule">
+        <field name="name">Portal Remision Lines</field>
+        <field name="model_id" ref="ec_account_edi_extend.model_account_remision_line"/>
+        <field name="domain_force">[('remision_id.state', 'not in', ('canceled', 'draft')), ('remision_id.message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+    
+</data>
