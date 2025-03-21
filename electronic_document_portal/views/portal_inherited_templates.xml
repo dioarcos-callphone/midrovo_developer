@@ -116,14 +116,12 @@
             <td class="tx_status text-center">
                 <t t-if="invoice.state_sri == 'draft'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="draft" title="draft" role="img"></i>
                         <span class="d-none d-md-inline"> Creado</span>
                     </span>
                 </t>
 
                 <t t-if="invoice.state_sri == 'signed'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="signed" title="signed" role="img"></i>
                         <span class="d-none d-md-inline"> Firmado</span>
                     </span>
                 </t>
@@ -131,7 +129,6 @@
 
                 <t t-if="invoice.state_sri == 'waiting'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="waiting" title="waiting" role="img"></i>
                         <span class="d-none d-md-inline"> En espera de autorización</span>
                     </span>
                 </t>
@@ -139,7 +136,6 @@
 
                 <t t-if="invoice.state_sri == 'returned'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="returned" title="returned" role="img"></i>
                         <span class="d-none d-md-inline"> Devuelta</span>
                     </span>
                 </t>
@@ -147,14 +143,12 @@
 
                 <t t-if="invoice.state_sri == 'rejected'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="rejected" title="rejected" role="img"></i>
                         <span class="d-none d-md-inline"> No autorizado</span>
                     </span>
                 </t>
 
                 <t t-if="invoice.state_sri == 'cancel'">
                     <span class="badge rounded-pill text-bg-info">
-                        <i class="fa fa-fw" aria-label="cancel" title="cancel" role="img"></i>
                         <span class="d-none d-md-inline"> Cancelado</span>
                     </span>
                 </t>
