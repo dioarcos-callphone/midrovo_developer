@@ -62,7 +62,7 @@ class PortalShippingGuide(CustomerPortal):
             'shipping_guides': shipping_guides,
             'pager': pager,
         })
-        return request.render("ec_account_edi_extend.portal_my_shipping_guides", values)
+        return request.render("electronic_document_portal.portal_my_shipping_guides", values)
     
     @http.route(['/my/shipping_guides/<int:shipping_guide_id>'], type='http', auth="public", website=True)
     def portal_my_shipping_guide_detail(self, shipping_guide_id, access_token=None, report_type=None, download=False, **kw):

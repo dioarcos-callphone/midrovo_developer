@@ -51,7 +51,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'refunds': refunds,
             'pager': pager,
         })
-        return request.render("ec_account_edi_extend.portal_my_refunds", values)
+        return request.render("electronic_document_portal.portal_my_refunds", values)
     
     def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/refunds"):
         values = self._prepare_portal_layout_values()
@@ -213,7 +213,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             'debit_notes': debit_notes,
             'pager': pager,
         })
-        return request.render("ec_account_edi_extend.portal_my_debit_notes", values)
+        return request.render("electronic_document_portal.portal_my_debit_notes", values)
     
     def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/debit_notes"):
         values = self._prepare_portal_layout_values()

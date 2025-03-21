@@ -62,7 +62,7 @@ class PortalPurchaseSettlement(CustomerPortal):
             'purchase_settlements': purchase_settlements,
             'pager': pager,
         })
-        return request.render("ec_account_edi_extend.portal_my_purchase_settlements", values)
+        return request.render("electronic_document_portal.portal_my_purchase_settlements", values)
     
     @http.route(['/my/purchase_settlements/<int:purchase_settlement_id>'], type='http', auth="public", website=True)
     def portal_my_purchase_settlement_detail(self, purchase_settlement_id, access_token=None, report_type=None, download=False, **kw):

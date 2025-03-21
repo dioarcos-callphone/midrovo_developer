@@ -65,7 +65,7 @@ class PortalWithholding(CustomerPortal):
             'withholdings': withholdings,
             'pager': pager,
         })
-        return request.render("ec_account_edi_extend.portal_my_withholdings", values)
+        return request.render("electronic_document_portal.portal_my_withholdings", values)
     
     @http.route(['/my/withholdings/<int:withholding_id>'], type='http', auth="public", website=True)
     def portal_my_withholding_detail(self, withholding_id, access_token=None, report_type=None, download=False, **kw):
