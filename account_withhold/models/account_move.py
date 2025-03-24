@@ -77,5 +77,8 @@ class AccountMove(models.Model):
         if pro_tax_group:
             add_subtotal(pro_amount, pro_base, currency_id, _("Profit Withhold"))
 
+        
+        _logger.info(f'SE RETORNA WTH SUBTOTALS >>> { wth_subtotals }')
+
         return wth_subtotals
     
