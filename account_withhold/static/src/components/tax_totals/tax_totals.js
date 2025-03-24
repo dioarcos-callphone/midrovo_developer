@@ -48,7 +48,7 @@ class CustomTaxTotalsComponent extends TaxTotalsComponent {
 }
 
 // Registramos el nuevo componente en Odoo
-registry.category("fields").add("custom-account-tax-totals-field", CustomTaxTotalsComponent);
+// registry.category("fields").add("custom-account-tax-totals-field", CustomTaxTotalsComponent);
 
 CustomTaxTotalsComponent.template = "account.TaxTotalsField";
 CustomTaxTotalsComponent.components = { TaxGroupComponent };
