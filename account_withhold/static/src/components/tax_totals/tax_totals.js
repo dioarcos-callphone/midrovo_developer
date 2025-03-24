@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { TaxTotalsComponent } from "@account/static/src/components/tax_totals.js";
+import { TaxTotalsComponent } from "@account/static/src/js/tax_totals.js";
 
 class CustomTaxTotalsComponent extends TaxTotalsComponent {
     setup() {
