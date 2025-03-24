@@ -50,6 +50,7 @@ class AccountMove(models.Model):
                     pro_base += line['base']
 
         if not (vat_tax_group or pro_tax_group):
+            _logger.info("RETORNA FALSE")
             return False  # widget gives errors if no tax groups
 
         wth_subtotals = {
