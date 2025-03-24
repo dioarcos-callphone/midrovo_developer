@@ -1,7 +1,6 @@
 /** @odoo-module **/
-import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { registry } from "@web/core/registry";
-import { TaxTotalsComponent, TaxGroupComponent } from "@account/components/tax_totals/tax_totals";
+import { TaxTotalsComponent } from "@account/components/tax_totals/tax_totals";
 
 class CustomTaxTotalsComponent extends TaxTotalsComponent {
     setup() {
@@ -13,6 +12,7 @@ class CustomTaxTotalsComponent extends TaxTotalsComponent {
      * Sobreescribimos el método para agregar una nueva lógica
      */
     formatData(props) {
+        console.log('ENTRA EN FORMAT DATA')
         let totals = JSON.parse(JSON.stringify(props.value));
         const currencyFmtOpts = { currencyId: props.record.data.currency_id && props.record.data.currency_id[0] };
 
@@ -47,10 +47,7 @@ class CustomTaxTotalsComponent extends TaxTotalsComponent {
     }
 }
 
-// Registramos el nuevo componente en Odoo
-// registry.category("fields").add("custom-account-tax-totals-field", CustomTaxTotalsComponent);
-
-CustomTaxTotalsComponent.template = "account.TaxTotalsField";
-CustomTaxTotalsComponent.components = { TaxGroupComponent };
-CustomTaxTotalsComponent.props = standardFieldProps;
-registry.category("fields").add("account-tax-totals-field", CustomTaxTotalsComponent);
+// Registra el componente extendido
+if (!registry.get("account-tax-totals-field")) {
+    registry.category("fields").add("account-tax-totals-field", CustomTaxTotalsComponent);
+}
