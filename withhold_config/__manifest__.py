@@ -10,9 +10,8 @@
     'company': 'Callphone S.A.',
     'website': 'https://www.callphoneecuador.com',
     'license': 'LGPL-3',
-    'category': 'account',
+    'category': 'settings',
     'depends': [
-        'account',
         'l10n_ec_edi'
     ],
 
