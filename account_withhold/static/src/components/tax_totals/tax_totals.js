@@ -17,7 +17,7 @@ class CustomTaxTotalsComponent extends TaxTotalsComponent {
 
         console.log(`MOSTRAR TOTALS >>> ${ totals }`)
 
-        super().formatData(props)
+        this.super().formatData(props)
     }
 }
 
