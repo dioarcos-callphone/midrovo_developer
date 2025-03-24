@@ -23,9 +23,9 @@
     'installable': True,
     'auto_install': True,
     'application': False,
-    'assets': {
-        'web.assets_backend': [
-            'account_withhold/static/src/components/**/*',
-        ],
-    }
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'account_withhold/static/src/components/**/*',
+    #     ],
+    # }
 }
