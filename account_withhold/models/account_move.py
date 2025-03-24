@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import _, api, models
 from odoo.tools.misc import formatLang
 
 import logging
@@ -10,8 +10,6 @@ class AccountMove(models.Model):
 
     @api.model
     def _l10n_ec_withhold_subtotals_dict(self, currency_id, lines):
-        _logger.info('ENTRA EN EL METODO SUBTOTALS DICT')
-
         """
         This method returns the information for the tax summary widgets in both the withhold wizard as in the withholding
         itself. That is why the lines are passed as parameter.
@@ -40,19 +38,12 @@ class AccountMove(models.Model):
         }
 
         if not (vat_tax_group or pro_tax_group):
-            _logger.info("RETORNA SI NO HAY TAX GROUPS")
+            # _logger.info("RETORNA SI NO HAY TAX GROUPS")
 
             return wth_subtotals
-            # return {
-            #     'formatted_amount_total': formatLang(self.env, 0.0, currency_obj=currency_id),
-            #     'allow_tax_edition': False,
-            #     'groups_by_subtotal': {},
-            #     'subtotals_order': [],
-            #     'subtotals': [],
-            #     'display_tax_base': False,
-            # }  # widget gives errors if no tax groups
         
             # ANTERIORMENTE RETORNABA FALSE
+            # return False # widget gives errors if no tax groups
 
         def add_subtotal(amount, base, currency, key):
             # Add a subtotal to the widget
@@ -69,9 +60,6 @@ class AccountMove(models.Model):
             add_subtotal(vat_amount, vat_base, currency_id, _("VAT Withhold"))
         if pro_tax_group:
             add_subtotal(pro_amount, pro_base, currency_id, _("Profit Withhold"))
-
-        
-        _logger.info(f'SE RETORNA WTH SUBTOTALS >>> { wth_subtotals }')
 
         return wth_subtotals
     
