@@ -25,7 +25,7 @@
     'application': False,
     'assets': {
         'web.assets_backend': [
-            '/account_withhold/static/src/components/**/*',
+            'account_withhold/static/src/components/**/*',
         ],
     }
 }
