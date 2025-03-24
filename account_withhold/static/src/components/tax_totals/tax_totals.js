@@ -53,4 +53,4 @@ class CustomTaxTotalsComponent extends TaxTotalsComponent {
 CustomTaxTotalsComponent.template = "account.TaxTotalsField";
 CustomTaxTotalsComponent.components = { TaxGroupComponent };
 CustomTaxTotalsComponent.props = standardFieldProps;
-registry.category("fields").add("account-tax-totals-field-for-withhold", CustomTaxTotalsComponent);
+registry.category("fields").add("account-tax-totals-field-withhold", CustomTaxTotalsComponent);
