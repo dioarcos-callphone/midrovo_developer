@@ -14,12 +14,12 @@
     'depends': [
         'account'
     ],
-    'data': [
-        ''
-    ],
-    'demo': [
-        ''
-    ],
+    # 'data': [
+    #     ''
+    # ],
+    # 'demo': [
+    #     ''
+    # ],
     'installable': True,
     'auto_install': True,
     'application': False,
