@@ -30,19 +30,6 @@ class AccountMove(models.Model):
                     pro_amount += line['amount']
                     pro_base += line['base']
 
-        if not (vat_tax_group or pro_tax_group):
-            _logger.info("RETORNA FALSE")
-            return {
-                'formatted_amount_total': formatLang(self.env, 0.0, currency_obj=currency_id),
-                'allow_tax_edition': False,
-                'groups_by_subtotal': {},
-                'subtotals_order': [],
-                'subtotals': [],
-                'display_tax_base': False,
-            }  # widget gives errors if no tax groups
-        
-            # ANTERIORMENTE RETORNABA FALSE
-
         wth_subtotals = {
             'formatted_amount_total': formatLang(self.env, vat_amount + pro_amount, currency_obj=currency_id),
             'allow_tax_edition': False,
@@ -51,6 +38,21 @@ class AccountMove(models.Model):
             'subtotals': [],
             'display_tax_base': False,
         }
+
+        if not (vat_tax_group or pro_tax_group):
+            _logger.info("RETORNA SI NO HAY TAX GROUPS")
+
+            return wth_subtotals
+            # return {
+            #     'formatted_amount_total': formatLang(self.env, 0.0, currency_obj=currency_id),
+            #     'allow_tax_edition': False,
+            #     'groups_by_subtotal': {},
+            #     'subtotals_order': [],
+            #     'subtotals': [],
+            #     'display_tax_base': False,
+            # }  # widget gives errors if no tax groups
+        
+            # ANTERIORMENTE RETORNABA FALSE
 
         def add_subtotal(amount, base, currency, key):
             # Add a subtotal to the widget

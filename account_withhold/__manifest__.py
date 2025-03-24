@@ -1,5 +1,5 @@
 {
-    'name': 'Account Withhold Util',
+    'name': 'Withhold Config',
     'version': '1.0',
     'description': '''
         - Modulo desarrollado para Odoo 16 EE
