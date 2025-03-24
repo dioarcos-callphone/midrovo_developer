@@ -15,18 +15,9 @@
         'account',
         'l10n_ec_edi'
     ],
-    # 'data': [
-    #     ''
-    # ],
-    # 'demo': [
-    #     ''
-    # ],
+
     'installable': True,
     'auto_install': True,
     'application': False,
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'account_withhold/static/src/components/**/*',
-    #     ],
-    # }
+
 }
