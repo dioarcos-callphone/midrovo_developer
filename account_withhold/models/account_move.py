@@ -8,6 +8,25 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
     _description = 'account.move'
 
+    @api.depends('country_code', 'line_ids.tax_ids.tax_group_id', 'line_ids.l10n_ec_withhold_tax_amount', 'line_ids.balance')
+    def _compute_l10n_ec_withhold_subtotals(self):
+        _logger.info("ENTRA EN EL METODO COMPUTADO")
+        def line_dict(withhold_line):
+            return {
+                'tax_group': withhold_line.tax_ids.tax_group_id,
+                'amount': withhold_line.l10n_ec_withhold_tax_amount,
+                'base': abs(withhold_line.balance),
+            }
+
+        moves_ec = self.filtered(lambda move: move.country_code == 'EC')
+        (self - moves_ec).l10n_ec_withhold_subtotals = False
+        for move in moves_ec:
+            if move.l10n_ec_withhold_type:
+                lines = move.l10n_ec_withhold_line_ids.mapped(line_dict)
+                move.l10n_ec_withhold_subtotals = self._l10n_ec_withhold_subtotals_dict(move.currency_id, lines)
+            else:
+                move.l10n_ec_withhold_subtotals = {}
+
     @api.model
     def _l10n_ec_withhold_subtotals_dict(self, currency_id, lines):
         _logger.info('ENTRA EN EL METODO SUBTOTALS DICT')
