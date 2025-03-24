@@ -31,12 +31,12 @@
         'views/user_extend_view.xml',
         'views/portal_inherited_templates.xml',
         # 'views/portal_custom_templates.xml',
-        'views/invoice_portal_template.xml'
-        'views/credit_note_portal_template.xml'
-        'views/debit_note_portal_template.xml'
-        'views/liquidation_portal_template.xml'
-        'views/remission_portal_template.xml'
-        'views/retention_portal_template.xml'
+        'views/invoice_portal_template.xml',
+        'views/credit_note_portal_template.xml',
+        'views/debit_note_portal_template.xml',
+        'views/liquidation_portal_template.xml',
+        'views/remission_portal_template.xml',
+        'views/retention_portal_template.xml',
         
     ],
     'assets': {
