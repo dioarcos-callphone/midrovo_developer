@@ -1,5 +1,5 @@
 /** @odoo-module **/
-
+import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { registry } from "@web/core/registry";
 import { TaxTotalsComponent, TaxGroupComponent } from "@account/components/tax_totals/tax_totals";
 
