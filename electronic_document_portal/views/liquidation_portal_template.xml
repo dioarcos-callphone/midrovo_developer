@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- L I Q U I D A C I O N E S  D E  C O M P R A -->
+    <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
+                <a t-if="purchase_settlement" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidación de compras</a>
+                <t t-else="">Liquidaciones de compras</t>
+            </li>
+            <li t-if="purchase_settlement" class="breadcrumb-item active">
+                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                <t t-else=""><em>Borrador de liquidación de compras</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_purchase_settlements" name="Mis Liquidaciones de Compra">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Liquidaciones de compra</t>
+        </t>
+        <t t-if="not purchase_settlements">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay liquidaciones de compra disponibles</h4>
+                <p>Parece que no tienes liquidaciones de compra asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="purchase_settlements" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Liquidación de compra #</th>
+                    <th>Fecha de la factura</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Impuestos no incluidos</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-end">Total en moneda</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="purchase_settlements" t-as="purchase_settlement">
+                    <tr>
+                        <td>
+                            <span t-att-title="purchase_settlement.name">
+                                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="purchase_settlement.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="purchase_settlement.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="purchase_settlement.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_untaxed_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-purchase_settlement.amount_total_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-end"><span t-out="-purchase_settlement.amount_total_in_currency_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+</odoo>

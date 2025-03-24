@@ -131,10 +131,10 @@
                 <t t-foreach="withholdings" t-as="withholding">
                     <tr>
                         <td>
-                            <span t-att-title="withholding.l10n_latam_document_number">
+                            <a t-att-href="withholding.get_portal_url()" t-att-title="withholding.l10n_latam_document_number">
                                 <span t-if="withholding.l10n_latam_document_number != '/'">Ret.</span> <t t-out="withholding.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
                                 <em t-else="">Borrador de retenciones</em>
-                            </span>
+                            </a>
                         </td>
                         <td><span t-field="withholding.creation_date"/></td>
                         <t t-if="withholding.invoice_id">

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- G U I A S  D E  R E M I S I O N -->
+    <template id="portal_my_home_menu_shipping_guides" name="Portal layout : shipping guides menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'shipping_guide'" t-attf-class="breadcrumb-item #{'active ' if not shipping_guide else ''}">
+                <a t-if="shipping_guide" t-attf-href="/my/shipping_guide?{{ keep_query() }}">Guía de remisión</a>
+                <t t-else="">Guías de Remisión</t>
+            </li>
+            <li t-if="shipping_guide" class="breadcrumb-item active">
+                <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                <t t-else=""><em>Borrador de guía de remisión</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_shipping_guides" name="Mis Guias de Remisión">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Guías de remisión</t>
+        </t>
+        <t t-if="not shipping_guides">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay guías de remisión disponibles</h4>
+                <p>Parece que no tienes guías de remisión asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="shipping_guides" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Guía de remisión #</th>
+                    <th>Fecha inicio de traslado</th>
+                    <th class='d-none d-md-table-cell'>Fecha fin de traslado</th>
+                    <th class="text-center">Dirección</th>
+                    <th class="text-center">Transportista</th>
+                    <th class="text-center">Tipo de traslado</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="shipping_guides" t-as="shipping_guide">
+                    <tr>
+                        <td>
+                            <span t-att-title="shipping_guide.document_number">
+                                <span t-if="shipping_guide.document_number != '/'">Guía.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
+                                <em t-else="">Borrador de guías de remisión</em>
+                            </span>
+                        </td>
+                        <td><span t-field="shipping_guide.delivery_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="shipping_guide.transfer_date"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_address"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.delivery_carrier"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.remision_type"/></td>
+                        <td class="text-center"><span t-field="shipping_guide.state"/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="shipping_guide.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+</odoo>

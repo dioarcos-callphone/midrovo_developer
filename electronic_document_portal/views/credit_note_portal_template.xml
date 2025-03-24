@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- N O T A S  D E  C R E D I T O -->
+    <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
+                <t t-else="">Notas de crédito</t>
+            </li>
+            <li t-if="refund" class="breadcrumb-item active">
+                <t t-out="refund.name" t-if="refund.name != '/'"/>
+                <t t-else=""><em>Borrador de reembolso</em></t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_refunds" name="Mis Notas de Crédito">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Notas de crédito</t>
+        </t>
+        <t t-if="not refunds">
+             <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <h4>No hay notas de crédito disponibles</h4>
+                <p>Parece que no tienes notas de crédito asociadas a tu cuenta en este momento.</p>
+                <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+            </div>
+            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
+        </t>
+        <t t-if="refunds" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Nota de crédito #</th>
+                    <th>Fecha de nota de crédito</th>
+                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Importe adeudado</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="refunds" t-as="refund">
+                    <tr>
+                        <td>
+                            <span t-att-title="refund.name">
+                                <t t-out="refund.name" t-if="refund.name != '/'"/>
+                                <em t-else="">Borrador de nota de crédito</em>
+                            </span>
+                        </td>
+                        <td><span t-field="refund.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-if="refund.state == 'posted' and refund.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            </t>
+                            <t t-if="refund.state == 'posted' and refund.payment_state in ('paid', 'in_payment')">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+                            </t>
+                            <t t-if="refund.state == 'posted' and refund.payment_state == 'reversed'">
+                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+                            </t>
+                            <t t-if="refund.state == 'cancel'">
+                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="-refund.amount_residual if refund.move_type == 'out_refund' else refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="refund.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="refund.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+</odoo>
