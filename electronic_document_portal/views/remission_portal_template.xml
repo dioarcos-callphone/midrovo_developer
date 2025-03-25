@@ -48,10 +48,10 @@
                 <t t-foreach="shipping_guides" t-as="shipping_guide">
                     <tr>
                         <td>
-                            <span t-att-title="shipping_guide.document_number">
+                            <a t-att-href="shipping_guide.get_portal_url()" t-att-title="shipping_guide.document_number">
                                 <span t-if="shipping_guide.document_number != '/'">Guía.</span>  <t t-out="shipping_guide.document_number" t-if="shipping_guide.document_number != '/'"/>
                                 <em t-else="">Borrador de guías de remisión</em>
-                            </span>
+                            </a>
                         </td>
                         <td><span t-field="shipping_guide.delivery_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="shipping_guide.transfer_date"/></td>
