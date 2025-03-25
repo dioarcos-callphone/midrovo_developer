@@ -18,7 +18,7 @@
             </t>
         </xpath>
 
-        <xpath expr="//li[@t-if='invoice' and @class='breadcrumb-item active']" position="replace">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[@t-if='invoice' and @class='breadcrumb-item active']" position="replace">
             <t t-if="page_name == 'invoice'" class='fact-bread'>
                 <li t-if="invoice" class="breadcrumb-item active">
                     <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
