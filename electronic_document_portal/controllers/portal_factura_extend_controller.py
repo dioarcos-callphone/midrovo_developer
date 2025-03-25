@@ -154,6 +154,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
     def _invoice_get_page_view_values(self, invoice, access_token, **kwargs):
         move_type = invoice.move_type
         debit_note = invoice.debit_note or invoice.debit_origin_id
+        history = 'my_invoices_history'
 
         values = {
             'page_name': 'invoice',
@@ -162,12 +163,14 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         if debit_note and move_type == 'out_invoice':
             values['page_name'] = 'debit_note'
+            history = 'my_debit_notes_history'
         elif move_type == 'out_refund':
             values['page_name'] = 'refund'
+            history = 'my_refunds_history'
         elif move_type == 'in_invoice':
             values['page_name'] = 'purchase_settlement'
         
-        return self._get_page_view_values(invoice, access_token, values, 'my_invoices_history', False, **kwargs)
+        return self._get_page_view_values(invoice, access_token, values, history, False, **kwargs)
         
         
     # def _get_account_searchbar_filters(self):

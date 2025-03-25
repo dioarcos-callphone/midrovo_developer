@@ -5,7 +5,7 @@
     <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
-                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Notas de crédito</a>
                 <t t-else="">Notas de crédito</t>
             </li>
             <li t-if="refund" class="breadcrumb-item active">
