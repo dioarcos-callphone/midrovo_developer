@@ -4,12 +4,12 @@
     <!-- N O T A S  D E  C R E D I T O -->
     <template id="portal_my_home_menu_refund" name="Portal layout : refund menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
-                <a t-if="invoice" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
+            <li t-if="page_name == 'refund'" t-attf-class="breadcrumb-item #{'active ' if not refund else ''}">
+                <a t-if="refund" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
                 <t t-else="">Notas de crédito</t>
             </li>
-            <li t-if="invoice" class="breadcrumb-item active">
-                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
+            <li t-if="refund" class="breadcrumb-item active">
+                <t t-out="refund.name" t-if="refund.name != '/'"/>
                 <t t-else=""><em>Borrador de reembolso</em></t>
             </li>
         </xpath>
