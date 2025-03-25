@@ -24,7 +24,7 @@
 
             <li t-if="page_name == 'liquidation'" 
                 t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
-                <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Liquidaciones de Compras</a>
+                <a t-if="invoice" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidaciones de Compras</a>
                 <t t-else="">Liquidaciones de Compras</t>
             </li>
         </xpath>
