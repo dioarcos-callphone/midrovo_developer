@@ -169,7 +169,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             values['page_name'] = 'refund'
             history = 'my_refunds_history'
         elif move_type == 'in_invoice':
-            values['page_name'] = 'purchase_settlement'
+            values['page_name'] = 'liquidation'
         
         return self._get_page_view_values(invoice, access_token, values, history, False, **kwargs)
         
