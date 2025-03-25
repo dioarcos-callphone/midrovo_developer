@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="portal_my_home_menu_invoice_inherit" name="Portal layout: invoice menu entries (extended)"
-        inherit_id="account.portal_my_home_menu_invoice" priority="35">
+        inherit_id="portal.portal_breadcrumbs" priority="35">
         <xpath expr="//li[@t-if='page_name == &quot;invoice&quot;']" position="replace">
             <li t-if="page_name == 'invoice'" 
                 t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
