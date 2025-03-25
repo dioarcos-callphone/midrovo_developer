@@ -48,10 +48,10 @@
                 <t t-foreach="purchase_settlements" t-as="purchase_settlement">
                     <tr>
                         <td>
-                            <span t-att-title="purchase_settlement.name">
+                            <a t-att-href="purchase_settlement.get_portal_url()" t-att-title="purchase_settlement.name">
                                 <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
-                                <em t-else="">Borrador de guías de remisión</em>
-                            </span>
+                                <em t-else="">Borrador de liquidaciones de compras</em>
+                            </a>
                         </td>
                         <td><span t-field="purchase_settlement.invoice_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="purchase_settlement.invoice_date_due"/></td>
