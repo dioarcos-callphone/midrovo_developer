@@ -36,7 +36,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
     ################################################################################################
         
     # metodo que genera el contenido de notas de credito
-    @http.route(['/my/refund', '/my/refund/page/<int:page>'], type='http', auth="user", website=True)
+    @http.route(['/my/refunds', '/my/refunds/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
         values = self._prepare_my_refunds_values(page, date_begin, date_end, sortby, filterby)
 
@@ -158,21 +158,17 @@ class CustomPortalEcAccountEdi(PortalAccount):
 
         values = {
             'page_name': 'invoice',
+            'invoice': invoice,
         }
 
         if debit_note and move_type == 'out_invoice':
             values['page_name'] = 'debit_note'
-            values['debit_note'] = invoice
             history = 'my_debit_notes_history'
         elif move_type == 'out_refund':
             values['page_name'] = 'refund'
-            values['refund'] = invoice
             history = 'my_refunds_history'
         elif move_type == 'in_invoice':
             values['page_name'] = 'purchase_settlement'
-            values['liquidation'] = invoice
-        else:
-            values['invoice'] = invoice
         
         return self._get_page_view_values(invoice, access_token, values, history, False, **kwargs)
         
