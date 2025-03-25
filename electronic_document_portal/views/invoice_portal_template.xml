@@ -13,7 +13,7 @@
                 <t t-else="">Notas de Crédito</t>
             </li>
 
-            <li t-if="invoice and page_name == 'invoice'" class="breadcrumb-item active">
+            <!-- <li t-if="invoice and page_name == 'invoice'" class="breadcrumb-item active">
                 <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
                 <t t-else=""><em>Borrador de Factura</em></t>
             </li>
@@ -21,7 +21,7 @@
             <li t-if="invoice and page_name == 'refund'" class="breadcrumb-item active">
                 <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
                 <t t-else=""><em>Borrador de Nota de Crédito</em></t>
-            </li>
+            </li> -->
         </xpath>
 
         <!-- <xpath expr="//li[@t-if='invoice' and @class='breadcrumb-item active']" position="replace">
