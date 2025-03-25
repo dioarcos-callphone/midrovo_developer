@@ -8,8 +8,8 @@
                 <a t-if="invoice" t-attf-href="/my/refund?{{ keep_query() }}">Nota de crédito</a>
                 <t t-else="">Notas de crédito</t>
             </li>
-            <li t-if="refund" class="breadcrumb-item active">
-                <t t-out="refund.name" t-if="refund.name != '/'"/>
+            <li t-if="invoice" class="breadcrumb-item active">
+                <t t-out="invoice.name" t-if="invoice.name != '/'"/>
                 <t t-else=""><em>Borrador de reembolso</em></t>
             </li>
         </xpath>
