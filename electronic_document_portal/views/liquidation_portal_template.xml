@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- L I Q U I D A C I O N E S  D E  C O M P R A -->
-    <!-- <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+    <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
                 <a t-if="purchase_settlement" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidación de compras</a>
@@ -13,7 +13,7 @@
                 <t t-else=""><em>Borrador de liquidación de compras</em></t>
             </li>
         </xpath>
-    </template> -->
+    </template>
 
     <template id="portal_my_purchase_settlements" name="Mis Liquidaciones de Compra">
       <t t-call="portal.portal_layout">
