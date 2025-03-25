@@ -148,6 +148,7 @@ class CustomPortalEcAccountEdi(PortalAccount):
             return request.make_response(xml_decode, headers=headers)
         
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
+        _logger.info(f'MOSTRANDO VALUES >>> { values }')
         return request.render("account.portal_invoice_page", values)
         
         
