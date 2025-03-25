@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="portal_my_home_menu_invoice_custom" name="Portal layout: Custom invoice menu entries" inherit_id="account.portal_my_home_menu_invoice">
-        <xpath expr="//li[@t-if='invoice' and @class='breadcrumb-item active']" position="replace">
-            <t t-if="page_name == 'invoice'" class='fact-bread'>
-                <li t-if="invoice" class="breadcrumb-item active">
-                    <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
-                    <t t-else=""><em>Borrador de Factura</em></t>
-                </li>
-            </t>
-
-            <t t-if="page_name == 'refund'" class='ref-bread'>
-                <li t-if="invoice" class="breadcrumb-item active">
-                    <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
-                    <t t-else=""><em>Borrador de Nota de Crédito</em></t>
-                </li>
-            </t>
+    <template id="portal_my_home_menu_invoice_inherit" name="Portal layout: invoice menu entries (extended)"
+        inherit_id="account.portal_my_home_menu_invoice" priority="35">
+        <xpath expr="//li[t-if='page_name == \"invoice\"']" position="replace">
+            <li t-if="page_name in ('invoice', 'refund', 'debit_note', 'liquidation')" 
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Invoices &amp; Bills</a>
+                <t t-else="">Invoices &amp; Bills</t>
+            </li>
         </xpath>
     </template>
+
 
 </odoo>
