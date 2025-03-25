@@ -6,8 +6,26 @@
         <xpath expr="//li[contains(@t-if, 'invoice')]" position="replace">
             <li t-if="page_name == 'invoice'" 
                 t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
-                <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Invoices &amp; Bills</a>
-                <t t-else="">Invoices &amp; Bills</t>
+                <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Facturas</a>
+                <t t-else="">Facturas</t>
+            </li>
+
+            <li t-if="page_name == 'refund'" 
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                <a t-if="invoice" t-attf-href="/my/refunds?{{ keep_query() }}">Notas de Crédito</a>
+                <t t-else="">Notas de Crédito</t>
+            </li>
+
+            <li t-if="page_name == 'debit_note'" 
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                <a t-if="invoice" t-attf-href="/my/debit_notes?{{ keep_query() }}">Notas de Débito</a>
+                <t t-else="">Notas de Débito</t>
+            </li>
+
+            <li t-if="page_name == 'liquidation'" 
+                t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Liquidaciones de Compras</a>
+                <t t-else="">Liquidaciones de Compras</t>
             </li>
         </xpath>
     </template>
