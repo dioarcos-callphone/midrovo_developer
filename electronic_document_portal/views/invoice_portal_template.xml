@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="portal_my_home_menu_invoice_custom" name="Portal layout: Custom invoice menu entries" inherit_id="account.portal_my_home_menu_invoice" priority="40">
-        <xpath expr="//li[@t-if='page_name == &quot;invoice&quot;']" position="replace"> 
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[@t-if='page_name == &quot;invoice&quot;']" position="replace"> 
             <t t-if="page_name == 'invoice'" class='fact'>
                 <li t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
                     <a t-if="invoice" t-attf-href="/my/invoices?{{ keep_query() }}">Facturas</a>
