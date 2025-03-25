@@ -34,7 +34,7 @@ class PortalPurchaseSettlement(CustomerPortal):
     
     def _purchase_settlement_get_page_view_values(self, purchase_settlement, access_token, **kwargs):
         values = {
-            'page_name': 'purchase_settlement',
+            'page_name': 'liquidation',
             'purchase_settlement': purchase_settlement,
         }
         return self._get_page_view_values(purchase_settlement, access_token, values, 'my_purchase_settlements_history', False, **kwargs)
