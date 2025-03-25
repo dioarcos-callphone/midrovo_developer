@@ -46,10 +46,10 @@
                 <t t-foreach="refunds" t-as="refund">
                     <tr>
                         <td>
-                            <span t-att-title="refund.name">
+                            <a t-att-href="refund.get_portal_url()" t-att-title="refund.name">
                                 <t t-out="refund.name" t-if="refund.name != '/'"/>
                                 <em t-else="">Borrador de nota de crédito</em>
-                            </span>
+                            </a>
                         </td>
                         <td><span t-field="refund.invoice_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
