@@ -10,6 +10,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//header" position="attributes">
                     <attribute name="class">d-none</attribute>
+                    <attribute name="groups">electronic_document_portal.portal_user_internal_group</attribute>
                 </xpath>
             </field>
         </record>
