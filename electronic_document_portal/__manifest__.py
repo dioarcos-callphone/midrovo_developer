@@ -29,7 +29,6 @@
         'security/documents_security.xml',
         'security/ir.model.access.csv',
         'reports/report_invoice_document_extend.xml',
-        'views/user_extend_view.xml',
         'templates/portal_template.xml',
         'templates/payment_portal_template.xml',
         'templates/invoice_portal_template.xml',
@@ -38,6 +37,8 @@
         'templates/liquidation_portal_template.xml',
         'templates/remission_portal_template.xml',
         'templates/retention_portal_template.xml',
+        'views/user_extend_view.xml',
+        'views/invoice_view',
         
     ],
     'assets': {
