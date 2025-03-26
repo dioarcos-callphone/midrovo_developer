@@ -2,23 +2,22 @@
 <odoo>
 
     <data>
-
-        <record id="portal_user_internal_subcategory" model="ir.module.category">
-            <field name="name">Usuario Interno</field>
-            <field name="sequence">60</field>
-        </record>
-
+    
         <record id="portal_web_category" model="ir.module.category">
             <field name="name">Portal Web Documentos Electrónicos</field>
             <field name="description">Grupo de acceso a documentos electrónicos en el portal web.</field>
-            <field name="sequence">5</field>
-            <field name="parent_id" ref="portal_user_internal_subcategory" />
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="portal_user_internal_subcategory" model="ir.module.category">
+            <field name="name">Usuario Interno</field>
+            <field name="parent_id" ref="portal_web_category" />
         </record>
 
         <record id="portal_user_internal_group" model="res.groups">
             <field name="name">Imprimir y Enviar Documentos Electrónicos</field>
             <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
-            <field name="category_id" ref="portal_web_category"/>
+            <field name="category_id" ref="portal_user_internal_subcategory"/>
         </record>
     
     </data>
