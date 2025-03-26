@@ -20,7 +20,7 @@
         <t t-if="liquidations" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
-                    <th class="text-center">Liquidación de compra #</th>
+                    <th>Liquidación de compra #</th>
                     <th class="text-center">Fecha de la factura</th>
                     <th class="text-center d-none d-md-table-cell">Fecha de vencimiento</th>
                     <th class="text-center">Estado</th>
@@ -32,13 +32,13 @@
             <tbody>
                 <t t-foreach="liquidations" t-as="liquidation">
                     <tr>
-                        <td class="text-center">
+                        <td>
                             <a t-att-href="liquidation.get_portal_url()" t-att-title="liquidation.name">
                                 <t t-out="liquidation.name" t-if="liquidation.name != '/'"/>
                                 <em t-else="">Borrador de liquidaciones de compras</em>
                             </a>
                         </td>
-                        <td><span t-field="liquidation.invoice_date"/></td>
+                        <td class="text-center"><span t-field="liquidation.invoice_date"/></td>
                         <td class="text-center d-none d-md-table-cell"><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-if="liquidation.state_sri == 'draft'">
