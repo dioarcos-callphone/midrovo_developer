@@ -18,13 +18,13 @@
 
             <li t-if="page_name == 'debit_note'" 
                 t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
-                <a t-if="invoice" t-attf-href="/my/debit_note?{{ keep_query() }}">Notas de Débito</a>
+                <a t-if="invoice" t-attf-href="/my/debit_notes?{{ keep_query() }}">Notas de Débito</a>
                 <t t-else="">Notas de Débito</t>
             </li>
 
             <li t-if="page_name == 'liquidation'" 
                 t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
-                <a t-if="invoice" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidaciones de Compras</a>
+                <a t-if="invoice" t-attf-href="/my/liquidations?{{ keep_query() }}">Liquidaciones de Compras</a>
                 <t t-else="">Liquidaciones de Compras</t>
             </li>
         </xpath>
