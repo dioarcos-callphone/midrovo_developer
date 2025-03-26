@@ -53,8 +53,8 @@
                                 <em t-else="">Borrador de Guías de Remisión</em>
                             </a>
                         </td>
-                        <td><span t-field="remission.delivery_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="remission.transfer_date"/></td>
+                        <td class="text-center"><span t-field="remission.delivery_date"/></td>
+                        <td class='text-center d-none d-md-table-cell'><span t-field="remission.transfer_date"/></td>
                         <td class="text-center"><span t-field="remission.delivery_address"/></td>
                         <td class="text-center"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
