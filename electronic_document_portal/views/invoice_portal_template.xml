@@ -55,7 +55,7 @@
                 <thead>
                     <tr class="active">
                         <th>Factura #</th>
-                        <th class="text-center">Fecha de Factura</th>
+                        <th class="text-center">Fecha de Emisión</th>
                         <th class='text-center d-none d-md-table-cell'>Fecha de Vencimiento</th>
                         <th class="text-center">Estado de Autorización</th>
                         <th class="text-center">Importe Adeudado</th>
