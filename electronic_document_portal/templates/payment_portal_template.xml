@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_invoice_page_inherit_payment" name="template_name" inherit_id="account_payment.portal_invoice_page_inherit_payment">
+        <xpath expr="//div[@class='d-grid']" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
+    <template id="portal_my_invoice_payment_inh" name="Elimina el boton de pago" inherit_id="account_payment.portal_my_invoices_payment">
+        <xpath expr="//th[not(text()) and not(*)]" position="replace"></xpath>
+        <xpath expr="//td[@class='text-center']" position="replace"></xpath>
+    </template>
+
+</odoo>

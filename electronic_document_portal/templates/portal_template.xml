@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_home_refund" name="Mostrar Notas de Credito" inherit_id="portal.portal_my_home" customize_show="True" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Notas de Crédito</t>
+                <t t-set="url" t-value="'/my/refunds'"/>
+                <t t-set="placeholder_count" t-value="'refund_count'"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Retenciones</t>
+                <t t-set="url" t-value="'/my/retentions'"/>
+                <t t-set="placeholder_count" t-value="'retention_count'"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Guías de remisión</t>
+                <t t-set="url" t-value="'/my/remissions'"/>
+                <t t-set="placeholder_count" t-value="'remission_count'"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Liquidaciones de compra</t>
+                <t t-set="url" t-value="'/my/liquidations'"/>
+                <t t-set="placeholder_count" t-value="'liquidation_count'"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Notas de Débito</t>
+                <t t-set="url" t-value="'/my/debit_notes'"/>
+                <t t-set="placeholder_count" t-value="'debit_note_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
