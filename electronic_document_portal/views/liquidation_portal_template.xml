@@ -15,14 +15,14 @@
         </xpath>
     </template> -->
 
-    <template id="portal_my_purchase_settlements" name="Mis Liquidaciones de Compra">
+    <template id="portal_my_liquidations" name="Mis Liquidaciones de Compra">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
         <t t-call="portal.portal_searchbar">
             <t t-set="title">Liquidaciones de compra</t>
         </t>
-        <t t-if="not purchase_settlements">
+        <t t-if="not liquidations">
              <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
                 <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
                 <h4>No hay liquidaciones de compra disponibles</h4>
@@ -31,7 +31,7 @@
             </div>
             <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
-        <t t-if="purchase_settlements" t-call="portal.portal_table">
+        <t t-if="liquidations" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
                     <th>Liquidación de compra #</th>
@@ -45,39 +45,39 @@
                 </tr>
             </thead>
             <tbody>
-                <t t-foreach="purchase_settlements" t-as="purchase_settlement">
+                <t t-foreach="liquidations" t-as="liquidation">
                     <tr>
                         <td>
-                            <a t-att-href="purchase_settlement.get_portal_url()" t-att-title="purchase_settlement.name">
-                                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
+                            <a t-att-href="liquidation.get_portal_url()" t-att-title="liquidation.name">
+                                <t t-out="liquidation.name" t-if="liquidation.name != '/'"/>
                                 <em t-else="">Borrador de liquidaciones de compras</em>
                             </a>
                         </td>
-                        <td><span t-field="purchase_settlement.invoice_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="purchase_settlement.invoice_date_due"/></td>
+                        <td><span t-field="liquidation.invoice_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state not in ('in_payment', 'paid', 'reversed')">
+                            <t t-if="liquidation.state == 'posted' and liquidation.payment_state not in ('in_payment', 'paid', 'reversed')">
                                 <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
                             </t>
-                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state in ('paid', 'in_payment')">
+                            <t t-if="liquidation.state == 'posted' and liquidation.payment_state in ('paid', 'in_payment')">
                                 <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
                             </t>
-                            <t t-if="purchase_settlement.state == 'posted' and purchase_settlement.payment_state == 'reversed'">
+                            <t t-if="liquidation.state == 'posted' and liquidation.payment_state == 'reversed'">
                                 <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
                             </t>
-                            <t t-if="purchase_settlement.state == 'cancel'">
+                            <t t-if="liquidation.state == 'cancel'">
                                 <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
                             </t>
                         </td>
-                        <td class="text-center"><span t-out="-purchase_settlement.amount_untaxed_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
-                        <td class="text-center"><span t-out="-purchase_settlement.amount_total_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
-                        <td class="text-end"><span t-out="-purchase_settlement.amount_total_in_currency_signed if purchase_settlement.move_type == 'out_refund' else purchase_settlement.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": purchase_settlement.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-liquidation.amount_untaxed_signed if liquidation.move_type == 'out_refund' else liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-center"><span t-out="-liquidation.amount_total_signed if liquidation.move_type == 'out_refund' else liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-end"><span t-out="-liquidation.amount_total_in_currency_signed if liquidation.move_type == 'out_refund' else liquidation.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
-                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
                             <span class="xml-icon" style="margin: 5px;">
-                                <a class="fa fa-file-code-o fa-lg" t-att-href="purchase_settlement.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
                             </span>
                         </td>
                     </tr>
