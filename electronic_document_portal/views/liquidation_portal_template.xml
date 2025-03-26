@@ -26,7 +26,6 @@
                     <th class="text-center">Estado</th>
                     <th class="text-center">Impuestos no incluidos</th>
                     <th class="text-center">Total</th>
-                    <th class="text-end">Total en moneda</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -84,9 +83,8 @@
                                 </span>
                             </t>
                         </td>
-                        <td class="text-center"><span t-out="-liquidation.amount_untaxed_signed if liquidation.move_type == 'out_refund' else liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
-                        <td class="text-center"><span t-out="-liquidation.amount_total_signed if liquidation.move_type == 'out_refund' else liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
-                        <td class="text-end"><span t-out="-liquidation.amount_total_in_currency_signed if liquidation.move_type == 'out_refund' else liquidation.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-center"><span t-out="liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-center"><span t-out="liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
