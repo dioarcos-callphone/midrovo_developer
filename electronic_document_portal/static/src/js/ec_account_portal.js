@@ -10,9 +10,9 @@ publicWidget.registry.PortalHomeCounters.include({
     _getCountersAlwaysDisplayed() {
         return this._super(...arguments).concat([
             'refund_count',
-            'withholding_count',
-            'remission_count',
             'retention_count',
+            'remission_count',
+            'liquidation_count',
             'debit_note_count',
         ]);
     },
