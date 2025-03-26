@@ -9,11 +9,11 @@
             <field name="sequence">10</field>
         </record>
 
-        <record id="portal_user_internal_group" model="res.groups">
+        <!-- <record id="portal_user_internal_group" model="res.groups">
             <field name="name">Imprimir y Enviar Documentos Electrónicos</field>
             <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
             <field name="category_id" ref="electronic_document_portal.portal_web_category"/>
-        </record>
+        </record> -->
     
     </data>
     
