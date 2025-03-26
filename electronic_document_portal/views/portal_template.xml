@@ -13,16 +13,16 @@
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Retenciones</t>
-                <t t-set="url" t-value="'/my/withholding'"/>
-                <t t-set="placeholder_count" t-value="'withholding_count'"/>
+                <t t-set="url" t-value="'/my/retentions'"/>
+                <t t-set="placeholder_count" t-value="'retentions_count'"/>
             </t>
         </xpath>
 
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Guías de remisión</t>
-                <t t-set="url" t-value="'/my/shipping_guide'"/>
-                <t t-set="placeholder_count" t-value="'shipping_guide_count'"/>
+                <t t-set="url" t-value="'/my/remissions'"/>
+                <t t-set="placeholder_count" t-value="'remission_count'"/>
             </t>
         </xpath>
 

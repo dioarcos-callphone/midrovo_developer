@@ -1,6 +1,6 @@
 from odoo import models, fields
 
-class SaleShopExtend(models.Model):
+class SaleShop(models.Model):
     _inherit = 'sale.shop'
     _description = 'Establecimientos'
     

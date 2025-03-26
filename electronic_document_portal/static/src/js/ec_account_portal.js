@@ -11,7 +11,7 @@ publicWidget.registry.PortalHomeCounters.include({
         return this._super(...arguments).concat([
             'refund_count',
             'withholding_count',
-            'shipping_guide_count',
+            'remission_count',
             'purchase_settlement_count',
             'debit_note_count',
         ]);

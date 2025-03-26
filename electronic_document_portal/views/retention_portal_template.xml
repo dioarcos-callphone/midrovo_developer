@@ -2,27 +2,27 @@
 <odoo>
 
     <!-- R E T E N C I O N E S -->
-    <template id="portal_my_home_menu_withholding" name="Portal layout : withholding menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+    <template id="portal_my_home_menu_retention" name="Portal layout : retention menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'withholding'" t-attf-class="breadcrumb-item #{'active ' if not withholding else ''}">
-                <a t-if="withholding" t-attf-href="/my/withholding?{{ keep_query() }}">Retención</a>
+            <li t-if="page_name == 'retention'" t-attf-class="breadcrumb-item #{'active ' if not retention else ''}">
+                <a t-if="retention" t-attf-href="/my/retentions?{{ keep_query() }}">Retenciones</a>
                 <t t-else="">Retenciones</t>
             </li>
-            <li t-if="withholding" class="breadcrumb-item active">
-                <t t-out="withholding.name" t-if="withholding.name != '/'"/>
-                <t t-else=""><em>Borrador de retención</em></t>
+            <li t-if="retention" class="breadcrumb-item active">
+                <t t-out="retention.name" t-if="retention.name != '/'"/>
+                <t t-else=""><em>Borrador de Retención</em></t>
             </li>
         </xpath>
     </template>
 
-    <template id="portal_my_withholdings" name="Mis Retenciones">
+    <template id="portal_my_retentions" name="Mis Retenciones">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
         <t t-call="portal.portal_searchbar">
             <t t-set="title">Retenciones</t>
         </t>
-        <t t-if="not withholdings">
+        <t t-if="not retentions">
              <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
                 <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
                 <h4>No hay retenciones disponibles</h4>
@@ -31,56 +31,85 @@
             </div>
             <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
-        <t t-if="withholdings" t-call="portal.portal_table">
+        <t t-if="retentions" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
                     <th>Retención #</th>
-                    <th>Fecha de emisión</th>
-                    <th>Factura asociada</th>
-                    <th class="text-center">Estado</th>
-                    <th class="text-center">Total retenido IVA</th>
-                    <th class="text-center">Total retenido renta</th>
+                    <th class="text-center">Fecha de Emisión</th>
+                    <th class="text-center">Factura ASsociada</th>
+                    <th class="text-center">Estado de Autorización</th>
+                    <th class="text-center">Total Retención IVA</th>
+                    <th class="text-center">Total Retención renta</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
-                <t t-foreach="withholdings" t-as="withholding">
+                <t t-foreach="retentions" t-as="retention">
                     <tr>
                         <td>
-                            <a t-att-href="withholding.get_portal_url()" t-att-title="withholding.l10n_latam_document_number">
-                                <span t-if="withholding.l10n_latam_document_number != '/'">Ret.</span> <t t-out="withholding.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
+                            <a t-att-href="retention.get_portal_url()" t-att-title="retention.l10n_latam_document_number">
+                                <span t-if="retention.l10n_latam_document_number != '/'">Ret.</span> <t t-out="retention.l10n_latam_document_number" t-if="withholding.l10n_latam_document_number != '/'"/>
                                 <em t-else="">Borrador de retenciones</em>
                             </a>
                         </td>
-                        <td><span t-field="withholding.creation_date"/></td>
-                        <t t-if="withholding.invoice_id">
-                            <td><span t-field="withholding.invoice_id.name"/></td>
+                        <td class="text-center"><span t-field="retention.creation_date"/></td>
+                        <t t-if="retention.invoice_id">
+                            <td class="text-center"><span t-field="retention.invoice_id.name"/></td>
                         </t>
                         <t t-else="">
-                            <td><span t-field="withholding.factura_origen_api"/></td>
+                            <td class="text-center"><span t-field="retention.factura_origen_api"/></td>
                         </t>
                         <td class="tx_status text-center">
-                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state not in ('in_payment', 'paid', 'reversed')">
-                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            <t t-if="retention.state_sri == 'draft'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Creado</span>
+                                </span>
                             </t>
-                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state in ('paid', 'in_payment')">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+
+                            <t t-if="retention.state_sri == 'signed'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Firmado</span>
+                                </span>
                             </t>
-                            <t t-if="withholding.state == 'posted' and withholding.invoice_id.payment_state == 'reversed'">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+
+                            <t t-if="retention.state_sri == 'waiting'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> En espera de autorización</span>
+                                </span>
                             </t>
-                            <t t-if="withholding.state == 'canceled'">
-                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+
+                            <t t-if="retention.state_sri == 'authorized'">
+                                <span class="badge badge-success text-bg-success">
+                                    <span class="d-none d-md-inline"> Autorizado</span>
+                                </span>
+                            </t>
+
+                            <t t-if="retention.state_sri == 'returned'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Devuelta</span>
+                                </span>
+                            </t>
+
+                            <t t-if="retention.state_sri == 'rejected'">
+                                <span class="badge badge-success text-bg-danger">
+                                    <span class="d-none d-md-inline"> No autorizado</span>
+                                </span>
+                            </t>
+
+                            <t t-if="retention.state_sri == 'cancel'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Cancelado</span>
+                                </span>
                             </t>
                         </td>
-                        <td class="text-end"><span t-out="withholding.total_iva" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
-                        <td class="text-end"><span t-out="withholding.total_renta" t-options='{"widget": "monetary", "display_currency": withholding.invoice_id.currency_id}'/></td>
+                        <td class="text-center"><span t-out="retention.total_iva" t-options='{"widget": "monetary", "display_currency": retention.invoice_id.currency_id}'/></td>
+                        <td class="text-center"><span t-out="retention.total_renta" t-options='{"widget": "monetary", "display_currency": retention.invoice_id.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
-                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="withholding.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
                             <span class="xml-icon" style="margin: 5px;">
-                                <a class="fa fa-file-code-o fa-lg" t-att-href="withholding.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="retention.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
                             </span>
                         </td>
                     </tr>

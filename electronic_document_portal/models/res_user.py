@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from random import randint
 
-class UserExtend(models.Model):
+class ResUser(models.Model):
     _inherit = 'res.users'
     
     shop_ids = fields.Many2many(
