@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="portal_web_category" model="ir.module.category">
+            <field name="name">Portal Web Documentos Electrónicos</field>
+        </record>
+
+        <record id="portal_user_internal_group" model="res.groups">
+            <field name="name">Imprimir y Enviar Documentos Electrónicos</field>
+            <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
+            <field name="category_id" ref="portal_web_category"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>
