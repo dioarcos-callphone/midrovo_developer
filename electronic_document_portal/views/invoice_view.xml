@@ -16,19 +16,18 @@
                         <!-- Send (only invoices) -->
                         <button name="action_invoice_sent"
                                 type="object"
-                                string="Send &amp; Print"
+                                string="Enviar e Imprimir"
                                 attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
                                 class="oe_highlight"
                                 data-hotkey="y"/>
                         <button name="action_invoice_sent"
                                 type="object"
-                                string="Send &amp; Print"
+                                string="Enviar e Imprimir"
                                 attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', False), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"
                                 data-hotkey="y"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
                     </header>
                 </xpath>
-
                 
             </field>
         </record>
