@@ -25,7 +25,7 @@
         'portal',
     ],
     'data': [
-        'security/portal_group.xml'
+        'security/portal_group.xml',
         'security/documents_security.xml',
         'security/ir.model.access.csv',
         'reports/report_invoice_document_extend.xml',
