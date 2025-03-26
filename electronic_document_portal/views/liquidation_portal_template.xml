@@ -42,43 +42,43 @@
                         <td><span t-field="liquidation.invoice_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="refund.state_sri == 'draft'">
+                            <t t-if="liquidation.state_sri == 'draft'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Creado</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'signed'">
+                            <t t-if="liquidation.state_sri == 'signed'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Firmado</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'waiting'">
+                            <t t-if="liquidation.state_sri == 'waiting'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> En espera de autorización</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'authorized'">
+                            <t t-if="liquidation.state_sri == 'authorized'">
                                 <span class="badge badge-success text-bg-success">
                                     <span class="d-none d-md-inline"> Autorizado</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'returned'">
+                            <t t-if="liquidation.state_sri == 'returned'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Devuelta</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'rejected'">
+                            <t t-if="liquidation.state_sri == 'rejected'">
                                 <span class="badge badge-success text-bg-danger">
                                     <span class="d-none d-md-inline"> No autorizado</span>
                                 </span>
                             </t>
 
-                            <t t-if="refund.state_sri == 'cancel'">
+                            <t t-if="liquidation.state_sri == 'cancel'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Cancelado</span>
                                 </span>
