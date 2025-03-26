@@ -102,8 +102,8 @@
                                 </span>
                             </t>
                         </td>
-                        <td class="text-center"><span t-out="retention.total_iva" t-options='{"widget": "monetary", "display_currency": retention.invoice_id.currency_id}'/></td>
-                        <td class="text-center"><span t-out="retention.total_renta" t-options='{"widget": "monetary", "display_currency": retention.invoice_id.currency_id}'/></td>
+                        <td class="text-center"><span t-out="retention.total_iva" /></td>
+                        <td class="text-center"><span t-out="retention.total_renta" /></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
