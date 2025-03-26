@@ -2,19 +2,6 @@
 <odoo>
 
     <!-- L I Q U I D A C I O N E S  D E  C O M P R A -->
-    <!-- <template id="portal_my_home_menu_purchase_settlements" name="Portal layout : purchase settlements menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
-        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'purchase_settlement'" t-attf-class="breadcrumb-item #{'active ' if not purchase_settlement else ''}">
-                <a t-if="purchase_settlement" t-attf-href="/my/purchase_settlement?{{ keep_query() }}">Liquidación de compras</a>
-                <t t-else="">Liquidaciones de compras</t>
-            </li>
-            <li t-if="purchase_settlement" class="breadcrumb-item active">
-                <t t-out="purchase_settlement.name" t-if="purchase_settlement.name != '/'"/>
-                <t t-else=""><em>Borrador de liquidación de compras</em></t>
-            </li>
-        </xpath>
-    </template> -->
-
     <template id="portal_my_liquidations" name="Mis Liquidaciones de Compra">
       <t t-call="portal.portal_layout">
         <t t-set="breadcrumbs_searchbar" t-value="True"/>
@@ -29,7 +16,6 @@
                 <p>Parece que no tienes liquidaciones de compra asociadas a tu cuenta en este momento.</p>
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
-            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
         <t t-if="liquidations" t-call="portal.portal_table">
             <thead>

@@ -30,5 +30,81 @@
         </xpath>
     </template>
 
+    <template id="portal_my_invoices_inh" name="Mis Facturas" inherit_id="account.portal_my_invoices">
+        <!-- Cambia el título de la página anteriormente estaba como My Invoices and Payments -->
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="before">
+            <t t-set="title">Mis Facturas</t>
+        </xpath>
+        <xpath expr="//t[@t-if='not invoices']" position="replace">
+            <t t-if="not invoices">
+                <div class="alert alert-info text-center" style="margin: 20px; padding: 15px; border-radius: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <h4>No hay facturas disponibles</h4>
+                    <p>Parece que no tienes facturas asociadas a tu cuenta en este momento.</p>
+                    <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
+                </div>
+            </t>
+        </xpath>
+        
+        <xpath expr="//td[@class='tx_status text-center']" position="replace">
+            <td class="tx_status text-center">
+                <t t-if="invoice.state_sri == 'draft'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> Creado</span>
+                    </span>
+                </t>
+
+                <t t-if="invoice.state_sri == 'signed'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> Firmado</span>
+                    </span>
+                </t>
+
+
+                <t t-if="invoice.state_sri == 'waiting'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> En espera de autorización</span>
+                    </span>
+                </t>
+
+
+                <t t-if="invoice.state_sri == 'returned'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> Devuelta</span>
+                    </span>
+                </t>
+
+
+                <t t-if="invoice.state_sri == 'rejected'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> No autorizado</span>
+                    </span>
+                </t>
+
+                <t t-if="invoice.state_sri == 'cancel'">
+                    <span class="badge badge-success text-bg-info">
+                        <span class="d-none d-md-inline"> Cancelado</span>
+                    </span>
+                </t>
+
+            </td>
+        </xpath>
+        
+        <xpath expr="//th[@class='text-end']" position="after">
+            <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+        </xpath>
+
+        <xpath expr="//td[@class='text-end']" position="after">
+            <td class="text-center">
+                <span class="pdf-icon" style="margin: 5px;">
+                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                </span>
+                <span class="xml-icon" style="margin: 5px;">
+                    <a class="fa fa-file-code-o fa-lg" t-att-href="invoice.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                </span>
+            </td>
+        </xpath>
+    </template>
+
 
 </odoo>
