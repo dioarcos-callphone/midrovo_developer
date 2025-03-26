@@ -76,15 +76,15 @@
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Liquidaciones de compra</t>
-                <t t-set="url" t-value="'/my/purchase_settlement'"/>
-                <t t-set="placeholder_count" t-value="'purchase_settlement_count'"/>
+                <t t-set="url" t-value="'/my/liquidations'"/>
+                <t t-set="placeholder_count" t-value="'liquidation_count'"/>
             </t>
         </xpath>
 
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Notas de Débito</t>
-                <t t-set="url" t-value="'/my/debit_note'"/>
+                <t t-set="url" t-value="'/my/debit_notes'"/>
                 <t t-set="placeholder_count" t-value="'debit_note_count'"/>
             </t>
         </xpath>
