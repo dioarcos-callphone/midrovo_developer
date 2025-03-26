@@ -61,7 +61,7 @@
                                 title="Preview invoice"
                                 attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund')), ('state', '==', 'cancel')]}"/>
                         <!-- Reverse -->
-                        <button name="%(action_view_account_move_reversal)d" string="Reverse Entry"
+                        <button name="%(account.action_view_account_move_reversal)d" string="Reverse Entry"
                                 type="action" groups="account.group_account_invoice" data-hotkey="z"
                                 attrs="{'invisible': ['|', ('move_type', '!=', 'entry'), '|', ('state', '!=', 'posted'), ('payment_state', '=', 'reversed')]}"/>
                         <button name="action_reverse" string='Add Credit Note'
