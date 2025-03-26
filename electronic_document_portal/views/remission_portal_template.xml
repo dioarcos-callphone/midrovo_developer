@@ -59,43 +59,43 @@
                         <td class="text-center"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="retention.state_sri == 'draft'">
+                            <t t-if="remission.state_sri == 'draft'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Creado</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'signed'">
+                            <t t-if="remission.state_sri == 'signed'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Firmado</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'waiting'">
+                            <t t-if="remission.state_sri == 'waiting'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> En espera de autorización</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'authorized'">
+                            <t t-if="remission.state_sri == 'authorized'">
                                 <span class="badge badge-success text-bg-success">
                                     <span class="d-none d-md-inline"> Autorizado</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'returned'">
+                            <t t-if="remission.state_sri == 'returned'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Devuelta</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'rejected'">
+                            <t t-if="remission.state_sri == 'rejected'">
                                 <span class="badge badge-success text-bg-danger">
                                     <span class="d-none d-md-inline"> No autorizado</span>
                                 </span>
                             </t>
 
-                            <t t-if="retention.state_sri == 'cancel'">
+                            <t t-if="remission.state_sri == 'cancel'">
                                 <span class="badge badge-success text-bg-info">
                                     <span class="d-none d-md-inline"> Cancelado</span>
                                 </span>
