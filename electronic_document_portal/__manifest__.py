@@ -38,7 +38,7 @@
         'templates/remission_portal_template.xml',
         'templates/retention_portal_template.xml',
         'views/user_extend_view.xml',
-        'views/invoice_view',
+        'views/invoice_view.xml',
         
     ],
     'assets': {
