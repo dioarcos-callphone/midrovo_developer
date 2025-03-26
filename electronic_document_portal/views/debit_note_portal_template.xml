@@ -16,7 +16,6 @@
                 <p>Parece que no tienes notas de débito asociadas a tu cuenta en este momento.</p>
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
-            <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
         <t t-if="debit_notes" t-call="portal.portal_table">
             <thead>
@@ -41,17 +40,46 @@
                         </td>
                         <td><span t-field="debit_note.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state not in ('in_payment', 'paid', 'reversed')">
-                                <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Esperando pago</span></span>
+                            <t t-if="refund.state_sri == 'draft'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Creado</span>
+                                </span>
                             </t>
-                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state in ('paid', 'in_payment')">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Pagado</span></span>
+
+                            <t t-if="refund.state_sri == 'signed'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Firmado</span>
+                                </span>
                             </t>
-                            <t t-if="debit_note.state == 'posted' and debit_note.payment_state == 'reversed'">
-                                <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-check" aria-label="Reversed" title="Reversed" role="img"></i><span class="d-none d-md-inline"> Invertido</span></span>
+
+                            <t t-if="refund.state_sri == 'waiting'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> En espera de autorización</span>
+                                </span>
                             </t>
-                            <t t-if="debit_note.state == 'cancel'">
-                                <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelado</span></span>
+
+                            <t t-if="refund.state_sri == 'authorized'">
+                                <span class="badge badge-success text-bg-success">
+                                    <span class="d-none d-md-inline"> Autorizado</span>
+                                </span>
+                            </t>
+
+                            <t t-if="refund.state_sri == 'returned'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Devuelta</span>
+                                </span>
+                            </t>
+
+                            <t t-if="refund.state_sri == 'rejected'">
+                                <span class="badge badge-success text-bg-danger">
+                                    <span class="d-none d-md-inline"> No autorizado</span>
+                                </span>
+                            </t>
+
+                            <t t-if="refund.state_sri == 'cancel'">
+                                <span class="badge badge-success text-bg-info">
+                                    <span class="d-none d-md-inline"> Cancelado</span>
+                                </span>
                             </t>
                         </td>
                         <td class="text-end"><span t-out="debit_note.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>

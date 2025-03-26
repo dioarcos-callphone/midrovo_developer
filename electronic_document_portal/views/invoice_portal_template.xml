@@ -49,7 +49,7 @@
         <xpath expr="//td[@class='tx_status text-center']" position="replace">
             <td class="tx_status text-center">
                 <t t-if="invoice.state_sri == 'draft'">
-                    <span class="badge badge-success text-bg-success">
+                    <span class="badge badge-success text-bg-info">
                         <span class="d-none d-md-inline"> Creado</span>
                     </span>
                 </t>
@@ -60,13 +60,17 @@
                     </span>
                 </t>
 
-
                 <t t-if="invoice.state_sri == 'waiting'">
                     <span class="badge badge-success text-bg-info">
                         <span class="d-none d-md-inline"> En espera de autorización</span>
                     </span>
                 </t>
 
+                <t t-if="invoice.state_sri == 'authorized'">
+                    <span class="badge badge-success text-bg-success">
+                        <span class="d-none d-md-inline"> Autorizado</span>
+                    </span>
+                </t>
 
                 <t t-if="invoice.state_sri == 'returned'">
                     <span class="badge badge-success text-bg-info">
@@ -74,9 +78,8 @@
                     </span>
                 </t>
 
-
                 <t t-if="invoice.state_sri == 'rejected'">
-                    <span class="badge badge-success text-bg-info">
+                    <span class="badge badge-success text-bg-danger">
                         <span class="d-none d-md-inline"> No autorizado</span>
                     </span>
                 </t>
