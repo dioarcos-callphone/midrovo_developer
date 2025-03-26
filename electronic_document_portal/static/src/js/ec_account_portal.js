@@ -12,7 +12,7 @@ publicWidget.registry.PortalHomeCounters.include({
             'refund_count',
             'withholding_count',
             'remission_count',
-            'purchase_settlement_count',
+            'retention_count',
             'debit_note_count',
         ]);
     },
