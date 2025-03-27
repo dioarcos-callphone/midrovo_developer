@@ -93,6 +93,10 @@ class RemissionPortalController(CustomerPortal):
             ]
             
             return request.make_response(xml_decode, headers=headers)
+        
+        values = self._remission_get_page_view_values(remission_sudo, access_token, **kw)
+        
+        return request.render("electronic_document_portal.portal_remission_page", values)
     
     def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/remissions"):
         values = self._prepare_portal_layout_values()

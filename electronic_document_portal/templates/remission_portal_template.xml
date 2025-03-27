@@ -116,4 +116,60 @@
       </t>
     </template>
 
+
+    <template id="portal_remission_page" name="Retention Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="sales_team.group_sale_salesman,account.group_account_invoice,account.group_account_readonly">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/web#model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % (remission._name, remission.id, remission.env.ref('ec_remision.action_account_remision').id)"/>
+                </t>
+            </t>
+
+            <div class="row mt16 o_portal_invoice_sidebar">
+                <!-- Sidebar -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
+                    <t t-set="title">
+                        <h2 class="mb-0">
+                            <!-- <b t-if="retention.total_renta != 0" t-field="retention.total_renta"/>
+                            <b t-else="" t-field="retention.total_iva"/> -->
+                            <b>MOSTRAR ALGO</b>
+                        </h2>
+                    </t>
+
+                    <t t-set="entries">
+                        <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                            <li class="list-group-item flex-grow-1">
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                    <div class="btn-group  flex-grow-1 me-1 mb-1">
+                                        <a class="btn btn-danger btn-block o_download_btn" t-att-href="remission.get_portal_url(report_type='pdf', download=True)" title="RIDE"><i class="fa fa-download"/> RIDE</a>
+                                    </div>
+                                    <div class="btn-group  flex-grow-1 me-1 mb-1">
+                                        <a class="btn btn-success btn-block o_download_btn" t-att-href="remission.get_portal_url(report_type='xml', download=True)" title="XML"><i class="fa fa-download"/> XML</a>
+                                    </div>
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-att-href="remission.get_portal_url(report_type='pdf')" id="print_retention_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </t>
+                </t>
+
+                <!-- Page Content -->
+                <div id="invoice_content" class="col-12 col-lg">
+                    <t t-if="error or warning" t-call="account.portal_invoice_error"/>
+                    <t t-if="success and (not error and not warning)" t-call="account.portal_invoice_success"/>
+
+                    <div class="o_portal_html_view shadow p-3">
+                        <div class="o_portal_html_loader text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw text-black-50"></i>
+                        </div>
+                        <iframe id="invoice_html" class="mt8 mb8" width="100%" height="100%" frameborder="0" scrolling="no" t-att-src="remission.get_portal_url(report_type='html')"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
 </odoo>
