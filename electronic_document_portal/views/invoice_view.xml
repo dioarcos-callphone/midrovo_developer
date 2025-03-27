@@ -23,8 +23,11 @@
                         <button name="action_invoice_sent"
                                 type="object"
                                 string="Enviar e Imprimir"
-                                attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', False), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_refund'))]}"
+                                attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', False), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"
                                 data-hotkey="y"/>
+                        <button name="print_document" string='Imprimir RIDE'
+							type='object' groups="account.group_account_invoice"
+							/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
                     </header>
                 </xpath>
