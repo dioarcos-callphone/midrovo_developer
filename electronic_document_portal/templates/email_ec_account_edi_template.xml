@@ -3,16 +3,60 @@
 
     <data>
     
-        <record id="ec_email_template_edi_invoice_inherit" model="mail.template">
-            <field name="name">Enviar Documento Electrónico por Correo (Modificado)</field>
-            <field name="model_id" ref="account.model_account_move" />
-            <field name="inherit_id" ref="ec_account_edi.ec_email_template_edi_invoice"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='report_name']" position="replace">
-                    <field name="report_name">{{(object.display_name or '').replace('/','_')}}{{object.state == 'draft' and 'draft' or ''}}</field>
-                </xpath>
-            </field>
-        </record>
+        <!--Email template -->
+		<record id="electronic_document_email_template_edi_invoice" model="mail.template">
+			<field name="name">Enviar Documento Electrónico por Correo</field>
+			<field name="email_from">{{(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')}}</field>
+			<field name="subject">{{object.company_id.name}} Documento (Ref {{object.display_name or 'n/a'}})</field>
+			<field name="partner_to">{{object.partner_id.id}}</field>
+			<field name="model_id" ref="account.model_account_move" />
+			<field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+					<p style="margin: 0px; padding: 0px; font-size: 13px;">
+						Estimado/a <t t-out="object.partner_id.name"/>
+						<t t-if="object.partner_id.parent_id">
+							(<i><t t-out="object.partner_id.parent_id.name"/></i>)
+						</t>
+						,</p>
+					<br />
+					<p>Adjunto se encuentra su
+						<t t-if="object.l10n_latam_document_number">
+							documento <strong><t t-out="object.display_name"/></strong>
+						</t>
+						<t t-else="">
+							Documento
+						</t>
+						<t t-if="object.ref">
+							(Con referencia: <t t-out="object.ref"/>)
+						</t>
+						<t t-if="object.xml_key">
+							Clave de Acceso: <t t-out="object.xml_key"/>
+						</t>
+						por un monto de <strong><t t-out="abs(object.amount_total)"></t> <t t-out="object.currency_id.name"/></strong>
+						de <t t-out="object.company_id.name"/>.
+					</p>
+					<br/><br/>
+
+					<t t-if="object.state=='paid'">
+						<p>Este documento se en encuentra pagado.</p>
+					</t>
+					<t t-else="">
+						<p>Por favor remitanos su pago en brevedad.</p>
+					</t>
+
+					<p>Gracias,</p>
+					<p style="color:#888888">
+						<t t-if="object.user_id and object.user_id.signature">
+							<t t-out="object.user_id.signature"/>
+						</t>
+					</p>
+				</div>
+			</field>
+			<field name="auto_delete" eval="True" />
+			<field name="report_template" ref="ec_account_edi.e_invoice_qweb"/>
+			<field name="report_name">{{(object.display_name or '').replace('/','_')}}{{object.state == 'draft' and 'draft' or ''}}</field>
+			<field name="lang">{{object.partner_id.lang}}</field>
+		</record>
     
     </data>
     
