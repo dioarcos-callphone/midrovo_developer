@@ -97,6 +97,11 @@ class RetentionPortalController(CustomerPortal):
             ]
             
             return request.make_response(xml_decode, headers=headers)
+        
+        values = self._invoice_get_page_view_values(retention_sudo, access_token, **kw)
+        
+        return request.render("electronic_document_portal.portal_retention_page", values)
+    
     
     def _prepare_my_retention_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/retentions"):
         values = self._prepare_portal_layout_values()
