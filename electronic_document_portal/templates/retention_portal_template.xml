@@ -9,7 +9,7 @@
                 <t t-else="">Retenciones</t>
             </li>
             <li t-if="retention" class="breadcrumb-item active">
-                <t t-out="retention.l10n_latam_document_number" t-if="retention.l10n_latam_document_number != '/'"/>
+                <span t-if="retention.l10n_latam_document_number != '/'">Ret.</span> <t t-out="retention.l10n_latam_document_number" t-if="retention.l10n_latam_document_number != '/'"/>
                 <t t-else=""><em>Borrador de Retención</em></t>
             </li>
         </xpath>

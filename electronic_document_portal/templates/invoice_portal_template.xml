@@ -64,7 +64,7 @@
                             <td>
                                 <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
                                     <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
-                                    <em t-else="">Draft Invoice</em>
+                                    <em t-else="">Borrador de Factura</em>
                                 </a>
                             </td>
                             <td class="text-center"><span t-field="invoice.invoice_date"/></td>
