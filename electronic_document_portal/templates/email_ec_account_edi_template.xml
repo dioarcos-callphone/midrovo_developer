@@ -53,7 +53,7 @@
 				</div>
 			</field>
 			<field name="auto_delete" eval="True" />
-            <field name="attachment_ids">{{(object.xml_report)}}</field>
+            <field name="attachment_ids" eval="[(0, 0, {'name': 't-esc(object.display_name) + '.xml', 'datas': 't-esc(object.xml_report)', 'mimetype': 'application/xml'})]"/>
 			<field name="report_template" ref="ec_account_edi.e_invoice_qweb"/>
 			<field name="report_name">{{(object.display_name or '').replace('/','_')}}{{object.state == 'draft' and 'draft' or ''}}</field>
 			<field name="lang">{{object.partner_id.lang}}</field>
