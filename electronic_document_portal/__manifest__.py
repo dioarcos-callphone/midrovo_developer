@@ -29,6 +29,7 @@
         'security/documents_security.xml',
         'security/ir.model.access.csv',
         'reports/report_invoice_document_extend.xml',
+        'templates/email_ec_account_edi_template.xml'
         'templates/portal_template.xml',
         'templates/payment_portal_template.xml',
         'templates/invoice_portal_template.xml',

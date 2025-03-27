@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="ec_email_template_edi_invoice_inherit" model="mail.template">
+            <field name="name">Enviar Documento Electrónico por Correo (Modificado)</field>
+            <field name="model_id" ref="account.model_account_move" />
+            <field name="inherit_id" ref="ec_account_edi.ec_email_template_edi_invoice"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='report_name']" position="replace">
+                    <field name="report_name">{{(object.display_name or '').replace('/','_')}}{{object.state == 'draft' and 'draft' or ''}}</field>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>
