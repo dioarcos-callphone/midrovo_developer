@@ -4,7 +4,7 @@
     <data>
     
         <!--Email template -->
-		<record id="electronic_document_email_template_edi_invoice" model="mail.template">
+		<record id="ec_account_edi.ec_email_template_edi_invoice" model="mail.template">
 			<field name="name">Enviar Documento Electrónico por Correo</field>
 			<field name="email_from">{{(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')}}</field>
 			<field name="subject">{{object.company_id.name}} Documento (Ref {{object.display_name or 'n/a'}})</field>
@@ -38,7 +38,7 @@
 					<br/><br/>
 
 					<t t-if="object.state=='paid'">
-						<p>Este documento se en encuentra pagado.</p>
+						<p>Este documento se encuentra pagado.</p>
 					</t>
 					<t t-else="">
 						<p>Por favor remitanos su pago en brevedad.</p>
