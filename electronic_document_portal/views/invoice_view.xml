@@ -17,7 +17,7 @@
                         <button name="action_invoice_sent"
                                 type="object"
                                 string="Enviar e Imprimir"
-                                attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True)]}"
+                                attrs="{'invisible':['|', ('state', '!=', 'posted'), ('is_move_sent', '=', True)]}"
                                 class="oe_highlight"
                                 data-hotkey="y"/>
                         <button name="action_invoice_sent"
