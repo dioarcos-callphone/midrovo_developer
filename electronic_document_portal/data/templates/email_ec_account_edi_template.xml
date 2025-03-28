@@ -137,9 +137,6 @@
 						<t t-else="">
 							Documento
 						</t>
-						<t t-if="object.ref">
-							(Con referencia: <t t-out="object.ref"/>)
-						</t>
 						<t t-if="object.xml_key">
 							Clave de Acceso: <t t-out="object.xml_key"/>
 						</t>
