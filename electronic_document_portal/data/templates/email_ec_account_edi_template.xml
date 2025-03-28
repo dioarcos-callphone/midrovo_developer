@@ -124,44 +124,40 @@
 			<field name="body_html" type="html">
 				<div style="margin: 0px; padding: 0px;">
 					<p style="margin: 0px; padding: 0px; font-size: 13px;">
-						Estimado/a <t t-out="object.partner_id.name"/>
-						<t t-if="object.partner_id.parent_id">
-							(<i><t t-out="object.partner_id.parent_id.name"/></i>)
-						</t>
-						,</p>
-					<br />
-					<p>Adjunto se encuentra su
-						<t t-if="object.l10n_latam_document_number">
-							documento <strong><t t-out="object.display_name"/></strong>
-						</t>
-						<t t-else="">
-							Documento
-						</t>
-						<t t-if="object.xml_key">
-							Clave de Acceso: <t t-out="object.xml_key"/>
-						</t>
-						por un monto de <strong><t t-out="abs(object.amount_total)"></t> <t t-out="object.currency_id.name"/></strong>
-						de <t t-out="object.company_id.name"/>.
+					Estimado/a <t t-out="object.partner_id.name"/>
+					<t t-if="object.partner_id.parent_id">
+						(<i><t t-out="object.partner_id.parent_id.name"/></i>)
+					</t>
+					,
 					</p>
-					<br/><br/>
-
-					<t t-if="object.state=='paid'">
-						<p>Este documento se encuentra pagado.</p>
+					<br />
+					<p>Nos complace informarle que hemos enviado su mercancía según lo acordado. Adjunto a este correo encontrará la <strong>Guía de Remisión</strong> correspondiente al envío realizado.</p>
+					<br />
+					<p><strong>Detalles del Envío:</strong></p>
+					<ul>
+					<li><strong>Número de Guía de Remisión:</strong> <t t-out="object.l10n_latam_document_number"/></li>
+					<li><strong>Fecha de Envío:</strong> <t t-out="object.delivery_date"/></li>
+					<li><strong>Remitente:</strong> <t t-out="object.company_id.name"/></li>
+					<li><strong>Transportista:</strong> <t t-out="object.delivery_carrier.name"/></li>
+					</ul>
+					<p>
+					<t t-if="object.xml_key">
+						Clave de Acceso: <t t-out="object.xml_key"/>
 					</t>
-					<t t-else="">
-						<p>Por favor remitanos su pago en brevedad.</p>
-					</t>
+					</p>
+					<br /><br />
 
 					<p>Gracias,</p>
 					<p style="color:#888888">
-						<t t-if="object.user_id and object.user_id.signature">
-							<t t-out="object.user_id.signature"/>
-						</t>
+					<!-- <t t-if="object.user_id and object.user_id.signature">
+						<t t-out="object.user_id.signature"/>
+					</t> -->
 					</p>
 				</div>
-			</field>
+				</field>
+
 			<field name="auto_delete" eval="True" />
-			<field name="report_template" ref="ec_account_edi.e_invoice_qweb"/>
+			<field name="report_template" ref="ec_account_edi.e_delivery_note_qweb"/>
 			<field name="report_name">{{(object.display_name or '').replace('/','_')}}{{object.state == 'draft' and 'draft' or ''}}</field>
 			<field name="lang">{{object.partner_id.lang}}</field>
 		</record>
