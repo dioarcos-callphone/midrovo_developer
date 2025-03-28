@@ -14,6 +14,10 @@ class Retention(models.Model):
         self.ensure_one()
         return 'Retencion-%s' % (self.l10n_latam_document_number)
     
+
+    def _get_mail_template(self):
+        return 'electronic_document_portal.ec_email_template_edi_retention'
+
 class WithholdLineExtend(models.Model):
     _inherit = 'account.withhold.line'
     
