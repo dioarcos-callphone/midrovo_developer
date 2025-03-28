@@ -28,7 +28,7 @@ class Remission(models.Model):
     def _get_mail_template(self):
         return 'electronic_document_portal.ec_email_template_edi_remission'
 
-    def action_invoice_sent(self):
+    def action_remission_sent(self):
         """ Open a window to compose an email, with the edi invoice template
             message loaded by default
         """
