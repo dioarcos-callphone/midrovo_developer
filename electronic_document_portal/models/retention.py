@@ -23,7 +23,7 @@ class Retention(models.Model):
         return 'electronic_document_portal.ec_email_template_edi_retention'
     
     
-    def action_remission_print(self):
+    def action_withhold_print(self):
         return self.env.ref('ec_account_edi.e_retention_qweb').report_action(self)
     
 
