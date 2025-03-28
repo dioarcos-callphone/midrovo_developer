@@ -1,4 +1,5 @@
 from odoo import models, fields, _
+from odoo.exceptions import UserError
 from odoo.tools import (get_lang)
 
 class Remission(models.Model):
@@ -31,6 +32,10 @@ class Remission(models.Model):
     
     def _get_mail_template(self):
         return 'electronic_document_portal.ec_email_template_edi_remission'
+    
+    def action_remission_print(self):
+        return self.env.ref('ec_account_edi.e_delivery_note_qweb').report_action(self)
+
 
     def action_remission_sent(self):
         """ Open a window to compose an email, with the edi invoice template
