@@ -9,3 +9,4 @@ access_account_remision_portal,account.remision.portal,electronic_document_porta
 acces_account_remision_line_portal,account.remision.line.portal,electronic_document_portal.model_account_remision_line,base.group_portal,1,0,0,0
 
 access_account_remission_send,access.account.remission.send,model_account_remission_send,,1,1,1,0
+access_account_withhold_send,access.account.withhold.send,model_account_withhold_send,,1,1,1,0

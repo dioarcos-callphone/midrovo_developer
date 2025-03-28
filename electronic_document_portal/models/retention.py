@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.tools import (get_lang)
 
 class Retention(models.Model):
