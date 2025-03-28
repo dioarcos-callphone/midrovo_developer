@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="account_remision_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.remision.view.form.inherit</field>
+            <field name="model">account.remision</field>
+            <field name="inherit_id" ref="ec_account_edi.account_remision_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(e_delivery_note_qweb)d']" position="after">
+                    <button name="action_remission_sent"
+                                type="object"
+                                string="Send &amp; Print"
+                                attrs="{'invisible':[('state', '!=', 'posted')]}"
+                                class="oe_highlight"
+                                data-hotkey="y"/>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>
