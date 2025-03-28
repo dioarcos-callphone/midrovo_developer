@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="account_withhold_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.withhold.view.form.inherit</field>
+            <field name="model">account.withhold</field>
+            <field name="inherit_id" ref="ec_withholding.view_account_retention_purchase_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="attributes">
+                    <attribute name="groups">!electronic_document_portal.portal_user_internal_group</attribute>
+                </xpath>
+                <xpath expr="//header" position="after">
+                    <header groups='electronic_document_portal.portal_user_internal_group'>
+                        <button name="action_withhold_sent" type="object"
+							string="Enviar e Imprimir" states="posted"
+							class="oe_highlight o_invoice_send" groups="base.group_user" />
+						<field name="state" widget="statusbar"
+							statusbar_visible="draft,posted" />
+                    </header>
+                </xpath>
+                <xpath expr="//button[@name='action_withhold_sent']" position="inside">
+                    <button name="action_withhold_sent" type="object"
+							string="Enviar e Imprimir" states="posted"
+							class="oe_highlight o_invoice_send" groups="base.group_user" />
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

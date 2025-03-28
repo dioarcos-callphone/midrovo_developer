@@ -8,6 +8,20 @@
             <field name="model">account.remision</field>
             <field name="inherit_id" ref="ec_account_edi.account_remision_form_view"/>
             <field name="arch" type="xml">
+                <xpath expr="//header" position="attributes">
+                    <attribute name="groups">!electronic_document_portal.portal_user_internal_group</attribute>
+                </xpath>
+                <xpath expr="//header" position="after">
+                    <header groups='electronic_document_portal.portal_user_internal_group'>
+                        <button name="action_remission_sent"
+                                type="object"
+                                string="Enviar e Imprimir"
+                                attrs="{'invisible':[('state', '!=', 'posted')]}"
+                                class="oe_highlight"
+                                data-hotkey="y"/>
+						<field name="state" widget="statusbar" />
+                    </header>
+                </xpath>
                 <xpath expr="//button[@name='%(ec_account_edi.e_delivery_note_qweb)d']" position="after">
                     <button name="action_remission_sent"
                                 type="object"
