@@ -11,7 +11,7 @@
                 <xpath expr="//button[@name='%(ec_account_edi.e_delivery_note_qweb)d']" position="after">
                     <button name="action_remission_sent"
                                 type="object"
-                                string="Send &amp; Print"
+                                string="Enviar e Imprimir"
                                 attrs="{'invisible':[('state', '!=', 'posted')]}"
                                 class="oe_highlight"
                                 data-hotkey="y"/>

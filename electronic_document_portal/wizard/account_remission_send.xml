@@ -7,7 +7,7 @@
             <field name="model">account.remission.send</field>
             <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>
             <field name="arch" type="xml">
-                <form string="Remission send &amp; Print">
+                <form string="Enviar e Imprimir Guía de Remisión">
                     <!-- truly invisible fields for control and options -->
                     <field name="composition_mode" invisible="1"/>
                     <field name="remission_ids" invisible="1"/>
@@ -19,7 +19,7 @@
                         <div name="info_form"
                              attrs="{'invisible': ['|', ('is_print', '=', False), ('composition_mode', '=', 'mass_mail')]}"
                              class="text-center text-muted d-inline-block ms-2">
-                            Preview as a PDF
+                            Vista previa en formato PDF
                         </div>
                     </div>
                     <div name="option_email">
@@ -36,10 +36,10 @@
                                 <label for="partner_ids" string="Recipients" groups="base.group_user"/>
                                 <div groups="base.group_user">
                                     <span attrs="{'invisible': [('composition_mode', '!=', 'mass_mail')]}">
-                                        <strong>Email mass mailing</strong> on
-                                        <span>the selected records</span>
+                                        <strong>Envío masivo de correos electrónicos </strong> a
+                                        <span>los registro seleccionados</span>
                                     </span>
-                                    <span>Followers of the document and</span>
+                                    <span>Seguidores del documento y</span>
                                     <field name="partner_ids" widget="many2many_tags_email" placeholder="Add contacts to notify..."
                                         context="{'force_email':True, 'show_email':True}" attrs="{'invisible': [('composition_mode', '=', 'mass_mail')]}"/>
                                 </div>
@@ -59,16 +59,16 @@
                     </div>
 
                     <footer>
-                        <button string="Send &amp; Print"
+                        <button string="Enviar e Imprimir"
                             attrs="{'invisible': ['|', ('is_email', '=', False), ('is_print', '=', False)]}" data-hotkey="q"
                             name="send_and_print_action" type="object" class="send_and_print btn-primary o_mail_send"/>
-                        <button string="Send" data-hotkey="q"
+                        <button string="Enviar" data-hotkey="q"
                             attrs="{'invisible': ['|', ('is_print', '=', True), ('is_email', '=', False)]}"
                             name="send_and_print_action" type="object" class="send btn-primary o_mail_send"/>
-                        <button string="Print" data-hotkey="q"
+                        <button string="Imprimir" data-hotkey="q"
                             attrs="{'invisible': ['|', ('is_print', '=', False), ('is_email', '=', True)]}"
                             name="send_and_print_action" type="object" class="print btn-primary o_mail_send"/>
-                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                        <button string="Cancelar" class="btn-secondary" special="cancel" data-hotkey="z" />
                         <button icon="fa-lg fa-save" type="object" name="save_as_template" string="Save as new template"
                             attrs="{'invisible': ['|', ('composition_mode', '=', 'mass_mail'), ('is_email', '=', False)]}"
                             class="float-end btn-secondary" help="Save as a new template" data-hotkey="w" />
@@ -78,7 +78,7 @@
         </record>
 
         <record id="remission_send" model="ir.actions.server">
-            <field name="name">Send &amp; print</field>
+            <field name="name">Enviar e Imprimir</field>
             <field name="state">code</field>
             <field name="type">ir.actions.server</field>
             <field name="model_id" ref="model_account_remision"/>
