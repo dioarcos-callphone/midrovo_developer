@@ -16,7 +16,7 @@ class MailTemplate(models.Model):
             for key in aux.keys():
                 r = aux[key]
                 if 'model' in r and 'res_id' in r:
-                    if r.get('model') == 'account.remision' # Se anade account remision para mostrar xml cuando se envia al correo
+                    if r.get('model') == 'account.remision': # Se anade account remision para mostrar xml cuando se envia al correo
                         class_model = self.env[r.get('model')]
                         record = class_model.browse(r.get('res_id'))
                         if record.xml_data_id and record.xml_data_id.state == 'authorized':
