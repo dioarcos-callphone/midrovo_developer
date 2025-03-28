@@ -60,11 +60,11 @@ class Remission(models.Model):
         )
 
         report_action = {
-            'name': _('Send Invoice'),
+            'name': _('Send Remission'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'account.invoice.send',
+            'res_model': 'account.remission.send',
             'views': [(compose_form.id, 'form')],
             'view_id': compose_form.id,
             'target': 'new',
