@@ -15,7 +15,8 @@ class Remission(models.Model):
     ], string=u'Estado', readonly=True, related='xml_data_id.state')
 
     remission_send_ids = fields.Many2many('account.remission.send', 'account_remission_account_remission_send_rel')
-    user_id = fields.Many2one(string='User', default=lambda self: self.env.user)
+    user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.uid)
+
 
     # EXTENDS portal portal.mixin
     def _compute_access_url(self):
