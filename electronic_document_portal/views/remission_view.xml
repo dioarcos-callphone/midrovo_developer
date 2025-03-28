@@ -8,7 +8,7 @@
             <field name="model">account.remision</field>
             <field name="inherit_id" ref="ec_account_edi.account_remision_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//button[@name='%(e_delivery_note_qweb)d']" position="after">
+                <xpath expr="//button[@name='%(ec_account_edi.e_delivery_note_qweb)d']" position="after">
                     <button name="action_remission_sent"
                                 type="object"
                                 string="Send &amp; Print"
