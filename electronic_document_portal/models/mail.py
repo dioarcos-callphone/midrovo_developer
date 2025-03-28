@@ -28,7 +28,5 @@ class MailTemplate(models.Model):
                             except:
                                 _logger.warning("Can't get xml file")
 
-                _logger.info(f'MOSTRANDO R >>> { r }')
-                res.update(r)
         return res
     
