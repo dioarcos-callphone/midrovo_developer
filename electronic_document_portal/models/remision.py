@@ -13,7 +13,9 @@ class Remission(models.Model):
         ('rejected', u'No Autorizado'),
         ('cancel', u'Cancelado')
     ], string=u'Estado', readonly=True, related='xml_data_id.state')
-    
+
+    remission_send_ids = fields.Many2many('account.remission.send', 'account_remission_account_remission_send_rel')
+
     # EXTENDS portal portal.mixin
     def _compute_access_url(self):
         super()._compute_access_url()
