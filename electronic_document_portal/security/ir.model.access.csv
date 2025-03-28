@@ -7,3 +7,5 @@ access_account_tax_group_portal,account.tax.group,account.model_account_tax_grou
 
 access_account_remision_portal,account.remision.portal,electronic_document_portal.model_account_remision,base.group_portal,1,0,0,0
 acces_account_remision_line_portal,account.remision.line.portal,electronic_document_portal.model_account_remision_line,base.group_portal,1,0,0,0
+
+access_account_remission_send,access.account.remission.send,model_account_remission_send,,1,1,1,0
