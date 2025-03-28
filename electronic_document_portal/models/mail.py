@@ -16,7 +16,9 @@ class MailTemplate(models.Model):
             for key in aux.keys():
                 r = aux[key]
                 if 'model' in r and 'res_id' in r:
+                    _logger.info(f"MOSTRANDO GET MODEL FFFF >>> { r.get('model') }")
                     if r.get('model') == 'account.remision': # Se anade account remision para mostrar xml cuando se envia al correo
+                        _logger.info(f"MOSTRANDO GET MODEL >>> { r.get('model') }")
                         class_model = self.env[r.get('model')]
                         record = class_model.browse(r.get('res_id'))
                         if record.xml_data_id and record.xml_data_id.state == 'authorized':
@@ -26,7 +28,7 @@ class MailTemplate(models.Model):
                             except:
                                 _logger.warning("Can't get xml file")
 
-                # _logger.info(f'MOSTRANDO R >>> { r }')
-                # res.update(r)
+                _logger.info(f'MOSTRANDO R >>> { r }')
+                res.update(r)
         return res
     
