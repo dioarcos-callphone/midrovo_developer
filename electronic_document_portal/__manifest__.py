@@ -41,6 +41,7 @@
         'views/user_extend_view.xml',
         'views/invoice_view.xml',
         'views/remission_view.xml',
+        'views/withhold_view.xml',
         'wizard/account_remission_send.xml',
         'wizard/account_withhold_send.xml',
         
