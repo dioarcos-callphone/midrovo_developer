@@ -19,7 +19,7 @@ class MailTemplate(models.Model):
             for key in aux.keys():
                 r = aux[key]
                 if isinstance(r, dict) and 'model' in r and 'res_id' in r:  # Aseguramos que r es un diccionario
-                    if r.get('model') in ['account.move', 'account.withhold', 'account.remision']:  # Se agrega account.remision
+                    if r.get('model') == 'account.remision':  # Se agrega account.remision
                         class_model = self.env[r.get('model')]
                         record = class_model.browse(r.get('res_id'))
                         if record.xml_data_id and record.xml_data_id.state == 'authorized':
