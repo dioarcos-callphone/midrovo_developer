@@ -28,7 +28,7 @@ class AccountRemissionSend(models.TransientModel):
         res = super(AccountRemissionSend, self).default_get(fields)
         res_ids = self._context.get('active_ids')
 
-        remissions = self.env['account.remision'].browse(res_ids).filtered(lambda move: move.is_invoice(include_receipts=True))
+        remissions = self.env['account.remision'].browse(res_ids)
         if not remissions:
             raise UserError(_("You can only send invoices."))
 
