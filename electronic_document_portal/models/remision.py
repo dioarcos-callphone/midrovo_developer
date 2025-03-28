@@ -58,3 +58,6 @@ class Remission(models.Model):
             'context': ctx,
         }
     
+
+class RemissionLine(models.Model):
+    _inherit = 'account.remision.line'
