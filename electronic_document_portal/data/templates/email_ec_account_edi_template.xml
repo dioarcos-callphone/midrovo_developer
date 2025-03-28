@@ -66,47 +66,33 @@
 			<field name="subject">{{object.company_id.name}} Documento (Ref {{object.display_name or 'n/a'}})</field>
 			<field name="partner_to">{{object.partner_id.id}}</field>
 			<field name="model_id" ref="ec_account_edi.model_account_withhold" />
-			<field name="body_html" type="html">
-				<div style="margin: 0px; padding: 0px;">
-					<p style="margin: 0px; padding: 0px; font-size: 13px;">
-						Estimado/a <t t-out="object.partner_id.name"/>
-						<t t-if="object.partner_id.parent_id">
-							(<i><t t-out="object.partner_id.parent_id.name"/></i>)
-						</t>
-						,</p>
-					<br />
-					<p>Adjunto se encuentra su
-						<t t-if="object.l10n_latam_document_number">
-							documento <strong><t t-out="object.display_name"/></strong>
-						</t>
-						<t t-else="">
-							Documento
-						</t>
-						<t t-if="object.ref">
-							(Con referencia: <t t-out="object.ref"/>)
-						</t>
-						<t t-if="object.xml_key">
-							Clave de Acceso: <t t-out="object.xml_key"/>
-						</t>
-						por un monto de <strong><t t-out="abs(object.amount_total)"></t> <t t-out="object.currency_id.name"/></strong>
-						de <t t-out="object.company_id.name"/>.
-					</p>
-					<br/><br/>
+			<field name="body_html" type="xml">
+                <div>
+                    <p>Estimado <t t-out="object.partner_id.name"/>
+                        <t t-if="object.partner_id.parent_id">
+                            (<i><t t-out="object.partner_id.parent_id.name"/></i>)
+                        </t>
+                        ,</p>
+                    <p>Adjunto se encuentra su
+                        Retención <strong><t t-out="object.display_name"/></strong>
+                        <t t-if="object.xml_key">
+                            Clave de Acceso: <t t-out="object.xml_key"/>
+                        </t>
+                        por un monto de <strong><t t-out="object.total"/> <t t-out="object.company_id.currency_id.name"/></strong>
+                        de <t t-out="object.company_id.name"/>.
+                    </p>
 
-					<t t-if="object.state=='paid'">
-						<p>Este documento se encuentra pagado.</p>
-					</t>
-					<t t-else="">
-						<p>Por favor remitanos su pago en brevedad.</p>
-					</t>
-
-					<p>Gracias,</p>
-					<p style="color:#888888">
-						<t t-if="object.user_id and object.user_id.signature">
-							<t t-out="object.user_id.signature"/>
-						</t>
-					</p>
-				</div>
+                    <t t-if="is_online">
+                        <br/><br/>
+                    </t>
+                    <br/><br/>
+                    <p>Gracias,</p>
+                    <p style="color:#888888">
+                        <t t-if="object.invoice_id.user_id and object.invoice_id.user_id.signature">
+                            <t t-out="object.invoice_id.user_id.signature"/>
+                        </t>
+                    </p>
+                </div>
 			</field>
 			<field name="auto_delete" eval="True" />
 			<field name="report_template" ref="ec_account_edi.e_invoice_qweb"/>
@@ -149,9 +135,9 @@
 
 					<p>Gracias,</p>
 					<p style="color:#888888">
-					<!-- <t t-if="object.user_id and object.user_id.signature">
+					<t t-if="object.user_id and object.user_id.signature">
 						<t t-out="object.user_id.signature"/>
-					</t> -->
+					</t>
 					</p>
 				</div>
 				</field>
