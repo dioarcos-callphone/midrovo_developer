@@ -14,9 +14,9 @@ class AccountRemissionSend(models.TransientModel):
 
     is_email = fields.Boolean('Email', default=lambda self: self.env.company.invoice_is_email)
     remission_without_email = fields.Text(compute='_compute_remission_without_email', string='remission(s) that will not be sent')
-    is_print = fields.Boolean('Print', default=lambda self: self.env.company.invoice_is_print)
-    printed = fields.Boolean('Is Printed', default=False)
-    remission_ids = fields.Many2many('account.remision', 'account_remission_account_remission_send_rel', string='Remissions')
+    is_print = fields.Boolean('Imprmir', default=lambda self: self.env.company.invoice_is_print)
+    printed = fields.Boolean('Está Impreso', default=False)
+    remission_ids = fields.Many2many('account.remision', 'account_remission_account_remission_send_rel', string='Guías de Remisión')
     composer_id = fields.Many2one('mail.compose.message', string='Composer', required=True, ondelete='cascade')
     template_id = fields.Many2one(
         'mail.template', 'Use template',
