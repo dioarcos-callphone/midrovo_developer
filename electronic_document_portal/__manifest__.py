@@ -42,6 +42,7 @@
         'views/invoice_view.xml',
         'views/remission_view.xml',
         'wizard/account_remission_send.xml',
+        'wizard/account_withhold_send.xml',
         
     ],
     'assets': {

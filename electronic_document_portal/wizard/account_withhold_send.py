@@ -7,68 +7,44 @@ from odoo.exceptions import UserError
 from odoo.tools.misc import get_lang
 
 
-class AccountInvoiceSend(models.TransientModel):
-    _name = 'account.invoice.send'
+class AccountWithholdSend(models.TransientModel):
+    _name = 'account.withhold.send'
     _inherits = {'mail.compose.message':'composer_id'}
-    _description = 'Account Invoice Send'
+    _description = 'Account Withhold Send'
 
     is_email = fields.Boolean('Email', default=lambda self: self.env.company.invoice_is_email)
-    invoice_without_email = fields.Text(compute='_compute_invoice_without_email', string='invoice(s) that will not be sent')
-    is_print = fields.Boolean('Print', default=lambda self: self.env.company.invoice_is_print)
-    printed = fields.Boolean('Is Printed', default=False)
-    invoice_ids = fields.Many2many('account.move', 'account_move_account_invoice_send_rel', string='Invoices')
+    withhold_without_email = fields.Text(compute='_compute_withhold_without_email', string='withhold(s) that will not be sent')
+    is_print = fields.Boolean('Imprmir', default=lambda self: self.env.company.invoice_is_print)
+    printed = fields.Boolean('Está Impreso', default=False)
+    withhold_ids = fields.Many2many('account.withhold', 'account_withhold_account_withhold_send_rel', string='Retenciones')
     composer_id = fields.Many2one('mail.compose.message', string='Composer', required=True, ondelete='cascade')
     template_id = fields.Many2one(
         'mail.template', 'Use template',
-        domain="[('model', '=', 'account.move')]"
+        domain="[('model', '=', 'account.withhold')]"
         )
-
-    # Technical field containing a textual representation of the selected move types,
-    # if multiple. It is used to inform the user in the window in such case.
-    move_types = fields.Char(
-        string='Move types',
-        compute='_compute_move_types',
-        readonly=True)
 
     @api.model
     def default_get(self, fields):
-        res = super(AccountInvoiceSend, self).default_get(fields)
+        res = super(AccountWithholdSend, self).default_get(fields)
         res_ids = self._context.get('active_ids')
 
-        invoices = self.env['account.move'].browse(res_ids).filtered(lambda move: move.is_invoice(include_receipts=True))
-        if not invoices:
+        withholds = self.env['account.withhold'].browse(res_ids)
+        if not withholds:
             raise UserError(_("You can only send invoices."))
 
         composer = self.env['mail.compose.message'].create({
             'composition_mode': 'comment' if len(res_ids) == 1 else 'mass_mail',
         })
         res.update({
-            'invoice_ids': res_ids,
+            'withhold_ids': res_ids,
             'composer_id': composer.id,
         })
         return res
 
-    @api.onchange('invoice_ids')
+    @api.onchange('withhold_ids')
     def _compute_composition_mode(self):
         for wizard in self:
-            wizard.composer_id.composition_mode = 'comment' if len(wizard.invoice_ids) == 1 else 'mass_mail'
-
-    @api.onchange('invoice_ids')
-    def _compute_move_types(self):
-        for wizard in self:
-            move_types = False
-
-            if len(wizard.invoice_ids) > 1:
-                moves = self.env['account.move'].browse(self.env.context.get('active_ids'))
-
-                # Get the move types of all selected moves and see if there is more than one of them.
-                # If so, we'll display a warning on the next window about it.
-                move_types_set = set(m.type_name for m in moves)
-
-                if len(move_types_set) > 1:
-                    move_types = ', '.join(move_types_set)
-
-            wizard.move_types = move_types
+            wizard.composer_id.composition_mode = 'comment' if len(wizard.withhold_ids) == 1 else 'mass_mail'
 
 
     @api.onchange('template_id')
@@ -95,22 +71,22 @@ class AccountInvoiceSend(models.TransientModel):
             self.composer_id._onchange_template_id_wrapper()
 
     @api.onchange('is_email')
-    def _compute_invoice_without_email(self):
+    def _compute_withhold_without_email(self):
         for wizard in self:
-            if wizard.is_email and len(wizard.invoice_ids) > 1:
-                invoices = self.env['account.move'].search([
+            if wizard.is_email and len(wizard.withhold_ids) > 1:
+                withholds = self.env['account.withhold'].search([
                     ('id', 'in', self.env.context.get('active_ids')),
                     ('partner_id.email', '=', False)
                 ])
-                if invoices:
-                    wizard.invoice_without_email = "%s\n%s" % (
+                if withholds:
+                    wizard.withhold_without_email = "%s\n%s" % (
                         _("The following invoice(s) will not be sent by email, because the customers don't have email address."),
-                        "\n".join([i.name for i in invoices])
+                        "\n".join([i.name for i in withholds])
                         )
                 else:
-                    wizard.invoice_without_email = False
+                    wizard.withhold_without_email = False
             else:
-                wizard.invoice_without_email = False
+                wizard.withhold_without_email = False
 
     def _send_email(self):
         if self.is_email:
@@ -119,11 +95,11 @@ class AccountInvoiceSend(models.TransientModel):
                                           mail_notify_author=self.env.user.partner_id in self.composer_id.partner_ids,
                                           mailing_document_based=True,
                                           )._action_send_mail()
-            if self.env.context.get('mark_invoice_as_sent'):
+            if self.env.context.get('mark_withhold_as_sent'):
                 #Salesman send posted invoice, without the right to write
                 #but they should have the right to change this flag
-                self.mapped('invoice_ids').sudo().write({'is_move_sent': True})
-            for invoice in self.invoice_ids:
+                self.mapped('withhold_ids').sudo().write({'is_withhold_sent': True})
+            for invoice in self.withhold_ids:
                 prioritary_attachments = False
                 if self.composition_mode == 'comment':
                     # With a single invoice we take the attachment directly from the composer
@@ -139,7 +115,7 @@ class AccountInvoiceSend(models.TransientModel):
     def _print_document(self):
         """ to override for each type of models that will use this composer."""
         self.ensure_one()
-        action = self.invoice_ids.action_invoice_print()
+        action = self.withhold_ids.action_withhold_print()
         action.update({'close_on_report_download': True})
         return action
 
@@ -171,5 +147,5 @@ class AccountInvoiceSend(models.TransientModel):
         self.composer_id.action_save_as_template()
         self.template_id = self.composer_id.template_id.id
         action = _reopen(self, self.id, self.model, context=self._context)
-        action.update({'name': _('Send Invoice')})
+        action.update({'name': _('Send Withhold')})
         return action
