@@ -40,7 +40,8 @@
         'templates/retention_portal_template.xml',
         'views/user_extend_view.xml',
         'views/invoice_view.xml',
-        'wizard/account_remission_send.xml'
+        'views/remission_view.xml',
+        'wizard/account_remission_send.xml',
         
     ],
     'assets': {
