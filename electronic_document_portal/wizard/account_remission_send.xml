@@ -8,11 +8,6 @@
             <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>
             <field name="arch" type="xml">
                 <form string="Remission send &amp; Print">
-                    <div class="alert alert-warning" role="alert"
-                         attrs="{'invisible': [('move_types', '=', False)]}">
-                        You have selected the following document types at the same time:
-                        <field name="move_types"/>
-                    </div>
                     <!-- truly invisible fields for control and options -->
                     <field name="composition_mode" invisible="1"/>
                     <field name="remission_ids" invisible="1"/>
