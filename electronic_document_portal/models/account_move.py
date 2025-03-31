@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -8,4 +9,11 @@ class AccountMove(models.Model):
             return 'ec_account_edi.ec_email_template_edi_invoice'
         return ('account.email_template_edi_credit_note' if all(
             move.move_type == 'out_refund' for move in self) else 'account.email_template_edi_invoice')
+    
+    def unlink(self):
+        if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
+            raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
+        
+        return super().unlink()
+
     
