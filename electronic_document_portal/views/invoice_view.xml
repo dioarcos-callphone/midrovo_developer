@@ -50,20 +50,22 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//page" position="after">
-                    <page string="Información SRI">
-                        <group string="Datos XML">
-                            <field name="xml_data_id" nolabel="1" readonly="1">
-                                <!-- Mostrar campos específicos del modelo relacionado -->
-                                <form>
-                                    <group>
-                                        <field name="xml_type"/>
-                                    </group>
-                                </form>
-                            </field>
-                        </group>
+                <!-- Agregar un notebook -->
+                <notebook position="inside">
+                    <page string="SRI Messages">
+                        <!-- Agregar la vista tree para los message_ids -->
+                        <field name="message_ids">
+                            <tree>
+                                <field name="message_code_id" />
+                                <field name="message_type" />
+                                <field name="message" />
+                                <field name="other_info" />
+                                <field name="create_date" />
+                                <field name="write_date" />
+                            </tree>
+                        </field>
                     </page>
-                </xpath>
+                </notebook>
             </field>
         </record>
     

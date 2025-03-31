@@ -4,6 +4,11 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
+    message_ids = fields.One2many(
+        related='xml_data_id.message_ids',
+        string="Message Lines"
+    )
+
     def _get_mail_template(self):
         if self.move_type in ['out_invoice', 'in_invoice', 'out_refund']:
             return 'ec_account_edi.ec_email_template_edi_invoice'
