@@ -2,8 +2,6 @@
 <templates>
     <t t-name="electronic_document_portal.ActionMenus" t-inherit="web.ActionMenus" t-inherit-mode="extension">
         <xpath expr="//Dropdown[@t-if='actionItems.length']" position="replace">
-            <t t-log='this.env'></t>
-            <t t-log='this.env.user'></t>
             <t t-if="!this.user.has_group(electronic_document_portal.portal_user_internal_group_nodelete)">
                 <Dropdown t-if="actionItems.length" class="'d-inline-block'" togglerClass="'btn btn-light'" hotkey="'u'">
                     <t t-set-slot="toggler">
