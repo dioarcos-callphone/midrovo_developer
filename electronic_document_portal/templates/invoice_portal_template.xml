@@ -172,6 +172,15 @@
         <xpath expr="//div[@id='invoice_communication']" position="attributes">
             <attribute name="class">d-none</attribute>
         </xpath>
+
+        <xpath expr="//div[@class='o_portal_html_view shadow p-3']" position="after">
+            <div id="document_information" class="mt-4">
+                <h2>Información de la validez del documento</h2>
+                <p>Mostrar mensaje</p>
+            </div>
+        </xpath>
+
+
     </template>
 
 </odoo>
