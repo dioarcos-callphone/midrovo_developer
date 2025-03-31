@@ -50,27 +50,15 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='xml_name']" position="after">
-                    <notebook>
-                        <page string="Mensajes Informativos">
-                            <field name="xml_data_id">
-                                <notebook>
-                                    <page string="Mensajes">
-                                        <field name="message_ids">
-                                            <tree editable="bottom">
-                                                <!-- <field name="message_code_id"/> -->
-                                                <field name="message_type"/>
-                                                <field name="message"/>
-                                                <field name="other_info"/>
-                                                <field name="create_date"/>
-                                                <field name="write_date"/>
-                                            </tree>
-                                        </field>
-                                    </page>
-                                </notebook>
-                            </field>
-                        </page>
-                    </notebook>
+                <xpath expr="//page" position="after">
+                    <page string="Mensajes Informativos">
+                        <field name="xml_data_id">
+                            <field name="xml_key" />
+                            <field name="xml_report" />
+                            <field name="xml_authorized" />
+                            <field name="authorization_date" />
+                        </field>
+                    </page>
                 </xpath>
             </field>
         </record>
