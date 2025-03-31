@@ -58,7 +58,7 @@
                                     <page string="Mensajes">
                                         <field name="message_ids">
                                             <tree editable="bottom">
-                                                <field name="message_code_id"/>
+                                                <!-- <field name="message_code_id"/> -->
                                                 <field name="message_type"/>
                                                 <field name="message"/>
                                                 <field name="other_info"/>
