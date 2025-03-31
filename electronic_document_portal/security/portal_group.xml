@@ -20,6 +20,12 @@
             <field name="comment">Restricción para eliminar documentos electrónicos.</field>
             <field name="category_id" ref="portal_web_category"/>
         </record>
+
+        <record id="portal_user_internal_group_posted" model="res.groups">
+            <field name="name">Eliminar Documentos Electrónicos Publicados</field>
+            <field name="comment">Acceso para eliminar documentos electrónicos ya publicados.</field>
+            <field name="category_id" ref="portal_web_category"/>
+        </record>
     
     </data>
     

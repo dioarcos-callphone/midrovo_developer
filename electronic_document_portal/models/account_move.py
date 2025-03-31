@@ -14,6 +14,9 @@ class AccountMove(models.Model):
         if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
             raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
         
-        return super().unlink()
+        if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_posted"):
+            self.state = 'draft'
+
+        return super(AccountMove, self).unlink()
 
     
