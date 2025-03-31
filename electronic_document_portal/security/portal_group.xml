@@ -19,6 +19,12 @@
             <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
             <field name="category_id" ref="portal_user_internal_subcategory"/>
         </record>
+
+        <record id="portal_user_internal_group_nodelete" model="res.groups">
+            <field name="name">No Eliminar Documentos Electrónicos</field>
+            <field name="comment">Restricción para eliminar documentos electrónicos.</field>
+            <field name="category_id" ref="portal_user_internal_subcategory"/>
+        </record>
     
     </data>
     
