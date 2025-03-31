@@ -10,19 +10,19 @@
         </record>
 
         <record id="portal_user_internal_group" model="res.groups">
-            <field name="name">Imprimir y Enviar Documentos Electrónicos</field>
+            <field name="name">Imprimir y enviar documentos</field>
             <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
             <field name="category_id" ref="portal_web_category"/>
         </record>
 
         <record id="portal_user_internal_group_nodelete" model="res.groups">
-            <field name="name">No Eliminar Documentos Electrónicos</field>
+            <field name="name">No eliminar documentos</field>
             <field name="comment">Restricción para eliminar documentos electrónicos.</field>
             <field name="category_id" ref="portal_web_category"/>
         </record>
 
         <record id="portal_user_internal_group_posted" model="res.groups">
-            <field name="name">Eliminar Documentos Electrónicos Publicados</field>
+            <field name="name">Eliminar documentos publicados</field>
             <field name="comment">Acceso para eliminar documentos electrónicos ya publicados.</field>
             <field name="category_id" ref="portal_web_category"/>
         </record>
