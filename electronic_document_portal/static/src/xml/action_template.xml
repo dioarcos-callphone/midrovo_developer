@@ -2,11 +2,11 @@
 <templates>
     <t t-name="electronic_document_portal.ActionMenus" t-inherit="web.ActionMenus" t-inherit-mode="extension">
         <xpath expr="//Dropdown[@t-if='actionItems.length']" position="replace">
-            <t t-if="1 == 1">
+            <t t-if="!self.env.user.has_group(electronic_document_portal.portal_user_internal_group_nodelete)">
                 <Dropdown t-if="actionItems.length" class="'d-inline-block'" togglerClass="'btn btn-light'" hotkey="'u'">
                     <t t-set-slot="toggler">
                         <i class="me-md-1 fa fa-cog"/>
-                        <span class="o_dropdown_title">Actionaaaaa</span>
+                        <span class="o_dropdown_title">Acción</span>
                     </t>
                     <t t-foreach="actionItems" t-as="item" t-key="item.key">
                         <t t-if="item.Component" t-component="item.Component" t-props="item.props" />
