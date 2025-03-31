@@ -57,7 +57,7 @@
                                 <!-- Mostrar campos específicos del modelo relacionado -->
                                 <form>
                                     <group>
-                                        <field name="xml_type"/>
+                                        <field name="xml_data_id.xml_type"/>
                                     </group>
                                 </form>
                             </field>
