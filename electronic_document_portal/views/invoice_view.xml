@@ -59,7 +59,7 @@
                                 
                                 <field name="message_type" />
                                 <!-- <field name="message" /> -->
-                                <field name="other_info" />
+                                <!-- <field name="other_info" /> -->
                                 <!-- <field name="create_date" />
                                 <field name="write_date" /> -->
                             </tree>
