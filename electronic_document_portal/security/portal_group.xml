@@ -13,12 +13,14 @@
             <field name="name">Imprimir y Enviar Documentos Electrónicos</field>
             <field name="comment">Acceso para imprimir y enviar documentos a través del módulo de contabilidad.</field>
             <field name="category_id" ref="portal_web_category"/>
+            <field name="sequence">6</field>
         </record>
 
         <record id="portal_user_internal_group_nodelete" model="res.groups">
             <field name="name">No Eliminar Documentos Electrónicos</field>
             <field name="comment">Restricción para eliminar documentos electrónicos.</field>
             <field name="category_id" ref="portal_web_category"/>
+            <field name="sequence">6</field>
         </record>
     
     </data>
