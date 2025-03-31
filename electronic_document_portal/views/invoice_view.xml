@@ -56,25 +56,13 @@
                         <!-- Agregar la vista tree para los message_ids -->
                         <field name="message_ids" nolabel="1" readonly="1" colspan="4">
                             <tree string="Mensajes Informativos">
-                                <field name="message_code_id" />
+                                
                                 <field name="message_type" />
                                 <field name="message" />
                                 <field name="other_info" />
                                 <field name="create_date" />
                                 <field name="write_date" />
                             </tree>
-                            <form string="Mensaje de Información">
-                                <group col="4" colspan="6">
-                                    <field name="message_code_id" />
-                                    <field name="message_type" />
-                                    <field name="create_date" />
-                                    <field name="write_date" />
-                                </group>
-                                <separator string="Mensaje"  />
-                                <field name="message" nolabel="1"  />
-                                <separator string="Otra Información"  />
-                                <field name="other_info" nolabel="1"  />
-                            </form>
                         </field>
                     </page>
                 </notebook>
