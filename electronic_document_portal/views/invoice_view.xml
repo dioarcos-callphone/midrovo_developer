@@ -53,7 +53,19 @@
                 <xpath expr="//page" position="after">
                     <page string="Información SRI">
                         <group>
-                            <field name="xml_data_id" context="{'form_view_ref': 'ec_account_edi.ec_sri_xml_data_form_view'}"/>
+                            <field name="xml_data_id"/>
+                        </group>
+                        <group>
+                            <field name="xml_data_id.number_document"/>
+                            <field name="xml_data_id.file_xml_path"/>
+                            <field name="xml_data_id.file_signed_path"/>
+                            <field name="xml_data_id.file_authorized_path"/>
+                            <field name="xml_data_id.xml_file_version"/>
+                            <field name="xml_data_id.xml_key"/>
+                            <field name="xml_data_id.description"/>
+                            <field name="xml_data_id.key_id"/>
+                            <field name="xml_data_id.authorization_date"/>
+                            <field name="xml_data_id.signed_date"/>
                         </group>
                     </page>
                 </xpath>
