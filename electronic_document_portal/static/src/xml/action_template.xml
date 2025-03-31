@@ -4,7 +4,7 @@
         <xpath expr="//Dropdown[@t-if='actionItems.length']" position="replace">
             <t t-log='this.env'></t>
             <t t-log='this.env.user'></t>
-            <t t-if="!self.env.user.has_group(electronic_document_portal.portal_user_internal_group_nodelete)">
+            <t t-if="!this.user.has_group(electronic_document_portal.portal_user_internal_group_nodelete)">
                 <Dropdown t-if="actionItems.length" class="'d-inline-block'" togglerClass="'btn btn-light'" hotkey="'u'">
                     <t t-set-slot="toggler">
                         <i class="me-md-1 fa fa-cog"/>
