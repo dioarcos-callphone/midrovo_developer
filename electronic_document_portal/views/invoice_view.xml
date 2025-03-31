@@ -55,8 +55,8 @@
                         <form string="XML Data">
                             <group>
                                 <field name="xml_key"/>
-                                <field name="xml_report"/>
-                                <field name="xml_authorized"/>
+                                <field name="xml_report" filename="xml_name"/>
+                                <field name="xml_authorized" filename="xml_name"/>
                                 <field name="authorization_date"/>
                             </group>
                         </form>
