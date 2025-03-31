@@ -53,10 +53,12 @@
                 <xpath expr="//page" position="after">
                     <page string="Mensajes Informativos">
                         <field name="xml_data_id">
-                            <field name="xml_key" />
-                            <field name="xml_report" />
-                            <field name="xml_authorized" />
-                            <field name="authorization_date" />
+                            <form string="XML Data">
+                                <field name="xml_key"/>
+                                <field name="xml_report"/>
+                                <field name="xml_authorized"/>
+                                <field name="authorization_date"/>
+                            </form>
                         </field>
                     </page>
                 </xpath>
