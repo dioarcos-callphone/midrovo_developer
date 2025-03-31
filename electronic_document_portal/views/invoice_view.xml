@@ -32,6 +32,15 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
                     </header>
                 </xpath>
+
+                <xpath expr="//button[@name='action_invoice_sent']" position="replace">
+                    <button name="action_invoice_sent"
+                            type="object"
+                            string="Enviar e Imprimir"
+                            attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice'))]}"
+                            class="oe_highlight"
+                            data-hotkey="y"/>
+                </xpath>
                 
             </field>
         </record>
