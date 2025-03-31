@@ -52,14 +52,14 @@
             <field name="arch" type="xml">
                 <xpath expr="//page" position="after">
                     <page name="xml_data_id" string="Mensajes Informativos">
-                        <group>
-                            <form string="XML Data">
+                        <form string="XML Data">
+                            <group>
                                 <field name="xml_key"/>
                                 <field name="xml_report"/>
                                 <field name="xml_authorized"/>
                                 <field name="authorization_date"/>
-                            </form>
-                        </group>
+                            </group>
+                        </form>
                     </page>
                 </xpath>
             </field>
