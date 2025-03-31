@@ -82,6 +82,12 @@ class Remission(models.Model):
             return self.env['ir.actions.report']._action_configure_external_report_layout(report_action)
 
         return report_action
+    
+    def unlink(self):
+        if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
+            raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
+        
+        return super().unlink()
 
 class RemissionLine(models.Model):
     _inherit = 'account.remision.line'
