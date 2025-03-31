@@ -45,7 +45,21 @@
             </field>
         </record>
 
-        
+        <record id="account_invoice_sales_form_view_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.sales.form.view.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Agregar un notebook -->
+                <notebook position="inside">
+                    <page string="SRI Messages">
+                        <group>
+                            <field name="message_ids" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
     
     </data>
     
