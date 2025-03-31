@@ -52,16 +52,18 @@
             <field name="arch" type="xml">
                 <xpath expr="//page" position="after">
                     <page string="Mensajes Informativos">
-                        <field name="xml_data_id" nolabel="1" readonly="1">
-                            <form string="XML Data">
-                                <group>
-                                    <field name="xml_key"/>
-                                    <field name="xml_report"/>
-                                    <field name="xml_authorized"/>
-                                    <field name="authorization_date"/>
-                                </group>
-                            </form>
-                        </field>
+                        <group>
+                            <field name="xml_data_id" nolabel="1" readonly="1">
+                                <form string="XML Data">
+                                    <group>
+                                        <field name="xml_key"/>
+                                        <field name="xml_report"/>
+                                        <field name="xml_authorized"/>
+                                        <field name="authorization_date"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
                     </page>
                 </xpath>
             </field>
