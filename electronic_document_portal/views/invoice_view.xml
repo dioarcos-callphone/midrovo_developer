@@ -50,21 +50,23 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='Información de Documento Electrónico']" position="inside">
-                    <page>
-                        <group>
-                            <field name="xml_data_id.message_ids" nolabel="1" readonly="1">
-                                <tree string="Mensajes Informativos">
-                                    <field name="message_code_id" />
-                                    <field name="message_type" />
-                                    <field name="message" />
-                                    <field name="other_info" />
-                                    <field name="create_date" />
-                                    <field name="write_date" />
-                                </tree>
-                            </field>
-                        </group>
-                    </page>
+                <xpath expr="//field[@name='xml_name']" position="after">
+                    <notebook>
+                        <page>
+                            <group>
+                                <field name="xml_data_id.message_ids" nolabel="1" readonly="1">
+                                    <tree string="Mensajes Informativos">
+                                        <field name="message_code_id" />
+                                        <field name="message_type" />
+                                        <field name="message" />
+                                        <field name="other_info" />
+                                        <field name="create_date" />
+                                        <field name="write_date" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
                 </xpath>
             </field>
         </record>
