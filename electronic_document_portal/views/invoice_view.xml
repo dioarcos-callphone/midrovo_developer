@@ -51,18 +51,10 @@
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//page" position="after">
-                    <page name="xml_data_id" string="Mensajes Informativos">
-                        <field name="state" widget="statusbar"
-							   statusbar_visible="draft,signed,authorized" statusbar_colors="{'cancel':'red'}" />
-                        <form string="XML Data" create="0" editable="0">
-                            <group>
-                                <field name="xml_key"/>
-                                <field name="xml_report" filename="xml_name"/>
-                                <field name="xml_authorized" filename="xml_name"/>
-                                <field name="authorization_date"/>
-                                <field name="signed_date" />
-                            </group>
-                        </form>
+                    <page string="Información SRI">
+                        <group>
+                            <field name="xml_data_id" context="{'form_view_ref': 'ec_account_edi.ec_sri_xml_data_form_view'}"/>
+                        </group>
                     </page>
                 </xpath>
             </field>
