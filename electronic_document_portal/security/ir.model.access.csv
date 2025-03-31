@@ -10,3 +10,5 @@ acces_account_remision_line_portal,account.remision.line.portal,electronic_docum
 
 access_account_remission_send,access.account.remission.send,model_account_remission_send,,1,1,1,0
 access_account_withhold_send,access.account.withhold.send,model_account_withhold_send,,1,1,1,0
+
+access_user_internal,acces.user.internal,account.model_account_move,electronic_document_portal.portal_user_internal_group_nodelete,0,0,0,0
