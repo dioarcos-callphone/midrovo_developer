@@ -53,11 +53,11 @@
                 <xpath expr="//page" position="after">
                     <page string="Información SRI">
                         <group string="Datos XML">
-                            <field name="xml_data_id">
+                            <field name="xml_data_id" nolabel="1" readonly="1">
                                 <!-- Mostrar campos específicos del modelo relacionado -->
                                 <form>
                                     <group>
-                                        <field name="xml_data_id.xml_type"/>
+                                        <field name="xml_type"/>
                                     </group>
                                 </form>
                             </field>
