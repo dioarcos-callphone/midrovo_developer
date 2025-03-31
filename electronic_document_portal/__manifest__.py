@@ -23,6 +23,7 @@
         'purchase',
         'account_payment',
         'portal',
+        'web'
     ],
     'data': [
         'security/portal_group.xml',
