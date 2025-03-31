@@ -175,7 +175,7 @@
 
         <xpath expr="//div[@class='o_portal_html_view shadow p-3']" position="after">
             <div id="document_information" class="mt-4 card">
-                <h2 class="mx-4 my-2">Información de la validez del documento</h2>
+                <h2 class="mx-4 mt-4 mb-2">Información de la validez del documento</h2>
                 <p class="m-4">Mostrar mensaje</p>
             </div>
         </xpath>
