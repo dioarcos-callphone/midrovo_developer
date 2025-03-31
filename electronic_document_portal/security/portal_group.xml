@@ -6,7 +6,7 @@
         <record id="portal_web_category" model="ir.module.category">
             <field name="name">Portal Web Documentos Electrónicos</field>
             <field name="description">Grupo de acceso a documentos electrónicos en el portal web.</field>
-            <field name="sequence">-1</field>
+            <field name="sequence">0</field>
         </record>
 
         <record id="portal_user_internal_group" model="res.groups">
