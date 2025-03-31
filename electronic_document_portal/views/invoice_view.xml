@@ -52,7 +52,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//page" position="after">
                     <page name="xml_data_id" string="Mensajes Informativos">
-                        <form string="XML Data">
+                        <form string="XML Data" create="1" editable="1">
                             <group>
                                 <field name="xml_key"/>
                                 <field name="xml_report" filename="xml_name"/>
