@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <templates xml:space="preserve">
+    <templates>
         <t t-name="electronic_document_portal.ActionMenus" t-inherit="web.ActionMenus">
             <xpath expr="//Dropdown[@t-if='actionItems.length']" position="replace">
                 <t t-if="not env.user.has_group('electronic_document_portal.portal_user_internal_group_nodelete')">

@@ -23,7 +23,6 @@
         'purchase',
         'account_payment',
         'portal',
-        'web'
     ],
     'data': [
         'security/portal_group.xml',
@@ -50,10 +49,11 @@
     'assets': {
         'web.assets_frontend': [
             'electronic_document_portal/static/src/js/ec_account_portal.js',
-        ],
-        'web.assets_backend': [
             'electronic_document_portal/static/src/xml/action_template.xml',
-        ]
+        ],
+        # 'web.assets_backend': [
+        #     'electronic_document_portal/static/src/xml/action_template.xml',
+        # ]
     },
     
     'installable': True,
