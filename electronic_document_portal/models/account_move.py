@@ -5,6 +5,7 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     message_ids = fields.One2many(
+        "sri.xml.data.message.line",
         related='xml_data_id.message_ids',
         string="Message Lines"
     )
