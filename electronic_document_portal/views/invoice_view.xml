@@ -50,7 +50,7 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@string='Información de Documento Electrónico']" position="inside">
+                <xpath expr="//field[@name='xml_name']" position="after">
                     <page>
                         <group>
                             <field name="message_ids" nolabel="1" readonly="1">
