@@ -54,6 +54,7 @@
                     <page name="xml_data_id" string="Mensajes Informativos">
                         <form string="XML Data" create="0" editable="0">
                             <group>
+                                <field name="state" widget="statusbar" statusbar_visible="authorized,returned,waiting,rejected"/>
                                 <field name="xml_key"/>
                                 <field name="xml_report" filename="xml_name"/>
                                 <field name="xml_authorized" filename="xml_name"/>
