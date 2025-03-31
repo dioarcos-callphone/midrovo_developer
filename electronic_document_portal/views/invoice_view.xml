@@ -54,14 +54,12 @@
                     <page string="Mensajes Informativos">
                         <group>
                             <field name="xml_data_id" nolabel="1" readonly="1">
-                                <form string="XML Data">
-                                    <group>
-                                        <field name="xml_key"/>
-                                        <field name="xml_report"/>
-                                        <field name="xml_authorized"/>
-                                        <field name="authorization_date"/>
-                                    </group>
-                                </form>
+                                <tree string="XML Data">
+                                    <field name="xml_key"/>
+                                    <field name="xml_report"/>
+                                    <field name="xml_authorized"/>
+                                    <field name="authorization_date"/>
+                                </tree>
                             </field>
                         </group>
                     </page>
