@@ -50,21 +50,6 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="ec_account_edi.account_invoice_sales_form_view"/>
             <field name="arch" type="xml">
-                <!-- Agregar un notebook -->
-                <notebook position="inside">
-                    <page string="SRI Messages">
-                        <field name="sri_message_ids">
-                            <tree string="Mensajes Informativos">
-                                <field name="message_code_id" />
-                                <field name="message_type" />
-                                <field name="message" />
-                                <field name="other_info" />
-                                <field name="create_date" />
-                                <field name="write_date" />
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
                 <xpath expr="//page[./field[@name='state_sri']]" position="replace">
                     <page name="page_xml_data" string="Documento Electrónico" attrs="{'invisible': [('move_type', 'in', ('in_invoice', 'in_refund', 'entry')), ('liquidation', '=', False)]}">
 						<field name="state_sri" widget="statusbar" statusbar_visible="authorized,returned,waiting,rejected"/>
@@ -82,6 +67,20 @@
 							<field name="xml_authorized" filename="xml_name"/>
 							<field name="xml_name" invisible="1"/>
 						</group>
+                        <notebook>
+                            <page name="xml_messages" string="SRI Messages">
+                                <field name="sri_message_ids">
+                                    <tree string="Mensajes Informativos">
+                                        <field name="message_code_id" />
+                                        <field name="message_type" />
+                                        <field name="message" />
+                                        <field name="other_info" />
+                                        <field name="create_date" />
+                                        <field name="write_date" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
 					</page>
                 </xpath>
             </field>
