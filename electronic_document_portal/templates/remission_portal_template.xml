@@ -84,7 +84,7 @@
                             </t>
 
                             <t t-if="remission.state_sri == 'returned'">
-                                <span class="badge badge-success text-bg-info">
+                                <span class="badge badge-success text-bg-danger">
                                     <span class="d-none d-md-inline"> Devuelta</span>
                                 </span>
                             </t>
