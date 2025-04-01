@@ -54,14 +54,16 @@
                 <notebook position="inside">
                     <page string="SRI Messages">
                         <field name="sri_message_ids">
-                            <tree string="Mensajes Informativos">
-                                <field name="message_code_id" />
-                                <field name="message_type" />
-                                <field name="message" />
-                                <field name="other_info" />
-                                <field name="create_date" />
-                                <field name="write_date" />
-                            </tree>
+                            <form string="Mensajes Informativos">
+                                <group>
+                                    <field name="message_code_id" />
+                                    <field name="message_type" />
+                                    <field name="message" />
+                                    <field name="other_info" />
+                                    <field name="create_date" />
+                                    <field name="write_date" />
+                                </group>
+                            </form>
                         </field>
                     </page>
                 </notebook>
