@@ -65,10 +65,13 @@
                         </field>
                     </page>
                     <page string="SRI Info">
-                        <field name="view_xml_data" mode="form">
+                        <field name="xml_data_id" readonly="1">
                             <form>
                                 <group>
-                                    <field name="xml_type" />
+                                    <field name="xml_key" string="Clave de Acceso"/>
+                                    <field name="state" string="Estado"/>
+                                    <field name="authorization_date" string="Fecha Autorización"/>
+                                    <field name="type_environment" string="Tipo de Ambiente"/>
                                 </group>
                             </form>
                         </field>
