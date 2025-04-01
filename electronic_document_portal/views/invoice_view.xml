@@ -55,19 +55,21 @@
 						<div position="right" class="oe_right">
                             <field name="state_sri" widget="statusbar" statusbar_visible="authorized,returned,waiting,rejected"/>
                         </div>
-                        <sheet>
-                            <group>
-                                <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
-                                <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
-                            </group>
-                            <group>
-                                <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
-                                <field name="authorization_date" readonly="1"/>
-                                <field name="xml_report" filename="xml_name"/>
-                                <field name="xml_authorized" filename="xml_name"/>
-                                <field name="xml_name" invisible="1"/>
-                            </group>
-                        </sheet>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
+                                    <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
+                                </group>
+                                <group>
+                                    <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
+                                    <field name="authorization_date" readonly="1"/>
+                                    <field name="xml_report" filename="xml_name"/>
+                                    <field name="xml_authorized" filename="xml_name"/>
+                                    <field name="xml_name" invisible="1"/>
+                                </group>
+                            </sheet>
+                        </form>
                         <notebook>
                             <page name="xml_messages" string="SRI Messages">
                                 <field name="sri_message_ids">
@@ -88,6 +90,5 @@
         </record>
     
     </data>
-    
 
 </odoo>
