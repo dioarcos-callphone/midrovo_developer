@@ -65,16 +65,15 @@
                         </field>
                     </page>
                     <page string="SRI Info">
-                        <field name="xml_data_id" readonly="1">
-                            <form>
-                                <group>
-                                    <field name="xml_key" string="Clave de Acceso"/>
-                                    <field name="xml_data_id/state" string="Estado"/>
-                                    <field name="xml_data_id/authorization_date" string="Fecha Autorización"/>
-                                    <field name="xml_data_id/type_environment" string="Tipo de Ambiente"/>
-                                </group>
-                            </form>
-                        </field>
+                        <field name="xml_data_id" widget="many2one_avatar" options="{
+                            'fields': [
+                                'number_document',
+                                'xml_key',
+                                'authorization_date',
+                                'file_xml_path'
+                            ],
+                            'display_name': 'number_document'
+                        }"/>
                     </page>
                 </notebook>
             </field>
