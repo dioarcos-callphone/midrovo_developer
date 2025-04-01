@@ -46,6 +46,7 @@
                         </header>
                         <form>
                             <group>
+                                <field name="xml_data_id" invisible="1" />
                                 <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
                                 <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
                                 <field name="authorization_date" readonly="1"/>
