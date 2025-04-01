@@ -56,14 +56,12 @@
                             name="state_sri" 
                             widget="statusbar" 
                             statusbar_visible="authorized,returned,waiting,rejected"
-                            position="right"/>
-						<div>
-							<group>
-								<field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
-							</group>
-							<button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"
-									/>
-						</div>
+                            position="right"
+                            class="oe_right"/>
+                        <group>
+                            <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
+                            <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
+                        </group>
 						<group>
 							<field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
 							<field name="authorization_date" readonly="1"/>
