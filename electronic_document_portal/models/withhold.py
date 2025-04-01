@@ -2,11 +2,16 @@ from odoo import models, fields, _
 from odoo.exceptions import UserError
 from odoo.tools import (get_lang)
 
-class Retention(models.Model):
+class Withhold(models.Model):
     _inherit = 'account.withhold'
 
     retention_send_ids = fields.Many2many('account.withhold.send', 'account_withhold_account_withhold_send_rel')
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.uid)
+
+    sri_message_ids = fields.One2many(
+        related='xml_data_id.message_ids',
+        string="Message Lines"
+    )
     
     # EXTENDS portal portal.mixin
     def _compute_access_url(self):
