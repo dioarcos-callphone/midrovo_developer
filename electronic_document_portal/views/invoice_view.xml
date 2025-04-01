@@ -65,10 +65,13 @@
                         </field>
                     </page>
                     <page string="SRI Info">
-                        <group>
-                            <field name="xml_data_id"/>
-                            <field name="xml_data_id" context="{'form_view_ref': 'ec_account_edi.ec_sri_xml_data_form_view'}" mode="form"/>
-                        </group>
+                        <field name="xml_data_id" mode="form">
+                            <form>
+                                <group>
+                                    <field name="response_date" />
+                                </group>
+                            </form>
+                        </field>
                     </page>
                 </notebook>
             </field>
