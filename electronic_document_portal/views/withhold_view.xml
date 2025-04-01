@@ -34,7 +34,7 @@
             <field name="inherit_id" ref="ec_account_edi.account_retention_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[./field[@name='state_sri']]" position="replace">
-                    <page name="page_xml_data" string="Documento Electrónico" attrs="{'invisible': [('move_type', 'in', ('in_invoice', 'in_refund', 'entry')), ('liquidation', '=', False)]}">
+                    <page name="page_xml_data" string="Documento Electrónico">
 						<header class="border-bottom-0">
                             <button 
                                 name="send_sri" 
