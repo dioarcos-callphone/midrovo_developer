@@ -10,8 +10,7 @@ class AccountMove(models.Model):
     )
 
     view_xml_data = fields.One2many(
-        related='xml_data_id',
-        string='Xml Data Form'
+        'sri.xml.data'
     )
 
     def _get_mail_template(self):
