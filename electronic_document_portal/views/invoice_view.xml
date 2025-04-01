@@ -68,7 +68,7 @@
                         <field name="xml_data_id" mode="form" options="{'no_open': True}">
                             <form>
                                 <group>
-                                    <field name="xml_data_id.response_date" />
+                                    <field name="xml_type" />
                                 </group>
                             </form>
                         </field>
