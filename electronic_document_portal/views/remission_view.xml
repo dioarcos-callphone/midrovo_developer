@@ -31,7 +31,7 @@
                                 data-hotkey="y"/>
                 </xpath>
 
-                <xpath expr="//page[./field[@name='state_sri']]" position="replace">
+                <xpath expr="//page[./group/field[@name='xml_key']]" position="replace">
                     <page name="page_xml_data" string="Documento Electrónico">
 						<header class="border-bottom-0">
                             <button 
