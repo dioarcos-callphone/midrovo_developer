@@ -12,6 +12,8 @@ class Withhold(models.Model):
         related='xml_data_id.message_ids',
         string="Message Lines"
     )
+
+    xml_authorized = fields.Binary(string=u"Archivo XML Autorizado", related='xml_data_id.xml_authorized', copy=False)
     
     # EXTENDS portal portal.mixin
     def _compute_access_url(self):
