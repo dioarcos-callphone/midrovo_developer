@@ -75,7 +75,6 @@
                             <page name="xml_messages" string="Información SRI">
                                 <field name="sri_message_ids">
                                     <tree string="Mensajes Informativos">
-                                        <field name="message_code_id" />
                                         <field name="message_type" />
                                         <field name="message" />
                                         <field name="other_info" />
