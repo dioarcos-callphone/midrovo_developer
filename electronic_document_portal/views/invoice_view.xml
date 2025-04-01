@@ -52,7 +52,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[./field[@name='state_sri']]" position="replace">
                     <page name="page_xml_data" string="Documento Electrónico" attrs="{'invisible': [('move_type', 'in', ('in_invoice', 'in_refund', 'entry')), ('liquidation', '=', False)]}">
-						<field name="state_sri" widget="statusbar" statusbar_visible="authorized,returned,waiting,rejected"/>
+						<field 
+                            name="state_sri" 
+                            widget="statusbar" 
+                            statusbar_visible="authorized,returned,waiting,rejected"
+                            position="right"/>
 						<div>
 							<group>
 								<field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
