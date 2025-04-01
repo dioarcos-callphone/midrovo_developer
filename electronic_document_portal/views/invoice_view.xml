@@ -57,8 +57,10 @@
                         </header>
                         <group>
                             <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
-                            <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
                         </group>
+                        <div class="my-1">
+                            <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
+                        </div>
                         <group>
                             <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
                             <field name="authorization_date" readonly="1"/>
