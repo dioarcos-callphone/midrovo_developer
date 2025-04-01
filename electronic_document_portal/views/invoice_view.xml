@@ -54,7 +54,7 @@
                 <notebook position="inside">
                     <page string="SRI Messages">
                         <field name="sri_message_ids">
-                            <form string="Mensajes Informativos">
+                            <tree string="Mensajes Informativos">
                                 <group>
                                     <field name="message_code_id" />
                                     <field name="message_type" />
@@ -63,8 +63,14 @@
                                     <field name="create_date" />
                                     <field name="write_date" />
                                 </group>
-                            </form>
+                            </tree>
                         </field>
+                    </page>
+                    <page string="SRI Info">
+                        <group>
+                            <field name="xml_data_id"/>
+                            <field name="xml_data_id" context="{'form_view_ref': 'ec_account_edi.ec_sri_xml_data_form_view'}" mode="form"/>
+                        </group>
                     </page>
                 </notebook>
             </field>
