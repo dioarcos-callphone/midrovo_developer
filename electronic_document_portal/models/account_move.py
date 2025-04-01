@@ -9,6 +9,11 @@ class AccountMove(models.Model):
         string="Message Lines"
     )
 
+    view_xml_data = fields.One2many(
+        related='xml_data_id',
+        string='Xml Data Form'
+    )
+
     def _get_mail_template(self):
         if self.move_type in ['out_invoice', 'in_invoice', 'out_refund']:
             return 'ec_account_edi.ec_email_template_edi_invoice'

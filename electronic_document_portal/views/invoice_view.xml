@@ -65,7 +65,7 @@
                         </field>
                     </page>
                     <page string="SRI Info">
-                        <field name="xml_data_id" mode="form" options="{'no_open': True}">
+                        <field name="view_xml_data" mode="form">
                             <form>
                                 <group>
                                     <field name="xml_type" />
