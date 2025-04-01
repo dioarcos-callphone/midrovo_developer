@@ -28,6 +28,9 @@ class Remission(models.Model):
         super()._compute_access_url()
         for remision in self:
             remision.access_url = '/my/remissions/%s' % (remision.id)
+
+    def send_sri(self):
+        self.xml_data_id.send_file()
       
     # Genera el nombre del archivo PDF del reporte  
     def _get_report_base_filename(self):
