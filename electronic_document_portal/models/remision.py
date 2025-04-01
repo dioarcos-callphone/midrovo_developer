@@ -15,6 +15,8 @@ class Remission(models.Model):
         ('cancel', u'Cancelado')
     ], string=u'Estado', readonly=True, related='xml_data_id.state')
 
+    xml_authorized = fields.Binary(string=u"Archivo XML Autorizado", related='xml_data_id.xml_authorized', copy=False)
+
     remission_send_ids = fields.Many2many('account.remission.send', 'account_remission_account_remission_send_rel')
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.uid)
 
