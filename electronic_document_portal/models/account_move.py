@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    message_ids = fields.One2many(
+    sri_message_ids = fields.One2many(
         related='xml_data_id.message_ids',
         string="Message Lines"
     )

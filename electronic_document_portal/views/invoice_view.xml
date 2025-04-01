@@ -53,7 +53,7 @@
                 <!-- Agregar un notebook -->
                 <notebook position="inside">
                     <page string="SRI Messages">
-                        <field name="message_ids">
+                        <field name="sri_message_ids">
                             <tree string="Mensajes Informativos">
                                 <field name="message_code_id" />
                                 <field name="message_type" />
