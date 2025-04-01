@@ -58,8 +58,6 @@
                         <button name="send_xml_sri" class="oe_highlight" string="Enviar al SRI" type="object"/>
                         <group>
                             <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
-                        </group>
-                        <group>
                             <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
                             <field name="authorization_date" readonly="1"/>
                             <field name="xml_report" filename="xml_name"/>
