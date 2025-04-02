@@ -63,7 +63,7 @@
                     <t t-foreach="invoices" t-as="invoice">
                         <tr>
                             <td>
-                                <a class="badge badge-info" t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
+                                <a class="badge badge-info text-bg-info" t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
                                     <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
                                     <em t-else="">Borrador de Factura</em>
                                 </a>
