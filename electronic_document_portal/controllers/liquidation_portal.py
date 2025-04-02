@@ -30,6 +30,9 @@ class LiquidationPortalController(PortalAccount):
             ('move_type', '=', 'in_invoice'), 
             ('liquidation', '=', True)
         ]
+
+        if user.has_group('base.group_portal'):
+            domain.append(('state_sri', '=', 'authorized'))
         
         if printer_default_ids:
             domain.append(('journal_id.printer_id', 'in', printer_default_ids.ids))

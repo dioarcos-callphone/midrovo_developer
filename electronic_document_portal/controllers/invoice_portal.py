@@ -23,6 +23,9 @@ class InvoicePortalController(PortalAccount):
             ('debit_origin_id', '=', False),
             ('debit_note', '=', False)
         ]
+
+        if user.has_group('base.group_portal'):
+            domain.append(('state_sri', '=', 'authorized'))
         
         if printer_default_ids:
             domain.append(('printer_id', 'in', printer_default_ids.ids))

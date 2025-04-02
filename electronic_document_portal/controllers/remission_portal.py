@@ -23,6 +23,9 @@ class RemissionPortalController(CustomerPortal):
         printer_default_ids = user.printer_default_ids
         
         domain = [('state', 'not in', ('canceled', 'draft'))]
+
+        if user.has_group('base.group_portal'):
+            domain.append(('state_sri', '=', 'authorized'))
         
         if printer_default_ids:
             domain.append(('printer_id', 'in', printer_default_ids.ids))
