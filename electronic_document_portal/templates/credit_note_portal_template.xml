@@ -41,7 +41,7 @@
                         <td><span t-field="refund.invoice_date"/></td>
                         <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="is_move_sent == True">
+                            <t t-if="refund.is_move_sent">
                                 <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
                             </t>
                             <t t-else="">

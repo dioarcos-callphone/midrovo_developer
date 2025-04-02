@@ -42,7 +42,7 @@
                         <td class="text-center"><span t-field="liquidation.invoice_date"/></td>
                         <td class="text-center d-none d-md-table-cell"><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="is_move_sent == True">
+                            <t t-if="liquidation.is_move_sent == True">
                                 <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
                             </t>
                             <t t-else="">

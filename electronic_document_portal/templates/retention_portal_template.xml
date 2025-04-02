@@ -61,7 +61,7 @@
                             <td class="text-center"><span t-field="retention.factura_origen_api"/></td>
                         </t>
                         <td class="tx_status text-center">
-                            <t t-if="is_withhold_sent == True">
+                            <t t-if="retention.is_withhold_sent == True">
                                 <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
                             </t>
                             <t t-else="">

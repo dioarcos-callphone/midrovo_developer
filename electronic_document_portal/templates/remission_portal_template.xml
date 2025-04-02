@@ -60,7 +60,7 @@
                         <td class="text-center"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="is_remission_sent == True">
+                            <t t-if="remission.is_remission_sent == True">
                                 <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
                             </t>
                             <t t-else="">
