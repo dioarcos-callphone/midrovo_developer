@@ -25,7 +25,10 @@ class RetentionPortalController(CustomerPortal):
         user = request.env.user
         printer_default_ids = user.printer_default_ids
         
-        _logger.info(f'MOSTRANDO USER { user.read() }')
+        if self.env.user.has_group('base.group_portal'):
+            _logger.info("El usuario es un usuario portal")
+        else:
+            _logger.info("El usuario NO es un usuario portal")
         
         domain = [('state', 'not in', ('canceled', 'draft'))]
         
