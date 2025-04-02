@@ -6,8 +6,8 @@ from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
 import base64
 
-# import logging
-# _logger = logging.getLogger(__name__)
+import logging
+_logger = logging.getLogger(__name__)
 
 class RetentionPortalController(CustomerPortal):
     
@@ -24,6 +24,8 @@ class RetentionPortalController(CustomerPortal):
         # Domain para documentos de retencion
         user = request.env.user
         printer_default_ids = user.printer_default_ids
+        
+        _logger.info(f'MOSTRANDO USER { user.read() }')
         
         domain = [('state', 'not in', ('canceled', 'draft'))]
         
