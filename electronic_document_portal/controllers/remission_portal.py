@@ -6,6 +6,9 @@ from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
 import base64
 
+# import logging
+# _logger = logging.getLogger(__name__)
+
 class RemissionPortalController(CustomerPortal):
     
     def _prepare_home_portal_values(self, counters):

@@ -6,8 +6,8 @@ from odoo.addons.portal.controllers.portal import pager as portal_pager
 from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
 
-import logging
-_logger = logging.getLogger(__name__)
+# import logging
+# _logger = logging.getLogger(__name__)
 
 class CreditNotePortalController(PortalAccount):
 

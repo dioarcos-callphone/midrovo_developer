@@ -6,8 +6,8 @@ from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
 import base64
 
-import logging
-_logger = logging.getLogger(__name__)
+# import logging
+# _logger = logging.getLogger(__name__)
 
 class InvoicePortalController(PortalAccount):
 
