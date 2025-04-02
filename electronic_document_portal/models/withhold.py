@@ -5,7 +5,16 @@ from odoo.tools import (get_lang)
 class Withhold(models.Model):
     _inherit = 'account.withhold'
 
-    retention_send_ids = fields.Many2many('account.withhold.send', 'account_withhold_account_withhold_send_rel')
+    attachment_ids = fields.One2many('ir.attachment', 'res_id', domain=[('res_model', '=', 'account.withhold')], string='Attachments')
+
+    is_withhold_sent = fields.Boolean(
+        readonly=True,
+        default=False,
+        copy=False,
+        tracking=True,
+    )
+
+    withhold_send_ids = fields.Many2many('account.withhold.send', 'account_withhold_account_withhold_send_rel')
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.uid)
 
     sri_message_ids = fields.One2many(
@@ -57,7 +66,7 @@ class Withhold(models.Model):
             default_use_template=bool(template),
             default_template_id=template and template.id or False,
             default_composition_mode='comment',
-            mark_invoice_as_sent=True,
+            mark_withhold_as_sent=True,
             default_email_layout_xmlid="mail.mail_notification_layout_with_responsible_signature",
             model_description="",
             force_email=True,

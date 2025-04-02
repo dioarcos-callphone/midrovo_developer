@@ -5,6 +5,15 @@ from odoo.tools import (get_lang)
 class Remission(models.Model):
     _inherit = 'account.remision'
 
+    attachment_ids = fields.One2many('ir.attachment', 'res_id', domain=[('res_model', '=', 'account.remision')], string='Attachments')
+
+    is_remission_sent = fields.Boolean(
+        readonly=True,
+        default=False,
+        copy=False,
+        tracking=True,
+    )
+
     state_sri = fields.Selection([
         ('draft', u'Creado'),
         ('signed', u'Firmado'),
@@ -69,7 +78,7 @@ class Remission(models.Model):
             default_use_template=bool(template),
             default_template_id=template and template.id or False,
             default_composition_mode='comment',
-            mark_invoice_as_sent=True,
+            mark_remission_as_sent=True,
             default_email_layout_xmlid="mail.mail_notification_layout_with_responsible_signature",
             model_description="",
             force_email=True,
