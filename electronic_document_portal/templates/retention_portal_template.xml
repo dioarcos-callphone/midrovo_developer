@@ -36,7 +36,7 @@
                 <tr class="active">
                     <th>Retención #</th>
                     <th class="text-center">Fecha de Emisión</th>
-                    <th class="text-center">Factura ASsociada</th>
+                    <th class="text-center">Factura Asociada</th>
                     <th class="text-center">Estado de Autorización</th>
                     <th class="text-center">Total Retención IVA</th>
                     <th class="text-center">Total Retención renta</th>
