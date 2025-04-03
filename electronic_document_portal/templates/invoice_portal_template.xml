@@ -86,25 +86,25 @@
                                 </t>
 
                                 <t t-if="invoice.state_sri == 'signed'">
-                                    <span class="badge badge-success text-bg-info w-75">
+                                    <span class="badge badge-success text-bg-primary w-75">
                                         <span class="d-none d-md-inline"> Firmado</span>
                                     </span>
                                 </t>
 
                                 <t t-if="invoice.state_sri == 'waiting'">
-                                    <span class="badge badge-success text-bg-info w-75">
+                                    <span class="badge badge-success text-bg-secondary w-75">
                                         <span class="d-none d-md-inline"> En espera de autorización</span>
                                     </span>
                                 </t>
 
                                 <t t-if="invoice.state_sri == 'authorized'">
                                     <span class="badge badge-success text-bg-success w-75">
-                                        <span class="d-none d-md-inline"> En espera de autorización</span>
+                                        <span class="d-none d-md-inline"> Autorizado</span>
                                     </span>
                                 </t>
 
                                 <t t-if="invoice.state_sri == 'returned'">
-                                    <span class="badge badge-success text-bg-danger w-75">
+                                    <span class="badge badge-success text-bg-warning w-75">
                                         <span class="d-none d-md-inline"> Devuelta</span>
                                     </span>
                                 </t>
@@ -116,7 +116,7 @@
                                 </t>
 
                                 <t t-if="invoice.state_sri == 'cancel'">
-                                    <span class="badge badge-success text-bg-info w-75">
+                                    <span class="badge badge-success text-bg-dark w-75">
                                         <span class="d-none d-md-inline"> Cancelado</span>
                                     </span>
                                 </t>
