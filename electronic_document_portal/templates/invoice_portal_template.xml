@@ -82,47 +82,7 @@
                                 <t t-call="electronic_document_portla.sri_state_template">
                                     <t t-set="state_sri" t-value="invoice.state_sri"/>
                                 </t>
-                                <!-- <t t-if="invoice.state_sri == 'draft'">
-                                    <span class="badge badge-success text-bg-info w-75">
-                                        <span class="d-none d-md-inline"> Creado</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'signed'">
-                                    <span class="badge badge-success text-bg-primary w-75">
-                                        <span class="d-none d-md-inline"> Firmado</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'waiting'">
-                                    <span class="badge badge-success text-bg-secondary w-75">
-                                        <span class="d-none d-md-inline"> En espera de autorización</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'authorized'">
-                                    <span class="badge badge-success text-bg-success w-75">
-                                        <span class="d-none d-md-inline"> Autorizado</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'returned'">
-                                    <span class="badge badge-success text-bg-warning w-75">
-                                        <span class="d-none d-md-inline"> Devuelta</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'rejected'">
-                                    <span class="badge badge-success text-bg-danger w-75">
-                                        <span class="d-none d-md-inline"> No autorizado</span>
-                                    </span>
-                                </t>
-
-                                <t t-if="invoice.state_sri == 'cancel'">
-                                    <span class="badge badge-success text-bg-dark w-75">
-                                        <span class="d-none d-md-inline"> Cancelado</span>
-                                    </span>
-                                </t> -->
+                                
                             </td>
                             <td class="text-center"><span t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                             <td class="text-center">
