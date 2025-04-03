@@ -28,7 +28,7 @@
 
         <t t-if="state_sri == 'returned'">
             <span class="badge badge-success text-bg-warning w-75">
-                <span class="d-none d-md-inline"> Devuelta</span>
+                <span class="d-none d-md-inline"> Devuelto</span>
             </span>
         </t>
 
