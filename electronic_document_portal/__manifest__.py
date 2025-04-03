@@ -4,7 +4,8 @@
     'summary': 'Portal Web de Documentos Electrónicos',
     'description': """
         - Modulo creado para Odoo 16 Community
-        - Lista los documentos del cliente en el portal web
+        - Muestra documentos autorizados al usuario del portal
+        - Muestra todos los documentos al usuario interno
         - Documentos disponibles:
             - Facturas,
             - Notas de crédito,
