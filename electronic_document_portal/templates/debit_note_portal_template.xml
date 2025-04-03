@@ -41,54 +41,13 @@
                         </td>
                         <td class="text-center"><span t-field="debit_note.invoice_date_due"/></td>
                         <td class="tx_status text-center">
-                            <t t-if="debit_note.is_move_sent == True">
-                                <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
-                            </t>
-                            <t t-else="">
-                                <span class="fa fa-envelope text-danger" title="Correo no enviado"/>
+                            <t t-call="electronic_document_portal.email_state_template">
+                                <t t-set="is_sent" t-value="debit_note.is_move_sent" />
                             </t>
                         </td>
                         <td class="tx_status text-center">
-                            <t t-if="debit_note.state_sri == 'draft'">
-                                <span class="badge badge-success text-bg-info">
-                                    <span class="d-none d-md-inline"> Creado</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'signed'">
-                                <span class="badge badge-success text-bg-info">
-                                    <span class="d-none d-md-inline"> Firmado</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'waiting'">
-                                <span class="badge badge-success text-bg-info">
-                                    <span class="d-none d-md-inline"> En espera de autorización</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'authorized'">
-                                <span class="badge badge-success text-bg-success">
-                                    <span class="d-none d-md-inline"> Autorizado</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'returned'">
-                                <span class="badge badge-success text-bg-danger">
-                                    <span class="d-none d-md-inline"> Devuelta</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'rejected'">
-                                <span class="badge badge-success text-bg-danger">
-                                    <span class="d-none d-md-inline"> No autorizado</span>
-                                </span>
-                            </t>
-
-                            <t t-if="debit_note.state_sri == 'cancel'">
-                                <span class="badge badge-success text-bg-info">
-                                    <span class="d-none d-md-inline"> Cancelado</span>
-                                </span>
+                            <t t-call="electronic_document_portal.sri_state_template">
+                                <t t-set="state_sri" t-value="debit_note.state_sri"/>
                             </t>
                         </td>
                         <td class="text-center"><span t-out="debit_note.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
