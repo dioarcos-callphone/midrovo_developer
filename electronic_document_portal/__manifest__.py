@@ -22,8 +22,8 @@
             - Enviar e imprimir documentos (usuario interno)
         - Mejora de las vistas form de los documentos.
         - Enviar e imprimir con los documentos estándar del modulo ec_account_edi.
-        - Visualización de mensajes informativos del SRI y mejora de la pestaña Documentos electrónicos de los notebook FORM
-        - Replicación de métodos para enviar e imprimir y estado de enviado a email en account.remision y account.withhold
+        - Visualización de mensajes informativos del SRI y mejora de la pestaña Documentos electrónicos de los notebook FORM.
+        - Replicación de métodos para enviar e imprimir y estado de enviado a email en account.remision y account.withhold.
     """,
     'category': 'Electronic',
     'author': 'Mauricio Idrovo',
