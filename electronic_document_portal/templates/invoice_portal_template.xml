@@ -71,18 +71,14 @@
                             <td class="text-center"><span t-field="invoice.invoice_date"/></td>
                             <td class='text-center d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
-                                <t t-if="invoice.is_move_sent">
-                                    <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
-                                </t>
-                                <t t-else="">
-                                    <span class="fa fa-envelope text-danger" title="Correo no enviado"/>
+                                <t t-call="electronic_document_portal.email_state_template">
+                                    <t t-set="is_sent" t-value="invoice.is_move_sent" />
                                 </t>
                             </td>
                             <td class="tx_status text-center">
-                                <t t-call="sri_state_template">
+                                <t t-call="electronic_document_portal.sri_state_template">
                                     <t t-set="state_sri" t-value="invoice.state_sri"/>
                                 </t>
-                                
                             </td>
                             <td class="text-center"><span t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                             <td class="text-center">

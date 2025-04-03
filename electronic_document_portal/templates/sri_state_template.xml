@@ -44,6 +44,15 @@
             </span>
         </t>
     </template>
+
+    <template id="email_state_template" name="Template Estados de Email">
+        <t t-if="is_sent">
+            <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
+        </t>
+        <t t-else="">
+            <span class="fa fa-envelope text-danger" title="Correo no enviado"/>
+        </t>
+    </template>
     
 
 </odoo>
