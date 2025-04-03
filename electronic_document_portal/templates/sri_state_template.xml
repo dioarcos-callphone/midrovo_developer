@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <!-- TEMPLATE PARA LOS ESTADOS DEL SRI -->
     <template id="sri_state_template" name="Template Estados SRI">
         <t t-if="state_sri == 'draft'">
             <span class="badge badge-success text-bg-info w-75">
@@ -45,6 +45,7 @@
         </t>
     </template>
 
+    <!-- TEMPLATE PARA LOS ESTADOS DE EMAIL -->
     <template id="email_state_template" name="Template Estados de Email">
         <t t-if="is_sent">
             <span class="fa fa-envelope-open text-success" title="Correo enviado"/>
