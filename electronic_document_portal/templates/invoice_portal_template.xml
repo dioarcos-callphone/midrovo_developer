@@ -99,7 +99,7 @@
 
                                 <t t-if="invoice.state_sri == 'authorized'">
                                     <span class="badge badge-success text-bg-success w-50">
-                                        <span class="d-none d-md-inline"> Autorizado</span>
+                                        <span class="d-none d-md-inline"> En espera de autorización</span>
                                     </span>
                                 </t>
 
