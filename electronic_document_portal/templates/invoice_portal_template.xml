@@ -79,7 +79,7 @@
                                 </t>
                             </td>
                             <td class="tx_status text-center">
-                                <t t-call="sri_state_template">
+                                <t t-call="electronic_document_portla.sri_state_template">
                                     <t t-set="state_sri" t-value="invoice.state_sri"/>
                                 </t>
                                 <!-- <t t-if="invoice.state_sri == 'draft'">
