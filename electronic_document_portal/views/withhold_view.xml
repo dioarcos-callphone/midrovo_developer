@@ -16,6 +16,8 @@
                         <button name="action_withhold_sent" type="object"
 							string="Enviar e Imprimir" states="posted"
 							class="oe_highlight o_invoice_send" groups="base.group_user" />
+                        <button name="print_document"
+							string="Imprimir Retención" type="object" icon="fa-print" states="posted" />
 						<field name="state" widget="statusbar"
 							statusbar_visible="draft,posted" />
                     </header>
