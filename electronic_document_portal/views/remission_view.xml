@@ -19,6 +19,8 @@
                                 attrs="{'invisible':[('state', '!=', 'posted')]}"
                                 class="oe_highlight"
                                 data-hotkey="y"/>
+                        <button name="%(ec_account_edi.e_delivery_note_qweb)d" string="Imprimir Guía de Remisión"
+							type="action" icon="fa-print" states="posted" />
 						<field name="state" widget="statusbar" />
                     </header>
                 </xpath>
