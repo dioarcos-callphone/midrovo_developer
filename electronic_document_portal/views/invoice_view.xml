@@ -63,11 +63,11 @@
                         </header>
                         <form>
                             <group>
-                                <field name="new_xml_key" attrs="{'invisible': [('authorization_date', '!=', False)]}"/>
-                                <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
+                                <field name="new_xml_key" invisible="1"/>
+                                <field name="xml_key" readonly="1"/>
                                 <field name="authorization_date" readonly="1"/>
-                                <field name="xml_report" filename="xml_name"/>
-                                <field name="xml_authorized" filename="xml_name"/>
+                                <field name="xml_report" filename="xml_name" readonly="1"/>
+                                <field name="xml_authorized" filename="xml_name" readonly="1"/>
                                 <field name="xml_name" invisible="1"/>
                             </group>
                         </form>
