@@ -44,12 +44,12 @@
                                 attrs="{'invisible': [('state_sri', '!=', 'signed')]}"/>
                             <field name="state_sri" widget="statusbar" statusbar_visible="authorized,returned,waiting,rejected"/>
                         </header>
-                        <form attrs="{'readonly': True}">
+                        <form>
                             <group>
-                                <field name="xml_key" attrs="{'readonly': [('authorization_date', '!=', False)]}"/>
+                                <field name="xml_key" readonly="1"/>
                                 <field name="authorization_date" readonly="1"/>
-                                <field name="xml_report" filename="xml_name"/>
-                                <field name="xml_authorized" filename="xml_name"/>
+                                <field name="xml_report" filename="xml_name" readonly="1"/>
+                                <field name="xml_authorized" filename="xml_name" readonly="1"/>
                                 <field name="xml_name" invisible="1"/>
                             </group>
                         </form>
