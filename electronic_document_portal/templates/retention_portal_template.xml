@@ -41,6 +41,7 @@
                     <th class="text-center">Estado de Autorización</th>
                     <th class="text-center">Retención IVA</th>
                     <th class="text-center">Retención RENTA</th>
+                    <th class="text-center">Total</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -72,6 +73,7 @@
                         </td>
                         <td class="text-center"><span t-out="retention.total_iva" /></td>
                         <td class="text-center"><span t-out="retention.total_renta" /></td>
+                        <td class="text-center"><span t-out="retention.total" /></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
