@@ -11,6 +11,9 @@
             <xpath expr="//span[@t-esc='abs(document.total_renta)']" position="replace">
                 <span t-esc="abs(document.total_renta)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
             </xpath>
+            <xpath expr="//span[@t-esc='abs(document.total)" position="replace">
+                <span t-esc="abs(document.total)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
+            </xpath>
         </template>
     </data>
 </odoo>
