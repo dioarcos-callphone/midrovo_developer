@@ -39,8 +39,8 @@
                     <th class="text-center">Factura Asociada</th>
                     <th class="text-center">Estado de Envío</th>
                     <th class="text-center">Estado de Autorización</th>
-                    <th class="text-center">Retención IVA</th>
-                    <th class="text-center">Retención RENTA</th>
+                    <th class="text-center">Total I.V.A.</th>
+                    <th class="text-center">Total I.R.</th>
                     <th class="text-center">Total</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
