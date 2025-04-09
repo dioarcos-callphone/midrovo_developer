@@ -5,6 +5,12 @@
             <xpath expr="//span[@t-esc='abs(line.retained_value)']" position="replace">
                 <span t-esc="abs(line.retained_value)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
             </xpath>
+            <xpath expr="//span[@t-esc='abs(document.total_iva)']" position="replace">
+                <span t-esc="abs(document.total_iva)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
+            </xpath>
+            <xpath expr="//span[@t-esc='abs(document.total_renta)']" position="replace">
+                <span t-esc="abs(document.total_renta)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
+            </xpath>
         </template>
     </data>
 </odoo>
