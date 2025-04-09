@@ -68,9 +68,6 @@ class RetentionPortalController(CustomerPortal):
         })
 
         currency = request.env.company.currency_id
-
-        _logger.info(f"MOSTRANDO CURRENCY >>> { currency }")
-
         values["display_currency"] = currency
 
         return request.render("electronic_document_portal.portal_my_retentions", values)
