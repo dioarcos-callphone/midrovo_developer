@@ -71,9 +71,9 @@
                                 <t t-set="state_sri" t-value="retention.state_sri"/>
                             </t>
                         </td>
-                        <td class="text-center"><span t-esc="retention.total_iva" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
-                        <td class="text-center"><span t-esc="retention.total_renta" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
-                        <td class="text-center"><span t-esc="retention.total" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-center"><span t-esc="abs(retention.total_iva)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-center"><span t-esc="abs(retention.total_renta)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-center"><span t-esc="abs(retention.total)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
