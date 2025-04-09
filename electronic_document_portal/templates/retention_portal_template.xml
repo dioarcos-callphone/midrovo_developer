@@ -104,7 +104,7 @@
                     <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
                     <t t-set="title">
                         <h2 class="mb-0">
-                            <b t-if="retention.total != 0" t-field="retention.total" t-options='{"widget": "monetary", "display_currency": display_currency}'/>
+                            <b t-if="retention.total != 0" t-esc="abs(retention.total)" t-options='{"widget": "monetary", "display_currency": display_currency}'/>
                         </h2>
                     </t>
 
