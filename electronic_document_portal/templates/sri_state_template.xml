@@ -48,10 +48,10 @@
     <!-- TEMPLATE PARA LOS ESTADOS DE EMAIL -->
     <template id="email_state_template" name="Template Estados de Email">
         <t t-if="is_sent">
-            <span class="fa fa-envelope-open text-success" title="Correo enviado 😊"/>
+            <span class="fa fa-envelope-open text-success fa-2x" title="Correo enviado 😊"/>
         </t>
         <t t-else="">
-            <span class="fa fa-envelope text-danger" title="Correo no enviado 😟"/>
+            <span class="fa fa-envelope text-danger fa-2x" title="Correo no enviado 😟"/>
         </t>
     </template>
     
