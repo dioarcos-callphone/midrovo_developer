@@ -3,7 +3,7 @@
     <data>
         <template id="report_withhold_document_extend" name="Invoice Document" inherit_id="ec_account_edi.report_e_retention_qweb">
             <xpath expr="//span[@t-esc='abs(line.retained_value)']" position="replace">
-                <span t-esc="abs(line.retained_value)" t-options='{"widget": "monetary", "display_currency": env.company.currendy_id}'/>
+                <span t-esc="abs(line.retained_value)" t-options='{"widget": "monetary", "display_currency": env.company.currency_id}'/>
             </xpath>
         </template>
     </data>
