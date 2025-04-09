@@ -6,8 +6,8 @@ from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
 import base64
 
-# import logging
-# _logger = logging.getLogger(__name__)
+import logging
+_logger = logging.getLogger(__name__)
 
 class RetentionPortalController(CustomerPortal):
     
@@ -66,6 +66,13 @@ class RetentionPortalController(CustomerPortal):
             'retentions': retentions,
             'pager': pager,
         })
+
+        currency = request.env.company.currency_id
+
+        _logger.info(f"MOSTRANDO CURRENCY >>> { currency }")
+
+        values["display_currency"] = currency
+
         return request.render("electronic_document_portal.portal_my_retentions", values)
     
     @http.route(['/my/retentions/<int:retention_id>'], type='http', auth="public", website=True)
@@ -102,9 +109,6 @@ class RetentionPortalController(CustomerPortal):
             return request.make_response(xml_decode, headers=headers)
         
         values = self._retention_get_page_view_values(retention_sudo, access_token, **kw)
-
-        currency = request.env.company.currency_id
-        values["display_currency"] = currency
         
         return request.render("electronic_document_portal.portal_retention_page", values)
     
