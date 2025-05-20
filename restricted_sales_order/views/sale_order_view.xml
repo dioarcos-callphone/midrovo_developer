@@ -8,9 +8,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <!-- <xpath expr="//button[@name='action_cancel']" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['draft', 'sent']), ('id', '=', False)]}</attribute>
-                </xpath> -->
+                <xpath expr="//button[@name='action_cancel']" position="replace">
+                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', ('state', 'not in', ['draft', 'sent']), ('id', '=', False)]}" data-hotkey="z"/>
+                </xpath>
             </field>
         </record>
     
