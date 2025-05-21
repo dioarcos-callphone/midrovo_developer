@@ -5,6 +5,7 @@
         Modulo desarrollado en Odoo 16 Enterprise
         Especificaciones:
             - Presenta reporte de saldo por vencer
+            - Wizard con opcion de mostrar analisis de reporte total vencido y total por vencer
     ''',
     'summary': 'Reporte de saldo por vencer',
     'author': 'Mauricio Idrovo',

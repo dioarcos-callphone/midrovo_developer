@@ -15,4 +15,12 @@ _logger = logging.getLogger(__name__)
 class AccountDueWizard(models.TransientModel):
     _inherit = "account.due.wizard"
 
-    is_vencer = fields.Boolean('Por vencer')
+    analysis_receivable_balance = fields.Selection(
+        [
+            ('vencer', 'Saldo por vencer'),
+            ('vencido', 'Saldo vencido'),
+        ],
+        string = 'Analisis de Reporte de Saldo',
+        default = 'vencido',
+        help = "Seleccione el analisis de saldo por cobrar"
+    )

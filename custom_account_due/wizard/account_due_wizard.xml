@@ -9,8 +9,8 @@
             <field name="inherit_id" ref="account_due.account_due_report_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group[2]" position="after">
-                    <group name="por_vencer" string="Saldo por Vencer">
-                        <field name="is_vencer" />
+                    <group name="por_vencer" string="Analisis Reporte de Saldo">
+                        <field name="analysis_receivable_balance" widget="radio" options="{'horizontal': true}" />
                     </group> 
                 </xpath>
             </field>
