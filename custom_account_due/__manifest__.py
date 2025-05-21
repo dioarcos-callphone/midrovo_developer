@@ -15,7 +15,7 @@
         'account_due'
     ],
     'data': [
-        'wizard/account_due_wizard'
+        'wizard/account_due_wizard.xml'
     ],
     # 'demo': [
     #     ''
