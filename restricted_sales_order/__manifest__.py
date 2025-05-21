@@ -12,7 +12,8 @@
     'license': 'LGPL-3',
     'category': 'sale',
     'depends': [
-        'sale'
+        'sale',
+        'custom_security_rules'
     ],
     'data': [
         'views/sale_order_view.xml',
