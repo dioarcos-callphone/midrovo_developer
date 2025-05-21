@@ -8,8 +8,8 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="custom_security_rules.sale_order_inherit_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//header/button[@name='action_cancel']" position="attributes">
-                    <attribute name="attrs">{'invisible': True}</attribute>
+                <xpath expr="//header/button[@name='action_cancel' and @groups='!custom_security_rules.group_custom_security_role_user_2']" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>
