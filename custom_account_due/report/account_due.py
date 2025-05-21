@@ -7,3 +7,5 @@ _logger = logging.getLogger(__name__)
 
 class InvoiceDetails(models.AbstractModel):
     _inherit = 'report.account_due.report_account_due'
+
+    
