@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="account_due_report_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.due.report.view.form.inherit</field>
+            <field name="model">account.due.wizard</field>
+            <field name="inherit_id" ref="account_due.account_due_report_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group[2]" position="after">
+                    <group name="por_vencer" string="Saldo por Vencer">
+                        <field name="is_vencer" />
+                    </group> 
+                </xpath>
+            </field>
+        </record>
+    
+        <record id="account_due_report_view_form" model="ir.ui.view">
+        <field name="name">account.due.report.view.form</field>
+        <field name="model">account.due.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Fecha de Corte">
+                            <field name="court_date"/>
+                        </group>
+                        <group string="Tipo de Informe">
+                            <field name="report_type" widget="radio" options="{'horizontal': true}" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Filtros">
+                            <field name="client_id"/>
+                            <field name="journal_id" />
+                            <field name="comercial_id" />
+                        </group>
+                        <group string="Pagos no aplicados">
+                            <field name="payment_not_apply"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_pdf" string="PDF" type="object"
+                            data-hotkey="q" class="btn-pdf"/>
+                    <button name="action_excel" string="EXCEL" type="object"
+                            data-hotkey="q" class="btn-excel"/>
+                    <button string="Cancelar" class="btn-secondary"
+                            special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    </data>
+    
+
+</odoo>
