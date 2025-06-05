@@ -17,6 +17,7 @@
                         <tr>
                             <th align="center" style="vertical-align: middle">PRODUCTOS</th>
                             <th align="center" style="vertical-align: middle">STOCK TOTAL</th>
+                            <th align="center" style="vertical-align: middle">CANTIDAD SIN RESERVAS</th>
                             <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
                                 <th align="center" style="vertical-align: middle">COSTO</th>
                                 <th align="center" style="vertical-align: middle">VALOR DEL STOCK</th>
@@ -42,6 +43,9 @@
                             </td>
                             <td align="center" width="120">
                                 <t t-esc="new['cantidad']"/>
+                            </td>
+                            <td align="center" width="120">
+                                <t t-esc="new['cantidad_sin_reserva']"/>
                             </td>
                             <t t-if="not env.user.has_group('inventory_report_location.group_inventory_report_location_user')">
                                 <td align="center" width="120">
