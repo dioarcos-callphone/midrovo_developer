@@ -4,6 +4,7 @@ from odoo.osv import expression
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
+from collections import OrderedDict
 import base64
 
 # import logging
@@ -104,6 +105,26 @@ class RemissionPortalController(CustomerPortal):
         
         return request.render("electronic_document_portal.portal_remission_page", values)
     
+    def _get_remission_searchbar_filters(self):
+        return {
+            'all': {
+                'label': _('Todos'),
+                'domain': []
+            },
+            'auth': {
+                'label': _('Autorizados'),
+                'domain': [
+                    ('state_sri', '=', 'authorized'),
+                ]
+            },
+            'reject': {
+                'label': _('No Autorizados'), 
+                'domain': [
+                    ('state_sri', '!=', 'authorized')
+                ]
+            },
+        }
+    
     def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/remissions"):
         values = self._prepare_portal_layout_values()
         
@@ -119,6 +140,12 @@ class RemissionPortalController(CustomerPortal):
         if not sortby:
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_filters = self._get_remission_searchbar_filters()
+        # default filter by value
+        if not filterby:
+            filterby = 'all'
+        domain += searchbar_filters[filterby]['domain']
 
         if date_begin and date_end:
             domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
@@ -143,6 +170,8 @@ class RemissionPortalController(CustomerPortal):
             'default_url': url,
             'searchbar_sortings': searchbar_sortings,
             'sortby': sortby,
+            'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
+            'filterby': filterby,
         })
         
         return values

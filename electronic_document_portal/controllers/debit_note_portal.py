@@ -5,6 +5,7 @@ from odoo.osv import expression
 from odoo.addons.portal.controllers.portal import pager as portal_pager
 from odoo.addons.account.controllers.portal import PortalAccount
 from odoo.http import request
+from collections import OrderedDict
 
 # import logging
 # _logger = logging.getLogger(__name__)
@@ -43,6 +44,34 @@ class DebitNotePortalController(PortalAccount):
         
         return domain
     
+    def _get_debit_note_searchbar_filters(self):
+        return {
+            'all': {
+                'label': _('Todos'),
+                'domain': []
+            },
+            'auth': {
+                'label': _('Autorizados'),
+                'domain': [
+                    ('move_type', '=', 'out_invoice'),
+                    ('state_sri', '=', 'authorized'),
+                    '|',
+                    ('debit_origin_id', '!=', False),
+                    ('debit_note', '!=', False),
+                ]
+            },
+            'reject': {
+                'label': _('No Autorizados'), 
+                'domain': [
+                    ('move_type', '=', 'out_invoice'),
+                    ('state_sri', '!=', 'authorized'),
+                    '|',
+                    ('debit_origin_id', '!=', False),
+                    ('debit_note', '!=', False),
+                ]
+            },
+        }
+    
     
     def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/debit_notes"):
         values = self._prepare_portal_layout_values()
@@ -59,6 +88,12 @@ class DebitNotePortalController(PortalAccount):
         if not sortby:
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_filters = self._get_debit_note_searchbar_filters()
+        # default filter by value
+        if not filterby:
+            filterby = 'all'
+        domain += searchbar_filters[filterby]['domain']
 
         if date_begin and date_end:
             domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
@@ -83,6 +118,8 @@ class DebitNotePortalController(PortalAccount):
             'default_url': url,
             'searchbar_sortings': searchbar_sortings,
             'sortby': sortby,
+            'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
+            'filterby': filterby,
         })
         
         return values
