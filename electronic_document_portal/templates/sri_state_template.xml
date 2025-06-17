@@ -2,7 +2,7 @@
 <odoo>
     <!-- TEMPLATE PARA LOS ESTADOS DEL SRI -->
     <template id="sri_state_template" name="Template Estados SRI">
-        <t t-if="state_sri == 'draft'">
+        <!-- <t t-if="state_sri == 'draft'">
             <span class="badge badge-success text-bg-info w-75">
                 <span class="d-none d-md-inline"> Creado</span>
             </span>
@@ -18,7 +18,7 @@
             <span class="badge badge-success text-bg-secondary w-75">
                 <span class="d-none d-md-inline"> En espera de autorización</span>
             </span>
-        </t>
+        </t> -->
 
         <t t-if="state_sri == 'authorized'">
             <span class="badge badge-success text-bg-success w-75">
@@ -26,23 +26,29 @@
             </span>
         </t>
 
-        <t t-if="state_sri == 'returned'">
+        <!-- <t t-if="state_sri == 'returned'">
             <span class="badge badge-success text-bg-warning w-75">
                 <span class="d-none d-md-inline"> Devuelto</span>
             </span>
-        </t>
+        </t> -->
 
-        <t t-if="state_sri == 'rejected'">
+        <!-- <t t-if="state_sri == 'rejected'">
+            <span class="badge badge-success text-bg-danger w-75">
+                <span class="d-none d-md-inline"> No autorizado</span>
+            </span>
+        </t> -->
+
+        <t t-else="">
             <span class="badge badge-success text-bg-danger w-75">
                 <span class="d-none d-md-inline"> No autorizado</span>
             </span>
         </t>
 
-        <t t-if="state_sri == 'cancel'">
+        <!-- <t t-if="state_sri == 'cancel'">
             <span class="badge badge-success text-bg-dark w-75">
                 <span class="d-none d-md-inline"> Cancelado</span>
             </span>
-        </t>
+        </t> -->
     </template>
 
     <!-- TEMPLATE PARA LOS ESTADOS DE EMAIL -->
