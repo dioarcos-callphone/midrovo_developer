@@ -40,6 +40,22 @@ class LiquidationPortalController(PortalAccount):
         
         return domain
     
+    def _get_searchbar_inputs(self):
+        return {
+            'all': {'label': _('All'), 'input': 'all'},
+            'partner': {'label': _('Cliente'), 'input': 'partner'},
+            'name': {'label': _('Numero del documento'), 'input': 'name'},
+        }
+    
+    def _get_search_domain(self, search_in, search):
+            if search_in == 'partner':
+                return [('partner_id.name', 'ilike', search)]
+            elif search_in == 'name':
+                return [('name', 'ilike', search)]
+            elif search_in == 'all':
+                return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
+            return []
+    
     def _get_liquidation_searchbar_filters(self):
         return {
             'all': {
@@ -65,7 +81,7 @@ class LiquidationPortalController(PortalAccount):
         }
     
 
-    def _prepare_my_liquidation_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/liquidations"):
+    def _prepare_my_liquidation_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/liquidations"):
         values = self._prepare_portal_layout_values()
         
         Liquidation = request.env['account.move']
@@ -80,6 +96,11 @@ class LiquidationPortalController(PortalAccount):
         if not sortby:
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_inputs = self._get_searchbar_inputs()
+
+        if search and search_in:
+            domain += self._get_search_domain(search_in, search)
 
         searchbar_filters = self._get_liquidation_searchbar_filters()
         # default filter by value
@@ -112,15 +133,16 @@ class LiquidationPortalController(PortalAccount):
             'sortby': sortby,
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
+            'searchbar_inputs': searchbar_inputs,
         })
         
         return values
     
 
     @http.route(['/my/liquidations', '/my/liquidations/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_liquidation(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    def portal_my_liquidation(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
         # Metodo que genera el contenido de retenciones
-        values = self._prepare_my_liquidation_values(page, date_begin, date_end, sortby, filterby)
+        values = self._prepare_my_liquidation_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
         pager = portal_pager(**values['pager'])
