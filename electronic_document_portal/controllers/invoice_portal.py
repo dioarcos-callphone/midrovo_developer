@@ -32,18 +32,40 @@ class InvoicePortalController(PortalAccount):
         
         return domain
     
+    def _get_account_searchbar_filters(self):
+        return {
+            'all': {
+                'label': _('Todos'),
+                'domain': []
+            },
+            'auth': {
+                'label': _('Autorizados'),
+                'domain': [
+                    ('move_type', '=', 'out_invoice'),
+                    ('state_sri', '=', 'authorized'),
+                ]
+            },
+            'reject': {
+                'label': _('No Autorizados'), 
+                'domain': [
+                    ('move_type', '=', 'out_invoice'),
+                    ('state_sri', '!=', 'authorized')
+                ]
+            },
+        }
     
-    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
-        # Extendemos este metodo para ocultar el filtro del search menu
-        # Llamamos al método original con super
-        values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
+    
+    # def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/invoices"):
+    #     # Extendemos este metodo para ocultar el filtro del search menu
+    #     # Llamamos al método original con super
+    #     values = super()._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, domain=domain, url=url)
         
-        # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
-        values.pop('searchbar_filters', None)  # Elimina si existe
-        values.pop('filterby', None)  # Elimina si existe
+    #     # Quitamos los elementos relacionados con `searchbar_filters` y `filterby`
+    #     values.pop('searchbar_filters', None)  # Elimina si existe
+    #     values.pop('filterby', None)  # Elimina si existe
         
-        # Retornamos los valores modificados
-        return values
+    #     # Retornamos los valores modificados
+    #     return values
     
     
     def _invoice_get_page_view_values(self, invoice, access_token, **kwargs):
@@ -91,7 +113,7 @@ class InvoicePortalController(PortalAccount):
             
         if report_type == 'xml':
             xml_name = invoice_sudo.xml_name
-            xml_bytes = invoice_sudo.xml_report
+            xml_bytes = invoice_sudo.xml_authorized
             
             # Si el XML está en base64, lo decodificamos
             xml_decode = base64.b64decode(xml_bytes)

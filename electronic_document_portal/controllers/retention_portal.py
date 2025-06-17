@@ -92,7 +92,7 @@ class RetentionPortalController(CustomerPortal):
             
         if report_type == 'xml':
             xml_name = retention_sudo.xml_name
-            xml_bytes = retention_sudo.xml_report
+            xml_bytes = retention_sudo.xml_authorized
             
             # Si el XML está en base64, lo decodificamos
             xml_decode = base64.b64decode(xml_bytes)

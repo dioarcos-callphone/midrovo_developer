@@ -87,7 +87,7 @@ class RemissionPortalController(CustomerPortal):
             
         if report_type == 'xml':
             xml_name = remission_sudo.xml_data_id.xml_name
-            xml_bytes = remission_sudo.xml_report
+            xml_bytes = remission_sudo.xml_authorized
             
             # Si el XML está en base64, lo decodificamos
             xml_decode = base64.b64decode(xml_bytes)
