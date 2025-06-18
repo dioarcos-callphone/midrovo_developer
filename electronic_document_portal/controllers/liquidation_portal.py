@@ -42,7 +42,7 @@ class LiquidationPortalController(PortalAccount):
     
     def _get_searchbar_inputs(self):
         return {
-            'all': {'label': _('All'), 'input': 'all'},
+            'all': {'label': _('Todos'), 'input': 'all'},
             'partner': {'label': _('Cliente'), 'input': 'partner'},
             'name': {'label': _('Numero del documento'), 'input': 'name'},
         }
