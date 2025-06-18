@@ -3,13 +3,13 @@
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
         <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="inside">
-            <t t-if="search_in">
-                <!-- Muestra el label del filtro activo -->
-                <span t-esc="searchbar_inputs.find(i => i.input === search_in)?.label || 'Filtros'"/>
+            <t t-set="current_filter_label" t-value="'Filtros'"/> <!-- Valor por defecto -->
+            <t t-foreach="searchbar_inputs" t-as="input">
+                <t t-if="input.input == search_in">
+                    <t t-set="current_filter_label" t-value="input.label"/>
+                </t>
             </t>
-            <t t-else="">
-                <span>Filtros</span>
-            </t>
+            <span t-esc="current_filter_label"/>
         </xpath>
     </template>
 
