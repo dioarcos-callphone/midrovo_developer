@@ -6,7 +6,7 @@
             <t t-set="selected_input_label" t-value="'Filtros'" />
             <t t-foreach="searchbar_inputs" t-as="input_value">
                 <t t-if="input_value['input'] == search_in">
-                    <t t-set="selected_input_label" t-value="input_value['label']" />
+                    <span t-set="selected_input_label" t-out="input_value['label']" />
                 </t>
             </t>
         </xpath>
