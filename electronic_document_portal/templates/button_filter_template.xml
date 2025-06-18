@@ -3,7 +3,12 @@
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
         <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="inside">
-            <span t-esc="search"/>
+            <t t-set="selected_input_label" t-value="'Filtros'" />
+            <t t-foreach="searchbar_inputs" t-as="input_value">
+                <t t-if="input_value['input'] == search_in">
+                    <t t-set="selected_input_label" t-value="input_value['label']" />
+                </t>
+            </t>
         </xpath>
     </template>
 
