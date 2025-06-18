@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
+        <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="inside">
+            <t t-if="search_in">
+                <!-- Muestra el label del filtro activo -->
+                <span t-esc="searchbar_inputs.find(i => i.input === search_in)?.label || 'Filtros'"/>
+            </t>
+            <t t-else="">
+                <span>Filtros</span>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
