@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
-        <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="inside">
+        <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="attributes">
             <!-- <t t-set="selected_input_label" t-value="'Filtros'" />
             <t t-foreach="searchbar_inputs" t-as="input">
                 <t t-if="input_value['input'] == search_in">
@@ -10,7 +10,9 @@
                 </t>
             </t> -->
 
-            <input type="text" class="form-control form-control-sm" placeholder="Search" t-att-value='search' name="search"/>
+            <attribute name="t-att-value" separator="" add="" remove="" value="search"></attribute>
+
+            
         </xpath>
     </template>
 
