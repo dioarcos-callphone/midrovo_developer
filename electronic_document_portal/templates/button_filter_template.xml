@@ -10,7 +10,7 @@
                 </t>
             </t> -->
 
-            <attribute name="t-att-value">search</attribute>
+            <attribute name="name">Filtros</attribute>
 
             
         </xpath>
