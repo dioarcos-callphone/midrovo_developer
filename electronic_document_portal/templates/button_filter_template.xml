@@ -10,9 +10,7 @@
                 </t>
             </t> -->
 
-            <t t-if="search_in == 'partner'">
-                <span>Es partner</span>
-            </t>
+            <span>Filtro</span>
         </xpath>
     </template>
 
