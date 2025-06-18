@@ -3,7 +3,7 @@
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
         <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="inside">
-            <span t-att-value="search"/>
+            <span t-esc="search"/>
         </xpath>
     </template>
 
