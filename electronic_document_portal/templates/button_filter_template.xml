@@ -10,7 +10,7 @@
                 </t>
             </t> -->
 
-            <span>Filtro</span>
+            <input type="text" class="form-control form-control-sm" placeholder="Search" t-att-value='search' name="search"/>
         </xpath>
     </template>
 
