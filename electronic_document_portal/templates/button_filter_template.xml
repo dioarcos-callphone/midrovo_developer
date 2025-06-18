@@ -10,7 +10,7 @@
                 </t>
             </t> -->
 
-            <attribute name="t-att-value" separator="" add="" remove="" value="search"></attribute>
+            <attribute name="t-att-value">search</attribute>
 
             
         </xpath>
