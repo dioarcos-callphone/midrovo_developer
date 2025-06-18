@@ -10,7 +10,7 @@
                 </t>
             </t> -->
 
-            <span t-esc="search" />
+            <span t-esc="search" name="search" />
         </xpath>
     </template>
 
