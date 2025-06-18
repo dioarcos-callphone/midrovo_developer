@@ -10,9 +10,27 @@
                 </t>
             </t> -->
 
-            <attribute name="name">Filtros</attribute>
+            <attribute name="id">dropdownButton</attribute>  
+        </xpath>
+        <xpath expr="//form[@t-if='searchbar_inputs']" position="after">
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('searchInput');
+                    const dropdownButton = document.getElementById('dropdownButton');
+                    
+                    // Inicializa el botón con el valor actual del input (si existe)
+                    if (searchInput.value) {
+                        dropdownButton.textContent = searchInput.value;
+                    } else {
+                        dropdownButton.textContent = 'Dropdown'; // Texto por defecto
+                    }
 
-            
+                    // Actualiza dinámicamente
+                    searchInput.addEventListener('input', function() {
+                        dropdownButton.textContent = this.value || 'Dropdown';
+                    });
+                });
+            </script>
         </xpath>
     </template>
 
