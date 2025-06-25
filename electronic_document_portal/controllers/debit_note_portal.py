@@ -91,7 +91,7 @@ class DebitNotePortalController(PortalAccount):
             return []
     
     
-    def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/debit_notes"):
+    def _prepare_my_debit_notes_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/debit_notes"):
         values = self._prepare_portal_layout_values()
         
         DebitNote = request.env['account.move']

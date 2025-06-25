@@ -52,7 +52,7 @@ class RemissionPortalController(CustomerPortal):
     
     # metodo que genera el contenido de retenciones
     @http.route(['/my/remissions', '/my/remissions/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_remission(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
+    def portal_my_remission(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
         values = self._prepare_my_remission_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
@@ -141,7 +141,7 @@ class RemissionPortalController(CustomerPortal):
                 return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
             return []
     
-    def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/remissions"):
+    def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/remissions"):
         values = self._prepare_portal_layout_values()
         
         Remission = request.env['account.remision']

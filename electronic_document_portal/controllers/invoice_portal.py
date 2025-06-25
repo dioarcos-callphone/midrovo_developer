@@ -83,7 +83,7 @@ class InvoicePortalController(PortalAccount):
     #     return values
 
 
-    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/invoices"):
+    def _prepare_my_invoices_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/invoices"):
         values = self._prepare_portal_layout_values()
         AccountInvoice = request.env['account.move']
 
@@ -210,7 +210,7 @@ class InvoicePortalController(PortalAccount):
 
 
     @http.route(['/my/invoices', '/my/invoices/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_invoices(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
+    def portal_my_invoices(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
         values = self._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
