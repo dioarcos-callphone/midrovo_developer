@@ -4,6 +4,7 @@ from odoo import http, _
 from odoo.osv import expression
 from odoo.exceptions import AccessError, MissingError
 from odoo.addons.account.controllers.portal import PortalAccount
+from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 from odoo.http import request
 from collections import OrderedDict
 import base64
@@ -204,4 +205,26 @@ class InvoicePortalController(PortalAccount):
         values = self._invoice_get_page_view_values(invoice_sudo, access_token, **kw)
         
         return request.render("account.portal_invoice_page", values)
+    
+
+
+
+    @http.route(['/my/invoices', '/my/invoices/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_invoices(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
+        values = self._prepare_my_invoices_values(page, date_begin, date_end, sortby, filterby, search, search_in)
+
+        # pager
+        pager = portal_pager(**values['pager'])
+
+        # content according to pager and archive selected
+        invoices = values['invoices'](pager['offset'])
+        request.session['my_invoices_history'] = invoices.ids[:100]
+
+        values.update({
+            'invoices': invoices,
+            'pager': pager,
+        })
+        return request.render("account.portal_my_invoices", values)
+
+        
         

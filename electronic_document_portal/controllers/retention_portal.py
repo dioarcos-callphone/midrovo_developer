@@ -52,9 +52,9 @@ class RetentionPortalController(CustomerPortal):
     
     
     @http.route(['/my/retentions', '/my/retentions/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_retention(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    def portal_my_retention(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
         # Metodo que genera el contenido de retenciones
-        values = self._prepare_my_retention_values(page, date_begin, date_end, sortby, filterby)
+        values = self._prepare_my_retention_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
         pager = portal_pager(**values['pager'])
