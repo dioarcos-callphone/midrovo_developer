@@ -47,8 +47,8 @@
 
     <!-- Ocultar templates -->
     <template id="hide_quotations_orders" inherit_id="sale.portal_my_home_sale" priority="21">
-        <xpath expr="//t[@t-call='portal.portal_docs_entry'][t-set[@title='Quotations']]" position="replace"/>
-        <xpath expr="//t[@t-call='portal.portal_docs_entry'][t-set[@title='Sales Orders']]" position="replace"/>
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace"/>
+        <xpath expr="//t[@t-call='portal.portal_docs_entry']" position="replace"/>
     </template>
 
 </odoo>
