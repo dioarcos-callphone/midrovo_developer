@@ -125,7 +125,23 @@ class RemissionPortalController(CustomerPortal):
             },
         }
     
-    def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/remissions"):
+    def _get_searchbar_inputs(self):
+        return {
+            'all': {'label': _('Todos'), 'input': 'all'},
+            'partner': {'label': _('Cliente'), 'input': 'partner'},
+            'name': {'label': _('Numero del documento'), 'input': 'name'},
+        }
+    
+    def _get_search_domain(self, search_in, search):
+            if search_in == 'partner':
+                return [('partner_id.name', 'ilike', search)]
+            elif search_in == 'name':
+                return [('name', 'ilike', search)]
+            elif search_in == 'all':
+                return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
+            return []
+    
+    def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/remissions"):
         values = self._prepare_portal_layout_values()
         
         Remission = request.env['account.remision']
@@ -140,6 +156,11 @@ class RemissionPortalController(CustomerPortal):
         if not sortby:
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_inputs = self._get_searchbar_inputs()
+
+        if search and search_in:
+            domain += self._get_search_domain(search_in, search)
 
         searchbar_filters = self._get_remission_searchbar_filters()
         # default filter by value
@@ -172,6 +193,7 @@ class RemissionPortalController(CustomerPortal):
             'sortby': sortby,
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
+            'searchbar_inputs': searchbar_inputs,
         })
         
         return values
