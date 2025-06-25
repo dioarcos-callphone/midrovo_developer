@@ -42,7 +42,7 @@
             </t>
         </xpath>
 
-        <xpath expr="//div[hasclass('o_portal_docs')]/a[@title='Cotizaciones']" position="replace">
+        <xpath expr="//div[hasclass('o_portal_docs')]/a[@href='/my/quotes']" position="replace">
             
         </xpath>
     </template>
