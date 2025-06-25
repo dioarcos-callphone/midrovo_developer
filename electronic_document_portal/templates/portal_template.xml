@@ -42,17 +42,14 @@
             </t>
         </xpath>
 
-        <xpath expr="//div[hasclass('o_portal_docs')]/a[@href='/my/quotes']" position="replace">
-            
-        </xpath>
     </template>
 
 
     <!-- Ocultar templates -->
-    <!-- <template id="custom_portal_my_home_sale" inherit_id="sale.portal_my_home_sale">
+    <template id="custom_portal_my_home_sale" inherit_id="sale.portal_my_home_sale">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             
         </xpath>
-    </template> -->
+    </template>
 
 </odoo>
