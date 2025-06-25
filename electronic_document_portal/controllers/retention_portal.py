@@ -145,9 +145,9 @@ class RetentionPortalController(CustomerPortal):
             if search_in == 'partner':
                 return [('partner_id.name', 'ilike', search)]
             elif search_in == 'name':
-                return [('name', 'ilike', search)]
+                return [('l10n_latam_document_number', 'ilike', search)]
             elif search_in == 'all':
-                return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
+                return ['|', ('l10n_latam_document_number', 'ilike', search), ('partner_id.name', 'ilike', search)]
             return []
     
     

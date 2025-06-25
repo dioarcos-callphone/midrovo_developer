@@ -136,9 +136,9 @@ class RemissionPortalController(CustomerPortal):
             if search_in == 'partner':
                 return [('partner_id.name', 'ilike', search)]
             elif search_in == 'name':
-                return [('name', 'ilike', search)]
+                return [('l10n_latam_document_number', 'ilike', search)]
             elif search_in == 'all':
-                return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
+                return ['|', ('l10n_latam_document_number', 'ilike', search), ('partner_id.name', 'ilike', search)]
             return []
     
     def _prepare_my_remission_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/remissions"):
