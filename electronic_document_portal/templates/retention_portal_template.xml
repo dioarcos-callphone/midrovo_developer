@@ -36,8 +36,8 @@
                 <tr class="active">
                     <th>Retención #</th>
                     <th>Cliente</th>
-                    <th class="text-end">F. Emisión</th>
-                    <th class="text-center">Factura</th>
+                    <th class="text-start">F. Emisión</th>
+                    <th class="text-start">Factura</th>
                     <th class="text-center">Envío Email</th>
                     <th class="text-center">Autorización</th>
                     <th class="text-end">Ret. IVA</th>
@@ -56,9 +56,9 @@
                             </a>
                         </td>
                         <td><span t-esc="retention.partner_id.name.title()"/></td>
-                        <td class="text-end"><span t-field="retention.creation_date"/></td>
+                        <td class="text-start"><span t-field="retention.creation_date"/></td>
                         <t t-if="retention.invoice_id">
-                            <td class="text-center"><span t-field="retention.invoice_id.name"/></td>
+                            <td class="text-start"><span t-field="retention.invoice_id.name"/></td>
                         </t>
                         <t t-else="">
                             <td class="text-center"><span t-field="retention.factura_origen_api"/></td>

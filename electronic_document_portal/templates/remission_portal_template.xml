@@ -55,8 +55,8 @@
                             </a>
                         </td>
                         <td style="width: 100px;"><span t-esc="remission.partner_id.name.title()"/></td>
-                        <td class="text-end"><span t-field="remission.delivery_date"/></td>
-                        <td class='text-end'><span t-field="remission.transfer_date"/></td>
+                        <td class="text-start"><span t-field="remission.delivery_date"/></td>
+                        <td class='text-start'><span t-field="remission.transfer_date"/></td>
                         <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
                         <td style="width: 50px;" class="tx_status text-center">

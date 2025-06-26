@@ -22,7 +22,7 @@
                 <tr class="active">
                     <th>Nota de débito #</th>
                     <th>Cliente</th>
-                    <th class="text-end">F. Venc.</th>
+                    <th class="text-start">F. Venc.</th>
                     <th class="tex-center">Envío Email</th>
                     <th class="text-center">Autorización</th>
                     <th class='text-end' title="Valor sin impuestos">Subtotal</th>
@@ -40,7 +40,7 @@
                             </a>
                         </td>
                         <td><span t-esc="debit_note.partner_id.name.title()"/></td>
-                        <td class="text-end"><span t-field="debit_note.invoice_date_due"/></td>
+                        <td class="text-start"><span t-field="debit_note.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
                                 <t t-set="is_sent" t-value="debit_note.xml_data_id.send_mail" />

@@ -22,8 +22,8 @@
                 <tr class="active">
                     <th>Liquidación #</th>
                     <th>Cliente</th>
-                    <th class="text-end">F. Factura</th>
-                    <th class="text-end d-none d-md-table-cell">F. Venc.</th>
+                    <th class="text-start">F. Factura</th>
+                    <th class="text-start">F. Venc.</th>
                     <th class="text-center">Envío Email</th>
                     <th class="text-center">Autorización</th>
                     <th class="text-end">Subtotal</th>
@@ -41,8 +41,8 @@
                             </a>
                         </td>
                         <td><span t-esc="liquidation.partner_id.name.title()"/></td>
-                        <td class="text-end"><span t-field="liquidation.invoice_date"/></td>
-                        <td class="text-end"><span t-field="liquidation.invoice_date_due"/></td>
+                        <td class="text-start"><span t-field="liquidation.invoice_date"/></td>
+                        <td class="text-start"><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
                                 <t t-set="is_sent" t-value="liquidation.xml_data_id.send_mail" />
