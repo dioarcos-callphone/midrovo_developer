@@ -59,8 +59,19 @@
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
-                            <span class="xml-icon" style="margin: 5px;">
+                            <!-- <span class="xml-icon" style="margin: 5px;">
                                 <a class="fa fa-file-code-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span> -->
+                            <span class="xml-icon" style="margin: 5px;">
+                                <t t-if="liquidation.xml_authorized">
+                                    <a class="fa fa-file-code-o fa-lg"
+                                    t-att-href="liquidation.get_portal_url(report_type='xml', download=True)"
+                                    style="color: green; font-weight: bold;"></a>
+                                </t>
+                                <t t-else="">
+                                    <span class="fa fa-file-code-o fa-lg"
+                                        style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                </t>
                             </span>
                         </td>
                     </tr>

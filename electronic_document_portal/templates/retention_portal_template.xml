@@ -80,8 +80,19 @@
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
                             </span>
-                            <span class="xml-icon" style="margin: 5px;">
+                            <!-- <span class="xml-icon" style="margin: 5px;">
                                 <a class="fa fa-file-code-o fa-lg" t-att-href="retention.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span> -->
+                            <span class="xml-icon" style="margin: 5px;">
+                                <t t-if="retention.xml_authorized">
+                                    <a class="fa fa-file-code-o fa-lg"
+                                    t-att-href="retention.get_portal_url(report_type='xml', download=True)"
+                                    style="color: green; font-weight: bold;"></a>
+                                </t>
+                                <t t-else="">
+                                    <span class="fa fa-file-code-o fa-lg"
+                                        style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                </t>
                             </span>
                         </td>
                     </tr>
@@ -117,8 +128,17 @@
                                     <div class="btn-group  flex-grow-1 me-1 mb-1">
                                         <a class="btn btn-danger btn-block o_download_btn" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" title="RIDE"><i class="fa fa-download"/> RIDE</a>
                                     </div>
-                                    <div class="btn-group  flex-grow-1 me-1 mb-1">
+                                    <!-- <div class="btn-group  flex-grow-1 me-1 mb-1">
                                         <a class="btn btn-success btn-block o_download_btn" t-att-href="retention.get_portal_url(report_type='xml', download=True)" title="XML"><i class="fa fa-download"/> XML</a>
+                                    </div> -->
+                                    <div class="btn-group flex-grow-1 me-1 mb-1">
+                                        <a t-attf-href="{{ retention.xml_authorized and retention.get_portal_url(report_type='xml', download=True) or '#' }}"
+                                        class="btn btn-block o_download_btn"
+                                        t-attf-class="{{ retention.xml_authorized and 'btn btn-success' or 'btn btn-secondary disabled' }}"
+                                        title="XML"
+                                        t-attf-style="{{ not retention.xml_authorized and 'pointer-events: none; opacity: 0.6;' or '' }}">
+                                            <i class="fa fa-download"/> XML
+                                        </a>
                                     </div>
                                     <div class="btn-group flex-grow-1 mb-1">
                                         <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-att-href="retention.get_portal_url(report_type='pdf')" id="print_retention_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
