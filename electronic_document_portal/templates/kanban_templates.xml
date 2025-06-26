@@ -22,6 +22,16 @@
                                     <span t-out="invoice.amount_residual"
                                         t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/>
                                 </p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="invoice.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="invoice.xml_data_id.send_mail" />
+                                    </t>
+                                </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
                                     t-att-href="invoice.get_portal_url(report_type='pdf', download=True)"/>
@@ -62,6 +72,16 @@
                                     <strong>Adeudado:</strong>
                                     <span t-out="refund.amount_residual"
                                         t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/>
+                                </p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="refund.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="refund.xml_data_id.send_mail" />
+                                    </t>
                                 </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
@@ -107,6 +127,16 @@
                                     <strong>Total:</strong>
                                     <span t-out="debit_note.amount_total_signed"
                                         t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
+                                </p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="debit_note.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="debit_note.xml_data_id.send_mail" />
+                                    </t>
                                 </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
@@ -154,6 +184,16 @@
                                     <strong>Total:</strong>
                                     <span t-out="liquidation.amount_total_signed"
                                         t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/>
+                                </p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="liquidation.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="liquidation.xml_data_id.send_mail" />
+                                    </t>
                                 </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
@@ -214,6 +254,16 @@
                                     <span t-esc="abs(retention.total)"
                                         t-options='{"widget": "monetary", "display_currency": display_currency}'/>
                                 </p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="retention.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="retention.xml_data_id.send_mail" />
+                                    </t>
+                                </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
                                     t-att-href="retention.get_portal_url(report_type='pdf', download=True)"/>
@@ -253,6 +303,16 @@
                                 <p class="mb-1"><strong>F. Fin:</strong> <span t-field="remission.transfer_date"/></p>
                                 <p class="mb-1"><strong>Transportista:</strong> <span t-field="remission.delivery_carrier"/></p>
                                 <p class="mb-1"><strong>Tipo Traslado:</strong> <span t-field="remission.remision_type"/></p>
+                                <p class="mb-1"><strong>Autorización:</strong> 
+                                    <t t-call="electronic_document_portal.sri_state_kanban_template">
+                                        <t t-set="state_sri" t-value="remission.state_sri"/>
+                                    </t>
+                                </p>
+                                <p class="mb-1"><strong>Envío Email:</strong> 
+                                    <t t-call="electronic_document_portal.email_state_template">
+                                        <t t-set="is_sent" t-value="remission.xml_data_id.send_mail" />
+                                    </t>
+                                </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
                                     t-att-href="remission.get_portal_url(report_type='pdf', download=True)"/>

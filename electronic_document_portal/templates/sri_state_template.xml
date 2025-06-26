@@ -51,6 +51,20 @@
         </t> -->
     </template>
 
+    <template id="sri_state_kanban_template" name="Template Kanban Estados SRI">
+        <t t-if="state_sri == 'authorized'">
+            <span class="text-bg-success w-75">
+                Documento autorizado
+            </span>
+        </t>
+
+        <t t-else="">
+            <span class="text-bg-danger w-75">
+                Documento no autorizado
+            </span>
+        </t>
+    </template>
+
     <!-- TEMPLATE PARA LOS ESTADOS DE EMAIL -->
     <template id="email_state_template" name="Template Estados de Email">
         <t t-if="is_sent">
