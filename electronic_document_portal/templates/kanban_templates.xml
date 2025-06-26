@@ -18,7 +18,7 @@
                                 <p class="mb-1"><strong>F. Emision:</strong> <span t-field="invoice.invoice_date"/></p>
                                 <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="invoice.invoice_date_due"/></p>
                                 <p class="mb-1">
-                                    <strong>Adeudado:</strong>
+                                    <strong>Total:</strong>
                                     <span t-out="invoice.amount_residual"
                                         t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/>
                                 </p>
@@ -73,7 +73,7 @@
                                 <p class="mb-1"><strong>F. Emision:</strong> <span t-field="refund.invoice_date"/></p>
                                 <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="refund.invoice_date_due"/></p>
                                 <p class="mb-1">
-                                    <strong>Adeudado:</strong>
+                                    <strong>Total:</strong>
                                     <span t-out="refund.amount_residual"
                                         t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/>
                                 </p>

@@ -27,7 +27,7 @@
                         <th class='text-start'>F. Venc.</th>
                         <th class="text-center">Envío Email</th>
                         <th class="text-center">Autorización</th>
-                        <th class="text-end">Adeudado</th>
+                        <th class="text-end">Total</th>
                         <th class="text-center" title="Descargar PDF o XML"><span class="fa fa-download fa-lg"></span></th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@
                                     <t t-set="state_sri" t-value="refund.state_sri"/>
                                 </t>
                             </td>
-                            <td class="text-end"><span t-out="-refund.amount_residual if refund.move_type == 'out_refund' else refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
+                            <td class="text-end"><span t-out="refund.amount_residual" t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/></td>
                             <td class="text-center">
                                 <span class="pdf-icon" style="margin: 5px;">
                                     <a class="fa fa-file-pdf-o fa-lg" t-att-href="refund.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
