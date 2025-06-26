@@ -36,8 +36,8 @@
                 <tr class="active">
                     <th>Guía de Remisión #</th>
                     <th>Cliente</th>
-                    <th class="text-end">F. Inicio</th>
-                    <th class='text-end'>F. Fin</th>
+                    <th class="text-start">F. Inicio</th>
+                    <th class='text-start'>F. Fin</th>
                     <th class="text-start">Transportista</th>
                     <th class="text-center">Tipo Traslado</th>
                     <th class="text-center">Envío Email</th>
@@ -55,8 +55,8 @@
                             </a>
                         </td>
                         <td style="width: 100px;"><span t-esc="remission.partner_id.name.title()"/></td>
-                        <td class="text-start"><span t-field="remission.delivery_date"/></td>
-                        <td class='text-start'><span t-field="remission.transfer_date"/></td>
+                        <td class="text-end"><span t-field="remission.delivery_date"/></td>
+                        <td class='text-end'><span t-field="remission.transfer_date"/></td>
                         <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
                         <td style="width: 50px;" class="tx_status text-center">
