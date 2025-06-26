@@ -43,10 +43,89 @@
 
 
     <!-- VISTA MOVIL NOTAS DE CREDITO -->
-
+    <template id="kanban_template_refund" name="Vista Movil de Notas de credito">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="refunds" t-as="refund">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="refund.get_portal_url()" t-att-title="refund.name">
+                                        <t t-out="refund.name"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="refund.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Emision:</strong> <span t-field="refund.invoice_date"/></p>
+                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="refund.invoice_date_due"/></p>
+                                <p class="mb-1">
+                                    <strong>Adeudado:</strong>
+                                    <span t-out="refund.amount_residual"
+                                        t-options='{"widget": "monetary", "display_currency": refund.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="refund.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="refund.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
 
 
     <!-- VISTA MOVIL NOTAS DE DEBITO -->
+    <template id="kanban_template_debit_note" name="Vista Movil de Notas de debito">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="debit_notes" t-as="debit_note">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
+                                        <t t-out="debit_note.name"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="debit_note.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="debit_note.invoice_date_due"/></p>
+                                <p class="mb-1">
+                                    <strong>Subtotal:</strong>
+                                    <span t-out="debit_note.amount_untaxed_signed"
+                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Total:</strong>
+                                    <span t-out="debit_note.amount_total_signed"
+                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="refund.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="refund.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
 
 
 
