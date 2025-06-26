@@ -22,7 +22,13 @@
 
         <t t-if="state_sri == 'authorized'">
             <span class="badge badge-success text-bg-success w-75">
-                <span class="d-none d-md-inline"> Autorizado</span>
+                Autorizado
+            </span>
+        </t>
+
+        <t t-else="">
+            <span class="badge badge-success text-bg-danger w-75">
+                No autorizado
             </span>
         </t>
 
@@ -37,12 +43,6 @@
                 <span class="d-none d-md-inline"> No autorizado</span>
             </span>
         </t> -->
-
-        <t t-else="">
-            <span class="badge badge-success text-bg-danger w-75">
-                <span class="d-none d-md-inline"> No autorizado</span>
-            </span>
-        </t>
 
         <!-- <t t-if="state_sri == 'cancel'">
             <span class="badge badge-success text-bg-dark w-75">
