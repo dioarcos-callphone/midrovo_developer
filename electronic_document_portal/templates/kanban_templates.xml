@@ -264,18 +264,22 @@
                                         <t t-set="is_sent" t-value="retention.xml_data_id.send_mail" />
                                     </t>
                                 </p>
-                                <div class="d-flex justify-content-end gap-2 mt-2">
-                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 2rem;"
-                                    t-att-href="retention.get_portal_url(report_type='pdf', download=True)"/>
-                                    
-                                    <t t-if="retention.xml_authorized">
-                                        <a class="fa fa-file-code-o" style="color: green; font-size: 2rem;"
-                                        t-att-href="retention.get_portal_url(report_type='xml', download=True)"/>
-                                    </t>
-                                    <t t-else="">
-                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5; font-size: 2rem;"></span>
-                                    </t>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <span class="text-muted">Descargue sus documentos</span>
+                                    <div class="d-flex gap-2">
+                                        <a class="fa fa-file-pdf-o" style="color: red; font-size: 2rem;"
+                                        t-att-href="retention.get_portal_url(report_type='pdf', download=True)"/>
+                                        
+                                        <t t-if="retention.xml_authorized">
+                                            <a class="fa fa-file-code-o" style="color: green; font-size: 2rem;"
+                                            t-att-href="retention.get_portal_url(report_type='xml', download=True)"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5; font-size: 2rem;"></span>
+                                        </t>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
