@@ -202,17 +202,17 @@
                                 <p class="mb-1">
                                     <strong>Ret. IVA:</strong>
                                     <span t-esc="abs(retention.total_iva)"
-                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                        t-options='{"widget": "monetary", "display_currency": display_currency}'/>
                                 </p>
                                 <p class="mb-1">
                                     <strong>Ret. RENTA:</strong>
                                     <span t-esc="abs(retention.total_renta)"
-                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                        t-options='{"widget": "monetary", "display_currency": display_currency}'/>
                                 </p>
                                 <p class="mb-1">
                                     <strong>Total:</strong>
                                     <span t-esc="abs(retention.total)"
-                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                        t-options='{"widget": "monetary", "display_currency": display_currency}'/>
                                 </p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
