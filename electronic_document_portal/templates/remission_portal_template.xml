@@ -59,7 +59,7 @@
                         <td class='text-end'><span t-field="remission.transfer_date"/></td>
                         <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
-                        <td class="tx_status text-center">
+                        <td style="width: 50px;" class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
                                 <t t-set="is_sent" t-value="remission.xml_data_id.send_mail" />
                             </t>
