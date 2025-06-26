@@ -21,6 +21,7 @@
             <thead>
                 <tr class="active">
                     <th>Nota de débito #</th>
+                    <th>Cliente</th>
                     <th class="text-end">F. Venc.</th>
                     <th class="tex-center">Envío Email</th>
                     <th class="text-center">Autorización</th>

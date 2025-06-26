@@ -55,6 +55,7 @@
                                 <em t-else="">Borrador de retenciones</em>
                             </a>
                         </td>
+                        <td><span t-esc="retention.partner_id.name.title()"/></td>
                         <td class="text-end"><span t-field="retention.creation_date"/></td>
                         <t t-if="retention.invoice_id">
                             <td class="text-center"><span t-field="retention.invoice_id.name"/></td>

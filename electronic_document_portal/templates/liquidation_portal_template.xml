@@ -21,6 +21,7 @@
             <thead>
                 <tr class="active">
                     <th>Liquidación #</th>
+                    <th>Cliente</th>
                     <th class="text-end">F. Factura</th>
                     <th class="text-end d-none d-md-table-cell">F. Venc.</th>
                     <th class="text-center">Envío Email</th>
