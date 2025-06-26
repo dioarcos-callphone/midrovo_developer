@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
-        <xpath expr="//form[@t-if='searchbar_inputs']/div" position="after">
+        <xpath expr="//form[@t-if='searchbar_inputs']/div" position="inside">
             <t t-if="clear_search">
                 <a t-att-href="clear_search" class="btn btn-outline-secondary" title="Limpiar búsqueda">
                     <span class="fa fa-times"/>
