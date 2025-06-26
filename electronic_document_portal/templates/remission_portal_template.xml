@@ -127,11 +127,11 @@
                                         <a class="btn btn-success btn-block o_download_btn" t-att-href="remission.get_portal_url(report_type='xml', download=True)" title="XML"><i class="fa fa-download"/> XML</a>
                                     </div> -->
                                     <div class="btn-group flex-grow-1 me-1 mb-1">
-                                        <a t-attf-href="{{ invoice.xml_authorized and invoice.get_portal_url(report_type='xml', download=True) or '#' }}"
+                                        <a t-attf-href="{{ remission.xml_authorized and remission.get_portal_url(report_type='xml', download=True) or '#' }}"
                                         class="btn btn-block o_download_btn"
-                                        t-attf-class="{{ invoice.xml_authorized and 'btn btn-success' or 'btn btn-secondary disabled' }}"
+                                        t-attf-class="{{ remission.xml_authorized and 'btn btn-success' or 'btn btn-secondary disabled' }}"
                                         title="XML"
-                                        t-attf-style="{{ not invoice.xml_authorized and 'pointer-events: none; opacity: 0.6;' or '' }}">
+                                        t-attf-style="{{ not remission.xml_authorized and 'pointer-events: none; opacity: 0.6;' or '' }}">
                                             <i class="fa fa-download"/> XML
                                         </a>
                                     </div>
