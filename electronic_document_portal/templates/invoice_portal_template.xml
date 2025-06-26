@@ -52,11 +52,11 @@
                     <tr class="active">
                         <th>Factura #</th>
                         <th>Cliente</th>
-                        <th class="text-center">F. Emisión</th>
-                        <th class='text-center d-none d-md-table-cell'>F. Venc.</th>
+                        <th class="text-end">F. Emisión</th>
+                        <th class='text-end d-none d-md-table-cell'>F. Venc.</th>
                         <th class="text-center">Envío Email</th>
                         <th class="text-center">Autorización</th>
-                        <th class="text-center">Adeudado</th>
+                        <th class="text-end">Adeudado</th>
                         <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                     </tr>
                 </thead>
@@ -70,8 +70,8 @@
                                 </a>
                             </td>
                             <td><span t-esc="invoice.partner_id.name.title()"/></td>
-                            <td class="text-center"><span t-field="invoice.invoice_date"/></td>
-                            <td class='text-center d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
+                            <td class="text-end"><span t-field="invoice.invoice_date"/></td>
+                            <td class='text-end d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
                                 <t t-call="electronic_document_portal.email_state_template">
                                     <t t-set="is_sent" t-value="invoice.xml_data_id.send_mail" />
@@ -82,7 +82,7 @@
                                     <t t-set="state_sri" t-value="invoice.state_sri"/>
                                 </t>
                             </td>
-                            <td class="text-center"><span t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                            <td class="text-end"><span t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                             <td class="text-center">
                                 <span class="pdf-icon" style="margin: 5px;">
                                     <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
