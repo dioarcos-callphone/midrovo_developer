@@ -122,13 +122,7 @@ class InvoicePortalController(PortalAccount):
             'page_name': 'invoice',
             'pager': {
                 "url": url,
-                "url_args": {
-                    'date_begin': date_begin,
-                    'date_end': date_end,
-                    'sortby': sortby,
-                    'search_in': search_in,
-                    'search': search
-                },
+                "url_args": {'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
                 "total": AccountInvoice.search_count(domain) if AccountInvoice.check_access_rights('read', raise_exception=False) else 0,
                 "page": page,
                 "step": self._items_per_page,
@@ -140,6 +134,7 @@ class InvoicePortalController(PortalAccount):
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
             'search_in': search_in,
+            'search': search,
         })
         return values
 
