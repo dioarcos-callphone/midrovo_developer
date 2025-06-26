@@ -56,6 +56,7 @@
         'templates/remission_portal_template.xml',
         'templates/retention_portal_template.xml',
         'templates/button_filter_template.xml',
+        'templates/kanban_templates.xml',
         'views/user_extend_view.xml',
         'views/invoice_view.xml',
         'views/remission_view.xml',

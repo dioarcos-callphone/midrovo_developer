@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- VISTA MOVIL FACTURAS -->
+    <template id="kanban_template_invoice" name="Vista Movil de Facturas">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="invoices" t-as="invoice">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
+                                        <t t-out="invoice.name"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="invoice.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Emision:</strong> <span t-field="invoice.invoice_date"/></p>
+                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="invoice.invoice_date_due"/></p>
+                                <p class="mb-1">
+                                    <strong>Adeudado:</strong>
+                                    <span t-out="invoice.amount_residual"
+                                        t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="invoice.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="invoice.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="invoice.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+
+    <!-- VISTA MOVIL NOTAS DE CREDITO -->
+
+
+
+    <!-- VISTA MOVIL NOTAS DE DEBITO -->
+
+
+
+    <!-- VISTA MOVIL LIQUIDACIONES -->
+    <template id="kanban_template_liquidation" name="Vista Movil de Liqiudaciones">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="liquidations" t-as="liquidation">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="liquidation.get_portal_url()" t-att-title="liquidation.name">
+                                        <t t-out="liquidation.name"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="liquidation.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Factura:</strong> <span t-field="liquidation.invoice_date"/></p>
+                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="liquidation.invoice_date_due"/></p>
+                                <p class="mb-1">
+                                    <strong>Subtotal:</strong>
+                                    <span t-out="liquidation.amount_untaxed_signed"
+                                        t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Total:</strong>
+                                    <span t-out="liquidation.amount_total_signed"
+                                        t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="liquidation.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="liquidation.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+</odoo>
