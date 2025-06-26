@@ -61,7 +61,7 @@
                             <td class="text-start"><span t-field="retention.invoice_id.name"/></td>
                         </t>
                         <t t-else="">
-                            <td class="text-center"><span t-field="retention.factura_origen_api"/></td>
+                            <td class="text-start"><span t-field="retention.factura_origen_api"/></td>
                         </t>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
