@@ -72,7 +72,7 @@
                             <td class='text-center d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
                                 <t t-call="electronic_document_portal.email_state_template">
-                                    <t t-set="is_sent" t-value="invoice.is_move_sent" />
+                                    <t t-set="is_sent" t-value="invoice.xml_data_id.send_mail" />
                                 </t>
                             </td>
                             <td class="tx_status text-center">

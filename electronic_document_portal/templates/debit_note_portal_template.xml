@@ -42,7 +42,7 @@
                         <td class="text-center"><span t-field="debit_note.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
-                                <t t-set="is_sent" t-value="debit_note.is_move_sent" />
+                                <t t-set="is_sent" t-value="debit_note.xml_data_id.send_mail" />
                             </t>
                         </td>
                         <td class="tx_status text-center">

@@ -42,7 +42,7 @@
                         <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
-                                <t t-set="is_sent" t-value="refund.is_move_sent" />
+                                <t t-set="is_sent" t-value="refund.xml_data_id.send_mail" />
                             </t>
                         </td>
                         <td class="tx_status text-center">
