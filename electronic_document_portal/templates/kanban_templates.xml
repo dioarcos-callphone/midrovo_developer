@@ -265,7 +265,7 @@
                                     </t>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <span class="text-muted">Descargue sus documentos</span>
+                                    <span class="text-muted">Descargue sus documentos <i class="fa fa-hand-o-right me-1" style="color: orange;"></i></span>
                                     <div class="d-flex gap-2">
                                         <a class="fa fa-file-pdf-o" style="color: red; font-size: 2rem;"
                                         t-att-href="retention.get_portal_url(report_type='pdf', download=True)"/>
