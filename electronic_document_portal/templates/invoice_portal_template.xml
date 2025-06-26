@@ -51,6 +51,7 @@
                 <thead>
                     <tr class="active">
                         <th>Factura #</th>
+                        <th>Cliente</th>
                         <th class="text-center">Fecha de Emisión</th>
                         <th class='text-center d-none d-md-table-cell'>Fecha de Vencimiento</th>
                         <th class="text-center">Estado de Envío</th>
@@ -68,6 +69,7 @@
                                     <em t-else="">Borrador de Factura</em>
                                 </a>
                             </td>
+                            <td><span t-esc="invoice.partner_id.name.capitalize()"/></td>
                             <td class="text-center"><span t-field="invoice.invoice_date"/></td>
                             <td class='text-center d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
