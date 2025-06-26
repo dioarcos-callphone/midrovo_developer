@@ -35,13 +35,14 @@
             <thead>
                 <tr class="active">
                     <th>Retención #</th>
-                    <th class="text-center">Fecha de Emisión</th>
-                    <th class="text-center">Factura Asociada</th>
-                    <th class="text-center">Estado de Envío</th>
-                    <th class="text-center">Estado de Autorización</th>
-                    <th class="text-center">Total I.V.A.</th>
-                    <th class="text-center">Total I.R.</th>
-                    <th class="text-center">Total</th>
+                    <th>Cliente</th>
+                    <th class="text-end">F. Emisión</th>
+                    <th class="text-center">Factura</th>
+                    <th class="text-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
+                    <th class="text-end">Ret. IVA</th>
+                    <th class="text-end">Ret. RENTA</th>
+                    <th class="text-end">Total</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -54,7 +55,7 @@
                                 <em t-else="">Borrador de retenciones</em>
                             </a>
                         </td>
-                        <td class="text-center"><span t-field="retention.creation_date"/></td>
+                        <td class="text-end"><span t-field="retention.creation_date"/></td>
                         <t t-if="retention.invoice_id">
                             <td class="text-center"><span t-field="retention.invoice_id.name"/></td>
                         </t>
@@ -71,9 +72,9 @@
                                 <t t-set="state_sri" t-value="retention.state_sri"/>
                             </t>
                         </td>
-                        <td class="text-center"><span t-esc="abs(retention.total_iva)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
-                        <td class="text-center"><span t-esc="abs(retention.total_renta)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
-                        <td class="text-center"><span t-esc="abs(retention.total)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-end"><span t-esc="abs(retention.total_iva)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-end"><span t-esc="abs(retention.total_renta)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
+                        <td class="text-end"><span t-esc="abs(retention.total)" t-options='{"widget": "monetary", "display_currency": display_currency}' /></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="retention.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>

@@ -21,12 +21,13 @@
             <thead>
                 <tr class="active">
                     <th>Nota de crédito #</th>
-                    <th>Fecha de nota de crédito</th>
-                    <th class='d-none d-md-table-cell'>Fecha de vencimiento</th>
-                    <th class="text-center">Estado de Envío</th>
-                    <th class="text-center">Estado de Autorización</th>
-                    <th class="text-end">Importe adeudado</th>
-                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                    <th>Cliente</th>
+                    <th class="text-end">F. Emisión</th>
+                    <th class='text-end'>F. Venc.</th>
+                    <th class="text-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
+                    <th class="text-end">Adeudado</th>
+                    <th class="text-center" title="Descargar PDF o XML"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +39,9 @@
                                 <em t-else="">Borrador de nota de crédito</em>
                             </a>
                         </td>
-                        <td><span t-field="refund.invoice_date"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="refund.invoice_date_due"/></td>
+                        <td><span t-esc="refund.partner_id.name.title()"/></td>
+                        <td class='teext-end'><span t-field="refund.invoice_date"/></td>
+                        <td class='teext-end'><span t-field="refund.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
                                 <t t-set="is_sent" t-value="refund.xml_data_id.send_mail" />

@@ -34,14 +34,15 @@
         <t t-if="remissions" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
-                    <th>Guía de remisión #</th>
-                    <th class="text-center">Fecha inicio de traslado</th>
-                    <th class='text-center d-none d-md-table-cell'>Fecha fin de traslado</th>
-                    <th class="text-center">Dirección</th>
-                    <th class="text-center">Transportista</th>
-                    <th class="text-center">Tipo de traslado</th>
-                    <th class="text-center">Estado de Envío</th>
-                    <th class="text-center">Estado de Autorización</th>
+                    <th>Guía de Remisión #</th>
+                    <th>Cliente</th>
+                    <th class="text-end">F. Inicio</th>
+                    <th class='text-end'>F. Fin</th>
+                    <th class="text-start">Dirección</th>
+                    <th class="text-start">Transportista</th>
+                    <th class="text-center">Tipo Traslado</th>
+                    <th class="text-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -54,10 +55,11 @@
                                 <em t-else="">Borrador de Guías de Remisión</em>
                             </a>
                         </td>
-                        <td class="text-center"><span t-field="remission.delivery_date"/></td>
-                        <td class='text-center d-none d-md-table-cell'><span t-field="remission.transfer_date"/></td>
-                        <td class="text-center"><span t-field="remission.delivery_address"/></td>
-                        <td class="text-center"><span t-field="remission.delivery_carrier"/></td>
+                        <td><span t-esc="remission.partner_id.name.title()"/></td>
+                        <td class="text-end"><span t-field="remission.delivery_date"/></td>
+                        <td class='text-end'><span t-field="remission.transfer_date"/></td>
+                        <td class="text-start"><span t-field="remission.delivery_address"/></td>
+                        <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
                         <td class="text-center"><span t-field="remission.remision_type"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">

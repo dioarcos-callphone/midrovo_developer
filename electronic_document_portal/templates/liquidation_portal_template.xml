@@ -20,13 +20,13 @@
         <t t-if="liquidations" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
-                    <th>Liquidación de compra #</th>
-                    <th class="text-center">Fecha de la factura</th>
-                    <th class="text-center d-none d-md-table-cell">Fecha de vencimiento</th>
-                    <th class="text-center">Estado de Envío</th>
-                    <th class="text-center">Estado de Autorización</th>
-                    <th class="text-center">Impuestos no incluidos</th>
-                    <th class="text-center">Total</th>
+                    <th>Liquidación #</th>
+                    <th class="text-end">F. Factura</th>
+                    <th class="text-end d-none d-md-table-cell">F. Venc.</th>
+                    <th class="text-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
+                    <th class="text-end">Subtotal</th>
+                    <th class="text-end">Total</th>
                     <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                 </tr>
             </thead>
@@ -39,8 +39,9 @@
                                 <em t-else="">Borrador de liquidaciones de compras</em>
                             </a>
                         </td>
-                        <td class="text-center"><span t-field="liquidation.invoice_date"/></td>
-                        <td class="text-center d-none d-md-table-cell"><span t-field="liquidation.invoice_date_due"/></td>
+                        <td><span t-esc="liquidation.partner_id.name.title()"/></td>
+                        <td class="text-end"><span t-field="liquidation.invoice_date"/></td>
+                        <td class="text-end"><span t-field="liquidation.invoice_date_due"/></td>
                         <td class="tx_status text-center">
                             <t t-call="electronic_document_portal.email_state_template">
                                 <t t-set="is_sent" t-value="liquidation.xml_data_id.send_mail" />
@@ -51,8 +52,8 @@
                                 <t t-set="state_sri" t-value="liquidation.state_sri"/>
                             </t>
                         </td>
-                        <td class="text-center"><span t-out="liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
-                        <td class="text-center"><span t-out="liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-end"><span t-out="liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-end"><span t-out="liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
                         <td class="text-center">
                             <span class="pdf-icon" style="margin: 5px;">
                                 <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
