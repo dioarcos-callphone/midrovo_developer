@@ -36,11 +36,11 @@
                                     <span class="text-muted">Descargue sus documentos <i class="fa fa-hand-o-right me-1" style="color: orange;"></i></span>
                                     <div class="d-flex gap-2">
                                         <a class="fa fa-file-pdf-o" style="color: red; font-size: 2rem;"
-                                        t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>
+                                        t-att-href="invoice.get_portal_url(report_type='pdf', download=True)"/>
                                         
-                                        <t t-if="refund.xml_authorized">
+                                        <t t-if="invoice.xml_authorized">
                                             <a class="fa fa-file-code-o" style="color: green; font-size: 2rem;"
-                                            t-att-href="refund.get_portal_url(report_type='xml', download=True)"/>
+                                            t-att-href="invoice.get_portal_url(report_type='xml', download=True)"/>
                                         </t>
                                         <t t-else="">
                                             <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5; font-size: 2rem;"></span>
