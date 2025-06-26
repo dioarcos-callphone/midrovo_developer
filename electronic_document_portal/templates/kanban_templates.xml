@@ -236,7 +236,7 @@
 
 
     <!-- GUIAS DE REMISION -->
-    <template id="kanban_template_remision" name="Vista Movil de Guias de remision">
+    <template id="kanban_template_remission" name="Vista Movil de Guias de remision">
         <div class="d-md-none">
             <div class="row row-cols-1 g-2">
                 <t t-foreach="remissions" t-as="remission">
@@ -255,10 +255,10 @@
                                 <p class="mb-1"><strong>Tipo Traslado:</strong> <span t-field="remission.remision_type"/></p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
-                                    t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>
-                                    <t t-if="refund.xml_authorized">
+                                    t-att-href="remission.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="remission.xml_authorized">
                                         <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
-                                        t-att-href="refund.get_portal_url(report_type='xml', download=True)"/>
+                                        t-att-href="remission.get_portal_url(report_type='xml', download=True)"/>
                                     </t>
                                     <t t-else="">
                                         <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>

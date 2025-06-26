@@ -31,67 +31,72 @@
             </div>
             <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
-        <t t-if="remissions" t-call="portal.portal_table">
-            <thead>
-                <tr class="active">
-                    <th>Guía de Remisión #</th>
-                    <th>Cliente</th>
-                    <th class="text-start">F. Inicio</th>
-                    <th class='text-start'>F. Fin</th>
-                    <th class="text-start">Transportista</th>
-                    <th class="text-center">Tipo Traslado</th>
-                    <th class="text-center">Envío Email</th>
-                    <th class="text-center">Autorización</th>
-                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <t t-foreach="remissions" t-as="remission">
-                    <tr>
-                        <td>
-                            <a t-att-href="remission.get_portal_url()" t-att-title="remission.document_number">
-                                <span t-if="remission.document_number != '/'">Guía.</span> <t t-out="remission.document_number" t-if="remission.document_number != '/'"/>
-                                <em t-else="">Borrador de Guías de Remisión</em>
-                            </a>
-                        </td>
-                        <td style="width: 100px;"><span t-esc="remission.partner_id.name.title()"/></td>
-                        <td class="text-start"><span t-field="remission.delivery_date"/></td>
-                        <td class='text-start'><span t-field="remission.transfer_date"/></td>
-                        <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
-                        <td class="text-center"><span t-field="remission.remision_type"/></td>
-                        <td style="width: 50px;" class="tx_status text-center">
-                            <t t-call="electronic_document_portal.email_state_template">
-                                <t t-set="is_sent" t-value="remission.xml_data_id.send_mail" />
-                            </t>
-                        </td>
-                        <td class="tx_status text-center">
-                            <t t-call="electronic_document_portal.sri_state_template">
-                                <t t-set="state_sri" t-value="remission.state_sri"/>
-                            </t>
-                        </td>
-                        <td class="text-center">
-                            <span class="pdf-icon" style="margin: 5px;">
-                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="remission.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
-                            </span>
-                            <!-- <span class="xml-icon" style="margin: 5px;">
-                                <a class="fa fa-file-code-o fa-lg" t-att-href="remission.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
-                            </span> -->
-                            <span class="xml-icon" style="margin: 5px;">
-                                <t t-if="remission.xml_authorized">
-                                    <a class="fa fa-file-code-o fa-lg"
-                                    t-att-href="remission.get_portal_url(report_type='xml', download=True)"
-                                    style="color: green; font-weight: bold;"></a>
-                                </t>
-                                <t t-else="">
-                                    <span class="fa fa-file-code-o fa-lg"
-                                        style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
-                                </t>
-                            </span>
-                        </td>
+        <div class="d-none d-md-block">
+            <t t-if="remissions" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Guía de Remisión #</th>
+                        <th>Cliente</th>
+                        <th class="text-start">F. Inicio</th>
+                        <th class='text-start'>F. Fin</th>
+                        <th class="text-start">Transportista</th>
+                        <th class="text-center">Tipo Traslado</th>
+                        <th class="text-center">Envío Email</th>
+                        <th class="text-center">Autorización</th>
+                        <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                     </tr>
-                </t>
-            </tbody>
-        </t>
+                </thead>
+                <tbody>
+                    <t t-foreach="remissions" t-as="remission">
+                        <tr>
+                            <td>
+                                <a t-att-href="remission.get_portal_url()" t-att-title="remission.document_number">
+                                    <span t-if="remission.document_number != '/'">Guía.</span> <t t-out="remission.document_number" t-if="remission.document_number != '/'"/>
+                                    <em t-else="">Borrador de Guías de Remisión</em>
+                                </a>
+                            </td>
+                            <td style="width: 100px;"><span t-esc="remission.partner_id.name.title()"/></td>
+                            <td class="text-start"><span t-field="remission.delivery_date"/></td>
+                            <td class='text-start'><span t-field="remission.transfer_date"/></td>
+                            <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
+                            <td class="text-center"><span t-field="remission.remision_type"/></td>
+                            <td style="width: 50px;" class="tx_status text-center">
+                                <t t-call="electronic_document_portal.email_state_template">
+                                    <t t-set="is_sent" t-value="remission.xml_data_id.send_mail" />
+                                </t>
+                            </td>
+                            <td class="tx_status text-center">
+                                <t t-call="electronic_document_portal.sri_state_template">
+                                    <t t-set="state_sri" t-value="remission.state_sri"/>
+                                </t>
+                            </td>
+                            <td class="text-center">
+                                <span class="pdf-icon" style="margin: 5px;">
+                                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="remission.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                </span>
+                                <!-- <span class="xml-icon" style="margin: 5px;">
+                                    <a class="fa fa-file-code-o fa-lg" t-att-href="remission.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                                </span> -->
+                                <span class="xml-icon" style="margin: 5px;">
+                                    <t t-if="remission.xml_authorized">
+                                        <a class="fa fa-file-code-o fa-lg"
+                                        t-att-href="remission.get_portal_url(report_type='xml', download=True)"
+                                        style="color: green; font-weight: bold;"></a>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o fa-lg"
+                                            style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                    </t>
+                                </span>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </div>
+
+        <!-- Vista KANBAN para móviles -->
+        <t t-call="electronic_document_portal.kanban_template_remission"/>
       </t>
     </template>
 
