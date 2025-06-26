@@ -52,11 +52,11 @@
                     <tr class="active">
                         <th>Factura #</th>
                         <th>Cliente</th>
-                        <th class="text-center">Fecha de Emisión</th>
-                        <th class='text-center d-none d-md-table-cell'>Fecha de Vencimiento</th>
-                        <th class="text-center">Estado de Envío</th>
-                        <th class="text-center">Estado de Autorización</th>
-                        <th class="text-center">Importe Adeudado</th>
+                        <th class="text-center">F. Emisión</th>
+                        <th class='text-center d-none d-md-table-cell'>F. Venc.</th>
+                        <th class="text-center">Envío Email</th>
+                        <th class="text-center">Autorización</th>
+                        <th class="text-center">Adeudado</th>
                         <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
                     </tr>
                 </thead>
