@@ -174,4 +174,109 @@
         </div>
     </template>
 
+
+    <!-- RETENCIONES -->
+    <template id="kanban_template_retention" name="Vista Movil de Retenciones">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="retentions" t-as="retention">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="retention.get_portal_url()" t-att-title="retention.l10n_latam_document_number">
+                                        Ret. <t t-out="retention.l10n_latam_document_number"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="retention.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Emision:</strong> <span t-field="retention.creation_date"/></p>
+                                <p class="mb-1">
+                                    <strong>Factura:</strong> 
+                                    <t t-if="retention.invoice_id">
+                                        <span t-field="retention.invoice_id.name" />
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="retention.factura_origen_api" />
+                                    </t>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Ret. IVA:</strong>
+                                    <span t-esc="abs(retention.total_iva)"
+                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Ret. RENTA:</strong>
+                                    <span t-esc="abs(retention.total_renta)"
+                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Total:</strong>
+                                    <span t-esc="abs(retention.total)"
+                                        t-options='{"widget": "monetary", "display_currency": retention.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="retention.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="retention.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="retention.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+
+
+    <!-- GUIAS DE REMISION -->
+    <template id="kanban_template_debit_note" name="Vista Movil de Notas de debito">
+        <div class="d-md-none">
+            <div class="row row-cols-1 g-2">
+                <t t-foreach="debit_notes" t-as="debit_note">
+                    <div class="col">
+                        <div class="card shadow-sm p-2">
+                            <div class="card-body">
+                                <h6>
+                                    <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
+                                        <t t-out="debit_note.name"/>
+                                    </a>
+                                </h6>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="debit_note.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="debit_note.invoice_date_due"/></p>
+                                <p class="mb-1">
+                                    <strong>Subtotal:</strong>
+                                    <span t-out="debit_note.amount_untaxed_signed"
+                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
+                                </p>
+                                <p class="mb-1">
+                                    <strong>Total:</strong>
+                                    <span t-out="debit_note.amount_total_signed"
+                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
+                                </p>
+                                <div class="d-flex justify-content-end gap-2 mt-2">
+                                    <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
+                                    t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>
+                                    <t t-if="refund.xml_authorized">
+                                        <a class="fa fa-file-code-o" style="color: green; font-size: 1.2rem;"
+                                        t-att-href="refund.get_portal_url(report_type='xml', download=True)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o" style="color: gray; opacity: 0.5;"></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
 </odoo>
