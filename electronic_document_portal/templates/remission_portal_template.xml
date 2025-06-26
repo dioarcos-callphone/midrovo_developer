@@ -54,7 +54,7 @@
                                 <em t-else="">Borrador de Guías de Remisión</em>
                             </a>
                         </td>
-                        <td class="w-25"><span t-esc="remission.partner_id.name.title()"/></td>
+                        <td style="width: 100px;"><span t-esc="remission.partner_id.name.title()"/></td>
                         <td class="text-end"><span t-field="remission.delivery_date"/></td>
                         <td class='text-end'><span t-field="remission.transfer_date"/></td>
                         <td class="text-start"><span t-field="remission.delivery_carrier"/></td>
