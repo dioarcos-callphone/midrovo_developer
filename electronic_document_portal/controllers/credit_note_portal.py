@@ -63,7 +63,7 @@ class CreditNotePortalController(PortalAccount):
         }
     
 
-    def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, domain=None, url="/my/refunds"):
+    def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/refunds"):
         values = self._prepare_portal_layout_values()
         CreditNote = request.env['account.move']
 
@@ -77,6 +77,11 @@ class CreditNotePortalController(PortalAccount):
         if not sortby:
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_inputs = self._get_searchbar_inputs()
+
+        if search and search_in:
+            domain += self._get_search_domain(search_in, search)
 
         searchbar_filters = self._get_credit_note_searchbar_filters()
         # default filter by value
@@ -109,6 +114,8 @@ class CreditNotePortalController(PortalAccount):
             'sortby': sortby,
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
+            'searchbar_inputs': searchbar_inputs,
+            'search_in': search_in,
         })
         
         return values
@@ -116,8 +123,8 @@ class CreditNotePortalController(PortalAccount):
 
     # metodo que genera el contenido de notas de credito
     @http.route(['/my/refunds', '/my/refunds/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
-        values = self._prepare_my_refunds_values(page, date_begin, date_end, sortby, filterby)
+    def portal_my_refund(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
+        values = self._prepare_my_refunds_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
         pager = portal_pager(**values['pager'])

@@ -194,6 +194,7 @@ class RemissionPortalController(CustomerPortal):
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
+            'search_in': search_in,
         })
         
         return values

@@ -81,7 +81,7 @@ class LiquidationPortalController(PortalAccount):
         }
     
 
-    def _prepare_my_liquidation_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='all', domain=None, url="/my/liquidations"):
+    def _prepare_my_liquidation_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/liquidations"):
         values = self._prepare_portal_layout_values()
         
         Liquidation = request.env['account.move']
@@ -134,13 +134,14 @@ class LiquidationPortalController(PortalAccount):
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
+            'search_in': search_in,
         })
         
         return values
     
 
     @http.route(['/my/liquidations', '/my/liquidations/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_liquidation(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
+    def portal_my_liquidation(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
         # Metodo que genera el contenido de retenciones
         values = self._prepare_my_liquidation_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 

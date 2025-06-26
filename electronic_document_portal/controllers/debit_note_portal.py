@@ -144,15 +144,16 @@ class DebitNotePortalController(PortalAccount):
             'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
+            'search_in': search_in,
         })
         
         return values
     
     
     @http.route(['/my/debit_notes', '/my/debit_notes/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_debit_note(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+    def portal_my_debit_note(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
         # Metodo que genera el contenido de notas de debito
-        values = self._prepare_my_debit_notes_values(page, date_begin, date_end, sortby, filterby)
+        values = self._prepare_my_debit_notes_values(page, date_begin, date_end, sortby, filterby, search, search_in)
 
         # pager
         pager = portal_pager(**values['pager'])

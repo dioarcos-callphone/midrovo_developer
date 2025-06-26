@@ -138,7 +138,6 @@ class InvoicePortalController(PortalAccount):
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
             'search_in': search_in,
-            'searchbar_inputs': searchbar_inputs,
         })
         return values
 
