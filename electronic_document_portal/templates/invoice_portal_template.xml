@@ -69,7 +69,7 @@
                                     <em t-else="">Borrador de Factura</em>
                                 </a>
                             </td>
-                            <td><span t-esc="invoice.partner_id.name.capitalize()"/></td>
+                            <td><span t-esc="invoice.partner_id.name.title()"/></td>
                             <td class="text-center"><span t-field="invoice.invoice_date"/></td>
                             <td class='text-center d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
