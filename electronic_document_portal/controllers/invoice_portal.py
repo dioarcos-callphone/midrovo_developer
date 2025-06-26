@@ -9,8 +9,8 @@ from odoo.http import request
 from collections import OrderedDict
 import base64
 
-# import logging
-# _logger = logging.getLogger(__name__)
+import logging
+_logger = logging.getLogger(__name__)
 
 class InvoicePortalController(PortalAccount):
 
@@ -98,6 +98,8 @@ class InvoicePortalController(PortalAccount):
         order = searchbar_sortings[sortby]['order']
 
         searchbar_inputs = self._get_searchbar_inputs()
+
+        _logger.info(f'MOSTRANDO SEARCH >>>> { search }')
 
         if search and search_in:
             domain += self._get_search_domain(search_in, search)
