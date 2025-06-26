@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_withhold_portal,account.withhold.portal,electronic_document_portal.model_account_withhold,base.group_portal,1,0,0,0
 acces_account_withhold_line_portal,account.withhold.line.portal,ec_account_edi.model_account_withhold_line,base.group_portal,1,0,0,0
+access_sri_xml_data,access.sri.xml.data,ec_account_edi.model_sri_xml_data,base.group_portal,1,0,0,0
 
 access_account_tax_portal,account.tax,account.model_account_tax,base.group_portal,1,0,0,0
 access_account_tax_group_portal,account.tax.group,account.model_account_tax_group,base.group_portal,1,0,0,0
