@@ -42,9 +42,9 @@ class LiquidationPortalController(PortalAccount):
     
     def _get_searchbar_inputs(self):
         return {
-            'all': {'label': _('Todos'), 'input': 'all'},
-            'partner': {'label': _('Cliente'), 'input': 'partner'},
-            'name': {'label': _('Numero del documento'), 'input': 'name'},
+            'all': {'label': _('Filtrar todos'), 'input': 'all'},
+            'partner': {'label': _('Nombre del cliente'), 'input': 'partner'},
+            'name': {'label': _('Número del documento'), 'input': 'name'},
         }
     
     def _get_search_domain(self, search_in, search):
@@ -135,6 +135,7 @@ class LiquidationPortalController(PortalAccount):
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
             'search_in': search_in,
+            'clear_search': '/my/liquidations'
         })
         
         return values

@@ -2,35 +2,12 @@
 <odoo>
 
     <template id="portal_searchbar" name="Portal template Button" inherit_id="portal.portal_searchbar">
-        <xpath expr="//form[@t-if='searchbar_inputs']/div/button" position="attributes">
-            <!-- <t t-set="selected_input_label" t-value="'Filtros'" />
-            <t t-foreach="searchbar_inputs" t-as="input">
-                <t t-if="input_value['input'] == search_in">
-                    <span t-att-value="input_value['label']" />
-                </t>
-            </t> -->
-
-            <attribute name="id">dropdownButton</attribute>  
-        </xpath>
-        <xpath expr="//form[@t-if='searchbar_inputs']" position="after">
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('searchInput');
-                    const dropdownButton = document.getElementById('dropdownButton');
-                    
-                    // Inicializa el botón con el valor actual del input (si existe)
-                    if (searchInput.value) {
-                        dropdownButton.textContent = searchInput.value;
-                    } else {
-                        dropdownButton.textContent = 'Dropdown'; // Texto por defecto
-                    }
-
-                    // Actualiza dinámicamente
-                    searchInput.addEventListener('input', function() {
-                        dropdownButton.textContent = this.value || 'Dropdown';
-                    });
-                });
-            </script>
+        <xpath expr="//form[@t-if='searchbar_inputs']/div" position="after">
+            <t t-if="clear_search">
+                <a t-att-href="clear_search" class="btn btn-outline-secondary" title="Limpiar búsqueda">
+                    <span class="fa fa-times"/>
+                </a>
+            </t>
         </xpath>
     </template>
 

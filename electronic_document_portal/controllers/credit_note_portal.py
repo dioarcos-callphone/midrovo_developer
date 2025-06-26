@@ -62,6 +62,23 @@ class CreditNotePortalController(PortalAccount):
             },
         }
     
+    
+    def _get_searchbar_inputs(self):
+        return {
+            'all': {'label': _('Filtrar todos'), 'input': 'all'},
+            'partner': {'label': _('Nombre del cliente'), 'input': 'partner'},
+            'name': {'label': _('Número del documento'), 'input': 'name'},
+        }
+    
+    def _get_search_domain(self, search_in, search):
+            if search_in == 'partner':
+                return [('partner_id.name', 'ilike', search)]
+            elif search_in == 'name':
+                return [('name', 'ilike', search)]
+            elif search_in == 'all':
+                return ['|', ('name', 'ilike', search), ('partner_id.name', 'ilike', search)]
+            return []
+    
 
     def _prepare_my_refunds_values(self, page, date_begin, date_end, sortby, filterby, search=None, search_in='name', domain=None, url="/my/refunds"):
         values = self._prepare_portal_layout_values()
@@ -116,6 +133,7 @@ class CreditNotePortalController(PortalAccount):
             'filterby': filterby,
             'searchbar_inputs': searchbar_inputs,
             'search_in': search_in,
+            'clear_search': '/my/refunds'
         })
         
         return values
