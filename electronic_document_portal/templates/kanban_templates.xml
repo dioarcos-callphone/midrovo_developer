@@ -236,30 +236,23 @@
 
 
     <!-- GUIAS DE REMISION -->
-    <template id="kanban_template_debit_note" name="Vista Movil de Notas de debito">
+    <template id="kanban_template_remision" name="Vista Movil de Guias de remision">
         <div class="d-md-none">
             <div class="row row-cols-1 g-2">
-                <t t-foreach="debit_notes" t-as="debit_note">
+                <t t-foreach="remissions" t-as="remission">
                     <div class="col">
                         <div class="card shadow-sm p-2">
                             <div class="card-body">
                                 <h6>
-                                    <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
-                                        <t t-out="debit_note.name"/>
+                                    <a t-att-href="remission.get_portal_url()" t-att-title="remission.l10n_latam_document_number">
+                                        Guia. <t t-out="remission.l10n_latam_document_number"/>
                                     </a>
                                 </h6>
-                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="debit_note.partner_id.name.title()"/></p>
-                                <p class="mb-1"><strong>F. Venc.:</strong> <span t-field="debit_note.invoice_date_due"/></p>
-                                <p class="mb-1">
-                                    <strong>Subtotal:</strong>
-                                    <span t-out="debit_note.amount_untaxed_signed"
-                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
-                                </p>
-                                <p class="mb-1">
-                                    <strong>Total:</strong>
-                                    <span t-out="debit_note.amount_total_signed"
-                                        t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/>
-                                </p>
+                                <p class="mb-1"><strong>Cliente:</strong> <t t-out="remission.partner_id.name.title()"/></p>
+                                <p class="mb-1"><strong>F. Inicio:</strong> <span t-field="remission.delivery_date"/></p>
+                                <p class="mb-1"><strong>F. Fin:</strong> <span t-field="remission.transfer_date"/></p>
+                                <p class="mb-1"><strong>Transportista:</strong> <span t-field="remission.delivery_carrier"/></p>
+                                <p class="mb-1"><strong>Tipo Traslado:</strong> <span t-field="remission.remision_type"/></p>
                                 <div class="d-flex justify-content-end gap-2 mt-2">
                                     <a class="fa fa-file-pdf-o" style="color: red; font-size: 1.2rem;"
                                     t-att-href="refund.get_portal_url(report_type='pdf', download=True)"/>

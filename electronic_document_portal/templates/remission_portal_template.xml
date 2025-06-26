@@ -112,7 +112,7 @@
                         <h2 class="mb-0">
                             <!-- <b t-if="retention.total_renta != 0" t-field="retention.total_renta"/>
                             <b t-else="" t-field="retention.total_iva"/> -->
-                            <b>MOSTRAR ALGO</b>
+                            <!-- <b>MOSTRAR ALGO</b> -->
                         </h2>
                     </t>
 
