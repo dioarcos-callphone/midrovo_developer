@@ -53,13 +53,13 @@
 
     <template id="sri_state_kanban_template" name="Template Kanban Estados SRI">
         <t t-if="state_sri == 'authorized'">
-            <span class="text-bg-success w-75">
+            <span class="text-success w-75">
                 Documento autorizado
             </span>
         </t>
 
         <t t-else="">
-            <span class="text-bg-danger w-75">
+            <span class="text-danger w-75">
                 Documento no autorizado
             </span>
         </t>
