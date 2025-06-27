@@ -67,11 +67,10 @@
     ],
     'assets': {
         'web.assets_frontend': [
+            'electronic_document_portal/static/src/css/style.css',
             'electronic_document_portal/static/src/js/ec_account_portal.js',
         ],
-        'web.assets_backend': [
-            'electronic_document_portal/static/src/css/style.css',
-        ]
+
     },
     
     'installable': True,
