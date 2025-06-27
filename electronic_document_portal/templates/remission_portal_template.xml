@@ -49,7 +49,7 @@
             <tbody>
                 <t t-foreach="remissions" t-as="remission">
                     <tr>
-                        <td style="min-width:160px;">
+                        <td class="number-mobile">
                             <a t-att-href="remission.get_portal_url()" t-att-title="remission.document_number">
                                 <span t-if="remission.document_number != '/'">Guía.</span> <t t-out="remission.document_number" t-if="remission.document_number != '/'"/>
                                 <em t-else="">Borrador de Guías de Remisión</em>

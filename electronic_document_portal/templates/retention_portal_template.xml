@@ -50,7 +50,7 @@
             <tbody>
                 <t t-foreach="retentions" t-as="retention">
                     <tr>
-                        <td>
+                        <td class="number-mobile">
                             <a t-att-href="retention.get_portal_url()" t-att-title="retention.l10n_latam_document_number">
                                 <span t-if="retention.l10n_latam_document_number != '/'">Ret.</span> <t t-out="retention.l10n_latam_document_number" t-if="retention.l10n_latam_document_number != '/'"/>
                                 <em t-else="">Borrador de retenciones</em>

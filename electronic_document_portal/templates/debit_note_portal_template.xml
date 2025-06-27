@@ -34,7 +34,7 @@
             <tbody>
                 <t t-foreach="debit_notes" t-as="debit_note">
                     <tr>
-                        <td>
+                        <td class="number-mobile">
                             <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
                                 <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
                                 <em t-else="">Borrador de notas de débito</em>

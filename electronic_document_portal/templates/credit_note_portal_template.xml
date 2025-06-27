@@ -34,7 +34,7 @@
             <tbody>
                 <t t-foreach="refunds" t-as="refund">
                     <tr>
-                        <td>
+                        <td class="number-mobile">
                             <a t-att-href="refund.get_portal_url()" t-att-title="refund.name">
                                 <t t-out="refund.name" t-if="refund.name != '/'"/>
                                 <em t-else="">Borrador de nota de crédito</em>
