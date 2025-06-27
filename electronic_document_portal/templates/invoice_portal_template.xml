@@ -51,7 +51,7 @@
             <t t-if="invoices" t-call="portal.portal_table">
                 <thead>
                     <tr class="active">
-                        <th>Factura #</th>
+                        <th class="w-100">Factura #</th>
                         <th>Cliente</th>
                         <th class="text-start">F. Emisión</th>
                         <th class='text-start'>F. Venc.</th>
@@ -64,7 +64,7 @@
                 <tbody>
                     <t t-foreach="invoices" t-as="invoice">
                         <tr>
-                            <td class="w-100">
+                            <td>
                                 <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
                                     <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
                                     <em t-else="">Borrador de Factura</em>
