@@ -1,4 +1,5 @@
 from odoo import models, fields, _
+from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
 from odoo.tools import (get_lang)
 
@@ -102,11 +103,26 @@ class Remission(models.Model):
 
         return report_action
     
+    # def unlink(self):
+    #     if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
+    #         raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
+        
+    #     return super().unlink()
+    
     def unlink(self):
         if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
             raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
         
-        return super().unlink()
+        if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_posted"):
+            self.state = 'draft'   
+
+        xml_model = self.env['sri.xml.data']
+        #si esta en modo produccion, no permitir eliminar el documento
+        if xml_model.is_enviroment_production(self.document_type):
+            for remision in self:
+                if remision.state != 'draft':
+                    raise ValidationError(_(u"¡No es posible desvincular la nota de entrega en el entorno de producción!"))
+        return super(Remission, self).unlink()
 
 class RemissionLine(models.Model):
     _inherit = 'account.remision.line'

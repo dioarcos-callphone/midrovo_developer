@@ -48,62 +48,62 @@
 
         <xpath expr="//t[@t-if='invoices']" position="replace">
             <!-- <div class="d-none d-md-block"> -->
-                <t t-if="invoices" t-call="portal.portal_table">
-                    <thead>
-                        <tr class="active">
-                            <th>Factura #</th>
-                            <th>Cliente</th>
-                            <th class="text-start">F. Emisión</th>
-                            <th class='text-start'>F. Venc.</th>
-                            <th class="text-center">Envío Email</th>
-                            <th class="text-center">Autorización</th>
-                            <th class="text-end">Adeudado</th>
-                            <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+            <t t-if="invoices" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Factura #</th>
+                        <th>Cliente</th>
+                        <th class="text-start">F. Emisión</th>
+                        <th class='text-start'>F. Venc.</th>
+                        <th class="text-center">Envío Email</th>
+                        <th class="text-center">Autorización</th>
+                        <th class="text-end">Adeudado</th>
+                        <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="invoices" t-as="invoice">
+                        <tr>
+                            <td>
+                                <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
+                                    <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
+                                    <em t-else="">Borrador de Factura</em>
+                                </a>
+                            </td>
+                            <td><span t-esc="invoice.partner_id.name.title()"/></td>
+                            <td class="text-start"><span t-field="invoice.invoice_date"/></td>
+                            <td class='text-start'><span t-field="invoice.invoice_date_due"/></td>
+                            <td class="tx_status text-center">
+                                <t t-call="electronic_document_portal.email_state_template">
+                                    <t t-set="is_sent" t-value="invoice.xml_data_id.send_mail" />
+                                </t>
+                            </td>
+                            <td class="tx_status text-center">
+                                <t t-call="electronic_document_portal.sri_state_template">
+                                    <t t-set="state_sri" t-value="invoice.state_sri"/>
+                                </t>
+                            </td>
+                            <td class="text-end"><span t-esc="invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                            <td class="text-center">
+                                <span class="pdf-icon" style="margin: 5px;">
+                                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                                </span>
+                                <span class="xml-icon" style="margin: 5px;">
+                                    <t t-if="invoice.xml_authorized">
+                                        <a class="fa fa-file-code-o fa-lg"
+                                        t-att-href="invoice.get_portal_url(report_type='xml', download=True)"
+                                        style="color: green; font-weight: bold;"></a>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="fa fa-file-code-o fa-lg"
+                                            style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                    </t>
+                                </span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="invoices" t-as="invoice">
-                            <tr>
-                                <td>
-                                    <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
-                                        <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
-                                        <em t-else="">Borrador de Factura</em>
-                                    </a>
-                                </td>
-                                <td><span t-esc="invoice.partner_id.name.title()"/></td>
-                                <td class="text-start"><span t-field="invoice.invoice_date"/></td>
-                                <td class='text-start'><span t-field="invoice.invoice_date_due"/></td>
-                                <td class="tx_status text-center">
-                                    <t t-call="electronic_document_portal.email_state_template">
-                                        <t t-set="is_sent" t-value="invoice.xml_data_id.send_mail" />
-                                    </t>
-                                </td>
-                                <td class="tx_status text-center">
-                                    <t t-call="electronic_document_portal.sri_state_template">
-                                        <t t-set="state_sri" t-value="invoice.state_sri"/>
-                                    </t>
-                                </td>
-                                <td class="text-end"><span t-esc="invoice.amount_residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
-                                <td class="text-center">
-                                    <span class="pdf-icon" style="margin: 5px;">
-                                        <a class="fa fa-file-pdf-o fa-lg" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
-                                    </span>
-                                    <span class="xml-icon" style="margin: 5px;">
-                                        <t t-if="invoice.xml_authorized">
-                                            <a class="fa fa-file-code-o fa-lg"
-                                            t-att-href="invoice.get_portal_url(report_type='xml', download=True)"
-                                            style="color: green; font-weight: bold;"></a>
-                                        </t>
-                                        <t t-else="">
-                                            <span class="fa fa-file-code-o fa-lg"
-                                                style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
-                                        </t>
-                                    </span>
-                                </td>
-                            </tr>
-                        </t>
-                    </tbody>
-                </t>
+                    </t>
+                </tbody>
+            </t>
             <!-- </div> -->
 
             <!-- Vista KANBAN para móviles -->

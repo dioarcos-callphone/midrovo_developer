@@ -95,6 +95,23 @@ class Withhold(models.Model):
             raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
         
         return super().unlink()
+    
+
+    def unlink(self):
+        for rec in self:
+            if self.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
+                raise UserError("No consta con permisos para eliminar éste documento porfavor comuníquese con el departamento de sistemas.")
+
+            if rec.state == 'posted':
+                if rec.env.user.has_group("electronic_document_portal.portal_user_internal_group_posted"):
+                    rec.state = 'draft'
+                else:
+                    raise UserError("No se permite borrar documentos que han sido publicados")
+
+            # if rec.env.user.has_group("electronic_document_portal.portal_user_internal_group_nodelete"):
+            #     raise UserError("No consta con permisos para eliminar este documento. Por favor comuníquese con el departamento de sistemas.")
+        
+        return super().unlink()
 
 class WithholdLineExtend(models.Model):
     _inherit = 'account.withhold.line'
