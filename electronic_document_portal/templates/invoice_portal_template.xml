@@ -64,7 +64,7 @@
                 <tbody>
                     <t t-foreach="invoices" t-as="invoice">
                         <tr>
-                            <td style="min-width: 120px;">
+                            <td style="max-width: 120px;">
                                 <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
                                     <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
                                     <em t-else="">Borrador de Factura</em>
