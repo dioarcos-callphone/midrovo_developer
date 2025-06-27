@@ -70,7 +70,7 @@
                                     <em t-else="">Borrador de Factura</em>
                                 </a>
                             </td>
-                            <td style="width: 100px;"><span t-esc="invoice.partner_id.name.title()"/></td>
+                            <td><span t-esc="invoice.partner_id.name.title()"/></td>
                             <td class="text-start"><span t-field="invoice.invoice_date"/></td>
                             <td class='text-start'><span t-field="invoice.invoice_date_due"/></td>
                             <td class="tx_status text-center">
