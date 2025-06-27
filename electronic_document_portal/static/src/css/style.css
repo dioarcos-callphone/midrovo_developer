@@ -1,5 +1,5 @@
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .number-mobile {
-    width: 200px;
+    width: 250px;
   }
 }
