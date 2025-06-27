@@ -1,11 +1,5 @@
-@media (max-width: 400px) {
+@media (max-width: 768px) {
   .number-mobile {
-    min-width: 200px;
+    width: 200px;
   }
-}
-
-.number-mobile {
-    background-color: red;
-    color: black;
-    font-size: 24px;
 }
