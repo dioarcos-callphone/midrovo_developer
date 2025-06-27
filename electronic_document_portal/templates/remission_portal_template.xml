@@ -50,7 +50,8 @@
                 <t t-foreach="remissions" t-as="remission">
                     <tr>
                         <td>
-                            <a t-att-href="remission.get_portal_url()" t-att-title="remission.document_number">
+                            <a t-att-href="remission.get_portal_url()" t-att-title="remission.document_number"
+                                class="text-truncate d-inline-block" style="max-width: 100%; white-space: nowrap;">
                                 <span t-if="remission.document_number != '/'">Guía.</span> <t t-out="remission.document_number" t-if="remission.document_number != '/'"/>
                                 <em t-else="">Borrador de Guías de Remisión</em>
                             </a>
