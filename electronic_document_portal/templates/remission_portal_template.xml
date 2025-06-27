@@ -31,7 +31,7 @@
             </div>
             <!-- <p style="margin:7px 10px; padding:5px;">Actualmente no hay notas de crédito para su cuenta.</p> -->
         </t>
-        <div class="d-none d-md-block">
+        <!-- <div class="d-none d-md-block"> -->
             <t t-if="remissions" t-call="portal.portal_table">
                 <thead>
                     <tr class="active">
@@ -93,10 +93,10 @@
                     </t>
                 </tbody>
             </t>
-        </div>
+        <!-- </div> -->
 
         <!-- Vista KANBAN para móviles -->
-        <t t-call="electronic_document_portal.kanban_template_remission"/>
+        <!-- <t t-call="electronic_document_portal.kanban_template_remission"/> -->
       </t>
     </template>
 

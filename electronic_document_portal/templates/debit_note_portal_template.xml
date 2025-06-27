@@ -17,71 +17,71 @@
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
         </t>
-        <div class="d-none d-md-block">
-            <t t-if="debit_notes" t-call="portal.portal_table">
-                <thead>
-                    <tr class="active">
-                        <th>Nota de débito #</th>
-                        <th>Cliente</th>
-                        <th class="text-start">F. Venc.</th>
-                        <th class="tex-center">Envío Email</th>
-                        <th class="text-center">Autorización</th>
-                        <th class='text-end' title="Valor sin impuestos">Subtotal</th>
-                        <th class="text-end">Total</th>                 
-                        <th class="text-center" title="Descargar PDF o XML"><span class="fa fa-download fa-lg"></span></th>
+        <!-- <div class="d-none d-md-block"> -->
+        <t t-if="debit_notes" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Nota de débito #</th>
+                    <th>Cliente</th>
+                    <th class="text-start">F. Venc.</th>
+                    <th class="tex-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
+                    <th class='text-end' title="Valor sin impuestos">Subtotal</th>
+                    <th class="text-end">Total</th>                 
+                    <th class="text-center" title="Descargar PDF o XML"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="debit_notes" t-as="debit_note">
+                    <tr>
+                        <td>
+                            <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
+                                <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
+                                <em t-else="">Borrador de notas de débito</em>
+                            </a>
+                        </td>
+                        <td><span t-esc="debit_note.partner_id.name.title()"/></td>
+                        <td class="text-start"><span t-field="debit_note.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-call="electronic_document_portal.email_state_template">
+                                <t t-set="is_sent" t-value="debit_note.xml_data_id.send_mail" />
+                            </t>
+                        </td>
+                        <td class="tx_status text-center">
+                            <t t-call="electronic_document_portal.sri_state_template">
+                                <t t-set="state_sri" t-value="debit_note.state_sri"/>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="debit_note.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
+                        <td class="text-end"><span t-out="debit_note.amount_total_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
+                        <!-- <td class="text-center"><span t-out="debit_note.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td> -->
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <!-- <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span> -->
+                            <span class="xml-icon" style="margin: 5px;">
+                                <t t-if="debit_note.xml_authorized">
+                                    <a class="fa fa-file-code-o fa-lg"
+                                    t-att-href="debit_note.get_portal_url(report_type='xml', download=True)"
+                                    style="color: green; font-weight: bold;"></a>
+                                </t>
+                                <t t-else="">
+                                    <span class="fa fa-file-code-o fa-lg"
+                                        style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                </t>
+                            </span>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="debit_notes" t-as="debit_note">
-                        <tr>
-                            <td>
-                                <a t-att-href="debit_note.get_portal_url()" t-att-title="debit_note.name">
-                                    <t t-out="debit_note.name" t-if="debit_note.name != '/'"/>
-                                    <em t-else="">Borrador de notas de débito</em>
-                                </a>
-                            </td>
-                            <td><span t-esc="debit_note.partner_id.name.title()"/></td>
-                            <td class="text-start"><span t-field="debit_note.invoice_date_due"/></td>
-                            <td class="tx_status text-center">
-                                <t t-call="electronic_document_portal.email_state_template">
-                                    <t t-set="is_sent" t-value="debit_note.xml_data_id.send_mail" />
-                                </t>
-                            </td>
-                            <td class="tx_status text-center">
-                                <t t-call="electronic_document_portal.sri_state_template">
-                                    <t t-set="state_sri" t-value="debit_note.state_sri"/>
-                                </t>
-                            </td>
-                            <td class="text-end"><span t-out="debit_note.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
-                            <td class="text-end"><span t-out="debit_note.amount_total_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td>
-                            <!-- <td class="text-center"><span t-out="debit_note.amount_total_in_currency_signed" t-options='{"widget": "monetary", "display_currency": debit_note.currency_id}'/></td> -->
-                            <td class="text-center">
-                                <span class="pdf-icon" style="margin: 5px;">
-                                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
-                                </span>
-                                <!-- <span class="xml-icon" style="margin: 5px;">
-                                    <a class="fa fa-file-code-o fa-lg" t-att-href="debit_note.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
-                                </span> -->
-                                <span class="xml-icon" style="margin: 5px;">
-                                    <t t-if="debit_note.xml_authorized">
-                                        <a class="fa fa-file-code-o fa-lg"
-                                        t-att-href="debit_note.get_portal_url(report_type='xml', download=True)"
-                                        style="color: green; font-weight: bold;"></a>
-                                    </t>
-                                    <t t-else="">
-                                        <span class="fa fa-file-code-o fa-lg"
-                                            style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
-                                    </t>
-                                </span>
-                            </td>
-                        </tr>
-                    </t>
-                </tbody>
-            </t>
-        </div>
+                </t>
+            </tbody>
+        </t>
+        <!-- </div> -->
 
         <!-- Vista KANBAN para móviles -->
-        <t t-call="electronic_document_portal.kanban_template_debit_note"/>
+        <!-- <t t-call="electronic_document_portal.kanban_template_debit_note"/> -->
       </t>
     </template>
 

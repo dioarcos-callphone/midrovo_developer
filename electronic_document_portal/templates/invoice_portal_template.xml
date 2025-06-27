@@ -47,7 +47,7 @@
         </xpath>
 
         <xpath expr="//t[@t-if='invoices']" position="replace">
-            <div class="d-none d-md-block">
+            <!-- <div class="d-none d-md-block"> -->
                 <t t-if="invoices" t-call="portal.portal_table">
                     <thead>
                         <tr class="active">
@@ -104,10 +104,10 @@
                         </t>
                     </tbody>
                 </t>
-            </div>
+            <!-- </div> -->
 
             <!-- Vista KANBAN para móviles -->
-            <t t-call="electronic_document_portal.kanban_template_invoice"/>
+            <!-- <t t-call="electronic_document_portal.kanban_template_invoice"/> -->
         </xpath>
     </template>
 

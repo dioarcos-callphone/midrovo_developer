@@ -17,72 +17,72 @@
                 <a href="/my/home" class="btn btn-primary" style="margin-top: 10px;">Volver al Panel</a>
             </div>
         </t>
-        <div class="d-none d-md-block">
-            <t t-if="liquidations" t-call="portal.portal_table">
-                <thead>
-                    <tr class="active">
-                        <th>Liquidación #</th>
-                        <th>Cliente</th>
-                        <th class="text-start">F. Factura</th>
-                        <th class="text-start">F. Venc.</th>
-                        <th class="text-center">Envío Email</th>
-                        <th class="text-center">Autorización</th>
-                        <th class="text-end">Subtotal</th>
-                        <th class="text-end">Total</th>
-                        <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+        <!-- <div class="d-none d-md-block"> -->
+        <t t-if="liquidations" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Liquidación #</th>
+                    <th>Cliente</th>
+                    <th class="text-start">F. Factura</th>
+                    <th class="text-start">F. Venc.</th>
+                    <th class="text-center">Envío Email</th>
+                    <th class="text-center">Autorización</th>
+                    <th class="text-end">Subtotal</th>
+                    <th class="text-end">Total</th>
+                    <th class="text-center"><span class="fa fa-download fa-lg"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="liquidations" t-as="liquidation">
+                    <tr>
+                        <td>
+                            <a t-att-href="liquidation.get_portal_url()" t-att-title="liquidation.name">
+                                <t t-out="liquidation.name" t-if="liquidation.name != '/'"/>
+                                <em t-else="">Borrador de liquidaciones de compras</em>
+                            </a>
+                        </td>
+                        <td><span t-esc="liquidation.partner_id.name.title()"/></td>
+                        <td class="text-start"><span t-field="liquidation.invoice_date"/></td>
+                        <td class="text-start"><span t-field="liquidation.invoice_date_due"/></td>
+                        <td class="tx_status text-center">
+                            <t t-call="electronic_document_portal.email_state_template">
+                                <t t-set="is_sent" t-value="liquidation.xml_data_id.send_mail" />
+                            </t>
+                        </td>
+                        <td class="tx_status text-center">
+                            <t t-call="electronic_document_portal.sri_state_template">
+                                <t t-set="state_sri" t-value="liquidation.state_sri"/>
+                            </t>
+                        </td>
+                        <td class="text-end"><span t-out="liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-end"><span t-out="liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
+                        <td class="text-center">
+                            <span class="pdf-icon" style="margin: 5px;">
+                                <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
+                            </span>
+                            <!-- <span class="xml-icon" style="margin: 5px;">
+                                <a class="fa fa-file-code-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
+                            </span> -->
+                            <span class="xml-icon" style="margin: 5px;">
+                                <t t-if="liquidation.xml_authorized">
+                                    <a class="fa fa-file-code-o fa-lg"
+                                    t-att-href="liquidation.get_portal_url(report_type='xml', download=True)"
+                                    style="color: green; font-weight: bold;"></a>
+                                </t>
+                                <t t-else="">
+                                    <span class="fa fa-file-code-o fa-lg"
+                                        style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
+                                </t>
+                            </span>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="liquidations" t-as="liquidation">
-                        <tr>
-                            <td>
-                                <a t-att-href="liquidation.get_portal_url()" t-att-title="liquidation.name">
-                                    <t t-out="liquidation.name" t-if="liquidation.name != '/'"/>
-                                    <em t-else="">Borrador de liquidaciones de compras</em>
-                                </a>
-                            </td>
-                            <td><span t-esc="liquidation.partner_id.name.title()"/></td>
-                            <td class="text-start"><span t-field="liquidation.invoice_date"/></td>
-                            <td class="text-start"><span t-field="liquidation.invoice_date_due"/></td>
-                            <td class="tx_status text-center">
-                                <t t-call="electronic_document_portal.email_state_template">
-                                    <t t-set="is_sent" t-value="liquidation.xml_data_id.send_mail" />
-                                </t>
-                            </td>
-                            <td class="tx_status text-center">
-                                <t t-call="electronic_document_portal.sri_state_template">
-                                    <t t-set="state_sri" t-value="liquidation.state_sri"/>
-                                </t>
-                            </td>
-                            <td class="text-end"><span t-out="liquidation.amount_untaxed_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
-                            <td class="text-end"><span t-out="liquidation.amount_total_signed" t-options='{"widget": "monetary", "display_currency": liquidation.currency_id}'/></td>
-                            <td class="text-center">
-                                <span class="pdf-icon" style="margin: 5px;">
-                                    <a class="fa fa-file-pdf-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='pdf', download=True)" style="color: red; font-weight: bold;"></a>
-                                </span>
-                                <!-- <span class="xml-icon" style="margin: 5px;">
-                                    <a class="fa fa-file-code-o fa-lg" t-att-href="liquidation.get_portal_url(report_type='xml', download=True)" style="color: green; font-weight: bold;"></a>
-                                </span> -->
-                                <span class="xml-icon" style="margin: 5px;">
-                                    <t t-if="liquidation.xml_authorized">
-                                        <a class="fa fa-file-code-o fa-lg"
-                                        t-att-href="liquidation.get_portal_url(report_type='xml', download=True)"
-                                        style="color: green; font-weight: bold;"></a>
-                                    </t>
-                                    <t t-else="">
-                                        <span class="fa fa-file-code-o fa-lg"
-                                            style="color: gray; opacity: 0.5; cursor: not-allowed;"></span>
-                                    </t>
-                                </span>
-                            </td>
-                        </tr>
-                    </t>
-                </tbody>
-            </t>
-        </div>
+                </t>
+            </tbody>
+        </t>
+        <!-- </div> -->
 
         <!-- Vista KANBAN para móviles -->
-        <t t-call="electronic_document_portal.kanban_template_liquidation"/>
+        <!-- <t t-call="electronic_document_portal.kanban_template_liquidation"/> -->
       </t>
     </template>
 
