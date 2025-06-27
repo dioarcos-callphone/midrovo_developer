@@ -21,13 +21,13 @@
         </t> -->
 
         <t t-if="state_sri == 'authorized'">
-            <span class="badge badge-success text-bg-success w-75">
+            <span class="badge badge-success text-bg-success">
                 Autorizado
             </span>
         </t>
 
         <t t-else="">
-            <span class="badge badge-success text-bg-danger w-75">
+            <span class="badge badge-success text-bg-danger">
                 No autorizado
             </span>
         </t>
