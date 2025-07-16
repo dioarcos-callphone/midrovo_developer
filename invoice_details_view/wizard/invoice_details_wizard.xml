@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <record id="invoice_details_report_view_form" model="ir.ui.view">
+        <field name="name">invoice.details.report.view.form</field>
+        <field name="model">invoice.details.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Rango de Fechas">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group string="Tipo de Costo">
+                            <field name="cost_options" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Filtros">
+                            <field name="journal_ids" widget="many2many_tags"/>
+                            <field name="comercial_ids" widget="many2many_tags"/>
+                            <field name="cashier_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Tipo de Informe">
+                            <field name="informe" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_pdf" string="PDF" type="object"
+                            data-hotkey="q" class="btn-pdf"/>
+                    <button name="action_excel" string="EXCEL" type="object"
+                            data-hotkey="q" class="btn-excel"/>
+                    <button string="Cancelar" class="btn-secondary"
+                            special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="invoice_details_report_action" model="ir.actions.act_window">
+        <field name="name">Reporte de Facturas y Notas de Crédito</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="invoice_details_report_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="invoice_details_report_menu"
+              name="Reporte de detalles de facturas"
+              parent="account.menu_finance_reports"
+              sequence="5">
+    </menuitem>
+
+    <menuitem
+        id="invoice_detail_report_view_menu"
+        name="Informes de factura y notas de crédito"
+        action="invoice_details_report_action"
+        parent="invoice_details_report_menu"
+        sequence="1"/>
+
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="paperformat_landscape" model="report.paperformat">
+        <field name="name">Landscape Paper</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field> <!-- Orientación horizontal -->
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">30</field>
+        <field name="header_spacing">25</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+    </record>
+
+    <record id="report_invoice_details_action" model="ir.actions.report">
+        <field name="name">Reporte de Detalles de Facturas</field>
+        <field name="model">report.invoice_details_view.report_invoice_details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_details_view.report_invoice_details</field>
+        <field name="report_file">invoice_details_view.report_invoice_details</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_landscape"/>
+    </record>
+</odoo>
