@@ -313,6 +313,7 @@ class balance_portfolio(models.Model):
             # _logger.info("API BALANCE PORTFOLIO NUEVO Cliente  %s", new_balance)
         else:
             if not res_balance_portfolio.sales_man:
+                _logger.info("ENTRAAAA")
                 res_balance_portfolio.write({ 'sales_man': vendedor }) # Antes se anadia sales man 'sales_man': vendedor
             # _logger.info("API BALANCE PORTFOLIO Cliente Actualizado  %s", new_balance)
 
