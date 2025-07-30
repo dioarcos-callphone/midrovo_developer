@@ -5,56 +5,34 @@
       <field name="name">view.balance.portfolio.form</field>
       <field name="model">balance.portfolio</field>
       <field name="arch" type="xml">
-        <form string="balance_portfolio" class="o_form_view_custom"  create="false" edit="false" delete="false" >
+        <form string="balance_portfolio" create="false" edit="false" delete="false" >
           <header>
                 <!-- Agregar el botón dentro de un grupo o en la ubicación deseada -->
-                <button name="create_balance_portfolio_api" string=" Sincronizar" type="object" class="oe_highlight fa fa-refresh p-2" />
+                <button name="crete_balance_portfolio_api" string=" Sincronizar" type="object" class="oe_highlight fa fa-refresh p-2" />
           </header> 
           <sheet>
             <group name="group_top">
                 <group name="group_left">
-                    <field name="sales_man" />
                     <field name="client_id"/>
-                    <field name="client_vat"/>
                     <field name="status"/>
-                    <field name="current_date"/>
                 </group>
-                <group name="group_right" > 
+                <group name="group_right">
+                    <field name="client_vat"/>
                     <field name="total_amount"/>
-                    <field name="total_balance"/>
-                    <field name="overdue_accounts"/>
-                    <field name="accounts_collected"/>
-                    <field name="postdated_checks"/>
+                    <field name="current_date"/>
                 </group>
             </group>
             <notebook>
-              <page string="Facturas">
-                <field name="factura_ids" widget="section_and_note_one2many" mode="tree">
+              <page string="Detalles de Pagos">
+                <field name="client_detail_ids"  widget="section_and_note_one2many"  mode="tree">
                   <tree editable="bottom">
                     <field name="client_id" invisible="1"/>
-                    <field name="tipo"/>
+                    <field name="type"/>
                     <field name="id_register"/>
                     <field name="date"/>
                     <field name="record_date" widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
                     <field name="end_date"  widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
-                    <field name="days_order"/>
-                    <field name="total"/>
-                    <field name="balance"/>
-                    <field name="quota"/>
-                    <field name="term"/>
-                  </tree>
-                </field>
-              </page>
-              <page string="Cheques">
-                <field name="cheque_ids"  widget="section_and_note_one2many"  mode="tree">
-                  <tree editable="bottom" default_order="days_order asc" >
-                    <field name="client_id" invisible="1"/>
-                    <field name="tipo"/>
-                    <field name="id_register"/>
-                    <field name="date"/>
-                    <field name="record_date" widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
-                    <field name="end_date"  widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
-                    <field name="days_order"/>
+                    <field name="days"/>
                     <field name="total"/>
                     <field name="balance"/>
                     <field name="quota"/>
@@ -68,11 +46,12 @@
       </field>
     </record>
 
+
     <record id="view_balance_portfolio_tree" model="ir.ui.view">
       <field name="name">view.balance.portfolio.tree</field>
       <field name="model">balance.portfolio</field>
       <field name="arch" type="xml">
-        <tree string="Saldo de cartera" default_order="client_id ASC"  create="0"  export_xlsx="false" delete="false" >
+        <tree string="Saldo de cartera" default_order="client_id ASC"  create="0"  export_xlsx="false" >
           <!-- Define un filtro para registros activos -->
           <field name="client_id"/>
           <field name="client_vat"/>
@@ -141,9 +120,6 @@
       <field name="name">Saldo de Cartera</field>
       <field name="res_model">balance.portfolio</field>
       <field name="view_mode">tree,form,kanban</field>
-      <field name="target">current</field>
-      <field name="context">{}</field>
-      <!-- <field name="groups_id" eval="[(4, ref('balance_portfolio.group_balance_portfolio_basic'))]"/> -->
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Saldo de Cartera
@@ -152,7 +128,6 @@
           Click 'Nuevo' para añadir nuevos elementos
         </p>
       </field>
-
     </record>
 
     <!-- Top menu item -->

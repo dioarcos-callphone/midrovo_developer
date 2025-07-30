@@ -7,13 +7,13 @@
             <t t-set="o" t-value="o.with_context(lang=lang)"/>
             <div class="page">
                 <center>
-                    <h2>Reporte de Saldo de Cartera</h2>
+                    <h1>Saldo de cartera.</h1>
                     <!-- <span t-field="o.client_id" />  -->
                 </center>
                 <!-- Invoice & partner information -->
-                <div id="informations" class="row pt-3 mt-4 mb-4 d-flex justify-content-between">
+                <div id="informations" class="row pt-3 mt-4 mb-4">
                     <t t-set="partner" t-value="o.client_id"/>
-                    <div class="col-6 mb-2" name="balance_portfolio_client">
+                    <div class="col-auto col-3 mw-100 mb-2" name="balance_portfolio_client">
                         <p class="m-0">
                             <div t-if="partner.name">
                                 <strong>Cliente: </strong>
@@ -27,34 +27,20 @@
                             </div> 
                         </p>
                     </div>
-                    <table class="col-6"  name="balance_portfoli_current_date">
-                        <tbody>
-                            <tr>
-                                <td><strong t-if='o.current_date'>Fecha Actual: </strong></td>
-                                <td><span t-if='o.current_date' t-esc='o.current_date'/></td>
-                            </tr>
-                            <tr>
-                                <td class="p-1"><strong>Total facturado: </strong></td>
-                                <td class="p-1">$ <span t-field="o.total_amount" t-field-options='{"widget": "monetary"}'/></td>
-                            </tr>
-                            <tr>
-                                <td class="p-1"><strong>Saldo cartera: </strong></td>
-                                <td class="p-1">$ <span t-field="o.total_balance" t-field-options='{"widget": "monetary"}'/></td>
-                            </tr>
-                            <tr>
-                                <td class="p-1"><strong>Cartera vencida: </strong></td>
-                                <td class="p-1">$ <span t-field="o.overdue_accounts" t-field-options='{"widget": "monetary"}'/></td>
-                            </tr>
-                            <tr>
-                                <td class="p-1"><strong>Cartera por vencer: </strong></td>
-                                <td class="p-1">$ <span t-field="o.accounts_collected" t-field-options='{"widget": "monetary"}'/></td>
-                            </tr>
-                            <tr>
-                                <td class="p-1"><strong>Cheques posfechados: </strong></td>
-                                <td class="p-1">$ <span t-field="o.postdated_checks" t-field-options='{"widget": "monetary"}'/></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-auto col-3 mw-100 mb-2"  name="balance_portfoli_current_date">
+                        <p class="m-0">
+                            <div t-if="o.current_date">
+                                <strong>Fecha Actual: </strong>
+                                <t t-esc="o.current_date"/> 
+                            </div>  
+                        </p>
+                        <p class="m-0">
+                            <div t-if="o.total_amount">
+                                <strong>Total: </strong>
+                                <span t-field="o.total_amount" t-field-options='{"widget": "monetary"}'/> 
+                            </div>  
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Withhold lines -->
@@ -63,7 +49,7 @@
                         <tr>
                             <t t-set="colspan" t-value="6"/>
                             <th name="th_description" class="text-start">
-                                <span>Doc.</span>
+                                <span>Documento</span>
                             </th>
                             <th name="th_docnumber" class="text-start">
                                 <span>Registro No.</span>
@@ -83,93 +69,19 @@
                             <th name="th_balance" class="text-start">
                                 <span>Saldo</span>
                             </th>
-                            <th name="th_balance" class="text-start">
-                                <span>Saldo Acumulado</span>
+                            <th name="th_quota" class="text-end">
+                                <span>Cupo</span>
+                            </th>
+                            <th name="th_term" class="text-end">
+                                <span>Plazo</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody class="balance_portfolio_line_table_tbody" style="vertical-align=middle;">
-                        <t t-if="o.factura_ids">
-                            <tr>
-                                <td colspan="8" style="text-align: center; font-weight: bold; padding: 5px;">DOCUMENTOS ADEUDADOS</td>
-                            </tr>
-
-                            <t t-set="saldo_acumulado" t-value="0"/> <!-- Inicializar saldo acumulado -->
-
-                            <tr t-foreach="o.factura_ids" style="border-top: 0.5px solid gray !important;" t-as='invoice_detail_line'>
-                                <t t-set="saldo_acumulado" t-value="round(saldo_acumulado + float(invoice_detail_line.balance), 2)"/>
-                                
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.tipo"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.id_register"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.record_date"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.end_date"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.days"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.total"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="invoice_detail_line.balance"/>
-                                </td>
-                                <td class="text-end" style="vertical-align: middle; font-weight: bold;">
-                                    $ <span t-esc="saldo_acumulado"/>
-                                </td>
-                            </tr>
-                        </t>
-
-                        <t t-if="o.cheque_ids">
-                            <tr>
-                                <td colspan="8" style="text-align: center; font-weight: bold; padding: 5px;">CHEQUES POSFECHADOS</td>
-                            </tr>
-
-                            <t t-set="saldo_acumulado" t-value="0"/> <!-- Inicializar saldo acumulado -->
-
-                            <tr t-foreach="sorted(o.cheque_ids, key=lambda c: c.days_order)" style="border-top: 0.5px solid gray !important;" t-as='cheque_detail_line'>
-                                <t t-set="saldo_acumulado" t-value="round(saldo_acumulado + float(cheque_detail_line.balance), 2)"/>
-                                
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.tipo"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.id_register"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.record_date"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.end_date"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.days"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.total"/>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span t-esc="cheque_detail_line.balance"/>
-                                </td>
-                                <td class="text-end" style="vertical-align: middle; font-weight: bold;">
-                                    $ <span t-esc="saldo_acumulado"/>
-                                </td>
-                            </tr>
-                        </t>
-
-
-
-                        <!-- <t t-foreach="o.client_detail_ids" t-as="client_detail_line">
-                            
+                        <t t-foreach="o.client_detail_ids" t-as="client_detail_line">
                             <tr style="border-top: 0.5px solid gray !important;">
                                     <td style="vertical-align: middle;">
-                                        <span t-esc="client_detail_line.tipo"/>
+                                        <span t-esc="client_detail_line.type"/>
                                     </td>
                                     <td style="vertical-align: middle;">
                                         <span t-esc="client_detail_line.id_register"/>
@@ -188,16 +100,15 @@
                                     </td>
                                     <td style="vertical-align: middle;">
                                         <span t-esc="client_detail_line.balance"/>
-                                    </td> -->
-                                    
-                                    <!-- <td style="vertical-align: middle;">
+                                    </td>
+                                    <td style="vertical-align: middle;">
                                         <span t-esc="client_detail_line.quota"/>
                                     </td>
                                     <td style="vertical-align: middle;">
                                         <span t-esc="client_detail_line.term"/>
-                                    </td> -->
-                            <!-- </tr> -->
-                        <!-- </t> -->
+                                    </td>
+                            </tr>
+                        </t>
                     </tbody> 
                 </table>
             </div>

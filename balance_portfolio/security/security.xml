@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Create Groups -->
+        <record id="category_balance_portfolio" model="ir.module.category">
+            <field name="name">Saldo de Cartera</field>
+            <field name="sequence">60</field>
+        </record>
+        <record id="category_balance_portfolio_access" model="ir.module.category">
+            <field name="name">Saldo de Cartera Access</field>
+            <field name="sequence">5</field>
+            <field name="parent_id" ref="category_balance_portfolio"/>
+        </record>
+        <record id="group_balance_portfolio_basic" model="res.groups">
+            <field name="name">Accesos permitido .</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="category_id" ref="balance_portfolio.category_balance_portfolio_access"/>
+            <field name="comment">Use Portfolio Balance.</field>
+        </record>
+
+        <record id="group_balance_portfolio_restringido" model="res.groups">
+            <field name="name">Accesos limitado .</field>
+            <field name="category_id" ref="balance_portfolio.category_balance_portfolio_access"/>
+            <field name="comment">Use Portfolio Balance Limit.</field>
+        </record>
+
+        <!-- Create Record Rules-->
+        <record id="rule_balance_portfolio" model="ir.rule">
+            <field name="name">rule.portfolio.balance</field>
+            <field name="model_id" ref="model_balance_portfolio"/>
+            <field name="groups" eval="[(4, ref('balance_portfolio.group_balance_portfolio_basic'))]"/>
+            <field name="domain_force">['|',('id', '=', user.id),('id', '!=', False),('status','=','A')]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record> 
+
+        <record id="rule_balance_portfolio_limit" model="ir.rule">
+            <field name="name">rule.portfolio.balance</field>
+            <field name="model_id" ref="model_balance_portfolio"/>
+            <field name="groups" eval="[(4, ref('balance_portfolio.group_balance_portfolio_restringido'))]"/>
+            <field name="domain_force">['|',('id', '=', user.id),('id', '!=', False),('client_id.user_id','=',user.id),('status','=','A')]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record> 
+
+        <record id="rule_balance_portfolio_lines" model="ir.rule">
+            <field name="name">rule.portfolio.balance.lines</field>
+            <field name="model_id" ref="model_balance_portfolio_lines"/>
+            <field name="groups" eval="[(4, ref('balance_portfolio.group_balance_portfolio_basic'))]"/>
+            <field name="domain_force">['|',('id', '=', user.id),('id', '!=', False)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record> 
+
+
+
+        <!-- <record id="rule_balance_portfolio_limit" model="ir.rule">
+            <field name="name">rule.balance.portfolio.limit</field>
+            <field name="model_id" ref="model_balance_portfolio_line"/>
+            <field name="groups" eval="[(4, ref('balance_portfolio.group_balance_portfolio_restringido'))]"/>
+            <field name="domain_force">['|',('id', '=', user.id),('id', '!=', False),('client_id.user_id','=',user.id),('status','=','A')]</field>
+        </record> -->
+
+    </data>
+</odoo>
