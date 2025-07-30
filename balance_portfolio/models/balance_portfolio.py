@@ -308,13 +308,12 @@ class balance_portfolio(models.Model):
         """ Crear cabeceras """
         res_balance_portfolio = self.search([('client_id', '=', partern_id)],limit=1)
         if not res_balance_portfolio:
-            balance_vals = { 'client_id': partern_id } # Antes se anadia sales man 'sales_man': vendedor
+            balance_vals = { 'client_id': partern_id, 'sales_man': vendedor } # Antes se anadia sales man 'sales_man': vendedor
             new_balance = self.create(balance_vals)
             # _logger.info("API BALANCE PORTFOLIO NUEVO Cliente  %s", new_balance)
         else:
             if not res_balance_portfolio.sales_man:
-                pass
-                # res_balance_portfolio.write({ 'sales_man': vendedor }) # Antes se anadia sales man 'sales_man': vendedor
+                res_balance_portfolio.write({ 'sales_man': vendedor }) # Antes se anadia sales man 'sales_man': vendedor
             # _logger.info("API BALANCE PORTFOLIO Cliente Actualizado  %s", new_balance)
 
         # _logger.info("API CREATE USER %s", new_balance.client_id.name)
@@ -322,7 +321,6 @@ class balance_portfolio(models.Model):
 
     @api.model
     def _balance_portfolio_partner_api(self, company_id=1):
-        _logger.info("ENTRAAAAAAAAA")
         try:
             api_data = self.env['api.administrator'].sudo().search([
                 ('name', '=', 'balance_partner_update'),
