@@ -322,6 +322,7 @@ class balance_portfolio(models.Model):
 
     @api.model
     def _balance_portfolio_partner_api(self, company_id=1):
+        _logger.info("ENTRAAAAAAAAA")
         try:
             api_data = self.env['api.administrator'].sudo().search([
                 ('name', '=', 'balance_partner_update'),
