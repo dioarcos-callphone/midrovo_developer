@@ -283,7 +283,7 @@ class balance_portfolio(models.Model):
                             dict_q = {}
                             dict_q['name'] = elements.get('nombre').strip()
                             dict_q['vat'] = elements.get('ruc').strip()
-                            dict_q['phone'] = elements.get('phone','').strip()
+                            dict_q['phone'] = elements.get('telefono','').strip()
                             dict_q['email'] = elements.get('email', '').strip()
                             if res_users_id :
                                 dict_q['user_id'] = res_users_id.id
