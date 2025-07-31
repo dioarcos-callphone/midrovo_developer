@@ -15,17 +15,21 @@
                 <group name="group_left">
                     <field name="sales_man" />
                     <field name="client_id"/>
+                    <field name="client_vat"/>
                     <field name="status"/>
+                    <field name="current_date"/>
                 </group>
                 <group name="group_right">
-                    <field name="client_vat"/>
                     <field name="total_amount"/>
-                    <field name="current_date"/>
+                    <field name="total_balance"/>
+                    <field name="overdue_accounts"/>
+                    <field name="accounts_collected"/>
+                    <field name="postdated_checks"/>
                 </group>
             </group>
             <notebook>
-              <page string="Detalles de Pagos">
-                <field name="client_detail_ids"  widget="section_and_note_one2many"  mode="tree">
+              <page string="Facturas">
+                <field name="factura_ids" widget="section_and_note_one2many" mode="tree">
                   <tree editable="bottom">
                     <field name="client_id" invisible="1"/>
                     <field name="type"/>
@@ -33,7 +37,24 @@
                     <field name="date"/>
                     <field name="record_date" widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
                     <field name="end_date"  widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
-                    <field name="days"/>
+                    <field name="days_order"/>
+                    <field name="total"/>
+                    <field name="balance"/>
+                    <field name="quota"/>
+                    <field name="term"/>
+                  </tree>
+                </field>
+              </page>
+              <page string="Cheques">
+                <field name="cheque_ids"  widget="section_and_note_one2many"  mode="tree">
+                  <tree editable="bottom" default_order="days_order asc" >
+                    <field name="client_id" invisible="1"/>
+                    <field name="type"/>
+                    <field name="id_register"/>
+                    <field name="date"/>
+                    <field name="record_date" widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
+                    <field name="end_date"  widget="date" options='{"datepicker": {"format": "dd/MM/yyyy"}}'/>
+                    <field name="days_order"/>
                     <field name="total"/>
                     <field name="balance"/>
                     <field name="quota"/>

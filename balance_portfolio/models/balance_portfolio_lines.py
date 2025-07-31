@@ -12,6 +12,7 @@ from datetime import datetime
 class balance_portfolio_lines(models.Model):
     _name = 'balance.portfolio.lines'
     _description = 'balance_portfolio_lines'
+    _order = 'days_order desc'
 
 
     #parameter to One2many, 
@@ -31,6 +32,9 @@ class balance_portfolio_lines(models.Model):
     record_date = fields.Date(string='Fecha de emision')  
     end_date = fields.Date(string='Fecha de vencimiento')  
     days = fields.Char( string = 'Dias')
+
+    days_order = fields.Integer(string='Días', compute='_compute_days_order', store=True)
+
     total = fields.Char(string = 'Total')  
     balance = fields.Char(string = 'Saldo')  
     quota = fields.Char(string = 'Cupo')  
@@ -50,5 +54,8 @@ class balance_portfolio_lines(models.Model):
     )
     description = fields.Text(string='Observaciones')   
 
-
+    @api.depends('days')
+    def _compute_days_order(self):
+        for record in self:
+            record.days_order = int(record.days)
 

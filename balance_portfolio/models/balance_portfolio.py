@@ -43,18 +43,73 @@ class balance_portfolio(models.Model):
         store=True
     )
 
+    factura_ids = fields.One2many(
+        'balance.portfolio.lines',
+        'client_id',
+        domain=[('type', '=', 'FA')],
+        string='Pagos con Factura'
+    )
+
+    cheque_ids = fields.One2many(
+        'balance.portfolio.lines',
+        'client_id',
+        domain=[('type', '=', 'CH')],
+        string='Pagos con Cheque'
+    )
+
+    total_amount = fields.Float(string='Total facturado', compute='_compute_total_amount')
+    total_balance = fields.Float(string='Saldo de cartera', compute='_compute_total_balance')
+    overdue_accounts = fields.Float(string='Cartera vencida', compute='_compute_overdue_accounts')
+    accounts_collected = fields.Float(string='Cartera por vencer', compute='_compute_accounts_collected')
+    postdated_checks = fields.Float(string='Cheques posfechados', compute='_compute_postdated_checks')
+
     def _compute_current_date(self):
         for record in self:
             record.current_date = fields.Date.today()
 
-    total_amount = fields.Float(string='Total', compute='_compute_total_amount')
-    #balance_amount = fields.Float(string='Saldo', compute='_compute_balance_amount')
+    # total_amount = fields.Float(string='Total', compute='_compute_total_amount')
+    # balance_amount = fields.Float(string='Saldo', compute='_compute_balance_amount')
     
     @api.depends('client_detail_ids.total')
     def _compute_total_amount(self):
         for balance in self:
             total = sum(float(line.total) for line in balance.client_detail_ids)
             balance.total_amount = total
+
+    @api.depends('client_detail_ids.balance')
+    def _compute_total_balance(self):
+        for balance in self:
+            details_filtered = balance.client_detail_ids.filtered(lambda detail: detail.type == 'FA')
+            total_balance = sum(float(line.balance) for line in details_filtered)
+            balance.total_balance = total_balance
+
+    @api.depends('client_detail_ids.balance', 'client_detail_ids.days', 'client_detail_ids.type')
+    def _compute_overdue_accounts(self):
+        for balance in self:
+            total_balance = sum(
+                float(line.balance) for line in balance.client_detail_ids 
+                if line.days and line.days.isdigit() and int(line.days) > 0 and line.type != "CH"
+            )
+            balance.overdue_accounts = total_balance
+
+    @api.depends('client_detail_ids.balance', 'client_detail_ids.days', 'client_detail_ids.type')
+    def _compute_accounts_collected(self):
+        for balance in self:
+            total_collected = sum(
+                float(line.balance) for line in balance.client_detail_ids
+                if line.days and isinstance(line.days, str) and line.days.lstrip('-').isdigit() 
+                and int(line.days) <= 0 and line.type != "CH"
+            )
+            balance.accounts_collected = total_collected
+
+    @api.depends('client_detail_ids.balance', 'client_detail_ids.type')
+    def _compute_postdated_checks(self):
+        for balance in self:
+            total_balance = sum(
+                float(line.balance) for line in balance.client_detail_ids 
+                if line.type == "CH"
+            )
+            balance.postdated_checks = total_balance
 
     @api.onchange('client_detail_ids')
     def _onchange_client_detail_ids(self):
@@ -142,6 +197,11 @@ class balance_portfolio(models.Model):
 
                             balance_portfolio_line_new = self.env['balance.portfolio.lines'].create(balance_portfolio_line)
                             _logger.info("DEATTALES CREADOS %s", balance_portfolio_line_new.record_date)
+
+                else:
+                    for line in self.client_detail_ids:
+                        line.unlink()
+
         except Exception as e:
             _logger.error("Error al hacer la solicitud a la API: %s", str(e))
             data = {'datos': False, 'count': 0 ,'st_data':str(e)}
