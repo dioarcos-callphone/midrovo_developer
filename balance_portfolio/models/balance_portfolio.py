@@ -46,14 +46,14 @@ class balance_portfolio(models.Model):
     factura_ids = fields.One2many(
         'balance.portfolio.lines',
         'client_id',
-        domain=[('type', '=', 'FA')],
+        domain=[('type', 'ilike', 'FA')],
         string='Pagos con Factura'
     )
 
     cheque_ids = fields.One2many(
         'balance.portfolio.lines',
         'client_id',
-        domain=[('type', '=', 'CH')],
+        domain=[('type', 'ilike', 'CH')],
         string='Pagos con Cheque'
     )
 
@@ -79,7 +79,7 @@ class balance_portfolio(models.Model):
     @api.depends('client_detail_ids.balance')
     def _compute_total_balance(self):
         for balance in self:
-            details_filtered = balance.client_detail_ids.filtered(lambda detail: detail.type == 'FA')
+            details_filtered = balance.client_detail_ids.filtered(lambda detail: "FA" in detail.type)
             total_balance = sum(float(line.balance) for line in details_filtered)
             balance.total_balance = total_balance
 
@@ -88,7 +88,7 @@ class balance_portfolio(models.Model):
         for balance in self:
             total_balance = sum(
                 float(line.balance) for line in balance.client_detail_ids 
-                if line.days and line.days.isdigit() and int(line.days) > 0 and line.type != "CH"
+                if line.days and line.days.isdigit() and int(line.days) > 0 and "CH" not in line.type
             )
             balance.overdue_accounts = total_balance
 
@@ -98,7 +98,7 @@ class balance_portfolio(models.Model):
             total_collected = sum(
                 float(line.balance) for line in balance.client_detail_ids
                 if line.days and isinstance(line.days, str) and line.days.lstrip('-').isdigit() 
-                and int(line.days) <= 0 and line.type != "CH"
+                and int(line.days) <= 0 and "CH" not in line.type
             )
             balance.accounts_collected = total_collected
 
@@ -107,7 +107,7 @@ class balance_portfolio(models.Model):
         for balance in self:
             total_balance = sum(
                 float(line.balance) for line in balance.client_detail_ids 
-                if line.type == "CH"
+                if "CH" in line.type
             )
             balance.postdated_checks = total_balance
 
