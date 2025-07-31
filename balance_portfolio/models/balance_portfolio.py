@@ -219,15 +219,17 @@ class balance_portfolio(models.Model):
 
 
     @api.model
-    def crete_balance_portfolio_head( self, partern_id, company_id):
+    def crete_balance_portfolio_head( self, partern_id, company_id, seller_code):
         """ Crear cabeceras """
         res_balance_portfolio = self.search([('client_id', '=', partern_id)],limit=1)
         if not res_balance_portfolio:
-            balance_vals = {'client_id': partern_id}
+            balance_vals = {'client_id': partern_id, 'sales_man': seller_code}
             new_balance = self.create(balance_vals)
             _logger.info("API BALANCE PORTFOLIO NUEVO Cliente  %s", new_balance)
         else:
             new_balance = res_balance_portfolio
+            if not new_balance.sales_man:
+                new_balance.write({ 'sales_man': seller_code })
             _logger.info("API BALANCE PORTFOLIO Cliente Actualizado  %s", new_balance)
 
         _logger.info("API CREATE USER %s", new_balance.client_id.name)
@@ -292,7 +294,7 @@ class balance_portfolio(models.Model):
                                 _logger.info("API INFO UPDATE USER %s", res_partner.id)
                             # se crea el saldo de cartera toma mucho tiempo y mata al servidor
                             if partern_id :
-                                self.crete_balance_portfolio_head(partern_id, company_id)
+                                self.crete_balance_portfolio_head(partern_id, company_id, seller_code)
                                 
         except Exception as e:
             _logger.error("Error al hacer la solicitud a la API: %s", str(e))
