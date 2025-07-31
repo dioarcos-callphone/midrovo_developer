@@ -46,7 +46,7 @@ class balance_portfolio(models.Model):
     factura_ids = fields.One2many(
         'balance.portfolio.lines',
         'client_id',
-        domain=[('type', 'ilike', 'FA')],
+        domain=[('type', 'not ilike', 'CH')],
         string='Pagos con Factura'
     )
 
