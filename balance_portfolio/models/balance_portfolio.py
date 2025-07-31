@@ -16,6 +16,13 @@ class balance_portfolio(models.Model):
     _name = 'balance.portfolio'
     _description = 'balance_portfolio'
 
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.client_id.name
+            result.append((record.id, name))
+        return result
+
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.company)
     client_id = fields.Many2one('res.partner', string='Cliente', required=True)
     client_vat = fields.Char(related='client_id.vat', string='Cédula del Cliente')
