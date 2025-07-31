@@ -8,7 +8,7 @@
         <form string="balance_portfolio" create="false" edit="false" delete="false" >
           <header>
                 <!-- Agregar el botón dentro de un grupo o en la ubicación deseada -->
-                <button name="crete_balance_portfolio_api" string=" Sincronizar" type="object" class="oe_highlight fa fa-refresh p-2" />
+                <button name="create_balance_portfolio_api" string=" Sincronizar" type="object" class="oe_highlight fa fa-refresh p-2" />
           </header> 
           <sheet>
             <group name="group_top">

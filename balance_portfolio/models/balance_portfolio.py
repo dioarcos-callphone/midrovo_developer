@@ -142,7 +142,7 @@ class balance_portfolio(models.Model):
         cabeceras.write({'status': 'I'})
 
 
-    def crete_balance_portfolio_api(self):
+    def create_balance_portfolio_api(self):
         """ Crea saldo de cartera """
         lines_value = []
         count = 1
