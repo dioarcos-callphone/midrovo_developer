@@ -79,7 +79,7 @@ class balance_portfolio(models.Model):
     @api.depends('client_detail_ids.balance')
     def _compute_total_balance(self):
         for balance in self:
-            details_filtered = balance.client_detail_ids.filtered(lambda detail: "FA" in detail.type)
+            details_filtered = balance.client_detail_ids.filtered(lambda detail: "CH" not in detail.type)
             total_balance = sum(float(line.balance) for line in details_filtered)
             balance.total_balance = total_balance
 
