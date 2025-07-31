@@ -13,6 +13,7 @@
           <sheet>
             <group name="group_top">
                 <group name="group_left">
+                    <field name="sales_man" />
                     <field name="client_id"/>
                     <field name="status"/>
                 </group>

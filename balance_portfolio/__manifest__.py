@@ -23,7 +23,8 @@
 
     # always loaded
     'data': [
-        'security/security.xml',
+        'security/groups.xml',
+        'security/rules.xml',
         'security/ir.model.access.csv',
         'views/user_profile.xml',
         'views/balance_portfolio.xml',
